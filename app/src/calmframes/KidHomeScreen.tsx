@@ -7,6 +7,7 @@ import { continuousScenePicture, MCWAY_SOURCE_SHA256 } from './continuousScene';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
+  findNodeHandle,
   Image,
   ScrollView,
   StyleSheet,
@@ -223,6 +224,17 @@ const KidHomeScreen = ({
   const returnTo = requested === 'poster' && !otherStories.some((entry) => entry.title.id === preferredId)
     ? 'watch' : requested;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
+  const watchRef = React.useRef<React.ComponentRef<typeof TouchableOpacity>>(null);
+  const posterRefs = React.useRef<Record<string, React.ComponentRef<typeof TouchableOpacity> | null>>({});
+  const [focusTargets, setFocusTargets] = React.useState<{ watch?: number; poster?: number }>({});
+  // Resolve mounted native controls after the selection/layout commit. Geometry
+  // must not turn Up from Watch into a different title selection.
+  React.useLayoutEffect(() => {
+    const watch = findNodeHandle(watchRef.current) ?? undefined;
+    const poster = findNodeHandle(posterRefs.current[featured?.title.id ?? ''] ?? null) ?? undefined;
+    setFocusTargets(previous => previous.watch === watch && previous.poster === poster
+      ? previous : { watch, poster });
+  });
   const empty = listed.length === 0;
   // With nothing to watch, the shelf does not ask who is watching: there is
   // nothing for the answer to change, and one fewer thing to read.
@@ -283,9 +295,9 @@ const KidHomeScreen = ({
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
                 </>}
                 <View style={styles.actions}>
-                  <CalmButton primary playIcon={!ambient} sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                  <CalmButton buttonRef={watchRef} nextFocusUp={focusTargets.poster} primary playIcon={!ambient} sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (ambient ? onAmbient! : (onPlay ?? onOpen))(featured); }} />
-                  <CalmButton quiet tertiary compact onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
+                  <CalmButton nextFocusUp={focusTargets.poster} quiet tertiary compact onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
             </View> : null;
@@ -313,6 +325,7 @@ const KidHomeScreen = ({
                 // here was heard as "not selected, selected" on every card.
                 // The chosen card says selected; the others say nothing of it.
                 return <TouchableOpacity surfaceKind="tertiary" disabled={saving || undefined} accessibilityState={{ disabled: saving, ...(selected ? { selected } : {}) }}
+                  ref={node => { posterRefs.current[entry.title.id] = node; }} nextFocusDown={focusTargets.watch}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
                   accessibilityLabel={[label.cardName ?? label.name, qualifier && spoken(qualifier)].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}

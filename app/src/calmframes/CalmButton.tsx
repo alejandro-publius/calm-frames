@@ -60,6 +60,10 @@ export interface CalmButtonProps {
   /** Disable confirmation for actions that start playback or confirm elsewhere. */
   sound?: boolean;
   hasTVPreferredFocus?: boolean;
+  /** Native directional targets override nearest-element movement on TV. */
+  nextFocusUp?: number;
+  nextFocusDown?: number;
+  buttonRef?: React.Ref<React.ComponentRef<typeof TouchableOpacity>>;
   testID?: string;
 }
 
@@ -79,6 +83,9 @@ const CalmButton = ({
   disabled = false,
   sound = true,
   hasTVPreferredFocus = false,
+  nextFocusUp,
+  nextFocusDown,
+  buttonRef,
   testID = 'calm-button',
 }: CalmButtonProps) => {
   const coastal = React.useContext(CoastalAppearance);
@@ -91,6 +98,9 @@ const CalmButton = ({
   const study = material && !world;
   return (
     <TouchableOpacity
+      ref={buttonRef}
+      nextFocusUp={nextFocusUp}
+      nextFocusDown={nextFocusDown}
       testID={testID}
       surfaceKind={primary ? 'primary' : tertiary || (quiet && (compact || coastal)) ? 'tertiary' : 'secondary'}
       accessibilityRole="button"
