@@ -10,15 +10,20 @@ Two halves, neither of which calls AWS:
     docs/SECURITY.md about the image (ARM64, base pinned by digest, hashes for
     every package, not root) fail here if someone changes the file.
 
-Every guard in this file has been broken on purpose and seen to go red. The
-mutations are listed in docs/SECURITY.md.
+The publishing/container mutations are listed in docs/SECURITY.md. The offline
+session fixture preserves the host environment and refuses identity-file and
+network fallback. Its negative controls are recorded in
+docs/overnight-2026-10-25/OFFLINE_AWS_TESTS.md.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
+import socket
 import sys
+from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
@@ -26,7 +31,16 @@ import pytest
 boto3 = pytest.importorskip("boto3", reason="boto3 is needed for the ingest container tests")
 moto = pytest.importorskip("moto", reason="moto is needed for the ingest container tests")
 
+from botocore import configloader  # noqa: E402
+from botocore import session as botocore_session  # noqa: E402
+from botocore.config import Config  # noqa: E402
+from botocore.configprovider import EnvironmentProvider  # noqa: E402
+from botocore.credentials import CredentialResolver  # noqa: E402
+from botocore.httpsession import URLLib3Session  # noqa: E402
+from botocore.session import Session as BotocoreSession  # noqa: E402
+from botocore.tokens import TokenProviderChain  # noqa: E402
 from moto import mock_aws  # noqa: E402
+from moto.core.base_backend import AccountSpecificBackend  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 INGEST_DIR = REPO / "pipeline" / "infra" / "ingest"
@@ -79,12 +93,103 @@ def make_settings(tmp_path: Path, **overrides) -> entrypoint.Settings:
     return entrypoint.Settings(**values)
 
 
+class InMemoryAwsSession(BotocoreSession):
+    """A test-only profile that cannot open a developer's AWS identity files."""
+
+    @property
+    def full_config(self):
+        return {"profiles": {"offline-ingest-tests": {"region": REGION}}}
+
+
+@contextmanager
+def isolated_aws_clients():
+    """Use Moto backends with no environment, profile-file or network fallback.
+
+    Moto's default credential/session patching is disabled. Dummy credentials
+    belong only to this private session, never to os.environ or boto3's global
+    session. The host's AWS_PROFILE guard remains in force throughout.
+    """
+    def environment_snapshot():
+        # Pytest itself changes this marker between fixture setup and teardown.
+        return {key: value for key, value in os.environ.items() if key != "PYTEST_CURRENT_TEST"}
+
+    environment = environment_snapshot()
+    default_session = boto3.DEFAULT_SESSION
+
+    def refuse_identity_files(*args, **kwargs):
+        raise AssertionError("AWS identity/config files are forbidden in offline tests")
+
+    def refuse_credentials(*args, **kwargs):
+        raise AssertionError("Ambient AWS credentials are forbidden in offline tests")
+
+    def refuse_transport(*args, **kwargs):
+        raise AssertionError("AWS HTTP transport is forbidden outside Moto")
+
+    def refuse_socket(*args, **kwargs):
+        raise AssertionError("Network sockets are forbidden in offline tests")
+
+    def in_memory_core():
+        core = InMemoryAwsSession(profile="offline-ingest-tests")
+        core.set_credentials("FOOBARKEY", "FOOBARSECRET")
+        core.register_component("credential_provider", CredentialResolver([]))
+        core.register_component("token_provider", TokenProviderChain([]))
+        return core
+
+    with pytest.MonkeyPatch.context() as isolated:
+        # Moto's lazy SSM/EC2 region tables also construct fresh SDK sessions.
+        # Their constructors must use the same in-memory identity boundary.
+        isolated.setattr(botocore_session, "get_session", in_memory_core)
+        isolated.setattr(configloader, "load_config", refuse_identity_files)
+        isolated.setattr(configloader, "raw_config_parse", refuse_identity_files)
+        isolated.setattr(CredentialResolver, "load_credentials", refuse_credentials)
+        isolated.setattr(URLLib3Session, "send", refuse_transport)
+        isolated.setattr(socket, "getaddrinfo", refuse_socket)
+        isolated.setattr(socket, "create_connection", refuse_socket)
+        isolated.setattr(socket.socket, "connect", refuse_socket)
+        isolated.setattr(socket.socket, "connect_ex", refuse_socket)
+        try:
+            with mock_aws(config={"core": {
+                "mock_credentials": False,
+                "reset_boto3_session": False,
+                "service_whitelist": ["s3", "ssm", "dynamodb"],
+                "passthrough": {"urls": [], "services": []},
+            }}):
+                session = boto3.Session(
+                    botocore_session=in_memory_core(),
+                    aws_access_key_id="FOOBARKEY",
+                    aws_secret_access_key="FOOBARSECRET",
+                    region_name=REGION,
+                )
+                # Moto queries SDK region metadata through its own Session().
+                # Give that offline lookup the same in-memory session as clients.
+                isolated.setattr(AccountSpecificBackend, "get_session", staticmethod(lambda: session))
+                config = Config(
+                    ignore_configured_endpoint_urls=True,
+                    proxies={},
+                    retries={"max_attempts": 0},
+                    defaults_mode="legacy",
+                )
+                clients = {
+                    service: session.client(service, config=config)
+                    for service in ("s3", "ssm", "dynamodb")
+                }
+                try:
+                    yield clients
+                finally:
+                    for client in clients.values():
+                        client.close()
+        finally:
+            # Do not let pytest print environment contents if a guard fails.
+            if environment_snapshot() != environment:
+                pytest.fail("Offline AWS fixture changed the process environment")
+            if boto3.DEFAULT_SESSION is not default_session:
+                pytest.fail("Offline AWS fixture replaced the global boto3 session")
+
+
+@pytest.fixture
 def aws_clients():
-    return {
-        "s3": boto3.client("s3", region_name=REGION),
-        "ssm": boto3.client("ssm", region_name=REGION),
-        "dynamodb": boto3.client("dynamodb", region_name=REGION),
-    }
+    with isolated_aws_clients() as clients:
+        yield clients
 
 
 def set_up_aws(clients) -> None:
@@ -173,10 +278,57 @@ def delivery_keys(clients) -> list[str]:
     return sorted(item["Key"] for item in listing.get("Contents", []))
 
 
+class TestOfflineAwsIsolation:
+    def test_a_missing_ambient_profile_cannot_affect_mocked_services(self, monkeypatch):
+        original = EnvironmentProvider.provide
+        profile_reads = []
+
+        def nonexistent_profile(provider):
+            if provider._name in ("AWS_PROFILE", "AWS_DEFAULT_PROFILE"):
+                profile_reads.append(provider._name)
+                return "nonexistent-offline-profile"
+            return original(provider)
+
+        # Model an invalid ambient profile without changing the actual guard.
+        monkeypatch.setattr(EnvironmentProvider, "provide", nonexistent_profile)
+        assert EnvironmentProvider("AWS_PROFILE", {}).provide() == "nonexistent-offline-profile"
+        profile_reads.clear()
+        with isolated_aws_clients() as clients:
+            set_up_aws(clients)
+            clients["ssm"].put_parameter(Name=KEY_PARAM, Value="fictional", Type="String")
+            assert clients["s3"].get_object(Bucket=SOURCE_BUCKET, Key=UPLOAD_KEY)["Body"].read() == SOURCE_BYTES
+            assert clients["dynamodb"].scan(TableName=TABLE)["Items"] == []
+            assert clients["ssm"].get_parameter(Name=KEY_PARAM)["Parameter"]["Value"] == "fictional"
+        assert profile_reads == []
+
+    def test_requests_that_escape_moto_are_refused_before_transport(self, monkeypatch):
+        from moto.core.models import botocore_stubber
+
+        with isolated_aws_clients() as clients:
+            assert clients["s3"].list_buckets()["Buckets"] == []
+            with monkeypatch.context() as escaped:
+                escaped.setattr(botocore_stubber, "enabled", False)
+                with pytest.raises(AssertionError, match="AWS HTTP transport is forbidden outside Moto"):
+                    clients["s3"].list_buckets()
+            with pytest.raises(AssertionError, match="Network sockets are forbidden"):
+                socket.create_connection(("offline.example.invalid", 443))
+
+    def test_identity_file_and_provider_fallbacks_fail_closed(self, tmp_path):
+        class UnexpectedProvider:
+            def load(self):
+                pytest.fail("An ambient credential provider was consulted")
+
+        with isolated_aws_clients():
+            for loader in (configloader.load_config, configloader.raw_config_parse):
+                with pytest.raises(AssertionError, match="AWS identity/config files are forbidden"):
+                    loader(str(tmp_path / "nonexistent-config"))
+            with pytest.raises(AssertionError, match="Ambient AWS credentials are forbidden"):
+                CredentialResolver([UnexpectedProvider()]).load_credentials()
+
+
 class TestOnlyACheckedTitleIsPublished:
-    @mock_aws
-    def test_a_verified_title_is_published_and_written_to_the_catalog(self, tmp_path):
-        clients = aws_clients()
+    def test_a_verified_title_is_published_and_written_to_the_catalog(self, tmp_path, aws_clients):
+        clients = aws_clients
         set_up_aws(clients)
         settings = make_settings(tmp_path)
         seen: dict = {}
@@ -196,15 +348,14 @@ class TestOnlyACheckedTitleIsPublished:
         assert rows[0]["verified"]["BOOL"] is True
         assert rows[0]["status"]["S"] == "verified"
 
-    @mock_aws
-    def test_nothing_is_published_when_verify_did_not_pass(self, tmp_path):
+    def test_nothing_is_published_when_verify_did_not_pass(self, tmp_path, aws_clients):
         """The guard: a title verify refused publishes no bytes at all.
 
         Seen to fail by making is_publishable return True whatever the entry
         says. The failure reads:
           assert [] == []  ->  AssertionError on delivery_keys(clients) == []
         """
-        clients = aws_clients()
+        clients = aws_clients
         set_up_aws(clients)
         settings = make_settings(tmp_path)
         seen: dict = {}
@@ -225,15 +376,14 @@ class TestOnlyACheckedTitleIsPublished:
 
 
 class TestTheHazardousFilesStayInTheTask:
-    @mock_aws
-    def test_the_cover_model_and_the_source_never_reach_the_delivery_bucket(self, tmp_path):
+    def test_the_cover_model_and_the_source_never_reach_the_delivery_bucket(self, tmp_path, aws_clients):
         """The guard: the upload list is an allowlist, not a directory walk.
 
         Seen to fail by replacing publishable_paths with a walk of the title
         directory. The failure names the file:
           AssertionError: verify/cover_model_wcag.mp4 was published
         """
-        clients = aws_clients()
+        clients = aws_clients
         set_up_aws(clients)
         settings = make_settings(tmp_path)
         seen: dict = {}
@@ -293,15 +443,14 @@ class TestAHostileObjectKey:
 
 
 class TestTheSigningKey:
-    @mock_aws
-    def test_the_key_is_readable_only_by_this_user_and_is_gone_at_the_end(self, tmp_path):
+    def test_the_key_is_readable_only_by_this_user_and_is_gone_at_the_end(self, tmp_path, aws_clients):
         """The guard: a private key fetched into the task does not outlive it.
 
         Seen to fail by removing the cleanup in the finally block. The failure
         reads:
           AssertionError: assert not True  ->  the keys directory still exists
         """
-        clients = aws_clients()
+        clients = aws_clients
         set_up_aws(clients)
         clients["ssm"].put_parameter(
             Name=KEY_PARAM, Value=throwaway_private_key_pem(), Type="SecureString"
@@ -320,9 +469,8 @@ class TestTheSigningKey:
         # And it was never published.
         assert [key for key in delivery_keys(clients) if "key" in key.lower()] == []
 
-    @mock_aws
-    def test_the_key_is_deleted_even_when_the_pipeline_raises(self, tmp_path):
-        clients = aws_clients()
+    def test_the_key_is_deleted_even_when_the_pipeline_raises(self, tmp_path, aws_clients):
+        clients = aws_clients
         set_up_aws(clients)
         clients["ssm"].put_parameter(
             Name=KEY_PARAM, Value=throwaway_private_key_pem(), Type="SecureString"
@@ -336,16 +484,14 @@ class TestTheSigningKey:
             entrypoint.run(settings, clients, explode)
         assert not (settings.workdir / "keys").exists()
 
-    @mock_aws
-    def test_a_parameter_that_is_not_a_private_key_is_refused(self, tmp_path):
-        clients = aws_clients()
+    def test_a_parameter_that_is_not_a_private_key_is_refused(self, tmp_path, aws_clients):
+        clients = aws_clients
         clients["ssm"].put_parameter(Name=KEY_PARAM, Value="hello", Type="SecureString")
         with pytest.raises(entrypoint.TaskRefused):
             entrypoint.fetch_signing_key(clients["ssm"], KEY_PARAM, tmp_path / "keys")
 
-    @mock_aws
-    def test_without_a_parameter_the_pipeline_is_run_with_no_key_at_all(self, tmp_path):
-        clients = aws_clients()
+    def test_without_a_parameter_the_pipeline_is_run_with_no_key_at_all(self, tmp_path, aws_clients):
+        clients = aws_clients
         set_up_aws(clients)
         settings = make_settings(tmp_path)
         seen: dict = {}
