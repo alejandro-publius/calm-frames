@@ -5,6 +5,7 @@ import { createStackNavigator } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { WithSuspense } from '../../utils/WithSuspense';
 import HarborOpening from '../../calmframes/HarborOpening';
+import { CALM_WORLD } from '../../calmframes/calmStyles';
 import { playerRouteFallback } from './playerRouteFallback';
 import { AppStackParamList, Screens } from './types';
 
@@ -29,6 +30,8 @@ const AppStack = () => {
   const navigationOptions = {
     headerShown: false,
     animationEnabled: false,
+    // The navigator paints before a lazy route. Never expose its near-white default.
+    cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
   };
 
   return (

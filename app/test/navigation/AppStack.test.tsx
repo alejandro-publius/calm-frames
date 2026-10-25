@@ -4,6 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import AppStack from '../../src/components/navigation/AppStack';
+import { CALM_WORLD } from '../../src/calmframes/calmStyles';
 import { Screens } from '../../src/components/navigation/types';
 
 jest.mock('../../src/screens/DetailsScreen', () => 'DetailsScreen');
@@ -104,6 +105,7 @@ describe('AppStack', () => {
     expect(navigatorProps.screenOptions).toEqual({
       headerShown: false,
       animationEnabled: false,
+      cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
     });
   });
 
