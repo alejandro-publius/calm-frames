@@ -1,0 +1,8 @@
+[  0.00-  9.00] COM frames works only with prepared videos in this app, not other apps or live TV.
+[  9.00- 10.84] Detection can miss flashing.
+[ 10.84- 14.08] This prototype has not been medically validated.
+[ 14.08- 19.16] COM frames reduces exposure to flashing above published limits in the videos it plays not
+[ 19.16- 26.64] a medical device.
+[ 26.64- 37.76] Playback Proof and Details button
+[ 37.76- 46.58] Back button
+[ 46.58- 48.74] Playback Proof and Details button

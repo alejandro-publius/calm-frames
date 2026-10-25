@@ -1,0 +1,93 @@
+{
+ "what": "own commits of the ten never-merge branches (rev-list <branch> ^<cut_from>), IDs only; no harness was merged or executed",
+ "checked_against": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f",
+ "result": "none of the 25 is in the history of fbe53bf",
+ "total_own_commits": 25,
+ "branches": {
+  "claude/integration-harness-a11y-2026-10-24-never-merge": {
+   "cut_from": "d7ff886854746d3a07b1a705eca0eefa53854eca",
+   "own_commits": [
+    "937c27ec15f996fc3f601effa13cac57e6a99a76",
+    "9d5ff4c08d9984a57a7e8f565134192596baf6e7"
+   ],
+   "head": "937c27ec15f996fc3f601effa13cac57e6a99a76"
+  },
+  "claude/integration-harness-onboarding-2026-10-24-never-merge": {
+   "cut_from": "d7ff886854746d3a07b1a705eca0eefa53854eca",
+   "own_commits": [
+    "ec68707e120022953a483a99fb15bb4f0ce1c3f7",
+    "667362541163813c9096a21615903f714316b7c6",
+    "f1d96d3ed37235316a68b4b0e45a0f503e95a627"
+   ],
+   "head": "ec68707e120022953a483a99fb15bb4f0ce1c3f7"
+  },
+  "claude/integration2-harness-a11y-2026-10-24-never-merge": {
+   "cut_from": "917e78f5949f1a879e3219f7512827bdd678d305",
+   "own_commits": [
+    "0f182f9b1178e20167917868c26a7ab7552b0d4f",
+    "800e31f7515f2079f443e59c2f47913024279ecb",
+    "17804674fc5ac8c865413f08fd3d75c1c89716c8"
+   ],
+   "head": "0f182f9b1178e20167917868c26a7ab7552b0d4f"
+  },
+  "claude/integration2-harness-onboarding-2026-10-24-never-merge": {
+   "cut_from": "917e78f5949f1a879e3219f7512827bdd678d305",
+   "own_commits": [
+    "50b52313df8e23420e96d35cc16b2cbe75ba6d74",
+    "df89748070c4acbb53f92f6acbd1997af9b65fb6",
+    "240606fa1a20bec5891ff73b49374317d62b71ef"
+   ],
+   "head": "50b52313df8e23420e96d35cc16b2cbe75ba6d74"
+  },
+  "claude/integration3-harness-a11y-2026-10-24-never-merge": {
+   "cut_from": "4de7bd03be2d654ea3e6c071b52c3b807df24f2e",
+   "own_commits": [
+    "19ba55d084c8fa0f40d75e2b6b2d724bafd20414",
+    "79e24d4331d695de664fbb766a482c02f9a8cc75",
+    "d43beee3c14222f71ce2cf1fc6fbae314f3c7522"
+   ],
+   "head": "19ba55d084c8fa0f40d75e2b6b2d724bafd20414"
+  },
+  "claude/integration3-harness-onboarding-2026-10-24-never-merge": {
+   "cut_from": "4de7bd03be2d654ea3e6c071b52c3b807df24f2e",
+   "own_commits": [
+    "089ec6fa0d0f531a18e28b0380afb97607253e52",
+    "e64872e1a3a61878d0126d7c0e254f3df5741dee",
+    "6e4ab07d6962e23b4145d7037edb3ba1abb3ea32"
+   ],
+   "head": "089ec6fa0d0f531a18e28b0380afb97607253e52"
+  },
+  "claude/native-accessibility-harness-2026-10-24-never-merge": {
+   "cut_from": "88c171666e9ab32d6993338c7ab77173d2f3e088",
+   "own_commits": [
+    "5e48655c8900f330f4ce353c3bb3f5aec512d8d6"
+   ],
+   "head": "5e48655c8900f330f4ce353c3bb3f5aec512d8d6"
+  },
+  "claude/native-accessibility-harness-v2-2026-10-24-never-merge": {
+   "cut_from": "3b0174b6c7dd8a4e31a84b3ddb8d479ddb759d27",
+   "own_commits": [
+    "4553ee3fb5d268850acb15529e820328dc0c1e93"
+   ],
+   "head": "4553ee3fb5d268850acb15529e820328dc0c1e93"
+  },
+  "claude/onboarding-harness-2026-10-23-never-merge": {
+   "cut_from": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+   "own_commits": [
+    "78e8a2ce7e15525d940332b8680fd800fcf664e3",
+    "6f5aa66d3258ea89fbf1f0dcc5c7a64222c7417a"
+   ],
+   "head": "78e8a2ce7e15525d940332b8680fd800fcf664e3"
+  },
+  "claude/onboarding-harness-fixed-2026-10-23-never-merge": {
+   "cut_from": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+   "own_commits": [
+    "b9cd62746b7660c65a9b8fd537523409e77971e2",
+    "dd1ec6c37f5d5ed86138bc38867d0b16b245a9b8",
+    "444ca911e784dbd8131ae9087605a216944aeaa9",
+    "6f5aa66d3258ea89fbf1f0dcc5c7a64222c7417a"
+   ],
+   "head": "b9cd62746b7660c65a9b8fd537523409e77971e2"
+  }
+ }
+}

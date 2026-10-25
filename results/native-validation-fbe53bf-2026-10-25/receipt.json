@@ -1,0 +1,363 @@
+{
+ "source_commit": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f",
+ "source_tree_clean_before_build": true,
+ "source_tree_clean_after_build": true,
+ "tool_versions": {
+  "node": "v22.23.2",
+  "npm": "10.9.8",
+  "python": "3.12.13 (uv cpython-3.12)",
+  "java": "openjdk 21.0.12.1 (Homebrew); JAVA_HOME=/opt/homebrew/opt/openjdk@21, the fallback the handoff names, because /usr/libexec/java_home -v 21 returned a Java 8 applet plugin",
+  "vega_cli": "1.3.4",
+  "vega_sdk": "0.24.9914 (active, only installed)",
+  "capture": "ScreenCaptureKit app-window recorder (calm-record-window), ffmpeg 9.0.1",
+  "transcription": "mlx-whisper, mlx-community/whisper-base.en-mlx, on the Mac"
+ },
+ "builds": {
+  "debug": {
+   "exit_code": 0,
+   "seconds": 78.07,
+   "timed_out": false,
+   "package_bytes": 132667620,
+   "package_sha256": "3ce800cf493af7a54aeb0b6a16785f3bb6e9d3d778a9930b257458b2ec4f276d",
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "installed_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "installed_on": [
+    "disposable instance (fictional household)",
+    "main instance (real household)"
+   ],
+   "inventory_path": "native-results/instances-debug.json",
+   "module_table_inventory_path": "native-results/inventory-debug.json",
+   "source_map_path": "in the sanitized receipt ZIP only: native-results/source-maps/Debug/"
+  },
+  "release": {
+   "exit_code": 0,
+   "seconds": 75.14,
+   "timed_out": false,
+   "package_bytes": 132101221,
+   "package_sha256": "8ce683285c12172dd515a7758313d60572fdd511f7a94c0e66bd22efbf020fea",
+   "package_sha384": "ace30351afc9ed7ea251b026bec789bd0f14eb2a871b85eae50ec17c032624ebc257bdfb35401248f74703785e5a2557",
+   "installed_sha384": "ace30351afc9ed7ea251b026bec789bd0f14eb2a871b85eae50ec17c032624ebc257bdfb35401248f74703785e5a2557",
+   "installed_on": [
+    "disposable instance (fictional household)"
+   ],
+   "inventory_path": "native-results/instances-release.json",
+   "module_table_inventory_path": "native-results/inventory-release.json",
+   "source_map_path": "in the sanitized receipt ZIP only: native-results/source-maps/Release/"
+  }
+ },
+ "device_type": "Vega Virtual Device, SDK 0.24.9914, aarch64, on an Apple Silicon Mac: the main instance (real household) for the package-scoped Debug install, installed identity and private Home checks; a fresh disposable instance with a made-up household for every state-changing check, then deleted",
+ "viewports_observed": [
+  "1920x1080",
+  "1280x720"
+ ],
+ "household_pin_positions_preserved": true,
+ "only_fictional_profile_used_for_changes": true,
+ "observations": [
+  {
+   "items": [
+    1,
+    2,
+    3,
+    4,
+    11,
+    14
+   ],
+   "check": "Native screen/layout/copy/Watch/focus/loading sweep",
+   "status": "failed",
+   "evidence": [
+    "evidence/t01-1080-open-library-sheet.jpg",
+    "evidence/d10-1080-after-open-library.jpg",
+    "evidence/h01-1080-up-from-watch.jpg",
+    "evidence/h02-1080-acadia.jpg",
+    "evidence/h03-1080-down-to-watch.jpg",
+    "evidence/h04-1080-up-again.jpg",
+    "evidence/h05-1080-mcway-down-up.jpg",
+    "evidence/h06-1080-forest.jpg",
+    "evidence/h07-1080-forest-down-up.jpg",
+    "evidence/h09-1080-acadia-details.jpg",
+    "evidence/h10-1080-acadia-more-info.jpg",
+    "evidence/h13-1080-technical.jpg",
+    "evidence/h17-1080-technical-down10.jpg",
+    "evidence/h18-1080-back-to-more-info.jpg",
+    "evidence/h19-1080-remote-back-details.jpg",
+    "evidence/h20-1080-remote-back-home.jpg",
+    "evidence/t02-1080-acadia-watch-sheet.jpg",
+    "evidence/t03-1080-mcway-watch-sheet.jpg",
+    "evidence/w08-1080-mcway-controls.jpg",
+    "evidence/w10-1080-mcway-paused-hidden.jpg",
+    "evidence/w12-1080-home-after-mcway.jpg",
+    "evidence/p03-1080-parents-open.jpg",
+    "evidence/p15-1080-kid2-walk-5.jpg",
+    "evidence/p18-1080-kid2-walk-8.jpg",
+    "evidence/t20-1080-cold-start-sheet.jpg",
+    "evidence/t30-720-cold-start-sheet.jpg",
+    "evidence/e02-720-home.jpg",
+    "evidence/e03-720-up-from-watch.jpg",
+    "evidence/e05-720-kid2-mcway-details.jpg",
+    "evidence/e06-720-kid2-mcway-more-info.jpg",
+    "evidence/e18-720-parents-kid.jpg",
+    "evidence/e21-720-kid-walk-1.jpg",
+    "evidence/e24-720-kid-walk-4.jpg",
+    "evidence/t05-1080-kid2-resume-sheet.jpg",
+    "evidence/t05-1080-kid2-resume-luma.csv",
+    "evidence/t12-1080-otters-preview-start-frames.jpg",
+    "evidence/t12-1080-otters-preview-luma.csv"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "observed": "Home, Details, More info, technical details, Parents, chooser, player controls, paused notice, cold start, Open library and still-to-preview transitions at 1920x1080 and 1280x720; Watch is visible and the focus ring is distinct on every stop seen; essential safety and limits copy present on More info, technical details and the Parents explainer; Back routes return focus to the control that opened each page",
+   "failure": "Demonstrated defect D1: Up from Watch moves focus and the selected title to the middle card nearest Watch at both sizes (also seen on Release, evidence/r21-720-release-mcway-watch.png); Down from Sea Otters or Forest lands on Details",
+   "unobserved": [
+    "error views (missing or unchecked video, empty library) and the playback error Try again route: not reachable without fault injection",
+    "owner visual cohesion and comfort (#1, #8)"
+   ],
+   "measured": "still-to-preview start: about 0.4 to 0.47 s of near-white frame (mean luma 240 of 255) before the Opening your video card, Sea Otters and Forest; the documented pale first frame (#3), cause not established"
+  },
+  {
+   "items": [
+    6
+   ],
+   "check": "Owner disclaimer-at-rest decision; retain completed navigation",
+   "status": "observed",
+   "evidence": [
+    "evidence/d07-1080-explainer-at-rest.jpg",
+    "evidence/d08-1080-explainer-one-up.jpg",
+    "evidence/d09-1080-explainer-down.jpg",
+    "evidence/t01-1080-open-library-sheet.jpg"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "note": "Closes #6 against the existing passing navigation: production first run at 1920x1080 and 1280x720 on a672f57 (steps open at top, one Down reaches Next, Up reaches the explainer reading stop, Down returns, Open library reaches Home; acceptance archive d21 to d24 and d30 to d36). FirstRunScreen.tsx is unchanged between a672f57 and fbe53bf, and the fbe53bf first run at 1920x1080 repeated the explainer route (d07 at rest, d08 one Up onto the stop, d09 one Down, t01 Open library to Home). No audiovisual acceptance is implied.",
+   "owner_decision": "Disclaimer layout accepted as-is by the owner on 2026-10-25; no layout change requested or made."
+  },
+  {
+   "items": [
+    11
+   ],
+   "check": "Once-per-pause speech and remaining upstream speech limits",
+   "status": "failed",
+   "evidence": [
+    "evidence/a01-1080-pause-once.transcript.txt",
+    "evidence/a01-1080-pause-once.transcript.json",
+    "evidence/a01-1080-pause-once-frames.jpg",
+    "evidence/a03-1080-pause-repeat.transcript.txt",
+    "evidence/a03-1080-pause-repeat.transcript.json",
+    "evidence/a03-1080-pause-repeat-frames.jpg",
+    "evidence/a02-1080-after-player.transcript.txt"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "failure": "Demonstrated defect D3: with VoiceView on (Dolby kept, as on the real device) no announcement was heard on any of three real pauses, including when the controls were shown and hidden during a pause; Paused. Press Play to continue. was spoken once on entering the player (a01) instead. No repeat when controls hid (nothing spoken).",
+   "separately_recorded": {
+    "resume_entry_speech": "McWay Falls. Resume at 1:18, button (a01); Resume at 1:42, button (a03); then Back, button",
+    "seekbar_speech": "Current progress is 27%, 28% (a01); Current progress is 34% (a03)",
+    "other": "a03 stalled about 10 s after Resume; later the app's own Playback slow card with Try again appeared and was read by VoiceView; Try again not pressed"
+   },
+   "unobserved": [
+    "pause listening at 1280x720"
+   ]
+  },
+  {
+   "items": [
+    20,
+    11
+   ],
+   "check": "Reading comfort profile persistence/layout/focus/VoiceView",
+   "status": "failed",
+   "evidence": [
+    "evidence/p23-1080-kid-comfort-focus.jpg",
+    "evidence/t04-1080-comfort-on-sheet.jpg",
+    "evidence/p24-1080-kid-comfort-on.jpg",
+    "evidence/p25-1080-kid-comfort-on-still.jpg",
+    "evidence/p26-1080-comfort-up.jpg",
+    "evidence/p27-1080-comfort-down.jpg",
+    "evidence/p28-1080-kid-comfort-row-on.jpg",
+    "evidence/p29-1080-kid-comfort-off.jpg",
+    "evidence/p30-1080-after-toggle-down.jpg",
+    "evidence/r03-1080-more-info-kid-comfort.jpg",
+    "evidence/r06-1080-more-info-kid-down3.jpg",
+    "evidence/k07-1080-kid2-more-info.jpg",
+    "evidence/r11-1080-mcway-more-info-vv.jpg",
+    "evidence/a04-1080-more-info-comfort.transcript.txt",
+    "evidence/a05-1080-comfort-switch-kid.transcript.txt",
+    "evidence/a07-1080-comfort-switch-kid2.transcript.txt",
+    "evidence/s02-1080-relaunch-kid-more-info.jpg",
+    "evidence/s05-1080-relaunch-kid2-more-info.jpg",
+    "evidence/e06-720-kid2-mcway-more-info.jpg",
+    "evidence/e12-720-kid-more-info.jpg",
+    "evidence/e15-720-kid-more-info-down3.jpg",
+    "evidence/e24-720-kid-walk-4.jpg",
+    "evidence/e25-720-kid-comfort-off.jpg",
+    "evidence/e26-720-after-off-down.jpg",
+    "evidence/a10-720-comfort-toggle-on.transcript.txt",
+    "evidence/e28-720-after-vv-toggle.jpg",
+    "evidence/a11-720-more-info-comfort.transcript.txt",
+    "evidence/r30-720-release-more-info.jpg"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "observed": "default off; Kid on and Kid 2 off stay separate in Parents and More info; larger text wraps inside the column at both sizes (long licence URL included) and the pages scroll with whole focus rings; state persists across an app relaunch, two device restarts and the Debug to Release update; VoiceView reads Reading comfort, on/off, switch, with its hint, and reads the comfort-size More info stop in full at both sizes",
+   "failure": "Demonstrated defect D2: after a Reading comfort save the next D-pad press (and, with VoiceView on, no press at all) puts focus on the page-top Back; turning it On pushed the focused row mostly below the visible edge with its state off screen and no scroll followed",
+   "unobserved": [
+    "owner reading-comfort judgment (#20)"
+   ]
+  },
+  {
+   "items": [
+    10
+   ],
+   "check": "Stricter-profile recovery, positions and supported-caption boundary",
+   "status": "observed",
+   "evidence": [
+    "evidence/p09-1080-kid2-extra.jpg",
+    "evidence/k08-1080-kid2-technical.jpg",
+    "evidence/k09-1080-kid2-covered.jpg",
+    "evidence/k10-1080-kid2-settings.jpg",
+    "evidence/h09-1080-acadia-details.jpg",
+    "evidence/q03-1080-kid2-mcway-playing.jpg",
+    "evidence/q05-1080-kid2-resumed.jpg",
+    "evidence/q07-1080-kid2-resumed-playing.jpg",
+    "evidence/q12-1080-kid-resume-prompt.jpg",
+    "evidence/r23-720-release-resume-prompt.jpg",
+    "evidence/r28-720-release-relaunch-prompt.jpg"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "observed": "Everyone and Kid Standard, Kid 2 Extra cautious (no floor lowered). Kid 2's Acadia record: detected 8.3 to 11.7 s and 29.1 to 30.6 s, covered 7.3 to 12.7 s and 28.1 to 31.6 s, 2 scenes and 9 seconds hidden; Kid's Acadia Details: 2 scenes, 7 seconds. Separate McWay positions: Kid 2 saved 0:31 and resumed from it (00:40 about 8 s later) while Kid kept Resume at 1:18; Kid's later positions carried into Release (2:14, then 2:29 after a relaunch).",
+   "unobserved": [
+    "covered intervals during moving playback under the stricter profile (Acadia opens as a still scene; its preview was not played as Kid 2)",
+    "playback error and explicit retry (no fault harness used)",
+    "supported-caption restoration: the consumer catalog has no caption tracks"
+   ]
+  },
+  {
+   "items": [
+    7,
+    11
+   ],
+   "check": "Other ambient titles and reduced-motion capability",
+   "status": "observed",
+   "evidence": [
+    "evidence/t11-1080-otters-still-sheet.jpg",
+    "evidence/m03-1080-otters-still.jpg",
+    "evidence/t12-1080-otters-preview-sheet.jpg",
+    "evidence/t12-1080-otters-preview-start-frames.jpg",
+    "evidence/m04-1080-otters-preview-end.jpg",
+    "evidence/t13-1080-forest-still-sheet.jpg",
+    "evidence/m12-1080-forest-still.jpg",
+    "evidence/t14-1080-forest-preview-sheet.jpg",
+    "evidence/t14-1080-forest-preview-start-frames.jpg",
+    "evidence/m13-1080-forest-preview-end.jpg",
+    "evidence/q02-1080-kid2-mcway-details.jpg",
+    "evidence/w01-1080-acadia-playing.jpg",
+    "native-results/a11y-settings-list-disposable.txt"
+   ],
+   "package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "observed": "Sea Otters: silent still scene (no frame written after opening) with an optional 20 s moving preview, silent, ending on the still with Finished. Forest: silent still scene with an optional 12 s moving preview with nature sound, ending on the still. Acadia: still scene. McWay is the only continuous edition (5 minutes, nature sounds, then a still frame). No long moving Forest or Sea Otters edition exists; previews are not sustained editions.",
+   "reduced_motion": "unavailable on this virtual device: a11y-tv-util settings list answers Error obtaining user profile object and there is no settings screen for it; nothing set. The app's Gentle artwork motion is off by default and Home stays still with it off (frames 11 s apart, PSNR 67 to 72 dB).",
+   "measured": "one black frame (33 ms) as the Forest preview ended into its still"
+  },
+  {
+   "items": [
+    8,
+    1,
+    20
+   ],
+   "check": "Owner picture/audio/palette/reading-comfort observations",
+   "status": "unobserved",
+   "evidence": [],
+   "note": "Owner picture, sound, palette, pace and reading-comfort review not performed in this pass; nothing is claimed. The main device holds the fbe53bf Debug package (sha384 2b98119e...) for that review; Release was observed only on the disposable device."
+  }
+ ],
+ "owner_review": {
+  "performed": false,
+  "reviewed_package_sha384": null,
+  "disclaimer_at_rest_decision": "accepted as-is (owner, 2026-10-25)",
+  "picture_audio_pace_comfort": null,
+  "accepted_scope": null,
+  "note": "Only the #6 layout decision was made; picture, sound, palette, pace and comfort review (#8, #1, #20) was not performed."
+ },
+ "demonstrated_defects": [
+  {
+   "id": "D1",
+   "items": [
+    4,
+    11,
+    1
+   ],
+   "title": "Up from Watch changes the selected title",
+   "packages": [
+    "fbe53bf Debug (1920x1080, 1280x720)",
+    "fbe53bf Release (1280x720)"
+   ],
+   "repro": "Home with Acadia (or Forest) chosen; Down to Watch; Up. Focus and the check mark move to McWay Falls or Sea Otters, whichever middle card is nearest the centered Watch. Down from Sea Otters or Forest lands on Details.",
+   "evidence": [
+    "evidence/h01-1080-up-from-watch.jpg",
+    "evidence/h04-1080-up-again.jpg",
+    "evidence/h07-1080-forest-down-up.jpg",
+    "evidence/e03-720-up-from-watch.jpg",
+    "evidence/r21-720-release-mcway-watch.jpg",
+    "evidence/m11-1080-forest-down.jpg"
+   ],
+   "source_note": "KidHomeScreen.tsx is unchanged between a672f57 and fbe53bf, so this predates fbe53bf"
+  },
+  {
+   "id": "D2",
+   "items": [
+    20,
+    11
+   ],
+   "title": "Focus jumps to the page-top Back after a Reading comfort save",
+   "packages": [
+    "fbe53bf Debug (1920x1080, 1280x720)"
+   ],
+   "repro": "Parents, a kid chosen, Down to Reading comfort, Select. Off to On: the larger text pushes the focused row mostly below the visible edge and no scroll follows; the next D-pad press, in any direction, lands on the page-top Back. On to Off: the row stays in view but the next Down also lands on the top Back. With VoiceView on (720) focus moved to the top Back about 10 s after the save without a key.",
+   "evidence": [
+    "evidence/p24-1080-kid-comfort-on.jpg",
+    "evidence/p25-1080-kid-comfort-on-still.jpg",
+    "evidence/p26-1080-comfort-up.jpg",
+    "evidence/p30-1080-after-toggle-down.jpg",
+    "evidence/e26-720-after-off-down.jpg",
+    "evidence/e28-720-after-vv-toggle.jpg",
+    "evidence/a10-720-comfort-toggle-on.transcript.txt"
+   ],
+   "source_note": "new with the Reading comfort feature in fbe53bf; the saved state itself is correct"
+  },
+  {
+   "id": "D3",
+   "items": [
+    11
+   ],
+   "title": "Pause announcement not heard on real pauses",
+   "packages": [
+    "fbe53bf Debug (1920x1080)"
+   ],
+   "repro": "VoiceView on, Dolby kept (Do not disable Dolby). Watch McWay, Resume; Play/Pause to pause; wait; Down and Up to show and hide controls; Play/Pause to resume; Play/Pause again. Nothing is spoken on either pause; the sentence was spoken once while the player was opening.",
+   "evidence": [
+    "evidence/a01-1080-pause-once.transcript.txt",
+    "evidence/a01-1080-pause-once-frames.jpg",
+    "evidence/a03-1080-pause-repeat.transcript.txt",
+    "evidence/a03-1080-pause-repeat-frames.jpg"
+   ],
+   "source_note": "VideoPlayerUI.tsx now calls announceForAccessibility when paused becomes true and the notice's live region is none; a672f57 with the polite live region did speak on pause (repeatedly). Cause not established."
+  }
+ ],
+ "remaining_unobserved": [
+  "owner picture, sound, palette, pace and comfort review (#8, #1) and reading-comfort judgment (#20), naming the package reviewed",
+  "error views and the playback error Try again route (no fault harness); the app's slow-playback Try again appeared once and was not pressed",
+  "covered intervals during moving playback under the stricter profile",
+  "caption restoration (no caption tracks in the catalog)",
+  "system reduced motion (unavailable on the virtual device)",
+  "pause announcement at 1280x720",
+  "Gentle artwork motion turned on (app setting left at its default, off)",
+  "Release: VoiceView, Parents and Reading comfort changes (only launch, Watch, Back and persistence were in scope)",
+  "a physical Fire TV device"
+ ],
+ "rollback": {
+  "used": false,
+  "package_sha384": "480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59",
+  "installed_hash_matched": null,
+  "note": "retained a672f57 package verified (sha256 8cc0ffd5...73dd8) and kept read-only; secondary 6a87937 verified; neither installed"
+ },
+ "publication_authorized": false,
+ "secrets_or_household_export_included": false,
+ "items_newly_closed": [
+  6
+ ],
+ "receipt_note": "Repository copy for cloud Codex. Evidence paths point at review copies in this folder; full-size originals, every other capture, the sanitized source maps and the tools are in the sanitized receipt ZIP, whose RETURN_RECEIPT.json predates the owner's #6 decision. No push other than the handoff branch, no merge, publication or submission change."
+}

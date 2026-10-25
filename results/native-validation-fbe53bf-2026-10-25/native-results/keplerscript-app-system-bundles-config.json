@@ -1,0 +1,34 @@
+{
+  "systemBundles": {
+    "common": [
+      "index.amzn__react-native-kepler-4.hermes.bundle",
+      "index.amzn__react-linear-gradient-2.hermes.bundle",
+      "index.amzn__react-native-svg-3.hermes.bundle",
+      "index.amzn__react-native-w3cmedia-2.hermes.bundle",
+      "amzn__kepler-media-controls.hermes.bundle",
+      "index.amzn__keplermediadescriptor-1.hermes.bundle",
+      "index.amzn__react-navigation__native-8.hermes.bundle",
+      "index.amzn__react-navigation__core-8.hermes.bundle",
+      "index.amzn__react-navigation__routers-8.hermes.bundle",
+      "index.amzn__react-native-device-info-2.hermes.bundle",
+      "index.amzn__kepler-content-personalization-1.hermes.bundle",
+      "index.amzn__kepler-epg-provider-1.hermes.bundle",
+      "index.amzn__react-native-localize-2.hermes.bundle",
+      "index.amzn__kepler-file-system-0.hermes.bundle",
+      "index.amzn__react-native-vector-icons-2.hermes.bundle",
+      "index.amzn__keplerscript-netmgr-lib-2.hermes.bundle",
+      "index.amzn__security-manager-lib-1.hermes.bundle",
+      "index.amzn__react-navigation__drawer-8.hermes.bundle",
+      "index.amzn__react-native-safe-area-context-8.hermes.bundle",
+      "index.amzn__react-navigation__elements-8.hermes.bundle",
+      "index.amzn__react-native-drawer-layout-8.hermes.bundle",
+      "index.amzn__react-native-reanimated-4.hermes.bundle",
+      "index.amzn__react-native-worklets-1.hermes.bundle",
+      "index.amzn__react-native-screens-3.hermes.bundle",
+      "index.amzn__react-native-gesture-handler-4.hermes.bundle",
+      "index.amzn__keplerscript-appstore-iap-lib-2.hermes.bundle",
+      "index.amzn__react-native-async-storage__async-storage-2.hermes.bundle",
+      "index.amzn__react-navigation__stack-8.hermes.bundle"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+needs.module 31 wants.module 2 libs ['lib/aarch64/com.amazon.keplerscript.carousel.so']
+bundle npm packages 83 node_modules files 658 debug True
+non-runtime files packaged: []
+reconciliation: {'group matches this bundle': 31, 'grouped as shipping, absent from this Debug bundle': 2}
+   grouped as shipping, absent from this Debug bundle | @amazon-devices/react-navigation__native moderate not in bundle
+   grouped as shipping, absent from this Debug bundle | @amazon-devices/security-manager-lib high not in bundle
+exit 0

@@ -1,5 +1,7 @@
 # Calm Frames: rules for every session
 
+**October 25 native validation handoff.** Read `START_HERE_CODEX.md` first. Branch `codex/native-validation-handoff-2026-10-25` is verified source `fbe53bf` plus Mac validation documentation and fictional-household evidence only. fbe53bf Debug and Release were built, installed and identified on the Vega Virtual Device. Three native defects are for cloud Codex to fix: D1, Up from Watch changes the selected title; D2, focus jumps to the page-top Back after a Reading comfort save; D3, the pause announcement is not heard on real pauses. The owner accepted the disclaimer layout as-is, so #6 is complete; picture, sound and comfort review (#8) stays with the owner. Passing source tests are not native acceptance. Further Mac-only checks wait for the owner. No main merge, publication or submission change.
+
 **October 25 overnight takeover.** The owner authorized local implementation across
 the original 20 outcomes after Claude stopped editing. GitHub handoff
 `codex/final-handoff-2026-10-25` was independently fetched and matched
