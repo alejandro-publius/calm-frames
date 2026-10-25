@@ -145,8 +145,14 @@ def capture(output: Path, pipeline_python: Path) -> None:
             page.screenshot(path=output / 'desktop-review.png', full_page=True)
             assert page.locator('video,audio,iframe').count() == 0
             assert page.evaluate('document.getAnimations().length') == 0
-            stop = time.monotonic() - t0
             cdp.send('Page.stopScreencast')
+            cdp.remove_listener('Page.screencastFrame', frame)
+            stop = time.monotonic() - t0
+            write(private / 'raw-recording.json', {
+                'source_commit': source, 'capture_tool_sha256': sha(Path(__file__)),
+                'events': events, 'stop_elapsed_s': stop, 'frames': pictures,
+                'scope': 'Actual local caregiver browser; no media playback or native capture',
+            })
             # Exercise the newly fixed nested-record failure outside the demonstration take.
             damaged = jobs / ('d' * 32)
             shutil.copytree(jobs / job['id'], damaged)
@@ -169,6 +175,7 @@ def capture(output: Path, pipeline_python: Path) -> None:
             assert not errors and not external
             checks = {'permission_required': True, 'real_file_analysis_frames': 360, 'duration_ms': 12000, 'three_presets_reviewed': True, 'keyboard_report_download': True, 'visible_focus': True, 'nested_corruption_isolated': True, 'invalid_report_http_status': 400, 'keyboard_remove_only_corrupt_copy': True, 'source_preserved': True, 'narrow_horizontal_overflow': False, 'reduced_motion_emulated': True, 'active_animations': 0, 'media_elements': 0, 'page_errors': errors, 'external_requests': external, 'native_fire_tv': False}
             checks['browser_version'] = browser.version
+            write(output / 'browser-checks.json', {'source_commit': source, **checks})
             browser.close()
         assert pictures and stop > pictures[-1]['elapsed_s']
         # Preserve real waits between browser frames. This is browser IPC timing,
