@@ -1,0 +1,42 @@
+[
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/index.js",
+    "bytes": 312,
+    "sha256": "3eb8eaa980024a30c2ca83cdc2e5abf9283a0616749dc71b1245574ece1f4dbf"
+  },
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/package.json",
+    "bytes": 621,
+    "sha256": "361cdc32373ff474eb2219363502f1e36b6e5a0016f63df65d38eadbbbd8cf7f"
+  },
+  {
+    "path": "app/node_modules/@amazon-devices/security-manager-lib/package.json",
+    "bytes": 1334,
+    "sha256": "564cff716237b8a310f23039c91ddfacff77977671fa0d1a1225bf00c7d1e484"
+  },
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/node_modules/react-native/Libraries/Blob/URL.js",
+    "bytes": 5170,
+    "sha256": "565eedce9d8981b1d10f99f11d3ce54fab75eeb66ded0fddf6d156c494427c65"
+  },
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/node_modules/react-native/Libraries/Core/Devtools/setupDevtools.js",
+    "bytes": 1371,
+    "sha256": "5ba698d503890f9aff2fa7f551e50d12a1039285e6e22bcf2862af86d16a0ef0"
+  },
+  {
+    "path": "app/node_modules/metro-inspector-proxy/src/InspectorProxy.js",
+    "bytes": 8926,
+    "sha256": "eaace0fa9f293db9e76fb0f7e6e31ef5e8f725beb052b105b235fe52932abf45"
+  },
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/node_modules/metro/src/lib/attachWebsocketServer.js",
+    "bytes": 2624,
+    "sha256": "ab4d04de22b60d94295bc4a23b4c95396e275b3ac9dda426fe4c2d612c29bc9a"
+  },
+  {
+    "path": "app/node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli/build/commands/server/messageSocket.js",
+    "bytes": 6697,
+    "sha256": "4007a159443a3db90733438be100e87fdebdd89073bf2014025da25ba1503514"
+  }
+]

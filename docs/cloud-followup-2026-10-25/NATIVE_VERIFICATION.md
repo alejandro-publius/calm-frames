@@ -3,8 +3,10 @@
 This is the single home verification queue for the preserved native fixes plus
 the new dependency lock. It is not another full acceptance pass on fbe53bf. Keep completed #5/#6 and the accepted disclaimer. Use the final
 full source SHA in the transfer's `SYNC_MANIFEST.json`; product changes end at
-`09b3c55603ddff50bb068a585980aa188002479e`. No new native package exists in this
+`365be0813a8416399ada1d469b0db326d45917d4`. No new native package exists in this
 cloud. The received fbe53bf package hashes cannot identify the new build.
+The previous cb96e21 transfer is preserved but superseded for new work. App UI
+and the D1/D2/D3 fixes are unchanged; this update changes build dependencies only.
 
 ## Separate worktree
 
@@ -47,7 +49,7 @@ signing change or environment reinstall is required by this handoff.
 cd "$CALM_NEW_TREE"
 npm --prefix app ci --ignore-scripts --no-audit --no-fund
 python3 docs/cloud-followup-2026-10-25/restore_generated_player.py \
-  --archive "$CALM_TRANSFER/calm-frames-generated-player-inputs-2917303.zip" \
+  --archive "$CALM_TRANSFER/calm-frames-generated-player-inputs-365be08.zip" \
   --checkout "$CALM_NEW_TREE" --expected-head "$CALM_SHA"
 npm --prefix app run check:native-inputs
 npm --prefix app run typecheck

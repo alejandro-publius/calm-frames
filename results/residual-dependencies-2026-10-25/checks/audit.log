@@ -1,0 +1,10 @@
+python: 0 package(s) with advisories
+npm: 9 package(s), 4 advisory(s), 0 critical, 9 high
+3 exception group(s) in audit_exceptions.toml
+written to results/audit.json
+
+Not accounted for:
+  the exception 'in-the-device-bundle' was due for review on 2026-10-21
+  the exception 'not-in-the-device-bundle' was due for review on 2026-10-21
+
+Fix it, or add an exception that says why, with a review date.

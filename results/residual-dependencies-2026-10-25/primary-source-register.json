@@ -1,0 +1,248 @@
+{
+  "read_utc": "2026-10-25T22:33:13.703451+00:00",
+  "sources": [
+    {
+      "filename": "@amazon-devices-security-manager-lib-latest.json",
+      "sha256": "97823006ee46b7405a51161dbabcebfc4c52fb139cb7490f6393804a1f487e34",
+      "package": "@amazon-devices/security-manager-lib",
+      "version": "1.0.1767254405",
+      "tarball": "https://registry.npmjs.org/@amazon-devices/security-manager-lib/-/security-manager-lib-1.0.1767254405.tgz",
+      "integrity": "sha512-R3Z2D4Szv/4pg9NJCiqf+LOq3Unxvh6aHA3QRIkSToQT5qoF6EWkx1d2ryEtUVTmxvCp+k4Eih7Dlr0kwrX/cA==",
+      "dependencies": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      }
+    },
+    {
+      "filename": "GHSA-3h5v-q93c-6h6q.json",
+      "sha256": "91837b8ea227a07e823b336650b145ec48e21bfd310afe09e90e6a5f37032061",
+      "url": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+      "summary": "ws affected by a DoS when handling a request with many HTTP headers",
+      "ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 2.1.0, < 5.2.4",
+          "first_patched_version": "5.2.4",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 6.0.0, < 6.2.3",
+          "first_patched_version": "6.2.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 7.0.0, < 7.5.10",
+          "first_patched_version": "7.5.10",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 8.0.0, < 8.17.1",
+          "first_patched_version": "8.17.1",
+          "vulnerable_functions": []
+        }
+      ]
+    },
+    {
+      "filename": "GHSA-5fw9-fq32-wv5p.json",
+      "sha256": "5f1b620e4c5d54a8f7e30a307df53127fb76a6e0d4eefbde3bc647703e3f5ae7",
+      "url": "https://github.com/advisories/GHSA-5fw9-fq32-wv5p",
+      "summary": "OS Command Injection in node-notifier",
+      "ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "node-notifier"
+          },
+          "vulnerable_version_range": "< 8.0.1",
+          "first_patched_version": "8.0.1",
+          "vulnerable_functions": []
+        }
+      ]
+    },
+    {
+      "filename": "GHSA-7f53-fmmv-mfjv.json",
+      "sha256": "78cadc11c17e7373e903685ea6b699384851e9be3e35b76e5f1e945324ebb67c",
+      "url": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+      "summary": "Regular expression denial of service in react-native",
+      "ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-native"
+          },
+          "vulnerable_version_range": ">= 0.59.0, < 0.62.3",
+          "first_patched_version": "0.62.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-native"
+          },
+          "vulnerable_version_range": ">= 0.63.0, < 0.64.1",
+          "first_patched_version": "0.64.1",
+          "vulnerable_functions": []
+        }
+      ]
+    },
+    {
+      "filename": "GHSA-96hv-2xvq-fx4p.json",
+      "sha256": "a3d4db1afd790f3eba1f703f2e890959fc33d2857ee9b5da1bf646418042ea12",
+      "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+      "summary": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 1.1.0, < 5.2.5",
+          "first_patched_version": "5.2.5",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 6.0.0, < 6.2.4",
+          "first_patched_version": "6.2.4",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 7.0.0, < 7.5.11",
+          "first_patched_version": "7.5.11",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 8.0.0, < 8.21.0",
+          "first_patched_version": "8.21.0",
+          "vulnerable_functions": []
+        }
+      ]
+    },
+    {
+      "filename": "GHSA-rxrc-rgv4-jpvx.json",
+      "sha256": "23a349e06d633028ee1c814f761f477fbb9f4d3344322d97242101338a3842e5",
+      "url": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+      "summary": "React Developer Tools extension Improper Authorization vulnerability",
+      "ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-devtools-core"
+          },
+          "vulnerable_version_range": "< 4.28.4",
+          "first_patched_version": "4.28.4",
+          "vulnerable_functions": []
+        }
+      ]
+    },
+    {
+      "filename": "devtools-fix.json",
+      "sha256": "6988c57233725ac71c463c04186aeaefe3976a6ee72d8ba82afcb058a1e32af5",
+      "url": "https://github.com/react/react/commit/09285d5a7f1c08bec09f44cec3d0518a603597fc",
+      "changed_files": [
+        "packages/react-devtools-extensions/src/background/dynamicallyInjectContentScripts.js",
+        "packages/react-devtools-extensions/src/background/executeScript.js",
+        "packages/react-devtools-extensions/src/background/index.js",
+        "packages/react-devtools-extensions/src/background/injectProxy.js",
+        "packages/react-devtools-extensions/src/background/messageHandlers.js",
+        "packages/react-devtools-extensions/src/contentScripts/backendManager.js",
+        "packages/react-devtools-extensions/src/contentScripts/fileFetcher.js",
+        "packages/react-devtools-extensions/src/contentScripts/installHook.js",
+        "packages/react-devtools-extensions/src/contentScripts/prepareInjection.js",
+        "packages/react-devtools-extensions/src/contentScripts/proxy.js",
+        "packages/react-devtools-extensions/src/main/fetchFileWithCaching.js",
+        "packages/react-devtools-extensions/src/main/index.js",
+        "packages/react-devtools-extensions/src/main/injectBackendManager.js",
+        "packages/react-devtools-extensions/webpack.config.js"
+      ]
+    },
+    {
+      "filename": "node-notifier-10.0.1.json",
+      "sha256": "af8b13758144257f094b4330f3bec5914f9c2fdd6c5331836a7bad2aec447256",
+      "package": "node-notifier",
+      "version": "10.0.1",
+      "tarball": "https://registry.npmjs.org/node-notifier/-/node-notifier-10.0.1.tgz",
+      "integrity": "sha512-YX7TSyDukOZ0g+gmzjB6abKu+hTGvO8+8+gIFDsRCU2t8fLV/P2unmt+LGFaIa4y64aX98Qksa97rgz4vMNeLQ==",
+      "dependencies": {
+        "uuid": "^8.3.2",
+        "which": "^2.0.2",
+        "growly": "^1.3.0",
+        "is-wsl": "^2.2.0",
+        "semver": "^7.3.5",
+        "shellwords": "^0.1.1"
+      }
+    },
+    {
+      "filename": "node-notifier-8.0.2.json",
+      "sha256": "d1624e59f863455a72a38dc237cfbbf3e9e4f50157ec51a219efb61e5bd22d3c",
+      "package": "node-notifier",
+      "version": "8.0.2",
+      "tarball": "https://registry.npmjs.org/node-notifier/-/node-notifier-8.0.2.tgz",
+      "integrity": "sha512-oJP/9NAdd9+x2Q+rfphB2RJCHjod70RcRLjosiPMMu5gjIfwVnOUGq2nbTjTUbmy0DJ/tFIVT30+Qe3nzl4TJg==",
+      "dependencies": {
+        "uuid": "^8.3.0",
+        "which": "^2.0.2",
+        "growly": "^1.3.0",
+        "is-wsl": "^2.2.0",
+        "semver": "^7.3.2",
+        "shellwords": "^0.1.1"
+      }
+    },
+    {
+      "filename": "notifier-fix.json",
+      "sha256": "32964b9fbc5f1fe581245744045c9358343b471ff7331be47944f730e99a37a5",
+      "url": "https://github.com/mikaelbr/node-notifier/commit/5d62799dab88505a709cd032653b2320c5813fce",
+      "changed_files": [
+        "package.json"
+      ]
+    },
+    {
+      "filename": "react-native-tscodegen-types-latest.json",
+      "sha256": "942a17ff2f7e08f51f1554de2b58f39a59a11b9dac40301bb71d8dc33df60b09",
+      "package": "react-native-tscodegen-types",
+      "version": "0.71.0",
+      "tarball": "https://registry.npmjs.org/react-native-tscodegen-types/-/react-native-tscodegen-types-0.71.0.tgz",
+      "integrity": "sha512-3QlF/fSv2ExEhfq0UNwaZlCf6ViD86LfndiZ4AW1EtIzvJ8PtQV7/5+rqRJ4HOZyr08aQVcdPvXMjRLQim9KPg==",
+      "dependencies": {
+        "react-native": "0.64.1",
+        "@types/react-native": "0.69.5",
+        "@react-native/assets": "1.0.0",
+        "@types/react-native__assets": "1.0.0"
+      }
+    },
+    {
+      "filename": "rn-fix.json",
+      "sha256": "42d14b4bc303d8cb9478f67bdd6b6ce855104440ceb7608a623643dc3aca6a7d",
+      "url": "https://github.com/react/react-native/commit/ca09ae82715e33c9ac77b3fa55495cf84ba891c7",
+      "changed_files": [
+        "Libraries/Blob/URL.js"
+      ]
+    }
+  ]
+}

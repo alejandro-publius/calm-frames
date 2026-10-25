@@ -1,8 +1,11 @@
-# Eight more advisories removed; five remain
+# Prior cb96e21 dependency work: eight removed; five remained
+
+This is the preserved prior checkpoint. The [current follow-up](REMAINING_DEPENDENCIES.md)
+fixes one more finding and corrects the old CLI and WebSocket attributions.
 
 Product/toolchain source `29173032a71e7a052b6dc71575e4a160df88563a` continues
 the earlier decoder/UUID fixes without changing native app source. The fresh
-[audit](../../results/audit.json) has **5 unique advisories: 3 high, 2 moderate**,
+[audit](../../results/residual-dependencies-2026-10-25/audit-at-cb96e21.json) has **5 unique advisories: 3 high, 2 moderate**,
 down from 13 at `64f792b`. Its package totals are 10 entries (9 high, 1 moderate),
 which include transitive affected parents and are not unique-advisory counts.
 Python reported zero advisories across the recorded 12/14/54-package scopes.

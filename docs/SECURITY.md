@@ -424,8 +424,8 @@ permission is not acceptance of the remaining findings.
 | Scope | Current scanner result |
 |---|---|
 | Python packages with findings in the scanned sources | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->10<!--/n--> |
-| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->5<!--/n--> |
+| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->9<!--/n--> |
+| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->4<!--/n--> |
 | npm packages classified critical | <!--n results/audit.json:published.npm_critical -->0<!--/n--> |
 | npm packages classified high | <!--n results/audit.json:published.npm_high -->9<!--/n--> |
 | Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |

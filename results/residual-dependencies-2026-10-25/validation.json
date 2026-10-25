@@ -1,0 +1,159 @@
+{
+  "product_source_commit": "365be0813a8416399ada1d469b0db326d45917d4",
+  "base": "cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0",
+  "branch": "codex/native-defect-fixes-2026-10-25",
+  "checks": {
+    "own_locked_install": {
+      "exit_code": 0,
+      "node": "22.23.2",
+      "npm": "10.9.8",
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "existing_npmrc_retained": true,
+      "log": "checks/notifier-final.log"
+    },
+    "notifier_and_uuid_consumers": {
+      "exit_code": 0,
+      "passed": 8,
+      "new_tests": 5,
+      "command": "node --test tools/notifier_dependency.test.mjs tools/uuid_dependency.test.mjs",
+      "log": "checks/notifier-final.log",
+      "scope": "Actual legacy CLI no-client broadcast, current Jest reporter, bounded POSIX argument handling, Mac backend arguments and unchanged binary hash, UUID v4 pipe-name consumer plus existing xcode/UUID regression. No OS desktop notification, native pipe or device was opened."
+    },
+    "normal_typecheck_lint": {
+      "exit_code": 0,
+      "commands": [
+        "npm run check:native-inputs",
+        "npm run typecheck",
+        "npm run lint"
+      ],
+      "log": "checks/final-gates.log",
+      "lint_warnings_retained": true
+    },
+    "node_and_prepared_media": {
+      "exit_code": 0,
+      "passed": 150,
+      "command": "node tools/check_prepared_library.mjs && node tools/playback_proof.mjs --check && node --test tools/playback_proof.test.mjs tools/check_prepared_library.test.mjs tools/approved_prepared_libraries.test.mjs tools/check_native_inputs.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs tools/legacy_shell_quote.test.mjs tools/build_dependency_compat.test.mjs tools/legacy_logkitty.test.mjs tools/body_parser_dependency.test.mjs tools/legacy_spawn_dependency.test.mjs tools/legacy_tmp_dependency.test.mjs tools/legacy_fetch_dependency.test.mjs tools/legacy_locale_dependency.test.mjs tools/uri_decoder_dependency.test.mjs tools/uri_decoder_metro.test.mjs tools/uuid_dependency.test.mjs tools/legacy_parser_dependencies.test.mjs tools/legacy_glob_dependencies.test.mjs tools/notifier_dependency.test.mjs",
+      "log": "checks/final-gates.log",
+      "counts_overlap_consumer_run": true,
+      "note": "Existing prepared-library and Playback Proof controls pass. A nonfatal Metro file-map cache-write ENOENT during the decoder probe is retained in the log; the bundled decoder probe and all tests completed."
+    },
+    "normal_player_generation": {
+      "exit_code": 0,
+      "command": "npm run setup:player",
+      "log": "checks/player.log",
+      "archive": "generated-player-archive.json",
+      "manifest": "GENERATED_PLAYER_INPUTS.json",
+      "native_package": false
+    },
+    "sbom": {
+      "exit_code": 0,
+      "bills_reproduced": 3,
+      "commands": [
+        "python scripts/sbom.py",
+        "python scripts/sbom.py --check"
+      ],
+      "log": "checks/sbom.log",
+      "peer_warnings_retained": true,
+      "versions": {
+        "cyclonedx-py": "7.4.0",
+        "cyclonedx-python-lib": "11.12.0",
+        "cyclonedx-npm": "6.0.1",
+        "cyclonedx-library": "10.3.0"
+      }
+    },
+    "audit": {
+      "exit_code": 1,
+      "command": "python scripts/dep_audit.py --check --freeze <recorded-python-freeze>",
+      "unique_advisories": 4,
+      "unique_high": 3,
+      "unique_moderate": 1,
+      "npm_affected_package_entries": 9,
+      "python_affected_package_entries": 0,
+      "python_scanned_scopes": [
+        12,
+        14,
+        54
+      ],
+      "expired_groups": [
+        "in-the-device-bundle",
+        "not-in-the-device-bundle"
+      ],
+      "exceptions_changed": false,
+      "log": "checks/audit.log"
+    },
+    "prior_tests_not_repeated": {
+      "native_app": {
+        "source_checkpoint": "64f792b0052142b9d26ba9888b096b9ab498a70a",
+        "receipt": "../native-fixes-2026-10-25/validation.json"
+      },
+      "import_pipeline_browser": {
+        "source_checkpoint": "cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0",
+        "receipt": "../cloud-followup-2026-10-25/validation.json"
+      },
+      "reason": "Native app and pipeline unchanged; focused checks target the actual changed dependency and tooling consumers."
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "reason": "Local-only continuation; no push or dispatch."
+    },
+    "native_and_human": {
+      "status": "pending",
+      "historical_native_source": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f",
+      "single_checklist": "../../docs/cloud-followup-2026-10-25/NATIVE_VERIFICATION.md"
+    },
+    "documentation": {
+      "exit_code": 0,
+      "published_numbers_checked": 749,
+      "local_links_checked": 245,
+      "broken_links": [],
+      "scope": "Markdown/HTML local target existence in changed Markdown files; no remote fetch",
+      "style": "pass",
+      "generated_restore_helper_ruff": "pass",
+      "git_diff_check": "pass"
+    },
+    "privacy": {
+      "tool": "gitleaks 8.30.1",
+      "commits_scanned": 1,
+      "committed_source_findings": 0,
+      "staged_docs_evidence_files_scanned": 29,
+      "staged_docs_evidence_findings": 0,
+      "manual_review": "All fixtures are fictional. No household, PIN, signing, account or native captures were collected. Upstream packages and verbose primary source downloads remain outside Git."
+    }
+  },
+  "original_checklist": {
+    "completed": [
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ]
+  },
+  "remaining_migration_paths": "residual-risk.json",
+  "limits": [
+    "No risk waiver or exception renewal",
+    "No release acceptance",
+    "No new native package or screenshots",
+    "No long ambient editions or production demo/narration/manga",
+    "No purchase, push, merge, publication or submission change"
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/notifier-resolved.log",
+    "bytes": 7418,
+    "original_sha256": "28b70007c4e14361961b18ae4f871e4257c22b869c063e95455dcae4077a6169",
+    "retained_sha256": "470060e5ec25eeb7a4630858c4c47b00e87c4d1db115ce407d8c4f24cc3eef1e",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/notifier-final.log",
+    "bytes": 7101,
+    "original_sha256": "efa23b279a7b57743a5275ce36deb986e9f53d3500606220984a6272a2b18898",
+    "retained_sha256": "efa23b279a7b57743a5275ce36deb986e9f53d3500606220984a6272a2b18898",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/audit.log",
+    "bytes": 398,
+    "original_sha256": "f6bf0151cffd7e07803a3ccb19454718a339100459197f0b8608ab3b3963df41",
+    "retained_sha256": "f6bf0151cffd7e07803a3ccb19454718a339100459197f0b8608ab3b3963df41",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/sbom.log",
+    "bytes": 3548,
+    "original_sha256": "d44649b0708602cda30872ae22df9c3fd69ff98e952f61d584810fbd817907b1",
+    "retained_sha256": "af8e2c876bd066901966002ad4fcc886a9e45dbe10cef12bb6ca65d971d63d2d",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/player.log",
+    "bytes": 11075,
+    "original_sha256": "f62fdfcc9ba397ac75291163247a336da4f9d0d15ad2ec0af4db8ea73daadd11",
+    "retained_sha256": "431b15469887adcd12a95b7cfe47d66ddefb8865ca8bea7d2cfebb9f61b227dc",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/residual-dependencies-2026-10-25/checks/final-gates.log",
+    "bytes": 45303,
+    "original_sha256": "5df4ac4896685cca3d939873be32098eb686cd829f7625805bae5cfb0ec4a51b",
+    "retained_sha256": "a65d64075e93377ebf236d5b990211d15ee42d643b135154ac760b1e76921d8d",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  }
+]

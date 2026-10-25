@@ -1,0 +1,113 @@
+{
+  "source_commit": "365be0813a8416399ada1d469b0db326d45917d4",
+  "audit_utc": "2026-10-25T22:31:46Z",
+  "unique_advisories": 4,
+  "unique_severities": {
+    "moderate": 1,
+    "high": 3
+  },
+  "npm_package_entries": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 9,
+    "critical": 0,
+    "total": 9
+  },
+  "policy_problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21"
+  ],
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-rxrc-rgv4-jpvx",
+      "scanner_id": 1099563,
+      "package": "react-devtools-core",
+      "title": "React Developer Tools extension Improper Authorization vulnerability",
+      "severity": "moderate",
+      "affected_range": "<4.28.4",
+      "source": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+      "locked_nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+          "version": "3.6.3"
+        }
+      ],
+      "historical_exception_group": "in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "Fixed 4.28.4 is outside the old RN ^3.6.1 request. Actual renderer/debug-bridge compatibility is unverified; no specific call-signature break is asserted. Primary patch targets browser-extension privilege paths; standalone applicability is not established and the scanner finding is retained.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories.",
+      "exact_paths": "baseline-paths.json"
+    },
+    {
+      "ghsa_id": "GHSA-7f53-fmmv-mfjv",
+      "scanner_id": 1089027,
+      "package": "react-native",
+      "title": "Regular expression denial of service in react-native",
+      "severity": "high",
+      "affected_range": ">=0.59.0 <0.62.3",
+      "source": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+      "locked_nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+          "version": "0.60.6"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "The actual codegen runtime entry exports RN TurboModuleRegistry and native codegen helpers. Its ^0.60.6 request excludes fixed 0.62.3; replacing the SDK/codegen graph needs separate supported integration validation.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories.",
+      "exact_paths": "baseline-paths.json"
+    },
+    {
+      "ghsa_id": "GHSA-3h5v-q93c-6h6q",
+      "scanner_id": 1118731,
+      "package": "ws",
+      "title": "ws affected by a DoS when handling a request with many HTTP headers",
+      "severity": "high",
+      "affected_range": ">=2.1.0 <5.2.4",
+      "source": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+      "locked_nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "Only the nested DevTools ws 3.3.3 copy matches this header advisory. Fixed 5.x standalone bridge/session compatibility is unverified. The two 1.1.5 nodes are outside this advisory range.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories.",
+      "exact_paths": "baseline-paths.json"
+    },
+    {
+      "ghsa_id": "GHSA-96hv-2xvq-fx4p",
+      "scanner_id": 1123262,
+      "package": "ws",
+      "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "severity": "high",
+      "affected_range": ">=1.1.0 <5.2.5",
+      "source": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+      "locked_nodes": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "version": "1.1.5"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "All three old ws nodes match. Inspector device/debugger handlers, Metro attachWebsocketServer and CLI getpeers use upgradeReq.url; fixed ws 5 supplies a separate request argument. Migrate those consumers and validate discovery, peers, reconnect and shutdown before overriding.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories.",
+      "exact_paths": "baseline-paths.json"
+    }
+  ],
+  "exceptions_changed": false,
+  "scope": "Installed dependency findings. Current native package not built; historical fbe53bf inventories remain separate."
+}

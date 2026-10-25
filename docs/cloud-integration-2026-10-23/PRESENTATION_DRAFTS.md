@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Reconciled against received native handoff `37d10c2db57fc0868499adc133cff7560600d5cc` for fbe53bf and local product/toolchain fixes through `09b3c55603ddff50bb068a585980aa188002479e`. The [current checkpoint](CHECKPOINT.md) separates observed native behavior from newer source fixes. These private drafts authorize no release or submission change. The approved eight-cue narration in demo/STORYBOARD.md is unchanged; replacement footage, manga and ElevenLabs narration do not yet exist for the new build.
+Reconciled against received native handoff `37d10c2db57fc0868499adc133cff7560600d5cc` for fbe53bf and local product/toolchain fixes through `365be0813a8416399ada1d469b0db326d45917d4`. The [current checkpoint](CHECKPOINT.md) separates observed native behavior from newer source fixes. These private drafts authorize no release or submission change. The approved eight-cue narration in demo/STORYBOARD.md is unchanged; replacement footage, manga and ElevenLabs narration do not yet exist for the new build.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 

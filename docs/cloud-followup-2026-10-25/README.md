@@ -1,84 +1,80 @@
-# Cloud continuation from 64f792b
+# Cloud continuation from cb96e21
 
-Current product/toolchain: **`09b3c55603ddff50bb068a585980aa188002479e`** on
-`codex/native-defect-fixes-2026-10-25`. Later documentation commits are identified
-by the full HEAD and tree in the verified transfer's `SYNC_MANIFEST.json`.
-This continues the existing worktree; it does not restart the native fixes.
+Current product/toolchain: **`365be0813a8416399ada1d469b0db326d45917d4`** on
+`codex/native-defect-fixes-2026-10-25`, continuing the verified clean checkpoint
+`cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0`. Later documentation commits are
+identified by the full HEAD and tree in the verified transfer's `SYNC_MANIFEST.json`.
 
 ## Completed in this pass
 
-- **Item 12:** removed eight more advisories, reducing **13 to 5**. Scoped TOML
-  and legacy CLI parser changes pass their actual SDK/CLI consumers; the fixed
-  glob graph passes real matching and watcher checks. The actual SDK manifest
-  output is unchanged. [Changes, remaining advisories and limits](DEPENDENCIES.md).
-- **Item 13:** a damaged local-import record no longer hides intact reviews or
-  prevents restart. Its files are retained, and damaged metadata cannot authorize
-  preparation. A completed worker keeps ownership until it exits, avoiding a
-  premature approval action. Oversized saved timestamps also fail recoverably.
-  [Implementation and browser evidence](IMPORT_RECOVERY.md).
-- **Items 7/16:** prepared a [source-specific licensed-content plan](LICENSED_CONTENT_PLAN.md)
-  and an [exact production-input plan](DEMO_PREPARATION.md) using the existing
-  guarded renderer and unchanged eight narration cues. No media was generated.
-- **Items 18/19:** updated this record, original numbered ledger, source-backed
-  presentation and strict generated-player inputs for the new lock. One current
-  [home validation queue](NATIVE_VERIFICATION.md) carries build, install, rollback
-  and the preserved native acceptance criteria.
+- **Item 12:** fixed the legacy notifier advisory, reducing **5 to 4**. The
+  actual old CLI and current Jest reporter pass consumer checks with notifier
+  8.0.2 and the already-fixed UUID 11.1.1. No other retained package version
+  changes. The Mac notification executable is byte-identical; native delivery
+  was not tested. [All five original paths and exact migration boundaries](REMAINING_DEPENDENCIES.md).
+- Corrected two earlier attributions: the notifier comes from the old CLI;
+  the WebSocket header advisory applies only to the DevTools 3.3.3 copy, not
+  the two 1.1.5 copies. The fragmentation advisory still affects all three.
+- **Items 18/19:** updated the original ledger and the
+  [single native verification queue](NATIVE_VERIFICATION.md). The current
+  generated-player archive is bound to this lock. Older transfers remain
+  preserved but must not be used as the latest source.
 
-Small code commits are `c1ee670` (parsers), `4dea0ce` (import recovery),
-`2917303` (globs), `be1327d` (consumer tests bound to the checkout) and `09b3c55`
-(oversized saved-time regression). The last test adjustment prevents a pruned
-dependency from falling through to the cloud tool host's unrelated installation.
+The [new receipt](../../results/residual-dependencies-2026-10-25/validation.json)
+records a fresh locked install on Node 22.23.2/npm 10.9.8, normal typecheck/lint,
+prepared-library/Playback Proof gates, all 150 Node tooling tests, normal player
+generation and three reproduced SBOMs. Existing lint/peer warnings and a
+nonfatal Metro probe cache-write warning remain visible. The new notifier's
+five tests are included in the 150, not extra independent passes.
 
-## Evidence and boundaries
+Audit still exits 1: **4 distinct advisories (3 high, 1 moderate)**, with nine
+affected npm package entries and both October 21 exception groups expired.
+No gate, exception, review date or owner acceptance changed. No new native
+package, hosted CI or audiovisual acceptance is claimed.
 
-The [validation receipt](../../results/cloud-followup-2026-10-25/validation.json)
-records actual commands, source scopes and logs:
+## Preserved earlier work
 
-- Own locked installation using Node 22.23.2/npm 10.9.8; normal TypeScript and
-  ESLint pass, with existing lint warnings retained.
-- All 145 Node checks and prepared-library/Playback Proof checks pass. The SDK
-  manifest is byte-identical before/after the parser upgrade.
-- The intake/delivery run passes 116 tests. After adding the oversized-timestamp
-  case, the relevant intake/HTTP subset passes 54 tests; these counts overlap.
-  Ruff and normal pipeline mypy pass.
-- Real local caregiver-page browser checks pass at desktop and narrow widths,
-  including explicit keyboard removal, visible focus, no horizontal overflow,
-  no external requests and reduced-motion emulation. Images were inspected.
-- Normal player generation completes, and all three pinned SBOMs reproduce.
-  The [generated-input manifest](../../results/cloud-followup-2026-10-25/GENERATED_PLAYER_INPUTS.json)
-  binds outputs to the current app lock and build inputs. It is not a native
-  app package. Existing peer-graph warnings remain visible in the SBOM log.
+The [prior receipt](../../results/cloud-followup-2026-10-25/validation.json)
+belongs to the previous continuation through `09b3c55` and checkpoint `cb96e21`:
 
-The earlier full app run is retained at 64f792b and was not repeated or presented
-as a new full-suite run. App source, D1/D2/D3, the coastal background, guard,
-household/PIN code, approved media, signing, disclaimer, judging package and
-approved storyboard are unchanged. [Preservation proof](../../results/cloud-followup-2026-10-25/preservation.json)
-also checks all named never-merge exclusions remain outside ancestry.
+- [Eight prior dependency fixes](DEPENDENCIES.md) reduced 13 advisories to 5,
+  with actual SDK parser/CLI/manifest/filter/watcher consumer evidence.
+- [Local import recovery](IMPORT_RECOVERY.md) fixes damaged-record isolation,
+  worker ownership until exit and recoverable oversized timestamps. Its 116-test
+  intake/delivery run, overlapping 54-test final subset and real browser checks
+  were not repeated because this pass did not change those files.
+- The [licensed-content plan](LICENSED_CONTENT_PLAN.md) and
+  [demo production-input plan](DEMO_PREPARATION.md) remain plans. No long edition,
+  production footage, manga or narration was generated.
 
-## Remaining work, in order
+The earlier 1,905-test app run remains at `64f792b`; it was not relabelled as a
+new run. Native UI, D1/D2/D3, coastal background, guard, household/PIN code,
+pipeline, approved media, signing, disclaimer, judging package and approved
+storyboard are unchanged from `cb96e21`.
+[Preservation evidence](../../results/residual-dependencies-2026-10-25/preservation.json)
+also checks the named never-merge exclusions remain outside ancestry.
+
+## Remaining work
 
 The [original ledger](../cloud-integration-2026-10-23/CHECKPOINT.md) remains
 **6 complete, 12 partial, 2 blocked**. Completed **5, 6, 9, 14, 15, 18** stay
-closed. No whole item is newly closed by this pass's source-tested subparts.
+closed. No whole acceptance item closes from this dependency fix alone.
 
-1. **#12:** Audit exits 1 on five legacy dependency advisories and two expired
-   groups. The remaining SDK/debug/notification/WebSocket consumers need supported
-   integration evidence before further major changes. No new risk approval is
-   requested or assumed, and no exception or gate was changed.
-2. **#1/#2/#3/#4/#10/#11/#19/#20:** one native pass on the new exact package must
-   confirm focus, saved Reading comfort visibility, real pause speech, route/media
-   frames and available recovery. Keep unobserved cases explicit. No cloud test
-   supplies native timing, system-bundle inventory or VoiceView acceptance.
-3. **#7/#13/#16:** actual qualifying licensed long files, separately approved
-   personal-edition delivery and accepted-build raw demo takes remain missing.
-   Existing short previews and reference JPEGs do not fill those gaps. No archive
-   is needed to continue reviewing these source changes.
-4. **#8/#17:** owner audiovisual/comfort observations and account/judge-access
-   confirmation remain blocked. Current official source access is also limited.
-   No human or medical acceptance follows from general approval to continue.
+1. **#12:** remaining nested RN, DevTools and two WebSocket advisories need a
+   supported SDK/tooling migration or a separately authorized compatibility
+   project. The [exact options](REMAINING_DEPENDENCIES.md#where-the-remaining-migration-paths-stop)
+   distinguish a demonstrated WebSocket API break from unverified renderer
+   compatibility. That broader path is stopped; Audit remains blocking.
+2. **#1/#2/#3/#4/#10/#11/#19/#20:** the one native queue covers focus, saved
+   Reading comfort visibility, actual pause speech, route/media frames, recovery
+   and exact new package inventories. No cloud result supplies these observations.
+3. **#7/#13/#16:** qualifying licensed long files, approved personal-edition
+   delivery and accepted-build raw demo takes remain missing. Short previews
+   and reference JPEGs do not fill those gaps.
+4. **#8/#17:** owner picture/sound/comfort observations and account/judge-access
+   confirmation remain blocked. Technical checks do not establish human or
+   medical acceptance.
 
-Native work can wait until home. Manga, ElevenLabs and the final production demo
-stay parked until the product is accepted and frozen. No source-supported,
-compatible leaf remediation or demonstrated additional recovery defect remains
-unaddressed from this pass's investigation. Keep the canonical branch local;
-no push, merge, purchase, public upload or live-submission change occurred.
+Native work can wait until home. Manga, ElevenLabs and the production demo stay
+parked until the product is accepted and frozen. No push, merge, purchase,
+public upload or live-submission change occurred.

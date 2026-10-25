@@ -10,7 +10,7 @@ import subprocess
 import zipfile
 from pathlib import Path
 
-ARCHIVE_SHA256 = "1f6e55030c906aab4c0818b374c694a6d975853a4b4e23ad660b58e4af7f37ec"
+ARCHIVE_SHA256 = "2c939d4b38b5fff5676faa4928d828eff7c0bde93e2063f9b1a6b98246fb405e"
 
 
 def require(condition: bool, message: str) -> None:
