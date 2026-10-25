@@ -22,7 +22,7 @@ function fixture(t) {
 
 test('only the unchanged legacy editor receives the fixed temporary-file dependency', () => {
   assert.equal(require('../package.json').version, '2.2.0');
-  assert.equal(require('tmp/package.json').version, '0.2.6');
+  assert.equal(require('tmp/package.json').version, '0.2.7');
 });
 
 test('temporary names reject a symlink outside their configured base', t => {
@@ -38,6 +38,12 @@ for (const [option, value] of [['prefix', '../escaped'], ['postfix', '/../../esc
   test(`temporary names reject traversal in ${option}`, t => {
     const { base } = fixture(t);
     assert.throws(() => tmp.tmpNameSync({ tmpdir: base, dir: base, [option]: value }), /Relative value not allowed/);
+  });
+  test(`temporary names reject a non-string traversal bypass in ${option}`, t => {
+    const { base } = fixture(t);
+    for (const nonString of [[value], { includes: () => false, toString: () => value }]) {
+      assert.throws(() => tmp.tmpNameSync({ tmpdir: base, dir: base, [option]: nonString }), /string/);
+    }
   });
 }
 
