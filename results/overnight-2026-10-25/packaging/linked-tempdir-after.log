@@ -1,0 +1,188 @@
+TAP version 13
+# tar: Removing leading `/' from member names
+# tar: Removing leading `/' from member names
+# tar: Removing leading `../' from hard link targets
+# tar: Removing leading `../' from hard link targets
+# Subtest: runtime assets contain no Python, shell or C/C++ build sources
+ok 1 - runtime assets contain no Python, shell or C/C++ build sources
+  ---
+  duration_ms: 2.485881
+  type: 'test'
+  ...
+# Subtest: asset source exclusions retain generated catalogs and reject aliased build paths
+ok 2 - asset source exclusions retain generated catalogs and reject aliased build paths
+  ---
+  duration_ms: 0.695442
+  type: 'test'
+  ...
+# Subtest: runtime asset source check cannot be bypassed through a linked directory
+ok 3 - runtime asset source check cannot be bypassed through a linked directory
+  ---
+  duration_ms: 1.171984
+  type: 'test'
+  ...
+# Subtest: runtime assets remain valid beneath a linked parent directory
+ok 4 - runtime assets remain valid beneath a linked parent directory
+  ---
+  duration_ms: 1.151421
+  type: 'test'
+  ...
+# Subtest: runtime assets reject a directly linked root including trailing separators
+ok 5 - runtime assets reject a directly linked root including trailing separators
+  ---
+  duration_ms: 0.799498
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 6 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 889.665103
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 7 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 19.930555
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 8 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 8.480308
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 9 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 9.461328
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 10 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 8.749335
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 11 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 9.145118
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 12 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 9.473674
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 13 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 8.473936
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 14 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 8.261807
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 15 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 9.799873
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 16 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 7.985914
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 17 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 8.175619
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 18 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 62.612822
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 19 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 54.842446
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 20 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 14.553425
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 21 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 21.38894
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 22 - refuses changed prepared json bytes
+  ---
+  duration_ms: 2.036399
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 23 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.560321
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 24 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 365.660571
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 25 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 171.612104
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 26 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 0.995955
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 27 - refuses aliases to files outside the package
+  ---
+  duration_ms: 317.832177
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 28 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 3342.787945
+  type: 'test'
+  ...
+# Subtest: refuses build scripts outside the prepared namespace in a native package
+ok 29 - refuses build scripts outside the prepared namespace in a native package
+  ---
+  duration_ms: 1633.361061
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7608.842931

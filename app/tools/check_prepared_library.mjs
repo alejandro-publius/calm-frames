@@ -36,7 +36,12 @@ export function checkRuntimeAssetNames(names) {
 
 /** Check asset paths without executing generators or reading media bytes. */
 export function checkRuntimeAssetDirectory(root = path.join(APP, 'assets')) {
-  requireThat(fs.realpathSync(root) === path.resolve(root), 'Asset root must not be a symlink.');
+  // Ancestor aliases (for example macOS /tmp) do not make the asset root a link.
+  // Normalize trailing separators before lstat so a linked root cannot hide one.
+  const assetRoot = path.resolve(root);
+  const rootStat = fs.lstatSync(assetRoot);
+  requireThat(!rootStat.isSymbolicLink(), 'Asset root must not be a symlink.');
+  requireThat(rootStat.isDirectory(), 'Asset root must be a directory.');
   const names = [];
   const walk = (directory, prefix) => {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -49,7 +54,7 @@ export function checkRuntimeAssetDirectory(root = path.join(APP, 'assets')) {
       }
     }
   };
-  walk(root, 'assets/');
+  walk(assetRoot, 'assets/');
   checkRuntimeAssetNames(names);
   return { files: names.length, build_sources: 'excluded' };
 }

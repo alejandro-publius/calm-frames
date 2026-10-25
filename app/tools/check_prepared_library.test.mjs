@@ -50,6 +50,34 @@ test('runtime asset source check cannot be bypassed through a linked directory',
   }
 });
 
+test('runtime assets remain valid beneath a linked parent directory', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'calm-asset-ancestor-'));
+  try {
+    fs.mkdirSync(path.join(directory, 'real/assets'), { recursive: true });
+    fs.writeFileSync(path.join(directory, 'real/assets/artwork.svg'), '<svg/>');
+    fs.symlinkSync('real', path.join(directory, 'alias'));
+    assert.deepEqual(checkRuntimeAssetDirectory(path.join(directory, 'alias/assets')),
+      { files: 1, build_sources: 'excluded' });
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test('runtime assets reject a directly linked root including trailing separators', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'calm-asset-root-'));
+  try {
+    fs.mkdirSync(path.join(directory, 'assets'));
+    fs.writeFileSync(path.join(directory, 'assets/artwork.svg'), '<svg/>');
+    fs.symlinkSync('assets', path.join(directory, 'linked-assets'));
+    for (const suffix of ['', path.sep]) {
+      assert.throws(() => checkRuntimeAssetDirectory(path.join(directory, 'linked-assets') + suffix),
+        /Asset root must not be a symlink/);
+    }
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
 test('checks the actual generated library and exact byte total', () => {
   assert.equal(check(fixture).titles, 1);
   assert.equal(check(fixture).bytes, [...fixture.values()].reduce((total, data) => total + data.length, 0));

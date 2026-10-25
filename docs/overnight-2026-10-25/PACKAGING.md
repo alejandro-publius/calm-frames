@@ -59,3 +59,17 @@ passes. The full integrated run must retain the negative cases.
 
 No dependency exceptions, application behavior, approved media, signing, trust,
 household data or submission material changed. Nothing was pushed or published.
+
+## Portability correction after review
+
+A review reproduced a false rejection when a normal asset directory sat below
+a linked parent, as with the system temporary-directory aliases on macOS. The
+root check now inspects the root itself with `lstat`; parent aliases are allowed.
+Directly linked asset roots, including a path with a trailing separator, and
+linked descendants remain refused. No asset bytes changed.
+
+The new ordinary-parent regression failed before the correction. The complete
+package-gate suite then passed both normally and with `TMPDIR` pointing through
+an owned directory alias. The [portability receipt](../../results/overnight-2026-10-25/packaging/portability.json)
+records exact source hashes, commands and results. This reproduces the filesystem
+condition in Linux; it does not claim a Mac or native-package build.
