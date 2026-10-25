@@ -85,7 +85,8 @@ export function validateHousehold(value: unknown): SavedHousehold {
       !/^profile-[1-9][0-9]{0,8}$/.test(profile.id) ||
       typeof profile.name !== 'string' ||
       profile.name.trim().length === 0 ||
-      profile.name.length > MAX_PROFILE_NAME
+      profile.name.length > MAX_PROFILE_NAME ||
+      (profile.readingComfortEnabled !== undefined && typeof profile.readingComfortEnabled !== 'boolean')
     ) {
       throw new Error('Invalid household profile');
     }
@@ -93,6 +94,7 @@ export function validateHousehold(value: unknown): SavedHousehold {
       id: profile.id,
       name: profile.name,
       settings: settings(profile.settings),
+      readingComfortEnabled: profile.readingComfortEnabled === true,
     };
   });
   if (

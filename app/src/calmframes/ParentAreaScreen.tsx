@@ -148,6 +148,7 @@ import {
   ProfileLogs,
   removeProfile,
   renameProfile,
+  setProfileReadingComfort,
   setChimeEnabled,
   setFloor,
   setProfileSettings,
@@ -207,6 +208,8 @@ export interface ParentAreaScreenProps {
    * refused or failed, in which case the draft stays on screen.
    */
   onRenameProfile?: (family: Family) => Promise<boolean>;
+  /** A preference is shown as saved only when the route commits its family. */
+  onProfilePreferencesChange?: (family: Family) => Promise<boolean>;
   /** One hide log per profile id. */
   profileLogs?: ProfileLogs;
   titles: CheckedTitle[];
@@ -229,6 +232,7 @@ const ParentAreaScreen = ({
   family,
   onFamilyChange,
   onRenameProfile,
+  onProfilePreferencesChange,
   profileLogs = emptyProfileLogs(),
   titles,
   nowMs = Date.now,
@@ -236,8 +240,14 @@ const ParentAreaScreen = ({
   onSetPin,
   onCredits,
   testID = 'parent-area',
-  saving = false,
+  saving: externalSaving = false,
 }: ParentAreaScreenProps) => {
+  const [comfortPending, setComfortPending] = React.useState(false);
+  const comfortPendingRef = React.useRef(false);
+  const comfortWantsFocusRef = React.useRef(false);
+  const [comfortFailed, setComfortFailed] = React.useState(false);
+  const [comfortReturnFocus, setComfortReturnFocus] = React.useState(false);
+  const saving = externalSaving || comfortPending;
   const [unlocked, setUnlocked] = React.useState(false);
   const [extraReturnFocus, setExtraReturnFocus] = React.useState<string>();
   const [extraTitle, setExtraTitle] = React.useState<CheckedTitle>();
@@ -435,9 +445,41 @@ const ParentAreaScreen = ({
   const editingProfile: Profile | undefined = family
     ? family.profiles.find((profile) => profile.id === editingId)
     : undefined;
+  // Only the selected kid's scrollable help changes. The profile panel,
+  // name editor, PIN and approved explainer retain their existing geometry.
+  const readingComfort = editingProfile?.readingComfortEnabled === true && !editingName && !confirmingRemoval;
+  const helpText = readingComfort ? styles.comfortHelp : undefined;
+  const bodyText = readingComfort ? styles.comfortBody : undefined;
+  const helpRow = readingComfort ? styles.comfortRow : undefined;
   const shown: HouseholdSettings = editingProfile
     ? editingProfile.settings
     : family?.floor ?? settings;
+
+  const saveReadingComfort = () => {
+    if (!family || !editingProfile || !onProfilePreferencesChange || saving || comfortPendingRef.current) return;
+    comfortPendingRef.current = true;
+    comfortWantsFocusRef.current = true;
+    setComfortPending(true);
+    setComfortFailed(false);
+    // Never flip local state optimistically: the stored family owns On/Off.
+    // A synchronous throw is a failed save too, just like a rejected promise.
+    (async () => {
+      try {
+        const accepted = await onProfilePreferencesChange(
+          setProfileReadingComfort(family, editingProfile.id, editingProfile.readingComfortEnabled !== true),
+        );
+        if (mounted.current) setComfortFailed(!accepted);
+      } catch {
+        if (mounted.current) setComfortFailed(true);
+      } finally {
+        comfortPendingRef.current = false;
+        if (mounted.current) {
+          setComfortPending(false);
+          setComfortReturnFocus(comfortWantsFocusRef.current);
+        }
+      }
+    })();
+  };
 
   const choose = (change: Partial<HouseholdSettings>) => {
     if (saving) { return; }
@@ -542,7 +584,7 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} preferredBack={!editingName && !extraReturnFocus && !renameReturnFocus} backDisabled={saving || renamePending} />
+      <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} preferredBack={!editingName && !extraReturnFocus && !renameReturnFocus && !comfortPending && !comfortReturnFocus} backDisabled={saving || renamePending} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -595,6 +637,9 @@ const ParentAreaScreen = ({
               // answers by choosing somebody else has not said remove.
               setAskedToRemove(null);
               setRenameReturnFocus(false);
+              setComfortReturnFocus(false);
+              comfortWantsFocusRef.current = false;
+              setComfortFailed(false);
               setEditingId(profile.id);
             }}
           />
@@ -733,12 +778,13 @@ const ParentAreaScreen = ({
               onPress={() => choose({ preset: name })}
               style={[
                 styles.row,
+                helpRow,
                 chosen ? styles.chosen : null,
                 focusedRow === key ? styles.focused : null,
               ]}>
               <View style={styles.rowText}>
                 <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null, saving ? styles.disabledRowText : null]}>{PRESETS[name].title}</Text>
-                <Text style={[styles.rowDetail, saving ? styles.disabledRowText : null]}>{PRESETS[name].description}</Text>
+                <Text style={[styles.rowDetail, helpText, saving ? styles.disabledRowText : null]}>{PRESETS[name].description}</Text>
               </View>
               <View style={styles.rowState}>
                 {chosen ? (
@@ -754,10 +800,10 @@ const ParentAreaScreen = ({
         <Text style={styles.section} accessibilityRole="header">
           {sectionFor(ROOM_TITLE, whose)}
         </Text>
-        <Text style={styles.body} testID={`${testID}-room`}>
+        <Text style={[styles.body, bodyText]} testID={`${testID}-room`}>
           {describeRoom(shown)}
         </Text>
-        <Text style={styles.helper}>{ROOM_ONLY_ADDS}</Text>
+        <Text style={[styles.helper, helpText]}>{ROOM_ONLY_ADDS}</Text>
         <Text style={styles.subheading} accessibilityRole="header">
           {TV_SIZE_TITLE}
         </Text>
@@ -841,7 +887,7 @@ const ParentAreaScreen = ({
         </Text>
         {/* The record is one stop, so the remote can land on it and VoiceView reads it; ReadingStop.tsx says why. */}
         <ReadingStop testID={`${testID}-hidden-reading`} flush>
-        <Text style={styles.body} testID={`${testID}-total`}>
+        <Text style={[styles.body, bodyText]} testID={`${testID}-total`}>
           {shownLog.entries.length === 0
             ? editingProfile
               ? nothingHiddenFor(editingProfile.name)
@@ -864,7 +910,7 @@ const ParentAreaScreen = ({
               <Text
                 key={`${line.entry.atMs}-${line.index}`}
                 testID={`${testID}-log-${line.index}`}
-                style={styles.logLine}>
+                style={[styles.logLine, helpText]}>
                 {describeHideEntry(line.entry)}
               </Text>
             ))}
@@ -872,6 +918,34 @@ const ParentAreaScreen = ({
         ))}
         </ReadingStop>
       </View>
+
+      {family && editingProfile && onProfilePreferencesChange && !editingName && !confirmingRemoval ? (
+        <View style={styles.group}>
+          <Text style={styles.section} accessibilityRole="header">Reading for {editingProfile.name}</Text>
+          <TouchableOpacity
+            testID={`${testID}-reading-comfort`}
+            focusable
+            hasTVPreferredFocus={comfortReturnFocus}
+            accessibilityRole="switch"
+            accessibilityLabel={`Reading comfort, ${readingComfort ? 'on' : 'off'}`}
+            accessibilityHint="Larger help text and more space in this kid's Parents settings and More info."
+            accessibilityState={{ checked: readingComfort, disabled: saving }}
+            activeOpacity={1}
+            onFocus={() => { comfortWantsFocusRef.current = true; setFocusedRow('reading-comfort'); setRenameReturnFocus(false); }}
+            onBlur={() => { comfortWantsFocusRef.current = false; setFocusedRow(null); setComfortReturnFocus(false); }}
+            onPress={saveReadingComfort}
+            style={[styles.row, helpRow, focusedRow === 'reading-comfort' ? styles.focused : null]}>
+            <View style={styles.rowText}>
+              <Text style={[styles.rowTitle, focusedRow === 'reading-comfort' ? styles.focusedLabel : null]}>Reading comfort</Text>
+              <Text style={[styles.rowDetail, helpText]}>Larger help text and more space in Parents and More info. Other screens stay the same.</Text>
+            </View>
+            <View style={styles.rowState}><Text style={styles.rowStateWord}>{readingComfort ? 'On' : 'Off'}</Text></View>
+          </TouchableOpacity>
+          {comfortFailed ? <Text testID={`${testID}-reading-comfort-failure`} style={[styles.helper, helpText]} accessibilityLiveRegion="polite">
+            Reading comfort was not saved. Choose it again to retry.
+          </Text> : null}
+        </View>
+      ) : null}
 
       {family && onFamilyChange ? (
         <View style={styles.group}>
@@ -910,10 +984,10 @@ const ParentAreaScreen = ({
                     onFamilyChange({ ...family, [preference.key]: !enabled });
                   }
                 }}
-                style={[styles.row, focused ? styles.focused : null]}>
+                style={[styles.row, helpRow, focused ? styles.focused : null]}>
                 <View style={styles.rowText}>
                   <Text style={[styles.rowTitle, focused ? styles.focusedLabel : null]}>{preference.title}</Text>
-                  <Text style={styles.rowDetail}>{preference.note}</Text>
+                  <Text style={[styles.rowDetail, helpText]}>{preference.note}</Text>
                 </View>
                 <View style={styles.rowState}>
                   <Text style={styles.rowStateWord}>{enabled ? 'On' : 'Off'}</Text>
@@ -942,10 +1016,10 @@ const ParentAreaScreen = ({
             onPress={() => {
               if (!saving) { onFamilyChange(setChimeEnabled(family, !family.chimeEnabled)); }
             }}
-            style={[styles.row, focusedRow === 'chime' ? styles.focused : null]}>
+            style={[styles.row, helpRow, focusedRow === 'chime' ? styles.focused : null]}>
             <View style={styles.rowText}>
               <Text style={[styles.rowTitle, focusedRow === 'chime' ? styles.focusedLabel : null]}>{CHIME_ROW_TITLE}</Text>
-              <Text style={styles.rowDetail} testID={`${testID}-chime-note`}>
+              <Text style={[styles.rowDetail, helpText]} testID={`${testID}-chime-note`}>
                 {CHIME_NOTE}
               </Text>
             </View>
@@ -985,7 +1059,7 @@ const ParentAreaScreen = ({
               ) : null}
               {titleNotice ? (
                 <Text
-                  style={styles.rowDetail}
+                  style={[styles.rowDetail, helpText]}
                   testID={`${testID}-reason-${entry.title.id}`}>
                   {titleNotice.detail}
                 </Text>
@@ -1156,6 +1230,9 @@ const styles = StyleSheet.create({
     color: CALM_COLORS.TEXT_DIM,
     marginTop: scale(8),
   },
+  comfortHelp: { fontSize: scale(36), lineHeight: scale(52) },
+  comfortBody: { fontSize: scale(40), lineHeight: scale(56) },
+  comfortRow: { paddingVertical: scale(32), marginBottom: scale(24) },
   rowState: {
     width: scale(STATE_COLUMN),
     marginLeft: scale(CALM_SPACE.ROW),

@@ -515,6 +515,7 @@ const KidModeScreen = ({
         family={family}
         onFamilyChange={setFamily}
         onRenameProfile={setFamily}
+        onProfilePreferencesChange={setFamily}
         profileLogs={profileLogs}
         titles={titles}
         nowMs={nowMs}
@@ -556,6 +557,7 @@ const KidModeScreen = ({
     return withInterfaceFeedback(
       <TitleDetailsScreen
         key={`details-${focusGeneration}-${open.title.id}`}
+        readingComfortEnabled={watching.readingComfortEnabled === true}
         saving={saved.phase === 'saving'}
         interfaceMotionEnabled={family.interfaceMotionEnabled === true}
         interfaceActive={interfaceActive}

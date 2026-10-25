@@ -72,6 +72,8 @@ export interface Profile {
   name: string;
   /** This kid's preset and this kid's room. Never weaker than the floor. */
   settings: HouseholdSettings;
+  /** Optional help-text presentation only. Missing legacy values mean off. */
+  readingComfortEnabled?: boolean;
 }
 
 export interface Family {
@@ -133,11 +135,15 @@ export function makeProfile(
     id,
     name: cleanName(name),
     settings: clampSettings({ ...DEFAULT_SETTINGS, ...settings }),
+    readingComfortEnabled: false,
   };
 }
 
 export function clampProfile(profile: Profile): Profile {
-  return makeProfile(profile.id, profile.name, profile.settings);
+  return {
+    ...makeProfile(profile.id, profile.name, profile.settings),
+    readingComfortEnabled: profile.readingComfortEnabled === true,
+  };
 }
 
 /** A household that has just finished the first run: one profile, one floor. */
@@ -245,6 +251,17 @@ export function renameProfile(family: Family, id: string, name: string): Family 
     profiles: family.profiles.map((profile) =>
       profile.id === id ? { ...profile, name: cleanName(name) } : profile,
     ),
+  };
+}
+
+/** A display preference, separate from protection settings and profile identity. */
+export function setProfileReadingComfort(family: Family, id: string, enabled: boolean): Family {
+  if (!findProfile(family, id)) return family;
+  return {
+    ...family,
+    profiles: family.profiles.map(profile => profile.id === id
+      ? { ...profile, readingComfortEnabled: enabled === true }
+      : profile),
   };
 }
 

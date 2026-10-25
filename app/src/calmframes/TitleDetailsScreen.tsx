@@ -46,6 +46,8 @@ export interface TitleDetailsScreenProps {
   testID?: string;
   interfaceMotionEnabled?: boolean;
   interfaceActive?: boolean;
+  /** Larger scrollable More info text only; never changes playback or Watch. */
+  readingComfortEnabled?: boolean;
   /** The optional simulated demo lives inside More info. */
   practice?: CheckedTitle;
   onOpenPractice?: (entry: CheckedTitle) => void;
@@ -62,6 +64,7 @@ const TitleDetailsScreen = ({
   onBack,
   testID = 'title-details',
   interfaceActive = true,
+  readingComfortEnabled = false,
   practice,
   onOpenPractice,
   preferPracticeFocus = false,
@@ -155,7 +158,7 @@ const TitleDetailsScreen = ({
   if (page !== 'watch') return (
     <ScrollView key={page} testID={`${testID}-${page}`} style={styles.screen} contentContainerStyle={styles.content}>
       <CalmPageHeader onBack={back} backTestID={`${testID}-info-back`} preferredBack={page === 'technical' || (!preferPracticeFocus && returnFocus !== 'technical')} />
-      <View style={styles.reading}>
+      <View style={[styles.reading, page === 'info' && readingComfortEnabled ? styles.comfortReading : null]}>
         <Text style={styles.title} accessibilityRole="header">{page === 'technical' ? 'Technical details' : 'More info'}</Text>
         {page === 'technical' ? <>
           <PreparedVideoAnalysis entry={entry} settings={settings} testID={`${testID}-record`} />
@@ -171,14 +174,14 @@ const TitleDetailsScreen = ({
         </> : <>
           <Text style={styles.section} accessibilityRole="header">{presentation.name}</Text>
           {/* What the title covers and the safety wording, in one stop the remote can land on, so VoiceView reads them; ReadingStop.tsx says why. */}
-          <ReadingStop testID={`${testID}-info-reading`} flush style={styles.infoReading}>
-            {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
-              : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0, ocean)}</Text> : null}
-            <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
-            <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
+          <ReadingStop testID={`${testID}-info-reading`} flush style={[styles.infoReading, readingComfortEnabled ? styles.comfortReading : null]}>
+            {demo ? <Text style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
+              : intervals.length > 0 ? <Text style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0, ocean)}</Text> : null}
+            <Text style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
+            <Text testID={`${testID}-info-safety`} style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
           </ReadingStop>
-          {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
-          {presentation.attribution ? <Text style={styles.summary} testID={`${testID}-attribution`}>{presentation.attribution}</Text> : null}
+          {presentation.art === 'coastal' ? <Text style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
+          {presentation.attribution ? <Text style={[styles.summary, readingComfortEnabled ? styles.comfortText : null]} testID={`${testID}-attribution`}>{presentation.attribution}</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
             accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}
             disabled={saving} hasTVPreferredFocus={preferPracticeFocus && returnFocus !== 'technical'} onPress={() => onOpenPractice?.(practiceOffered)} /></View> : null}
@@ -229,6 +232,8 @@ const styles = StyleSheet.create({
   environmentName: { ...CALM_TEXT.supporting, color: WORLD.TEXT },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
   infoReading: { gap: scale(24) },
+  comfortReading: { gap: scale(32) },
+  comfortText: { fontSize: scale(40), lineHeight: scale(56) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
