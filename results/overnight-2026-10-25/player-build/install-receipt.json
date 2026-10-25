@@ -1,0 +1,43 @@
+{
+  "source_commit": "596418e64e83f724c5c9e4a5b34122746aec11e4",
+  "branch": "codex/overnight-player-build-2026-10-25",
+  "worktree": "/workspace/calm-frames-overnight-player-build-2026-10-25",
+  "versions": {
+    "node": "v22.23.2",
+    "npm": "10.9.8",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)",
+    "python": "Python 3.12.14"
+  },
+  "inputs": {
+    "package.json": {
+      "bytes": 12867,
+      "sha256": "8a0364fef5be37b840f73c36163ab391d4b8034d258c81df6fb44cb080049b20"
+    },
+    "package-lock.json": {
+      "bytes": 796569,
+      "sha256": "eb9e7cc870cc351a5e57bfcf43641b6621a4d49d3ce7e0a401319836986d4240"
+    },
+    "shaka-setup/build.sh": {
+      "bytes": 4704,
+      "sha256": "23d7160a3970fc4448ad77031d0d96dbe3510170988e42f797c6a2dabe4da777"
+    },
+    "shaka-setup/copyOutputs.sh": {
+      "bytes": 1005,
+      "sha256": "1ba7570aa0ef391bc84336d7443aeb67c56b6f3f0e92409a1e450fa335d1ba38"
+    },
+    "shaka-setup/applyPatches.sh": {
+      "bytes": 388,
+      "sha256": "542922a495c010f3be1e95df452601f2a6850920b324d780896bc802649e3a16"
+    },
+    "shaka-setup/shaka-rel-v4.8.5-r1.2.tar.gz": {
+      "bytes": 71978,
+      "sha256": "f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e"
+    }
+  },
+  "install": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "started_at": "2026-10-25T08:14:58.089863+00:00",
+    "exit_code": 0,
+    "ended_at": "2026-10-25T08:15:27.101485+00:00"
+  }
+}

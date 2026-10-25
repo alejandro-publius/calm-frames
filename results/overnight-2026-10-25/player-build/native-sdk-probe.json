@@ -1,0 +1,5 @@
+{
+  "native_sdk": "blocked",
+  "reason": "Vega CLI was not found in ambient environment, nor could be found within $KEPLER_SDK_PATH (value = 'undefined').\nPlease export a valid $KEPLER_SDK_PATH or include Vega CLI path in $PATH to run it.",
+  "scope": "Read-only CLI discovery. No native build, simulator, install or signing attempted."
+}

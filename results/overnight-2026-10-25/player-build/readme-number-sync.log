@@ -1,0 +1,3 @@
+drift: docs/SECURITY.md: results/sbom.json:published.app_components says '1105', the document says '1103'
+
+1 problem(s) in 747 marked number(s)

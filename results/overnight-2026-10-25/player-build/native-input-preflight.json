@@ -1,0 +1,10 @@
+{
+  "command": "npm run check:native-inputs",
+  "exit_code": 0,
+  "result": {
+    "nativeInputs": "ready",
+    "missing": [],
+    "problems": [],
+    "scope": "Input files only. SDK compatibility, native build and owner visual/audio acceptance remain separate checks."
+  }
+}
