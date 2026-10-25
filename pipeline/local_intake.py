@@ -117,6 +117,10 @@ def validate_saved_review(job: dict) -> None:
         not isinstance(hashes, dict) or set(hashes) != {"wcag", "broadcast"}
         or not all(digest(value) for value in hashes.values())
         or not isinstance(plans, dict) or set(plans) != {"wcag", "broadcast", "extra-cautious"}
+        or ("analysis_run" in review and (
+            not isinstance(review["analysis_run"], str)
+            or JOB_ID.fullmatch(review["analysis_run"]) is None
+        ))
     ):
         raise IntakeError(error)
 

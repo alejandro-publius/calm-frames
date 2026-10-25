@@ -115,7 +115,7 @@ def test_saved_review_waits_for_its_owned_worker_before_enabling_actions(tmp_pat
 
 @pytest.mark.parametrize("damage", [
     "missing-review", "list-review", "missing-preset", "missing-map",
-    "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    "invalid-span", "wrong-total", "list-flags", "invalid-run", "changed-digest",
 ])
 def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
     tmp_path, monkeypatch, damage,
@@ -143,6 +143,8 @@ def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
         review["presets"]["wcag"]["covered_ms"] = 1000
     elif damage == "list-flags":
         review["flagged_intervals"] = {"wcag": [None]}
+    elif damage == "invalid-run":
+        review["analysis_run"] = ["not-a-run-id"]
     else:
         saved["review_digest"] = "0" * 64
     # A recomputed checksum cannot make an incomplete review usable either.
