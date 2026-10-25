@@ -157,7 +157,10 @@
     "@react-native-community/cli-platform-android@2.9.0": {
       "logkitty": "0.7.1"
     },
-    "decode-uri-component": "$decode-uri-component"
+    "decode-uri-component": "$decode-uri-component",
+    "xcode@2.1.0": {
+      "uuid": "11.1.1"
+    }
   },
   "engines": {
     "node": ">=22"

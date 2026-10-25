@@ -56121,8 +56121,8 @@
     {
       "type": "library",
       "name": "uuid",
-      "version": "3.4.0",
-      "bom-ref": "calm-frames-app@0.1.0|uuid@3.4.0",
+      "version": "11.1.1",
+      "bom-ref": "calm-frames-app@0.1.0|uuid@11.1.1",
       "licenses": [
         {
           "license": {
@@ -56131,15 +56131,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/uuid@3.4.0",
+      "purl": "pkg:npm/uuid@11.1.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz",
+          "url": "https://registry.npmjs.org/uuid/-/uuid-11.1.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "1e3483470ea0644e4932081cb4705c8d56a4d3cf8a1158522220f31674fd4bd69e826a7ce52fdb45e0554dbe104c5691369b49f64b9868d8676cd10e91b29bfc"
+              "content": "bc8631ac1082fcdfcaf89b37a9237cf20a3b9087cd3ecb2bfe11c27ac28240d0239a0bd84b6a2aafaf6422e7c41be3b8f8f7decce1f811b21e1c27c5a2ff1981"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -67817,7 +67817,7 @@
       "ref": "calm-frames-app@0.1.0|utils-merge@1.0.1"
     },
     {
-      "ref": "calm-frames-app@0.1.0|uuid@3.4.0"
+      "ref": "calm-frames-app@0.1.0|uuid@11.1.1"
     },
     {
       "ref": "calm-frames-app@0.1.0|v8-to-istanbul@9.3.0",
@@ -67957,7 +67957,7 @@
       "ref": "calm-frames-app@0.1.0|xcode@2.1.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|simple-plist@1.3.1",
-        "calm-frames-app@0.1.0|uuid@3.4.0"
+        "calm-frames-app@0.1.0|uuid@11.1.1"
       ]
     },
     {

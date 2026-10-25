@@ -43,7 +43,7 @@ jobs:
         run: npm run typecheck
       - name: Check prepared package assets and tamper controls
         working-directory: app
-        run: node tools/check_prepared_library.mjs && node tools/playback_proof.mjs --check && node --test tools/playback_proof.test.mjs tools/check_prepared_library.test.mjs tools/approved_prepared_libraries.test.mjs tools/check_native_inputs.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs tools/legacy_shell_quote.test.mjs tools/build_dependency_compat.test.mjs tools/legacy_logkitty.test.mjs tools/body_parser_dependency.test.mjs tools/legacy_spawn_dependency.test.mjs tools/legacy_tmp_dependency.test.mjs tools/legacy_fetch_dependency.test.mjs tools/legacy_locale_dependency.test.mjs tools/uri_decoder_dependency.test.mjs tools/uri_decoder_metro.test.mjs
+        run: node tools/check_prepared_library.mjs && node tools/playback_proof.mjs --check && node --test tools/playback_proof.test.mjs tools/check_prepared_library.test.mjs tools/approved_prepared_libraries.test.mjs tools/check_native_inputs.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs tools/legacy_shell_quote.test.mjs tools/build_dependency_compat.test.mjs tools/legacy_logkitty.test.mjs tools/body_parser_dependency.test.mjs tools/legacy_spawn_dependency.test.mjs tools/legacy_tmp_dependency.test.mjs tools/legacy_fetch_dependency.test.mjs tools/legacy_locale_dependency.test.mjs tools/uri_decoder_dependency.test.mjs tools/uri_decoder_metro.test.mjs tools/uuid_dependency.test.mjs
       - name: Lint
         working-directory: app
         run: npx eslint src test --ext .ts,.tsx
