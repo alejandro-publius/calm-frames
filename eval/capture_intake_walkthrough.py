@@ -111,6 +111,7 @@ def capture(output: Path, pipeline_python: Path) -> None:
             page.keyboard.press('Enter')
             save = page.get_by_role('button', name='Save caregiver review (JSON)')
             save.wait_for(timeout=120000)
+            assert 'Analysis complete for' in page.locator('#notice').inner_text()
             mark('complete_review_visible')
             data = page.request.get(origin + '/jobs').json()
             job = data['jobs'][0]
@@ -173,7 +174,7 @@ def capture(output: Path, pipeline_python: Path) -> None:
             page.get_by_role('heading', name='Unreadable import').wait_for(state='detached')
             assert not damaged.exists() and sha(jobs / job['id'] / 'original.mp4') == EXPECTED
             assert not errors and not external
-            checks = {'permission_required': True, 'real_file_analysis_frames': 360, 'duration_ms': 12000, 'three_presets_reviewed': True, 'keyboard_report_download': True, 'visible_focus': True, 'nested_corruption_isolated': True, 'invalid_report_http_status': 400, 'keyboard_remove_only_corrupt_copy': True, 'source_preserved': True, 'narrow_horizontal_overflow': False, 'reduced_motion_emulated': True, 'active_animations': 0, 'media_elements': 0, 'page_errors': errors, 'external_requests': external, 'native_fire_tv': False}
+            checks = {'permission_required': True, 'real_file_analysis_frames': 360, 'duration_ms': 12000, 'three_presets_reviewed': True, 'completion_status_announced': True, 'keyboard_report_download': True, 'visible_focus': True, 'nested_corruption_isolated': True, 'invalid_report_http_status': 400, 'keyboard_remove_only_corrupt_copy': True, 'source_preserved': True, 'narrow_horizontal_overflow': False, 'reduced_motion_emulated': True, 'active_animations': 0, 'media_elements': 0, 'page_errors': errors, 'external_requests': external, 'native_fire_tv': False}
             checks['browser_version'] = browser.version
             write(output / 'browser-checks.json', {'source_commit': source, **checks})
             browser.close()
