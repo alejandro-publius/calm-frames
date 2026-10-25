@@ -1,0 +1,7 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+E   AssertionError: AWS identity/config files are forbidden in offline tests
+/workspace/calm-frames-overnight-packaging-2026-10-25/pipeline/tests/test_infra_ingest.py:118: AssertionError: AWS identity/config files are forbidden in offline tests
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_a_missing_ambient_profile_cannot_affect_mocked_services
+1 failed in 0.42s

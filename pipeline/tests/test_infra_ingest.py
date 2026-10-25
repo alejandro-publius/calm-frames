@@ -315,6 +315,8 @@ class TestOfflineAwsIsolation:
 
     def test_identity_file_and_provider_fallbacks_fail_closed(self, tmp_path):
         class UnexpectedProvider:
+            METHOD = "offline-unexpected"
+
             def load(self):
                 pytest.fail("An ambient credential provider was consulted")
 
