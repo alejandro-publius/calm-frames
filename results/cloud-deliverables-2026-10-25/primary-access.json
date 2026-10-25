@@ -1,0 +1,33 @@
+{
+  "checked_utc": "2026-10-25T23:07:19.760944+00:00",
+  "requests": [
+    {
+      "url": "https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E",
+      "error": "URLError",
+      "full_content_verified": false
+    },
+    {
+      "url": "https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters",
+      "error": "URLError",
+      "full_content_verified": false
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/Category:Videos_of_forests",
+      "error": "URLError",
+      "full_content_verified": false
+    },
+    {
+      "url": "https://amazonappdev2026.devpost.com/rules",
+      "error": "URLError",
+      "full_content_verified": false
+    }
+  ],
+  "retries": 0,
+  "proxy_bypass": false,
+  "one_diagnostic": {
+    "url": "https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E",
+    "error": "URLError",
+    "reason": "Tunnel connection failed: 403 Forbidden"
+  },
+  "diagnostic_attempts_after_unclassified_error": 1
+}

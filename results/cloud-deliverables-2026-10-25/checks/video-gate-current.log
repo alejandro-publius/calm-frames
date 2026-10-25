@@ -1,0 +1,11 @@
+Calm Frames video check
+  file:    <local-evidence>/walkthrough-current/caregiver-browser-walkthrough.mp4
+  profile: wcag
+
+length:  25.80 s, under the 180 s limit
+
+PASS <local-evidence>/walkthrough-current/caregiver-browser-walkthrough.mp4: below the wcag thresholds
+
+record written to <local-evidence>/walkthrough-current/video-gate.json
+
+PASS. Commit <local-evidence>/walkthrough-current/video-gate.json and <local-evidence>/walkthrough-current/video-gate.map.json alongside the video link.

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<checkout>/eval/capture_intake_walkthrough.py", line 211, in <module>
+    capture(args.output, args.pipeline_python)
+  File "<checkout>/eval/capture_intake_walkthrough.py", line 173, in capture
+    assert pictures and stop > pictures[-1]['elapsed_s']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

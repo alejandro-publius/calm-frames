@@ -3,10 +3,13 @@
 This is the single home verification queue for the preserved native fixes plus
 the new dependency lock. It is not another full acceptance pass on fbe53bf. Keep completed #5/#6 and the accepted disclaimer. Use the final
 full source SHA in the transfer's `SYNC_MANIFEST.json`; product changes end at
-`365be0813a8416399ada1d469b0db326d45917d4`. No new native package exists in this
+`5bd9f6c4cdc6b8ea4b9427270810cd5de2c78b53`. No new native package exists in this
 cloud. The received fbe53bf package hashes cannot identify the new build.
-The previous cb96e21 transfer is preserved but superseded for new work. App UI
-and the D1/D2/D3 fixes are unchanged; this update changes build dependencies only.
+The 67e10f0 transfer is preserved but superseded for new work. This continuation
+changes the local caregiver workflow and capture tooling only. Native app source,
+D1/D2/D3, dependency locks and generated inputs remain byte-identical to 67e10f0.
+Reuse the verified 365be08 input archive included with the latest transfer; no
+player regeneration was needed. Keep one native batch, bound to the final SHA.
 
 ## Separate worktree
 

@@ -1,0 +1,155 @@
+{
+  "source_commit": "5bd9f6c4cdc6b8ea4b9427270810cd5de2c78b53",
+  "base": "67e10f065e0e3448ba39d09d6e11a5d51853c962",
+  "branch": "codex/native-defect-fixes-2026-10-25",
+  "checks": {
+    "before": {
+      "log": "checks/review-before.log",
+      "exit_code": 1,
+      "new_damaged_review_cases_failed": 8
+    },
+    "intake_core": {
+      "log": "checks/review-after.log",
+      "exit_code": 0,
+      "passed": 88,
+      "scope": "Intake, saved review, corrupt-record and worker-transaction regressions"
+    },
+    "http_and_delivery": {
+      "log": "checks/intake-delivery-http.log",
+      "initial_passed": 56,
+      "initial_failed": 1,
+      "resolution": "A package-delivery fixture omitted the complete producer review. Its fixture now carries all three presets; cancellation, ticket revocation and changed-file refusal assertions remain.",
+      "resolved_subset_log": "checks/delivery-fixture-final.log",
+      "resolved_subset_passed": 13,
+      "resolved_subset_exit_code": 0,
+      "unique_passing_cases_after_correction": 57
+    },
+    "nonempty_plan": {
+      "log": "checks/nonempty-plan.log",
+      "exit_code": 0,
+      "passed": 1,
+      "overlaps_intake_core": true,
+      "scope": "Actual producer app-guard union plans remain accepted by saved-review validation"
+    },
+    "python": {
+      "ruff": "pass on changed Python files",
+      "mypy_log": "checks/python-types-final.log",
+      "normal_mypy_sources": 28,
+      "mypy_exit_code": 0
+    },
+    "browser_and_real_input": {
+      "receipt": "browser/browser-checks.json",
+      "report": "browser/caregiver-review.json",
+      "new_ui_completion_assertion": true,
+      "input_frames": 360,
+      "input_seconds": 12,
+      "native": false,
+      "source": "83de58f907b48484ea44f8b855ff94322894ff9c",
+      "current_source_readback": "browser/current-source-readback.json"
+    },
+    "capture": {
+      "receipt": "demo/capture-receipt.json",
+      "log": "checks/capture-current.log",
+      "source": "83de58f907b48484ea44f8b855ff94322894ff9c",
+      "seconds": 25.8,
+      "actual_browser_recording": true,
+      "first_attempt_failure": "Stop timestamp preceded an in-flight final browser frame; recorder now detaches the callback before freezing timing and saves raw evidence before encoding."
+    },
+    "video": {
+      "receipt": "demo/video-gate.json",
+      "map": "demo/video-gate.map.json",
+      "log": "checks/video-gate-current.log",
+      "exit_code": 0,
+      "full_decode_exit_code": 0,
+      "file": "../../docs/cloud-deliverables-2026-10-25/assets/caregiver-browser-walkthrough.mp4",
+      "sha256": "af7e936682f2cacf32d11d34293b2bdab2c11177756946a06140f55227ec1b93",
+      "bytes": 460930,
+      "not_final_native_demo": true
+    },
+    "preview": {
+      "receipt": "demo/preview-checks.json",
+      "images_inspected": true,
+      "transport_limit": "Managed Chromium refuses file URLs; one-file local HTTP used without changing policy"
+    },
+    "dependencies": {
+      "rerun": false,
+      "reason": "Package manifests, locks, SBOMs, audit policy and results unchanged",
+      "prior_receipt": "../residual-dependencies-2026-10-25/validation.json",
+      "last_audit_exit_code": 1,
+      "remaining_advisories": 4,
+      "expired_groups": 2,
+      "no_migration_or_exception_change": true
+    },
+    "prior_native_app_tests": {
+      "rerun": false,
+      "reason": "App source unchanged from 67e10f0; native acceptance remains pending"
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "reason": "No push or dispatch authorized"
+    },
+    "final_run_identity_guard": {
+      "source": "5bd9f6c4cdc6b8ea4b9427270810cd5de2c78b53",
+      "before_log": "checks/run-identity-before.log",
+      "before_exit_code": 1,
+      "new_case_failed_before": 1,
+      "after_log": "checks/run-identity-after.log",
+      "after_exit_code": 0,
+      "passed": 44,
+      "overlaps_prior_core": true,
+      "actual_retained_review_check": "browser/current-source-readback.json"
+    },
+    "documentation": {
+      "published_numbers_checked": 749,
+      "local_links_checked": 238,
+      "broken_links": [],
+      "style": "pass",
+      "git_diff_check": "pass"
+    },
+    "privacy": {
+      "tool": "gitleaks 8.30.1",
+      "commits_scanned": 4,
+      "code_findings": 0,
+      "staged_files_scanned": 37,
+      "staged_findings": 0,
+      "scope": "Only licensed example data and fictional import copies; no household, PIN, credential, signing-key or native capture collected"
+    }
+  },
+  "original_checklist": {
+    "newly_closed": [],
+    "completed": [
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ]
+  },
+  "acceptance_limits": [
+    "No new native package, capture or focus/speech acceptance",
+    "No new qualifying long edition acquired",
+    "No new signer, preparation approval or TV delivery",
+    "No final replacement demo, art or narration",
+    "No medical/human acceptance",
+    "No push, merge, publication or submission change"
+  ]
+}

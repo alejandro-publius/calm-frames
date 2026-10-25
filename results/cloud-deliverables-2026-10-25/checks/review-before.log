@@ -1,0 +1,444 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-review] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18ce0ce0>
+damage = 'missing-review'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[list-review] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18ce2510>
+damage = 'list-review'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-preset] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18cf6810>
+damage = 'missing-preset'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-map] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18cf7e90>
+damage = 'missing-map'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[invalid-span] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18cf69c0>
+damage = 'invalid-span'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[wrong-total] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18cf7560>
+damage = 'wrong-total'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[list-flags] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a18cf6ba0>
+damage = 'list-flags'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+_ test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[changed-digest] _
+
+tmp_path = PosixPath('<test-temp>/test_damaged_saved_review_cann7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8a17f23b90>
+damage = 'changed-digest'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-review", "list-review", "missing-preset", "missing-map",
+        "invalid-span", "wrong-total", "list-flags", "changed-digest",
+    ])
+    def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+        tmp_path, monkeypatch, damage,
+    ):
+        from pipeline.hashing import fingerprint
+
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        root = tmp_path / "imports"
+        store = intake.IntakeStore(root)
+        bad_path, bad = ready(store)
+        good_path, good = ready(store)
+        saved = intake.read_job(bad_path)
+        review = saved["review"]
+        if damage == "missing-review":
+            saved.pop("review")
+        elif damage == "list-review":
+            saved["review"] = ["unreadable"]
+        elif damage == "missing-preset":
+            review["presets"].pop("extra-cautious")
+        elif damage == "missing-map":
+            review["review_map_hashes"] = {}
+        elif damage == "invalid-span":
+            review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+        elif damage == "wrong-total":
+            review["presets"]["wcag"]["covered_ms"] = 1000
+        elif damage == "list-flags":
+            review["flagged_intervals"] = {"wcag": [None]}
+        else:
+            saved["review_digest"] = "0" * 64
+        # A recomputed checksum cannot make an incomplete review usable either.
+        if damage != "changed-digest":
+            saved["review_digest"] = fingerprint(saved.get("review"))
+        intake._write_json(bad_path / "job.json", saved, bad_path)
+        before = (bad_path / "job.json").read_bytes()
+        source_before = (bad_path / "original.mp4").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            listed = {j["id"]: j for j in store.poll()}
+>           assert listed[bad["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'review' == 'unreadable'
+E
+E             - unreadable
+E             + review
+
+pipeline/tests/test_intake_corrupt_record.py:157: AssertionError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-review]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[list-review]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-preset]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[missing-map]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[invalid-span]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[wrong-total]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[list-flags]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work[changed-digest]
+8 failed, 6 deselected in 0.96s

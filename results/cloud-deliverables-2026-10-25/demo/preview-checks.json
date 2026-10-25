@@ -1,0 +1,33 @@
+{
+  "views": [
+    {
+      "width": 1200,
+      "height": 950,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    }
+  ],
+  "embedded_video_metadata_loaded": true,
+  "video_paused_on_load": true,
+  "native_controls_present": true,
+  "external_requests": [],
+  "page_errors": [],
+  "visible_keyboard_focus": true,
+  "reduced_motion_requested": true,
+  "animations": 0,
+  "self_contained": true,
+  "test_transport": "Local HTTP serving this one generated HTML file only; no policy change",
+  "file_scheme_test": "Cloud browser refused file:// with ERR_BLOCKED_BY_ADMINISTRATOR; direct file opening not observed here",
+  "explicit_playback_probe": {
+    "advanced": true,
+    "decoded_frames": 19,
+    "error": null
+  },
+  "video_fully_buffered": true,
+  "images_inspected": true,
+  "csp_retained": true
+}

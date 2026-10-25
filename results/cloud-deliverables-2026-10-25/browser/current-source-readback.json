@@ -1,0 +1,9 @@
+{
+  "validated_source": "5bd9f6c4cdc6b8ea4b9427270810cd5de2c78b53",
+  "captured_source": "83de58f907b48484ea44f8b855ff94322894ff9c",
+  "retained_review_deep_equal": true,
+  "source_and_both_maps_checked": true,
+  "analysis_repeated": false,
+  "normal_review_schema_passed": true,
+  "native_or_playback_claim": false
+}

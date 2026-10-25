@@ -1,0 +1,17 @@
+{
+  "duration_limit_s": 180,
+  "duration_s": 25.8,
+  "duration_verdict": "pass",
+  "flashmap_exit": 0,
+  "flashmap_verdict": "pass",
+  "flashmap_version": "1.0.0",
+  "map": "video-gate.map.json",
+  "profile": "wcag",
+  "recorded_utc": "2026-10-25T23:11:44+00:00",
+  "segments_over_threshold": 0,
+  "verdict": "pass",
+  "video": "caregiver-browser-walkthrough.mp4",
+  "video_bytes": 460930,
+  "video_sha256": "af7e936682f2cacf32d11d34293b2bdab2c11177756946a06140f55227ec1b93",
+  "what_this_is": "The gate on the demo video file: flashmap over the finished cut, plus its length. Written by eval/check_video.sh. A pass here is about this file and nothing else."
+}

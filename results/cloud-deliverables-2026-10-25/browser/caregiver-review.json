@@ -1,0 +1,49 @@
+{
+  "schema": "calm-frames-caregiver-review-v1",
+  "title": "Forest creek (licensed review example)",
+  "source": {
+    "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+    "bytes": 2498811
+  },
+  "analysis": {
+    "analysis_complete": true,
+    "analysis_run": "4d370333b22d4c1bba270fbbda854c77",
+    "analysis_width": 192,
+    "duration_ms": 12000,
+    "flagged_intervals": {
+      "broadcast": [],
+      "wcag": []
+    },
+    "frame_count": 360,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "extra-cautious": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "wcag": {
+        "covered_ms": 0,
+        "intervals": []
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "45bef4aa40966c43423404d8787d3bb1eef1d0cd1ca56e67382913a5b0e95609",
+      "wcag": "4de1855753ce48a294f1edb7bbdf1a5f20dbb77c2b3d890c04a722fff0beaa53"
+    },
+    "source_sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+  },
+  "processing_permission_confirmed": true,
+  "permission_verified_by_application": false,
+  "tv_playback_authorized": false,
+  "limitations": [
+    "Analysis does not establish medical safety, seizure prevention or comfort.",
+    "Use only non-DRM videos you own or have permission to process. Rights are not verified by this application.",
+    "This review does not authorize original playback or add a title to the TV library.",
+    "TV delivery requires a separately authorized signer, exact edition approval and a checked app build."
+  ]
+}

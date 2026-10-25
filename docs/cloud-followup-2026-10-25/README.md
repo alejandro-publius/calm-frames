@@ -1,6 +1,8 @@
-# Cloud continuation from cb96e21
+**Latest continuation:** [actual caregiver fixes, licensed-file verification and video](../cloud-deliverables-2026-10-25/README.md). The dependency record below remains valid for its stated source; the four-advisory migration decision is unchanged.
 
-Current product/toolchain: **`365be0813a8416399ada1d469b0db326d45917d4`** on
+# Prior dependency continuation from cb96e21
+
+Product/toolchain at this prior checkpoint: **`365be0813a8416399ada1d469b0db326d45917d4`** on
 `codex/native-defect-fixes-2026-10-25`, continuing the verified clean checkpoint
 `cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0`. Later documentation commits are
 identified by the full HEAD and tree in the verified transfer's `SYNC_MANIFEST.json`.

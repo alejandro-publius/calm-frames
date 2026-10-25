@@ -1,0 +1,22 @@
+{
+  "source_commit": "83de58f907b48484ea44f8b855ff94322894ff9c",
+  "permission_required": true,
+  "real_file_analysis_frames": 360,
+  "duration_ms": 12000,
+  "three_presets_reviewed": true,
+  "completion_status_announced": true,
+  "keyboard_report_download": true,
+  "visible_focus": true,
+  "nested_corruption_isolated": true,
+  "invalid_report_http_status": 400,
+  "keyboard_remove_only_corrupt_copy": true,
+  "source_preserved": true,
+  "narrow_horizontal_overflow": false,
+  "reduced_motion_emulated": true,
+  "active_animations": 0,
+  "media_elements": 0,
+  "page_errors": [],
+  "external_requests": [],
+  "native_fire_tv": false,
+  "browser_version": "154.0.8037.57"
+}
