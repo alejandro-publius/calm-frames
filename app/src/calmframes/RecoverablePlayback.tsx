@@ -63,9 +63,14 @@ export default function RecoverablePlayback({identity, title, menuArt, onBack, c
   return <CoastalAppearance.Provider value><WorldAppearance.Provider value>
     <View style={styles.screen} testID="playback-resume-choice">
       <CoastalWorld detail destination={islandKind(menuArt)} />
-      <CalmPageHeader onBack={leave} backTestID="resume-back" preferredBack={state.phase === 'loading'} />
+      {/* Back takes no focus of its own. It used to while the saved place
+          loaded, a few milliseconds, and focus then jumped to Resume, so
+          VoiceView announced Back, or a bare "button" before its label was
+          drawn, ahead of the choice. The remote's Back still leaves. */}
+      <CalmPageHeader onBack={leave} backTestID="resume-back" />
       <View style={styles.copy}>
-        <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
+        {/* A heading, so VoiceView says which video's place this is as the prompt opens. */}
+        <Text style={[styles.title, heroTitleTypography(title)]} accessibilityRole="header" testID="playback-resume-title">{title}</Text>
         {state.phase === 'loading' ? <Text style={styles.detail} accessibilityLiveRegion="polite">Opening your video…</Text> :
           <View style={styles.actions}>
             <CalmButton primary hasTVPreferredFocus sound={false} label={`Resume at ${resumeTime(state.checkpoint!.positionMs)}`}

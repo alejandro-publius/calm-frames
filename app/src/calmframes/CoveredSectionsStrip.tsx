@@ -20,10 +20,25 @@ import React from 'react';
 import { WorldAppearance, WORLD } from './CoastalWorld';
 import { StyleSheet, Text, View } from 'react-native';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { spoken } from './copy';
 import { CoveredSectionsResult } from './coveredSections';
 import SceneTimeline from './SceneTimeline';
 
 export const COVERED_SECTIONS_HEADING = 'Scenes covered';
+
+/**
+ * The strip in one sentence, as it is said: its heading and its line. A
+ * screen reader hears this from the strip and, on the Details page, after the
+ * Watch button, since VoiceView speaks only what has focus and the strip
+ * never takes it.
+ */
+export function coveredSectionsSummary(result: CoveredSectionsResult, ocean = false): string {
+  return `${coveredSectionsHeading(result, ocean)}. ${spoken(result.text)}`;
+}
+
+function coveredSectionsHeading(result: CoveredSectionsResult, ocean: boolean): string {
+  return ocean && result.kind === 'ready' ? 'Scenes replaced' : COVERED_SECTIONS_HEADING;
+}
 
 export interface CoveredSectionsStripProps {
   result: CoveredSectionsResult;
@@ -42,13 +57,13 @@ const CoveredSectionsStrip = ({
 }: CoveredSectionsStripProps) => {
   const world = React.useContext(WorldAppearance);
   const trackWidth = scale(width);
-  const heading = ocean && result.kind === 'ready' ? 'Scenes replaced' : COVERED_SECTIONS_HEADING;
+  const heading = coveredSectionsHeading(result, ocean);
   return (
     <View
       testID={testID}
       style={[styles.block, { maxWidth: trackWidth }]}
       accessible
-      accessibilityLabel={`${heading}. ${result.text}`}>
+      accessibilityLabel={coveredSectionsSummary(result, ocean)}>
       <View style={styles.summaryRow}>
         <Text style={[styles.heading, world && { color: WORLD.TEXT_DIM }]} testID={`${testID}-heading`}>{heading}</Text>
         <Text style={[styles.line, world && { color: WORLD.TEXT_DIM }]} testID={`${testID}-line`}>{result.text}</Text>

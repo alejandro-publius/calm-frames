@@ -589,6 +589,17 @@ export function runtimeLabel(durationMs: number | undefined): string | null {
   }
   return describeHiddenTotal(durationMs);
 }
+
+/**
+ * A line drawn on screen, as a screen reader should say it: the separator as
+ * a pause and short units as whole words. VoiceView on the TV read the
+ * separator aloud as "middle dot".
+ */
+export function spoken(line: string): string {
+  return line.split(' · ').join(', ')
+    .replace(/\b(\d+) min\b/g, (_, n: string) => `${n} minute${n === '1' ? '' : 's'}`)
+    .replace(/\b(\d+) sec\b/g, (_, n: string) => `${n} second${n === '1' ? '' : 's'}`);
+}
 export const CAPTIONS_CONTINUE_LINE =
   'When a video has captions, the captions continue too.';
 export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';

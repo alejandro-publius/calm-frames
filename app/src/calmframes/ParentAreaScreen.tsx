@@ -58,6 +58,7 @@ import TouchableOpacity from './CalmTouchable';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
+import FocusRow from './FocusRow';
 import HomeHarborScene from './HomeHarborScene';
 import {
   CALM_CONTROL,
@@ -131,6 +132,7 @@ import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import PinKeypad from './PinKeypad';
 import ProfileNameEditor from './ProfileNameEditor';
 import ProfilePicker from './ProfilePicker';
+import ReadingStop from './ReadingStop';
 import {
   addProfile,
   allProfileHides,
@@ -720,7 +722,11 @@ const ParentAreaScreen = ({
               testID={`${testID}-preset-${name}`}
               accessibilityRole="radio"
               accessibilityState={{ checked: chosen, selected: chosen, ...blocked }}
-              accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
+              // Name and state first, as the TV and seat chips say them; the
+              // description follows as the hint. Read as one label, it came
+              // first and a quick move cut the state off.
+              accessibilityLabel={`${PRESETS[name].title}${chosen ? ', chosen' : ''}`}
+              accessibilityHint={PRESETS[name].description}
               activeOpacity={1}
               onFocus={() => setFocusedRow(key)}
               onBlur={() => setFocusedRow(null)}
@@ -833,6 +839,8 @@ const ParentAreaScreen = ({
         <Text style={styles.section} accessibilityRole="header">
           {sectionFor(HIDDEN_TITLE, whose)}
         </Text>
+        {/* The record is one stop, so the remote can land on it and VoiceView reads it; ReadingStop.tsx says why. */}
+        <ReadingStop testID={`${testID}-hidden-reading`} flush>
         <Text style={styles.body} testID={`${testID}-total`}>
           {shownLog.entries.length === 0
             ? editingProfile
@@ -862,6 +870,7 @@ const ParentAreaScreen = ({
             ))}
           </View>
         ))}
+        </ReadingStop>
       </View>
 
       {family && onFamilyChange ? (
@@ -889,7 +898,10 @@ const ParentAreaScreen = ({
                 testID={`${testID}-${preference.id}`}
                 accessibilityRole="switch"
                 accessibilityState={{ checked: enabled, disabled: saving }}
-                accessibilityLabel={`${preference.title}. ${preference.note}`}
+                // On or Off is drawn beside the name, so it is said with it,
+                // before the note.
+                accessibilityLabel={`${preference.title}, ${enabled ? 'on' : 'off'}`}
+                accessibilityHint={preference.note}
                 activeOpacity={1}
                 onFocus={() => setFocusedRow(preference.id)}
                 onBlur={() => setFocusedRow(null)}
@@ -965,7 +977,9 @@ const ParentAreaScreen = ({
                 />
               </View>
               {entry.status === 'verified' && personalCoverAsset(entry.title) ? (
-                <CalmButton label="Extra picture covers" disabled={saving}
+                // Every verified title has one of these, so the title is in
+                // what a screen reader says; the name beside it is only text.
+                <CalmButton label="Extra picture covers" accessibilityLabel={`Extra picture covers: ${titlePresentation(entry.title).name}`} disabled={saving}
                   hasTVPreferredFocus={extraReturnFocus === entry.title.id}
                   onPress={() => { setExtraReturnFocus(undefined); setExtraTitle(entry); }} testID={`${testID}-extra-${entry.title.id}`} />
               ) : null}
@@ -985,6 +999,9 @@ const ParentAreaScreen = ({
         <Text style={styles.section} accessibilityRole="header">
           {EXPLAINER_TITLE}
         </Text>
+        {/* The approved sentence is in here, so the lines are one stop the
+            remote can land on and VoiceView reads; ReadingStop.tsx says why. */}
+        <ReadingStop testID={`${testID}-explainer-reading`} flush>
         {EXPLAINER_LINES.map((line, index) => (
           <Text
             key={line}
@@ -993,10 +1010,12 @@ const ParentAreaScreen = ({
             {line}
           </Text>
         ))}
+        </ReadingStop>
       </View>
 
       {onBack || onCredits ? (
-        <View style={styles.footer}>
+        // Right from the last of these went up the page to a seat chip.
+        <FocusRow style={styles.footer} testID={`${testID}-footer`}>
           {onBack ? (
             <View style={styles.button}>
               <CalmButton
@@ -1017,7 +1036,7 @@ const ParentAreaScreen = ({
               />
             </View>
           ) : null}
-        </View>
+        </FocusRow>
       ) : null}
     </ScrollView>
   );

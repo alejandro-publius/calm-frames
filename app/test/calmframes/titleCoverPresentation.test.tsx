@@ -31,7 +31,8 @@ it('shows the concise actual Extra cautious count, with ocean audio explanation 
   const screen = render(<TitleDetailsScreen entry={entry} settings={settings} onPlay={jest.fn()} />);
   expect(screen.getByTestId('title-details-covered-heading').props.children).toBe('Scenes replaced');
   expect(screen.getByTestId('title-details-covered-line').props.children).toBe('2 scenes · 9 seconds');
-  expect(screen.getByTestId('title-details-covered').props.accessibilityLabel).toBe('Scenes replaced. 2 scenes · 9 seconds');
+  // Said with a pause where the line draws a dot: VoiceView read the dot aloud.
+  expect(screen.getByTestId('title-details-covered').props.accessibilityLabel).toBe('Scenes replaced. 2 scenes, 9 seconds');
   expect(screen.getByTestId('title-details-meta').props.children).toBe('38 seconds');
   expect(screen.getByText('Waves along the coast of Acadia National Park.')).toBeTruthy();
   expect(screen.queryByText(/The sound continues|original audio/)).toBeNull();

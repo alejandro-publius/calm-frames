@@ -13,7 +13,7 @@ import { continuousScenePicture } from './continuousScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
 import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE, SAVING_CHANGES } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
-import CoveredSectionsStrip from './CoveredSectionsStrip';
+import CoveredSectionsStrip, { coveredSectionsSummary } from './CoveredSectionsStrip';
 import { coveredSections } from './coveredSections';
 import { hasBakedOceanPresentation } from './titleCoverPresentation';
 import FlashMapStrip from './FlashMapStrip';
@@ -29,6 +29,7 @@ import { useUiCapture } from './uiCapture';
 import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME, TITLE_DETAILS_HARBOR_FRAME, TITLE_DETAILS_DEMO_FRAME } from './uiFrames';
 import ViewingPlan from './ViewingPlan';
 import PreparedVideoAnalysis from './PreparedVideoAnalysis';
+import ReadingStop from './ReadingStop';
 import { concernsPackagedLibrary, packagedLibrary } from './packagedLibrary';
 import {
   benignStorySettings,
@@ -169,10 +170,13 @@ const TitleDetailsScreen = ({
           <ViewingPlan entry={entry} settings={settings} testID={`${testID}-plan`} />
         </> : <>
           <Text style={styles.section} accessibilityRole="header">{presentation.name}</Text>
-          {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
-            : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0, ocean)}</Text> : null}
-          <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
-          <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
+          {/* What the title covers and the safety wording, in one stop the remote can land on, so VoiceView reads them; ReadingStop.tsx says why. */}
+          <ReadingStop testID={`${testID}-info-reading`} flush style={styles.infoReading}>
+            {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
+              : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0, ocean)}</Text> : null}
+            <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
+            <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
+          </ReadingStop>
           {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
           {presentation.attribution ? <Text style={styles.summary} testID={`${testID}-attribution`}>{presentation.attribution}</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
@@ -195,7 +199,8 @@ const TitleDetailsScreen = ({
       </CalmPageHeader>
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
+          {/* A heading, so VoiceView names the page when it opens, as it does every other page's title. */}
+          <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} accessibilityRole="header" testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{onAmbient ? 'Still scene' : meta}</Text>
         </View>
         {presentation.description ? <Text style={[styles.synopsis, { color: WORLD.TEXT_DIM }]} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
@@ -204,6 +209,9 @@ const TitleDetailsScreen = ({
           <View style={styles.buttons}>
             <CalmButton primary playIcon={!onAmbient} sound={false} testID={`${testID}-play`} label={saving ? SAVING_CHANGES : playLabel}
               accessibilityLabel={saving ? SAVING_CHANGES : `${playLabel}: ${presentation.name}`}
+              // What will be covered, heard before Watch is pressed. The strip
+              // above says it on screen and can never take focus itself.
+              accessibilityHint={saving ? undefined : coveredSectionsSummary(covered, ocean)}
               disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => (onAmbient ?? onPlay)(entry)} />
             <CalmButton quiet tertiary compact testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
               onPress={() => setPage('info')} />
@@ -220,6 +228,7 @@ const styles = StyleSheet.create({
   environment: { flexDirection: 'row', alignItems: 'center', gap: scale(CALM_SPACE.TIGHT) },
   environmentName: { ...CALM_TEXT.supporting, color: WORLD.TEXT },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
+  infoReading: { gap: scale(24) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },

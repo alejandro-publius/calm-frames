@@ -7,6 +7,7 @@ import { render } from '@testing-library/react-native';
 import React from 'react';
 import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import CoveredSectionsStrip, { COVERED_SECTIONS_HEADING } from '../../src/calmframes/CoveredSectionsStrip';
+import { spoken } from '../../src/calmframes/copy';
 import {
   COVERED_SECTIONS_NO_DURATION,
   COVERED_SECTIONS_NONE,
@@ -53,7 +54,8 @@ describe('the covered sections block', () => {
     });
     expect(view.queryByTestId('covered-sections-mark-2')).toBeNull();
     expect(view.getByTestId('covered-sections-line').props.children).toBe(ready.text);
-    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(`${COVERED_SECTIONS_HEADING}. ${ready.text}`);
+    // Said with a pause where the line draws a dot: VoiceView read the dot aloud.
+    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(`${COVERED_SECTIONS_HEADING}. ${spoken(ready.text)}`);
     expect(view.getByTestId('covered-sections').props.accessible).toBe(true);
   });
 

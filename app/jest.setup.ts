@@ -144,6 +144,17 @@ jest.mock('@amazon-devices/react-native-kepler', () => {
     default: jest.fn(),
   };
 });
+// FocusRow wraps the Kepler focus guide, which the mock above draws as
+// nothing. Screens that hold their controls in a row still need those
+// controls drawn, so the row is a plain view here; focusRow.test.tsx unmocks it.
+jest.mock('./src/calmframes/FocusRow', () => {
+  const ReactActual = jest.requireActual('react');
+  const { View } = jest.requireActual('react-native');
+  return {
+    __esModule: true,
+    default: ({ children, ...props }: { children?: unknown }) => ReactActual.createElement(View, props, children),
+  };
+});
 jest.mock('lodash', () => ({
   isEqual: jest.fn(() => true),
 }));
