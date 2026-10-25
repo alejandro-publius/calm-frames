@@ -1,7 +1,8 @@
-# Claude demo assembly handoff
+# Demo assembly specification
 
-Claude handles final demo assembly and ElevenLabs narration only. This cloud
-thread remains the sole product integration owner. Do not edit application
+The October 25 takeover retires the earlier Claude assignment. This retained
+specification now belongs to the sole cloud integration owner. Actual media
+production stays parked until accepted-product reconciliation. Do not edit application
 code, dependencies, signing, approved media, repository candidate or submission.
 The export's PRODUCT_IDENTITY.json names the immutable branch/full SHA and
 validation state. A frozen handoff identity is not native or product acceptance.
@@ -62,8 +63,9 @@ Use a private copy of timeline.json outside Git. The exported copy is pinned
 to the handoff source, with missing paths/package identity still null. Supply
 actual files, hashes and capture receipts. Run the included preflight tests and
 check-only command; missing assets must fail before output creation. Render
-1920x1080 H.264/AAC only when inputs and provenance pass. Real encoding remains
-untested until those inputs arrive. Do not use placeholders to pass preflight.
+1920x1080 H.264/AAC only when inputs and provenance pass. The encoding machinery
+has been exercised with a visibly labelled synthetic fixture; production footage
+and narration remain absent. Do not use placeholders to pass production preflight.
 
 Keep the McWay CC BY 3.0 attribution from PRESENTATION_DRAFTS.md, including
 source, license, adaptations and no endorsement. Record illustration provenance
@@ -82,4 +84,4 @@ Report product checkpoint readiness, media-package export, video rendering and
 submission update separately. Exporting this package neither renders a movie
 nor selects a replacement submission. Preserve the submitted fallback and all
 frozen linked materials after the stated noon Pacific cutoff. No publication
-or application change is delegated to Claude.
+or application change is delegated by this specification.

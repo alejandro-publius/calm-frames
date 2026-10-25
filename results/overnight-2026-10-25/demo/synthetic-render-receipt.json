@@ -1,0 +1,282 @@
+{
+  "artifact_role": "synthetic_tool_test",
+  "source_commit": null,
+  "package_sha256": null,
+  "manifest_sha256": "5241509025b47d92bd9d255c2cb6545d007f004799b39b1ac592fd674e07206e",
+  "renderer_sha256": "270f4687758f5d5d5ba49ba4c3588d8d59a7845aa09278cace443e1d8ecd2a24",
+  "tools": {
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "narration_script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "measured_duration_seconds": 170.021029,
+  "inputs": {
+    "manga_01": {
+      "sha256": "01c23db9a9a35a398c71729c1b92cc7d502fb795ec34237850cd438647b2ce4b",
+      "kind": "illustration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": null,
+      "duration": null,
+      "audio": false,
+      "bytes": 19466
+    },
+    "n01": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "native_home": {
+      "sha256": "7cb9ae113e6de787744ba5a346901a630d4785e0bb19730042bd055612ad869b",
+      "kind": "native_video",
+      "capture_receipt_sha256": null,
+      "video_duration": 70.0,
+      "audio_duration": 70.0,
+      "duration": 70.0,
+      "audio": true,
+      "bytes": 334904
+    },
+    "n02": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "native_details": {
+      "sha256": "7cb9ae113e6de787744ba5a346901a630d4785e0bb19730042bd055612ad869b",
+      "kind": "native_video",
+      "capture_receipt_sha256": null,
+      "video_duration": 70.0,
+      "audio_duration": 70.0,
+      "duration": 70.0,
+      "audio": true,
+      "bytes": 334904
+    },
+    "n03": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "manga_02": {
+      "sha256": "01c23db9a9a35a398c71729c1b92cc7d502fb795ec34237850cd438647b2ce4b",
+      "kind": "illustration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": null,
+      "duration": null,
+      "audio": false,
+      "bytes": 19466
+    },
+    "n04": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "native_ambient": {
+      "sha256": "7cb9ae113e6de787744ba5a346901a630d4785e0bb19730042bd055612ad869b",
+      "kind": "native_video",
+      "capture_receipt_sha256": null,
+      "video_duration": 70.0,
+      "audio_duration": 70.0,
+      "duration": 70.0,
+      "audio": true,
+      "bytes": 334904
+    },
+    "manga_03": {
+      "sha256": "01c23db9a9a35a398c71729c1b92cc7d502fb795ec34237850cd438647b2ce4b",
+      "kind": "illustration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": null,
+      "duration": null,
+      "audio": false,
+      "bytes": 19466
+    },
+    "n05": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "native_return": {
+      "sha256": "7cb9ae113e6de787744ba5a346901a630d4785e0bb19730042bd055612ad869b",
+      "kind": "native_video",
+      "capture_receipt_sha256": null,
+      "video_duration": 70.0,
+      "audio_duration": 70.0,
+      "duration": 70.0,
+      "audio": true,
+      "bytes": 334904
+    },
+    "n06": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "manga_04": {
+      "sha256": "01c23db9a9a35a398c71729c1b92cc7d502fb795ec34237850cd438647b2ce4b",
+      "kind": "illustration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": null,
+      "duration": null,
+      "audio": false,
+      "bytes": 19466
+    },
+    "n07": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "native_proof": {
+      "sha256": "7cb9ae113e6de787744ba5a346901a630d4785e0bb19730042bd055612ad869b",
+      "kind": "native_video",
+      "capture_receipt_sha256": null,
+      "video_duration": 70.0,
+      "audio_duration": 70.0,
+      "duration": 70.0,
+      "audio": true,
+      "bytes": 334904
+    },
+    "n08": {
+      "sha256": "251d954bb18312014d91ba26f2d52f4a02fb1bab5f147c7723ec35e606bcc9ea",
+      "kind": "narration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": 1.0,
+      "duration": 1.0,
+      "audio": true,
+      "bytes": 1303
+    },
+    "manga_05": {
+      "sha256": "01c23db9a9a35a398c71729c1b92cc7d502fb795ec34237850cd438647b2ce4b",
+      "kind": "illustration",
+      "capture_receipt_sha256": null,
+      "video_duration": null,
+      "audio_duration": null,
+      "duration": null,
+      "audio": false,
+      "bytes": 19466
+    }
+  },
+  "edit_ledger": [
+    {
+      "asset": "manga_01",
+      "start": 0,
+      "duration": 12,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_home",
+      "start": 12,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_details",
+      "start": 22,
+      "duration": 12,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_02",
+      "start": 34,
+      "duration": 11,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_ambient",
+      "start": 45,
+      "duration": 70,
+      "source_start": 0,
+      "native_audio_gain": 1.0
+    },
+    {
+      "asset": "manga_03",
+      "start": 115,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_return",
+      "start": 125,
+      "duration": 20,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_04",
+      "start": 145,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_proof",
+      "start": 155,
+      "duration": 9,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_05",
+      "start": 164,
+      "duration": 6,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    }
+  ],
+  "input_bytes_encoded_from": "private_hash_verified_snapshots",
+  "outputs": {
+    "TEST_ONLY-synthetic-render.mp4": {
+      "bytes": 1838593,
+      "sha256": "754730fb2f6f9d14af3e794548d5757a4baa318f5d9c3ea3a174660a1818d395"
+    },
+    "TEST_ONLY-synthetic-render.srt": {
+      "bytes": 1039,
+      "sha256": "954c045f7be07e13f5d65a9a41f70c4a6751609628a5098586152432159f3594"
+    }
+  },
+  "full_decode": "passed",
+  "existing_video_gate": "not_run",
+  "human_audio_palette_full_video_acceptance": "pending",
+  "published": false
+}

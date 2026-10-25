@@ -1,0 +1,56 @@
+{
+  "artifact_role": "synthetic_tool_test",
+  "real_app_capture_used": false,
+  "speech_generated": false,
+  "paid_calls": 0,
+  "media_opened_in_player": false,
+  "production_preflight": "refused synthetic assets as required",
+  "production_preflight_errors": [
+    "Synthetic fixtures cannot pass production-input preflight",
+    "An exact selected production source commit is required",
+    "The selected installed package SHA256 is required",
+    "Authorized narration voice is missing",
+    "manga_01: provenance/capture review is missing",
+    "manga_02: provenance/capture review is missing",
+    "manga_03: provenance/capture review is missing",
+    "manga_04: provenance/capture review is missing",
+    "manga_05: provenance/capture review is missing",
+    "n01: provenance/capture review is missing",
+    "n02: provenance/capture review is missing",
+    "n03: provenance/capture review is missing",
+    "n04: provenance/capture review is missing",
+    "n05: provenance/capture review is missing",
+    "n06: provenance/capture review is missing",
+    "n07: provenance/capture review is missing",
+    "n08: provenance/capture review is missing",
+    "native_ambient: provenance/capture review is missing",
+    "native_ambient: requires a reviewed raw production take, not a harness or mockup",
+    "native_ambient: capture receipt is missing, changed or inconsistent",
+    "native_details: provenance/capture review is missing",
+    "native_details: requires a reviewed raw production take, not a harness or mockup",
+    "native_details: capture receipt is missing, changed or inconsistent",
+    "native_home: provenance/capture review is missing",
+    "native_home: requires a reviewed raw production take, not a harness or mockup",
+    "native_home: capture receipt is missing, changed or inconsistent",
+    "native_proof: provenance/capture review is missing",
+    "native_proof: requires a reviewed raw production take, not a harness or mockup",
+    "native_proof: capture receipt is missing, changed or inconsistent",
+    "native_return: provenance/capture review is missing",
+    "native_return: requires a reviewed raw production take, not a harness or mockup",
+    "native_return: capture receipt is missing, changed or inconsistent"
+  ],
+  "render_receipt_sha256": "b3969018257dd6d7bdac7f87d3630fca167b4b5bbd6d07005ffa59a6895550da",
+  "outputs": {
+    "TEST_ONLY-synthetic-render.mp4": {
+      "bytes": 1838593,
+      "sha256": "754730fb2f6f9d14af3e794548d5757a4baa318f5d9c3ea3a174660a1818d395"
+    },
+    "TEST_ONLY-synthetic-render.srt": {
+      "bytes": 1039,
+      "sha256": "954c045f7be07e13f5d65a9a41f70c4a6751609628a5098586152432159f3594"
+    }
+  },
+  "full_decode": "passed",
+  "duration_seconds": 170.021029,
+  "human_audio_palette_full_video_acceptance": "not_applicable_to_test_fixture"
+}

@@ -1,0 +1,79 @@
+{
+  "recorded_utc": "2026-10-25T07:36:24.963383+00:00",
+  "source_before_work": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "items": [
+    16,
+    8
+  ],
+  "status": "Assembly tooling improved and exercised with a labelled synthetic fixture. Product media remains blocked on actual accepted-source assets and human review.",
+  "changes": [
+    "Reject muted or attenuated ambient app audio.",
+    "Preserve the complete closing-credit hold.",
+    "Bind rendering to the preflight manifest, capture receipts and private hash-verified input snapshots.",
+    "Record package identity, capture-receipt hashes, edit ledger, renderer hash and tool versions.",
+    "Exercise actual encoding with visible TEST ONLY synthetic card and digital silence; normal production preflight rejects its manifest."
+  ],
+  "focused_checks": {
+    "command": "python docs/cloud-integration-2026-10-23/demo/test_render_preflight.py -v",
+    "passed": 24,
+    "reproduced_old_defects": 3,
+    "before_log": "preflight-before.log",
+    "after_log": "preflight.log",
+    "new_refusal_mutation_controls": "mutation-controls.json",
+    "ruff_version": "0.17.0",
+    "ruff_changed_python": "passed"
+  },
+  "synthetic_encoder": {
+    "artifact_role": "synthetic_tool_test",
+    "real_app_capture": false,
+    "paid_generation": false,
+    "speech_generated": false,
+    "full_decode": "passed",
+    "video_gate": "passed on synthetic bytes only",
+    "observed_video": {
+      "width": 1920,
+      "height": 1080,
+      "avg_frame_rate": "30/1",
+      "start_time": "0.021029",
+      "duration": "170.000000",
+      "nb_frames": "5100"
+    },
+    "frame_count_verified_by_full_read": 5100,
+    "container_duration_seconds": 170.021029,
+    "subtitle_intervals_checked": 10,
+    "subtitles_ordered_nonoverlapping_and_within_output": true,
+    "test_label_visually_inspected_on_extracted_frame": true,
+    "output_sha256": "754730fb2f6f9d14af3e794548d5757a4baa318f5d9c3ea3a174660a1818d395",
+    "output_bytes": 1838593,
+    "output_in_git": false,
+    "test_output_external_directory": "/workspace/shared/calm-frames-overnight-demo/TEST_ONLY-smoke-1/TEST_ONLY-output"
+  },
+  "input_inventory": {
+    "repository_media_files": 25,
+    "verified_historical_native_references": 5,
+    "eligible_current_native_video_inputs": 0,
+    "production_assets_missing": 18
+  },
+  "approved_narration_unchanged_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "owned_file_hashes": {
+    "docs/cloud-integration-2026-10-23/demo/render_demo.py": "270f4687758f5d5d5ba49ba4c3588d8d59a7845aa09278cace443e1d8ecd2a24",
+    "docs/cloud-integration-2026-10-23/demo/render_smoke_test.py": "1e798032cc15e8e1bd600e0396cc5d86c48e49e72ad363abf179fc996e1f41c9",
+    "docs/cloud-integration-2026-10-23/demo/test_render_preflight.py": "eae4a17990ed975baa2788e82ba8135413d56d120631c09dc0cee65d13c3bbef"
+  },
+  "not_claimed": [
+    "Current-source replacement demo exists",
+    "Manga/ElevenLabs assets generated",
+    "Medical safety or human comfort acceptance",
+    "Existing app content is a native recording",
+    "Mac evidence ZIPs were received",
+    "Publication or hosted CI success"
+  ],
+  "checked_code_commit": "324a10a302ea6f3a40e52734e9ac1acdac72ae5a",
+  "log_normalization": {
+    "preflight-before.log": {
+      "original_sha256": "902fd433cf0fad9e60051f97d556988c746e65ad184d37734c555eb7ccfb2cd4",
+      "committed_sha256": "88e6183a51b5e506c0a18372f4c3a83c59f63c488d316eab3f11ae3554753027",
+      "normalization": "line-end whitespace only; original retained outside Git"
+    }
+  }
+}

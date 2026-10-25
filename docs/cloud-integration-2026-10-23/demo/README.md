@@ -2,9 +2,16 @@
 
 An unsubmitted production package draft, October 23, 2026. Media production is deferred until the product candidate is finished, selected and validated. Reconcile this story with that accepted build before generating manga, narration or a final video. The plan is 2:50 including credits, with a continuous 70-second native ambient excerpt. These are editorial targets, not measured output durations. Rowan is a fictional adult character, not an interviewed user or an efficacy claim.
 
+The [October 25 tooling continuation](../../overnight-2026-10-25/DEMO.md) records
+the current asset inventory, verified encoder exercise and remaining inputs.
+The integration owner now owns assembly; the earlier Claude delegation is
+historical. The approved script is unchanged and actual media production remains
+parked. The encoded synthetic test is labelled TEST ONLY throughout and cannot
+pass production-input preflight.
+
 Ready now:
 
-- [Claude assembly-only handoff](CLAUDE_ASSEMBLY.md) and [exact narration-only text](narration-only.txt). The integration owner retains product decisions; Claude's delegated scope is demo assembly and ElevenLabs narration after product gates permit production.
+- [Assembly specification](CLAUDE_ASSEMBLY.md) and [exact narration-only text](narration-only.txt). The integration owner retains product and assembly decisions; narration follows accepted-product reconciliation.
 - [Narration and storyboard](STORYBOARD.md), [five-image prompt](IMAGE_PROMPT.md), and [narration production plan](ELEVENLABS_PLAN.md).
 - [Asset inventory](asset-manifest.json), with hashes of existing native references and explicit missing inputs.
 - [Render plan](timeline.json), [renderer](render_demo.py), [focused checks](test_render_preflight.py) and [draft subtitles](captions.draft.srt).
@@ -14,7 +21,7 @@ Ready now:
 
 1. Actual Blackbox reference frames. Devpost and YouTube access is blocked in this executor; no match to Blackbox's visual style is claimed.
 2. Five finished illustrations from the prompt, with provenance and review. No images have been generated here.
-3. App-window recordings of the selected production source: Home, Details/Watch, uninterrupted McWay playback, leave/return/Resume, and Playback Proof. Include raw-take hashes, source/package identity, capture scope and edit ledger. Exclude PIN entry, desktop, microphone and Retry harness UI. The current plan targets application source 12125b2970342b5376b0bc7964383e547b407376; a different selected source requires reconciling the plan and evidence first.
+3. App-window recordings of the selected production source: Home, Details/Watch, uninterrupted McWay playback, leave/return/Resume, and Playback Proof. Include raw-take hashes, source/package identity, capture scope and edit ledger. Exclude PIN entry, desktop, microphone and Retry harness UI. The historical template still names application source 12125b2970342b5376b0bc7964383e547b407376. It is not the current product selection. The [current missing-input inventory](../../../results/overnight-2026-10-25/demo/missing-inputs.json) leaves selection open until the accepted build is identified.
 4. A usable ElevenLabs secure binding and an available built-in voice, selected after product acceptance. The owner approved the exact current script, authorized selection of a calm built-in voice and explicitly authorized an unlimited budget. No further budget approval is pending. Keep generation to the eight planned cues with no automatic retries. Reapprove the script only if product reconciliation changes its text. No voice ID has been selected and no paid generation has occurred.
 
 The [older replacement demo receipt](../../../results/replacement-demo-2026-10-22/demo.json) identifies source d96c088 and an MP4 outside Git. It cannot demonstrate current recovery/profile work. Preserve that file and the submitted baseline video. The existing native screenshots in the inventory are planning references, not substitutes for missing motion footage.
@@ -33,7 +40,21 @@ For native takes, also supply the selected installed package hash and a hashed J
 
 The output directory must be new and outside the repository. The script writes a review MP4, measured-cue SRT and exact-input/output receipt. It does not publish, install, sign, change prepared media or call ElevenLabs. It preserves natural-speed footage and letterboxes instead of cropping controls. Illustrations stay still; there are no zooms, loops, flashing transitions or added music.
 
-Preflight and refusal behavior were exercised with metadata/text fixtures. The real encoding path has not run because its assets and approvals are missing. No MP4, audio, output checksum or human acceptance is claimed from these checks.
+The actual encoding path has now run with an explicitly labelled static test
+card and digital silence, outside Git. Full decode and the existing video gate
+passed for that synthetic artifact. This verifies tooling only. No current-source
+product video, spoken narration, illustrations or human acceptance is claimed.
+The renderer snapshots hash-checked input bytes before encoding, preserves the
+ambient audio gain and closing-credit hold, and records the selected package,
+capture-receipt hashes and edit ledger in the output receipt.
+
+To repeat the bounded synthetic tool check, use a new directory outside Git:
+
+    python3 docs/cloud-integration-2026-10-23/demo/render_smoke_test.py \
+      --outdir /absolute/path/to/new-TEST_ONLY-output
+
+This creates no speech or app capture and never opens a player. Its manifest is
+deliberately refused by the normal production renderer.
 
 Captions are a sidecar, not burned-in text. Required story/source labels and closing credits are included in that sidecar. Verify the intended player's subtitle display or arrange a separately reviewed burned-in pass. Do not claim captions are visible merely because the file exists.
 

@@ -1,0 +1,253 @@
+{
+  "recorded_utc": "2026-10-25T07:32:56.628550+00:00",
+  "source_reviewed": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "selected_product_for_demo": null,
+  "reason": "The product remains under local integration and human acceptance. Reconcile the unchanged approved narration against the selected final source before media production.",
+  "last_received_mac_candidate": {
+    "code_commit": "a672f57d333dc0e3fada51b3175ca1711d1f9397",
+    "handoff_commit": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+    "package_sha256_reported": "8cc0ffd52fc61df17d8b69b40c31964c5ed0749c578ec1de67e1aedf78173dd8",
+    "native_binary_bytes_received": false,
+    "human_acceptance": "pending"
+  },
+  "approved_script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "assets": [
+    {
+      "id": "manga_01",
+      "kind": "illustration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "required_provenance": "Original illustration asset with actual generation/license record and owner review; never a substitute for native UI"
+    },
+    {
+      "id": "n01",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 12,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "native_home",
+      "kind": "native_video",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "minimum_selected_interval_seconds": 10,
+      "required_capture_scope": "app_window_and_app_audio_only",
+      "required_metadata": [
+        "source_commit",
+        "package_sha256",
+        "raw_take_sha256",
+        "capture_scope",
+        "production_capture"
+      ],
+      "require_original_capture_receipt": true,
+      "native_timing_or_comfort_acceptance_inferred": false
+    },
+    {
+      "id": "n02",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 10,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "native_details",
+      "kind": "native_video",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "minimum_selected_interval_seconds": 12,
+      "required_capture_scope": "app_window_and_app_audio_only",
+      "required_metadata": [
+        "source_commit",
+        "package_sha256",
+        "raw_take_sha256",
+        "capture_scope",
+        "production_capture"
+      ],
+      "require_original_capture_receipt": true,
+      "native_timing_or_comfort_acceptance_inferred": false
+    },
+    {
+      "id": "n03",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 12,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "manga_02",
+      "kind": "illustration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "required_provenance": "Original illustration asset with actual generation/license record and owner review; never a substitute for native UI"
+    },
+    {
+      "id": "n04",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 11,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "native_ambient",
+      "kind": "native_video",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "minimum_selected_interval_seconds": 70,
+      "required_capture_scope": "app_window_and_app_audio_only",
+      "required_metadata": [
+        "source_commit",
+        "package_sha256",
+        "raw_take_sha256",
+        "capture_scope",
+        "production_capture"
+      ],
+      "require_original_capture_receipt": true,
+      "native_timing_or_comfort_acceptance_inferred": false
+    },
+    {
+      "id": "manga_03",
+      "kind": "illustration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "required_provenance": "Original illustration asset with actual generation/license record and owner review; never a substitute for native UI"
+    },
+    {
+      "id": "n05",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 10,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "native_return",
+      "kind": "native_video",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "minimum_selected_interval_seconds": 20,
+      "required_capture_scope": "app_window_and_app_audio_only",
+      "required_metadata": [
+        "source_commit",
+        "package_sha256",
+        "raw_take_sha256",
+        "capture_scope",
+        "production_capture"
+      ],
+      "require_original_capture_receipt": true,
+      "native_timing_or_comfort_acceptance_inferred": false
+    },
+    {
+      "id": "n06",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 20,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "manga_04",
+      "kind": "illustration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "required_provenance": "Original illustration asset with actual generation/license record and owner review; never a substitute for native UI"
+    },
+    {
+      "id": "n07",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 10,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "native_proof",
+      "kind": "native_video",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "minimum_selected_interval_seconds": 9,
+      "required_capture_scope": "app_window_and_app_audio_only",
+      "required_metadata": [
+        "source_commit",
+        "package_sha256",
+        "raw_take_sha256",
+        "capture_scope",
+        "production_capture"
+      ],
+      "require_original_capture_receipt": true,
+      "native_timing_or_comfort_acceptance_inferred": false
+    },
+    {
+      "id": "n08",
+      "kind": "narration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "maximum_cue_window_seconds": 9,
+      "script_changes_approved": false,
+      "existing_unchanged_script_approved": true,
+      "voice_selection": "calm built-in voice already authorized; exact ID not yet selected",
+      "paid_generation": "parked until accepted-product reconciliation and secure access",
+      "no_automatic_paid_retries": true
+    },
+    {
+      "id": "manga_05",
+      "kind": "illustration",
+      "status": "not_received",
+      "required_for_selected_product_demo": true,
+      "required_provenance": "Original illustration asset with actual generation/license record and owner review; never a substitute for native UI"
+    }
+  ],
+  "missing_evidence_attachments": [
+    {
+      "filename": "calm-frames-acceptance-evidence-a672f57-2026-10-24.zip",
+      "bytes": 12111203,
+      "sha256": "bb7c423899d1671746dbb24aac79c26761d4be44c5875e7f9ebe02eba61cee34",
+      "status": "Named in user handoff; local bytes not supplied; contents and suitability not inferred"
+    },
+    {
+      "filename": "calm-frames-integration-evidence-2026-10-24.zip",
+      "bytes": 5739813,
+      "sha256": "ac3b3e92391297ee5cbf10b6714344660a9b20b0ad4ae1d208e2509dfacc0207",
+      "status": "Named in user handoff; local bytes not supplied; contents and suitability not inferred"
+    }
+  ],
+  "human_queue": [
+    "Select the accepted product source/package after machine fixes and native checks.",
+    "Review actual picture/audio/palette/comfort, including the pending onboarding disclaimer layout.",
+    "Review actual narration pronunciation and speech/app-audio mix after generation.",
+    "Watch the complete actual replacement cut at natural speed and check subtitle display.",
+    "Decide any permitted publication separately; frozen submission remains unchanged."
+  ]
+}

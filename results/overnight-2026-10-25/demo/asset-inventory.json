@@ -1,0 +1,243 @@
+{
+  "created_utc": "2026-10-25T07:28:55.384833+00:00",
+  "source_inspected": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "repository_media_files": [
+    {
+      "path": "app/assets/raw/benign-story/harbor.mp4",
+      "bytes": 4538880,
+      "sha256": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/benign-story/harbor.precovered.mp4",
+      "bytes": 2116155,
+      "sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/offline/calm_gradient.mp4",
+      "bytes": 119567,
+      "sha256": "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4",
+      "bytes": 6004594,
+      "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
+      "bytes": 5834837,
+      "sha256": "8aa6b3566e325b2b89863b221ce2b428ed7ba1ff5abf4cdc41a80ec415121e63",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
+      "bytes": 6004594,
+      "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/broadcast.mp4",
+      "bytes": 216765,
+      "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/extra-cautious.mp4",
+      "bytes": 216765,
+      "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.mp4",
+      "bytes": 216765,
+      "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.mp4",
+      "bytes": 2577605,
+      "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.mp4",
+      "bytes": 2577605,
+      "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.mp4",
+      "bytes": 2577605,
+      "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/broadcast.mp4",
+      "bytes": 2498811,
+      "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/extra-cautious.mp4",
+      "bytes": 2498811,
+      "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.mp4",
+      "bytes": 2498811,
+      "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/broadcast.mp4",
+      "bytes": 21959584,
+      "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4",
+      "bytes": 21959584,
+      "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/wcag.mp4",
+      "bytes": 21959584,
+      "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.mp4",
+      "bytes": 9722393,
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.mp4",
+      "bytes": 9722393,
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.mp4",
+      "bytes": 9722393,
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "kind": "packaged_app_content_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/sound/calm-chime.mp3",
+      "bytes": 16941,
+      "sha256": "d18605cf4864598c7d5e752cc801bc90557d3e3fba5d03d42e4216580b1b6b5e",
+      "kind": "packaged_menu_sound_not_narration",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "app/assets/raw/sound/menu-select.mp3",
+      "bytes": 2708,
+      "sha256": "38e2663df732562de2876fe40d3fd64f2fc9aa3ac52d745b956a88e5af2c7ab0",
+      "kind": "packaged_menu_sound_not_narration",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "docs/design/arrival/opening-browser.mp4",
+      "bytes": 726931,
+      "sha256": "9a72f457d0a13b7ce7ae1b34482002314697d718755d6a171b6fd59f02990ca7",
+      "kind": "browser_approximation_not_native_capture",
+      "eligible_for_current_native_demo_slot": false
+    },
+    {
+      "path": "flashmap/tests/fixtures/calm_sweep.mp4",
+      "bytes": 2733,
+      "sha256": "3bbba6573870746dbe9cbe1758c320ef8f89063aa7c853625214fb9c9429394c",
+      "kind": "repository_test_fixture_not_demo_input",
+      "eligible_for_current_native_demo_slot": false
+    }
+  ],
+  "shared_workspace_non_fixture_media_files": [],
+  "verified_historical_native_references": [
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/37-polish-picker.png",
+      "bytes": 256366,
+      "sha256": "39356b75d9a33034894ace30b4634f27f0e2756407d5a7812d1ec35aa8e69d2f",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true,
+      "bytes_rehashed_here": 256366,
+      "sha256_rehashed_here": "39356b75d9a33034894ace30b4634f27f0e2756407d5a7812d1ec35aa8e69d2f",
+      "hash_matches": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/38-polish-selected.png",
+      "bytes": 535449,
+      "sha256": "f227ae747d44691ae0e04cd11de51db268386edacb555e35a7c81835d76321b4",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true,
+      "bytes_rehashed_here": 535449,
+      "sha256_rehashed_here": "f227ae747d44691ae0e04cd11de51db268386edacb555e35a7c81835d76321b4",
+      "hash_matches": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/40-polish-details.png",
+      "bytes": 476776,
+      "sha256": "f85b31d3f142d15149bccf07b07bbc20991f76ed829cb95f117e2bfa11baba5f",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true,
+      "bytes_rehashed_here": 476776,
+      "sha256_rehashed_here": "f85b31d3f142d15149bccf07b07bbc20991f76ed829cb95f117e2bfa11baba5f",
+      "hash_matches": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/17-kid2-resume.png",
+      "bytes": 259457,
+      "sha256": "7234d03696329e033ec090abe76aaa63cfbcee94090835e64dd9ef040b33350d",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+      "not_current_source_capture": true,
+      "bytes_rehashed_here": 259457,
+      "sha256_rehashed_here": "7234d03696329e033ec090abe76aaa63cfbcee94090835e64dd9ef040b33350d",
+      "hash_matches": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/22-kid-isolated.png",
+      "bytes": 259455,
+      "sha256": "0908a2bd2694ce22d076eb45559b97c16ba783c25c4dd2f4b13c2f3ba78e15c6",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+      "not_current_source_capture": true,
+      "bytes_rehashed_here": 259455,
+      "sha256_rehashed_here": "0908a2bd2694ce22d076eb45559b97c16ba783c25c4dd2f4b13c2f3ba78e15c6",
+      "hash_matches": true
+    }
+  ],
+  "eligible_current_native_takes": [],
+  "narration_audio": [],
+  "illustrations": [],
+  "scope": "Read actual local file bytes and recorded reference hashes. Repository content and browser approximations are not native app-window recordings. No file was played. Generated synthetic smoke media is excluded from this production inventory."
+}
