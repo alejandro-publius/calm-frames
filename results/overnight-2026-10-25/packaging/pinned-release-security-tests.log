@@ -1,0 +1,34 @@
+F............                                                            [100%]
+=================================== FAILURES ===================================
+_ test_digest_exception_requires_exact_field_and_verified_value[app/src/calmframes/PinKeypad.tsx-True-0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-14/test_digest_exception_requires0')
+field = 'app/src/calmframes/PinKeypad.tsx', known_digest = True, expected = 0
+
+    @pytest.mark.skipif(not GITLEAKS, reason="gitleaks is checked by the separate security job")
+    @pytest.mark.parametrize("field,known_digest,expected", [
+        ("app/src/calmframes/PinKeypad.tsx", True, 0),
+        ("app/src/calmframes/PinKeypad.tsx", False, 1),
+        ("api_key", False, 1),
+    ])
+    def test_digest_exception_requires_exact_field_and_verified_value(tmp_path, field, known_digest, expected):
+        import json
+
+        target = tmp_path / "results/test/app-inputs.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Synthetic detector bait only, derived locally and never a real credential.
+        value = hashlib.sha256(b"calm-frames generated secret-scan negative fixture").hexdigest()
+        if known_digest:
+            value = hashlib.sha256((REPO / field).read_bytes()).hexdigest()
+        target.write_text(json.dumps({field: value}, indent=2) + "\n")
+        result = subprocess.run([GITLEAKS, "dir", str(tmp_path), "--config", str(REPO / ".gitleaks.toml"),
+                                 "--redact", "--no-banner"], capture_output=True, text=True, check=False)
+>       assert result.returncode == expected, "unexpected scanner result (values intentionally omitted)"
+E       AssertionError: unexpected scanner result (values intentionally omitted)
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/workspace/shared/calm-frames-dependency-wave2/gitleaks', 'dir', '/tmp/pytest-of-agent/pytest-...'], returncode=1, stdout='', stderr='7:32AM INF scanned ~109 bytes (109 bytes) in 22.1ms\n7:32AM WRN leaks found: 1\n').returncode
+
+eval/tests/test_secret_scan_manifest.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED eval/tests/test_secret_scan_manifest.py::test_digest_exception_requires_exact_field_and_verified_value[app/src/calmframes/PinKeypad.tsx-True-0]
+1 failed, 12 passed in 3.77s
