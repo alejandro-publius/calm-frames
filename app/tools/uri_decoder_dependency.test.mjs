@@ -9,16 +9,24 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const require = createRequire(join(app, 'package.json'));
 const queryRequire = createRequire(require.resolve('query-string'));
-const mapRequire = createRequire(require.resolve('source-map-resolve'));
+const lock = JSON.parse(readFileSync(join(app, 'package-lock.json')));
+// The retired glob tree used source-map-resolve. Do not fall through to a
+// tool host's NODE_PATH copy when that consumer is absent from this app.
+const mapNode = Object.keys(lock.packages).find(path => path.endsWith('node_modules/source-map-resolve'));
+const mapRequire = mapNode ? createRequire(join(app, mapNode, 'package.json')) : null;
 const query = require('query-string');
 const decoder = queryRequire('decode-uri-component');
 
-test('both existing consumers use the callable adapter and only the pinned fixed parser', () => {
+test('every declared decoder consumer uses the callable adapter and only the pinned fixed parser', () => {
   assert.equal(require('query-string/package.json').version, '7.1.3');
-  assert.equal(require('source-map-resolve/package.json').version, '0.5.3');
   assert.equal(typeof decoder, 'function');
-  assert.equal(decoder, mapRequire('decode-uri-component'));
-  const lock = JSON.parse(readFileSync(join(app, 'package-lock.json')));
+  const consumers = Object.entries(lock.packages).filter(([, entry]) => entry.dependencies?.['decode-uri-component']);
+  assert.ok(consumers.some(([path]) => path === 'node_modules/query-string'));
+  for (const [path] of consumers) {
+    const consumer = createRequire(join(app, path, 'package.json'));
+    assert.ok(consumer.resolve('decode-uri-component').startsWith(app + '/'), 'consumer must stay in this checkout');
+    assert.equal(consumer('decode-uri-component'), decoder, path);
+  }
   const parsers = Object.entries(lock.packages).filter(([path, entry]) =>
     path.includes('node_modules/decode-uri-component') && !entry.link);
   assert.equal(parsers.length, 1);
@@ -60,11 +68,17 @@ test('malformed percent input completes inside a bounded child process', () => {
   assert.equal(result.stdout.trim(), 'completed');
 });
 
-test('actual source-map consumer preserves a plus in a source URL and reads inline maps', () => {
-  const decodeSource = require('source-map-resolve/lib/decode-uri-component');
+test('source-map consumer is either retired with its graph or retains URL and inline-map behavior', () => {
+  if (!mapRequire) {
+    assert.ok(Object.values(lock.packages).every(entry => !entry.dependencies?.['source-map-resolve']),
+      'a declared source-map consumer must have a local locked installation');
+    return;
+  }
+  assert.equal(mapRequire('./package.json').version, '0.5.3');
+  const decodeSource = mapRequire('./lib/decode-uri-component');
   assert.equal(decodeSource('file:///a+b%20c.js'), 'file:///a+b c.js');
   const map = { version: 3, sources: ['a+b.ts'], names: [], mappings: '' };
-  const result = require('source-map-resolve').resolveSourceMapSync(
+  const result = mapRequire('./').resolveSourceMapSync(
     '//# sourceMappingURL=data:application/json,' + encodeURIComponent(JSON.stringify(map)),
     '/fixture/app.js', () => { throw new Error('No filesystem read expected'); },
   );
