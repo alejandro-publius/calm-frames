@@ -118,7 +118,7 @@ def main() -> int:
     if missing:
         for asset in missing:
             print(f"missing: {asset.relative_to(REPO)}", file=sys.stderr)
-        print("Run app/assets/brand/render.sh.", file=sys.stderr)
+        print("Run app/tools/brand/render.sh.", file=sys.stderr)
         return 2
 
     findings: list[dict[str, object]] = []

@@ -31,7 +31,10 @@ third-party attribution.
 
 Regenerate it from the repository root with:
 
-    python3 app/assets/raw/sound/generate_menu_select.py
+    python3 app/tools/sound/generate_menu_select.py
+
+The generator stays outside the packaged asset tree. It writes the same
+`app/assets/raw/sound/menu-select.mp3` path regardless of the working directory.
 
 The source is a short, softly attacked 560 Hz tone with a quiet octave partial.
 It confirms an accepted menu selection only when Selection sounds is enabled. It is

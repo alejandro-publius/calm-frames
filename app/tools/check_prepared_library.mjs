@@ -18,10 +18,40 @@ const PRESETS = ['wcag', 'broadcast', 'extra-cautious'];
 const CORE_CHECKS = ['map_hash', 'map_signature', 'plan_matches_map', 'safe_rendition_clean',
   'rendition_matches_source', 'cover_proof', 'cover_model_clean', 'hls_rendition_clean', 'hls_timing_matches_master'];
 const OUTCOMES = ['no flagged segments', 'cover proven drawn', 'cover not proven'];
+// These are developer inputs, never runtime artwork, audio or prepared catalogs.
+const BUILD_SOURCE = /\.(?:py|pyc|pyo|pyw|sh|bash|zsh|c|cc|cpp|cxx|h|hpp)$/i;
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
 function requireThat(value, message) {
   if (!value) throw new Error(message);
+}
+
+export function checkRuntimeAssetNames(names) {
+  for (const name of names) {
+    const canonical = path.posix.normalize('/' + name).slice(1);
+    requireThat(!canonical.startsWith('assets/') || !BUILD_SOURCE.test(canonical),
+      `Build-only source must not ship in assets: ${name}`);
+  }
+}
+
+/** Check asset paths without executing generators or reading media bytes. */
+export function checkRuntimeAssetDirectory(root = path.join(APP, 'assets')) {
+  requireThat(fs.realpathSync(root) === path.resolve(root), 'Asset root must not be a symlink.');
+  const names = [];
+  const walk = (directory, prefix) => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const name = prefix + entry.name;
+      requireThat(!entry.isSymbolicLink(), 'Runtime assets must not be symlinks.');
+      if (entry.isDirectory()) walk(path.join(directory, entry.name), name + '/');
+      else {
+        requireThat(entry.isFile(), 'Runtime assets must be regular files.');
+        names.push(name);
+      }
+    }
+  };
+  walk(root, 'assets/');
+  checkRuntimeAssetNames(names);
+  return { files: names.length, build_sources: 'excluded' };
 }
 
 function record(value) {
@@ -235,6 +265,7 @@ export function checkPreparedPackage(packagePath, expectedCatalogSha256, options
   const members = listing.split('\n').filter(Boolean);
   const details = verbose.split('\n').filter(Boolean);
   requireThat(members.length === details.length, 'Ambiguous prepared archive listing.');
+  checkRuntimeAssetNames(members.filter((_, index) => details[index][0] !== 'd'));
   const names = [];
   for (const [index, member] of members.entries()) {
     const canonical = path.posix.normalize('/' + member).slice(1).replace(/\/$/, '');
@@ -260,6 +291,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const strict = { requireReports: args.includes('--require-reports') };
     const options = args.filter((arg) => arg !== '--require-reports');
     requireThat(options.length === 0 || options[0] === '--packages', 'Choose --packages and/or --require-reports.');
+    const runtimeAssets = checkRuntimeAssetDirectory();
     const result = checkPreparedDirectory(undefined, strict);
     const approved = checkApprovedCatalogs(APP);
     result.approvedBundles = approved.map(entry => entry.bundleId);
@@ -277,7 +309,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
         checkPreparedPackage(path.join(APP, `build/${arch}-${kind}/calm-frames-app_${arch}.vpkg`), result.catalogSha256, strict);
       }
     }
-    console.log(JSON.stringify({ prepared_library: 'checked', ...result }));
+    console.log(JSON.stringify({ prepared_library: 'checked', runtime_assets: runtimeAssets, ...result }));
   } catch (error) {
     console.error(`Prepared library check failed: ${error.message}`);
     process.exitCode = 1;

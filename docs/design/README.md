@@ -554,7 +554,7 @@ The test reads `CALM_COLORS`, `CALM_TEXT`,
 `tokens.json` to them. It recomputes every ratio in the two contrast tables
 and in `tokens.json`, and fails on any text pair under 4.5 to 1 or ring pair
 under 3 to 1. It also checks that the logo's colours in
-`app/assets/brand/make_logo.py` are palette colours, and that the logo table
+`app/tools/brand/make_logo.py` are palette colours, and that the logo table
 on the brand page names the right token for each. Three negative controls in
 the same file feed its comparisons an altered palette, ratio and pair, and
 expect a complaint every time.

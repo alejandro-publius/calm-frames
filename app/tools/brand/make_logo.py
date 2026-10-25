@@ -1,4 +1,7 @@
 # Calm Frames mark: a peaceful monk and one open halo inside a rounded frame.
+from pathlib import Path
+
+OUTPUT = Path(__file__).resolve().parents[2] / "assets" / "brand"
 TEAL="#102F3A"; CREAM="#F3E8D3"; SAFF="#E6A957"; SAFFD="#B87A2C"; INK="#17323C"
 # Oct 14: a restrained warm-sand inset border on the icon and the tile, about
 # one percent of the height in from every edge, concentric with the frame's
@@ -73,5 +76,5 @@ def tile():
 T = tile()
 
 for name, svg in [("calm-frames-mark-bust.svg", B), ("calm-frames-mark-head.svg", C), ("calm-frames-tile-1280x720.svg", T)]:
-    open(name, "w").write(svg)
+    (OUTPUT / name).write_text(svg)
 print("written")

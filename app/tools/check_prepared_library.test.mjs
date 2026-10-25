@@ -5,7 +5,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
-import { checkPreparedDirectory, checkPreparedNamespace, checkPreparedPackage } from './check_prepared_library.mjs';
+import { checkPreparedDirectory, checkPreparedNamespace, checkPreparedPackage,
+  checkRuntimeAssetDirectory, checkRuntimeAssetNames } from './check_prepared_library.mjs';
 
 const root = fileURLToPath(new URL('../assets/raw/prepared-library/', import.meta.url));
 const fixture = new Map();
@@ -18,6 +19,36 @@ function read(directory, prefix = '') {
 }
 read(root);
 const check = (files) => checkPreparedNamespace([...files.keys()], (name) => files.get(name));
+
+test('runtime assets contain no Python, shell or C/C++ build sources', () => {
+  const result = checkRuntimeAssetDirectory();
+  assert.equal(result.build_sources, 'excluded');
+  assert.ok(result.files > 0);
+});
+
+test('asset source exclusions retain generated catalogs and reject aliased build paths', () => {
+  assert.doesNotThrow(() => checkRuntimeAssetNames([
+    'assets/raw/prepared-library/catalog.ts', 'assets/image/CalmFrames.png',
+    'assets/raw/sound/menu-select.mp3', 'lib/aarch64/runtime.so',
+  ]));
+  for (const name of ['assets/brand/../tools/build.PY', '/assets/brand/render.sh',
+    'assets/brand/render_qt.cpp', './assets/raw/sound/generate_menu_select.py']) {
+    assert.throws(() => checkRuntimeAssetNames([name]), /Build-only source/);
+  }
+});
+
+test('runtime asset source check cannot be bypassed through a linked directory', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'calm-linked-assets-'));
+  try {
+    fs.mkdirSync(path.join(directory, 'assets'));
+    fs.mkdirSync(path.join(directory, 'tools'));
+    fs.writeFileSync(path.join(directory, 'tools/build.py'), '# build source');
+    fs.symlinkSync('../tools', path.join(directory, 'assets/linked'));
+    assert.throws(() => checkRuntimeAssetDirectory(path.join(directory, 'assets')), /symlinks/);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
 
 test('checks the actual generated library and exact byte total', () => {
   assert.equal(check(fixture).titles, 1);
@@ -230,6 +261,26 @@ test('rejects alternate archive paths and link members before reading any prepar
     }
     fs.writeFileSync(archive, tar([...entries, { name: 'assets/raw', kind: '2', link: 'elsewhere' }]));
     assert.throws(() => checkPreparedPackage(archive), /regular files/);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+test('refuses build scripts outside the prepared namespace in a native package', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'calm-build-assets-'));
+  const archive = path.join(directory, 'package.vpkg');
+  const entries = [...fixture.entries()].map(([name, bytes]) => ({ name: 'assets/raw/prepared-library/' + name, bytes }));
+  try {
+    for (const name of [
+      'assets/brand/make_logo.py',
+      'assets/brand/render.sh',
+      'assets/brand/render_qt.cpp',
+      'assets/raw/sound/generate_menu_select.py',
+      './assets/tools/build.PY',
+    ]) {
+      fs.writeFileSync(archive, tar([...entries, { name, bytes: Buffer.from('build tool, not runtime media') }]));
+      assert.throws(() => checkPreparedPackage(archive), /Build-only source must not ship in assets/, name);
+    }
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }

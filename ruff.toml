@@ -66,8 +66,8 @@ extend-immutable-calls = [
 # The app lane's asset generators. results/redesign_validation_2026-10-10.json
 # and results/interface_finish_2026-10-10_pacific.json record their bytes as the
 # source of the shipped icon, tile and menu sound.
-"app/assets/brand/make_logo.py" = ["E702", "I001"]
-"app/assets/raw/sound/generate_menu_select.py" = ["I001"]
+"app/tools/brand/make_logo.py" = ["E702", "I001"]
+"app/tools/sound/generate_menu_select.py" = ["I001"]
 # pytest fixtures imported by name from a shared module and then taken as test
 # parameters, which pyflakes reads as a redefinition of the import.
 "eval/property_scheduler_test.py" = ["F811"]

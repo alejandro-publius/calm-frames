@@ -18,7 +18,8 @@
 # transparency. The icons keep their alpha: the mark is a rounded square and
 # the corners have to be see through.
 set -e
-cd "$(dirname "$0")"
+CALM_BRAND_TOOLS="$(cd "$(dirname "$0")" && pwd)"
+cd "$CALM_BRAND_TOOLS/../../assets/brand"
 
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 QT_RENDERER=""
@@ -26,7 +27,7 @@ if command -v pkg-config >/dev/null && pkg-config --exists Qt6Svg; then
   mkdir -p ../../../build/brand
   QT_RENDERER="$(cd ../../../build/brand && pwd)/render-svg"
   c++ -std=c++17 -fPIC -isystem "$(xcrun --show-sdk-path)/usr/include/c++/v1" \
-    render_qt.cpp $(pkg-config --cflags --libs Qt6Svg) -o "$QT_RENDERER"
+    "$CALM_BRAND_TOOLS/render_qt.cpp" $(pkg-config --cflags --libs Qt6Svg) -o "$QT_RENDERER"
 elif [ ! -x "$CHROME" ]; then
   echo "Google Chrome is not at $CHROME. Install it, or render the SVGs some other way." >&2
   exit 2

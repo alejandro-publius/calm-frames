@@ -55,7 +55,7 @@ REPO = Path(__file__).resolve().parents[2]
 STYLES = REPO / "app/src/calmframes/calmStyles.ts"
 PAGE = REPO / "docs/design/README.md"
 TOKENS = REPO / "docs/design/tokens.json"
-LOGO = REPO / "app/assets/brand/make_logo.py"
+LOGO = REPO / "app/tools/brand/make_logo.py"
 BRAND = REPO / "docs/brand/README.md"
 
 # The floors the brief and calmStyles.ts set. The code's own constants are

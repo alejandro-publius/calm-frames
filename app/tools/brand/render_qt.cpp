@@ -1,5 +1,6 @@
 // Render the repository's SVG artwork with the installed Qt SVG engine.
 // No browser, screen capture or network is involved.
+// Build-only source stays outside app/assets, which the native package ships.
 #include <QGuiApplication>
 #include <QImage>
 #include <QPainter>

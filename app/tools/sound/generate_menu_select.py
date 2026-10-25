@@ -26,7 +26,7 @@ def main() -> None:
         '-f', 's16le', '-ar', str(sample_rate), '-ac', '1', '-i', 'pipe:0',
         '-map_metadata', '-1', '-fflags', '+bitexact', '-flags:a', '+bitexact',
         '-c:a', 'libmp3lame', '-b:a', '128k',
-        str(Path(__file__).with_name('menu-select.mp3')),
+        str(Path(__file__).resolve().parents[2] / 'assets' / 'raw' / 'sound' / 'menu-select.mp3'),
     ], input=samples, check=True)
 
 

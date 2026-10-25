@@ -21,13 +21,16 @@ The previous renders are in Git history before this change.
 
 ## Making the files
 
-    cd app/assets/brand
-    ../../../.venv/bin/python make_logo.py   # writes the three SVGs
-    ./render.sh                              # writes every PNG
+From the repository root:
+
+    .venv/bin/python app/tools/brand/make_logo.py   # writes the three SVGs
+    app/tools/brand/render.sh                      # writes every PNG
 
 `make_logo.py` draws the three SVGs. `render.sh` renders them at the requested
 sizes using the installed Qt SVG engine, with headless Chrome as a fallback.
 `render_qt.cpp` is the small native renderer, compiled under `build/brand`.
+The generators live in `app/tools/brand`; generated SVGs remain in
+`app/assets/brand`. Only runtime assets belong in the packaged asset tree.
 The Qt route needs the macOS command line tools and `pkg-config Qt6Svg`.
 No new renderer was downloaded for the October 9 refresh.
 
@@ -172,7 +175,7 @@ which lists every `CALM_COLORS` entry in `app/src/calmframes/calmStyles.ts`
 with its use, and the pairs that carry text with their contrast ratios. This
 section keeps only what is particular to the mark.
 
-The five original colours at the top of `app/assets/brand/make_logo.py` are
+The five original colours at the top of `app/tools/brand/make_logo.py` are
 app tokens, and `eval/tests/test_design_page.py` fails if one of them stops
 being a palette colour or if any colour beyond the sixth appears. The sixth,
 `SAND`, is the inset border Alex asked for on Oct 14; it is artwork only and
