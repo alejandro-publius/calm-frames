@@ -1,0 +1,23 @@
+{
+  "checked_utc": "2026-10-25T20:40:34.523621+00:00",
+  "sources": [
+    {
+      "source": "nps_usage",
+      "url": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "status": "unavailable",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "forest_source",
+      "url": "https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E",
+      "status": "unavailable",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "source": "otters_source",
+      "url": "https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters",
+      "status": "unavailable",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}

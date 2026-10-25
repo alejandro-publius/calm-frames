@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Reconciled against received native handoff `37d10c2db57fc0868499adc133cff7560600d5cc` for fbe53bf and local fixes through `a6bdb62276dd63603716509e24b2034451b46b44`. The [current checkpoint](CHECKPOINT.md) separates observed native behavior from newer source fixes. These private drafts authorize no release or submission change. The approved eight-cue narration in demo/STORYBOARD.md is unchanged; replacement footage, manga and ElevenLabs narration do not yet exist for the new build.
+Reconciled against received native handoff `37d10c2db57fc0868499adc133cff7560600d5cc` for fbe53bf and local product/toolchain fixes through `09b3c55603ddff50bb068a585980aa188002479e`. The [current checkpoint](CHECKPOINT.md) separates observed native behavior from newer source fixes. These private drafts authorize no release or submission change. The approved eight-cue narration in demo/STORYBOARD.md is unchanged; replacement footage, manga and ElevenLabs narration do not yet exist for the new build.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
@@ -96,7 +96,7 @@ Do not upload this description unchanged: replace the final reviewer-link instru
 ## Screenshot ordering and captions
 
 The current gallery uses the received fbe53bf native review copies, before the
-new defect fixes. Do not label them as captures of a6bdb62. Keep their original
+new defect fixes. Do not label them as captures of the newer cloud source. Keep their original
 repository bytes and retain the [manifest](../../results/native-validation-fbe53bf-2026-10-25/evidence/MANIFEST.json)
 that binds each JPEG to its original capture and transformation.
 
@@ -111,7 +111,7 @@ are native evidence for fbe53bf only. The older Retry harness screenshots remain
 excluded from production presentation. These images are suitable evidence
 references; the replacement demo still needs raw accepted-build app footage,
 not screenshots animated into a purported native walkthrough. See the
-[production input register](../native-fixes-2026-10-25/DEMO_INPUTS.md).
+[production input plan](../cloud-followup-2026-10-25/DEMO_PREPARATION.md).
 
 ## Architecture draft
 

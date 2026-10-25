@@ -1,0 +1,128 @@
+[
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/parsers-before.log",
+    "bytes": 11800,
+    "original_sha256": "f4ec230532e7e3dcfecb8252da9b13af584ab5528066bd4cffccc15f4619eb4d",
+    "retained_sha256": "9fbc0decba971e8c21a0452a7b439169e8cad4878bca1757e959c381348a1e08",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/parsers-final.log",
+    "bytes": 8771,
+    "original_sha256": "77e1a93070b748c6518af609704d6716cf1d624541340777e71218d919cd8714",
+    "retained_sha256": "05d3614b801c7a1b2433435442fb85378134e246726f3207b0371754a058002a",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/parsers-resolved.log",
+    "bytes": 8015,
+    "original_sha256": "5e39651bd7e04b83d552213a400133303d01173bf88fc58d5c87648d2201ad37",
+    "retained_sha256": "5e39651bd7e04b83d552213a400133303d01173bf88fc58d5c87648d2201ad37",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/intake-before.log",
+    "bytes": 14281,
+    "original_sha256": "0011c493afae74ca7aec89f7b069880485506840288eebe64554c994b09b5abf",
+    "retained_sha256": "6738ee59f63c430849d0681c051d286646a5ead52bcdbc3f50ed3dd383498f5b",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/intake-final.log",
+    "bytes": 2520,
+    "original_sha256": "5c74d3322513c05af4fc2818ba4d6fbae418b9d03474a23989ae65ced16acd4d",
+    "retained_sha256": "c08cf7cae3e500451969253880bc361160113ab78acd4618fb854051fc55f5db",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/intake-final-fixed.log",
+    "bytes": 181,
+    "original_sha256": "63fa44bd32d0e7585646edadb15429fb076f68c32a00637ac7832259e12e8d63",
+    "retained_sha256": "63fa44bd32d0e7585646edadb15429fb076f68c32a00637ac7832259e12e8d63",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/intake-time-before.log",
+    "bytes": 3093,
+    "original_sha256": "ddef3dc23f95c09e28c78824a812716a73c8e1194c8a78ee43c1aec63f28604f",
+    "retained_sha256": "994996bcd6dfee94d2e3d25ad0dc879653ec194ac04526984c8361fb71bd877f",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/intake-time-after.log",
+    "bytes": 99,
+    "original_sha256": "97ee62d7e0116c657f0e85a2411754903d5cc1cec528185684c6326235860422",
+    "retained_sha256": "97ee62d7e0116c657f0e85a2411754903d5cc1cec528185684c6326235860422",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/globs-before-bounded.log",
+    "bytes": 6668,
+    "original_sha256": "54ea5b6f948f41afc4d3355987c541d38b7dfccfc9cc215cdf1fcaae525ff9ed",
+    "retained_sha256": "5202b290c9e8e710f8037287cb4d57e10b05d1ca6bb47a49de5bc0c3a08f6619",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/globs-after.log",
+    "bytes": 14567,
+    "original_sha256": "0e92faa7efe5d4ebf6a1654fc475f0ec1f36440c90221f033edfb7a962a96db3",
+    "retained_sha256": "2386474273649785fcc19960d8ee4e1d58cd331d3f64bf9f405c87a41e68bc58",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/globs-pinned.log",
+    "bytes": 8813,
+    "original_sha256": "fdfc0bb93f90cb355159bde1985df9c99273c6c27344eeacacd1ef1bbc6d8c58",
+    "retained_sha256": "fdfc0bb93f90cb355159bde1985df9c99273c6c27344eeacacd1ef1bbc6d8c58",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/node-gates-final.log",
+    "bytes": 44680,
+    "original_sha256": "dcc244a83d2d5d4254a084799ecd8cb1f94885ca7d62d6c70f55288b4f63da75",
+    "retained_sha256": "ecd6dba67723215f5ed627f8c765ebabf18e19084355ad4675ca514083486b93",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/node-gates-resolved.log",
+    "bytes": 35094,
+    "original_sha256": "85a2a1f894fdb6b1fcbf3caa960a0b666798c71236eb06f3cd7a19e0dab6dba6",
+    "retained_sha256": "260ab712abe60d67eb716daf0740bdbe48e833c750382dfc9ccc2bf0c607f83e",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/player-final.log",
+    "bytes": 11075,
+    "original_sha256": "8794a9319fe04f7fe660968814c140dd29d803de94a228fb8fa806c0eaff5edb",
+    "retained_sha256": "26fb6ca3409a4421bd0643d274b77337695b5ba58eccaba6ed07175ab8f90047",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/audit-final.log",
+    "bytes": 399,
+    "original_sha256": "eb078d13fc58bf69c8302b177ae842149ff867a9956c3fe3daa00786e7aaae31",
+    "retained_sha256": "eb078d13fc58bf69c8302b177ae842149ff867a9956c3fe3daa00786e7aaae31",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/sbom-final.log",
+    "bytes": 3880,
+    "original_sha256": "859b56d3b806b2e168e050d9a2a2866017f1bcf3e4717ecc95878b8183547155",
+    "retained_sha256": "bf5be2f41973a7f82b99b73c17f6283f07c036c8bcddbf80f9804eab17060c34",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/python-lint-final.log",
+    "bytes": 19,
+    "original_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "retained_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  },
+  {
+    "path": "results/cloud-followup-2026-10-25/checks/python-types-final.log",
+    "bytes": 44,
+    "original_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "retained_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "sanitization": "ANSI and trailing whitespace removed; cloud checkout/cache paths substituted. No result lines omitted."
+  }
+]

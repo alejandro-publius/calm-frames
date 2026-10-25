@@ -1,3 +1,5 @@
+> Historical 64f792b pass. For the current source, dependency counts, compatible generated inputs and native queue, use the [cloud continuation](../cloud-followup-2026-10-25/README.md). Counts below describe that prior pass.
+
 # Dependency remediation and remaining policy failures
 
 Product source `a6bdb62276dd63603716509e24b2034451b46b44` removes two of the

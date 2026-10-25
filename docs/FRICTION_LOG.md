@@ -1232,3 +1232,21 @@ The app's default route background was a concrete fixable gap. Recorder timing
 alone cannot identify decoder or compositor fault, so those layers and approved
 media remain unchanged. No permission bypass, Mac host fault attribution or
 unverified platform defect is included here.
+
+## 2026-10-25: one damaged local import blocked other caregiver reviews
+
+This is a project intake-store defect, not an Amazon or Mac platform finding.
+Reproduce with fictional local jobs: keep one intact review, truncate another
+job's metadata, then restart and request the job list. Expected: the intact
+review remains usable and the damaged record has a recoverable error. Actual:
+the old store raised while starting or listing every job. Severity: high for
+the affected local workflow. Workaround: preserve the damaged directory outside
+the intake root before restarting; never repair a review hash by guessing.
+
+The correction keeps a non-authorizing unreadable placeholder and permits only
+explicit local removal after an owned worker is stopped. The same real HTTP
+regression exposed a second issue: a saved review appeared ready just before
+its worker exited, so an immediate approval was refused. Severity: moderate
+transient workflow disruption. The corrected finishing state retains ownership
+until actual exit. The [tests and browser evidence](cloud-followup-2026-10-25/IMPORT_RECOVERY.md)
+cover both issues; no host fault or native acceptance is inferred.

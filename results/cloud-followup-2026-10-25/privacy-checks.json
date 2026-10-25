@@ -1,0 +1,7 @@
+{
+  "tool": "gitleaks 8.30.1",
+  "commits_scanned": 5,
+  "committed_new_source_findings": 0,
+  "staged_docs_evidence_findings": 0,
+  "manual_review": "New captures and fixtures are fictional local caregiver data; no PIN/household captures or SDK verbose manifests copied into Git."
+}

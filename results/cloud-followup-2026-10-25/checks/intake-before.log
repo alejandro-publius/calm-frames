@@ -1,0 +1,291 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+__ test_unreadable_record_is_preserved_and_does_not_block_restart[truncated] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_unreadable_record_is_pres0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f75d616a900>
+damage = 'truncated'
+
+    @pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape'])
+    def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        root = tmp_path / 'imports'
+        first = intake.IntakeStore(root)
+        bad_path, bad = ready(first)
+        good_path, good = ready(first)
+        first.close()
+        record = bad_path / 'job.json'
+        if damage == 'missing':
+            record.unlink()
+        elif damage == 'truncated':
+            record.write_text('{"id":')
+        else:
+            record.write_text(json.dumps({'id': bad['id'], 'status': None}))
+        original = record.read_bytes() if record.exists() else None
+        good_before = (good_path / 'job.json').read_bytes()
+        source_before = (bad_path / 'original.mp4').read_bytes()
+>       second = intake.IntakeStore(root)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_intake_corrupt_record.py:28:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:325: in __init__
+    if read_job(path)["status"] in ACTIVE:
+       ^^^^^^^^^^^^^^
+pipeline/local_intake.py:61: in read_job
+    data = json.loads(_file(path / "job.json", path).read_text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.decoder.JSONDecoder object at 0x7f75d6979ee0>, s = '{"id":'
+idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 7 (char 6)
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:356: JSONDecodeError
+___ test_unreadable_record_is_preserved_and_does_not_block_restart[missing] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_unreadable_record_is_pres1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f75d6704cb0>
+damage = 'missing'
+
+    @pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape'])
+    def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        root = tmp_path / 'imports'
+        first = intake.IntakeStore(root)
+        bad_path, bad = ready(first)
+        good_path, good = ready(first)
+        first.close()
+        record = bad_path / 'job.json'
+        if damage == 'missing':
+            record.unlink()
+        elif damage == 'truncated':
+            record.write_text('{"id":')
+        else:
+            record.write_text(json.dumps({'id': bad['id'], 'status': None}))
+        original = record.read_bytes() if record.exists() else None
+        good_before = (good_path / 'job.json').read_bytes()
+        source_before = (bad_path / 'original.mp4').read_bytes()
+>       second = intake.IntakeStore(root)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_intake_corrupt_record.py:28:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:325: in __init__
+    if read_job(path)["status"] in ACTIVE:
+       ^^^^^^^^^^^^^^
+pipeline/local_intake.py:61: in read_job
+    data = json.loads(_file(path / "job.json", path).read_text())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_unreadable_record_is_pres1/imports/a8e6614562d54fa9ac3f5adb40a3e953/job.json')
+root = PosixPath('/tmp/pytest-of-agent/pytest-47/test_unreadable_record_is_pres1/imports/a8e6614562d54fa9ac3f5adb40a3e953')
+
+    def _file(path: Path, root: Path) -> Path:
+        _path_inside(path, root)
+        if not path.is_file() or path.stat().st_nlink != 1:
+>           raise LocalLibraryError("A required artifact is missing or is not an owned regular file.")
+E           pipeline.local_library.LocalLibraryError: A required artifact is missing or is not an owned regular file.
+
+pipeline/local_library.py:95: LocalLibraryError
+_ test_unreadable_record_is_preserved_and_does_not_block_restart[invalid-shape] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_unreadable_record_is_pres2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f75d61da780>
+damage = 'invalid-shape'
+
+    @pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape'])
+    def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        root = tmp_path / 'imports'
+        first = intake.IntakeStore(root)
+        bad_path, bad = ready(first)
+        good_path, good = ready(first)
+        first.close()
+        record = bad_path / 'job.json'
+        if damage == 'missing':
+            record.unlink()
+        elif damage == 'truncated':
+            record.write_text('{"id":')
+        else:
+            record.write_text(json.dumps({'id': bad['id'], 'status': None}))
+        original = record.read_bytes() if record.exists() else None
+        good_before = (good_path / 'job.json').read_bytes()
+        source_before = (bad_path / 'original.mp4').read_bytes()
+        second = intake.IntakeStore(root)
+        try:
+>           jobs = {job['id']: job for job in second.poll()}
+                                              ^^^^^^^^^^^^^
+
+pipeline/tests/test_intake_corrupt_record.py:30:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:361: in poll
+    return sorted(jobs, key=lambda j: j["created_at"], reverse=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+j = {'id': 'bd7a1201b0614837a6a5ddff21287e48', 'status': None}
+
+>   return sorted(jobs, key=lambda j: j["created_at"], reverse=True)
+                                      ^^^^^^^^^^^^^^^
+E   KeyError: 'created_at'
+
+pipeline/local_intake.py:361: KeyError
+___ test_corrupt_record_during_owned_work_can_be_stopped_without_publishing ____
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_corrupt_record_during_own0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f75d61da0f0>
+
+    def test_corrupt_record_during_owned_work_can_be_stopped_without_publishing(tmp_path, monkeypatch):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        store = intake.IntakeStore(tmp_path / 'imports')
+        path, job = ready(store)
+        calls = []
+        class Child:
+            pid = 987654
+            stopped = False
+            def poll(self):
+                return 0 if self.stopped else None
+            def wait(self, timeout=None):
+                self.stopped = True
+                return 0
+        child = Child()
+        monkeypatch.setattr(intake.os, 'killpg', lambda pid, signal: calls.append((pid, signal)))
+        store.children[job['id']] = (child, intake.time.monotonic())
+        (path / 'job.json').write_text('{')
+        try:
+>           assert store.poll()[0]['status'] in intake.ACTIVE
+                   ^^^^^^^^^^^^
+
+pipeline/tests/test_intake_corrupt_record.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:357: in poll
+    read_job(job_dir(self.root, p.name))
+pipeline/local_intake.py:61: in read_job
+    data = json.loads(_file(path / "job.json", path).read_text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.decoder.JSONDecoder object at 0x7f75d6979ee0>, s = '{', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+
+        """
+        try:
+>           obj, end = self.scan_once(s, idx)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+E           json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:354: JSONDecodeError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-47/test_corrupt_record_during_own0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f75d61da0f0>
+
+    def test_corrupt_record_during_owned_work_can_be_stopped_without_publishing(tmp_path, monkeypatch):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        store = intake.IntakeStore(tmp_path / 'imports')
+        path, job = ready(store)
+        calls = []
+        class Child:
+            pid = 987654
+            stopped = False
+            def poll(self):
+                return 0 if self.stopped else None
+            def wait(self, timeout=None):
+                self.stopped = True
+                return 0
+        child = Child()
+        monkeypatch.setattr(intake.os, 'killpg', lambda pid, signal: calls.append((pid, signal)))
+        store.children[job['id']] = (child, intake.time.monotonic())
+        (path / 'job.json').write_text('{')
+        try:
+            assert store.poll()[0]['status'] in intake.ACTIVE
+            with pytest.raises(intake.IntakeError):
+                store.create('other.mp4', b'fixture', 'Other', permission_confirmed=True)
+            with pytest.raises(intake.IntakeError):
+                store.action(job['id'], 'delete')
+            store.action(job['id'], 'cancel')
+            assert calls == [(child.pid, intake.signal.SIGTERM)]
+            assert not store.children
+            assert store.poll()[0]['status'] == 'unreadable'
+            assert (path / 'job.json').read_text() == '{'
+        finally:
+>           store.close()
+
+pipeline/tests/test_intake_corrupt_record.py:81:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:573: in close
+    self.action(job_id, "cancel")
+pipeline/local_intake.py:464: in action
+    self.poll()
+pipeline/local_intake.py:357: in poll
+    read_job(job_dir(self.root, p.name))
+pipeline/local_intake.py:61: in read_job
+    data = json.loads(_file(path / "job.json", path).read_text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:338: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.decoder.JSONDecoder object at 0x7f75d6979ee0>, s = '{', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+
+        """
+        try:
+>           obj, end = self.scan_once(s, idx)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+E           json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py:354: JSONDecodeError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_unreadable_record_is_preserved_and_does_not_block_restart[truncated]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_unreadable_record_is_preserved_and_does_not_block_restart[missing]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_unreadable_record_is_preserved_and_does_not_block_restart[invalid-shape]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_corrupt_record_during_owned_work_can_be_stopped_without_publishing
+4 failed in 0.47s

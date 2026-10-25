@@ -1,0 +1,21 @@
+{
+  "scope": "Local caregiver browser with one fictional damaged record, not native Fire TV",
+  "viewports": [
+    [
+      1100,
+      850
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "visible_error": true,
+  "no_review_or_approval": true,
+  "keyboard_remove": true,
+  "visible_focus": true,
+  "narrow_overflow": false,
+  "reduced_motion_emulated": true,
+  "page_errors": [],
+  "external_requests": []
+}

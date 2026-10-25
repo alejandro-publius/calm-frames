@@ -1,0 +1,153 @@
+{
+  "product_source_commit": "09b3c55603ddff50bb068a585980aa188002479e",
+  "dependency_change_commit": "29173032a71e7a052b6dc71575e4a160df88563a",
+  "base": "64f792b0052142b9d26ba9888b096b9ab498a70a",
+  "branch": "codex/native-defect-fixes-2026-10-25",
+  "checks": {
+    "own_locked_install": {
+      "exit_code": 0,
+      "node": "22.23.2",
+      "npm": "10.9.8",
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "existing_npmrc_retained": true,
+      "log": "checks/globs-pinned.log"
+    },
+    "normal_typecheck_lint": {
+      "exit_code": 0,
+      "commands": [
+        "npm run typecheck",
+        "npm run lint"
+      ],
+      "log": "checks/node-gates-final.log",
+      "note": "These passed before a later Node consumer check in the same command failed. That separate test scope was corrected and all Node checks rerun. Existing lint warnings remain."
+    },
+    "node_and_prepared_media": {
+      "exit_code": 0,
+      "passed": 145,
+      "log": "checks/node-gates-resolved.log",
+      "resolved_failure": "Retired source-map-resolve resolved through tool-host NODE_PATH. Decoder tests now validate all consumers declared by the app lock, never the host fallback."
+    },
+    "intake_delivery": {
+      "exit_code": 0,
+      "passed": 116,
+      "source": "4dea0cedeff562d59898d5f39cf3066d9151fa66",
+      "log": "checks/intake-final-fixed.log"
+    },
+    "final_timestamp_intake_http": {
+      "exit_code": 0,
+      "passed": 54,
+      "source": "09b3c55603ddff50bb068a585980aa188002479e",
+      "log": "checks/intake-time-after.log",
+      "scope": "Corrupt-record, intake and real HTTP tests rerun after the additional oversized-time regression; counts overlap the broader 116-test run."
+    },
+    "python_lint_typecheck": {
+      "exit_code": 0,
+      "mypy_sources": 28,
+      "logs": [
+        "checks/python-lint-final.log",
+        "checks/python-types-final.log"
+      ]
+    },
+    "sdk_manifest": {
+      "exit_code": 0,
+      "receipt": "sdk-manifest-comparison.json"
+    },
+    "browser": {
+      "exit_code": 0,
+      "receipt": "browser/checks.json",
+      "native_fire_tv": false,
+      "images_visually_inspected": true
+    },
+    "normal_player_generation": {
+      "exit_code": 0,
+      "command": "npm run setup:player",
+      "source": "29173032a71e7a052b6dc71575e4a160df88563a",
+      "log": "checks/player-final.log",
+      "archive": "generated-player-archive.json",
+      "native_package": false
+    },
+    "sbom": {
+      "exit_code": 0,
+      "bills_reproduced": 3,
+      "log": "checks/sbom-final.log",
+      "peer_warnings_retained": true
+    },
+    "audit": {
+      "exit_code": 1,
+      "unique_advisories": 5,
+      "high": 3,
+      "moderate": 2,
+      "expired_groups": [
+        "in-the-device-bundle",
+        "not-in-the-device-bundle"
+      ],
+      "exceptions_changed": false,
+      "log": "checks/audit-final.log"
+    },
+    "prior_full_app_tests": {
+      "source_checkpoint": "64f792b0052142b9d26ba9888b096b9ab498a70a",
+      "receipt": "../native-fixes-2026-10-25/validation.json",
+      "rerun": false,
+      "reason": "Native app source unchanged; focused checks target the new dependencies and local intake changes."
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "reason": "Local-only continuation; no push/dispatch."
+    },
+    "native_and_human": {
+      "status": "pending",
+      "historical_native_source": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f"
+    },
+    "documentation": {
+      "exit_code": 0,
+      "published_numbers_checked": 749,
+      "local_links_checked": 330,
+      "broken_links": [],
+      "style": "pass",
+      "generated_restore_helper_ruff": "pass",
+      "git_diff_check": "pass"
+    },
+    "privacy": {
+      "tool": "gitleaks 8.30.1",
+      "commits_scanned": 5,
+      "committed_new_source_findings": 0,
+      "staged_docs_evidence_findings": 0,
+      "manual_review": "New captures and fixtures are fictional local caregiver data; no PIN/household captures or SDK verbose manifests copied into Git."
+    }
+  },
+  "original_checklist": {
+    "completed": [
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ]
+  },
+  "limits": [
+    "No release acceptance",
+    "No new native screenshots or package",
+    "No long ambient editions",
+    "No production demo, narration or manga",
+    "No purchase, publication or submission edit"
+  ]
+}

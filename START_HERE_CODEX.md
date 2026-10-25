@@ -1,3 +1,5 @@
+**Current cloud continuation, October 25:** source/toolchain `09b3c55603ddff50bb068a585980aa188002479e`, continuing from `64f792b`. [Current record](docs/cloud-followup-2026-10-25/README.md) and [single native handoff](docs/cloud-followup-2026-10-25/NATIVE_VERIFICATION.md) supersede the earlier next-action instructions below. Eight more dependency findings are fixed, leaving five; Audit still fails. Local-import record/worker recovery is fixed. The original checklist remains 6 complete, 12 partial, 2 blocked. No new native acceptance, push or publication.
+
 **Current local continuation:** [native fixes, checks and exact-source handoff](docs/native-fixes-2026-10-25/README.md). Product source is `a6bdb62276dd63603716509e24b2034451b46b44`; the export records the final documentation HEAD. The received 37d10c2 handoff below is historical and unchanged in scope. Its original 5/20 tally precedes the presentation reconciliation; use the [current ledger](docs/cloud-integration-2026-10-23/CHECKPOINT.md) for 6/20.
 
 # Start here: native validation of fbe53bf, handed to cloud Codex

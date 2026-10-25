@@ -1,0 +1,62 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_unreadable_record_is_preserved_and_does_not_block_restart[oversized-time] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-51/test_unreadable_record_is_pres0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f3d781239e0>
+damage = 'oversized-time'
+
+    @pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape', 'oversized-time'])
+    def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
+        root = tmp_path / 'imports'
+        first = intake.IntakeStore(root)
+        bad_path, bad = ready(first)
+        good_path, good = ready(first)
+        first.close()
+        record = bad_path / 'job.json'
+        if damage == 'missing':
+            record.unlink()
+        elif damage == 'truncated':
+            record.write_text('{"id":')
+        elif damage == 'oversized-time':
+            record.write_text(json.dumps({**bad, 'created_at': 10 ** 400}))
+        else:
+            record.write_text(json.dumps({'id': bad['id'], 'status': None}))
+        original = record.read_bytes() if record.exists() else None
+        good_before = (good_path / 'job.json').read_bytes()
+        source_before = (bad_path / 'original.mp4').read_bytes()
+>       second = intake.IntakeStore(root)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_intake_corrupt_record.py:31:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/local_intake.py:334: in __init__
+    if self.display_job(path)["status"] in ACTIVE:
+       ^^^^^^^^^^^^^^^^^^^^^^
+pipeline/local_intake.py:346: in display_job
+    job = read_job(path)
+          ^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-agent/pytest-51/test_unreadable_record_is_pres0/imports/5959d517604147d28e9267525ba4f5c2')
+
+    def read_job(path: Path) -> dict:
+        data = json.loads(_file(path / "job.json", path).read_text())
+        if not isinstance(data, dict) or data.get("id") != path.name:
+            raise IntakeError("Import metadata does not match this job.")
+        if (
+            not isinstance(data.get("status"), str)
+            or data["status"] not in ACTIVE | TERMINAL
+            or not isinstance(data.get("title"), str)
+            or not data["title"].strip()
+            or type(data.get("created_at")) not in {int, float}
+>           or not math.isfinite(data["created_at"])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ):
+E       OverflowError: int too large to convert to float
+
+pipeline/local_intake.py:70: OverflowError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_unreadable_record_is_preserved_and_does_not_block_restart[oversized-time]
+1 failed, 5 deselected in 0.28s

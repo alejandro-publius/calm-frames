@@ -1,0 +1,253 @@
+
+up to date in 2s
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm warn deprecated @babel/plugin-proposal-optional-catch-binding@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-catch-binding instead.
+npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm warn deprecated @hapi/bourne@1.3.2: This version has been deprecated and is no longer supported or maintained
+npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated @hapi/topo@3.1.6: This version has been deprecated and is no longer supported or maintained
+npm warn deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated @babel/plugin-proposal-async-generator-functions@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-async-generator-functions instead.
+npm warn deprecated @babel/plugin-proposal-object-rest-spread@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
+npm warn deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm warn deprecated rimraf@2.2.8: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated metro-react-native-babel-preset@0.76.9: Use @react-native/babel-preset instead
+npm warn deprecated metro-react-native-babel-preset@0.54.1: Use @react-native/babel-preset instead
+npm warn deprecated metro-react-native-babel-preset@0.54.1: Use @react-native/babel-preset instead
+npm warn deprecated @hapi/address@2.1.4: Moved to 'npm install @sideway/address'
+npm warn deprecated sane@4.1.0: some dependency vulnerabilities fixed, support for node < 10 dropped, and newer ECMAScript syntax/features added
+npm warn deprecated @hapi/hoek@8.5.1: This version has been deprecated and is no longer supported or maintained
+npm warn deprecated uglify-es@3.3.10: support for ECMAScript is superseded by `uglify-js` as of v3.13.0
+npm warn deprecated @testing-library/jest-native@5.4.3: DEPRECATED: This package is no longer maintained.
+npm warn deprecated Please use the built-in Jest matchers available in @testing-library/react-native v12.4+.
+npm warn deprecated
+npm warn deprecated See migration guide: https://callstack.github.io/react-native-testing-library/docs/migration/jest-matchers
+npm warn deprecated @hapi/joi@15.1.1: Switch to 'npm install joi'
+npm warn deprecated @testing-library/react-native@11.5.4: This version is no longer maintained. Upgrade to @latest (at least v12.4.0).
+npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm warn deprecated core-js@2.6.12: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+npm warn deprecated react-native@0.60.6: Issues and pull requests filed against this version are not supported. See the React Native release support policy to learn more: https://github.com/reactwg/react-native-releases#releases-support-policy
+
+added 1611 packages in 22s
+TAP version 13
+# Subtest: sane malformed-glob processing is bounded and reaches the fixed packages
+not ok 1 - sane malformed-glob processing is bounded and reaches the fixed packages
+  ---
+  duration_ms: 1510.999294
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_glob_dependencies.test.mjs:17:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    glob child exceeded its resource bound
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.start (node:internal/test_runner/test:944:17)
+    +     at startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '--max-old-space-size=64',
+    +     '-e',
+    +     'const match=require("<checkout>/app/node_modules/sane/node_modules/micromatch/index.js");\n' +
+    +       "      for (const input of ['{'.repeat(60000), '{x,'.repeat(12000)]) {\n" +
+    +       '        try { match.braces(input); } catch (e) {\n' +
+    +       '          if (!/length|max|limit/i.test(e.message)) throw e;\n' +
+    +       '        }\n' +
+    +       '      }'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:26:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: legacy types malformed-glob processing is bounded and reaches the fixed packages
+not ok 2 - legacy types malformed-glob processing is bounded and reaches the fixed packages
+  ---
+  duration_ms: 1507.599942
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_glob_dependencies.test.mjs:17:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    glob child exceeded its resource bound
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    +     at Test.postRun (node:internal/test_runner/test:1173:19)
+    +     at Test.run (node:internal/test_runner/test:1101:12)
+    +     at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '--max-old-space-size=64',
+    +     '-e',
+    +     'const match=require("<checkout>/app/node_modules/react-native-tscodegen-types/node_modules/micromatch/index.js");\n' +
+    +       "      for (const input of ['{'.repeat(60000), '{x,'.repeat(12000)]) {\n" +
+    +       '        try { match.braces(input); } catch (e) {\n' +
+    +       '          if (!/length|max|limit/i.test(e.message)) throw e;\n' +
+    +       '        }\n' +
+    +       '      }'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:26:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: legacy anymatch keeps string, regex, callback, negation and returned-index contracts
+ok 3 - legacy anymatch keeps string, regex, callback, negation and returned-index contracts
+  ---
+  duration_ms: 66.684823
+  type: 'test'
+  ...
+# Subtest: the actual sane inclusion filter keeps dotfile, ignore and brace-alternative behavior
+ok 4 - the actual sane inclusion filter keeps dotfile, ignore and brace-alternative behavior
+  ---
+  duration_ms: 8.528488
+  type: 'test'
+  ...
+# Subtest: the legacy watcher observes a matching file while preserving its ignored-file filter
+ok 5 - the legacy watcher observes a matching file while preserving its ignored-file filter
+  ---
+  duration_ms: 115.37817
+  type: 'test'
+  ...
+# Subtest: inspector parser refuses prototype mutation in a separate process
+ok 6 - inspector parser refuses prototype mutation in a separate process
+  ---
+  duration_ms: 39.103922
+  type: 'test'
+  ...
+# Subtest: legacy Metro parser refuses prototype mutation in a separate process
+ok 7 - legacy Metro parser refuses prototype mutation in a separate process
+  ---
+  duration_ms: 35.956036
+  type: 'test'
+  ...
+# Subtest: the actual inspector CLI retains default and explicit numeric ports without opening a server
+ok 8 - the actual inspector CLI retains default and explicit numeric ports without opening a server
+  ---
+  duration_ms: 57.801602
+  type: 'test'
+  ...
+# Subtest: actual Metro build options retain aliases, arrays, boolean negation and numeric coercion
+ok 9 - actual Metro build options retain aliases, arrays, boolean negation and numeric coercion
+  ---
+  duration_ms: 444.082961
+  type: 'test'
+  ...
+# Subtest: old yargs still validates required options and keeps arguments after the delimiter
+ok 10 - old yargs still validates required options and keeps arguments after the delimiter
+  ---
+  duration_ms: 16.16262
+  type: 'test'
+  ...
+# Subtest: the actual SDK manifest reader preserves all declared privileges
+ok 11 - the actual SDK manifest reader preserves all declared privileges
+  ---
+  duration_ms: 36.929978
+  type: 'test'
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+ok 12 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 34.500515
+  type: 'test'
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+ok 13 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 33.960641
+  type: 'test'
+  ...
+# Subtest: TOML enforces nesting and integer limits with ordinary parse errors
+ok 14 - TOML enforces nesting and integer limits with ordinary parse errors
+  ---
+  duration_ms: 66.744031
+  type: 'test'
+  ...
+# Subtest: TOML tables hostile fixture completes within a bounded child process
+ok 15 - TOML tables hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 238.282521
+  type: 'test'
+  ...
+# Subtest: TOML path hostile fixture completes within a bounded child process
+ok 16 - TOML path hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 77.872087
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 14
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3276.850788

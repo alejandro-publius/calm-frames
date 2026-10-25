@@ -424,10 +424,10 @@ permission is not acceptance of the remaining findings.
 | Scope | Current scanner result |
 |---|---|
 | Python packages with findings in the scanned sources | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->25<!--/n--> |
-| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->13<!--/n--> |
+| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->10<!--/n--> |
+| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->5<!--/n--> |
 | npm packages classified critical | <!--n results/audit.json:published.npm_critical -->0<!--/n--> |
-| npm packages classified high | <!--n results/audit.json:published.npm_high -->14<!--/n--> |
+| npm packages classified high | <!--n results/audit.json:published.npm_high -->9<!--/n--> |
 | Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
 
 The [first overnight batch](overnight-2026-10-25/DEPENDENCIES.md) fixes the
@@ -438,13 +438,17 @@ scoped legacy consumers. Both include affected-version reproductions, actual
 consumer checks, pinned lockfiles and reproduced SBOMs. No SDK, protection
 budget, exception date or approved media was changed to obtain a passing check.
 
-The [remaining advisory ledger](../results/overnight-2026-10-25/dependencies-followup/residual-risk.json)
+The [current cloud follow-up](cloud-followup-2026-10-25/DEPENDENCIES.md) retains
+the decoder/UUID fixes and removes eight further parser/glob advisories with
+actual consumer checks. Five remain; both expired groups still block Audit.
+
+The [remaining advisory ledger](../results/cloud-followup-2026-10-25/residual-risk.json)
 names each finding, locked node, exposure limit and next action. Shipping
 classification must be checked against the exact new native package; an older
 Debug inventory or host-tool test does not establish current Release contents.
-The old Metro WebSocket consumer and URI-decoder consumer have demonstrated
-API barriers to direct fixed-version overrides. Their evidence is linked in
-the follow-up; no unsupported replacement was silently applied.
+The old Metro WebSocket consumer still has a demonstrated API barrier to a
+direct fixed-version override. The URI decoder now uses a tested CommonJS
+adapter to the fixed parser; its new native package inventory remains pending.
 
 Historical fixes to xmldom, Lodash, Handlebars, image-size and subsequent build
 leaves remain in the verified handoff. The [retained October 13 audit](../results/audit-2026-10-13-historical.json)
@@ -471,7 +475,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1106<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1054<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.

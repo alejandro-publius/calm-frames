@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "published_numbers_checked": 749,
+  "local_links_checked": 330,
+  "broken_links": [],
+  "style": "pass",
+  "generated_restore_helper_ruff": "pass",
+  "git_diff_check": "pass"
+}

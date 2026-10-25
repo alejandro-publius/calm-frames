@@ -21,8 +21,8 @@ in this pass and linked directly, without another crop or recompression. Images
 from 1080 captures can be smaller review copies; the original manifest records
 that transformation. No screenshot proves the later source fixes or speech.
 
-[Current implementation and checks](../native-fixes-2026-10-25/README.md) and
-[exact-source native handoff](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md)
+[Current implementation and checks](../cloud-followup-2026-10-25/README.md) and
+[exact-source native handoff](../cloud-followup-2026-10-25/NATIVE_VERIFICATION.md)
 separate these captures from the pending build. Item 14 is complete as prepared
 repository presentation; publication and exact-build native acceptance remain
 separate. The following October 21 gallery is historical.

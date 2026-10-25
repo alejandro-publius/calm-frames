@@ -1,0 +1,146 @@
+TAP version 13
+# Subtest: sane malformed-glob processing is bounded and reaches the fixed packages
+not ok 1 - sane malformed-glob processing is bounded and reaches the fixed packages
+  ---
+  duration_ms: 1511.928622
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_glob_dependencies.test.mjs:17:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    glob child exceeded its resource bound
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.start (node:internal/test_runner/test:944:17)
+    +     at startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '--max-old-space-size=64',
+    +     '-e',
+    +     'const match=require("<checkout>/app/node_modules/sane/node_modules/micromatch/index.js");\n' +
+    +       "      for (const input of ['{'.repeat(60000), '{x,'.repeat(12000)]) {\n" +
+    +       '        try { match.braces(input); } catch (e) {\n' +
+    +       '          if (!/length|max|limit/i.test(e.message)) throw e;\n' +
+    +       '        }\n' +
+    +       '      }'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:26:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: legacy types malformed-glob processing is bounded and reaches the fixed packages
+not ok 2 - legacy types malformed-glob processing is bounded and reaches the fixed packages
+  ---
+  duration_ms: 1530.753365
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_glob_dependencies.test.mjs:17:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    glob child exceeded its resource bound
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    +     at Test.postRun (node:internal/test_runner/test:1173:19)
+    +     at Test.run (node:internal/test_runner/test:1101:12)
+    +     at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '--max-old-space-size=64',
+    +     '-e',
+    +     'const match=require("<checkout>/app/node_modules/react-native-tscodegen-types/node_modules/micromatch/index.js");\n' +
+    +       "      for (const input of ['{'.repeat(60000), '{x,'.repeat(12000)]) {\n" +
+    +       '        try { match.braces(input); } catch (e) {\n' +
+    +       '          if (!/length|max|limit/i.test(e.message)) throw e;\n' +
+    +       '        }\n' +
+    +       '      }'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:25:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_glob_dependencies.test.mjs:26:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: legacy anymatch keeps string, regex, callback, negation and returned-index contracts
+ok 3 - legacy anymatch keeps string, regex, callback, negation and returned-index contracts
+  ---
+  duration_ms: 82.789138
+  type: 'test'
+  ...
+# Subtest: the actual sane inclusion filter keeps dotfile, ignore and brace-alternative behavior
+ok 4 - the actual sane inclusion filter keeps dotfile, ignore and brace-alternative behavior
+  ---
+  duration_ms: 7.844842
+  type: 'test'
+  ...
+# Subtest: the legacy watcher observes a matching file while preserving its ignored-file filter
+ok 5 - the legacy watcher observes a matching file while preserving its ignored-file filter
+  ---
+  duration_ms: 117.072677
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 3
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3318.534708

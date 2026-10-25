@@ -63,6 +63,12 @@ owns delivery review and staging. Neither a review report nor a signed package
 automatically changes the TV's compiled approval registry. Personal import does
 not decrypt DRM, establish ownership rights or imply a native TV file picker.
 
+An unreadable saved import now stays visible without hiding intact reviews.
+Its damaged record cannot authorize analysis, approval or delivery; files stay
+until explicit removal, after any owned worker is stopped. Completed results
+also remain in a finishing state until the producing worker exits. See the
+[source-backed recovery record](../cloud-followup-2026-10-25/IMPORT_RECOVERY.md).
+
 The [current checkpoint](../cloud-integration-2026-10-23/CHECKPOINT.md) identifies
 implemented behavior, source tests, native observations and remaining human
 acceptance separately. The diagram is a code map, not evidence of a deployed

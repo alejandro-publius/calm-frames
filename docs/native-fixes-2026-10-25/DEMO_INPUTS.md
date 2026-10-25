@@ -1,3 +1,5 @@
+> Historical 64f792b pass. For the current source, dependency counts, compatible generated inputs and native queue, use the [cloud continuation](../cloud-followup-2026-10-25/README.md). Counts below describe that prior pass.
+
 # Replacement demo input status
 
 Original item 16 stays partial. Existing [assembly tooling](../overnight-2026-10-25/DEMO.md)

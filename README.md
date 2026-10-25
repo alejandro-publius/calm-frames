@@ -13,7 +13,7 @@ Calm Frames combines prepared nature content with offline flash analysis, signed
 
 Choose Acadia, McWay Falls, Sea Otters or Forest, inspect the title, and decide when to watch. McWay Falls offers five continuous minutes of a fixed coastal view at natural speed, then holds the final frame until you leave. The other titles open as still scenes, with short moving previews available separately.
 
-**Current development:** [native handoff `37d10c2`](START_HERE_CODEX.md) supplies verified evidence for installed source `fbe53bf`, including the accepted onboarding disclaimer. Local product fixes through `a6bdb62276dd63603716509e24b2034451b46b44` address Home focus, Reading comfort focus/visibility, pause feedback and the route background, plus two dependency advisories. Their [checks and remaining limits](docs/native-fixes-2026-10-25/README.md) are separate from native acceptance. The [20-item checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md) records 6 complete, 12 partial and 2 blocked.
+**Current development:** the [native handoff `37d10c2`](START_HERE_CODEX.md) supplies verified evidence for installed source `fbe53bf`, including the accepted disclaimer. D1/D2/D3 and coastal background fixes from `64f792b` are preserved. Continuation through `09b3c55603ddff50bb068a585980aa188002479e` adds local-import recovery and tested build-tool dependency fixes, reducing the remaining advisories from 13 to 5. Audit still fails. [Current checks and limits](docs/cloud-followup-2026-10-25/README.md) distinguish source fixes from native acceptance. The [20-item checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md) remains 6 complete, 12 partial and 2 blocked.
 
 **Evidence and demo:** the gallery below contains unmodified native review copies of **fbe53bf**, before the latest fixes. The [published demo](https://www.youtube.com/watch?v=6lAP1FH16vc) and [Devpost entry](https://devpost.com/software/calm-frames) remain the earlier submitted fallback. Replacement footage, manga and ElevenLabs narration are pending. No current hosted CI or human audiovisual acceptance is claimed.
 
@@ -46,7 +46,7 @@ McWay imagery: MoneySavingVideos, [CC BY 3.0](https://creativecommons.org/licens
 - **A guarded playback path.** The picture stays covered while verification is unresolved. Scheduled covers and seek guards are driven by the accepted map and household settings.
 - **Local household preferences.** PIN-protected settings, presets, captions and stricter cover choices are stored on the device. Optional interface motion respects reduced motion.
 - **Names for individual kids.** Inside unlocked Parents, a remote letter grid edits a kid's name while preserving profile identity, preferences and saved positions. Save waits for the storage result; Cancel and Back discard an unfinished edit. Input currently supports letters and spaces. [Implementation, native observations and remaining gaps](docs/design-polish-2026-10-23/FABLE_INTEGRATION.md).
-- **Optional larger help text.** Each kid can use Reading comfort in Parents and More info. It defaults off and saves per profile; it does not change protection, player controls or captions. [Received native observations and the pending focus correction](docs/native-fixes-2026-10-25/NATIVE_VERIFICATION.md).
+- **Optional larger help text.** Each kid can use Reading comfort in Parents and More info. It defaults off and saves per profile; it does not change protection, player controls or captions. [Received native observations and the pending focus correction](docs/cloud-followup-2026-10-25/NATIVE_VERIFICATION.md).
 - **Caregiver file pre-check.** A separate [local browser workflow](docs/overnight-2026-10-25/personal-import/README.md) analyzes an eligible personal MP4 without playing it. It requires processing permission and exports a report bound to the file. It does not remove DRM, certify rights or automatically add a title to the TV catalog.
 - **Tools beyond the demo.** The [flashmap analyzer](flashmap/README.md), [Vega hook](hook/README.md) and [local preparation workflow](pipeline/LOCAL_LIBRARY.md) expose the underlying work separately.
 
@@ -107,7 +107,7 @@ The installed app uses Vega's W3C media player. The remaining rows distinguish l
 
 ## Running locally
 
-Use the separate review worktree and verified source bundle in the [current native handoff](docs/native-fixes-2026-10-25/NATIVE_VERIFICATION.md). The review branch is local; cloning an older remote branch does not reproduce it. These commands assume you are already in that worktree. Compare its full SHA with the transfer manifest before installing dependencies or building.
+Use the separate review worktree and verified source bundle in the [current native handoff](docs/cloud-followup-2026-10-25/NATIVE_VERIFICATION.md). The review branch is local; cloning an older remote branch does not reproduce it. These commands assume you are already in that worktree. Compare its full SHA with the transfer manifest before installing dependencies or building.
 
 ```sh
 git rev-parse HEAD

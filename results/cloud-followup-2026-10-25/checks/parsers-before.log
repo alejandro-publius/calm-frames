@@ -1,0 +1,275 @@
+TAP version 13
+# Subtest: inspector parser refuses prototype mutation in a separate process
+not ok 1 - inspector parser refuses prototype mutation in a separate process
+  ---
+  duration_ms: 39.805326
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:20:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    prototype must remain unchanged
+
+    7 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 7
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:25:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: legacy Metro parser refuses prototype mutation in a separate process
+not ok 2 - legacy Metro parser refuses prototype mutation in a separate process
+  ---
+  duration_ms: 34.933857
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:20:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    prototype must remain unchanged
+
+    7 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 7
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:25:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: the actual inspector CLI retains default and explicit numeric ports without opening a server
+ok 3 - the actual inspector CLI retains default and explicit numeric ports without opening a server
+  ---
+  duration_ms: 46.605618
+  type: 'test'
+  ...
+# Subtest: actual Metro build options retain aliases, arrays, boolean negation and numeric coercion
+ok 4 - actual Metro build options retain aliases, arrays, boolean negation and numeric coercion
+  ---
+  duration_ms: 571.44031
+  type: 'test'
+  ...
+# Subtest: old yargs still validates required options and keeps arguments after the delimiter
+ok 5 - old yargs still validates required options and keeps arguments after the delimiter
+  ---
+  duration_ms: 16.115893
+  type: 'test'
+  ...
+# Subtest: the actual SDK manifest reader preserves all declared privileges
+not ok 6 - the actual SDK manifest reader preserves all declared privileges
+  ---
+  duration_ms: 58.114629
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:73:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '3.0.0' !== '5.0.1'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '5.0.1'
+  actual: '3.0.0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:80:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+not ok 7 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 41.0504
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:87:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    7 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 7
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:92:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+ok 8 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 32.851049
+  type: 'test'
+  ...
+# Subtest: TOML enforces nesting and integer limits with ordinary parse errors
+not ok 9 - TOML enforces nesting and integer limits with ordinary parse errors
+  ---
+  duration_ms: 8.971019
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:96:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:97:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TOML tables hostile fixture completes within a bounded child process
+not ok 10 - TOML tables hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 1514.547299
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:105:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    bounded parser process timed out
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:111:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    +     at Test.postRun (node:internal/test_runner/test:1173:19)
+    +     at Test.run (node:internal/test_runner/test:1101:12)
+    +     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '-e',
+    +     'const toml=require("<checkout>/app/node_modules/toml/index.js");\n' +
+    +       `      const doc="tables"==='tables'\n` +
+    +       "        ? Array.from({length:20000},(_,i)=>'[[t'+i+']]\\nv=1').join('\\n')\n" +
+    +       "        : '['+Array.from({length:20000},(_,i)=>'t'+i).join('.')+']\\nv=1';\n" +
+    +       '      toml.parse(doc);'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:111:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:112:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TOML path hostile fixture completes within a bounded child process
+not ok 11 - TOML path hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 1508.227114
+  type: 'test'
+  location: '<checkout>/app/tools/legacy_parser_dependencies.test.mjs:105:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    bounded parser process timed out
+    + actual - expected
+
+    + Error: spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:111:19)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    +     at Test.postRun (node:internal/test_runner/test:1173:19)
+    +     at Test.run (node:internal/test_runner/test:1101:12)
+    +     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node',
+    +   spawnargs: [
+    +     '-e',
+    +     'const toml=require("<checkout>/app/node_modules/toml/index.js");\n' +
+    +       `      const doc="path"==='tables'\n` +
+    +       "        ? Array.from({length:20000},(_,i)=>'[[t'+i+']]\\nv=1').join('\\n')\n" +
+    +       "        : '['+Array.from({length:20000},(_,i)=>'t'+i).join('.')+']\\nv=1';\n" +
+    +       '      toml.parse(doc);'
+    +   ],
+    +   syscall: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <npm-cache>/_npx/f4985f1adc097c41/node_modules/node/bin/node ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:111:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://<checkout>/app/tools/legacy_parser_dependencies.test.mjs:112:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 4
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3978.414954
