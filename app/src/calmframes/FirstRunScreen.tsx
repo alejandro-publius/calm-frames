@@ -84,6 +84,7 @@ import {
   PinGateState,
   setPin,
 } from './parentGate';
+import FocusArea from './FocusArea';
 import PinKeypad from './PinKeypad';
 import ReadingStop, { READING_STOP_ROOM } from './ReadingStop';
 import StatusNotice from './StatusNotice';
@@ -477,7 +478,11 @@ const FirstRunScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       {header}
-      <ScrollView key="explainer" testID={`${testID}-scroll`} style={[styles.scroll, styles.readingRoom]} contentContainerStyle={[styles.content, styles.readingContent]}>
+      {/* The stop's frame runs past the scroller's visible edge, beside the
+          buttons below, so Up from them found nothing. The area's frame is the
+          visible one, and it hands focus entering it to the stop. */}
+      <FocusArea style={[styles.scroll, styles.readingRoom]} testID={`${testID}-explainer-area`}>
+      <ScrollView key="explainer" testID={`${testID}-scroll`} style={styles.fill} contentContainerStyle={[styles.content, styles.readingContent]}>
         <View style={styles.review} testID={`${testID}-review`}>
           <Text style={styles.reviewTitle} accessibilityRole="header">
             Your household
@@ -512,6 +517,7 @@ const FirstRunScreen = ({
           </Text>
         </ReadingStop>
       </ScrollView>
+      </FocusArea>
       <View testID={`${testID}-footer`} style={styles.buttons}>
         <CalmButton
           quiet
@@ -547,6 +553,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
   scroll: { flex: 1, minHeight: 0 },
+  fill: { flex: 1 },
   content: {
     width: '100%',
     maxWidth: scale(1400),

@@ -19,6 +19,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
 import { READING_STOP_ROOM } from '../../src/calmframes/ReadingStop';
 import { EXPLAINER_LINES, SAFETY_NOTE } from '../../src/calmframes/copy';
+import FocusArea from '../../src/calmframes/FocusArea';
 import FirstRunScreen, {
   FirstRunResult,
 } from '../../src/calmframes/FirstRunScreen';
@@ -388,8 +389,9 @@ describe('the first run', () => {
   it('lets the remote land on the explainer lines, approved sentence included, behind a ring that fits', () => {
     // On the device the approved sentence starts below the screen's edge, and
     // the only way down to it was the scroller itself, which took focus with no
-    // ring. Seen to fail with the lines out of the stop, with the scroller's
-    // ring room taken away, and with the stop's top gap left at the flush default.
+    // ring. Seen to fail with the lines out of the stop, with the stop out of
+    // the area, with the ring's room taken away, and with the stop's top gap
+    // left at the flush default.
     renderFirstRun();
     type('5555'); type('5555');
     fireEvent.press(screen.getByTestId('first-run-next'));
@@ -400,10 +402,13 @@ describe('the first run', () => {
     for (let index = 0; index < EXPLAINER_LINES.length; index += 1) {
       expect(within(stop).getByTestId(`first-run-explainer-line-${index}`)).toBeTruthy();
     }
+    // Up from the buttons below enters the area around the scroller, which
+    // hands focus to the stop: the stop's own frame runs past the visible edge.
+    const area = screen.UNSAFE_getByType(FocusArea);
+    expect(area.findAllByProps({ testID: 'first-run-explainer-reading' }).length).toBeGreaterThan(0);
     // The ring is drawn outside the text, so the scroller has to hold that room.
-    const scroll = screen.UNSAFE_getByType(ScrollView);
-    const outer = StyleSheet.flatten(scroll.props.style);
-    const inner = StyleSheet.flatten(scroll.props.contentContainerStyle);
+    const outer = StyleSheet.flatten(area.props.style);
+    const inner = StyleSheet.flatten(screen.UNSAFE_getByType(ScrollView).props.contentContainerStyle);
     expect(-outer.marginHorizontal).toBe(scale(READING_STOP_ROOM));
     expect(inner.paddingHorizontal).toBe(scale(READING_STOP_ROOM));
     expect(inner.paddingBottom).toBeGreaterThanOrEqual(scale(READING_STOP_ROOM));
