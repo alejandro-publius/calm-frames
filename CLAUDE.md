@@ -1,5 +1,18 @@
 # Calm Frames: rules for every session
 
+**October 25 overnight takeover.** The owner authorized local implementation across
+the original 20 outcomes after Claude stopped editing. GitHub handoff
+`codex/final-handoff-2026-10-25` was independently fetched and matched
+`15ef46c6e23c8ba627492da23b1b147000031aa4`. Continue on the isolated
+`codex/overnight-completion-2026-10-25` branch. Read
+`docs/overnight-2026-10-25/WORK_STATUS.md` and the canonical numbered checkpoint.
+Retain #5's completed native scope, #6's navigation fixes and the resolved device
+idle timeout. Queue the owner's disclaimer-layout and comfort decisions. Keep
+new work local: no push, main merge, public upload, purchase, real PIN entry,
+exception renewal or permission bypass. Historical no-push statements in the
+Claude handoff precede the owner's completed handoff push. Do not import the
+never-merge harnesses or change the submitted fallback/judging package.
+
 **October 23 canonical integration.** Read `docs/cloud-integration-2026-10-23/CHECKPOINT.md` first on `codex/integration-owner-2026-10-23`. This cloud thread is the sole integration owner; completed Claude work is input. Claude now handles only the exported demo assembly and ElevenLabs package, with no application edits. Its base is verified shared head `6360417`; contrast proposal `ae30cc7` now has clean locked-install and normal typecheck evidence, not native acceptance. Targeted compatible dependency updates and regenerated SBOMs are recorded in the product receipt. Residual Audit findings remain. Only the five-advisory TOML controlled-build deferral has explicit owner approval through October 30; old groups remain expired. The owner authorized a reviewed normal push to this private branch and exact-source CI/Audit. Do not merge, replace submitted materials or disturb another session's simulator. Finish and accept the product before manga or narration. The exact draft script, calm built-in voice selection and unlimited budget are already authorized; generation and human review remain pending. Earlier checkpoints retain their historical scope.
 
 **October 22 cloud candidate.** Read `docs/CLOUD_RELEASE_CHECKPOINT.md` before continuing this isolated candidate. It reconciles verified Claude `0e9241a`, combined checks `9cdb333` and the byte-identical judging package `9ad7bb7`. Use only the combined checks; the earlier separate fixes are superseded. Exclude rejected browser UI `76223f9`. Preserve the native coastal design, accessibility, source branches and submitted fallback. Human listening, palette and full-video acceptance remain pending. Do not rebuild the existing judging package.

@@ -1,0 +1,11 @@
+{
+  "checked_utc": "2026-10-25T07:25:58.756942+00:00",
+  "url": "https://amazonappdev2026.devpost.com/rules",
+  "http_status": null,
+  "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bytes_received": 0,
+  "content_type": "",
+  "failure_reason": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "rules_verified": false,
+  "publication_authorized": false
+}

@@ -5,10 +5,18 @@ not a replacement submission. The original 20 requested outcomes below supersede
 the earlier operational checklist, whose narrower scopes overstated completion.
 The Git history retains that older record.
 
+**October 25 takeover:** the pushed Claude handoff was fetched and independently
+verified at `15ef46c6e23c8ba627492da23b1b147000031aa4`. The active local branch is
+`codex/overnight-completion-2026-10-25`; its [work status](../overnight-2026-10-25/WORK_STATUS.md)
+records current ownership, queued decisions and exact missing native evidence.
+Earlier source rows below retain their historical scope. New overnight work is
+local only and cannot inherit the installed candidate's native acceptance.
+
 ## Exact source and ownership
 
 | Role | Exact source and inclusion |
 |---|---|
+| Current received handoff | `codex/final-handoff-2026-10-25`, `15ef46c6e23c8ba627492da23b1b147000031aa4`, remotely verified. Native candidate `a672f57d333dc0e3fada51b3175ca1711d1f9397`; [recorded operator acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate). The native binary and two detailed evidence ZIPs have not been transferred here. |
 | Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; existing video and live materials remain unchanged. |
 | Frozen integration branch | `codex/integration-owner-2026-10-23`, `2cf54e0d168e58daedfde3f15407833d23af4e93`. Remote identity checked in the [hosted receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json). |
 | Mac acceptance snapshot | `codex/design-polish-2026-10-23`, `6a87937f9f185ac0760d6f8331184e34b876d92c`. The [received native receipt review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md) ties this source to recorded package SHA-256 `623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d` and matching installed-device SHA-384. Preserve this immutable snapshot. |
