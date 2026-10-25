@@ -41,6 +41,25 @@ output would discard useful regression evidence. This is a bounded privacy
 review, not a guarantee against every unknown data representation. No raw native
 log or household record was added to Git.
 
+## Exact digest scanner correction
+
+The final security regression reproduced a stale precise allowlist: Gitleaks
+treated the current `PinKeypad.tsx` digest in a build-input manifest as a possible
+credential. Privacy fix `07db296` legitimately changed those source bytes, but
+the allowlist still named only the older verified hash from `6a87937`.
+
+The [correction receipt](../../results/overnight-2026-10-25/handoff-review/digest-fix/receipt.json)
+records the source hashes, failing reproduction and passing checks. The fix adds
+one anchored exact filename-and-digest pattern. The verified older literal stays
+because historical receipts still use it. No directory or arbitrary digest is
+exempted, and the existing synthetic credential tests are unchanged.
+
+The known-digest regression now passes. Both original negative cases remain
+detected. Additional boundary checks accept each verified historical/current
+source digest only in its intended field and still detect the current digest
+placed in an `api_key` field or synthetic bait placed under the source filename.
+This correction changes scanner configuration only; it does not alter the app.
+
 ## Never-merge checks
 
 The [exclusion record](../../results/overnight-2026-10-25/handoff-review/harness-exclusion-review.json)
