@@ -1,7 +1,8 @@
 import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus, remote } from './playbackUiHarness';
 import { act, fireEvent } from '@testing-library/react-native';
-import { Platform, StyleSheet } from 'react-native';
+import { AccessibilityInfo, Platform, StyleSheet } from 'react-native';
 import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
+import { resetAnnouncements } from '../../src/calmframes/announce';
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -92,6 +93,52 @@ test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after
   expect(mockMedia.listeners.pause.size).toBe(0);
   expect(mockMedia.listeners.play.size).toBe(0);
   expect(mockMedia.listeners.ended.size).toBe(0);
+});
+
+test('one pause announcement survives controls hiding and is spoken again only after another pause', () => {
+  jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+  resetAnnouncements();
+  const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
+  const view = startPlayer();
+  const pausedMessage = 'Paused. Press Play to continue.';
+  const pauseCalls = () => speak.mock.calls.filter(([message]) => message === pausedMessage);
+  const position = mockMedia.currentTime;
+
+  act(() => mockMedia.pause());
+  expect(pauseCalls()).toEqual([[pausedMessage, { queue: false }]]);
+  expect(view.queryByTestId('player-paused')).toBeNull();
+
+  for (let i = 0; i < 3; i += 1) {
+    act(() => jest.advanceTimersByTime(6000));
+    const notice = view.getByTestId('player-paused');
+    expect(notice.props.accessible).toBe(true);
+    expect(notice.props.accessibilityLiveRegion).toBe('none');
+    expect(view.queryByTestId('control-bar')).toBeNull();
+    remote('down');
+    expect(view.queryByTestId('player-paused')).toBeNull();
+    expect(view.getByTestId('control-bar')).toBeTruthy();
+  }
+  expect(pauseCalls()).toHaveLength(1);
+  expect(mockMedia.currentTime).toBe(position);
+  expect(mockMedia.paused).toBe(true);
+  expect(mockGuard.requestSeek).not.toHaveBeenCalled();
+
+  act(() => { mockMedia.play(); });
+  expect(pauseCalls()).toHaveLength(1);
+  act(() => mockMedia.pause());
+  expect(pauseCalls()).toHaveLength(2);
+});
+
+test.each(['covering', 'countdown'] as const)('the %s scene card owns its pause announcement without the generic notice', kind => {
+  resetAnnouncements();
+  const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
+  const view = startPlayer(kind);
+  act(() => mockMedia.pause());
+  act(() => jest.advanceTimersByTime(6000));
+  expect(speak.mock.calls.some(([message]) => /Paused/.test(message))).toBe(true);
+  expect(speak.mock.calls.some(([message]) => message === 'Paused. Press Play to continue.')).toBe(false);
+  expect(view.queryByTestId('player-paused')).toBeNull();
+  expect(mockGuard.covered).toBe(kind === 'covering');
 });
 
 test('recovery paints above the retained cover and Back leaves once', () => {

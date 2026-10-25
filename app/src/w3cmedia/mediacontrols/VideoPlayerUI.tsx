@@ -12,6 +12,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
+import { announceForAccessibility } from '../../calmframes/announce';
 import { trace } from '../../calmframes/trace';
 import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
@@ -96,6 +97,11 @@ export const VideoPlayerUI = React.memo(
     sceneIntervals,
   }: VideoPlayerUIProps) => {
     useEffect(() => { trace('playback', paused ? 'paused' : 'playing'); }, [paused]);
+    useEffect(() => {
+      // Speak when pause starts, not each time the controls hide and the
+      // visible notice mounts again. Another pause must still be announced.
+      if (paused) announceForAccessibility('Paused. Press Play to continue.', { force: true, queue: false });
+    }, [paused]);
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
 
@@ -244,7 +250,7 @@ export const VideoPlayerUI = React.memo(
     return (
       <View style={styles.uiContainer} testID="video-player-ui-view">
         {paused && !showMediaControls && (
-          <View style={styles.paused} testID="player-paused" accessible accessibilityRole="text" accessibilityLiveRegion="polite">
+          <View style={styles.paused} testID="player-paused" accessible accessibilityRole="text" accessibilityLiveRegion="none">
             <Text style={styles.pausedText}>Paused. Press Play to continue.</Text>
           </View>
         )}
