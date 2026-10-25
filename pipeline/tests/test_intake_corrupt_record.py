@@ -8,7 +8,7 @@ from pipeline import local_intake as intake
 from .test_local_intake import ready
 
 
-@pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape'])
+@pytest.mark.parametrize('damage', ['truncated', 'missing', 'invalid-shape', 'oversized-time'])
 def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, monkeypatch, damage):
     monkeypatch.setattr(intake.IntakeStore, 'launch', lambda *_: None)
     root = tmp_path / 'imports'
@@ -21,6 +21,8 @@ def test_unreadable_record_is_preserved_and_does_not_block_restart(tmp_path, mon
         record.unlink()
     elif damage == 'truncated':
         record.write_text('{"id":')
+    elif damage == 'oversized-time':
+        record.write_text(json.dumps({**bad, 'created_at': 10 ** 400}))
     else:
         record.write_text(json.dumps({'id': bad['id'], 'status': None}))
     original = record.read_bytes() if record.exists() else None

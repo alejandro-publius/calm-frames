@@ -61,13 +61,16 @@ def read_job(path: Path) -> dict:
     data = json.loads(_file(path / "job.json", path).read_text())
     if not isinstance(data, dict) or data.get("id") != path.name:
         raise IntakeError("Import metadata does not match this job.")
+    try:
+        valid_time = type(data.get("created_at")) in {int, float} and math.isfinite(data["created_at"])
+    except OverflowError:
+        valid_time = False
     if (
         not isinstance(data.get("status"), str)
         or data["status"] not in ACTIVE | TERMINAL
         or not isinstance(data.get("title"), str)
         or not data["title"].strip()
-        or type(data.get("created_at")) not in {int, float}
-        or not math.isfinite(data["created_at"])
+        or not valid_time
     ):
         raise IntakeError("Import metadata is incomplete or unreadable.")
     return data
