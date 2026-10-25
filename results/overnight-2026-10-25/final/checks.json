@@ -48,7 +48,7 @@
     "elapsed_seconds": 24.97,
     "log": "logs/final-app-static.log",
     "raw_log_sha256": "d324012fbae32e7a7268c4d47676b0bd45523ab45e1cc6a29f74f8e1178989d8",
-    "sanitized_log_sha256": "b9bc59d2783f7d44a3a733abfdbc628c9c036b6b9628a0a2d3c3cabc7c628f42",
+    "sanitized_log_sha256": "2ba3223caf83914949c1d5f6fe7d535ae2202e84ec546fc190fc3ece8a19c916",
     "status": "passed"
   },
   {
@@ -199,7 +199,7 @@
     "elapsed_seconds": 26.01,
     "log": "logs/final-generated-input-checks.log",
     "raw_log_sha256": "5c4687166be503e071e9d6922522afd6b4b188c90f4314769d64d51e92c6fd55",
-    "sanitized_log_sha256": "be32d8ae5ae8fde8490da96913bf8a9e4a6a3a50ff07385523a8f63f2945a45a",
+    "sanitized_log_sha256": "59066c1757dfc410ab9af7efa0ab6651d6baf2f48a886e529ca15d326221c204",
     "status": "passed"
   },
   {
