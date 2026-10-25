@@ -1,0 +1,102 @@
+{
+  "base": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "checked_local_commit": "639bae1389ca88e5333d56261ae30d73a18f18a5",
+  "approved_runtime_asset_count": 153,
+  "all_runtime_asset_hashes_unchanged": true,
+  "asset_hash_manifest": "../packaging/asset-preservation.json",
+  "protected_files": [
+    {
+      "path": "scripts/audit_exceptions.toml",
+      "sha256": "0f1c478bc96af9834bade4c4d7832f8c19c684087adc12f024914309ab941a80",
+      "unchanged_from_base": true
+    },
+    {
+      "path": ".coveragerc",
+      "sha256": "ade6a2a4ad6f724ee5d79ea873dc8a50e812424e4347d598ef74b1e9f02f0f6d",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md",
+      "sha256": "5f08a7a99017bb984a9301f085f6a74d115ed3c52d6203499ba834dfe7884724",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "app/jest.config.json",
+      "sha256": "2a9da5763fb5e3207e85eb40f23170549c2271b226c664a85e9b4ac6ae0f98ba",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "app/jest.setup.ts",
+      "sha256": "09fe2f482285c201801acae19b3fe0dde1c706aba8cd062de261b22ee66d4b2a",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "app/test/common/jest-timers.ts",
+      "sha256": "206b1a20e3d2990eba9dc3c0a099cc85b7988f5dd9d2c68851e3c7b7ef905dbd",
+      "unchanged_from_base": true
+    }
+  ],
+  "judging_package_tree": "e549872bd4365665ba476503ec9ae319bafb5932",
+  "judging_package_unchanged": true,
+  "native_manifest_semantics_unchanged": true,
+  "excluded_supplied_commits": [
+    {
+      "commit": "937c27ec15f996fc3f601effa13cac57e6a99a76",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "ec68707e120022953a483a99fb15bb4f0ce1c3f7",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "0f182f9b1178e20167917868c26a7ab7552b0d4f",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "50b52313df8e23420e96d35cc16b2cbe75ba6d74",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "19ba55d084c8fa0f40d75e2b6b2d724bafd20414",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "089ec6fa0d0f531a18e28b0380afb97607253e52",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "5e48655c8900f330f4ce353c3bb3f5aec512d8d6",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "4553ee3fb5d268850acb15529e820328dc0c1e93",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "78e8a2ce7e15525d940332b8680fd800fcf664e3",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "b9cd62746b7660c65a9b8fd537523409e77971e2",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "6f5aa66d3258ea89fbf1f0dcc5c7a64222c7417a",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "444ca911e784dbd8131ae9087605a216944aeaa9",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "c812685c963ca67edc82f2b55b24b346c2f7539f",
+      "absent_from_complete_ancestry": true
+    },
+    {
+      "commit": "76223f99cf8543ffe1e75d54c9873b56a0c23318",
+      "absent_from_complete_ancestry": true
+    }
+  ],
+  "complete_own_commit_inventory_available": false,
+  "exclusion_limit": "All supplied full IDs checked. Additional intermediate own-commit IDs on ten excluded branches were not provided; no new harness branch was imported."
+}

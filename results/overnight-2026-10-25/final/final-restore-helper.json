@@ -1,0 +1,49 @@
+{
+  "helper_sha256": "9b7051b0be26335aa40d5aa3999587ff8c68342ccfc71b9618806bb0fb5f74f3",
+  "source_commit": "639bae1389ca88e5333d56261ae30d73a18f18a5",
+  "archive_sha256": "127409f759cfa58a1d6424c02418321dfac1e11863d3cc56cb3069b2fd0d2133",
+  "checks": [
+    {
+      "check": "wrong-full-source-SHA-refused-before-write",
+      "passed": true,
+      "exit_code": 1,
+      "refusal": "Player inputs not restored: Worktree HEAD differs from the transfer manifest"
+    },
+    {
+      "check": "modified-archive-refused-before-write",
+      "passed": true,
+      "exit_code": 1,
+      "refusal": "Player inputs not restored: Generated-input archive checksum mismatch"
+    },
+    {
+      "check": "symlink-destination-refused-before-write",
+      "passed": true,
+      "exit_code": 1,
+      "refusal": "Player inputs not restored: Do not restore through a linked file or subdirectory"
+    },
+    {
+      "check": "clean-matching-source-restores-eight-inputs",
+      "passed": true,
+      "exit_code": 0,
+      "new_files_written": 8,
+      "verified_files": 8,
+      "tracked_files_overwritten": false
+    },
+    {
+      "check": "same-inputs-idempotent",
+      "passed": true,
+      "exit_code": 0,
+      "new_files_written": 0,
+      "verified_files": 8,
+      "tracked_files_overwritten": false
+    },
+    {
+      "check": "different-existing-generated-file-preserved",
+      "passed": true,
+      "exit_code": 1,
+      "refusal": "Player inputs not restored: Existing generated file differs: app/src/w3cmedia/PlayerInterface.ts; preserve it and use another worktree"
+    }
+  ],
+  "tracked_source_unchanged": true,
+  "consumer_worktree_removed": true
+}

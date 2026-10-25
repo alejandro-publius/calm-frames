@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-10-25T08:53:03.737844+00:00",
+  "source_commit": "b603be9cb3a8dc13407f8f6f6408aad984f6f836",
+  "executables": {
+    "vega": null,
+    "kepler": null,
+    "java": "/usr/bin/java",
+    "ffmpeg": "/usr/bin/ffmpeg",
+    "ffprobe": "/usr/bin/ffprobe",
+    "chromium": "/usr/bin/chromium"
+  },
+  "kepler_sdk_path_configured": false,
+  "current_native_input_result": "logs/final-generated-input-checks.log",
+  "native_package_built": false,
+  "missing_native_artifacts": "No exact overnight .vpkg or the two current native evidence archives received."
+}

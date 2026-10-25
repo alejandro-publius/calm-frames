@@ -5,11 +5,17 @@ materials are unchanged. Review the final local source and checks before any
 new build or publication decision; the current installed Mac package is an
 earlier, separately identified artifact.
 
+Start with the [exact-source Mac handoff](MAC_HANDOFF.md) and
+[final validation](FINAL_VALIDATION.md). The portable export supplies the final
+full SHA and checksum manifest; it contains source and generated player inputs,
+not a newly compiled native package.
+
 ## Owner decisions
 
 | Item | Decision or observation to return |
 |---|---|
 | 6, disclaimer layout | Keep the installed explainer layout, where one Up reveals and reads the approved sentence, or require the sentence visible at rest. Navigation already passed; the approved wording is unchanged. |
+| 11 and 20, new native checks | On a package built from the transferred source, listen for one pause announcement and check Reading comfort on/off, wrapping, scrolling, D-pad focus and VoiceView at both supported sizes. Do not repeat the whole completed name-editor pass. |
 | 8, picture and sound | Record the exact package reviewed and your observations of palette, readable text, pacing and audio at your normal settings. State anything uncomfortable or unclear. This is personal acceptance, not medical validation. |
 | 12, residual audit policy | Review the final advisory/exposure record after fixes. Existing expired groups remain expired. No approval is assumed from permission to continue coding. |
 | 17 and 19, external access/publication | Confirm organizer rules, current judge access and any permitted publication window before changing submitted or public material. The cloud's official-rules request was blocked. |

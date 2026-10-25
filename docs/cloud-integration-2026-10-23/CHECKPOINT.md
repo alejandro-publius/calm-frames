@@ -24,6 +24,12 @@ missing intermediate harness IDs remain an explicit proof limit. No harness or
 rejected browser UI was imported. No overnight push, publication or submission
 change is authorized.
 
+The last product-code commit is `b603be9cb3a8dc13407f8f6f6408aad984f6f836`.
+[Final local validation](../overnight-2026-10-25/FINAL_VALIDATION.md) and the
+[Mac transfer instructions](../overnight-2026-10-25/MAC_HANDOFF.md) are complete.
+The external transfer manifest supplies the later immutable documentation/evidence
+HEAD, verified bundle/patch checksums and consumer import results.
+
 ## Hosted checks and remaining release blockers
 
 GitHub's API returned **no hosted runs for exact handoff `15ef46c`**;
@@ -33,7 +39,7 @@ CI on `2cf54e0` failed Python lint and Audit failed dependency policy; the
 [historical receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json)
 keeps those results tied to that source. No run was restarted overnight.
 
-The [dependency continuation](../overnight-2026-10-25/DEPENDENCIES.md) records
+The [dependency continuation](../overnight-2026-10-25/DEPENDENCIES.md) and [final bounded follow-up](../overnight-2026-10-25/DEPENDENCY_FOLLOWUP.md) record
 compatible fixes, failing-before regressions, exact lock inputs and reproduced
 SBOMs. It also lists residual advisories. The two October 21 exception groups
 remain expired. Only the existing five-advisory TOML controlled-build deferral
@@ -74,8 +80,8 @@ do not repeat them solely to transfer their evidence.
 | 16 | Replacement-demo tooling/assembly from real footage/assets, with missing production inputs queued | Partially completed | [Renderer fixes and real encoder exercise](../overnight-2026-10-25/DEMO.md) bind bytes and receipts, preserve ambient audio and prevent truncated credits. The encoded fixture is visibly TEST ONLY. Actual accepted-source captures, illustrations and narration are absent, so no replacement product video is claimed. Production stays parked until product acceptance and script reconciliation. |
 | 17 | Verify submission/judge-access requirements; queue account/eligibility steps | Blocked | [Primary-source register](../judging-package/PRIMARY_SOURCES.md) preserves dated official-source provenance. The [fresh rules request](../../results/overnight-2026-10-25/official-rules-access.json) was blocked before the origin. Need an accessible current official copy and owner account/eligibility/judge-access confirmation; no guessed deadline or access claim. |
 | 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Remote `15ef46c` is independently verified, local ownership is singular, original branches are preserved, and this ledger/transfer manifest separate source, package and acceptance. [Work status](../overnight-2026-10-25/WORK_STATUS.md) records the continuation. Maintain exact final SHA and checks in the portable export. |
-| 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | [Packaging fixes](../overnight-2026-10-25/PACKAGING.md) exclude build tools without changing runtime media bytes. Portable source/checksum export is prepared at the final checkpoint. A new native package cannot be built or accepted here without native SDK/runtime inputs and current evidence; no obsolete package is relabelled. No publication is performed. |
-| 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Deferred | Feasibility reviewed only while higher-priority machine work completes. A bounded default-off preference must preserve IDs, names, floors, positions and normal layouts, with result-aware persistence. Native wrapping/focus acceptance would remain open. No global redesign or protection change is authorized by this item. |
+| 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | [Packaging fixes](../overnight-2026-10-25/PACKAGING.md) retain runtime media bytes. [Normal player generation](../overnight-2026-10-25/PLAYER_BUILD.md) now passes in the cloud; its verified small ZIP supplies reusable generated inputs. The final source/checksum export preserves review and rollback instructions. A new native package is blocked by the missing Vega SDK; ARM64 container execution is unavailable here. No obsolete package is relabelled or published. |
+| 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Partially completed | [Implemented last](../overnight-2026-10-25/READING_COMFORT.md), integrated as `b603be9`: default-off per-kid larger help/body text and spacing in scrollable Parents and More info, with result-aware persistence and failure/retry. Legacy records, IDs, names, floors, positions and excluded layouts are preserved. Source/route tests and normal app checks pass. Native wrapping, D-pad focus, VoiceView and owner comfort still need acceptance. Older app rollback can drop this optional flag on its next save; do not clear household data. |
 
 ## Mac-only acceptance, without duplicate work
 

@@ -46,6 +46,11 @@ The failure fixture is identified separately from the production package. The
 platform keyboard was not used. Later cloud changes retain separate source and
 native acceptance identities.
 
+The local continuation also implements an optional per-kid Reading comfort
+preference for larger help text and spacing in Parents and More info. It defaults
+off, uses the saved profile and preserves playback/protection settings. Its
+source checks pass; native layout and owner comfort are not yet accepted.
+
 ### 🔎 Preparation and playback share a chain of evidence
 
 The offline pipeline records its preparation stages and verifies the resulting media before making a title available. The native player accepts approved prepared editions, validates their maps and routes playhead changes through the playback guard. Playback Proof exposes the record behind a title without making the viewer read it before watching.

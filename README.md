@@ -17,6 +17,8 @@ Choose Acadia, McWay Falls, Sea Otters or Forest, inspect the title, and decide 
 
 **Evidence and demo:** the [published demo](https://www.youtube.com/watch?v=6lAP1FH16vc), [Devpost entry](https://devpost.com/software/calm-frames) and screenshots below represent earlier builds. The screenshots are native captures of `60c3bbb`, not the four-island review source. Their [provenance record](docs/presentation/README.md#build-and-publication-status) is historical. The new manga/native/ElevenLabs demo remains a production draft; no completed replacement for this review build is claimed. Submitted materials remain unchanged.
 
+**Private continuation:** product code is frozen locally at `b603be9cb3a8dc13407f8f6f6408aad984f6f836`. The [validation receipt](docs/overnight-2026-10-25/FINAL_VALIDATION.md) separates passing source checks from the unresolved audit policy and native/human acceptance. The portable handoff identifies the final documentation/evidence commit; nothing has been promoted to the submission.
+
 ![Calm Frames Home: a coastal map with Ocean and Forest, McWay Falls selected, and Watch as the primary action](docs/presentation/home.png)
 
 <p align="center">
@@ -46,6 +48,7 @@ Screenshots are cropped from existing app-only native captures, with no reconstr
 - **A guarded playback path.** The picture stays covered while verification is unresolved. Scheduled covers and seek guards are driven by the accepted map and household settings.
 - **Local household preferences.** PIN-protected settings, presets, captions and stricter cover choices are stored on the device. Optional interface motion respects reduced motion.
 - **Names for individual kids.** Inside unlocked Parents, a remote letter grid edits a kid's name while preserving profile identity, preferences and saved positions. Save waits for the storage result; Cancel and Back discard an unfinished edit. Input currently supports letters and spaces. [Implementation, native observations and remaining gaps](docs/design-polish-2026-10-23/FABLE_INTEGRATION.md).
+- **Optional larger help text.** Each kid can use Reading comfort in Parents and More info. It defaults off and saves per profile; it does not change protection, player controls or captions. [Source checks and pending native layout review](docs/overnight-2026-10-25/READING_COMFORT.md).
 - **Caregiver file pre-check.** A separate [local browser workflow](docs/overnight-2026-10-25/personal-import/README.md) analyzes an eligible personal MP4 without playing it. It requires processing permission and exports a report bound to the file. It does not remove DRM, certify rights or automatically add a title to the TV catalog.
 - **Tools beyond the demo.** The [flashmap analyzer](flashmap/README.md), [Vega hook](hook/README.md) and [local preparation workflow](pipeline/LOCAL_LIBRARY.md) expose the underlying work separately.
 

@@ -9,8 +9,9 @@ records the exact source, commands, tool versions, logs and transfer checksum.
 The [checks record](../../results/overnight-2026-10-25/player-build/checks.json)
 also preserves an unrelated number-sync failure in this source snapshot:
 `docs/SECURITY.md` has a stale app component count relative to `results/sbom.json`.
-The integration owner is handling those audit files separately; player setup did
-not modify them.
+That historical mismatch is corrected in the integrated presentation at
+`6bbb362`; the [final checks](FINAL_VALIDATION.md) include number synchronization.
+Player setup did not modify those audit files.
 
 ## Executed path
 
@@ -53,11 +54,22 @@ toolchain, license text and its hash. It also references the existing
 [sample-license notice review](../AMAZON_SAMPLE_LICENSE_REVIEW.md); this build
 does not settle that recorded notice discrepancy or authorize publication.
 
-Restore only into a separate checkout of the declared source after its own
-locked install. Verify the recorded build-script and patch hashes first. Do not
-overwrite any tracked file, especially the custom `ShakaPlayer.ts`, which is
-absent from the ZIP. Run the normal native-input preflight after restore. The
-repository's `npm run setup:player` remains the normal regeneration path.
+The integration owner independently verified every archived byte and every
+recorded build-input hash against the final product source `b603be9`. The
+[reuse receipt](../../results/overnight-2026-10-25/final/generated-input-reuse.json)
+records the restore and normal preflight, typecheck and lint pass. Later app
+changes do not alter these player-generation inputs; this does not make the ZIP
+a native package for that later source.
+
+Restore only into a clean separate checkout of the full transfer SHA after its
+own locked install. The [restore helper](restore_generated_player.py) requires
+that exact HEAD, the exact ZIP checksum and matching build-input hashes. It
+refuses tracked files, linked destinations and differing existing inputs before
+writing anything. Its [boundary checks](../../results/overnight-2026-10-25/final/final-restore-helper.json)
+include refusal and idempotent restore. Follow the [Mac handoff](MAC_HANDOFF.md),
+then run the normal native-input preflight. The custom tracked `ShakaPlayer.ts`
+is absent from the ZIP. `npm run setup:player` remains the normal regeneration
+path if build inputs later change.
 
 The [complete generated-file inventory](../../results/overnight-2026-10-25/player-build/generated-file-inventory.json)
 also records artifacts omitted from this small archive. The generated binaries
