@@ -1,7 +1,7 @@
 /** Fictional profiles only. Reading preferences never change protection or identity. */
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import CalmTouchable from '../../src/calmframes/CalmTouchable';
@@ -119,6 +119,43 @@ describe('Reading comfort in Parents', () => {
     expect(screen.getByTestId('parent-area-reading-comfort').props.accessibilityState.checked).toBe(false);
     expect(screen.getByTestId('parent-area-reading-comfort').props.hasTVPreferredFocus).toBe(false);
     expect(style('parent-area-room').fontSize).toBe(scale(36));
+  });
+
+  it('does not rearm the page-top Back when the saved switch blurs', async () => {
+    openParents();
+    press('parent-area-profiles-profile-2');
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'focus');
+    press('parent-area-reading-comfort');
+    await flush();
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'blur');
+    expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+  });
+
+  it.each([720, 1080])('keeps the enlarged switch and state in view after layout at %s', height => {
+    const scroll = jest.spyOn(ScrollView.prototype, 'scrollTo').mockImplementation(() => {});
+    const { view, props } = openParents();
+    press('parent-area-profiles-profile-2');
+    const layout = (id: string, y: number, h: number) => fireEvent(screen.getByTestId(id), 'layout', {
+      nativeEvent: { layout: { x: 0, y, width: 1000, height: h } },
+    });
+    layout('parent-area-open', 0, height);
+    layout('parent-area-reading-group', 1500, 250);
+    layout('parent-area-reading-comfort', 50, 180);
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'focus');
+    scroll.mockClear();
+    view.rerender(<ParentAreaScreen {...props} family={setProfileReadingComfort(family, 'profile-2', true)} />);
+    layout('parent-area-reading-group', 1800, 330);
+    layout('parent-area-reading-comfort', 60, 250);
+    expect(scroll).toHaveBeenCalled();
+    const last = scroll.mock.calls.at(-1)![0] as { y: number; animated: boolean };
+    expect(last.animated).toBe(false);
+    expect(1860 - last.y).toBeGreaterThanOrEqual(0);
+    expect(2110 - last.y).toBeLessThanOrEqual(height);
+    scroll.mockClear();
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'blur');
+    layout('parent-area-reading-group', 1900, 330);
+    expect(scroll).not.toHaveBeenCalled();
+    scroll.mockRestore();
   });
 
   it('does not steal focus if the remote moved away during the save', async () => {

@@ -242,11 +242,36 @@ const ParentAreaScreen = ({
   testID = 'parent-area',
   saving: externalSaving = false,
 }: ParentAreaScreenProps) => {
+  const [initialBackFocus, setInitialBackFocus] = React.useState(true);
+  const scrollRef = React.useRef<ScrollView>(null);
+  const comfortLayout = React.useRef({ groupY: 0, rowY: 0, rowHeight: 0, viewport: 0, offset: 0 });
   const [comfortPending, setComfortPending] = React.useState(false);
   const comfortPendingRef = React.useRef(false);
   const comfortWantsFocusRef = React.useRef(false);
   const [comfortFailed, setComfortFailed] = React.useState(false);
   const [comfortReturnFocus, setComfortReturnFocus] = React.useState(false);
+  // Layout changes above the focused switch must keep its complete state in
+  // view. Native layout events supply geometry; no guessed line counts/timers.
+  const revealComfort = React.useCallback(() => {
+    const box = comfortLayout.current;
+    if (!comfortWantsFocusRef.current || !box.rowHeight || !box.viewport) return;
+    const top = box.groupY + box.rowY;
+    const margin = scale(24);
+    const bottom = top + box.rowHeight;
+    const offset = top - margin < box.offset ? Math.max(0, top - margin)
+      : bottom + margin > box.offset + box.viewport ? Math.max(0, bottom + margin - box.viewport) : box.offset;
+    if (offset !== box.offset) {
+      scrollRef.current?.scrollTo({ y: offset, animated: false });
+      box.offset = offset;
+    }
+  }, []);
+  const onViewportLayout = React.useCallback((event: import('react-native').LayoutChangeEvent) => {
+    comfortLayout.current.viewport = event.nativeEvent.layout.height;
+    revealComfort();
+  }, [revealComfort]);
+  const onParentsScroll = React.useCallback((event: import('react-native').NativeSyntheticEvent<import('react-native').NativeScrollEvent>) => {
+    comfortLayout.current.offset = event.nativeEvent.contentOffset.y;
+  }, []);
   const saving = externalSaving || comfortPending;
   const [unlocked, setUnlocked] = React.useState(false);
   const [extraReturnFocus, setExtraReturnFocus] = React.useState<string>();
@@ -581,10 +606,15 @@ const ParentAreaScreen = ({
 
   return (
     <ScrollView
+      ref={scrollRef}
+      onLayout={onViewportLayout}
+      onScroll={onParentsScroll}
+      scrollEventThrottle={16}
+      onContentSizeChange={revealComfort}
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} preferredBack={!editingName && !extraReturnFocus && !renameReturnFocus && !comfortPending && !comfortReturnFocus} backDisabled={saving || renamePending} />
+      <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} onBackFocus={() => setInitialBackFocus(false)} preferredBack={initialBackFocus && !editingName && !extraReturnFocus && !renameReturnFocus && !comfortPending && !comfortReturnFocus} backDisabled={saving || renamePending} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -637,6 +667,7 @@ const ParentAreaScreen = ({
               // answers by choosing somebody else has not said remove.
               setAskedToRemove(null);
               setRenameReturnFocus(false);
+              setInitialBackFocus(false);
               setComfortReturnFocus(false);
               comfortWantsFocusRef.current = false;
               setComfortFailed(false);
@@ -920,10 +951,16 @@ const ParentAreaScreen = ({
       </View>
 
       {family && editingProfile && onProfilePreferencesChange && !editingName && !confirmingRemoval ? (
-        <View style={styles.group}>
+        <View style={styles.group} testID={`${testID}-reading-group`}
+          onLayout={event => { comfortLayout.current.groupY = event.nativeEvent.layout.y; revealComfort(); }}>
           <Text style={styles.section} accessibilityRole="header">Reading for {editingProfile.name}</Text>
           <TouchableOpacity
             testID={`${testID}-reading-comfort`}
+            onLayout={event => {
+              comfortLayout.current.rowY = event.nativeEvent.layout.y;
+              comfortLayout.current.rowHeight = event.nativeEvent.layout.height;
+              revealComfort();
+            }}
             focusable
             hasTVPreferredFocus={comfortReturnFocus}
             accessibilityRole="switch"
@@ -931,7 +968,7 @@ const ParentAreaScreen = ({
             accessibilityHint="Larger help text and more space in this kid's Parents settings and More info."
             accessibilityState={{ checked: readingComfort, disabled: saving }}
             activeOpacity={1}
-            onFocus={() => { comfortWantsFocusRef.current = true; setFocusedRow('reading-comfort'); setRenameReturnFocus(false); }}
+            onFocus={() => { comfortWantsFocusRef.current = true; setInitialBackFocus(false); setComfortReturnFocus(false); setFocusedRow('reading-comfort'); setRenameReturnFocus(false); revealComfort(); }}
             onBlur={() => { comfortWantsFocusRef.current = false; setFocusedRow(null); setComfortReturnFocus(false); }}
             onPress={saveReadingComfort}
             style={[styles.row, helpRow, focusedRow === 'reading-comfort' ? styles.focused : null]}>
