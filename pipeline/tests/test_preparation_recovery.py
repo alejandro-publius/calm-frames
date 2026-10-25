@@ -820,6 +820,100 @@ def _prepare_command(title) -> list[str]:
             "--presets", "wcag,broadcast", "--title", "Calm test"]
 
 
+def _process_group_stopped(pgid: int, *, proc_root: Path = Path("/proc")) -> bool:
+    """Prove no group member can execute; an unknown state must keep waiting.
+
+    Linux container PID 1 may retain an orphan zombie after SIGKILL. Signal 0
+    sees that dead process until it is reaped, although it cannot write output.
+    Other platforms retain the original ESRCH-only completion check.
+    """
+    try:
+        os.killpg(pgid, 0)
+    except ProcessLookupError:
+        return True
+    except PermissionError:
+        return False
+    if sys.platform != "linux":
+        return False
+    found = False
+    try:
+        for path in proc_root.iterdir():
+            if not path.name.isdecimal():
+                continue
+            try:
+                # comm can contain spaces and closing parentheses; fields follow its last one.
+                fields = (path / "stat").read_text().rpartition(")")[2].split()
+            except FileNotFoundError:
+                continue  # This process was reaped during the read.
+            if int(fields[2]) == pgid:
+                found = True
+                if fields[0] != "Z":
+                    return False
+    except (OSError, ValueError, IndexError):
+        return False
+    return found
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux zombie-state regression")
+def test_stopped_process_group_recognizes_a_dead_unreaped_child():
+    process = subprocess.Popen([sys.executable, "-c", "pass"], start_new_session=True)
+    try:
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
+            fields = Path(f"/proc/{process.pid}/stat").read_text().rpartition(")")[2].split()
+            if fields[0] == "Z":
+                break
+            time.sleep(0.01)
+        else:
+            pytest.fail("the owned child did not reach its unreaped dead state")
+        # killpg(0) still succeeds, but a zombie cannot run or write a prepared file.
+        os.killpg(process.pid, 0)
+        assert _process_group_stopped(process.pid)
+    finally:
+        process.wait(timeout=5)
+
+
+def test_stopped_process_group_never_accepts_a_live_child():
+    process = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(30)"],
+                               start_new_session=True)
+    try:
+        assert process.poll() is None
+        assert not _process_group_stopped(process.pid)
+        assert process.poll() is None
+    finally:
+        process.terminate()
+        process.wait(timeout=5)
+    assert _process_group_stopped(process.pid)
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-state inspection")
+@pytest.mark.parametrize("other_state", ["R", "S", "D", "T", "I", "X", "unknown"])
+def test_stopped_process_group_rejects_mixed_or_unknown_states(tmp_path, monkeypatch, other_state):
+    monkeypatch.setattr(os, "killpg", lambda *_: None)
+    for pid, state in [(10, "Z"), (11, other_state)]:
+        path = tmp_path / str(pid)
+        path.mkdir()
+        (path / "stat").write_text(f"{pid} (owned child) {state} 1 123 123")
+    assert not _process_group_stopped(123, proc_root=tmp_path)
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-state inspection")
+@pytest.mark.parametrize("snapshot", ["missing", "empty", "malformed", "unreadable"])
+def test_stopped_process_group_requires_readable_positive_evidence(tmp_path, monkeypatch, snapshot):
+    monkeypatch.setattr(os, "killpg", lambda *_: None)
+    root = tmp_path / "proc"
+    if snapshot != "missing":
+        root.mkdir()
+    if snapshot in {"malformed", "unreadable"}:
+        entry = root / "10"
+        entry.mkdir()
+        if snapshot == "malformed":
+            (entry / "stat").write_text("not process metadata")
+        else:
+            (entry / "stat").mkdir()
+    assert not _process_group_stopped(123, proc_root=root)
+
+
 def _kill_when_blocked(title, rule: dict) -> None:
     """Start a real preparation, wait until it stops at ``rule``, then SIGKILL its group."""
     marker = Path(rule["marker"])
@@ -841,12 +935,8 @@ def _kill_when_blocked(title, rule: dict) -> None:
     assert process.returncode == -signal.SIGKILL
     deadline = time.monotonic() + 10
     while time.monotonic() < deadline:
-        try:
-            os.killpg(process.pid, 0)
-        except ProcessLookupError:
+        if _process_group_stopped(process.pid):
             break
-        except PermissionError:
-            pass  # macOS answers EPERM while killed children wait to be reaped
         time.sleep(0.05)
     else:
         pytest.fail("a process from the killed preparation is still running")
