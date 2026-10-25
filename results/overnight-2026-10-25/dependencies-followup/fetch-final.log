@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+ok 1 - the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+  ---
+  duration_ms: 14.450901
+  type: 'test'
+  ...
+# Subtest: the actual fallback strips sensitive headers on a redirect to a different loopback host
+ok 2 - the actual fallback strips sensitive headers on a redirect to a different loopback host
+  ---
+  duration_ms: 39.333403
+  type: 'test'
+  ...
+# Subtest: same-host redirects retain headers and convert POST to GET without retaining its body
+ok 3 - same-host redirects retain headers and convert POST to GET without retaining its body
+  ---
+  duration_ms: 10.142182
+  type: 'test'
+  ...
+# Subtest: the installed polyfill exports retain Headers, Request and cloned Response contracts
+ok 4 - the installed polyfill exports retain Headers, Request and cloned Response contracts
+  ---
+  duration_ms: 8.889016
+  type: 'test'
+  ...
+# Subtest: the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+ok 5 - the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+  ---
+  duration_ms: 12.088451
+  type: 'test'
+  ...
+# Subtest: FBJS still prefers an existing native fetch implementation
+ok 6 - FBJS still prefers an existing native fetch implementation
+  ---
+  duration_ms: 2.733929
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 179.451319

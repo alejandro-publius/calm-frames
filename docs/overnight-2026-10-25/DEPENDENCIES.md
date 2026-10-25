@@ -1,5 +1,9 @@
 # Item 12: dependency remediation
 
+The later [bounded fetch and locale follow-up](DEPENDENCY_FOLLOWUP.md) records
+additional fixes and the newest residual ledger. This page retains the first
+batch's exact source and evidence.
+
 The reviewed local code is `7c35dadf924c32275a6898f6cf32e965191bd8cc`, based on
 Claude's verified handoff `15ef46c6e23c8ba627492da23b1b147000031aa4`. This batch
 reduces concrete host-tool defects without changing the app interface, player,

@@ -20364,76 +20364,6 @@
     },
     {
       "type": "library",
-      "name": "encoding",
-      "version": "0.1.13",
-      "bom-ref": "calm-frames-app@0.1.0|encoding@0.1.13",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/encoding@0.1.13",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "11305aba8c354f7e58fd664c922a3d8e2334679c631c7989e179a364eab597f757cf796bdac467f3b9c9cb6d11ba9a928751769b71c73d2a7c4a120f409ac9dc"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/encoding"
-        }
-      ],
-      "components": [
-        {
-          "type": "library",
-          "name": "iconv-lite",
-          "version": "0.6.3",
-          "bom-ref": "calm-frames-app@0.1.0|encoding@0.1.13|iconv-lite@0.6.3",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/iconv-lite@0.6.3",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "e1f0a4efdc2c84c773329dab1f4eaa5ab244e22a25a8b842507f8e8ae22053ef91074fbde0d9432fcd5ab4eec65f9e6e50ab9ea34b711cdb6f13223a0fb59d33"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/encoding/node_modules/iconv-lite"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "end-of-stream",
       "version": "1.4.5",
       "bom-ref": "calm-frames-app@0.1.0|end-of-stream@1.4.5",
@@ -29975,76 +29905,6 @@
           "name": "cdx:npm:package:path",
           "value": "node_modules/isomorphic-fetch"
         }
-      ],
-      "components": [
-        {
-          "type": "library",
-          "name": "is-stream",
-          "version": "1.1.0",
-          "bom-ref": "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|is-stream@1.1.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/is-stream@1.1.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/is-stream/-/is-stream-1.1.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "b903e6f2472ce3b8f1dfc6ad01c593571ca5b506283d3ebccbd69661d57ac965d2c96f26cd26add132fa0a259d65e09d1772ab02fa55b671db4efe1137eaea75"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/isomorphic-fetch/node_modules/is-stream"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "node-fetch",
-          "version": "1.7.3",
-          "bom-ref": "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|node-fetch@1.7.3",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/node-fetch@1.7.3",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/node-fetch/-/node-fetch-1.7.3.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "3616780ac2b1edc626daf4ab040af63ef14e7bab160dfd1460b46a03ab2f51883bfbf4d27d502ee3d8d80b806f4384a6b3d49981da86060ae8a9f0e125d4f229"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/isomorphic-fetch/node_modules/node-fetch"
-            }
-          ]
-        }
       ]
     },
     {
@@ -33797,6 +33657,40 @@
     },
     {
       "type": "library",
+      "name": "map-age-cleaner",
+      "version": "0.1.3",
+      "bom-ref": "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/map-age-cleaner@0.1.3",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "6c9cf1ea73283fa3c32cf0459a0efec5129e159bc56e832b1a5c66363f4296f5f9dcaae6bcce5b5c55c45a36f3e1ccf50059fe8d627dcff0c94b3ee1aecd30df"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/map-age-cleaner"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "map-cache",
       "version": "0.2.2",
       "bom-ref": "calm-frames-app@0.1.0|map-cache@0.2.2",
@@ -34006,8 +33900,8 @@
     {
       "type": "library",
       "name": "mem",
-      "version": "1.1.0",
-      "bom-ref": "calm-frames-app@0.1.0|mem@1.1.0",
+      "version": "4.3.0",
+      "bom-ref": "calm-frames-app@0.1.0|mem@4.3.0",
       "licenses": [
         {
           "license": {
@@ -34016,15 +33910,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/mem@1.1.0",
+      "purl": "pkg:npm/mem@4.3.0",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/mem/-/mem-1.1.0.tgz",
+          "url": "https://registry.npmjs.org/mem/-/mem-4.3.0.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "9ce043adcff082991ddd7fc93a132a611fbf78baa57cb3f8a107e8040e90131231125f86534d68c849305b2b9ec8ef35d74a542a28ed8871a11266283a7f3ca1"
+              "content": "a97d9b1b8f294ea6115660c1dfbae7ffa3d3ecb711f13ee8017ddb7fdf6ed53b759f3c587f1920a83c14c2894f957c1e3345f304e045cd2c7891fa7b28fd6cff"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -34034,42 +33928,6 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/mem"
-        }
-      ],
-      "components": [
-        {
-          "type": "library",
-          "name": "mimic-fn",
-          "version": "1.2.0",
-          "bom-ref": "calm-frames-app@0.1.0|mem@1.1.0|mimic-fn@1.2.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/mimic-fn@1.2.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/mimic-fn/-/mimic-fn-1.2.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "8dff38bb1cf08ae88854a88e2e97d893b378e934b2f2e6d3a279a7798f6fae91cd027a74401b76071595f5d3b7fe3f81a1501bf9ae46e980cf5b73391ce74c59"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/mem/node_modules/mimic-fn"
-            }
-          ]
         }
       ]
     },
@@ -36343,10 +36201,6 @@
         }
       ],
       "properties": [
-        {
-          "name": "cdx:npm:package:development",
-          "value": "true"
-        },
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/mimic-fn"
@@ -39926,6 +39780,40 @@
     },
     {
       "type": "library",
+      "name": "p-defer",
+      "version": "1.0.0",
+      "bom-ref": "calm-frames-app@0.1.0|p-defer@1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/p-defer@1.0.0",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/p-defer/-/p-defer-1.0.0.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "c01df07c0c59a64d80cce7d430934bf9ddfac68b61452ca3f045ce6b87fa18ca980cdf4125a6922126ec93ec12f5a6e69de6d5c3de42d8a6f9b7ce549a90b1bb"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/p-defer"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "p-finally",
       "version": "1.0.0",
       "bom-ref": "calm-frames-app@0.1.0|p-finally@1.0.0",
@@ -39955,6 +39843,40 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/p-finally"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "p-is-promise",
+      "version": "2.1.0",
+      "bom-ref": "calm-frames-app@0.1.0|p-is-promise@2.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/p-is-promise@2.1.0",
+      "externalReferences": [
+        {
+          "url": "https://registry.npmjs.org/p-is-promise/-/p-is-promise-2.1.0.tgz",
+          "type": "distribution",
+          "hashes": [
+            {
+              "alg": "SHA-512",
+              "content": "6375b4c2544f2bc64c45b36af7b978339a2d8a8780e659b5cfb6e4364c4291af0748f8d1d314569a90a673dbad89a2cff496f5783f0181e2314d6e00205e393e"
+            }
+          ],
+          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/p-is-promise"
         }
       ]
     },
@@ -61566,18 +61488,6 @@
       "ref": "calm-frames-app@0.1.0|encodeurl@1.0.2"
     },
     {
-      "ref": "calm-frames-app@0.1.0|encoding@0.1.13",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|encoding@0.1.13|iconv-lite@0.6.3"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|encoding@0.1.13|iconv-lite@0.6.3",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|safer-buffer@2.1.2"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|end-of-stream@1.4.5",
       "dependsOn": [
         "calm-frames-app@0.1.0|once@1.4.0"
@@ -63151,18 +63061,8 @@
     {
       "ref": "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1",
       "dependsOn": [
-        "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|node-fetch@1.7.3",
+        "calm-frames-app@0.1.0|node-fetch@2.7.0",
         "calm-frames-app@0.1.0|whatwg-fetch@3.6.20"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|is-stream@1.1.0"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|node-fetch@1.7.3",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|encoding@0.1.13",
-        "calm-frames-app@0.1.0|isomorphic-fetch@2.2.1|is-stream@1.1.0"
       ]
     },
     {
@@ -63937,6 +63837,12 @@
       ]
     },
     {
+      "ref": "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
+      "dependsOn": [
+        "calm-frames-app@0.1.0|p-defer@1.0.0"
+      ]
+    },
+    {
       "ref": "calm-frames-app@0.1.0|map-cache@0.2.2"
     },
     {
@@ -63958,13 +63864,12 @@
       "ref": "calm-frames-app@0.1.0|media-typer@1.1.1"
     },
     {
-      "ref": "calm-frames-app@0.1.0|mem@1.1.0",
+      "ref": "calm-frames-app@0.1.0|mem@4.3.0",
       "dependsOn": [
-        "calm-frames-app@0.1.0|mem@1.1.0|mimic-fn@1.2.0"
+        "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
+        "calm-frames-app@0.1.0|mimic-fn@2.1.0",
+        "calm-frames-app@0.1.0|p-is-promise@2.1.0"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|mem@1.1.0|mimic-fn@1.2.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|memoize-one@5.2.1"
@@ -64634,7 +64539,6 @@
     {
       "ref": "calm-frames-app@0.1.0|node-fetch@2.7.0",
       "dependsOn": [
-        "calm-frames-app@0.1.0|encoding@0.1.13",
         "calm-frames-app@0.1.0|whatwg-url@5.0.0"
       ]
     },
@@ -64980,7 +64884,7 @@
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|lcid@1.0.0",
-        "calm-frames-app@0.1.0|mem@1.1.0",
+        "calm-frames-app@0.1.0|mem@4.3.0",
         "calm-frames-app@0.1.0|os-locale@2.1.0|execa@0.7.0"
       ]
     },
@@ -65052,7 +64956,13 @@
       ]
     },
     {
+      "ref": "calm-frames-app@0.1.0|p-defer@1.0.0"
+    },
+    {
       "ref": "calm-frames-app@0.1.0|p-finally@1.0.0"
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|p-is-promise@2.1.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|p-limit@3.1.0",

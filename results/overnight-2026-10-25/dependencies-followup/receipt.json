@@ -1,0 +1,267 @@
+{
+  "recorded_utc": "2026-10-25T08:04:59.590250+00:00",
+  "item": 12,
+  "status": "Two further scoped host-tool remediations verified; overall Audit remains open.",
+  "base": "fea683258b7425e829beba521574e15355a598d6",
+  "checked_code_source": "7f3e135f0fec98ef2de72b1d6aaef504de964602",
+  "code_commits_in_order": [
+    "a158a04e6e2438e10fef6d037b94f4e84d6821f7",
+    "9e1c6b2f3b57cb4252ccbddc8befd1eb657aec40",
+    "7f3e135f0fec98ef2de72b1d6aaef504de964602"
+  ],
+  "runtime": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "checks": [
+    {
+      "name": "followup-install-final",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 24.77
+    },
+    {
+      "name": "followup-compatibility",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_shell_quote.test.mjs",
+        "app/tools/build_dependency_compat.test.mjs",
+        "app/tools/legacy_logkitty.test.mjs",
+        "app/tools/body_parser_dependency.test.mjs",
+        "app/tools/legacy_spawn_dependency.test.mjs",
+        "app/tools/legacy_tmp_dependency.test.mjs",
+        "app/tools/legacy_fetch_dependency.test.mjs",
+        "app/tools/legacy_locale_dependency.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.11
+    },
+    {
+      "name": "followup-typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 12.16
+    },
+    {
+      "name": "followup-fetch-portable",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_fetch_dependency.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.37
+    },
+    {
+      "name": "followup-sbom-write",
+      "command": [
+        "python3",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.84
+    },
+    {
+      "name": "followup-sbom-check",
+      "command": [
+        "python3",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "<evidence-output>/followup-sbom-reproduction"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.35
+    },
+    {
+      "name": "followup-audit-after",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "audit",
+        "--package-lock-only",
+        "--json"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 6.58
+    },
+    {
+      "name": "followup-decode-barrier",
+      "command": [
+        "node",
+        "<evidence-output>/check_decode_barrier.cjs",
+        ".",
+        "<evidence-output>/decode-uri-component-0.5.1/index.js"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.06
+    }
+  ],
+  "tests": {
+    "passed": 53,
+    "failed": 0
+  },
+  "negative_controls": {
+    "fetch_1_7_3": "Actual FBJS/isomorphic fallback forwarded fictional authorization on a redirect to a different loopback host.",
+    "mem_1_1_0": "A supplied cache retained 16 expired entries without a reread; installed locale-consumer contracts already passed."
+  },
+  "scope": {
+    "fetch": "Only isomorphic-fetch 2.2.1 now resolves existing CommonJS node-fetch 2.7.0. Both wrappers stay unchanged; native fetch remains preferred.",
+    "locale": "Only os-locale 2.1.0 resolves mem 4.3.0. Actual environment priority, command parsing, fallback, sync/async cache identity and clear behavior pass.",
+    "loopback_fixture": "One 127.0.0.1 listener; two reserved .invalid host identities resolved only by a test-owned Agent to loopback. No external DNS/network or interface changes."
+  },
+  "limits": [
+    "No HTTPS downgrade runtime check or Mac/native acceptance is claimed.",
+    "Duplicate Headers.get/raw behavior differs across fetch majors; header-api-differences.json records it. The observed wrappers do not depend on the old duplicate-value/casing behavior; wire headers and used Request/Response paths pass.",
+    "os-locale does not set maxAge or custom mem options. The repaired TTL API is a dormant dependency defect in the observed caller, not evidence of a reachable household memory attack.",
+    "Install scripts were skipped. No Shaka/media/native rebuild, full app suite, Python audit or hosted run belongs to this lane.",
+    "Existing peer/tree warnings remain; SBOM byte reproduction does not waive them or accept the remaining advisory risk."
+  ],
+  "audit_delta": {
+    "before_source": "../dependencies/audit-after.json",
+    "before_source_commit": "fea683258b7425e829beba521574e15355a598d6",
+    "before_sha256": "4ab259f133e3c9122f7c4f2724eada0ad3dfeee5852628d213cf22e4949a162b",
+    "before": {
+      "info": 0,
+      "low": 0,
+      "moderate": 21,
+      "high": 17,
+      "critical": 0,
+      "total": 38
+    },
+    "after": {
+      "info": 0,
+      "low": 0,
+      "moderate": 19,
+      "high": 14,
+      "critical": 0,
+      "total": 33
+    },
+    "unique_advisories_before": 17,
+    "unique_advisories_after": 15,
+    "removed_advisories": [
+      "GHSA-4xcv-9jjx-gfj3",
+      "GHSA-r683-j2x4-v87g"
+    ],
+    "added_advisories": [],
+    "note": "The before scan is the preceding same-day exact-lock npm 10.9.8 result; the after scan is fresh. Package totals include propagated findings, not independent exploits."
+  },
+  "audit_problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21",
+    "pip-audit did not run: not rescanned in this npm-only follow-up"
+  ],
+  "preserved": {
+    "paths": [
+      "app/src",
+      "app/test",
+      "pipeline",
+      "app/manifest.toml",
+      "scripts/audit_exceptions.toml",
+      "docs/judging-package"
+    ],
+    "amazon_locked_nodes_unchanged": true,
+    "no_push_merge_publication": true
+  },
+  "input_files": {
+    "app/package.json": {
+      "bytes": 12867,
+      "sha256": "8a0364fef5be37b840f73c36163ab391d4b8034d258c81df6fb44cb080049b20"
+    },
+    "app/package-lock.json": {
+      "bytes": 796569,
+      "sha256": "eb9e7cc870cc351a5e57bfcf43641b6621a4d49d3ce7e0a401319836986d4240"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 16432,
+      "sha256": "bfab52f6efdd328ab2448ad87ab7f5a75b1b9069c8b381a277963986512135a0"
+    },
+    "app/tools/legacy_fetch_dependency.test.mjs": {
+      "bytes": 7250,
+      "sha256": "7771b8ea1ea88fa7f85cd0e12e201bc916e9b636727d3827d5fc39a412e74ac9"
+    },
+    "app/tools/legacy_locale_dependency.test.mjs": {
+      "bytes": 3781,
+      "sha256": "45d7592d00f3f36e7c0827b3b4bb40623893862327596c1474d9abe4d24af17a"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2220699,
+      "sha256": "bb4bcca37d9cd5ec4a4cef1624c27d5a1da2ab62a82d32e9331098ec1e0e4a51"
+    },
+    "docs/SBOM.ingest.cdx.json": {
+      "bytes": 67870,
+      "sha256": "23b797bd26eaad76db8e2de18e162bb0c95db305d9560efd409e70ac26a43980"
+    },
+    "docs/SBOM.cdk.cdx.json": {
+      "bytes": 6111,
+      "sha256": "50f9dfc198c9add372faf08d494813e37ced8e8ed48caf7d41642ef59eb76ebf"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "f23a582ad32b31bda576bd9622468fde6d8ee90b81a3a67a6baa7c9d7cf5d827"
+    },
+    "scripts/audit_exceptions.toml": {
+      "bytes": 16736,
+      "sha256": "0f1c478bc96af9834bade4c4d7832f8c19c684087adc12f024914309ab941a80"
+    }
+  },
+  "logs": {
+    "fetch-before": {
+      "raw_sha256": "827e0037afb601cbf777c257fa161ce621da48e9bc146ff5a05d4b549cd4e2aa",
+      "normalized_sha256": "9c210774b5575740261edbf33bec0bd7d5ae5d974af7de73aecf3763a3d3ca5b"
+    },
+    "fetch-final": {
+      "raw_sha256": "7b3b4bc1f5273277c43c248f16d3f8e90b9727f9cbf2b2b55b5e77151ce5865d",
+      "normalized_sha256": "7b3b4bc1f5273277c43c248f16d3f8e90b9727f9cbf2b2b55b5e77151ce5865d"
+    },
+    "locale-before": {
+      "raw_sha256": "3f2d2d4bf6f86bf1d48385d0a4cf2d950936ba8f0d542a262d675b754178c0d3",
+      "normalized_sha256": "8c48920e9aa023f7d2dbac4a4a351b080e39808cda7406caea2ee026053df4d4"
+    },
+    "followup-install-final": {
+      "raw_sha256": "b46ccd72c333c0339e316a7e2f8b46a5d37a481dfdaf3f93c5128b2a60e57e64",
+      "normalized_sha256": "b46ccd72c333c0339e316a7e2f8b46a5d37a481dfdaf3f93c5128b2a60e57e64"
+    },
+    "followup-compatibility": {
+      "raw_sha256": "0cce8e4f07c9b3217f72de191da441c4ad7414702ccf15ae8e5a3107384824d8",
+      "normalized_sha256": "0cce8e4f07c9b3217f72de191da441c4ad7414702ccf15ae8e5a3107384824d8"
+    },
+    "followup-typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    "followup-fetch-portable": {
+      "raw_sha256": "b9a588638c47f3551dd7d93f1ced6ab6e0d48619df22c223850000a8b8df1d9b",
+      "normalized_sha256": "b9a588638c47f3551dd7d93f1ced6ab6e0d48619df22c223850000a8b8df1d9b"
+    },
+    "followup-sbom-write": {
+      "raw_sha256": "ee198790da049ec1afc31941735087bb3cff6a4d29f1d92072530ccc48f8b363",
+      "normalized_sha256": "1ea373176753c3c8e6dd0009ab91e973eeeab4e8afce704a335ccd34be904971"
+    },
+    "followup-sbom-check": {
+      "raw_sha256": "6c0a106c27ab1f06bf2a5abaf2af315a73c1eb984889cad122ebe25c13d79c0d",
+      "normalized_sha256": "6b01eeb4bcb41ade419eed193358120cc8782d5632de1d29e0c661ab6541a166"
+    },
+    "followup-decode-barrier": {
+      "raw_sha256": "ce19f37df3e6d52c420d48ca9b2f0976abf30810ab91f01ddf494cd2dfc5f531",
+      "normalized_sha256": "ce19f37df3e6d52c420d48ca9b2f0976abf30810ab91f01ddf494cd2dfc5f531"
+    }
+  },
+  "log_normalization": "Checkout/tool/cache prefixes, ANSI color and trailing whitespace normalized; diagnostics retained."
+}
