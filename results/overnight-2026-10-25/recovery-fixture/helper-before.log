@@ -1,0 +1,27 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_________ test_stopped_process_group_recognizes_a_dead_unreaped_child __________
+
+    @pytest.mark.skipif(sys.platform != "linux", reason="Linux zombie-state regression")
+    def test_stopped_process_group_recognizes_a_dead_unreaped_child():
+        process = subprocess.Popen([sys.executable, "-c", "pass"], start_new_session=True)
+        try:
+            deadline = time.monotonic() + 5
+            while time.monotonic() < deadline:
+                fields = Path(f"/proc/{process.pid}/stat").read_text().rpartition(")")[2].split()
+                if fields[0] == "Z":
+                    break
+                time.sleep(0.01)
+            else:
+                pytest.fail("the owned child did not reach its unreaped dead state")
+            # killpg(0) still succeeds, but a zombie cannot run or write a prepared file.
+            os.killpg(process.pid, 0)
+>           assert _process_group_stopped(process.pid)
+E           AssertionError: assert False
+E            +  where False = _process_group_stopped(454346)
+E            +    where 454346 = <Popen: returncode: None args: ['/workspace/calm-frames-overnight-2026-10-25...>.pid
+
+pipeline/tests/test_preparation_recovery.py:847: AssertionError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_preparation_recovery.py::test_stopped_process_group_recognizes_a_dead_unreaped_child
+1 failed, 1 passed, 77 deselected in 0.32s

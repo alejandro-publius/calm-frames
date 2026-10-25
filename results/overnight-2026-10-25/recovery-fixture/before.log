@@ -1,0 +1,135 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_sigkill_after_a_step_commit_resumes_from_the_ledger_and_is_never_ready_meanwhile _
+
+title = namespace(tmp=PosixPath('<pytest-temp>/test_sigkill_after_a_step_comm0'), source=PosixPath('/tmp/pyte...m0/test_key.pem'), public=PosixPath('<pytest-temp>/test_sigkill_after_a_step_comm0/test_key.pub.pem'))
+
+    @needs_ffmpeg
+    def test_sigkill_after_a_step_commit_resumes_from_the_ledger_and_is_never_ready_meanwhile(title):
+        expected = _prepare(title)
+        assert expected["status"] == "ready"
+        sha = expected["source_sha256"]
+        layout = TitleLayout(title.workdir, sha)
+        identity = snapshot(layout)
+        title.workdir.rename(title.tmp / "uninterrupted")
+>       _kill_when_blocked(title, {"match": "calm.mp4", "profile": "broadcast", "partial_bytes": 300,
+                                   "marker": str(title.tmp / "blocked"), "seconds": 120})
+
+pipeline/tests/test_preparation_recovery.py:876:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+title = namespace(tmp=PosixPath('<pytest-temp>/test_sigkill_after_a_step_comm0'), source=PosixPath('/tmp/pyte...m0/test_key.pem'), public=PosixPath('<pytest-temp>/test_sigkill_after_a_step_comm0/test_key.pub.pem'))
+rule = {'match': 'calm.mp4', 'profile': 'broadcast', 'partial_bytes': 300, 'marker': '<pytest-temp>/test_sigkill_after_a_step_comm0/blocked', ...}
+
+    def _kill_when_blocked(title, rule: dict) -> None:
+        """Start a real preparation, wait until it stops at ``rule``, then SIGKILL its group."""
+        marker = Path(rule["marker"])
+        title.analyzer.plan["block"] = [rule]
+        title.analyzer.write()
+        process = subprocess.Popen(_prepare_command(title), cwd=REPO_ROOT, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, start_new_session=True)
+        deadline = time.monotonic() + 120
+        while not marker.exists():
+            if process.poll() is not None:
+                out, err = process.communicate()
+                pytest.fail(f"the preparation ended before it reached the kill point: {out}{err}")
+            if time.monotonic() > deadline:
+                os.killpg(process.pid, signal.SIGKILL)
+                pytest.fail("the preparation never reached the kill point")
+            time.sleep(0.05)
+        os.killpg(process.pid, signal.SIGKILL)
+        process.communicate(timeout=30)
+        assert process.returncode == -signal.SIGKILL
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            try:
+                os.killpg(process.pid, 0)
+            except ProcessLookupError:
+                break
+            except PermissionError:
+                pass  # macOS answers EPERM while killed children wait to be reaped
+            time.sleep(0.05)
+        else:
+>           pytest.fail("a process from the killed preparation is still running")
+E           Failed: a process from the killed preparation is still running
+
+pipeline/tests/test_preparation_recovery.py:852: Failed
+__________ test_sigkill_during_verification_redoes_only_verification ___________
+
+title = namespace(tmp=PosixPath('<pytest-temp>/test_sigkill_during_verificati0'), source=PosixPath('/tmp/pyte...i0/test_key.pem'), public=PosixPath('<pytest-temp>/test_sigkill_during_verificati0/test_key.pub.pem'))
+
+    @needs_ffmpeg
+    def test_sigkill_during_verification_redoes_only_verification(title):
+        first = _prepare(title)
+        assert first["status"] == "ready"
+        layout = TitleLayout(title.workdir, first["source_sha256"])
+        identity = snapshot(layout)
+        before = {name: record.completed_at for name, record in Ledger(layout.root).steps.items()}
+        layout.verify_report_path.unlink()
+>       _kill_when_blocked(title, {"match": "safe/broadcast/safe.mp4", "marker": str(title.tmp / "blocked"),
+                                   "seconds": 120})
+
+pipeline/tests/test_preparation_recovery.py:902:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+title = namespace(tmp=PosixPath('<pytest-temp>/test_sigkill_during_verificati0'), source=PosixPath('/tmp/pyte...i0/test_key.pem'), public=PosixPath('<pytest-temp>/test_sigkill_during_verificati0/test_key.pub.pem'))
+rule = {'match': 'safe/broadcast/safe.mp4', 'marker': '<pytest-temp>/test_sigkill_during_verificati0/blocked', 'seconds': 120}
+
+    def _kill_when_blocked(title, rule: dict) -> None:
+        """Start a real preparation, wait until it stops at ``rule``, then SIGKILL its group."""
+        marker = Path(rule["marker"])
+        title.analyzer.plan["block"] = [rule]
+        title.analyzer.write()
+        process = subprocess.Popen(_prepare_command(title), cwd=REPO_ROOT, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, start_new_session=True)
+        deadline = time.monotonic() + 120
+        while not marker.exists():
+            if process.poll() is not None:
+                out, err = process.communicate()
+                pytest.fail(f"the preparation ended before it reached the kill point: {out}{err}")
+            if time.monotonic() > deadline:
+                os.killpg(process.pid, signal.SIGKILL)
+                pytest.fail("the preparation never reached the kill point")
+            time.sleep(0.05)
+        os.killpg(process.pid, signal.SIGKILL)
+        process.communicate(timeout=30)
+        assert process.returncode == -signal.SIGKILL
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            try:
+                os.killpg(process.pid, 0)
+            except ProcessLookupError:
+                break
+            except PermissionError:
+                pass  # macOS answers EPERM while killed children wait to be reaped
+            time.sleep(0.05)
+        else:
+>           pytest.fail("a process from the killed preparation is still running")
+E           Failed: a process from the killed preparation is still running
+
+pipeline/tests/test_preparation_recovery.py:852: Failed
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_preparation_recovery.py::test_sigkill_after_a_step_commit_resumes_from_the_ledger_and_is_never_ready_meanwhile
+FAILED pipeline/tests/test_preparation_recovery.py::test_sigkill_during_verification_redoes_only_verification
+2 failed in 30.13s
+{
+  "pytest_exit_code": 1,
+  "killed_groups": [
+    439561,
+    443103
+  ],
+  "remaining_group_members": [
+    {
+      "pid": 439615,
+      "ppid": 1,
+      "pgid": 439561,
+      "state": "Z"
+    },
+    {
+      "pid": 443348,
+      "ppid": 1,
+      "pgid": 443103,
+      "state": "Z"
+    }
+  ]
+}
