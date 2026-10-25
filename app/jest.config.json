@@ -1,7 +1,7 @@
 {
   "preset": "react-native",
   "transformIgnorePatterns": [
-    "node_modules/(?!((jest-)?react-native|@react-native(-community)?|@amazon-devices|@shopify/flash-list|recyclerlistview|iso-639-3|@reduxjs/toolkit|immer|react-native-safe-area-context)/)"
+    "node_modules/(?!((jest-)?react-native|@react-native(-community)?|@amazon-devices|@shopify/flash-list|recyclerlistview|decode-uri-component-modern|iso-639-3|@reduxjs/toolkit|immer|react-native-safe-area-context)/)"
   ],
   "modulePathIgnorePatterns": ["src/w3cmedia/shakaplayer/dist/"],
   "moduleNameMapper": {

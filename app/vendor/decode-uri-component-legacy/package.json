@@ -1,0 +1,16 @@
+{
+  "name": "@calm-frames/decode-uri-component-legacy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CommonJS API adapter for the pinned upstream URI-decoder fix.",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "decode-uri-component-modern": "0.5.1"
+  }
+}

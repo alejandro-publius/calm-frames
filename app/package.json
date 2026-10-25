@@ -85,7 +85,9 @@
     "recyclerlistview": "^4.2.1",
     "underscore": "^1.13.7",
     "xmldom": "npm:@xmldom/xmldom@~0.8.15",
-    "yup": "~1.4.0"
+    "yup": "~1.4.0",
+    "decode-uri-component": "file:vendor/decode-uri-component-legacy",
+    "decode-uri-component-modern": "npm:decode-uri-component@0.5.1"
   },
   "devDependencies": {
     "@amazon-devices/kepler-cli-platform": "~0.22.7",
@@ -154,7 +156,8 @@
     "zod@^4.0.0": "4.6.6",
     "@react-native-community/cli-platform-android@2.9.0": {
       "logkitty": "0.7.1"
-    }
+    },
+    "decode-uri-component": "$decode-uri-component"
   },
   "engines": {
     "node": ">=22"

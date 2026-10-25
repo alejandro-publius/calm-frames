@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T08:12:43Z",
+  "generated_utc": "2026-10-25T19:55:01Z",
   "python": {
     "ran": true,
     "sources": [
@@ -31,10 +31,10 @@
     "totals": {
       "info": 0,
       "low": 0,
-      "moderate": 19,
+      "moderate": 14,
       "high": 14,
       "critical": 0,
-      "total": 33
+      "total": 28
     },
     "findings": [
       {
@@ -48,20 +48,6 @@
         "package": "@amazon-devices/kepler-module-manifest-builder",
         "severity": "high",
         "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@amazon-devices/react-navigation__core",
-        "severity": "moderate",
-        "direct": true,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@amazon-devices/react-navigation__native",
-        "severity": "moderate",
-        "direct": true,
         "ids": [],
         "fix_available": false
       },
@@ -106,15 +92,6 @@
         "direct": false,
         "ids": [
           "1098094"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "decode-uri-component",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1147955"
         ],
         "fix_available": false
       },
@@ -193,13 +170,6 @@
         "fix_available": false
       },
       {
-        "package": "query-string",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
         "package": "react-devtools-core",
         "severity": "high",
         "direct": false,
@@ -230,13 +200,6 @@
         "direct": false,
         "ids": [],
         "fix_available": false
-      },
-      {
-        "package": "source-map-resolve",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
       },
       {
         "package": "toml",
@@ -297,8 +260,8 @@
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 33,
-    "npm_advisories_total": 15,
+    "npm_packages_with_advisories": 28,
+    "npm_advisories_total": 14,
     "npm_critical": 0,
     "npm_high": 14,
     "exception_groups": 3,

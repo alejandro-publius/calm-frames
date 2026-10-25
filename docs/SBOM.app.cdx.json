@@ -5933,6 +5933,28 @@
     },
     {
       "type": "library",
+      "name": "decode-uri-component-legacy",
+      "group": "@calm-frames",
+      "version": "0.1.0",
+      "bom-ref": "calm-frames-app@0.1.0|@calm-frames/decode-uri-component-legacy@0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40calm-frames/decode-uri-component-legacy@0.1.0",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/decode-uri-component"
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "image-size-legacy",
       "group": "@calm-frames",
       "version": "0.1.0",
@@ -19379,8 +19401,8 @@
     {
       "type": "library",
       "name": "decode-uri-component",
-      "version": "0.2.2",
-      "bom-ref": "calm-frames-app@0.1.0|decode-uri-component@0.2.2",
+      "version": "0.5.1",
+      "bom-ref": "calm-frames-app@0.1.0|decode-uri-component@0.5.1",
       "licenses": [
         {
           "license": {
@@ -19389,15 +19411,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/decode-uri-component@0.2.2",
+      "purl": "pkg:npm/decode-uri-component@0.5.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/decode-uri-component/-/decode-uri-component-0.2.2.tgz",
+          "url": "https://registry.npmjs.org/decode-uri-component/-/decode-uri-component-0.5.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "16a51843ef28d79f06c864eb305266b3daa1dc2a932af02a82ab139e42c8f2c2aed34dbca2ba8187134c16415e9f4cc6ca0e9ea40083df6a63564e7c9e0204ad"
+              "content": "bd61d0917820d9c137041e2b47473e3d8c3d0424332e834844c23b02e9c8919b2def8b70fefa4fa7b54ba18b6c47f732d5fe798375c3594b257de0998e2649c8"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -19406,7 +19428,7 @@
       "properties": [
         {
           "name": "cdx:npm:package:path",
-          "value": "node_modules/decode-uri-component"
+          "value": "node_modules/decode-uri-component-modern"
         }
       ]
     },
@@ -57502,6 +57524,7 @@
         "calm-frames-app@0.1.0|@amazon-devices/vega-carousel@1.0.1",
         "calm-frames-app@0.1.0|@babel/core@7.29.7",
         "calm-frames-app@0.1.0|@babel/runtime@7.29.7",
+        "calm-frames-app@0.1.0|@calm-frames/decode-uri-component-legacy@0.1.0",
         "calm-frames-app@0.1.0|@calm-frames/image-size-legacy@0.1.0",
         "calm-frames-app@0.1.0|@jest/globals@29.7.0",
         "calm-frames-app@0.1.0|@react-native-community/cli@20.2.0",
@@ -57526,6 +57549,7 @@
         "calm-frames-app@0.1.0|babel-jest@29.7.0",
         "calm-frames-app@0.1.0|babel-plugin-transform-remove-console@6.9.4",
         "calm-frames-app@0.1.0|base-64@1.0.0",
+        "calm-frames-app@0.1.0|decode-uri-component@0.5.1",
         "calm-frames-app@0.1.0|eslint-config-prettier@6.15.0",
         "calm-frames-app@0.1.0|eslint-plugin-simple-import-sort@5.0.3",
         "calm-frames-app@0.1.0|eslint@8.57.1",
@@ -58882,6 +58906,12 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|@bcoe/v8-coverage@0.2.3"
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|@calm-frames/decode-uri-component-legacy@0.1.0",
+      "dependsOn": [
+        "calm-frames-app@0.1.0|decode-uri-component@0.5.1"
+      ]
     },
     {
       "ref": "calm-frames-app@0.1.0|@calm-frames/image-size-legacy@0.1.0",
@@ -61363,7 +61393,7 @@
       "ref": "calm-frames-app@0.1.0|decamelize@1.2.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|decode-uri-component@0.2.2"
+      "ref": "calm-frames-app@0.1.0|decode-uri-component@0.5.1"
     },
     {
       "ref": "calm-frames-app@0.1.0|dedent@1.7.2"
@@ -65191,7 +65221,7 @@
     {
       "ref": "calm-frames-app@0.1.0|query-string@7.1.3",
       "dependsOn": [
-        "calm-frames-app@0.1.0|decode-uri-component@0.2.2",
+        "calm-frames-app@0.1.0|@calm-frames/decode-uri-component-legacy@0.1.0",
         "calm-frames-app@0.1.0|filter-obj@1.1.0",
         "calm-frames-app@0.1.0|split-on-first@1.1.0",
         "calm-frames-app@0.1.0|strict-uri-encode@2.0.0"
@@ -67131,8 +67161,8 @@
     {
       "ref": "calm-frames-app@0.1.0|source-map-resolve@0.5.3",
       "dependsOn": [
+        "calm-frames-app@0.1.0|@calm-frames/decode-uri-component-legacy@0.1.0",
         "calm-frames-app@0.1.0|atob@2.1.2",
-        "calm-frames-app@0.1.0|decode-uri-component@0.2.2",
         "calm-frames-app@0.1.0|resolve-url@0.2.1",
         "calm-frames-app@0.1.0|source-map-url@0.4.1",
         "calm-frames-app@0.1.0|urix@0.1.0"
