@@ -7,8 +7,9 @@
  * focus, and whether a hold still loaded. Nothing in the picture changes.
  *
  * The device drops the app's console output under load, so these lines are
- * evidence only when they arrive; their absence proves nothing. Release
- * builds strip console output and never print them.
+ * evidence only when they arrive; their absence proves nothing. The __DEV__
+ * check disables these traces in Release. The Babel configuration retains
+ * console.warn, so stripping console output is not the privacy boundary.
  */
 export const TRACE_PREFIX = 'CALM_TRACE';
 
