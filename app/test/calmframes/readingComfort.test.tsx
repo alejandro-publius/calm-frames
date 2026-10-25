@@ -147,7 +147,7 @@ describe('Reading comfort in Parents', () => {
     layout('parent-area-reading-group', 1800, 330);
     layout('parent-area-reading-comfort', 60, 250);
     expect(scroll).toHaveBeenCalled();
-    const last = scroll.mock.calls.at(-1)![0] as { y: number; animated: boolean };
+    const last = scroll.mock.calls[scroll.mock.calls.length - 1][0] as { y: number; animated: boolean };
     expect(last.animated).toBe(false);
     expect(1860 - last.y).toBeGreaterThanOrEqual(0);
     expect(2110 - last.y).toBeLessThanOrEqual(height);

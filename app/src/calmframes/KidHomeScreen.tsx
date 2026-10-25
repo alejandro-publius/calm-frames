@@ -234,7 +234,7 @@ const KidHomeScreen = ({
     const poster = findNodeHandle(posterRefs.current[featured?.title.id ?? ''] ?? null) ?? undefined;
     setFocusTargets(previous => previous.watch === watch && previous.poster === poster
       ? previous : { watch, poster });
-  });
+  }, [featured?.title.id, showIntroduction, choosingProfile, islandHome, otherStories.length]);
   const empty = listed.length === 0;
   // With nothing to watch, the shelf does not ask who is watching: there is
   // nothing for the answer to change, and one fewer thing to read.

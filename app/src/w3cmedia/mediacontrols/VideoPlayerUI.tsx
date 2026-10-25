@@ -311,6 +311,7 @@ export const VideoPlayerUI = React.memo(
 
 const styles = StyleSheet.create({
   paused: {
+    zIndex: 1,
     position: 'absolute', top: scale(CALM_SPACE.SAFE_Y + 88), right: scale(CALM_SPACE.SAFE_X),
     backgroundColor: CALM_COLORS.SURFACE, padding: scale(16), borderRadius: scale(CALM_SURFACE.STATUS_RADIUS),
   },
