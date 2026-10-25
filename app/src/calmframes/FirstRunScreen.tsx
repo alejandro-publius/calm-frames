@@ -85,6 +85,7 @@ import {
   setPin,
 } from './parentGate';
 import PinKeypad from './PinKeypad';
+import ReadingStop, { READING_STOP_ROOM } from './ReadingStop';
 import StatusNotice from './StatusNotice';
 import { useUiCapture } from './uiCapture';
 import {
@@ -312,13 +313,16 @@ const FirstRunScreen = ({
     return (
       <View testID={testID} style={styles.screen}>
         {header}
-        <ScrollView key="preset" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+        {/* Nothing sits below the last preset. With room left to scroll there, the
+            first Down from Extra cautious only scrolled that room on the TV, and it
+            took a second Down to reach Next. */}
+        <ScrollView key="preset" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={[styles.content, styles.endsAtLastRow]}>
           <Text style={styles.helper}>{PRESET_STEP_NOTE}</Text>
           <View
             accessibilityRole="radiogroup"
             accessibilityLabel={STEP_TITLES.preset}
             aria-label={STEP_TITLES.preset}>
-            {PRESET_NAMES.map((name: PresetName) => {
+            {PRESET_NAMES.map((name: PresetName, index: number) => {
               const chosen = settings.preset === name;
               const key = `preset-${name}`;
               return (
@@ -337,6 +341,7 @@ const FirstRunScreen = ({
                   onPress={() => setSettings({ ...settings, preset: name })}
                   style={[
                     styles.row,
+                    index === PRESET_NAMES.length - 1 ? styles.lastRow : null,
                     chosen ? styles.chosen : null,
                     focusedRow === key ? styles.focused : null,
                   ]}>
@@ -472,7 +477,7 @@ const FirstRunScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       {header}
-      <ScrollView key="explainer" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+      <ScrollView key="explainer" testID={`${testID}-scroll`} style={[styles.scroll, styles.readingRoom]} contentContainerStyle={[styles.content, styles.readingContent]}>
         <View style={styles.review} testID={`${testID}-review`}>
           <Text style={styles.reviewTitle} accessibilityRole="header">
             Your household
@@ -485,20 +490,27 @@ const FirstRunScreen = ({
           </Text>
           <Text style={styles.reviewNote}>{REVIEW_NOTE}</Text>
         </View>
-        <View style={styles.explainer} testID={`${testID}-explainer`}>
-          {EXPLAINER_LINES.map((line, index) => (
-            <Text
-              key={line}
-              testID={`${testID}-explainer-line-${index}`}
-              style={styles.explainerLine}>
-              {line}
-            </Text>
-          ))}
-        </View>
-        <Text style={styles.note} testID={`${testID}-reading-time`}>
-          About {EXPLAINER_TARGET_SECONDS} seconds to read. You can find it again
-          under parental controls.
-        </Text>
+        {/* The approved sentence is the last line and starts below the screen's
+            edge. On the TV the only way down to it was the scroller itself, which
+            takes focus with no ring. Up from Open library now lands on this stop:
+            its ring shows, the scroller brings it into view and VoiceView reads
+            every line. The text stays where it stood. */}
+        <ReadingStop flush testID={`${testID}-explainer-reading`} style={styles.explainerStop}>
+          <View style={styles.explainer} testID={`${testID}-explainer`}>
+            {EXPLAINER_LINES.map((line, index) => (
+              <Text
+                key={line}
+                testID={`${testID}-explainer-line-${index}`}
+                style={styles.explainerLine}>
+                {line}
+              </Text>
+            ))}
+          </View>
+          <Text style={styles.note} testID={`${testID}-reading-time`}>
+            About {EXPLAINER_TARGET_SECONDS} seconds to read. You can find it again
+            under parental controls.
+          </Text>
+        </ReadingStop>
       </ScrollView>
       <View testID={`${testID}-footer`} style={styles.buttons}>
         <CalmButton
@@ -540,6 +552,18 @@ const styles = StyleSheet.create({
     maxWidth: scale(1400),
     paddingBottom: scale(CALM_SPACE.ROW),
   },
+  endsAtLastRow: { paddingBottom: 0 },
+  lastRow: { marginBottom: 0 },
+  // The explainer's reading stop draws its ring outside its text. A scroller
+  // clips at its edge, so this one reaches out by the ring's room and brings
+  // its content back in by the same amount: the text does not move.
+  readingRoom: { marginHorizontal: -scale(READING_STOP_ROOM) },
+  readingContent: {
+    paddingHorizontal: scale(READING_STOP_ROOM),
+    maxWidth: scale(1400 + 2 * READING_STOP_ROOM),
+  },
+  // The space above the lines, less the ring's room the stop takes back.
+  explainerStop: { marginTop: scale(CALM_SPACE.BLOCK - READING_STOP_ROOM) },
   header: { maxWidth: scale(1400), marginBottom: scale(16) },
   brandRow: {
     flexDirection: 'row',
@@ -668,7 +692,6 @@ const styles = StyleSheet.create({
     maxWidth: scale(1160),
   },
   explainer: {
-    marginTop: scale(CALM_SPACE.BLOCK),
     maxWidth: scale(1160),
   },
   explainerLine: {

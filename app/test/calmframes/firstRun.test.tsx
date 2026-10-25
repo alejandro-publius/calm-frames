@@ -13,15 +13,18 @@
  *   salted hash of it.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen, within } from '@testing-library/react-native';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import { CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
+import { READING_STOP_ROOM } from '../../src/calmframes/ReadingStop';
 import { EXPLAINER_LINES, SAFETY_NOTE } from '../../src/calmframes/copy';
 import FirstRunScreen, {
   FirstRunResult,
 } from '../../src/calmframes/FirstRunScreen';
 import {
   DEFAULT_SETTINGS,
+  PRESET_NAMES,
   TV_DIAGONAL_CHOICES_IN,
 } from '../../src/calmframes/household';
 import { attemptPin, hashPin } from '../../src/calmframes/parentGate';
@@ -366,6 +369,48 @@ describe('the first run', () => {
     expect(roomAgain).not.toBe(explainer);
     fireEvent.press(screen.getByLabelText('Back to viewing preset'));
     expect(scroller()).not.toBe(roomAgain);
+  });
+
+  it('leaves nothing to scroll below the last preset, so one Down from it reaches Next', () => {
+    // On the device, with Extra cautious focused, the first Down only scrolled
+    // the room left under the list, and a second Down was needed to reach Next.
+    // Seen to fail with the list's bottom padding, or the last row's gap, put back.
+    renderFirstRun();
+    type('5555'); type('5555');
+    const content = StyleSheet.flatten(screen.UNSAFE_getByType(ScrollView).props.contentContainerStyle);
+    expect(content.paddingBottom).toBe(0);
+    const gaps = PRESET_NAMES.map((name) =>
+      StyleSheet.flatten(screen.getByTestId(`first-run-preset-${name}`).props.style).marginBottom);
+    expect(gaps[gaps.length - 1]).toBe(0);
+    expect(gaps.slice(0, -1).every((gap) => gap > 0)).toBe(true);
+  });
+
+  it('lets the remote land on the explainer lines, approved sentence included, behind a ring that fits', () => {
+    // On the device the approved sentence starts below the screen's edge, and
+    // the only way down to it was the scroller itself, which took focus with no
+    // ring. Seen to fail with the lines out of the stop, with the scroller's
+    // ring room taken away, and with the stop's top gap left at the flush default.
+    renderFirstRun();
+    type('5555'); type('5555');
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    const stop = screen.getByTestId('first-run-explainer-reading');
+    expect(stop.props.focusable).toBe(true);
+    expect(within(stop).getByText(SAFETY_NOTE)).toBeTruthy();
+    for (let index = 0; index < EXPLAINER_LINES.length; index += 1) {
+      expect(within(stop).getByTestId(`first-run-explainer-line-${index}`)).toBeTruthy();
+    }
+    // The ring is drawn outside the text, so the scroller has to hold that room.
+    const scroll = screen.UNSAFE_getByType(ScrollView);
+    const outer = StyleSheet.flatten(scroll.props.style);
+    const inner = StyleSheet.flatten(scroll.props.contentContainerStyle);
+    expect(-outer.marginHorizontal).toBe(scale(READING_STOP_ROOM));
+    expect(inner.paddingHorizontal).toBe(scale(READING_STOP_ROOM));
+    expect(inner.paddingBottom).toBeGreaterThanOrEqual(scale(READING_STOP_ROOM));
+    // The lines stay where they stood: the stop's top gap, ring and padding add
+    // up to the space the review card had above them before.
+    const own = StyleSheet.flatten(stop.props.style);
+    expect(own.marginTop + own.borderWidth + own.padding).toBeCloseTo(scale(CALM_SPACE.BLOCK), 5);
   });
 
   it('has no motion: nothing on any step animates', () => {
