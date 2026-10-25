@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Reconciled for the unpublished product snapshot `6a87937f9f185ac0760d6f8331184e34b876d92c`, including the approved visual work and Fable's integrated name editor. The [checkpoint](CHECKPOINT.md) distinguishes that immutable Mac acceptance target from subsequent isolated dependency work. These private working drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md is unchanged; this editorial correction is not a replacement script or authorization to start media generation.
+Reconciled against verified handoff `15ef46c6e23c8ba627492da23b1b147000031aa4`, containing native candidate `a672f57`, and the [local continuation](../overnight-2026-10-25/WORK_STATUS.md). The [checkpoint](CHECKPOINT.md) distinguishes the recorded Mac package from later cloud changes. These private drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md remains unchanged.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
@@ -39,17 +39,24 @@ remote letter grid. Saving changes the name while retaining that kid's identity,
 preferences and saved places. Cancel and Back discard an unfinished edit. A
 failed storage write is not presented as a successful rename. Letters and spaces
 are supported; accents, digits and punctuation are not current input options.
-The [received native review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md)
-records typing, persistence through relaunch and focus return on `6a87937`.
-Native failed-write/retry and VoiceView remain unobserved; their implementation
-has source tests. The platform keyboard was not used. Later cloud follow-ups
-are separate from this installed package.
+The [recorded native acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)
+retains typing, persistence and focus observations and adds sibling-name refusal
+and controlled failed-write recovery with VoiceView in a made-up household.
+The failure fixture is identified separately from the production package. The
+platform keyboard was not used. Later cloud changes retain separate source and
+native acceptance identities.
 
 ### 🔎 Preparation and playback share a chain of evidence
 
 The offline pipeline records its preparation stages and verifies the resulting media before making a title available. The native player accepts approved prepared editions, validates their maps and routes playhead changes through the playback guard. Playback Proof exposes the record behind a title without making the viewer read it before watching.
 
 Recovery is explicit and covered while the player re-establishes its state. The implementation has automated checks, but complete native compositor and decoder ordering evidence remains limited. We keep that limitation visible instead of describing a test harness as production acceptance.
+
+Caregivers can also use the separate local file pre-check workflow for their
+own eligible, non-DRM media. It analyzes a file without playing it and keeps
+review separate from signing, verification and explicit TV-library approval.
+This workflow does not bypass copyright, DRM, the compiled catalog or map trust.
+It is not a native TV file-picker feature.
 
 The mechanisms are designed to reduce exposure to mapped flashing in the prepared videos this app plays. Analyzer misses and device timing limits remain relevant. A signed map is evidence of identity and approval, not a medical safety certificate.
 
@@ -65,7 +72,7 @@ The development candidate still needs its outstanding dependency review and nati
 >
 > A native Fire TV journey: choose a quiet scene, spend time with it, leave, and return to personal progress.
 >
-> Illustrated story panels are original narrative illustrations. App demonstrations use actual native footage, with the source commit and any time cuts identified in the final edit. Illustrations are not screenshots or evidence of app behavior.
+> The planned replacement edit will identify the recorded source and any time cuts. Native demonstrations require actual app footage. Any later illustrations must be labelled as illustrations and credited separately; they are not screenshots or evidence of app behavior.
 >
 > McWay Falls footage: MoneySavingVideos, "Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset," CC BY 3.0. The prepared edition uses the opening natural-speed segment, downsampled and encoded for the app, with a final audio fade. The final description must identify the additional excerpts and edits used in this demo. No endorsement implied.
 >
@@ -81,7 +88,7 @@ Do not upload this description unchanged: replace the final reviewer-link instru
 
 ## Screenshot ordering and captions
 
-The following files were visually inspected in this cloud review. They are existing Vega Virtual Device window captures with simulator chrome and a remote panel, not newly captured frames of `6360417`. Keep their original bytes. If a later presentation crops to the app viewport, label that crop and retain the source/hash in its asset manifest; no content replacement, recoloring or invented native UI.
+The following files were inspected in the earlier cloud review. They are existing Vega Virtual Device window captures with simulator chrome and a remote panel, not newly captured frames of `a672f57` or the overnight continuation. Keep their original bytes. If a later presentation crops to the app viewport, label that crop and retain the source/hash in its asset manifest; no content replacement, recoloring or invented native UI.
 
 | Order | Existing file | Proposed caption | Source and scope |
 |---|---|---|---|
