@@ -42,7 +42,7 @@ def test_preparation_publishes_only_after_approved_plan_and_unchanged_source(
 ):
     path, job = ready(store)
     job = intake.update(path, run_id="b" * 32)
-    review = {**job["review"], "presets": {"wcag": {"intervals": []}}}
+    review = job["review"]
     digest = fingerprint(review)
     intake.update(path, review=review, review_digest=digest,
                   approved_review=None if failure == "unapproved" else digest)
@@ -58,8 +58,9 @@ def test_preparation_publishes_only_after_approved_plan_and_unchanged_source(
         plan = HidePlan("wcag", job["source_sha256"], 500, 400, 1000, False, []).to_dict()
         if failure == "plan":
             plan["intervals"] = [{"start_ms": 1, "end_ms": 20, "reason": "general"}]
-        layout.plan_path("wcag").parent.mkdir(parents=True)
-        layout.plan_path("wcag").write_text(json.dumps(plan))
+        for preset in ("wcag", "broadcast", "extra-cautious"):
+            layout.plan_path(preset).parent.mkdir(parents=True, exist_ok=True)
+            layout.plan_path(preset).write_text(json.dumps({**plan, "preset": preset}))
         if failure == "source":
             source.write_bytes(b"changed after review")
         return {"status": "failed" if failure == "failed" else "ready"}

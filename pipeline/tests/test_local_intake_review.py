@@ -30,7 +30,10 @@ def reviewed(store):
         "review_map_hashes": {
             p: sha256_file(path / (p + ".json")) for p in ("wcag", "broadcast")
         },
-        "presets": {"wcag": {"intervals": [], "covered_ms": 0}},
+        "presets": {
+            preset: {"intervals": [], "covered_ms": 0}
+            for preset in ("wcag", "broadcast", "extra-cautious")
+        },
     }
     intake.update(path, status="review", review=review, review_digest=fingerprint(review))
     return path, job

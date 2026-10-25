@@ -194,3 +194,33 @@ def test_unreadable_job_does_not_break_the_real_review_server(server, media):
     assert not broken.exists()
     assert server.request('GET', review_url)[1] == original_report
     assert media.read_bytes() == (server.root / job['id'] / 'original.mp4').read_bytes()
+
+
+def test_damaged_nested_review_stays_isolated_through_http(server, media):
+    status, first, _ = server.upload(media.read_bytes())
+    assert status == 200
+    assert server.settled(first['id'])['status'] == 'review'
+    status, second, _ = server.upload(media.read_bytes())
+    assert status == 200
+    assert server.settled(second['id'])['status'] == 'review'
+    path = server.root / first['id']
+    record = path / 'job.json'
+    saved = json.loads(record.read_text())
+    saved['review']['presets'].pop('extra-cautious')
+    record.write_text(json.dumps(saved))
+    before = record.read_bytes()
+    source_before = (path / 'original.mp4').read_bytes()
+    status, value, _ = server.request('GET', '/jobs')
+    assert status == 200
+    jobs = {j['id']: j for j in value['jobs']}
+    assert jobs[first['id']]['status'] == 'unreadable'
+    assert 'review' not in jobs[first['id']]
+    assert jobs[second['id']]['status'] == 'review'
+    assert server.request('GET', f"/jobs/{first['id']}/review")[0] == 400
+    assert server.request('POST', f"/jobs/{first['id']}/approve")[0] == 400
+    assert server.request('GET', f"/jobs/{second['id']}/review")[0] == 200
+    assert record.read_bytes() == before
+    assert (path / 'original.mp4').read_bytes() == source_before
+    assert server.request('POST', f"/jobs/{first['id']}/delete")[0] == 200
+    assert not path.exists()
+    assert server.request('GET', f"/jobs/{second['id']}/review")[0] == 200

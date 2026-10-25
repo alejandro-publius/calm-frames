@@ -73,7 +73,79 @@ def read_job(path: Path) -> dict:
         or not valid_time
     ):
         raise IntakeError("Import metadata is incomplete or unreadable.")
+    validate_saved_review(data)
     return data
+
+
+def validate_saved_review(job: dict) -> None:
+    """Reject incomplete saved plans before they reach a reader or an action.
+
+    This checks the producer's existing format, not medical safety or approval.
+    Source and map bytes are still verified separately before export/preparation.
+    """
+    review = job.get("review")
+    if review is None and job["status"] not in {"review", "signing_blocked", "package_review"}:
+        return
+
+    def number(value) -> bool:
+        try:
+            return type(value) in {int, float} and math.isfinite(value)
+        except OverflowError:
+            return False
+
+    def digest(value) -> bool:
+        return isinstance(value, str) and re.fullmatch(r"[a-f0-9]{64}", value) is not None
+
+    error = "The saved analysis review is incomplete or changed. Analyze again."
+    if (
+        not isinstance(review, dict)
+        or review.get("analysis_complete") is not True
+        or review.get("playable") is not False
+        or not digest(review.get("source_sha256"))
+        or review["source_sha256"] != job.get("source_sha256")
+        or not number(review.get("duration_ms"))
+        or not 0 < review["duration_ms"] <= MAX_SECONDS * 1000
+        or type(review.get("frame_count")) is not int
+        or review["frame_count"] <= 0
+        or type(job.get("bytes")) is not int
+        or not 0 < job["bytes"] <= MAX_BYTES
+    ):
+        raise IntakeError(error)
+    hashes = review.get("review_map_hashes")
+    plans = review.get("presets")
+    if (
+        not isinstance(hashes, dict) or set(hashes) != {"wcag", "broadcast"}
+        or not all(digest(value) for value in hashes.values())
+        or not isinstance(plans, dict) or set(plans) != {"wcag", "broadcast", "extra-cautious"}
+    ):
+        raise IntakeError(error)
+
+    def spans_valid(spans) -> bool:
+        return isinstance(spans, list) and all(
+            isinstance(span, dict)
+            and number(span.get("start_ms")) and number(span.get("end_ms"))
+            and 0 <= span["start_ms"] < span["end_ms"] <= review["duration_ms"]
+            and isinstance(span.get("reason"), str) and bool(span["reason"])
+            for span in spans
+        )
+
+    for plan in plans.values():
+        if not isinstance(plan, dict) or not spans_valid(plan.get("intervals")):
+            raise IntakeError(error)
+        intervals = plan["intervals"]
+        if (
+            not number(plan.get("covered_ms"))
+            or plan["covered_ms"] != sum(s["end_ms"] - s["start_ms"] for s in intervals)
+            or any(a["end_ms"] > b["start_ms"] for a, b in zip(intervals, intervals[1:]))
+        ):
+            raise IntakeError(error)
+    flags = review.get("flagged_intervals", {})
+    if (
+        not isinstance(flags, dict) or not set(flags) <= {"wcag", "broadcast"}
+        or not all(spans_valid(spans) for spans in flags.values())
+        or fingerprint(review) != job.get("review_digest")
+    ):
+        raise IntakeError(error)
 
 
 def update(path: Path, **fields) -> dict:
@@ -500,7 +572,10 @@ class IntakeStore:
         with self.mutex:
             self.poll()
             path = job_dir(self.root, job_id)
-            if self.display_job(path)["status"] not in {"review", "signing_blocked", "package_review"}:
+            visible = self.display_job(path)
+            if visible.get("record_unreadable"):
+                raise IntakeError("The saved analysis review is incomplete or changed. Analyze again.")
+            if visible["status"] not in {"review", "signing_blocked", "package_review"}:
                 raise IntakeError("Wait for a complete current analysis before saving its review.")
             job, _ = checked_review(path)
             return {

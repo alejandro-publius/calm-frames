@@ -111,3 +111,67 @@ def test_saved_review_waits_for_its_owned_worker_before_enabling_actions(tmp_pat
     finally:
         child.stopped = True
         store.close()
+
+
+@pytest.mark.parametrize("damage", [
+    "missing-review", "list-review", "missing-preset", "missing-map",
+    "invalid-span", "wrong-total", "list-flags", "changed-digest",
+])
+def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
+    tmp_path, monkeypatch, damage,
+):
+    from pipeline.hashing import fingerprint
+
+    monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+    root = tmp_path / "imports"
+    store = intake.IntakeStore(root)
+    bad_path, bad = ready(store)
+    good_path, good = ready(store)
+    saved = intake.read_job(bad_path)
+    review = saved["review"]
+    if damage == "missing-review":
+        saved.pop("review")
+    elif damage == "list-review":
+        saved["review"] = ["unreadable"]
+    elif damage == "missing-preset":
+        review["presets"].pop("extra-cautious")
+    elif damage == "missing-map":
+        review["review_map_hashes"] = {}
+    elif damage == "invalid-span":
+        review["presets"]["wcag"]["intervals"] = [{"start_ms": 900, "end_ms": 1, "reason": "general"}]
+    elif damage == "wrong-total":
+        review["presets"]["wcag"]["covered_ms"] = 1000
+    elif damage == "list-flags":
+        review["flagged_intervals"] = {"wcag": [None]}
+    else:
+        saved["review_digest"] = "0" * 64
+    # A recomputed checksum cannot make an incomplete review usable either.
+    if damage != "changed-digest":
+        saved["review_digest"] = fingerprint(saved.get("review"))
+    intake._write_json(bad_path / "job.json", saved, bad_path)
+    before = (bad_path / "job.json").read_bytes()
+    source_before = (bad_path / "original.mp4").read_bytes()
+    good_before = (good_path / "job.json").read_bytes()
+    try:
+        listed = {j["id"]: j for j in store.poll()}
+        assert listed[bad["id"]]["status"] == "unreadable"
+        assert "review" not in listed[bad["id"]]
+        assert listed[good["id"]]["status"] == "review"
+        for action in ("approve", "stage-delivery", "plan-delivery", "retry"):
+            with pytest.raises(intake.IntakeError):
+                store.action(bad["id"], action)
+        with pytest.raises(intake.IntakeError):
+            store.export_review(bad["id"])
+        assert (bad_path / "job.json").read_bytes() == before
+        assert (bad_path / "original.mp4").read_bytes() == source_before
+        assert (good_path / "job.json").read_bytes() == good_before
+    finally:
+        store.close()
+    restarted = intake.IntakeStore(root)
+    try:
+        assert any(j["id"] == good["id"] and j["status"] == "review" for j in restarted.poll())
+        restarted.action(bad["id"], "delete")
+        assert not bad_path.exists()
+        assert (good_path / "job.json").read_bytes() == good_before
+    finally:
+        restarted.close()

@@ -58,7 +58,13 @@ def ready(store):
         "analysis_complete": True,
         "source_sha256": job["source_sha256"],
         "review_map_hashes": {p: sha256_file(path / (p + ".json")) for p in ["wcag", "broadcast"]},
-        "presets": {},
+        "duration_ms": 1000,
+        "frame_count": 24,
+        "playable": False,
+        "presets": {
+            preset: {"intervals": [], "covered_ms": 0}
+            for preset in ("wcag", "broadcast", "extra-cautious")
+        },
     }
     return path, intake.update(
         path, status="review", review=review, review_digest=fingerprint(review)
@@ -238,6 +244,11 @@ def test_review_uses_app_guard_union(tmp_path, monkeypatch):
     assert all(c["diag_in"] == 85 and c["distance_ft"] == 4 for c in calls)
     assert result["presets"]["wcag"]["covered_ms"] == 2000
     assert result["presets"]["extra-cautious"]["covered_ms"] == 3000
+    # A complete producer result with actual nonempty guard plans stays readable.
+    intake.validate_saved_review({
+        "status": "review", "source_sha256": sha, "bytes": source.stat().st_size,
+        "review": result, "review_digest": fingerprint(result),
+    })
 
 
 @pytest.fixture

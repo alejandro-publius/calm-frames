@@ -119,18 +119,23 @@ def test_staging_must_not_write_into_package_or_app(signed_package, monkeypatch)
 
 def test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket(store, signed_package):
     from pipeline import local_intake as intake
+    from pipeline.hashing import fingerprint
 
-    job = store.create("fixture.mp4", b"fixture only, not media", "Acadia approved fixture", permission_confirmed=True)
-    path = intake.job_dir(store.root, job["id"])
+    from .test_local_intake import ready
+
+    path, job = ready(store)
+    review = {**job["review"], "source_sha256": ACADIA}
     package = path / "runs" / "fixture" / "package"
     shutil.copytree(signed_package, package)
     intake.update(path, status="package_review", source_sha256=ACADIA,
+                  review=review, review_digest=fingerprint(review),
                   package={"relative_directory": "runs/fixture/package"})
     staged = store.action(job["id"], "stage-delivery")["delivery"]
     store.action(job["id"], "cancel")
     with pytest.raises(delivery.DeliveryError, match="canceled"):
         delivery.check_delivery(path / "delivery-reviews", staged["ticket_id"])
-    intake.update(path, status="package_review", package={"relative_directory": "runs/fixture/package"})
+    intake.update(path, status="package_review", review=review, review_digest=fingerprint(review),
+                  package={"relative_directory": "runs/fixture/package"})
     store.action(job["id"], "stage-delivery")
     next(package.rglob("extra-cautious.mp4")).write_bytes(b"changed")
     with pytest.raises(PipelineError):
