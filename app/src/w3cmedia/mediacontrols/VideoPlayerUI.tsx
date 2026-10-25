@@ -12,7 +12,6 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
-import { announceForAccessibility } from '../../calmframes/announce';
 import { trace } from '../../calmframes/trace';
 import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
@@ -97,11 +96,6 @@ export const VideoPlayerUI = React.memo(
     sceneIntervals,
   }: VideoPlayerUIProps) => {
     useEffect(() => { trace('playback', paused ? 'paused' : 'playing'); }, [paused]);
-    useEffect(() => {
-      // Speak when pause starts, not each time the controls hide and the
-      // visible notice mounts again. Another pause must still be announced.
-      if (paused) announceForAccessibility('Paused. Press Play to continue.', { force: true, queue: false });
-    }, [paused]);
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
 
@@ -112,6 +106,21 @@ export const VideoPlayerUI = React.memo(
     const [playerControlType, setPlayerControlType] = useState<string>('');
     const [isCaptionButtonFocused, setCaptionButtonFocused] = useState(false);
     const [showMediaControls, setShowMediaControls] = useState(true);
+    const played = useRef(false);
+    const [pauseNotice, setPauseNotice] = useState('');
+    useEffect(() => {
+      if (!paused) {
+        // A media element opens paused. It is not a user pause until playback
+        // has actually been observed; a covering card owns its own speech.
+        played.current = videoRef.current?.paused === false && !videoRef.current?.ended;
+        setPauseNotice('');
+      } else if (played.current && !showMediaControls) {
+        // The native run heard the polite notice after controls settled. Keep
+        // that live node mounted across show/hide, changing its text only once
+        // per real pause. Do not interrupt the still-active Dolby session.
+        setPauseNotice('Paused. Press Play to continue.');
+      }
+    }, [paused, showMediaControls, videoRef]);
     useEffect(() => { trace('playback', `controls ${showMediaControls ? 'shown' : 'hidden'}`); }, [showMediaControls]);
     const { handleShowControls, handleShowControlsOnKeyEvent, cancelTimer } =
       useMediaControls(showMediaControls, setShowMediaControls);
@@ -249,11 +258,11 @@ export const VideoPlayerUI = React.memo(
 
     return (
       <View style={styles.uiContainer} testID="video-player-ui-view">
-        {paused && !showMediaControls && (
-          <View style={styles.paused} testID="player-paused" accessible accessibilityRole="text" accessibilityLiveRegion="none">
-            <Text style={styles.pausedText}>Paused. Press Play to continue.</Text>
-          </View>
-        )}
+        <View testID="player-pause-announcement" accessible accessibilityRole="text"
+          accessibilityLiveRegion="polite" accessibilityLabel={pauseNotice}
+          style={pauseNotice ? styles.paused : styles.emptyPause}>
+          {pauseNotice ? <Text testID="player-paused" style={styles.pausedText}>{pauseNotice}</Text> : null}
+        </View>
         {showMediaControls && (
           <LinearGradient
             colors={[
@@ -302,9 +311,10 @@ export const VideoPlayerUI = React.memo(
 
 const styles = StyleSheet.create({
   paused: {
-    position: 'absolute', top: scale(CALM_SPACE.SAFE_Y), right: scale(CALM_SPACE.SAFE_X),
+    position: 'absolute', top: scale(CALM_SPACE.SAFE_Y + 88), right: scale(CALM_SPACE.SAFE_X),
     backgroundColor: CALM_COLORS.SURFACE, padding: scale(16), borderRadius: scale(CALM_SURFACE.STATUS_RADIUS),
   },
+  emptyPause: { position: 'absolute', width: 0, height: 0, overflow: 'hidden' },
   pausedText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT },
   ui: {
     height: '100%',

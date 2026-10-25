@@ -1,5 +1,8 @@
 import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus, remote } from './playbackUiHarness';
-import { act, fireEvent } from '@testing-library/react-native';
+import React from 'react';
+import VideoPlayerUI from '../../src/w3cmedia/mediacontrols/VideoPlayerUI';
+import { makeMedia } from './playbackUiHarness';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import { AccessibilityInfo, Platform, StyleSheet } from 'react-native';
 import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
 import { resetAnnouncements } from '../../src/calmframes/announce';
@@ -95,38 +98,56 @@ test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after
   expect(mockMedia.listeners.ended.size).toBe(0);
 });
 
-test('one pause announcement survives controls hiding and is spoken again only after another pause', () => {
+test('one retained polite pause message survives controls toggling and resets only on play', () => {
   jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
   resetAnnouncements();
   const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
   const view = startPlayer();
-  const pausedMessage = 'Paused. Press Play to continue.';
-  const pauseCalls = () => speak.mock.calls.filter(([message]) => message === pausedMessage);
   const position = mockMedia.currentTime;
-
+  const message = 'Paused. Press Play to continue.';
+  const region = view.getByTestId('player-pause-announcement');
+  expect(region.props.accessibilityLabel).toBe('');
   act(() => mockMedia.pause());
-  expect(pauseCalls()).toEqual([[pausedMessage, { queue: false }]]);
-  expect(view.queryByTestId('player-paused')).toBeNull();
-
+  // Let the existing controls settle; no immediate speech into active media.
+  expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('');
+  act(() => jest.advanceTimersByTime(6000));
+  expect(view.getByTestId('player-pause-announcement')).toBe(region);
+  expect(region.props.accessibilityLiveRegion).toBe('polite');
+  expect(region.props.accessibilityLabel).toBe(message);
   for (let i = 0; i < 3; i += 1) {
-    act(() => jest.advanceTimersByTime(6000));
-    const notice = view.getByTestId('player-paused');
-    expect(notice.props.accessible).toBe(true);
-    expect(notice.props.accessibilityLiveRegion).toBe('none');
-    expect(view.queryByTestId('control-bar')).toBeNull();
     remote('down');
-    expect(view.queryByTestId('player-paused')).toBeNull();
-    expect(view.getByTestId('control-bar')).toBeTruthy();
+    act(() => jest.advanceTimersByTime(6000));
+    expect(view.getByTestId('player-pause-announcement')).toBe(region);
+    expect(region.props.accessibilityLabel).toBe(message);
   }
-  expect(pauseCalls()).toHaveLength(1);
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(0);
   expect(mockMedia.currentTime).toBe(position);
-  expect(mockMedia.paused).toBe(true);
   expect(mockGuard.requestSeek).not.toHaveBeenCalled();
-
   act(() => { mockMedia.play(); });
-  expect(pauseCalls()).toHaveLength(1);
+  expect(region.props.accessibilityLabel).toBe('');
   act(() => mockMedia.pause());
-  expect(pauseCalls()).toHaveLength(2);
+  act(() => jest.advanceTimersByTime(6000));
+  expect(region.props.accessibilityLabel).toBe(message);
+});
+
+test('opening in a paused state is silent until actual playback and a later pause', () => {
+  resetAnnouncements();
+  const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
+  const media = makeMedia();
+  media.paused = true;
+  const props = { videoRef: { current: media } as never, navigateBack: jest.fn(), title: 'Fictional test',
+    setCaptionStatus: jest.fn(), setSelectedCaptionInVideoPlayer: jest.fn(),
+    bifFrameImagesRef: { current: null }, videoData: {} as never };
+  const view = render(<VideoPlayerUI {...props} paused />);
+  act(() => jest.advanceTimersByTime(6000));
+  expect(speak.mock.calls.some(([text]) => text === 'Paused. Press Play to continue.')).toBe(false);
+  expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('');
+  media.paused = false;
+  view.rerender(<VideoPlayerUI {...props} paused={false} />);
+  media.paused = true;
+  view.rerender(<VideoPlayerUI {...props} paused />);
+  act(() => jest.advanceTimersByTime(6000));
+  expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('Paused. Press Play to continue.');
 });
 
 test.each(['covering', 'countdown'] as const)('the %s scene card owns its pause announcement without the generic notice', kind => {
