@@ -120,7 +120,7 @@ def test_staging_must_not_write_into_package_or_app(signed_package, monkeypatch)
 def test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket(store, signed_package):
     from pipeline import local_intake as intake
 
-    job = store.create("fixture.mp4", b"fixture only, not media", "Acadia approved fixture")
+    job = store.create("fixture.mp4", b"fixture only, not media", "Acadia approved fixture", permission_confirmed=True)
     path = intake.job_dir(store.root, job["id"])
     package = path / "runs" / "fixture" / "package"
     shutil.copytree(signed_package, package)
