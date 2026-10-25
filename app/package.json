@@ -164,7 +164,8 @@
     "@amazon-devices/kepler-module-manifest-builder@0.1.16": {
       "toml": "5.0.1"
     },
-    "yargs-parser@^7.0.0": "13.1.2"
+    "yargs-parser@^7.0.0": "13.1.2",
+    "micromatch": "4.0.8"
   },
   "engines": {
     "node": ">=22"

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T20:38:27Z",
+  "generated_utc": "2026-10-25T20:49:05Z",
   "python": {
     "ran": true,
     "sources": [
@@ -31,10 +31,10 @@
     "totals": {
       "info": 0,
       "low": 0,
-      "moderate": 9,
-      "high": 11,
+      "moderate": 1,
+      "high": 9,
       "critical": 0,
-      "total": 20
+      "total": 10
     },
     "findings": [
       {
@@ -45,52 +45,8 @@
         "fix_available": false
       },
       {
-        "package": "@jest/fake-timers",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
         "package": "@react-native-community/cli",
         "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "anymatch",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "braces",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1098094"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "jest-haste-map",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "jest-message-util",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "jest-util",
-        "severity": "moderate",
         "direct": false,
         "ids": [],
         "fix_available": false
@@ -103,22 +59,8 @@
         "fix_available": false
       },
       {
-        "package": "metro-cache",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
         "package": "metro-config",
         "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "metro-core",
-        "severity": "moderate",
         "direct": false,
         "ids": [],
         "fix_available": false
@@ -128,15 +70,6 @@
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "micromatch",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1098681"
-        ],
         "fix_available": false
       },
       {
@@ -174,13 +107,6 @@
         "fix_available": false
       },
       {
-        "package": "sane",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
         "package": "ws",
         "severity": "high",
         "direct": false,
@@ -194,10 +120,10 @@
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 20,
-    "npm_advisories_total": 7,
+    "npm_packages_with_advisories": 10,
+    "npm_advisories_total": 5,
     "npm_critical": 0,
-    "npm_high": 11,
+    "npm_high": 9,
     "exception_groups": 3,
     "exceptions_in_the_shipped_bundle": 1
   },
