@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("render_demo", HERE / "render_demo.py")
@@ -189,6 +190,70 @@ class PreflightTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertFalse(target.exists())
         self.assertIn("actual absolute local file is missing", result.stdout)
+
+    def test_ambient_audio_cannot_be_silenced_or_attenuated(self):
+        ambient = next(s for s in self.plan["segments"] if s["asset"] == "native_ambient")
+        for gain in (0, 0.35):
+            with self.subTest(gain=gain):
+                ambient["native_audio_gain"] = gain
+                self.assertTrue(any("ambient app audio" in e for e in self.errors()))
+
+    def test_closing_credit_hold_cannot_be_cut_short(self):
+        self.plan["segments"][-1]["duration"] = 1
+        self.plan["duration_seconds"] = 165
+        self.assertTrue(any("closing credit hold" in e for e in self.errors()))
+
+    def test_changed_input_after_preflight_refuses_before_encoding(self):
+        errors, measured = render.validate(self.plan, fake_probe)
+        self.assertEqual(errors, [])
+        Path(self.plan["assets"]["native_ambient"]["path"]).write_bytes(b"Changed after preflight")
+        manifest = self.directory / "plan.json"
+        manifest.write_text(json.dumps(self.plan))
+        output = self.directory / "must-not-render"
+        with mock.patch.object(render, "run", side_effect=AssertionError("Encoder was started")):
+            with self.assertRaisesRegex(ValueError, "changed since preflight"):
+                render.render(self.plan, measured, output, manifest)
+        self.assertFalse(output.exists())
+
+    def test_synthetic_fixture_cannot_be_accepted_as_production_input(self):
+        self.plan["artifact_role"] = "synthetic_tool_test"
+        self.assertTrue(any("Synthetic fixtures cannot" in e for e in self.errors()))
+
+    def test_changed_capture_receipt_after_preflight_refuses(self):
+        errors, measured = render.validate(self.plan, fake_probe)
+        self.assertEqual(errors, [])
+        Path(self.plan["assets"]["native_ambient"]["capture_receipt_path"]).write_text("{}")
+        manifest = self.directory / "plan.json"
+        manifest.write_text(json.dumps(self.plan))
+        with self.assertRaisesRegex(ValueError, "capture receipt changed since preflight"):
+            render.verify_render_inputs(self.plan, measured, manifest)
+
+    def test_changed_manifest_after_preflight_refuses(self):
+        errors, measured = render.validate(self.plan, fake_probe)
+        self.assertEqual(errors, [])
+        manifest = self.directory / "plan.json"
+        manifest.write_text("{}")
+        with self.assertRaisesRegex(ValueError, "Manifest changed since preflight"):
+            render.verify_render_inputs(self.plan, measured, manifest)
+
+    def test_snapshot_retains_checked_bytes_when_original_changes(self):
+        errors, measured = render.validate(self.plan, fake_probe)
+        self.assertEqual(errors, [])
+        snapshots = render.snapshot_inputs(self.plan, measured, self.directory / "snapshots")
+        original = Path(self.plan["assets"]["native_ambient"]["path"])
+        original.write_bytes(b"Changed after snapshot")
+        copied = Path(snapshots["assets"]["native_ambient"]["path"])
+        self.assertNotEqual(copied, original)
+        self.assertEqual(render.digest(copied), self.plan["assets"]["native_ambient"]["sha256"])
+
+    def test_snapshot_refuses_bytes_changed_during_copy(self):
+        errors, measured = render.validate(self.plan, fake_probe)
+        self.assertEqual(errors, [])
+        def corrupt_copy(_source, destination):
+            destination.write_bytes(b"Changed during copy")
+        with mock.patch.object(render.shutil, "copyfile", side_effect=corrupt_copy):
+            with self.assertRaisesRegex(ValueError, "changed while making the render snapshot"):
+                render.snapshot_inputs(self.plan, measured, self.directory / "snapshots")
 
 
 if __name__ == "__main__":

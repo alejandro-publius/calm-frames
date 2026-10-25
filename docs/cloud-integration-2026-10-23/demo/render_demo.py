@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -72,6 +73,8 @@ def stream_duration(stream: dict) -> float:
 def validate(plan: dict, probe_file=probe) -> tuple[list[str], dict]:
     errors: list[str] = []
     measured: dict = {}
+    if plan.get("artifact_role") == "synthetic_tool_test":
+        errors.append("Synthetic fixtures cannot pass production-input preflight")
     if plan.get("schema_version") != 1:
         errors.append("Unsupported plan schema")
     total = plan.get("duration_seconds")
@@ -199,6 +202,11 @@ def validate(plan: dict, probe_file=probe) -> tuple[list[str], dict]:
     ambient = [s for s in plan.get("segments", []) if s.get("asset") == "native_ambient"]
     if len(ambient) != 1 or ambient[0].get("duration") != 70:
         errors.append("The planned uncut 70-second ambient passage is missing")
+    if ambient and ambient[0].get("native_audio_gain") != 1:
+        errors.append("The ambient app audio must retain its original gain")
+    closing = plan.get("segments", [])[-1:] or [{}]
+    if (closing[0].get("asset"), closing[0].get("start"), closing[0].get("duration"), total) != ("manga_05", 164, 6, 170):
+        errors.append("The approved closing credit hold requires manga_05 from 164 through 170 seconds")
     previous_end = 0.0
     for cue in cues:
         start, end = cue.get("start"), cue.get("end")
@@ -225,13 +233,52 @@ def run(command: list[str]) -> None:
     subprocess.run(command, check=True)
 
 
-def render(plan: dict, measured: dict, out: Path, manifest: Path) -> None:
+def verify_render_inputs(plan: dict, measured: dict, manifest: Path, *, test_fixture: bool = False) -> str:
+    """Bind encoding to the bytes and metadata which passed preflight."""
+    manifest_bytes = manifest.read_bytes()
+    if json.loads(manifest_bytes) != plan:
+        raise ValueError("Manifest changed since preflight")
+    for name in measured:
+        asset = plan["assets"][name]
+        if digest(Path(asset["path"])) != asset["sha256"]:
+            raise ValueError(f"{name}: input changed since preflight")
+        if asset["kind"] == "native_video" and not test_fixture:
+            if digest(Path(asset["capture_receipt_path"])) != asset["capture_receipt_sha256"]:
+                raise ValueError(f"{name}: capture receipt changed since preflight")
+    return hashlib.sha256(manifest_bytes).hexdigest()
+
+
+def snapshot_inputs(plan: dict, measured: dict, directory: Path) -> dict:
+    """Encode private byte-checked copies, unaffected by later edits to inputs."""
+    snapshot = json.loads(json.dumps(plan))
+    directory.mkdir()
+    for index, name in enumerate(measured):
+        asset = snapshot["assets"][name]
+        source = Path(asset["path"])
+        destination = directory / f"input-{index:02}{source.suffix}"
+        shutil.copyfile(source, destination)
+        if digest(destination) != asset["sha256"]:
+            raise ValueError(f"{name}: input changed while making the render snapshot")
+        asset["path"] = str(destination)
+    return snapshot
+
+
+def tool_version(tool: str) -> str:
+    return subprocess.run([tool, "-version"], check=True, capture_output=True, text=True, timeout=10).stdout.splitlines()[0]
+
+
+def render(plan: dict, measured: dict, out: Path, manifest: Path, *, test_fixture: bool = False) -> None:
     if out.exists() or out.is_relative_to(REPO):
         raise ValueError("Output directory must be new and outside the repository")
-    out.mkdir(parents=True, exist_ok=False)
+    if test_fixture and plan.get("artifact_role") != "synthetic_tool_test":
+        raise ValueError("The encoder test requires an explicitly labelled synthetic fixture")
+    manifest_hash = verify_render_inputs(plan, measured, manifest, test_fixture=test_fixture)
+    versions = {tool: tool_version(tool) for tool in ("ffmpeg", "ffprobe")}
     ff = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-n"]
     with tempfile.TemporaryDirectory(prefix="calm-edit-") as scratch:
         temp = Path(scratch)
+        plan = snapshot_inputs(plan, measured, temp / "inputs")
+        out.mkdir(parents=True, exist_ok=False)
         for index, segment in enumerate(plan["segments"]):
             asset = plan["assets"][segment["asset"]]
             inputs = ["-loop", "1", "-framerate", "30", "-i", asset["path"]] if asset["kind"] == "illustration" else [
@@ -261,17 +308,23 @@ def render(plan: dict, measured: dict, out: Path, manifest: Path) -> None:
             labels.append(f"[v{index}]")
             subtitles.append((cue["start"], cue["start"] + measured[cue["id"]]["duration"], cue["text"]))
         filters.append("".join(labels) + f"amix=inputs={len(labels)}:duration=first:normalize=0:dropout_transition=0[a]")
-        video = out / "calm-frames-story-review.mp4"
+        stem = "TEST_ONLY-synthetic-render" if test_fixture else "calm-frames-story-review"
+        video = out / (stem + ".mp4")
         run(ff + inputs + ["-filter_complex", ";".join(filters), "-map", "0:v:0", "-map", "[a]",
                           "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-t", str(plan["duration_seconds"]),
                           "-movflags", "+faststart", str(video)])
     # Merge labels into existing cues instead of emitting overlapping SRT blocks.
-    subtitles[0] = (subtitles[0][0], subtitles[0][1], "Illustrated story; fictional character.\n" + subtitles[0][2])
-    subtitles[1] = (subtitles[1][0], subtitles[1][1], "Native Fire TV / Vega app capture.\n" + subtitles[1][2])
-    subtitles += [(45, 51, "Native excerpt at natural speed; uncut until the next story frame."),
-                  (164, 170, "Not a medical device.\nMcWay: MoneySavingVideos, CC BY 3.0.\nFull credits in description.")]
+    if test_fixture:
+        subtitles = [(a, b, "TEST ONLY: silent synthetic encoder fixture. No app capture or narration.") for a, b, _ in subtitles]
+        subtitles += [(45, 51, "TEST ONLY: synthetic static picture and digital silence."),
+                      (164, 170, "TEST ONLY: encoder and subtitle checks. Not a product demo.")]
+    else:
+        subtitles[0] = (subtitles[0][0], subtitles[0][1], "Illustrated story; fictional character.\n" + subtitles[0][2])
+        subtitles[1] = (subtitles[1][0], subtitles[1][1], "Native Fire TV / Vega app capture.\n" + subtitles[1][2])
+        subtitles += [(45, 51, "Native excerpt at natural speed; uncut until the next story frame."),
+                      (164, 170, "Not a medical device.\nMcWay: MoneySavingVideos, CC BY 3.0.\nFull credits in description.")]
     subtitles.sort()
-    srt = out / "calm-frames-story-review.srt"
+    srt = out / (stem + ".srt")
     srt.write_text("\n".join(f"{i}\n{timestamp(a)} --> {timestamp(b)}\n{text}\n" for i, (a, b, text) in enumerate(subtitles, 1)))
     result = probe(video)
     duration = float(result["format"]["duration"])
@@ -279,9 +332,15 @@ def render(plan: dict, measured: dict, out: Path, manifest: Path) -> None:
         raise ValueError(f"Rendered duration rejected: {duration}")
     run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-i", str(video), "-f", "null", "-"])
     receipt = {
-        "source_commit": plan["source_commit"], "manifest_sha256": digest(manifest),
+        "artifact_role": "synthetic_tool_test" if test_fixture else "unsubmitted_product_review",
+        "source_commit": None if test_fixture else plan["source_commit"],
+        "package_sha256": None if test_fixture else plan["package_sha256"],
+        "manifest_sha256": manifest_hash, "renderer_sha256": digest(Path(__file__)), "tools": versions,
         "narration_script_sha256": plan["narration_script_sha256"], "measured_duration_seconds": duration,
-        "inputs": {k: {"sha256": a["sha256"], **measured[k]} for k, a in plan["assets"].items() if k in measured},
+        "inputs": {k: {"sha256": a["sha256"], "kind": a["kind"],
+                       "capture_receipt_sha256": a.get("capture_receipt_sha256"), **measured[k]}
+                   for k, a in plan["assets"].items() if k in measured},
+        "edit_ledger": plan["segments"], "input_bytes_encoded_from": "private_hash_verified_snapshots",
         "outputs": {p.name: {"bytes": p.stat().st_size, "sha256": digest(p)} for p in (video, srt)},
         "full_decode": "passed", "existing_video_gate": "not_run",
         "human_audio_palette_full_video_acceptance": "pending", "published": False,
