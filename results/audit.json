@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-25T20:49:05Z",
+  "generated_utc": "2026-10-25T22:31:46Z",
   "python": {
     "ran": true,
     "sources": [
@@ -31,10 +31,10 @@
     "totals": {
       "info": 0,
       "low": 0,
-      "moderate": 1,
+      "moderate": 0,
       "high": 9,
       "critical": 0,
-      "total": 10
+      "total": 9
     },
     "findings": [
       {
@@ -70,15 +70,6 @@
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "node-notifier",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1086436"
-        ],
         "fix_available": false
       },
       {
@@ -120,8 +111,8 @@
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 10,
-    "npm_advisories_total": 5,
+    "npm_packages_with_advisories": 9,
+    "npm_advisories_total": 4,
     "npm_critical": 0,
     "npm_high": 9,
     "exception_groups": 3,

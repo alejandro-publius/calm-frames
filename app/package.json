@@ -165,7 +165,9 @@
       "toml": "5.0.1"
     },
     "yargs-parser@^7.0.0": "13.1.2",
-    "micromatch": "4.0.8"
+    "micromatch": "4.0.8",
+    "node-notifier": "8.0.2",
+    "uuid": "11.1.1"
   },
   "engines": {
     "node": ">=22"
