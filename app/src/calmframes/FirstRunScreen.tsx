@@ -565,8 +565,12 @@ const styles = StyleSheet.create({
   // clips at its edge, so this one reaches out by the ring's room and brings
   // its content back in by the same amount: the text does not move.
   readingRoom: { marginHorizontal: -scale(READING_STOP_ROOM) },
+  // The bottom is exactly the ring's room too, so the content ends where the
+  // ring does: on the TV, with 2 units more below it, the first Down from the
+  // stop only scrolled those and a second was needed to reach the buttons.
   readingContent: {
     paddingHorizontal: scale(READING_STOP_ROOM),
+    paddingBottom: scale(READING_STOP_ROOM),
     maxWidth: scale(1400 + 2 * READING_STOP_ROOM),
   },
   // The space above the lines, less the ring's room the stop takes back.

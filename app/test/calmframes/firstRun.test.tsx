@@ -411,7 +411,9 @@ describe('the first run', () => {
     const inner = StyleSheet.flatten(screen.UNSAFE_getByType(ScrollView).props.contentContainerStyle);
     expect(-outer.marginHorizontal).toBe(scale(READING_STOP_ROOM));
     expect(inner.paddingHorizontal).toBe(scale(READING_STOP_ROOM));
-    expect(inner.paddingBottom).toBeGreaterThanOrEqual(scale(READING_STOP_ROOM));
+    // Exactly the ring's room below it: more left one dead Down on the TV,
+    // less would cut the ring off.
+    expect(inner.paddingBottom).toBe(scale(READING_STOP_ROOM));
     // The lines stay where they stood: the stop's top gap, ring and padding add
     // up to the space the review card had above them before.
     const own = StyleSheet.flatten(stop.props.style);
