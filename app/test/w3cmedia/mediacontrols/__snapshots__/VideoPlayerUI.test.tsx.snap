@@ -12,6 +12,21 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
   }
   testID="video-player-ui-view"
 >
+  <View
+    accessibilityLabel=""
+    accessibilityLiveRegion="polite"
+    accessibilityRole="text"
+    accessible={true}
+    style={
+      {
+        "height": 0,
+        "overflow": "hidden",
+        "position": "absolute",
+        "width": 0,
+      }
+    }
+    testID="player-pause-announcement"
+  />
   <LinearGradient
     colors={
       [

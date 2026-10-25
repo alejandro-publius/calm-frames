@@ -263,6 +263,13 @@ export const VideoPlayerUI = React.memo(
           style={pauseNotice ? styles.paused : styles.emptyPause}>
           {pauseNotice ? <Text testID="player-paused" style={styles.pausedText}>{pauseNotice}</Text> : null}
         </View>
+        {paused && !showMediaControls && !pauseNotice && (
+          // A saved paused position still needs visible guidance. It is not a
+          // new pause announcement and does not change the retained live node.
+          <View testID="player-paused" accessible accessibilityRole="text" accessibilityLiveRegion="none" style={styles.paused}>
+            <Text style={styles.pausedText}>Paused. Press Play to continue.</Text>
+          </View>
+        )}
         {showMediaControls && (
           <LinearGradient
             colors={[
