@@ -1,0 +1,37 @@
+FAIL test/calmframes/playbackUi.test.tsx
+  ✓ seekbar yields initial and restored preferred focus to Skip during none (88 ms)
+  ✓ seekbar yields initial and restored preferred focus to Skip during countdown (23 ms)
+  ✓ initialized playback exposes named captions and a stationary contrasting focus ring (30 ms)
+  ✓ ambient Harbor starts Off, honors explicit On through playback updates, and can return Off (29 ms)
+  ✓ pause stays visible after controls hide in covering state and clears on Play (46 ms)
+  ✓ pause stays visible after controls hide in countdown state and clears on Play (22 ms)
+  ✓ pause stays visible after controls hide in none state and clears on Play (17 ms)
+  ✕ one pause announcement survives controls hiding and is spoken again only after another pause (30 ms)
+  ✓ the covering scene card owns its pause announcement without the generic notice (15 ms)
+  ✓ the countdown scene card owns its pause announcement without the generic notice (17 ms)
+  ✓ recovery paints above the retained cover and Back leaves once (19 ms)
+  ✓ choosing the active caption track closes its menu without changing media or the hold (25 ms)
+
+  ● one pause announcement survives controls hiding and is spoken again only after another pause
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 1
+    Received array:  [["Paused. Press Play to continue.", {"queue": false}]]
+
+      127 |   expect(pauseCalls()).toHaveLength(1);
+      128 |   act(() => mockMedia.pause());
+    > 129 |   expect(pauseCalls()).toHaveLength(2);
+          |                        ^
+      130 | });
+      131 |
+      132 | test.each(['covering', 'countdown'] as const)('the %s scene card owns its pause announcement without the generic notice', kind => {
+
+      at Object.toHaveLength (test/calmframes/playbackUi.test.tsx:129:24)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 11 passed, 12 total
+Snapshots:   0 total
+Time:        1.459 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx/i.
