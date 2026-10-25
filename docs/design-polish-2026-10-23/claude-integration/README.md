@@ -1,8 +1,10 @@
 # Local integration candidate, October 24, 2026
 
 Branch `claude/integration-2026-10-24`, local only: nothing here is pushed,
-merged into main, published or submitted. The integration source is `d7ff886`;
-the commit adding these notes changes documentation only.
+merged into main, published or submitted. The integration source was
+`d7ff886`. The acceptance pass below added three item 6 commits, so the
+candidate source is now `a672f57`. The commits adding these notes change
+documentation only.
 
 ## Inputs, each verified before use
 
@@ -110,15 +112,170 @@ disclaimer below the explainer's edge, one extra Down on the preset step, and
 the device turning its display off after idle time. The fixture's own control
 test, which expected the keypad to be traced when nothing turns it off, now
 fails on the never-merge harness because the cloud fix removed that trace.
+The acceptance pass below takes up each of these.
+
+## Acceptance pass on the candidate
+
+After `d7ff886` the owner asked for the remaining checks that need no human:
+items 5, 6, 11 and 12. Item 6 produced three production commits, so the
+candidate is now `a672f57`. The full app suite passes on it: 178 suites passed
+and 1 skipped; 1878 tests passed and 4 skipped. Typecheck passes and lint has
+no error. Each new item 6 guard was broken on purpose and seen to fail.
+
+| Commit | What |
+|---|---|
+| `917e78f` | Item 6: nothing to scroll below the last preset; the explainer's lines in a reading stop |
+| `4de7bd0` | Item 6: FocusArea, so Up from the buttons reaches that stop |
+| `a672f57` | Item 6: the explainer's content ends where the stop's ring does |
+| this commit | These notes and ledger rows 5, 6, 8, 11, 12 and 18 |
+
+### Where it was checked
+
+- The main virtual device at 1280 by 720, with never-merge harnesses: the item
+  6 fixture on `d7ff886` code (`ec68707`) for the pictures of the defects, then
+  on `917e78f` (`50b5231`) and `4de7bd0` (`089ec6f`); and the item 11 harness
+  on `4de7bd0` code with a made-up household (`19ba55d`), whose first name save
+  is refused on purpose. `a672f57` changes only the explainer's bottom padding
+  and its test, so those results carry to it. The profile chooser was opened on
+  the real household with the candidate at `4de7bd0`, read only.
+- A disposable virtual device: its own instance, booted fresh from the SDK's
+  base images with the SDK's own tool, used at 1920 by 1080 and 1280 by 720 and
+  deleted afterwards. The candidate's own package ran its production first run
+  there on a new made-up household: `4de7bd0` first, then the exact `a672f57`
+  package at both sizes after a reinstall. It also played McWay Falls and sat
+  idle there. The real device's instance was stopped and untouched while it
+  ran.
+
+### Item 5, names, made-up household, 1280 by 720, VoiceView on
+
+- Renaming Robin to Sam, a sibling's name, is refused where the counter was:
+  "Sam. Sam is already in this household. Choose a different name." The old
+  name stays.
+- A refused save says "Name not saved yet. This TV couldn't write the change
+  down. Try again, or cancel to keep the old name." with focus on Try again,
+  and the draft and the old name stay. Try again saves it: the chip and the
+  Remove button take the new name, the kid keeps its place, and focus returns
+  to Edit name.
+
+### Item 6, first run
+
+- Before, on `d7ff886` code at 1280 by 720: with Extra cautious focused, the
+  first Down only scrolled the list. The explainer opened with the approved
+  sentence below its edge, and Up from Open library left no visible focus.
+- One Down from Extra cautious now reaches Next: in the fixture at 1280 by 720
+  and in the production first run at both sizes.
+- The explainer took three commits. The reading stop alone was never reached,
+  because its frame runs below the visible edge beside the buttons. FocusArea
+  lets Up reach it. Then a dead Down from the stop, 2 units of padding, went in
+  `a672f57`. At both sizes in the production first run, Up from Open library
+  now lands on a whole ring with the approved sentence in view, and one Down
+  returns to Open library. With VoiceView on, one Up reads every line, the
+  approved sentence and the reading note (heard in the fixture at 1280 by 720).
+- Every step opens at its top, the room's safety line first, and Open library
+  reaches Home on the new household. The production first run on a fresh
+  household is now observed at both sizes.
+- At rest the approved sentence still starts below the explainer's edge: the
+  step holds more text than one screen. It is one Up away, behind a visible
+  ring. Making it visible at rest needs a layout change, which is the owner's
+  decision, so the item stays partial.
+- The display turning off after idle time is the device, not the app. The
+  candidate sat on its Home on the disposable device at 1280 by 720 with no key
+  pressed. At 20 minutes the power daemon turned the display off, and the
+  lifecycle manager closed every app on it in one call, Calm Frames and the
+  system launcher alike. This virtual device has no screensaver. Calm Frames
+  was answering a routine media request half a second before. The lifecycle
+  manager logs its exit as "after crash", 89 ms after its own kill named it,
+  but the device's crash history stayed empty before and after. The window
+  keeps its last frame while the display sleeps, so only the log shows the
+  change. One Home press woke the device to its launcher, and Calm Frames
+  relaunched on its Home with the same made-up household and no error. Not
+  observed: idle during playback longer than 20 minutes, and a physical TV's
+  own timeout.
+
+### Item 11, 1280 by 720
+
+- Parents, made-up household: Down from the last covers button reads the
+  explainer stop in full, then "Credits and licences, button"; Left says
+  "Back, button"; Right at the end stays.
+- Profile chooser on the real household with the candidate at `4de7bd0`,
+  opened and closed without choosing: "Who is watching? Kid, watching, radio
+  button, checked", "Kid 2, radio button, not checked", and Back returns to
+  "Kid is watching. Choose who is watching, button".
+- Player controls on the disposable device, VoiceView on and Dolby kept as on
+  the real device: Down shows the title, Back, the seek bar and the captions
+  button, and Up reaches Back. VoiceView is silent while the video plays, as
+  the system's Dolby dialog says it will be. It reads "McWay Falls. Resume at
+  1:32, button" at the resume prompt, then "Back, button" and the seek bar's
+  percentages as playback starts (the upstream limitation). Paused, it says
+  "Paused. Press Play to continue.", and says it again each time the controls
+  hide after a key press: the notice is drawn only while paused with the
+  controls hidden, as a polite live region (`VideoPlayerUI.tsx`). The seek bar
+  says nothing when focused (upstream). Recorded, not changed: the player UI
+  was outside this pass.
+
+### Item 12, what the candidate package carries
+
+- `inventory.py` in the receipt reads the package without installing it: 31
+  required and 2 optional native modules in the packaged manifest, one native
+  library (`lib/aarch64/com.amazon.keplerscript.carousel.so`), and 83 npm
+  packages in the Debug bundle's module table (658 files). The same for
+  `d7ff886` and `a672f57`.
+- Of the audit's 45 flagged packages, 42 sit where their exception group says.
+  `@amazon-devices/react-navigation__native` and
+  `@amazon-devices/security-manager-lib` are grouped as shipping but are not in
+  this Debug bundle, which a Release bundle never exceeds; their native modules
+  are still declared. `body-parser` (advisory 1243074, high) is not in the
+  bundle either and has no exception. No exception was added, renewed or
+  re-dated.
+- The packaged manifest declares content personalization and EPG modules that
+  no remaining component uses, because the build adds one per installed
+  `@amazon-devices` package, and the package carries four build scripts among
+  its assets (`make_logo.py`, `render.sh`, `render_qt.cpp`,
+  `generate_menu_select.py`). Recorded, not changed.
+
+### Packages
+
+| Package | Bytes | sha256 |
+|---|---|---|
+| Candidate `a672f57` | 132,683,992 | `8cc0ffd52fc61df17d8b69b40c31964c5ed0749c578ec1de67e1aedf78173dd8` |
+| Harness `19ba55d`, never merge | 130,748,986 | `10bc4fba7a0dbb5ba45ab2ee9fa2f72f3f7a274f2d760d677f2b900822f9ac17` |
+| Harness `089ec6f`, never merge | 130,707,765 | `1b465aac12aa894bc83d18e280ed8f027e5b178e6f0edb5df1b72f539f497ac6` |
+| Harness `50b5231`, never merge | 130,709,072 | `121c10e027dc23903fd3ce5130360c5aebdb94de06bf219c5981e40ff25e4325` |
+
+The candidate's sha384 is
+`480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59`.
+Harness `0f182f9` was built and never installed.
+
+### The main device, ready for the owner's review
+
+- Back at its default size, with VoiceView off: a recording while focus moved
+  twice on Home held no speech (mean -57.8 dB, against about -36.5 dB with
+  VoiceView on).
+- `a672f57` is installed package scoped over `4de7bd0`, keeping the household.
+  The device reports the file's sha384, its first install time is unchanged,
+  and it opens on the ordinary Home with the real household.
+- The rollback package, the production build of `6a87937` (sha256
+  `623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d`), is kept
+  read only. Calm Native Diagnostic, from an earlier pass, is still on the
+  launcher.
+
+The owner's PIN was not entered. Made-up PINs went in with every press
+withheld, VoiceView off and nothing capturing. Nothing played on the real
+household, so its saved places are as they were.
 
 ## What stays open
 
-- Item 11 stays partial. Still open: the seek bar's progress announcements
-  (blocked upstream in Kepler UI Components 3.2.2); VoiceView's own Back or bare
-  button as the resume prompt opens; reduced motion, which this virtual device
-  cannot show; and, at 1280 by 720, Down from the Parents explainer to the
-  footer, the profile chooser and the player.
-- Owner listening, palette, comfort and full-video review stay pending.
-- Hosted CI on this exact source, residual Audit findings and the native module
-  inventory stay with the integration owner.
+- Item 6: at rest the approved sentence starts below the explainer's edge, one
+  Up away behind a visible ring. Making it visible at rest is the owner's
+  layout decision.
+- Item 11 stays partial: the seek bar's progress announcements (blocked
+  upstream in Kepler UI Components 3.2.2); VoiceView's own Back or bare button
+  as the resume prompt opens; reduced motion, which this virtual device cannot
+  show; the paused notice repeating each time the controls hide (recorded, not
+  changed); and a physical TV.
+- Item 12: hosted CI on this exact source, the residual Audit findings and the
+  exception decisions stay with the integration owner. Nothing was renewed or
+  re-dated.
+- Owner listening, palette, comfort and full-video review stay pending, on the
+  installed `a672f57`.
 - Nothing here signs off medical safety, human comfort or the 20 items.

@@ -110,6 +110,73 @@
   "physical Fire TV",
   "owner listening and comfort"
  ],
+ "acceptance_pass": {
+  "note": "after d7ff886, items 5, 6, 11 and 12; the unobserved list above is for d7ff886 and this pass observed its first two entries",
+  "candidate": "a672f57d333dc0e3fada51b3175ca1711d1f9397",
+  "commits_after_d7ff886": {
+   "917e78f5949f1a879e3219f7512827bdd678d305": "item 6: one Down reaches Next; the explainer's lines in a reading stop",
+   "4de7bd03be2d654ea3e6c071b52c3b807df24f2e": "item 6: FocusArea, so Up reaches that stop",
+   "a672f57d333dc0e3fada51b3175ca1711d1f9397": "item 6: the explainer's content ends where the stop's ring does"
+  },
+  "checks": {
+   "typecheck": "pass",
+   "lint": "0 errors, 108 warnings",
+   "jest_full": "178 suites passed, 1 skipped; 1878 tests passed, 4 skipped",
+   "item_6_mutations": "each new guard seen to fail when broken on purpose"
+  },
+  "packages": {
+   "candidate_a672f57": {
+    "bytes": 132683992,
+    "sha256": "8cc0ffd52fc61df17d8b69b40c31964c5ed0749c578ec1de67e1aedf78173dd8",
+    "sha384": "480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59"
+   },
+   "harness_a3_19ba55d_never_merge": {
+    "bytes": 130748986,
+    "sha256": "10bc4fba7a0dbb5ba45ab2ee9fa2f72f3f7a274f2d760d677f2b900822f9ac17",
+    "sha384": "2c5d375ccc94f8b996dca88ac58fd12979f36cabb0cedbab12b74946de1ff43b72ae11a9c331ea5e03f237ff383ba642"
+   },
+   "harness_b3_089ec6f_never_merge": {
+    "bytes": 130707765,
+    "sha256": "1b465aac12aa894bc83d18e280ed8f027e5b178e6f0edb5df1b72f539f497ac6",
+    "sha384": "be92c007619e589ccaf60de428274833efd38c15af9a199cf764c34417f1b4241fcf41c25399cdc8128ca835c3187fb6"
+   },
+   "harness_b2_50b5231_never_merge": {
+    "bytes": 130709072,
+    "sha256": "121c10e027dc23903fd3ce5130360c5aebdb94de06bf219c5981e40ff25e4325",
+    "sha384": "dd5cb831beb88803231c428d8af86c1bf739ce57116cf4b9f053244049085a051b024e9b219cd37bb19bea51f5577955"
+   },
+   "harness_a2_0f182f9_never_merge_never_installed": {
+    "bytes": 130749297,
+    "sha256": "d40000503b0b6dd1e92895123d2e05da97eff397f8aaf6abe6315a21556a1752",
+    "sha384": "2cd5dbca64f57bd797844345311160de635efe04665d41f9c4e58d4dcd82d0b57d36d91d376b6bba586c85b7742479c0"
+   }
+  },
+  "native": {
+   "item_5": "1280 x 720, VoiceView, made-up household: a sibling's name refused; a controlled failed save keeps the draft and the old name; Try again saves it",
+   "item_6": "production first run on fresh made-up households at 1920 x 1080 and 1280 x 720 on a disposable device: one Down reaches Next, the explainer's stop is reached and left in one press, Open library reaches Home",
+   "item_6_idle": "device behavior: display off at 20 minutes, every app closed including the launcher, crash history empty, clean relaunch",
+   "item_11": "1280 x 720: Parents explainer to footer, profile chooser and player controls",
+   "item_12": "native inventory of a672f57: 31 required and 2 optional modules, 1 native library, 83 npm packages; 42 of 45 flagged packages match their groups"
+  },
+  "main_device_after": {
+   "installed": "a672f57, package scoped over 4de7bd0, household kept",
+   "installed_sha384_matches_package": true,
+   "screen": "default size",
+   "voiceview": "off, checked by a recording",
+   "rollback_kept_read_only": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d"
+  },
+  "disposable_device": "its own instance, deleted after use",
+  "open": [
+   "item 6: the approved sentence starts below the explainer's edge at rest; the owner's layout decision",
+   "item 11 open items listed in the notes",
+   "item 12: hosted CI, residual Audit findings and exception decisions"
+  ],
+  "unobserved": [
+   "idle during playback longer than 20 minutes",
+   "physical Fire TV",
+   "owner listening and comfort"
+  ]
+ },
  "owner_pin_entered": false,
  "saved_progress_changed": false,
  "published": false,
