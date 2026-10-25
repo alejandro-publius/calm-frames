@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { readFileSync } from 'node:fs';
-import { createServer } from 'node:http';
+import { Agent, createServer } from 'node:http';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
@@ -74,11 +74,22 @@ test('the unchanged isomorphic and FBJS consumers reuse the existing fixed Commo
 });
 
 test('the actual fallback strips sensitive headers on a redirect to a different loopback host', { timeout: 4000 }, async t => {
-  const from = await server(t, '127.0.0.1');
-  const to = await server(t, '127.0.0.2');
+  const loopback = await server(t, '127.0.0.1');
+  const from = loopback.replace('127.0.0.1', 'calm-from.invalid');
+  const to = loopback.replace('127.0.0.1', 'calm-to.invalid');
+  // Two host identities, one owned loopback server. No external DNS/network or
+  // platform-specific loopback alias is required on Linux or macOS.
+  const agent = new Agent({
+    lookup(hostname, options, callback) {
+      assert.ok(['calm-from.invalid', 'calm-to.invalid'].includes(hostname));
+      if (options.all) callback(null, [{ address: '127.0.0.1', family: 4 }]);
+      else callback(null, '127.0.0.1', 4);
+    },
+  });
+  t.after(() => agent.destroy());
   const { fetch } = consumers();
   const response = await fetch(`${from}/redirect?to=${encodeURIComponent(to + '/echo')}`, {
-    headers: { ...sensitive, 'x-fixture': 'retained' }, timeout: 2000,
+    headers: { ...sensitive, 'x-fixture': 'retained' }, timeout: 2000, agent,
   });
   const received = await response.json();
   for (const key of Object.keys(sensitive)) assert.equal(received.headers[key], undefined, key);
