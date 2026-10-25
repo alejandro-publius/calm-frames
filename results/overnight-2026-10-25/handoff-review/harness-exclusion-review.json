@@ -1,0 +1,144 @@
+{
+  "recorded_utc": "2026-10-25T07:25:16.106840+00:00",
+  "candidate": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "complete_candidate_ancestor_count": 626,
+  "shallow_repository": false,
+  "named_branches": [
+    {
+      "branch": "claude/integration-harness-a11y-2026-10-24-never-merge",
+      "head": "937c27ec15f996fc3f601effa13cac57e6a99a76",
+      "cut_from": "d7ff886",
+      "reported_own_commits": 2,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/integration-harness-onboarding-2026-10-24-never-merge",
+      "head": "ec68707e120022953a483a99fb15bb4f0ce1c3f7",
+      "cut_from": "d7ff886",
+      "reported_own_commits": 3,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/integration2-harness-a11y-2026-10-24-never-merge",
+      "head": "0f182f9b1178e20167917868c26a7ab7552b0d4f",
+      "cut_from": "917e78f",
+      "reported_own_commits": 3,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/integration2-harness-onboarding-2026-10-24-never-merge",
+      "head": "50b52313df8e23420e96d35cc16b2cbe75ba6d74",
+      "cut_from": "917e78f",
+      "reported_own_commits": 3,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/integration3-harness-a11y-2026-10-24-never-merge",
+      "head": "19ba55d084c8fa0f40d75e2b6b2d724bafd20414",
+      "cut_from": "4de7bd0",
+      "reported_own_commits": 3,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/integration3-harness-onboarding-2026-10-24-never-merge",
+      "head": "089ec6fa0d0f531a18e28b0380afb97607253e52",
+      "cut_from": "4de7bd0",
+      "reported_own_commits": 3,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/native-accessibility-harness-2026-10-24-never-merge",
+      "head": "5e48655c8900f330f4ce353c3bb3f5aec512d8d6",
+      "cut_from": "88c1716",
+      "reported_own_commits": 1,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/native-accessibility-harness-v2-2026-10-24-never-merge",
+      "head": "4553ee3fb5d268850acb15529e820328dc0c1e93",
+      "cut_from": "3b0174b",
+      "reported_own_commits": 1,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/onboarding-harness-2026-10-23-never-merge",
+      "head": "78e8a2ce7e15525d940332b8680fd800fcf664e3",
+      "cut_from": "6a87937",
+      "reported_own_commits": 2,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    },
+    {
+      "branch": "claude/onboarding-harness-fixed-2026-10-23-never-merge",
+      "head": "b9cd62746b7660c65a9b8fd537523409e77971e2",
+      "cut_from": "6a87937",
+      "reported_own_commits": 4,
+      "head_absent_from_complete_candidate_ancestry": true,
+      "head_object_available": false
+    }
+  ],
+  "named_fixture_commits": [
+    {
+      "commit": "6f5aa66d3258ea89fbf1f0dcc5c7a64222c7417a",
+      "absent_from_complete_candidate_ancestry": true
+    },
+    {
+      "commit": "444ca911e784dbd8131ae9087605a216944aeaa9",
+      "absent_from_complete_candidate_ancestry": true
+    },
+    {
+      "commit": "c812685c963ca67edc82f2b55b24b346c2f7539f",
+      "absent_from_complete_candidate_ancestry": true
+    }
+  ],
+  "production_fix_original": {
+    "commit": "dd1ec6c37f5d5ed86138bc38867d0b16b245a9b8",
+    "absent_from_complete_candidate_ancestry": true,
+    "accepted_cherry_pick": "161c2f5875dd95c6e518d1f382deeb286092bcba",
+    "accepted_cherry_pick_in_ancestry": true
+  },
+  "entry_point": {
+    "path": "app/index.js",
+    "sha256": "e21d73cbe3b8cd2505c83c05fc066613756e2689b2d9431a9a467901bbe93096",
+    "byte_identical_to_6a87937": true,
+    "production_initial_route": "Screens.KID_MODE_SCREEN"
+  },
+  "historical_helpers": [
+    {
+      "path": "app/src/calmframes/SceneBridgeFixture.tsx",
+      "already_present_at_submitted_bf2f615": true,
+      "unchanged_from_6a87937": true
+    },
+    {
+      "path": "app/src/calmframes/harnessConfig.ts",
+      "already_present_at_submitted_bf2f615": true,
+      "unchanged_from_6a87937": true
+    },
+    {
+      "path": "app/src/calmframes/harnessFixtures.ts",
+      "already_present_at_submitted_bf2f615": true,
+      "unchanged_from_6a87937": true
+    },
+    {
+      "path": "app/src/calmframes/useCoverHarness.ts",
+      "already_present_at_submitted_bf2f615": true,
+      "unchanged_from_6a87937": true
+    }
+  ],
+  "reported_total_branch_own_commits": 25,
+  "all_branch_own_commit_ids_provided": false,
+  "limits": [
+    "Absence of each named head/fixture SHA is checked against the full candidate ancestry, not inferred from unavailable local branch objects.",
+    "The supplied table does not enumerate all 25 reported branch-own commit IDs; independent exclusion of that complete list requires the missing inventory.",
+    "The attachment wording that app/src contains no harness symbol is too broad: the listed historical helpers remain. No newly introduced onboarding/accessibility harness wiring is found in the reviewed integration diff.",
+    "No harness branch or bundle was imported or merged."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "recorded_utc": "2026-10-25T07:25:16.106840+00:00",
+  "input_attachment": {
+    "filename": "START_HERE_CODEX.md",
+    "bytes": 9903,
+    "sha256": "c8fe094f23fd5bca7c29ab0eb582084e85cda8b24f1c68f7dc31765fe6641f14"
+  },
+  "source_head": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "candidate_code": "a672f57d333dc0e3fada51b3175ca1711d1f9397",
+  "candidate_package": {
+    "reported_bytes": 132683992,
+    "reported_sha256": "8cc0ffd52fc61df17d8b69b40c31964c5ed0749c578ec1de67e1aedf78173dd8",
+    "reported_sha384": "480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59",
+    "binary_received": false,
+    "hash_recomputed_here": false
+  },
+  "item_5": {
+    "status": "retain completed based on committed Mac operator observations",
+    "new_native_observations_here": false,
+    "scope": "Sibling-name refusal and controlled failed-save/retry on made-up household at 1280 by 720 with VoiceView, plus earlier retained persistence/focus/isolation checks. New observations were on harness 19ba55d over production 4de7bd0.",
+    "source_mapping": "Only FirstRunScreen and its test differ from 4de7bd0 to a672f57 in app/src and app/test. The name editor and save route are unchanged.",
+    "independent_native_evidence_review": "blocked on the current-candidate evidence ZIP"
+  },
+  "item_6": {
+    "status": "partially completed",
+    "machine_observations": "Committed operator record covers production first run on a disposable fresh device at 1920 by 1080 and 1280 by 720; one Down reaches Next; Up reaches the explainer reading stop; one Down returns; Open library reaches Home.",
+    "human_blocker": "Owner acceptance of disclaimer beginning below the initial viewport, reachable by one Up.",
+    "idle_observation": "Committed record attributes the 20-minute display sleep and app termination to the device power/lifecycle manager, with empty crash history and clean relaunch. Not treated as an app crash.",
+    "limits": [
+      "No new screenshot, recording or native package was received in this task.",
+      "Idle during playback over 20 minutes and a physical TV were not observed."
+    ]
+  },
+  "missing_inputs": [
+    {
+      "filename": "calm-frames-acceptance-evidence-a672f57-2026-10-24.zip",
+      "reported_bytes": 12111203,
+      "reported_sha256": "bb7c423899d1671746dbb24aac79c26761d4be44c5875e7f9ebe02eba61cee34",
+      "received": false,
+      "purpose": "Current candidate native logs, screenshots/recordings, inventory and supporting receipt."
+    },
+    {
+      "filename": "calm-frames-integration-evidence-2026-10-24.zip",
+      "reported_bytes": 5739813,
+      "reported_sha256": "ac3b3e92391297ee5cbf10b6714344660a9b20b0ad4ae1d208e2509dfacc0207",
+      "received": false,
+      "purpose": "Earlier d7ff886 native integration evidence and private-trace corroboration."
+    },
+    {
+      "filename": "Never-merge inventory: all 25 full branch-own commit IDs, grouped by the ten branch heads and bases",
+      "received": false,
+      "purpose": "Complete independent per-commit exclusion proof without importing a harness bundle."
+    }
+  ],
+  "not_claimed": [
+    "Human comfort/listening approval",
+    "Medical safety",
+    "Hosted CI success",
+    "Independent inspection of absent native images",
+    "All 20 backlog goals complete"
+  ],
+  "outdated_handoff_text": [
+    "The supplied no-push statements conflict with the explicit user update and independently fetched handoff branch; they are not used as current status."
+  ],
+  "inventory_scope": {
+    "observed_package_type": "Debug, as reported by Mac operator",
+    "native_inventory_bytes_received": false,
+    "release_inventory_or_binary_received": false,
+    "unsupported_generalization": "The committed notes say the Release bundle never exceeds the inspected Debug bundle. No matched Release artifact or inventory is available to establish this.",
+    "adopted_claim": "The recorded inventory applies only to the named Debug package. No Release inclusion, exclusion or superset claim is accepted."
+  }
+}

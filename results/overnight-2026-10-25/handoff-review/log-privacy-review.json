@@ -1,0 +1,622 @@
+{
+  "base": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+  "head": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "count": 68,
+  "files": [
+    {
+      "path": "results/design-polish-2026-10-23/cloud-finish/audit-policy-tests.log",
+      "bytes": 99,
+      "sha256": "6500832ed20dcd0a31f7df14aba44c6f62741f0c9276f2279436ab057bc67f7f",
+      "lines": 2,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/cloud-finish/legacy-shell-quote-before.log",
+      "bytes": 3050,
+      "sha256": "d1a5f7cf8c1435c9a7e1af7d442cf6c97c953df22877fc2fc2780905f9600ac5",
+      "lines": 90,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/cloud-finish/ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/cloud-finish/shell-quote-fixed.log",
+      "bytes": 995,
+      "sha256": "1a7d3b356fbf2961db14b7014b6e45bb2238a851958095d27fb24855a3bb1b3a",
+      "lines": 34,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/app-tests.log",
+      "bytes": 199371,
+      "sha256": "83de834dbe68610d444d46d45d00bce4f35de0b39ea292c127d46102993b2e9f",
+      "lines": 4267,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/audit-policy-tests.log",
+      "bytes": 99,
+      "sha256": "91711cbac88ceda398938ee2c5ee00d6c01a12a031d254006994475219bbb20f",
+      "lines": 2,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/clean-install.log",
+      "bytes": 5644,
+      "sha256": "e16d0e7dfb7c7c407f683b3de926f3c2ef67964ac4275fcde8e7561da4ccd5f4",
+      "lines": 40,
+      "reviewed_candidates": [
+        {
+          "category": "email_address",
+          "line_numbers": [
+            16
+          ],
+          "classification": "public dependency-maintainer contact in npm warning",
+          "private_value_reproduced_in_this_review": false
+        }
+      ],
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/compatibility-before.log",
+      "bytes": 4524,
+      "sha256": "15629ae0815d86041494ec9b5b1267f0074e54b756e5ca09d2a3dcd41d68248c",
+      "lines": 128,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/compatibility.log",
+      "bytes": 2528,
+      "sha256": "8d734c8ad7e7e1ced0f8036c2746564c0191ed6d7eb890d7051d59be50b0e267",
+      "lines": 76,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/lint.log",
+      "bytes": 8420,
+      "sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714",
+      "lines": 161,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/prepared-guards.log",
+      "bytes": 12490,
+      "sha256": "d3bd423f420630cd2a0fad6b066b7f063e56c41f369a635b0fc56a189936294a",
+      "lines": 375,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/published-numbers.log",
+      "bytes": 39,
+      "sha256": "4b5ab1119fe7fbcbe8e50bd6f333daf2c5bb3bda700eb1980b8a9b213d7518c0",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/sbom-check.log",
+      "bytes": 1794,
+      "sha256": "50bf2d7df658458549284a8bedf2bea5e210a375d514d786772c928689fe18b8",
+      "lines": 22,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/sbom-write.log",
+      "bytes": 1938,
+      "sha256": "32bd25e6980505f8011010f39a79f8a28aa20c375d5b644dacc77a42bdd791ee",
+      "lines": 25,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/secrets-code.log",
+      "bytes": 106,
+      "sha256": "7d556a845aac21f2dd3349d23838f1d38aff94a7059dca991118694546e43bc0",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave2/typecheck.log",
+      "bytes": 67,
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/app-tests.log",
+      "bytes": 199588,
+      "sha256": "f75982cad62af37d7eda02685dd2303b15da9cbdaa7075612c6029fa0f259ac7",
+      "lines": 4270,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/clean-install.log",
+      "bytes": 5644,
+      "sha256": "11e6fe1c3f12e43569bb6cfd32f6b604bc7b3e9f09a550f4e45bf97be639da88",
+      "lines": 40,
+      "reviewed_candidates": [
+        {
+          "category": "email_address",
+          "line_numbers": [
+            16
+          ],
+          "classification": "public dependency-maintainer contact in npm warning",
+          "private_value_reproduced_in_this_review": false
+        }
+      ],
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/compatibility-before.log",
+      "bytes": 7106,
+      "sha256": "d31a8105d3e0adea31eb20082046b2188955b216a2b0b3b59c10b81374cd8ad8",
+      "lines": 184,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/compatibility.log",
+      "bytes": 4958,
+      "sha256": "8f6adb79cb382f55ffd9b73953cbe645bee34be7bbcd0d7fcf9d6bdfbd8c4dc8",
+      "lines": 142,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/install-before.log",
+      "bytes": 5644,
+      "sha256": "35f7c477e040675344f549295281be25a8a59f02f6397d68f01b429da98b0624",
+      "lines": 40,
+      "reviewed_candidates": [
+        {
+          "category": "email_address",
+          "line_numbers": [
+            16
+          ],
+          "classification": "public dependency-maintainer contact in npm warning",
+          "private_value_reproduced_in_this_review": false
+        }
+      ],
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/lint.log",
+      "bytes": 8420,
+      "sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714",
+      "lines": 161,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/lock-update.log",
+      "bytes": 18,
+      "sha256": "ce7bf91f54adc7390cff6bf1c2572fd00ce9cfbd0611637e273059c4710a80c9",
+      "lines": 2,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/prepared-guards.log",
+      "bytes": 12503,
+      "sha256": "4be99fc1f3369f94abb46c93585260f9931c4e5be2b64b428b864e4e6a620566",
+      "lines": 375,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/published-numbers.log",
+      "bytes": 39,
+      "sha256": "965697fb02971a11cb802175414d013528a3f12d51982e2d37eba3a009bf74a3",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/sbom-check.log",
+      "bytes": 1794,
+      "sha256": "402ba3ac8f38797815b2cbd5ddf29c95e0eb3a511388d7f12db7a350b70956ee",
+      "lines": 22,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/sbom-write.log",
+      "bytes": 1938,
+      "sha256": "959881f64e5acbc4d04d970dd56f0ebb1de5d40a4f446494021cab186fff1a09",
+      "lines": 25,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/secrets-code.log",
+      "bytes": 108,
+      "sha256": "10ffbaea58edba5c60eca781dec92df8c1d00e72e26fa2282e3d990edd792942",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/style.log",
+      "bytes": 62,
+      "sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/typecheck.log",
+      "bytes": 67,
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave3/zod-before.log",
+      "bytes": 5549,
+      "sha256": "0245af984859c5cc8da3b82a36b7421fe60171babc795050088bd7e11a7a1b47",
+      "lines": 158,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/clean-install.log",
+      "bytes": 5644,
+      "sha256": "1bf014d1dbc99f76e7780a613c98b84d03425b88966b4769bbee54a0230a9c98",
+      "lines": 40,
+      "reviewed_candidates": [
+        {
+          "category": "email_address",
+          "line_numbers": [
+            16
+          ],
+          "classification": "public dependency-maintainer contact in npm warning",
+          "private_value_reproduced_in_this_review": false
+        }
+      ],
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/compatibility-before.log",
+      "bytes": 5883,
+      "sha256": "2b72d8b9f07dbce9e1f6f2f8a3cc5744b12a8794e120e6c8a715f41005d5cee3",
+      "lines": 192,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/compatibility.log",
+      "bytes": 6072,
+      "sha256": "b7a4f902ef9baee1234705ea59cbb25ddf691bc7cefbdbce4eeaf9ed00896b57",
+      "lines": 172,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/lint.log",
+      "bytes": 8420,
+      "sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714",
+      "lines": 161,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/lock-update-scoped.log",
+      "bytes": 18,
+      "sha256": "b125771fda8addd462adfe7f7b03299feb35e28badbb2d16ae8589e371216f8f",
+      "lines": 2,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/logger-tree.log",
+      "bytes": 517,
+      "sha256": "31368e833a04e188268bb5212102bf0bdd985c39faa59c8ea82a75539206324b",
+      "lines": 10,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/prepared-guards.log",
+      "bytes": 506,
+      "sha256": "c08e65a20baed1e7a71ad05fb332d00ff4e9ba4643dabdee4a3c1f712ed111b0",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/published-numbers-update.log",
+      "bytes": 53,
+      "sha256": "bd645e88e20a077089bcbc585050710aae4666752fcb7078014a39c4ee60889c",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/published-numbers.log",
+      "bytes": 39,
+      "sha256": "2b06d48299d1193ba6e4c383ab24e03a57fcd99abdcc1cdf0af5728513998e73",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/sbom-check.log",
+      "bytes": 1794,
+      "sha256": "331a2fd2b2c84fc08e7ebfc9af430f87dde37f8891e63591d999d433868b91ce",
+      "lines": 22,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/sbom-write.log",
+      "bytes": 1938,
+      "sha256": "7c753f714ecf4f921a709844b30d942bacbc8f335639244b7d7456c781e1a823",
+      "lines": 25,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/secrets-code.log",
+      "bytes": 106,
+      "sha256": "622c0ae4b975724075956b4bd40e2e843b3ebb540b0c3e471b05d4a9e9334ea2",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/style.log",
+      "bytes": 62,
+      "sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/dependency-wave4/typecheck.log",
+      "bytes": 67,
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/app-tests-before-route-wait-fix.log",
+      "bytes": 202653,
+      "sha256": "fcf8ffce15df36e0c93bd9a247218406c5d969b7dcaf06946074a3fbba0c754f",
+      "lines": 4309,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/app-tests.log",
+      "bytes": 199588,
+      "sha256": "7c10a30b635bf11b000f50a7af687878ca3735d370b556e7127cd83293e50d45",
+      "lines": 4270,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/back-focus-before.log",
+      "bytes": 6901,
+      "sha256": "7a70becfa215fae19daea7076daf1b4f4e59079359289ab802f27eee80bfbf7d",
+      "lines": 135,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/browser-preview.log",
+      "bytes": 1631,
+      "sha256": "2da554eb56609c9a28c4c44a4b59e34fe5061997a2934d2f334879475bd170c6",
+      "lines": 14,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/dependency-guards.log",
+      "bytes": 8004,
+      "sha256": "c9b5079e86c3dec0b5722240129572fc1d849f25ec291eff82a8c9ed72093da5",
+      "lines": 191,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/focused.log",
+      "bytes": 16663,
+      "sha256": "f09d2564dd9520de5b58f96472a30511937a1c8099109f0f51ed68fc2d884a6a",
+      "lines": 413,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/lint.log",
+      "bytes": 8420,
+      "sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714",
+      "lines": 161,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/preview-trees.log",
+      "bytes": 448,
+      "sha256": "baf29a298f296667a4ad2a402aca6c1bde6ff02ba4cd98d6593155daa03e6ae7",
+      "lines": 12,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/published-numbers.log",
+      "bytes": 39,
+      "sha256": "4b5ab1119fe7fbcbe8e50bd6f333daf2c5bb3bda700eb1980b8a9b213d7518c0",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/secrets-code.log",
+      "bytes": 106,
+      "sha256": "bba96609adc8ba78211823cbc1f6c281849634a4e4d1eafce841075475757308",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/secrets-import.log",
+      "bytes": 110,
+      "sha256": "8269167527d92a260ab79140aad89e8c50b98da3a108af8df934d23554e09ced",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/style.log",
+      "bytes": 62,
+      "sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/typecheck.log",
+      "bytes": 67,
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/ui-colour-guards.log",
+      "bytes": 396,
+      "sha256": "b3d7cb1edd9004864859b199d02e871625d3d7471687d5f24b8ea88b5498277f",
+      "lines": 6,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/fable-integration/ui-negative-controls.log",
+      "bytes": 163,
+      "sha256": "479589e20089a934c3d53c626ba68c30b9b0180e51df922d4b920eaf3a748dd4",
+      "lines": 2,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/lint.log",
+      "bytes": 8420,
+      "sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714",
+      "lines": 161,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/privacy-after.log",
+      "bytes": 1060,
+      "sha256": "22aa92ba752d61470c1b4fca39ed25c462599ba17e07f2600fe3dbfde285afd0",
+      "lines": 22,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/privacy-before.log",
+      "bytes": 5595,
+      "sha256": "f6a6df0c9da7cd630b3b69f4de819be2b162ff23bd090f0718f235d9d579ec30",
+      "lines": 135,
+      "reviewed_candidates": [
+        {
+          "category": "pin_focus_trace",
+          "line_numbers": [
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61
+          ],
+          "classification": "synthetic Jest failing-reproduction output, all-key fixture exercise",
+          "private_value_reproduced_in_this_review": false
+        },
+        {
+          "category": "name_focus_trace",
+          "line_numbers": [
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118
+          ],
+          "classification": "synthetic Jest failing-reproduction output, all-key fixture exercise",
+          "private_value_reproduced_in_this_review": false
+        }
+      ],
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/published-numbers.log",
+      "bytes": 39,
+      "sha256": "720ff59fa33a8b6909b484c6252402673bbc787dac0f05c5180af93fd8ea1684",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/secrets-code.log",
+      "bytes": 109,
+      "sha256": "6c2c9ebd8b03447e8ebdae92585dfee77fd8b614ad1c4a80313c94d1da38a72e",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/style.log",
+      "bytes": 62,
+      "sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "lines": 1,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    },
+    {
+      "path": "results/design-polish-2026-10-23/private-input-trace/typecheck.log",
+      "bytes": 67,
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "lines": 3,
+      "disposition": "preserved unchanged; no demonstrated household or credential disclosure"
+    }
+  ],
+  "recorded_utc": "2026-10-25T07:25:16.106840+00:00",
+  "scope": "Every changed .log file from d7da316 to 15ef46c; all were already ancestors of cloud 226d317. Claude added no new .log files after 226d317.",
+  "file_bytes": 986362,
+  "line_count": 21142,
+  "private_data_findings": 0,
+  "modified_logs": 0,
+  "gitleaks": {
+    "version": "8.30.1",
+    "command": "gitleaks dir <exact 68-log copy> --config .gitleaks.toml --redact --no-banner --report-format json",
+    "exit_code": 0,
+    "findings": 0,
+    "report": []
+  },
+  "inspection_categories": [
+    "private Mac/Windows account home paths",
+    "email candidates classified by surrounding npm warning",
+    "private-key headers",
+    "Authorization and Proxy-Authorization credentials",
+    "credential assignments",
+    "PIN/name focus traces",
+    "labelled PIN values",
+    "serialized household key/record patterns"
+  ],
+  "limits": [
+    "Pattern and secret scans are bounded review evidence, not a guarantee against every unknown private-data representation.",
+    "Synthetic failing-test traces are retained as regression evidence, not actual household entry or proof of native logging behavior.",
+    "Native screenshots, recordings and original native log ZIPs from Claude are not part of these committed test/tool logs."
+  ]
+}
