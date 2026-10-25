@@ -1,0 +1,20 @@
+PASS test/calmframes/playbackUi.test.tsx
+  ✓ seekbar yields initial and restored preferred focus to Skip during none (93 ms)
+  ✓ seekbar yields initial and restored preferred focus to Skip during countdown (31 ms)
+  ✓ initialized playback exposes named captions and a stationary contrasting focus ring (30 ms)
+  ✓ ambient Harbor starts Off, honors explicit On through playback updates, and can return Off (36 ms)
+  ✓ pause stays visible after controls hide in covering state and clears on Play (45 ms)
+  ✓ pause stays visible after controls hide in countdown state and clears on Play (26 ms)
+  ✓ pause stays visible after controls hide in none state and clears on Play (28 ms)
+  ✓ one retained polite pause message survives controls toggling and resets only on play (32 ms)
+  ✓ opening in a paused state is silent until actual playback and a later pause (5 ms)
+  ✓ the covering scene card owns its pause announcement without the generic notice (20 ms)
+  ✓ the countdown scene card owns its pause announcement without the generic notice (19 ms)
+  ✓ recovery paints above the retained cover and Back leaves once (23 ms)
+  ✓ choosing the active caption track closes its menu without changing media or the hold (33 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       13 passed, 13 total
+Snapshots:   0 total
+Time:        1.599 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/playbackPresentation.test.tsx|test\/calmframes\/playerRecovery.test.tsx/i.

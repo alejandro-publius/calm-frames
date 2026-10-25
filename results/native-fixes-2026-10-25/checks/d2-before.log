@@ -1,0 +1,111 @@
+FAIL test/calmframes/readingComfort.test.tsx
+  Reading comfort persistence and isolation
+    ✓ defaults new and legacy profiles off without changing the household record (12 ms)
+    ✓ changes only the named kid and preserves protection through later edits (5 ms)
+    ✓ roundtrips a single enabled preference without changing PIN, floor or active profile (2 ms)
+    ✓ rejects a malformed stored preference: "true" (21 ms)
+    ✓ rejects a malformed stored preference: 1 (1 ms)
+    ✓ rejects a malformed stored preference: null
+    ✓ rejects a malformed stored preference: {}
+  Reading comfort in Parents
+    ✓ is offered only behind the PIN, for a kid and with a result-aware save adapter (380 ms)
+    ✓ waits for the saved family, blocks duplicate presses and retains a single focus target (269 ms)
+    ✕ does not rearm the page-top Back when the saved switch blurs (173 ms)
+    ✕ keeps the enlarged switch and state in view after layout at 720 (58 ms)
+    ✕ keeps the enlarged switch and state in view after layout at 1080 (55 ms)
+    ✓ does not steal focus if the remote moved away during the save (93 ms)
+    ✓ keeps the old preference after false and allows retry (181 ms)
+    ✓ keeps the old preference after rejection and allows retry (160 ms)
+  bounded Reading comfort typography
+    ✓ keeps the enlarged reading stop within a 1080-high viewport under the conservative text ruler (215 ms)
+    ✓ keeps the enlarged reading stop within a 720-high viewport under the conservative text ruler (160 ms)
+    ✓ does not change the name editor when the edited kid has Reading comfort on (141 ms)
+    ✓ changes help and spacing while retaining Parents disclaimer and profile panel geometry (84 ms)
+    ✓ enlarges More info only, preserving Watch geometry, safety wording, reading stop and Back focus (221 ms)
+
+  ● Reading comfort in Parents › does not rearm the page-top Back when the saved switch blurs
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      129 |     await flush();
+      130 |     fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'blur');
+    > 131 |     expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+          |                                                                                  ^
+      132 |   });
+      133 |
+      134 |   it.each([720, 1080])('keeps the enlarged switch and state in view after layout at %s', height => {
+
+      at Object.toBe (test/calmframes/readingComfort.test.tsx:131:82)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+  ● Reading comfort in Parents › keeps the enlarged switch and state in view after layout at 720
+
+    Unable to find an element with testID: parent-area-reading-group
+
+      136 |     const { view, props } = openParents();
+      137 |     press('parent-area-profiles-profile-2');
+    > 138 |     const layout = (id: string, y: number, h: number) => fireEvent(screen.getByTestId(id), 'layout', {
+          |                                                                           ^
+      139 |       nativeEvent: { layout: { x: 0, y, width: 1000, height: h } },
+      140 |     });
+      141 |     layout('parent-area-open', 0, height);
+
+      at getByTestId (test/calmframes/readingComfort.test.tsx:138:75)
+      at layout (test/calmframes/readingComfort.test.tsx:142:5)
+
+  ● Reading comfort in Parents › keeps the enlarged switch and state in view after layout at 720
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● Reading comfort in Parents › keeps the enlarged switch and state in view after layout at 1080
+
+    Unable to find an element with testID: parent-area-reading-group
+
+      136 |     const { view, props } = openParents();
+      137 |     press('parent-area-profiles-profile-2');
+    > 138 |     const layout = (id: string, y: number, h: number) => fireEvent(screen.getByTestId(id), 'layout', {
+          |                                                                           ^
+      139 |       nativeEvent: { layout: { x: 0, y, width: 1000, height: h } },
+      140 |     });
+      141 |     layout('parent-area-open', 0, height);
+
+      at getByTestId (test/calmframes/readingComfort.test.tsx:138:75)
+      at layout (test/calmframes/readingComfort.test.tsx:142:5)
+
+  ● Reading comfort in Parents › keeps the enlarged switch and state in view after layout at 1080
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 17 passed, 20 total
+Snapshots:   0 total
+Time:        5.054 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx/i.

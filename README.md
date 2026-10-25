@@ -13,42 +13,40 @@ Calm Frames combines prepared nature content with offline flash analysis, signed
 
 Choose Acadia, McWay Falls, Sea Otters or Forest, inspect the title, and decide when to watch. McWay Falls offers five continuous minutes of a fixed coastal view at natural speed, then holds the final frame until you leave. The other titles open as still scenes, with short moving previews available separately.
 
-**Development source and acceptance:** the verified handoff is `15ef46c6e23c8ba627492da23b1b147000031aa4`, containing native candidate `a672f57`. Its [recorded acceptance pass](docs/design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate) covers name editing, sibling-name refusal, controlled failed-save recovery, and onboarding navigation at both supported sizes. Some observations use explicitly identified disposable fixtures. Owner disclaimer-layout, audiovisual and comfort acceptance remain pending. New local work and exact checks are tracked in the [current 20-item checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md) and [overnight checkpoint](docs/overnight-2026-10-25/WORK_STATUS.md); those changes are separate from the installed Mac package.
+**Current development:** [native handoff `37d10c2`](START_HERE_CODEX.md) supplies verified evidence for installed source `fbe53bf`, including the accepted onboarding disclaimer. Local product fixes through `a6bdb62276dd63603716509e24b2034451b46b44` address Home focus, Reading comfort focus/visibility, pause feedback and the route background, plus two dependency advisories. Their [checks and remaining limits](docs/native-fixes-2026-10-25/README.md) are separate from native acceptance. The [20-item checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md) records 6 complete, 12 partial and 2 blocked.
 
-**Evidence and demo:** the [published demo](https://www.youtube.com/watch?v=6lAP1FH16vc), [Devpost entry](https://devpost.com/software/calm-frames) and screenshots below represent earlier builds. The screenshots are native captures of `60c3bbb`, not the four-island review source. Their [provenance record](docs/presentation/README.md#build-and-publication-status) is historical. The new manga/native/ElevenLabs demo remains a production draft; no completed replacement for this review build is claimed. Submitted materials remain unchanged.
+**Evidence and demo:** the gallery below contains unmodified native review copies of **fbe53bf**, before the latest fixes. The [published demo](https://www.youtube.com/watch?v=6lAP1FH16vc) and [Devpost entry](https://devpost.com/software/calm-frames) remain the earlier submitted fallback. Replacement footage, manga and ElevenLabs narration are pending. No current hosted CI or human audiovisual acceptance is claimed.
 
-**Private continuation:** product code is frozen locally at `b603be9cb3a8dc13407f8f6f6408aad984f6f836`. The [validation receipt](docs/overnight-2026-10-25/FINAL_VALIDATION.md) separates passing source checks from the unresolved audit policy and native/human acceptance. The portable handoff identifies the final documentation/evidence commit; nothing has been promoted to the submission.
-
-![Calm Frames Home: a coastal map with Ocean and Forest, McWay Falls selected, and Watch as the primary action](docs/presentation/home.png)
+![Native fbe53bf Home: four separate islands for Acadia, McWay Falls, Sea Otters and Forest; Acadia selected and Watch focused](results/native-validation-fbe53bf-2026-10-25/evidence/e02-720-home.jpg)
 
 <p align="center">
-  <img src="docs/presentation/details.png" alt="McWay Falls details show the duration, nature sounds, final still, and an explicit Watch action" width="49%">
-  <img src="docs/presentation/playback.png" alt="Native playback of the fixed McWay Falls cove and waterfall" width="49%">
+  <img src="results/native-validation-fbe53bf-2026-10-25/evidence/h09-1080-acadia-details.jpg" alt="Native fbe53bf Acadia Details shows its still-scene default, replacement summary and Watch action" width="49%">
+  <img src="results/native-validation-fbe53bf-2026-10-25/evidence/r24-720-release-playing.jpg" alt="Native fbe53bf Release plays McWay Falls with its transport controls visible" width="49%">
 </p>
 
-<p align="center"><em>Historical native views from source 60c3bbb: choose a place, inspect Details, then watch. These are not captures of the current review build.</em></p>
+<p align="center"><em>Actual native captures of fbe53bf, with a fictional profile. These do not show the newer focus, pause or background fixes. <a href="docs/presentation/README.md">Capture provenance and limits</a>.</em></p>
 
 <details>
-<summary><strong>After the scene: the final frame stays</strong></summary>
+<summary><strong>Historical ending evidence: the final frame stays</strong></summary>
 
-![The corrected ending retains the scene framing and shows a Back button; it does not repeat or automatically return Home](docs/presentation/ending.png)
+![Historical source 60c3bbb retains the final scene framing and a Back button](docs/presentation/ending.png)
 
-The audio fades at the end. The extracted final frame remains until Back. This is an intentional stationary ending, not an endless video loop.
+This older native view records the explicit stationary ending, not an endless video loop. Its [original provenance](docs/presentation/README.md#build-and-publication-status) remains available. A still image cannot verify the complete audio fade or current-build timing.
 
 </details>
 
-Screenshots are cropped from existing app-only native captures, with no reconstructed UI. McWay imagery: MoneySavingVideos, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). [Capture provenance and full credits](docs/presentation/README.md).
+McWay imagery: MoneySavingVideos, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). [Capture scope and full credits](docs/presentation/README.md). No screenshot was generated, recolored or presented as the new build.
 
 ## Features
 
-- **A connected coastal world.** Ocean and Forest share the same map, typography, warm surfaces and obvious remote focus across Home, Details and loading.
+- **A connected coastal world.** Four distinct destination islands share the same map, typography, warm surfaces and obvious remote focus across Home, Details and loading.
 - **Sustained viewing with a deliberate ending.** McWay runs at natural speed with no cuts or repeated loop. Its final frame stays open; the other approved titles offer silent still scenes first.
 - **Playback starts with a choice.** Watch is the primary action. Pause, resume and Back remain available; short previews are secondary actions.
 - **Prepared media with traceable identity.** Offline analysis, signed maps, exact source and rendition hashes, and verification reports travel with each approved edition.
 - **A guarded playback path.** The picture stays covered while verification is unresolved. Scheduled covers and seek guards are driven by the accepted map and household settings.
 - **Local household preferences.** PIN-protected settings, presets, captions and stricter cover choices are stored on the device. Optional interface motion respects reduced motion.
 - **Names for individual kids.** Inside unlocked Parents, a remote letter grid edits a kid's name while preserving profile identity, preferences and saved positions. Save waits for the storage result; Cancel and Back discard an unfinished edit. Input currently supports letters and spaces. [Implementation, native observations and remaining gaps](docs/design-polish-2026-10-23/FABLE_INTEGRATION.md).
-- **Optional larger help text.** Each kid can use Reading comfort in Parents and More info. It defaults off and saves per profile; it does not change protection, player controls or captions. [Source checks and pending native layout review](docs/overnight-2026-10-25/READING_COMFORT.md).
+- **Optional larger help text.** Each kid can use Reading comfort in Parents and More info. It defaults off and saves per profile; it does not change protection, player controls or captions. [Received native observations and the pending focus correction](docs/native-fixes-2026-10-25/NATIVE_VERIFICATION.md).
 - **Caregiver file pre-check.** A separate [local browser workflow](docs/overnight-2026-10-25/personal-import/README.md) analyzes an eligible personal MP4 without playing it. It requires processing permission and exports a report bound to the file. It does not remove DRM, certify rights or automatically add a title to the TV catalog.
 - **Tools beyond the demo.** The [flashmap analyzer](flashmap/README.md), [Vega hook](hook/README.md) and [local preparation workflow](pipeline/LOCAL_LIBRARY.md) expose the underlying work separately.
 
@@ -109,7 +107,7 @@ The installed app uses Vega's W3C media player. The remaining rows distinguish l
 
 ## Running locally
 
-Use the separately imported review worktree identified by the [current checkpoint](docs/cloud-integration-2026-10-23/CHECKPOINT.md) and its verified source bundle. The review branch is local; cloning an older remote branch does not reproduce it. These commands assume you are already in that worktree. Compare its full SHA with the transfer manifest before installing dependencies or building.
+Use the separate review worktree and verified source bundle in the [current native handoff](docs/native-fixes-2026-10-25/NATIVE_VERIFICATION.md). The review branch is local; cloning an older remote branch does not reproduce it. These commands assume you are already in that worktree. Compare its full SHA with the transfer manifest before installing dependencies or building.
 
 ```sh
 git rev-parse HEAD
@@ -123,6 +121,9 @@ Use Node 22 from `.nvmrc` and the checked-in dependency lock.
 ```sh
 cd app
 npm ci --ignore-scripts
+# Restore the transfer's verified player inputs as documented below,
+# or run npm run setup:player with JDK 21 configured.
+npm run check:native-inputs
 npm run typecheck
 npm run lint
 npm test -- --runInBand --ci
@@ -134,8 +135,9 @@ Requires an existing Vega SDK installation, Node 22 and JDK 21. The bundled cata
 
 ```sh
 # From the repository root, with Node 22 selected:
-source ~/vega/env
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+# Load the existing Vega SDK environment and verified JDK 21.
+# See the current native handoff; the Mac default selector previously chose Java 8.
+java -version
 cd app
 npm ci --ignore-scripts
 npm run setup:player

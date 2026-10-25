@@ -1,0 +1,11 @@
+PASS test/calmframes/profileNames.test.tsx (5.61 s)
+PASS test/screens/profileNameSave.test.tsx
+PASS test/screens/readingComfortSave.test.tsx
+PASS test/calmframes/parentNavigation.test.tsx
+PASS test/calmframes/readingComfort.test.tsx
+
+Test Suites: 5 passed, 5 total
+Tests:       51 passed, 51 total
+Snapshots:   0 total
+Time:        12.112 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx|test\/calmframes\/parentNavigation.test.tsx|test\/calmframes\/profileNames.test.tsx|test\/screens\/readingComfortSave.test.tsx|test\/screens\/profileNameSave.test.tsx/i.

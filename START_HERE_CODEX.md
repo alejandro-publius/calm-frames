@@ -1,3 +1,5 @@
+**Current local continuation:** [native fixes, checks and exact-source handoff](docs/native-fixes-2026-10-25/README.md). Product source is `a6bdb62276dd63603716509e24b2034451b46b44`; the export records the final documentation HEAD. The received 37d10c2 handoff below is historical and unchanged in scope. Its original 5/20 tally precedes the presentation reconciliation; use the [current ledger](docs/cloud-integration-2026-10-23/CHECKPOINT.md) for 6/20.
+
 # Start here: native validation of fbe53bf, handed to cloud Codex
 
 This branch, `codex/native-validation-handoff-2026-10-25`, is the verified source

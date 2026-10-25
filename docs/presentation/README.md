@@ -1,5 +1,34 @@
 # Native app gallery and current evidence
 
+## October 25 native evidence
+
+The current review gallery uses unmodified JPEG review copies from the received
+**fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f** native validation. They precede
+the local D1/D2/D3 and dependency fixes. The original PNG hashes, copy dimensions
+and repository JPEG hashes are in the [received manifest](../../results/native-validation-fbe53bf-2026-10-25/evidence/MANIFEST.json).
+All 102 review files were hash-checked; no private household images were added.
+
+| Order | Native file | What it shows |
+|---|---|---|
+| 1 | [Home, 1280 by 720](../../results/native-validation-fbe53bf-2026-10-25/evidence/e02-720-home.jpg) | Four distinct islands, fictional Kid 2, Acadia selected and Watch focused. D1 was still present in this build. |
+| 2 | [Acadia Details, 1080 capture review copy](../../results/native-validation-fbe53bf-2026-10-25/evidence/h09-1080-acadia-details.jpg) | Still-scene default and a deliberate Watch choice; no claim of moving playback. |
+| 3 | [Release McWay playback, 1280 by 720](../../results/native-validation-fbe53bf-2026-10-25/evidence/r24-720-release-playing.jpg) | Actual scene and transport controls; the frame does not establish full-duration audio or comfort. |
+
+The source-map-bound inventories and Debug/Release package identities are in the
+[receipt](../../results/native-validation-fbe53bf-2026-10-25/receipt.json). These
+review images contain no reconstruction or UI substitution. They were inspected
+in this pass and linked directly, without another crop or recompression. Images
+from 1080 captures can be smaller review copies; the original manifest records
+that transformation. No screenshot proves the later source fixes or speech.
+
+[Current implementation and checks](../native-fixes-2026-10-25/README.md) and
+[exact-source native handoff](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md)
+separate these captures from the pending build. Item 14 is complete as prepared
+repository presentation; publication and exact-build native acceptance remain
+separate. The following October 21 gallery is historical.
+
+## Historical October 21 gallery
+
 These are existing Calm Frames app-only captures from the Vega Virtual Device on October 21, 2026. The source is the installed local ending-bounds fix, `60c3bbb701081c37dbd87a6b1f5b66d51a74b855`. They are not browser mockups or generated UI.
 
 | Home | Title details |

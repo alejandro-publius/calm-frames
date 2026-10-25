@@ -1,113 +1,90 @@
 # Calm Frames canonical product checkpoint
 
-This cloud thread is the sole integration owner. This is private development,
-not a replacement submission. Claude stopped editing before the October 25
-handoff. The original numbered outcomes below remain the acceptance ledger;
-code, machine checks, native observations and human acceptance are separate.
-
-The Mac native validation of fbe53bf (2026-10-25) is on branch `codex/native-validation-handoff-2026-10-25`; read [START_HERE_CODEX.md](../../START_HERE_CODEX.md) for exact package identities, defects D1 to D3 and the owner's #6 decision. Passing source tests there are kept separate from failed native behavior.
+This cloud thread is the sole implementation owner. The October 25 native handoff
+is received, reconciled and preserved. Further native/human observations wait
+until the owner is home; independent cloud work does not wait for Mac access.
+This is private development, not a replacement submission.
 
 ## Exact source and ownership
 
 | Role | Exact identity |
 |---|---|
-| Received and independently verified GitHub handoff | `codex/final-handoff-2026-10-25`, `15ef46c6e23c8ba627492da23b1b147000031aa4` |
-| Active local continuation | `codex/overnight-completion-2026-10-25`; read its full HEAD with `git rev-parse HEAD`. The export manifest records the immutable transfer SHA. |
-| Native candidate described by the handoff | `a672f57d333dc0e3fada51b3175ca1711d1f9397`; [recorded acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate). Its binary and detailed native ZIPs are not present in this cloud. |
-| Preserved earlier rollback | `6a87937f9f185ac0760d6f8331184e34b876d92c`; [source and package review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md). |
-| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; live materials unchanged. |
-| Prior cloud branch | `codex/integration-owner-2026-10-23`, frozen historical source `2cf54e0d168e58daedfde3f15407833d23af4e93`; preserved. |
+| Independently fetched GitHub native handoff | `codex/native-validation-handoff-2026-10-25`, **`37d10c2db57fc0868499adc133cff7560600d5cc`** |
+| Product in the received native package | `fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f`; [receipt](../../results/native-validation-fbe53bf-2026-10-25/receipt.json) |
+| Active local branch | `codex/native-defect-fixes-2026-10-25` |
+| Last product-code commit | **`a6bdb62276dd63603716509e24b2034451b46b44`**; later documentation/evidence HEAD in the external `SYNC_MANIFEST.json` |
+| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; live materials unchanged |
+| Preserved rollbacks | Received fbe53bf Debug; older a672f57 and 6a87937 packages remain identified in [START_HERE_CODEX.md](../../START_HERE_CODEX.md) |
 
-The [overnight work status](../overnight-2026-10-25/WORK_STATUS.md) records local
-commits, checks, exact missing inputs and the next action. Original branches and
-worktrees remain intact. The judging package is preserved. The [exclusion review](../overnight-2026-10-25/HANDOFF_REVIEW.md)
-checks every supplied never-merge head and named fixture against ancestry;
-missing intermediate harness IDs remain an explicit proof limit. No harness or
-rejected browser UI was imported. No overnight push, publication or submission
-change is authorized.
+The [current implementation record](../native-fixes-2026-10-25/README.md) and
+[focused evidence](../../results/native-fixes-2026-10-25/) describe the new local
+fixes. All 102 received review files matched their manifest. The ten never-merge
+branches' supplied 25 membership entries identify 24 distinct commits, all absent
+from ancestry; prior named fixtures and rejected browser UI stay excluded.
+Original branches/worktrees and the judging package are unchanged. No push,
+main merge, publication, submission edit or exception renewal is authorized in
+this pass. No additional evidence archive is needed for the implemented fixes.
 
-The last product-code commit is `b603be9cb3a8dc13407f8f6f6408aad984f6f836`.
-[Final local validation](../overnight-2026-10-25/FINAL_VALIDATION.md) and the
-[Mac transfer instructions](../overnight-2026-10-25/MAC_HANDOFF.md) are complete.
-The external transfer manifest supplies the later immutable documentation/evidence
-HEAD, verified bundle/patch checksums and consumer import results.
+## Check scope and release blockers
 
-## Hosted checks and remaining release blockers
+Current source checks: own clean locked installation, full app tests, normal
+TypeScript/ESLint, real dependency-consumer tests, prepared-media/Playback Proof
+gates, normal player generation, pinned SBOM comparison and focused Python/demo
+tooling checks. [Validation receipt](../../results/native-fixes-2026-10-25/validation.json)
+records outcomes and limits. No hosted CI was triggered for these local commits;
+old GitHub results do not transfer to this source.
 
-GitHub's API returned **no hosted runs for exact handoff `15ef46c`**;
-[read receipt](../../results/overnight-2026-10-25/hosted-handoff.json).
-New local commits do not inherit earlier hosted or native results. Historical
-CI on `2cf54e0` failed Python lint and Audit failed dependency policy; the
-[historical receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json)
-keeps those results tied to that source. No run was restarted overnight.
+[Dependency remediation](../native-fixes-2026-10-25/DEPENDENCIES.md) removed two
+advisories. Audit still fails with 13 distinct advisories and the two October 21
+expired groups. Only the pre-existing five-advisory TOML controlled-build deferral
+runs through October 30. No acceptance was signed or extended. New native builds
+must establish their own package inventory and runtime resolution.
 
-The [dependency continuation](../overnight-2026-10-25/DEPENDENCIES.md) and [final bounded follow-up](../overnight-2026-10-25/DEPENDENCY_FOLLOWUP.md) record
-compatible fixes, failing-before regressions, exact lock inputs and reproduced
-SBOMs. It also lists residual advisories. The two October 21 exception groups
-remain expired. Only the existing five-advisory TOML controlled-build deferral
-is approved through October 30; it requires reviewed, hashed manifests and
-isolated, bounded builds. No exception was renewed and no owner acceptance
-was signed. A nonzero Audit result remains a release blocker.
-
-The [handoff review](../overnight-2026-10-25/HANDOFF_REVIEW.md) preserves #5/#6
-native observations and reports the committed-log privacy review. Later cloud
-source changes require a new native build identity. Missing native checks,
-owner layout/comfort decisions and external account access cannot be replaced
-by source tests. The [morning review](../overnight-2026-10-25/MORNING_REVIEW.md)
-bundles those decisions without stopping independent work.
+The owner accepted #6's disclaimer as-is. Do not redesign or ask again. D1, D2
+and D3 are fixed at source level, but native focus, layout, speech and the pale
+frame outcome need the [one native verification pass](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md).
+Owner audiovisual/comfort review and external eligibility/judge access stay
+separate. No medical, native timing or human acceptance follows from tests.
 
 ## One 20-item product checklist
 
-Statuses apply to each whole original outcome, not the number of tests written.
-A partial item can contain completed machine work. Preserve completed subparts;
-do not repeat them solely to transfer their evidence.
+**6 completed, 12 partially completed, 2 blocked.** Item **14** closes in this
+pass. Completed **5, 6, 9, 15 and 18** remain closed. These statuses cover each
+whole original outcome; source-tested subparts do not imply native acceptance.
 
 | # | Original outcome and acceptance scope | Status | Evidence and exact remaining action |
 |---|---|---|---|
-| 1 | Cohesive native Fire TV design across screens | Partially completed | The [coastal design, four islands and Sea Otters naming](../design-polish-2026-10-23/README.md) are retained in `15ef46c`. Source review found no additional justified redesign. Current native images of fbe53bf at both sizes now exist ([native validation](../../START_HERE_CODEX.md)); owner visual acceptance and comfort remain #8, and defect D1 affects Home focus. |
-| 2 | Remove redundant copy while retaining safety, accessibility and error instructions | Partially completed | Existing `2403d8f` cleanup and later Details/still/recovery copy are retained. [Current UI source review](../overnight-2026-10-25/APP_UX.md) preserves essential instructions. The fbe53bf native sweep at both sizes found nothing redundant or missing ([native validation](../../START_HERE_CODEX.md)); error views were not reached, and the item stays open while D1 is open. Not another speculative copy rewrite. |
-| 3 | Calm cold start, loading, first frames, errors and scene transitions | Partially completed | Pending-PIN feedback `41bdeb9`, guarded loading and explicit recovery remain. [Native limits](../overnight-2026-10-25/NATIVE_LIMITS.md) state the unproved pale first-frame cause. Native startup and transitions are now recorded on fbe53bf: a near-white frame appears as the player route opens, cause not established ([measurements](../../START_HERE_CODEX.md)). Error views not reached. Do not alter cover or decoder timing without new native evidence. |
-| 4 | Visible Watch and distinct card focus at both supported sizes | Partially completed | Existing contrast, Watch hierarchy and coastal refinements are retained. D-pad routes are recorded; traces do not establish focus pixels. Native fbe53bf images at 1920 by 1080 and 1280 by 720 show Watch visible and a distinct ring, but defect D1 fails card focus: Up from Watch moves focus and the selection to the nearest middle card ([D1](../../START_HERE_CODEX.md)). |
+| 1 | Cohesive native Fire TV design across screens | Partially completed | The coastal design, four separate islands and Sea Otters naming are preserved. [Received native images](../presentation/README.md) show both sizes on fbe53bf. D1 now has explicit native focus routing and source regressions; confirm the new package before native closure. Owner visual/comfort review remains #8. |
+| 2 | Remove redundant copy while retaining safety, accessibility and error instructions | Partially completed | Existing copy cleanup and essential error/safety/accessibility guidance are preserved. The received two-size sweep found no redundant or missing copy; error views were not reached. No speculative copy rewrite. Confirm remaining error-state guidance and the corrected focus path on the new package. |
+| 3 | Calm cold start, loading, first frames, errors and scene transitions | Partially completed | Guarded loading/recovery remain. [Current fixes](../native-fixes-2026-10-25/README.md) separate startup-paused guidance from real pause speech. [First-frame investigation](../native-fixes-2026-10-25/FIRST_FRAME.md) removes the app default pale background without claiming the observed frame is solved. Native transition and error-state evidence still needed. |
+| 4 | Visible Watch and distinct card focus at both supported sizes | Partially completed | Watch and its ring are visible in the received 720/1080 native images. D1 fix `256bc67` plus `1fc9349` maps every card Down to Watch and actions Up to the selected card. Ref/handle regression passes; native traversal at both sizes remains pending. |
 | 5 | PIN presentation, profile-panel sizing and kid-name UX | Completed | [Recorded native acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate) retains persistence, limit/blank/sibling refusal, Save/Cancel/Back focus and position isolation. Controlled failed-save/retry with VoiceView used named fixture `19ba55d` over `4de7bd0`, not corrupted household data; editor behavior is retained in `a672f57`. Private letter/digit tracing is suppressed by `07db296`. No original name/PIN check remains; retain the scope and do not repeat the whole pass. |
 | 6 | Reachable onboarding Next, Back and footer with readable disclaimer | Completed | Production navigation passed both sizes on `a672f57`: steps open at top, one Down reaches Next, Up reaches the explainer reading stop, Down returns and Open library reaches Home. Idle shutdown was the device's timeout closing all apps, not an app crash. The owner accepted the disclaimer layout as-is on 2026-10-25; `FirstRunScreen.tsx` is unchanged in fbe53bf, which repeated the explainer route at 1920 by 1080 ([decision](../../START_HERE_CODEX.md)). Wording and layout are preserved; no audiovisual acceptance is implied. |
-| 7 | Sustained ambient viewing beyond McWay, including Forest and Sea Otters | Partially completed | McWay's existing continuous edition and final still are retained. Other titles offer stills and separate short previews. No approved long moving Forest/Otters editions are available, and none are faked through loops or slow motion. Observed natively on fbe53bf: Sea Otters and Forest are silent still scenes with optional 20 s and 12 s previews; only McWay has a 5-minute edition ([native validation](../../START_HERE_CODEX.md)). Need appropriate licensed source/edition approval. |
-| 8 | Prepare owner audiovisual and comfort review without medical or human-validation claims | Blocked | [Morning review](../overnight-2026-10-25/MORNING_REVIEW.md) supplies exact identity and observation fields. Owner listening, palette, pacing and comfort observations are absent; technical evidence and approved narration are not acceptance. |
+| 7 | Sustained ambient viewing beyond McWay, including Forest and Sea Otters | Partially completed | McWay retains its five-minute natural-speed edition and final still. Native fbe53bf evidence shows silent Forest/Sea Otters stills with separate 12/20-second previews. No licensed, approved long editions are available. Do not fake them with loops, slowing or demo edits. |
+| 8 | Prepare owner audiovisual and comfort review without medical or human-validation claims | Blocked | [One native handoff](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md) identifies the new exact build and observation fields. Owner listening, palette, pacing and comfort observations remain absent. Technical checks, accepted disclaimer and approved narration are not audiovisual acceptance. |
 | 9 | Native cover, seek and decoder timing evidence or explicit truthful limitations | Completed | [Explicit limitations record](../overnight-2026-10-25/NATIVE_LIMITS.md) binds each source/observed claim and states unmeasured compositor, decoder and physical timing. This closes the requested limitations alternative, not native timing measurement. No medical guarantee follows. |
-| 10 | Recovery preserves protection floors, profile positions and supported captions | Partially completed | Source checkpoint/guard tests and earlier position isolation remain. Stored settings cannot lower the current floor. [Inventory and limits](../overnight-2026-10-25/NATIVE_LIMITS.md) show no consumer caption tracks; test restoration is not native caption evidence. Native on fbe53bf with fictional profiles: Kid 2 on Extra cautious covers 9 s of Acadia against Kid's 7 s, separate McWay positions were kept and ordinary resume worked into Release ([receipt](../../results/native-validation-fbe53bf-2026-10-25/receipt.json)). Error retry and covered moving playback were not reached; an approved captioned edition is still needed before claiming native restoration. |
-| 11 | Native readability, D-pad order/focus, VoiceView and reduced motion | Partially completed | Existing recorded two-size navigation/VoiceView results are retained. [Pause correction](../overnight-2026-10-25/APP_UX.md) announces each actual pause once, instead of repeating when controls hide; new regressions failed against old source. Native listening on fbe53bf: the announcement was not heard on real pauses (defect D3, while its source regression passes), and focus jumps to the page-top Back after a Reading comfort save (D2). Seek bar and resume-entry speech are recorded separately; system reduced motion is unavailable on the virtual device ([native validation](../../START_HERE_CODEX.md)). |
-| 12 | Core technical depth, dependency/audit remediation and final validation | Partially completed | [Compatible dependency fixes](../overnight-2026-10-25/DEPENDENCIES.md), [asset packaging protections](../overnight-2026-10-25/PACKAGING.md) and [caregiver import protections](../overnight-2026-10-25/personal-import/README.md) are implemented. Combined validation and the exact residual advisory ledger remain authoritative. Exact fbe53bf Debug and Release inventories are source-map bound; only `decode-uri-component` 0.2.2 ships among the residual advisories ([receipt](../../results/native-validation-fbe53bf-2026-10-25/receipt.json)). Expired policy groups and any failing gate still block release. No budgets, tests or exceptions are weakened. |
+| 10 | Recovery preserves protection floors, profile positions and supported captions | Partially completed | Received fictional-profile checks show stricter Acadia floors, separate McWay positions and ordinary resume through Release. Current regressions retain guarded recovery and visible restored-pause guidance. Error retry and covered moving playback remain unobserved; consumer titles have no caption tracks. No lowered floor or imported harness. |
+| 11 | Native readability, D-pad order/focus, VoiceView and reduced motion | Partially completed | D1 routing, D2 saved-switch focus/visibility and D3 persistent pause live-region fixes are implemented with regressions. [Native checklist](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md) queues D-pad and actual VoiceView/Dolby behavior. Existing observations stay valid for fbe53bf only; device system reduced motion remains unavailable. |
+| 12 | Core technical depth, dependency/audit remediation and final validation | Partially completed | [Two dependency fixes](../native-fixes-2026-10-25/DEPENDENCIES.md) remove the vulnerable decoder and UUID implementations with real-consumer/Metro checks. Clean locked install, 1,905 Jest tests, normal typecheck/lint, 129 Node checks, player build and reproducible SBOMs pass. Fresh Audit still fails: 13 distinct advisories and two expired groups. New native package/system resolution remains unverified. |
 | 13 | Working personal-file import and caregiver pre-check with rights/DRM boundaries | Partially completed | [Working local workflow](../overnight-2026-10-25/personal-import/README.md) now requires processing permission, refuses recognized encrypted MP4 metadata, analyzes without playback and exports an exact-hash caregiver report. Real HTTP/analyzer and browser checks pass, including tampering, reconnect, keyboard and narrow layout. Direct TV file selection and separately approved exact-edition delivery are not supplied or implied. |
-| 14 | GitHub presentation with actual screenshots, architecture, setup and build identity | Partially completed | [README](../../README.md), [architecture](../presentation/ARCHITECTURE.md) and local caregiver setup are current. Existing native screenshots are clearly historical; browser import images are labelled as that workflow. Current native captures of fbe53bf now exist ([evidence](../../results/native-validation-fbe53bf-2026-10-25/receipt.json)); presentation reconciliation remains. Private local drafts are ready for review; publication remains separate. |
-| 15 | Final accurate Devpost and YouTube description drafts | Completed | [Source-backed drafts](PRESENTATION_DRAFTS.md) distinguish implemented behavior, recorded native observations and planned replacement media. Claims retain rights/medical/native limits. These are completed private drafts, not final video acceptance or a live submission edit; reconcile again if accepted product scope changes. |
-| 16 | Replacement-demo tooling/assembly from real footage/assets, with missing production inputs queued | Partially completed | [Renderer fixes and real encoder exercise](../overnight-2026-10-25/DEMO.md) bind bytes and receipts, preserve ambient audio and prevent truncated credits. The encoded fixture is visibly TEST ONLY. Actual accepted-source captures, illustrations and narration are absent, so no replacement product video is claimed. Production stays parked until product acceptance and script reconciliation. |
+| 14 | GitHub presentation with actual screenshots, architecture, setup and build identity | Completed | [README](../../README.md) and [native gallery](../presentation/README.md) use inspected, unmodified fbe53bf review captures with exact provenance and pre-fix limits. [Architecture](../presentation/ARCHITECTURE.md), setup, current source identity and evidence links are reconciled. Prepared repository presentation is complete; no publication or current-fix screenshot is claimed. |
+| 15 | Final accurate Devpost and YouTube description drafts | Completed | [Reconciled private Devpost/YouTube drafts](PRESENTATION_DRAFTS.md) tie behavior to source and received native evidence. They distinguish unresolved defects, medical/rights boundaries and missing production media. No live submission or approved narration rewrite. Reconcile again with the selected accepted build before publication. |
+| 16 | Replacement-demo tooling/assembly from real footage/assets, with missing production inputs queued | Partially completed | Existing source/package/hash/credit/audio renderer guards pass their focused checks. [Current input register](../native-fixes-2026-10-25/DEMO_INPUTS.md) distinguishes received JPEG/transcript references from missing accepted-build raw takes, narration and manga. No demonstrated renderer defect requires reimplementation; assembly and human review await actual eligible inputs. |
 | 17 | Verify submission/judge-access requirements; queue account/eligibility steps | Blocked | [Primary-source register](../judging-package/PRIMARY_SOURCES.md) preserves dated official-source provenance. The [fresh rules request](../../results/overnight-2026-10-25/official-rules-access.json) was blocked before the origin. Need an accessible current official copy and owner account/eligibility/judge-access confirmation; no guessed deadline or access claim. |
-| 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Remote `15ef46c` is independently verified, local ownership is singular, original branches are preserved, and this ledger/transfer manifest separate source, package and acceptance. [Work status](../overnight-2026-10-25/WORK_STATUS.md) records the continuation. Maintain exact final SHA and checks in the portable export. The native-validation handoff records the exact fbe53bf package identities ([start here](../../START_HERE_CODEX.md)). |
-| 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | [Packaging fixes](../overnight-2026-10-25/PACKAGING.md) retain runtime media bytes. [Normal player generation](../overnight-2026-10-25/PLAYER_BUILD.md) now passes in the cloud; its verified small ZIP supplies reusable generated inputs. The final source/checksum export preserves review and rollback instructions. On the Mac, fbe53bf Debug and Release were built, installed package scoped and identified by installed SHA-384, and Release launch, Watch, Back and persistence were observed on a disposable device ([receipt](../../results/native-validation-fbe53bf-2026-10-25/receipt.json)). Release gates and publication remain. No obsolete package is relabelled or published. |
-| 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Partially completed | [Implemented last](../overnight-2026-10-25/READING_COMFORT.md), integrated as `b603be9`: default-off per-kid larger help/body text and spacing in scrollable Parents and More info, with result-aware persistence and failure/retry. Legacy records, IDs, names, floors, positions and excluded layouts are preserved. Source/route tests and normal app checks pass. Native on fbe53bf at both sizes: per-kid state, isolation, wrapping, scrolling, persistence and VoiceView wording observed; defect D2 (focus after a save) and the owner's comfort judgment remain ([D2](../../START_HERE_CODEX.md)). Older app rollback can drop this optional flag on its next save; do not clear household data. |
+| 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Verified GitHub handoff `37d10c2db57fc0868499adc133cff7560600d5cc`; local product `a6bdb62276dd63603716509e24b2034451b46b44` on `codex/native-defect-fixes-2026-10-25`. [Current work record](../native-fixes-2026-10-25/README.md), this numbered ledger and the verified export retain exact identities. Original worktrees and exclusions are preserved; final documentation HEAD is in SYNC_MANIFEST.json. |
+| 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | Normal player generation and strict input/package-source gates pass with the new lock. [Verified generated-input manifest](../../results/native-fixes-2026-10-25/GENERATED_PLAYER_INPUTS.json) and portable source export support the [separate-worktree build/rollback handoff](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md). fbe53bf native packages remain historical. New native packages, residual Audit and owner acceptance remain; no release promotion. |
+| 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Partially completed | Retain received two-size per-kid persistence, isolation, wrapping, scrolling and VoiceView observations. D2 now consumes Back focus once and keeps the saved switch visible using layout events. Source save/failure/focus tests pass; native corrected focus/visibility and owner comfort remain. No protection/position changes or treatment claim. Older rollback may drop this optional preference on its next save. |
 
-## Mac-only acceptance, without duplicate work
+## Next native/human queue
 
-Retain #5 and #6's completed observations. The [native limits](../overnight-2026-10-25/NATIVE_LIMITS.md)
-and [morning review](../overnight-2026-10-25/MORNING_REVIEW.md) identify the remaining
-work. Existing missing archives are listed with their recorded sizes/hashes in
-[WORK_STATUS.md](../overnight-2026-10-25/WORK_STATUS.md); attach those bytes instead
-of repeating completed capture runs just to transfer evidence.
+Use the [single exact-source handoff](../native-fixes-2026-10-25/NATIVE_VERIFICATION.md)
+for build/install/rollback and five grouped checks. Preserve PIN, names,
+positions, protection and existing acceptance. No private household capture or
+full 111 MB archive is requested. Only a specific missing sanitized excerpt
+should be requested if an exact unresolved check requires it later.
 
-Any new package must record its own full source and SHA-384. Preserve the
-household, PIN, positions, approved media and verified rollback. A later cloud
-commit cannot reuse `a672f57`'s installed-package hash or native acceptance.
-Never include real PINs, typed household names or account details in evidence.
-
-## External inputs and publication boundary
-
-The owner's stated submission freeze remains in force. The original submitted
-fallback and linked materials are unchanged. Neither general coding approval
-nor technical checks authorize new public materials or human audiovisual
-acceptance. This app plays its own prepared catalog; it is not protection for
-Prime Video, Netflix or other apps.
-
-The existing narration, calm built-in voice choice and budget were already
-approved. Do not ask again. Product acceptance comes first. Later production
-must reconcile that script with the exact accepted build and show any material
-revision before generation. Secure API access and actual media inputs are
-later-stage requirements, not blockers to independent source work.
+Narration, calm built-in voice and budget decisions already exist; do not ask
+again. Manga and ElevenLabs generation remain parked until product acceptance
+and exact-build script reconciliation. Missing production takes and secure API
+access are later-stage requirements, not reasons to stop available source work.
+The submission freeze and unchanged fallback remain in force.

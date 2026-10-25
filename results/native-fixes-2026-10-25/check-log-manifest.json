@@ -1,0 +1,184 @@
+[
+  {
+    "file": "results/native-fixes-2026-10-25/checks/d1-before.log",
+    "original_sha256": "4568a861080d291cd9cad08bc4fd410b999ecbdeac84042e4814bbca69f79b0d",
+    "retained_sha256": "4568a861080d291cd9cad08bc4fd410b999ecbdeac84042e4814bbca69f79b0d",
+    "bytes": 1179,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/d2-before.log",
+    "original_sha256": "d51d7d0d6850d0886722bd33555399c9c837cc0185b3134ccf21bf3cd6957d8d",
+    "retained_sha256": "d51d7d0d6850d0886722bd33555399c9c837cc0185b3134ccf21bf3cd6957d8d",
+    "bytes": 5447,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/d3-before.log",
+    "original_sha256": "3751d337cc245d625bcadab00deef92f4c7d8104b3d10ecf5f561d69b9457f43",
+    "retained_sha256": "3751d337cc245d625bcadab00deef92f4c7d8104b3d10ecf5f561d69b9457f43",
+    "bytes": 3369,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/navigation-before.log",
+    "original_sha256": "4669d6d986f21f82f868ebd4c13ff9dd06fd4e798da255fb9d391dacf60d6cdb",
+    "retained_sha256": "4669d6d986f21f82f868ebd4c13ff9dd06fd4e798da255fb9d391dacf60d6cdb",
+    "bytes": 1350,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/d2-regressions.log",
+    "original_sha256": "3117eeb4a7b98c43962be843d2b459619baaf97f0b6032497a68b2708c3312d1",
+    "retained_sha256": "3117eeb4a7b98c43962be843d2b459619baaf97f0b6032497a68b2708c3312d1",
+    "bytes": 583,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/d3-after.log",
+    "original_sha256": "b53009e98f0e3592b4f818934cf4792672b0e50b371b60ee9138a249b1a9ad6b",
+    "retained_sha256": "b53009e98f0e3592b4f818934cf4792672b0e50b371b60ee9138a249b1a9ad6b",
+    "bytes": 1509,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/ui-final-focus.log",
+    "original_sha256": "ed90e7f5d55a5737e104957486ec64f8d1d6cc26c45d8b42b17e7f88b9865275",
+    "retained_sha256": "5ec3b2b7360fbb26ffeb2b57c1c317bc33bfa3d6fc529ef539ad6dc943d66a4c",
+    "bytes": 9272,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/app-full.log",
+    "original_sha256": "f0c17a8e2f9551a3915dec4d9cfcfe040b18ac2c95ff616300774d545a512a3a",
+    "retained_sha256": "cfb4176483c5cf0e33109ea35976d46965d4d956535e3710dab6113e095ffc13",
+    "bytes": 208213,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/full-regressions-fixed.log",
+    "original_sha256": "7952e156c980f8aae22cc8732c04e5168b2fb87ea408ee2ca0393f90d5ace472",
+    "retained_sha256": "7952e156c980f8aae22cc8732c04e5168b2fb87ea408ee2ca0393f90d5ace472",
+    "bytes": 4239,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/app-full-final.log",
+    "original_sha256": "cad745109c0941d8e033ddef49d542a8fb0bd584c22a95402cacc3d5203015f5",
+    "retained_sha256": "75f0a6340177a4c6c5347d468d8093f2c38278cf50b8438d2dc0cd5e4a84da5e",
+    "bytes": 200388,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/node-gates-final.log",
+    "original_sha256": "9f91c33e63edbf99137dde8433930964a4ee2214dffc48bec23edcc2b276cfad",
+    "retained_sha256": "2a11f9ca593d657f2050d7ea2276fe59e5df1e5542ef99c3299a080da8158368",
+    "bytes": 40350,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/player-build.log",
+    "original_sha256": "68f60ba876338095f0a1d1ac3082d7faa19346df28f1f7bc8c63b2d9d2558201",
+    "retained_sha256": "794272c82e7a2635b1991fc8adda8f4bd5caf8f73b29b0864cf49953313a79f8",
+    "bytes": 11075,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/uuid-install-tests.log",
+    "original_sha256": "b5b6c804990065b659db4ce1dc2a595fb63f97be140c15d9d1b776439a67e3ff",
+    "retained_sha256": "d65c8a846e142bc405c7bb219d799b42d518fc8bb2760d88dfe19a51e1c818d0",
+    "bytes": 10825,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/audit-final.log",
+    "original_sha256": "aec218a25f5ccbb65ec8d43e761cb026d46bb6fecb82ab64183d70aaa5fcc421",
+    "retained_sha256": "aec218a25f5ccbb65ec8d43e761cb026d46bb6fecb82ab64183d70aaa5fcc421",
+    "bytes": 401,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/sbom-final.log",
+    "original_sha256": "a28c93b1d48b8d81f95e0c0de2fb3c113e02411f57ca533dbdc6350544c30fa0",
+    "retained_sha256": "909a70d879f2f1564d28e8cea603e04b60d87b67b11ea7e81bf793307e3040c8",
+    "bytes": 3880,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/python-focused.log",
+    "original_sha256": "f9e85e2fb85f58fbea0ce47bd220835a35fb8576d63accce6843de23631528e8",
+    "retained_sha256": "f9e85e2fb85f58fbea0ce47bd220835a35fb8576d63accce6843de23631528e8",
+    "bytes": 254,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/decoder/uuid-before-valid.log",
+    "original_sha256": "c86da0bc06055c104ed534fafce37c930cea644d3e123ddf49cfba1b44a0fc65",
+    "retained_sha256": "896792cdf821baeb9b58c5bf2c0524c754ffbdee38e55b436892d1fc788be5d3",
+    "bytes": 2117,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/decoder/before-dos.json",
+    "original_sha256": "4fcf15ea4993aab5faa9a6a7897981d6966c4e4e424db0538809a37c7a0d7442",
+    "retained_sha256": "4fcf15ea4993aab5faa9a6a7897981d6966c4e4e424db0538809a37c7a0d7442",
+    "bytes": 100,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/decoder/consumer-tests.log",
+    "original_sha256": "5d7be2616719ad7191656c93d6aba0d7003b6f57d8786896e0b43cb164a9996b",
+    "retained_sha256": "5d7be2616719ad7191656c93d6aba0d7003b6f57d8786896e0b43cb164a9996b",
+    "bytes": 1438,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/decoder/metro-test.log",
+    "original_sha256": "daf0c12a9ae6c705541158fbdc131a4eb22a6d6eda789e34c8e539c9102e0c20",
+    "retained_sha256": "c3f41e232eb6b2a1e172d0d8abf3f36e82f9ea40c893dc8384b94cf697ad679e",
+    "bytes": 3362,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout/cache paths replaced. No result lines omitted."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/style-final.log",
+    "original_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+    "retained_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+    "bytes": 62,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/docs-final.log",
+    "original_sha256": "fc05f5cc250b146f86c108a9eb1f3166bf9c628d6a432377f56a8673a8eac18e",
+    "retained_sha256": "fc05f5cc250b146f86c108a9eb1f3166bf9c628d6a432377f56a8673a8eac18e",
+    "bytes": 99,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/helper-ruff.log",
+    "original_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "retained_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "bytes": 19,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/secret-controls.log",
+    "original_sha256": "bcfa2cbe4f8573daa5dc15b4e75bfb9f6220e5d380e9ebf270f94c94d8b82924",
+    "retained_sha256": "bcfa2cbe4f8573daa5dc15b4e75bfb9f6220e5d380e9ebf270f94c94d8b82924",
+    "bytes": 98,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/gitleaks-commits.log",
+    "original_sha256": "b062b60269b191d96884d07b7e8637267212a3f3dcb4e8c67ad9cd8ddc64048c",
+    "retained_sha256": "b062b60269b191d96884d07b7e8637267212a3f3dcb4e8c67ad9cd8ddc64048c",
+    "bytes": 108,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  },
+  {
+    "file": "results/native-fixes-2026-10-25/checks/gitleaks-staged.log",
+    "original_sha256": "eea1ac5c811dcbec0c06ce62f039657dc99e8ce00c2eda58b3a7f27b0b8a6c39",
+    "retained_sha256": "eea1ac5c811dcbec0c06ce62f039657dc99e8ce00c2eda58b3a7f27b0b8a6c39",
+    "bytes": 110,
+    "sanitization": "ANSI color and trailing whitespace removed; cloud checkout paths replaced."
+  }
+]

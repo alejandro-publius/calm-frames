@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: both existing consumers use the callable adapter and only the pinned fixed parser
+ok 1 - both existing consumers use the callable adapter and only the pinned fixed parser
+  ---
+  duration_ms: 11.958384
+  type: 'test'
+  ...
+# Subtest: legacy callable keeps ordinary text, plus signs and invalid input behavior
+ok 2 - legacy callable keeps ordinary text, plus signs and invalid input behavior
+  ---
+  duration_ms: 1.320524
+  type: 'test'
+  ...
+# Subtest: actual query parser retains arrays, empty values, Unicode and literal plus
+ok 3 - actual query parser retains arrays, empty values, Unicode and literal plus
+  ---
+  duration_ms: 2.252357
+  type: 'test'
+  ...
+# Subtest: malformed percent input completes inside a bounded child process
+ok 4 - malformed percent input completes inside a bounded child process
+  ---
+  duration_ms: 50.451737
+  type: 'test'
+  ...
+# Subtest: actual source-map consumer preserves a plus in a source URL and reads inline maps
+ok 5 - actual source-map consumer preserves a plus in a source URL and reads inline maps
+  ---
+  duration_ms: 3.082678
+  type: 'test'
+  ...
+# Subtest: the installed navigation path reader and writer retain query parameters
+ok 6 - the installed navigation path reader and writer retain query parameters
+  ---
+  duration_ms: 14.479522
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 172.005406

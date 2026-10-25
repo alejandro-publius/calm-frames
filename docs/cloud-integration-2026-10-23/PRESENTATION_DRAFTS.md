@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Reconciled against verified handoff `15ef46c6e23c8ba627492da23b1b147000031aa4`, containing native candidate `a672f57`, and the [local continuation](../overnight-2026-10-25/WORK_STATUS.md). The [checkpoint](CHECKPOINT.md) distinguishes the recorded Mac package from later cloud changes. These private drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md remains unchanged.
+Reconciled against received native handoff `37d10c2db57fc0868499adc133cff7560600d5cc` for fbe53bf and local fixes through `a6bdb62276dd63603716509e24b2034451b46b44`. The [current checkpoint](CHECKPOINT.md) separates observed native behavior from newer source fixes. These private drafts authorize no release or submission change. The approved eight-cue narration in demo/STORYBOARD.md is unchanged; replacement footage, manga and ElevenLabs narration do not yet exist for the new build.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
@@ -46,10 +46,12 @@ The failure fixture is identified separately from the production package. The
 platform keyboard was not used. Later cloud changes retain separate source and
 native acceptance identities.
 
-The local continuation also implements an optional per-kid Reading comfort
-preference for larger help text and spacing in Parents and More info. It defaults
-off, uses the saved profile and preserves playback/protection settings. Its
-source checks pass; native layout and owner comfort are not yet accepted.
+Optional per-kid Reading comfort enlarges help/body text and spacing in Parents
+and More info. Its received fbe53bf native evidence covers isolation, persistence,
+wrapping and VoiceView; saving exposed a focus/visibility defect. The local D2
+fix retains focus and reveals the switch using measured layout, with source
+regressions passing. New native confirmation and owner comfort remain pending;
+no treatment benefit is claimed.
 
 ### 🔎 Preparation and playback share a chain of evidence
 
@@ -93,19 +95,23 @@ Do not upload this description unchanged: replace the final reviewer-link instru
 
 ## Screenshot ordering and captions
 
-The following files were inspected in the earlier cloud review. They are existing Vega Virtual Device window captures with simulator chrome and a remote panel, not newly captured frames of `a672f57` or the overnight continuation. Keep their original bytes. If a later presentation crops to the app viewport, label that crop and retain the source/hash in its asset manifest; no content replacement, recoloring or invented native UI.
+The current gallery uses the received fbe53bf native review copies, before the
+new defect fixes. Do not label them as captures of a6bdb62. Keep their original
+repository bytes and retain the [manifest](../../results/native-validation-fbe53bf-2026-10-25/evidence/MANIFEST.json)
+that binds each JPEG to its original capture and transformation.
 
-| Order | Existing file | Proposed caption | Source and scope |
-|---|---|---|---|
-| 1 | [Coastal Home](../../results/native-profiles-retry-polish-2026-10-23/38-polish-selected.png) | "A coastal home for choosing a scene. The selected profile remains visible." | Production `bd55e47`. The image visibly says Settle in; the current source later standardized this action to Watch. Do not relabel the pixels. |
-| 2 | [McWay Details](../../results/native-profiles-retry-polish-2026-10-23/40-polish-details.png) | "McWay Falls: a sustained natural-speed view, nature sound, and a still-frame ending." | Production `bd55e47`; this is a Details screen, not proof of full playback or final-frame behavior. |
-| 3 | [Profile choice](../../results/native-profiles-retry-polish-2026-10-23/37-polish-picker.png) | "Choose who is watching. The active profile is checked and the current control has a visible focus outline." | Production `bd55e47`; later saving/focus fixes need their own current-source native observation. |
-| 4 | [Kid 2 return](../../results/native-profiles-retry-polish-2026-10-23/17-kid2-resume.png) | "Kid 2 returns to its own saved place." | Profile acceptance source `4b04877`; use together with the next image and the receipt, not as current-build acceptance. |
-| 5 | [Kid return](../../results/native-profiles-retry-polish-2026-10-23/22-kid-isolated.png) | "Switching back preserves the other profile's saved place." | Profile acceptance source `4b04877`; proves the recorded position-isolation observation, not different protection presets or caption restoration. |
+| Order | Actual native file | Caption and scope |
+|---|---|---|
+| 1 | [Home](../../results/native-validation-fbe53bf-2026-10-25/evidence/e02-720-home.jpg) | Four separate destination islands; Acadia selected and Watch focused. Fictional Kid 2. The image does not prove D1 is fixed. |
+| 2 | [Acadia Details](../../results/native-validation-fbe53bf-2026-10-25/evidence/h09-1080-acadia-details.jpg) | A still-scene default, replacement summary and deliberate Watch choice. Review copy of a 1080 capture. |
+| 3 | [McWay in Release](../../results/native-validation-fbe53bf-2026-10-25/evidence/r24-720-release-playing.jpg) | Actual McWay playback and transport at 720. No complete audio, timing or comfort claim from a still. |
 
-The [native receipt](../../results/native-profiles-retry-polish-2026-10-23/receipt.json) records production, profile-acceptance and harness identities separately, plus screenshot hashes. Its `30-probe-focused`, `31-probe-error`, `33-retry-ready` and `35-retry-playing` images are from the separate Retry harness. Exclude them from a production screenshot gallery or production demo. Never merge that harness to make a recording easier.
-
-Use the ordered screenshots as an evidence appendix now. A final current-candidate gallery needs source-bound native captures supplied by the Mac acceptance executor; browser renders or generated images cannot fill that gap.
+[Package identities and observations](../../results/native-validation-fbe53bf-2026-10-25/receipt.json)
+are native evidence for fbe53bf only. The older Retry harness screenshots remain
+excluded from production presentation. These images are suitable evidence
+references; the replacement demo still needs raw accepted-build app footage,
+not screenshots animated into a purported native walkthrough. See the
+[production input register](../native-fixes-2026-10-25/DEMO_INPUTS.md).
 
 ## Architecture draft
 

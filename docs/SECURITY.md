@@ -424,8 +424,8 @@ permission is not acceptance of the remaining findings.
 | Scope | Current scanner result |
 |---|---|
 | Python packages with findings in the scanned sources | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->33<!--/n--> |
-| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->15<!--/n--> |
+| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->25<!--/n--> |
+| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->13<!--/n--> |
 | npm packages classified critical | <!--n results/audit.json:published.npm_critical -->0<!--/n--> |
 | npm packages classified high | <!--n results/audit.json:published.npm_high -->14<!--/n--> |
 | Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
@@ -471,7 +471,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1105<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1106<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.

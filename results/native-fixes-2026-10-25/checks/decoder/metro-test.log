@@ -1,0 +1,55 @@
+TAP version 13
+# ● Validation Warning:
+#   Unknown option "fileMapCacheDirectory" with value "<checkout>/app/node_modules/.cache/calm-frames-metro" was found.
+#   This is probably a typing mistake. Fixing it will remove this message.
+#                         ▒▒▓▓▓▓▒▒
+#                      ▒▓▓▓▒▒░░▒▒▓▓▓▒
+#                   ▒▓▓▓▓░░░▒▒▒▒░░░▓▓▓▓▒
+#                  ▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓
+#                  ▓▓░░░░░▒▓▓▓▓▓▓▒░░░░░▓▓
+#                  ▓▓░░▓▓▒░░░▒▒░░░▒▓▒░░▓▓
+#                  ▓▓░░▓▓▓▓▓▒▒▒▒▓▓▓▓▒░░▓▓
+#                  ▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓▓▒░░▓▓
+#                  ▓▓▒░░▒▒▓▓▓▓▓▓▓▓▒░░░▒▓▓
+#                   ▒▓▓▓▒░░░▒▓▓▒░░░▒▓▓▓▒
+#                      ▒▓▓▓▒░░░░▒▓▓▓▒
+#                         ▒▒▓▓▓▓▒▒
+#                 Welcome to Metro v0.83.8
+#               Fast - Scalable - Integrated
+# [metro-file-map] Cache write error
+# : Error: ENOENT: no such file or directory, open '<checkout>/app/node_modules/.cache/calm-frames-metro/metro-file-map-9f1e79da5f4980e5b58f446a95bffcb6-6950254b88daae41dbc8ec8688266c46'
+#     at async open (node:internal/fs/promises:639:25)
+#     at async Object.writeFile (node:internal/fs/promises:1222:14)
+#     at async <checkout>/app/node_modules/metro-file-map/src/cache/DiskCacheManager.js:80:11
+#     at async DiskCacheManager.write (<checkout>/app/node_modules/metro-file-map/src/cache/DiskCacheManager.js:106:7)
+#     at async \#takeSnapshotAndPersist (<checkout>/app/node_modules/metro-file-map/src/index.js:469:5)
+#     at async <checkout>/app/node_modules/metro-file-map/src/index.js:295:9
+#     at async DependencyGraph.ready (<checkout>/app/node_modules/metro/src/node-haste/DependencyGraph.js:94:5) {
+#   errno: -2,
+#   code: 'ENOENT',
+#   syscall: 'open',
+#   path: '<checkout>/app/node_modules/.cache/calm-frames-metro/metro-file-map-9f1e79da5f4980e5b58f446a95bffcb6-6950254b88daae41dbc8ec8688266c46'
+# }
+# transform[stderr]: (node:753764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+# transform[stderr]: (node:753765) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+# transform[stderr]: (node:753766) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+# LOG:Writing bundle output to: <checkout>/app/.logs/uri-metro-sazCBd/probe.js
+# LOG:Done writing bundle output
+# Subtest: Metro executes the fixed decoder through its existing CommonJS query consumer
+ok 1 - Metro executes the fixed decoder through its existing CommonJS query consumer
+  ---
+  duration_ms: 3765.549917
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3868.47259

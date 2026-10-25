@@ -1213,3 +1213,22 @@ Task: run the final UI source checks. Expected: workspace-only Jest run. Actual:
 ## 2026-10-21: Vega incremental packaging retained replaced media
 
 Task: package the approved Acadia replacement. Expected: five bundles and 63,317,768 prepared bytes. Actual: native staging retained the removed Acadia bundle/report alongside the new bundle, and the mandatory package budget gate rejected the archive. No installation occurred. Severity: build blocked. Workaround: move only the generated prepared namespace from app/build/private/vega/aarch64/Debug/assets/raw to the external evidence backup, then rebuild from the checked source assets. Suggestion: refresh the native staged asset tree when a bundle is removed.
+
+## 2026-10-25: native focus and pause defects found after source tests passed
+
+These are app defects recorded on fbe53bf, not claims that Amazon caused them.
+The [received handoff](../START_HERE_CODEX.md) contains the exact native package,
+fictional-household screenshots and speech transcripts. The [local fix record](native-fixes-2026-10-25/README.md)
+separates new source regressions from pending native confirmation.
+
+| Issue / severity | Reproduction and expected behavior | Actual native behavior | Workaround and actionable correction |
+|---|---|---|---|
+| D1, high navigation disruption | Select each Home title, Down to Watch, Up. Expect the same selected card. | Spatial navigation moves to a nearer middle card and changes title; some card Down moves to Details. | Re-select the title before watching. Explicit native ref/handle routing now maps cards Down to Watch and action Up to the selected card; verify both sizes. |
+| D2, high focus/visibility disruption | In a fictional profile's Parents, save Reading comfort. Expect switch focus and its full saved state to remain visible. | Focus returns to top Back; enlarged content pushes the switch below the viewport. | Scroll back and inspect the saved state. Consume initial Back preference once and reveal the switch using layout events; test save failure and moving away during save as well. |
+| D3, high accessibility feedback defect | With VoiceView, open player, let playback start, pause, show/hide controls, resume and pause again. Expect one notice per actual pause, none on opening. | Opening gets a pause announcement; real pauses are silent with the recorded Dolby session. | Inspect visible pause state; do not treat it as speech acceptance. Keep a persistent polite live region and separate restored-pause guidance from a new pause event. Native listening still required. |
+
+The near-white transition is tracked separately in the [first-frame investigation](native-fixes-2026-10-25/FIRST_FRAME.md).
+The app's default route background was a concrete fixable gap. Recorder timing
+alone cannot identify decoder or compositor fault, so those layers and approved
+media remain unchanged. No permission bypass, Mac host fault attribution or
+unverified platform defect is included here.
