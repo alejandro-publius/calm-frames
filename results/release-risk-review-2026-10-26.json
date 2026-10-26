@@ -1,0 +1,160 @@
+{
+  "decision_state": "PENDING; no risk acceptance, exception renewal or publication performed",
+  "package_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+  "package_bytes": 132117790,
+  "product_source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+  "main_app_tree": "107bbfe311d77de44b319bf3a13db77723aa0901",
+  "scope": "Exactly this aarch64Release package, not future Debug builds/toolchain or deviceOS/systempackages.",
+  "inventory_binding": {
+    "bundle_sha256": "4f9d62d9230efcadc4365eacda00e3f5b11f5d677d2ad28344f2383d75140c39",
+    "hermes_sha256": "a9ab71cb6881aaf9977c9fdcb233c95fbfbe8e070253aa2ff13f0cebf4fc9ad9",
+    "packaged_Hermes_matches_build": true,
+    "source_map_sha256": "6518cbebd8a02be419efcc0b82ee6520a52a78a10004e822d55d2ec1b450dd67",
+    "map_named_after_packaged_bundle": true,
+    "app_module_files": 339,
+    "node_module_files": 585,
+    "inventory_sha256": "6b6fbe03cd8592bde3cc7c3326d69afb0b2ab3d398c0d8f476eb947220f183fd"
+  },
+  "findings": [
+    {
+      "id": "GHSA-rxrc-rgv4-jpvx",
+      "title": "React Developer Tools extension Improper Authorization vulnerability",
+      "severity": "moderate",
+      "package": "react-devtools-core",
+      "affected_nodes": [
+        {
+          "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+          "locked_version": "3.6.3",
+          "in_this_package": false
+        }
+      ],
+      "vulnerable_instance_in_exact_Release": false,
+      "exposure": "Installed build/development dependency; no vulnerable instance found in this Release app bundle.",
+      "historical_exception_group": "in-the-device-bundle",
+      "source": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx"
+    },
+    {
+      "id": "GHSA-7f53-fmmv-mfjv",
+      "title": "Regular expression denial of service in react-native",
+      "severity": "high",
+      "package": "react-native",
+      "affected_nodes": [
+        {
+          "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+          "locked_version": "0.60.6",
+          "in_this_package": false
+        }
+      ],
+      "vulnerable_instance_in_exact_Release": false,
+      "exposure": "Installed build/development dependency; no vulnerable instance found in this Release app bundle.",
+      "historical_exception_group": "not-in-the-device-bundle",
+      "source": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv"
+    },
+    {
+      "id": "GHSA-3h5v-q93c-6h6q",
+      "title": "ws affected by a DoS when handling a request with many HTTP headers",
+      "severity": "high",
+      "package": "ws",
+      "affected_nodes": [
+        {
+          "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "locked_version": "3.3.3",
+          "in_this_package": false
+        }
+      ],
+      "vulnerable_instance_in_exact_Release": false,
+      "exposure": "Installed build/development dependency; no vulnerable instance found in this Release app bundle.",
+      "historical_exception_group": "not-in-the-device-bundle",
+      "source": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q"
+    },
+    {
+      "id": "GHSA-96hv-2xvq-fx4p",
+      "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "severity": "high",
+      "package": "ws",
+      "affected_nodes": [
+        {
+          "install_path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "locked_version": "1.1.5",
+          "in_this_package": false
+        },
+        {
+          "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "locked_version": "3.3.3",
+          "in_this_package": false
+        },
+        {
+          "install_path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "locked_version": "1.1.5",
+          "in_this_package": false
+        }
+      ],
+      "vulnerable_instance_in_exact_Release": false,
+      "exposure": "Installed build/development dependency; no vulnerable instance found in this Release app bundle.",
+      "historical_exception_group": "not-in-the-device-bundle",
+      "source": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p"
+    }
+  ],
+  "severity_counts": {
+    "moderate": 1,
+    "high": 3
+  },
+  "npm_propagated_high_nodes": 9,
+  "vulnerable_instances_found_in_Release": 0,
+  "reachability_limits": [
+    "Inventory is tied to packagedJS/Hermes and source map; absence applies to these installed vulnerable instances in this app package.",
+    "DeviceOS/SDKsystembundles are not covered by this app inventory.",
+    "ReactDevTools advisory patch targets browser-extension authorization; applicability to its standalone backend is not established, and finding is retained."
+  ],
+  "exposure_and_controls": {
+    "react_native_0_60_6": "URL regular-expression DoS in the nested codegen dependency; absent from the Release package. No blanket claim that all build-host uses are unreachable.",
+    "react_devtools_core_3_6_3": "Improper authorization in developer-tools extension paths; absent from the Release package; installed dependency finding retained.",
+    "ws_3_3_3_headers": "DoS if the old development websocketserver receives crafted HTTP headers; absent from the Release package.",
+    "ws_1_1_5_and_3_3_3_fragments": "Memory-exhaustion DoS on old development websocketservers; absent from the Release package.",
+    "operational_conditions_for_risk_review": [
+      "Use reviewed source and locked dependencies in controlled build environments.",
+      "Restrict Metro/DevTools/inspector exposure to trusted development hosts/networks; do not expose these old services to untrusted clients.",
+      "Distribute the reviewed Release artifact rather than substituting a Debug artifact.",
+      "Retain current finding reports and separately review any SDK/dependency/artifact change."
+    ],
+    "conditions_are_not_newly_configured": "No firewall, credential, bind-address or account change performed in this pass."
+  },
+  "policy": {
+    "file": "scripts/audit_exceptions.toml",
+    "sha256_unchanged": "0f1c478bc96af9834bade4c4d7832f8c19c684087adc12f024914309ab941a80",
+    "audit_workflow_sha256_unchanged": "2bbb117fe7e798dcd736a7bf875697c8fa43a5160d2500adb7a42ac9a2850a18",
+    "expired_groups": [
+      {
+        "group": "in-the-device-bundle",
+        "ships": true,
+        "review_by": "2026-10-21",
+        "accepted_by": "Claude, Oct 11 2026 session, on the infrastructure and security lane's reading; for Alex to confirm at the Oct 21 review"
+      },
+      {
+        "group": "not-in-the-device-bundle",
+        "ships": false,
+        "review_by": "2026-10-21",
+        "accepted_by": "Claude, Oct 11 2026 session, on the infrastructure and security lane's reading; for Alex to confirm at the Oct 21 review"
+      }
+    ],
+    "other_group": {
+      "group": "owner-approved-controlled-toml-builds-2026-10-23",
+      "review_by": "2026-10-30",
+      "scope": "Existing five-advisory controlledTOMLbuild acceptance; not blanket approval of these four."
+    },
+    "why_Audit_fails": "The two broad review records are expired. The shipped-group name reflects historical bundle classification, including older DebugDevTools and SDKparents; it is not a current per-advisory Release reachability verdict.",
+    "Audit_remains": "failure",
+    "release_helper": "scripts/release.sh enforces artifact/source/delivery gates and prepares files; it does not run or override the separate dependency Audit. docs/RELEASE.md retains separate package, security, license and recording review plus explicit publication approval. This pending decision does not supply those approvals or make a new demo a packaging prerequisite.",
+    "can_record_separate_risk_decision": true,
+    "separate_record_effect": "A pending/accepted exact-artifact review can be recorded without changing Audit code or exception dates. It does not make Auditgreen, renew the two groups, remove findings or supply releasepublication authority."
+  },
+  "minimum_owner_decision_draft": "Accept the listed residual build/development dependency risk for package bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e only, after reviewing its hash-bound inventory; acknowledge that Audit remains red and reliable actual-pause speech remains unresolved. Any authorization to publish this as a developmentprototype must be explicit and must disclose these limits. This draft does not request a workflow change, exception renewal, vendor repack, new signer or credential.",
+  "remaining_item19": [
+    "Exact-artifact security/release-risk decision above is pending; blanket project permission is not recorded as acceptance.",
+    "Final promotion/publication decision for the concrete developmentcandidate with knownnativepause-speechlimit remains pending.",
+    "If greenAudit is required for release, supportedremediation or a separatelyauthorized formalpolicydecision is stillneeded; no bypass is performed."
+  ],
+  "exception_or_workflow_changed": false,
+  "release_accepted": false,
+  "published": false
+}

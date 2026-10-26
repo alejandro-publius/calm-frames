@@ -1,0 +1,157 @@
+{
+  "date_utc": "2026-10-26",
+  "baseline_main": "800f14d8b094e2582819a7a83caa9ad8c74dc529",
+  "scope": "Practical wrap-up for original19,16,17; preserve12complete7partial1blocked. No new productbuild/devicepass, paidgeneration, upload, accesschange or newcredentials.",
+  "item19": {
+    "status": "partially completed",
+    "delivered": "One local owner-ready Release candidate path, exact identity, guarded optional reinstall helper and source-based public reviewer quickstart.",
+    "public_instructions": "docs/submission/REVIEWER_QUICKSTART.md",
+    "product_source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+    "app_tree": "107bbfe311d77de44b319bf3a13db77723aa0901",
+    "app_tree_matches_baseline_main": true,
+    "variant": "aarch64 Release",
+    "package_bytes": 132117790,
+    "package_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+    "public_download": null,
+    "normal_build_and_inventory_gates": "Existing passing source-bound records reused; no identical rebuild.",
+    "owner_helper_check": "Package hash and exact owned fictional disposable identity verified with --verify-only; no install, launch or storage change in this wrap-up.",
+    "release_accepted": false,
+    "remaining": [
+      "Audit: four advisories/nine high nodes and two expired review groups; no gate or exception changed.",
+      "Reliable actual-pause speech remains a demonstrated native failure.",
+      "Other native/content-dependent boundaries remain recorded in the original ledger; no broad Release acceptance inferred.",
+      "Publishing a release or replacing live submission/demo remains deferred."
+    ]
+  },
+  "item16": {
+    "status": "partially completed",
+    "delivered": "Unpublished1:47 nativeReleasefootagereviewreel from two existing canonicalRelease validation captures, with labeled editorial cards and existing credits. Not the approved final2:50story.",
+    "output_name": "Calm-Frames-native-Release-review-reel.mp4",
+    "sha256": "e6e3a13f76ae9443db506e0f2fa3fa9fb9b4b820d448b08a7322d0c411d94eae",
+    "bytes": 5094106,
+    "seconds": 107.649674,
+    "source_release_package_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+    "source_takes": [
+      {
+        "file": "speech-two-pauses-dolby-off-release720.mp4",
+        "sha256": "08f779f6a7525741c784401a83f2216a9b44db38bb65188da7add3b3e0782441",
+        "usage": "Entire original capture at natural speed, app audio retained, capture chrome and out-of-window padding removed"
+      },
+      {
+        "file": "voiceview-comfort-save-release720.mp4",
+        "sha256": "ac384ec8dc50c867c6d27c65a3cbbdd1a52087ffb644ae044ef43315ee6233f5",
+        "usage": "Entire original capture at natural speed, app audio retained, capture chrome and out-of-window padding removed"
+      }
+    ],
+    "layout_and_timing": {
+      "native_app_crop": [
+        0,
+        56,
+        1280,
+        720
+      ],
+      "app_controls_cropped": false,
+      "presentation": "Uniformlyscaled fullapparea,padded; labels outside app. Natural source speed; held final captured frame through original audio/container duration.",
+      "native_audio": "Retained, gain1.0, AACreencoded; no narration/music generated.",
+      "known_limits_retained": "Black covered pauses and unreliable speech remain represented; no70scontinuous ambient run or fullnative acceptance claimed."
+    },
+    "checks": {
+      "full_decode": "pass",
+      "existing_video_gate": "pass",
+      "segments_over_threshold": 0,
+      "under180seconds": true,
+      "representative_frames": "inspected",
+      "human_full_video_acceptance": "notclaimed"
+    },
+    "published": false,
+    "original_script_sha256": "39a7d3f0aa0d76f670213e034394e4b8ef15bdb9afa367e981b9e420707cfd30",
+    "original_script_modified": false,
+    "original_production_preflight_bypassed": false,
+    "remaining": {
+      "illustrations": 5,
+      "spoken_narration_cues": 8,
+      "native_production_takes": [
+        {
+          "id": "native_home",
+          "seconds": 10
+        },
+        {
+          "id": "native_details",
+          "seconds": 12
+        },
+        {
+          "id": "native_ambient",
+          "seconds": 70,
+          "continuous": true,
+          "natural_speed": true
+        },
+        {
+          "id": "native_return",
+          "seconds": 20
+        },
+        {
+          "id": "native_proof",
+          "seconds": 9
+        }
+      ],
+      "clarification": "Validation takes, overlays, draftsubtitles and test silence are not the missing production inputs. Original renderer remains unchanged and rejects incomplete manifest."
+    }
+  },
+  "item17": {
+    "status": "blocked",
+    "retained_parent_verification": [
+      "Officialrules",
+      "Submittedstatus",
+      "Alex/Rachellisted",
+      "FiveAmazonreviewerswithactivewriteaccess",
+      "Historicalpublic2:31YouTubedemo"
+    ],
+    "new_readonly_GitHub_check": {
+      "repository": "PUBLIC",
+      "root_LICENSE": "Apache2.0textread",
+      "active_nonowner_write_accounts": 6,
+      "permissions_changed": false
+    },
+    "exact_missing": [
+      "Savedsubmittedtrack",
+      "Savedsubmittedmini-challenges",
+      "Actuallysubmittedproductfeedback/frictionanswers",
+      "Pending-teamstatus/answers"
+    ],
+    "smallest_input": "Owner-held saved submission confirmation/export or authorized accessible account view of those exact fields; closed form remains unavailable. If no saved copy exists, an authorized official answer is needed. Janetfollow-up remainsdeferred.",
+    "repository_drafts_are_submitted_answers": false,
+    "organizer_contacted": false,
+    "submission_or_YouTube_changed": false
+  },
+  "hosted_baseline": {
+    "PR14_CI": {
+      "run": 40372394821,
+      "conclusion": "success"
+    },
+    "PR15_CI": {
+      "run": 40374489818,
+      "conclusion": "success"
+    },
+    "main800f_CI": {
+      "run": 40374615368,
+      "conclusion": "success"
+    },
+    "main5114_CI": {
+      "run": 40372625806,
+      "conclusion": "cancelled automatically when newer main queued"
+    },
+    "Audit": "All corresponding runs terminalfailure; dependencyjob only; SBOM,stack/container,ARM64passed. Currentmainrun40374615242.",
+    "manual_reruns": false
+  },
+  "privacy": {
+    "owner_package_video_and_raw_receipts": "Retained outside published repo; no private filesystem links or raw logs included.",
+    "product_source_or_harness_changed": false,
+    "main_household_touched": false,
+    "new_signer_credentials_or_policy_changes": false
+  },
+  "counts": {
+    "complete": 12,
+    "partial": 7,
+    "blocked": 1
+  }
+}
