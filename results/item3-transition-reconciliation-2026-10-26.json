@@ -1,0 +1,154 @@
+{
+  "date_utc": "2026-10-26",
+  "source_main": "5114a398a45da5bb9bbfd23ec7c05fac55ff65d9",
+  "scope": "Reuse existing recordings and source identity to assess original items 3 and 10; no new device pass, build or product test run.",
+  "item3": {
+    "status": "completed",
+    "original_criterion": {
+      "ledger": "cc1590c:docs/cloud-integration-2026-10-23/CHECKPOINT.md",
+      "wording": "Loading and transitions",
+      "recorded_defect": "Pale opening frame; source-bound benign native observation requested before changing player/cover timing."
+    },
+    "evidence_map": [
+      {
+        "criterion": "Cold start, loading and ordinary navigation/scene transitions",
+        "source": "fbe53bf",
+        "receipt": "results/native-validation-fbe53bf-2026-10-25/receipt.json",
+        "retained_observation": "Both-size cold start, Open library, Home/Details/Parents, still-to-preview and return transitions. Existing startup/opening/still components listed below retain their observed source."
+      },
+      {
+        "criterion": "Observed pale opening defect",
+        "receipt": "docs/native-receipt-fixes-773334a.md",
+        "retained_observation": "Debug 720p Forest, Sea Otters and McWay; Debug and Release 1080p McWay showed meaningful opening artwork without the earlier near-white interval. Installed stack animation option corrected; source retained unchanged.",
+        "sources_by_case": [
+          {
+            "source": "bcdfda09f82388e85cef39021aad32fd6955902e",
+            "variant": "Debug, 1280x720",
+            "cases": [
+              "Forest opening",
+              "Sea Otters opening",
+              "McWay opening"
+            ]
+          },
+          {
+            "source": "01504e8c29547ba6d2be878cd009b9c2f1f74b2d",
+            "variant": "Debug and Release, 1920x1080",
+            "cases": [
+              "McWay opening"
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "Production refusal/error/retry transitions",
+        "source": "c71045ad90d78d63c941040f99d418a481994f46",
+        "receipt": "results/item2-production-errors-2026-10-26/receipt.json",
+        "retained_observation": "Authorized local-only fault inputs exercised actual production rendering and native IO failure at both sizes. Hidden picture/refusal, error controls, first explicit activation closing and confirming native release, second explicit activation entering covered/seeking/confirming/ready, then Back to library. Same stored recordings reviewed for transitions; no native rerun."
+      },
+      {
+        "criterion": "No false pause instruction on opening before actual playback/pause",
+        "public_supporting_record": "docs/native-receipt-fixes-773334a.md",
+        "retained_recordings": [
+          {
+            "name": "g02-opening-and-pause-1080.mp4",
+            "sha256": "52e5270d4d78368c625ea76d8466347d07608433ae947c3f73bdfe37433e8503",
+            "source": "01504e8c29547ba6d2be878cd009b9c2f1f74b2d",
+            "variant": "Debug, 1920x1080",
+            "observation": "Initial restored pause, then actual playback/pause; transcript has no initial pause instruction before the actual pause."
+          },
+          {
+            "name": "f18-pause-speech-720.mp4",
+            "sha256": "455bb744581049d8408671203ab6da156163e919d5e8e5c97013cb6e08d69d82",
+            "stage_association": "720p stage grouped under bcdfda09f82388e85cef39021aad32fd6955902e; recording is not individually package-certified in the receipt hash table.",
+            "observation": "Sequence shows Resume, checking, moving picture, then actual pause around 15 seconds; first pause instruction begins at 15.92 seconds."
+          }
+        ],
+        "availability": "Raw recordings, transcripts and sheets retained outside the published repository; no private filesystem links. This is retained evidence, not a new test or claim of reliable later pause speech."
+      }
+    ],
+    "source_comparison": {
+      "app/src/App.tsx": {
+        "native_repair_01504e8": "fa1e5a20837d58240d1e9b566997680bc424f4dfdc9ef99ac2969e00cf49bb7e",
+        "main": "fa1e5a20837d58240d1e9b566997680bc424f4dfdc9ef99ac2969e00cf49bb7e"
+      },
+      "app/src/components/navigation/AppStack.tsx": {
+        "native_repair_01504e8": "0e102725dc455b63f0f3c72ec2f009b45f31e8ae3561885b7a260cf9b8ec6e65",
+        "main": "0e102725dc455b63f0f3c72ec2f009b45f31e8ae3561885b7a260cf9b8ec6e65"
+      },
+      "app/src/calmframes/HarborOpening.tsx": {
+        "native_repair_01504e8": "d941c19d8c8ca3c6afb795cbcb582fa6086be96c7acc21b006564b20a8abeb56",
+        "main": "d941c19d8c8ca3c6afb795cbcb582fa6086be96c7acc21b006564b20a8abeb56"
+      },
+      "app/src/calmframes/PlayerOpening.tsx": {
+        "native_repair_01504e8": "66acfe689b2a13ffefd788d2231454526ad0d8fac161f314dfd4b8c3e82e779a",
+        "main": "66acfe689b2a13ffefd788d2231454526ad0d8fac161f314dfd4b8c3e82e779a"
+      },
+      "app/src/calmframes/AmbientScene.tsx": {
+        "native_repair_01504e8": "bd7acf16d38feef49ccda46e3c7d3b237bc2261c2e11ebc75d0990f286b80ab3",
+        "main": "bd7acf16d38feef49ccda46e3c7d3b237bc2261c2e11ebc75d0990f286b80ab3"
+      },
+      "app/src/calmframes/FirstRunScreen.tsx": {
+        "native_repair_01504e8": "baf3752c59066b4185c43a366d426097a3c28af9384f69e6f7dc33c184b4b798",
+        "main": "baf3752c59066b4185c43a366d426097a3c28af9384f69e6f7dc33c184b4b798"
+      }
+    },
+    "startup_opening_still_files_unchanged_from_fbe53bf": [
+      "app/src/calmframes/HarborOpening.tsx",
+      "app/src/calmframes/PlayerOpening.tsx",
+      "app/src/calmframes/AmbientScene.tsx",
+      "app/src/calmframes/FirstRunScreen.tsx"
+    ],
+    "recording_boundary": "Change-only app-window recordings establish their captured transitions. They do not prove physical frame timing or a universal every-state/title result. 1080p Retry establishes ready/paused guidance and Back, not decoded-picture timing. Empty-library/storage-corruption views were not injected.",
+    "separate_open_item": "Reliable announcements on later actual pauses remain failed under item 11; no speech repair or complete release acceptance follows."
+  },
+  "item10": {
+    "status": "partially completed",
+    "completed_subcriteria": [
+      "Distinct profile positions, restart/Release persistence and current protection floors retained from the original native receipt.",
+      "Ordinary Resume retained; new explicit native error retry observed at 720p and 1080p, using Extra cautious McWay rendition and saved paused position 3:43.",
+      "Native release confirmed before second explicit Retry creates the replacement session; no automatic retry or floor override."
+    ],
+    "observed_edition": {
+      "bundleId": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+      "sourceSha256": "c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2",
+      "renditionSha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+      "preset": "extra-cautious"
+    },
+    "remaining_criteria": [
+      {
+        "criterion": "Stricter-profile recovery through actual flagged/covered moving content",
+        "boundary": "Recoverable McWay has no flagged intervals. Acadia has flagged intervals but its short previews explicitly exclude checkpoint recovery. Current normal routes cannot establish this combined observation.",
+        "next_supported_action": "Observe an approved checkpoint-enabled edition with actual flagged intervals under the stricter profile, using its existing trusted approval and normal recovery. Current catalog does not supply that input; do not bypass guards or merge a harness."
+      },
+      {
+        "criterion": "Native supported-caption restoration",
+        "boundary": "Consumer catalog contains no caption tracks. Existing source/native-adapter tests are retained but are not native caption observations.",
+        "next_supported_action": "If a trusted approved edition with supported caption tracks becomes available, select a track, save/restart/resume and inspect restored language/visibility. Do not claim a pass or add unapproved media solely for acceptance."
+      }
+    ],
+    "no_remaining_position_retest_required": true,
+    "references": [
+      "results/native-validation-fbe53bf-2026-10-25/receipt.json",
+      "results/item2-production-errors-2026-10-26/receipt.json",
+      "results/native-acceptance-gaps-2026-10-23/catalog-caption-inventory.json",
+      "docs/overnight-2026-10-25/NATIVE_LIMITS.md"
+    ]
+  },
+  "validation": {
+    "new_native_execution": false,
+    "new_build": false,
+    "new_product_suite": false,
+    "product_source_changed": false,
+    "driver_or_harness_published": false,
+    "separate_verifier": "Evidence review supports original item 3 closure and retains item 10 partial."
+  },
+  "counts": {
+    "complete": 12,
+    "partial": 7,
+    "blocked": 1
+  },
+  "limits": [
+    "No medical validation, seizure guarantee, universal comfort, native compositor timing or new Release acceptance.",
+    "Audit and reliable later pause speech remain unresolved; no security exception or workflow change."
+  ]
+}
