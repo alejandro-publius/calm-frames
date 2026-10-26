@@ -1,0 +1,19 @@
+{
+  "method": "Read-only Runtime.evaluate via the installed separate validation app inspector; no new build or install for diagnosis",
+  "sdk": "0.24.9914",
+  "js_package": "@amazon-devices/kepler-file-system 0.0.7",
+  "regular": {
+    "entryType": "5",
+    "size": 1692,
+    "mode_present": false
+  },
+  "owned_symlink": {
+    "entryType": "4",
+    "size": 65
+  },
+  "owned_directory": {
+    "error": "[com.amazon.kepler.file_system.IsADirectoryError]: "
+  },
+  "original_media_read": false,
+  "household_read": false
+}

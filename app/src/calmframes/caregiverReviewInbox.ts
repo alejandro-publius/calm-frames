@@ -4,7 +4,7 @@ import { KeplerFileSystem } from '@amazon-devices/kepler-file-system';
 // Component-owned SDK mount: no user-staged intermediate directory or alias.
 export const REVIEW_INBOX = '/scratch';
 // SDK 0.24 native file_system.idl FileType.FILE; not POSIX st_mode bits.
-const REGULAR_FILE = 5;
+const REGULAR_FILE = '5';
 export const MAX_REVIEW_BYTES = 256 * 1024;
 export const MAX_REVIEWS = 8;
 const NAME = /^calm-frames-review-[a-f0-9]{32}\.json$/;
@@ -18,7 +18,7 @@ export interface ReviewFile { name: string; review: CaregiverReview; text: strin
 export interface ReviewReader {
   exists(path: string): Promise<boolean>;
   getEntries(path: string): Promise<string[]>;
-  getMetadata(path: string, noFollow: boolean): Promise<{size: number; mode: number; entryType?: number}>;
+  getMetadata(path: string, noFollow: boolean): Promise<{size: number; mode?: unknown; entryType?: unknown}>;
   readFileAsString(path: string, encoding: string): Promise<string>;
 }
 function record(value: unknown): Record<string, unknown> {
@@ -64,11 +64,10 @@ export async function readReviewFile(name: string, reader: ReviewReader = Kepler
   if (!NAME.test(name)) throw new Error('Unsupported review filename');
   const path = `${REVIEW_INBOX}/${name}`;
   const stat = await reader.getMetadata(path, true);
-  // The native SDK exposes FileType through metadata; the JS declaration's
-  // OpenMode annotation must not be interpreted as POSIX permission bits.
-  // Prefer explicit entryType if present and reject conflicting representations.
-  const type = stat.entryType ?? stat.mode;
-  if (type !== REGULAR_FILE || (stat.entryType !== undefined && stat.mode !== type) ||
+  // SDK 0.24 returns the native enum as entryType: "5", with no mode.
+  // The installed JS Metadata.mode declaration does not match that bridge.
+  // Never infer a file type from OpenMode or coerce other numeric strings.
+  if ((stat.entryType !== REGULAR_FILE && stat.entryType !== 5) ||
       !Number.isInteger(stat.size) || stat.size <= 0 || stat.size > MAX_REVIEW_BYTES) throw new Error('Not a bounded regular review file');
   const text = await reader.readFileAsString(path, 'UTF-8');
   return {name, text, review: parseCaregiverReview(text)};

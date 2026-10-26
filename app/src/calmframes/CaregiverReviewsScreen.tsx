@@ -1,5 +1,5 @@
 /** Mounted only inside unlocked Parents. No media, signer or household writes. */
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {BackHandler, ScrollView, StyleSheet, Text, View} from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
@@ -12,6 +12,8 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
   const [status, setStatus] = useState('Loading caregiver reviews.'), [refresh, setRefresh] = useState(0);
   const [backFocus, setBackFocus] = useState(true), [returnFile, setReturnFile] = useState<string>();
   const generation = useRef<object | undefined>(undefined);
+  const scroll = useRef<ScrollView>(null);
+  useLayoutEffect(() => {if (selected) scroll.current?.scrollTo({y: 0, animated: false});}, [selected]);
   const leave = () => {if (selected) {setReturnFile(selected.name); setSelected(undefined);} else onBack();};
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {leave(); return true;});
@@ -35,7 +37,7 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
       if (generation.current === version) {setBackFocus(true); setSelected(current);}
     } catch {if (generation.current === version) {setSelected(undefined); setStatus('This review changed or could not be read. Refresh before choosing it again.');}}
   };
-  return <ScrollView testID="caregiver-reviews" style={styles.screen} contentContainerStyle={styles.content}>
+  return <ScrollView ref={scroll} testID="caregiver-reviews" style={styles.screen} contentContainerStyle={styles.content}>
     <CalmPageHeader onBack={leave} backTestID="caregiver-reviews-back" preferredBack={backFocus && !returnFile} onBackFocus={() => setBackFocus(false)} />
     <Text accessibilityRole="header" style={[CALM_TEXT.screen, styles.text]}>Personal file reviews</Text>
     <ReadingStop testID="caregiver-reviews-limits" flush>
