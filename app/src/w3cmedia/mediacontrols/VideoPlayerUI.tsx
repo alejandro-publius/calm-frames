@@ -13,6 +13,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
 import { trace } from '../../calmframes/trace';
+import { announceForAccessibility } from '../../calmframes/announce';
+import { CARD_ANNOUNCEMENT_SETTLE_MS } from '../../calmframes/usePlaybackPresentation';
 import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
 import Seekbar from '../../components/Seekbar';
@@ -110,17 +112,22 @@ export const VideoPlayerUI = React.memo(
     const [pauseNotice, setPauseNotice] = useState('');
     useEffect(() => {
       if (!paused) {
-        // A media element opens paused. It is not a user pause until playback
-        // has actually been observed; a covering card owns its own speech.
+        // Opening/restored paused media is not a new user pause.
         played.current = videoRef.current?.paused === false && !videoRef.current?.ended;
         setPauseNotice('');
-      } else if (played.current && !showMediaControls) {
-        // The native run heard the polite notice after controls settled. Keep
-        // that live node mounted across show/hide, changing its text only once
-        // per real pause. Do not interrupt the still-active Dolby session.
-        setPauseNotice('Paused. Press Play to continue.');
+        return;
       }
-    }, [paused, showMediaControls, videoRef]);
+      if (!played.current) return;
+      const message = 'Paused. Press Play to continue.';
+      setPauseNotice(message);
+      // A live-region mutation can be lost alongside native control focus.
+      // Speak once for this playback-to-pause transition, independently of
+      // controls visibility. Resume/unmount cancels superseded speech.
+      const timer = setTimeout(() => {
+        announceForAccessibility(message, { force: true, queue: false });
+      }, CARD_ANNOUNCEMENT_SETTLE_MS);
+      return () => clearTimeout(timer);
+    }, [paused, videoRef]);
     useEffect(() => { trace('playback', `controls ${showMediaControls ? 'shown' : 'hidden'}`); }, [showMediaControls]);
     const { handleShowControls, handleShowControlsOnKeyEvent, cancelTimer } =
       useMediaControls(showMediaControls, setShowMediaControls);
@@ -259,7 +266,7 @@ export const VideoPlayerUI = React.memo(
     return (
       <View style={styles.uiContainer} testID="video-player-ui-view">
         <View testID="player-pause-announcement" accessible accessibilityRole="text"
-          accessibilityLiveRegion="polite" accessibilityLabel={pauseNotice}
+          accessibilityLiveRegion="none" accessibilityLabel={pauseNotice}
           style={pauseNotice ? styles.paused : styles.emptyPause}>
           {pauseNotice ? <Text testID="player-paused" style={styles.pausedText}>{pauseNotice}</Text> : null}
         </View>

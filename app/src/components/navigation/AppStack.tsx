@@ -29,7 +29,8 @@ const Stack = createStackNavigator<AppStackParamList>();
 const AppStack = () => {
   const navigationOptions = {
     headerShown: false,
-    animationEnabled: false,
+    // Stack 7 reads animation; the removed animationEnabled option was ignored.
+    animation: 'none' as const,
     // The navigator paints before a lazy route. Never expose its near-white default.
     cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
   };

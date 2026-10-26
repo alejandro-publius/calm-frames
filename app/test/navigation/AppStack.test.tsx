@@ -104,7 +104,7 @@ describe('AppStack', () => {
 
     expect(navigatorProps.screenOptions).toEqual({
       headerShown: false,
-      animationEnabled: false,
+      animation: 'none',
       cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
     });
   });

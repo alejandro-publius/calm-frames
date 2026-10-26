@@ -158,6 +158,36 @@ describe('Reading comfort in Parents', () => {
     scroll.mockRestore();
   });
 
+  it.each([720, 1080])('reconciles an actual native scroll clamped before enlarged layout at %s', height => {
+    const scroll = jest.spyOn(ScrollView.prototype, 'scrollTo').mockImplementation(() => {});
+    const { view, props } = openParents();
+    press('parent-area-profiles-profile-2');
+    const layout = (id: string, y: number, h: number) => fireEvent(screen.getByTestId(id), 'layout', {
+      nativeEvent: { layout: { x: 0, y, width: 1000, height: h } },
+    });
+    layout('parent-area-open', 0, height);
+    layout('parent-area-reading-group', 1500, 250);
+    layout('parent-area-reading-comfort', 50, 180);
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'focus');
+    view.rerender(<ParentAreaScreen {...props} family={setProfileReadingComfort(family, 'profile-2', true)} />);
+    layout('parent-area-reading-group', 1800, 330);
+    layout('parent-area-reading-comfort', 60, 250);
+    // The native focus/scroll pass reports its actual position after the
+    // requested correction. A requested offset is not an observed offset.
+    scroll.mockClear();
+    fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: 1700 - height } } });
+    expect(scroll).toHaveBeenCalled();
+    const last = scroll.mock.calls[scroll.mock.calls.length - 1][0] as { y: number; animated: boolean };
+    expect(2110 - last.y).toBeLessThanOrEqual(height);
+    scroll.mockClear();
+    fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: last.y } } });
+    expect(scroll).not.toHaveBeenCalled();
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'blur');
+    fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: 0 } } });
+    expect(scroll).not.toHaveBeenCalled();
+    scroll.mockRestore();
+  });
+
   it('does not steal focus if the remote moved away during the save', async () => {
     let complete!: (accepted: boolean) => void;
     const save = jest.fn((_next: Family) => new Promise<boolean>(resolve => { complete = resolve; }));

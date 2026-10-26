@@ -98,7 +98,7 @@ test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after
   expect(mockMedia.listeners.ended.size).toBe(0);
 });
 
-test('one retained polite pause message survives controls toggling and resets only on play', () => {
+test('one explicit pause announcement survives controls toggling and repeats only after new playback', () => {
   jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
   resetAnnouncements();
   const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
@@ -108,11 +108,13 @@ test('one retained polite pause message survives controls toggling and resets on
   const region = view.getByTestId('player-pause-announcement');
   expect(region.props.accessibilityLabel).toBe('');
   act(() => mockMedia.pause());
-  // Let the existing controls settle; no immediate speech into active media.
-  expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('');
+  // Speech waits briefly for the pause commit, independently of controls visibility.
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(0);
+  act(() => jest.advanceTimersByTime(700));
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(1);
   act(() => jest.advanceTimersByTime(6000));
   expect(view.getByTestId('player-pause-announcement')).toBe(region);
-  expect(region.props.accessibilityLiveRegion).toBe('polite');
+  expect(region.props.accessibilityLiveRegion).toBe('none');
   expect(region.props.accessibilityLabel).toBe(message);
   for (let i = 0; i < 3; i += 1) {
     remote('down');
@@ -120,7 +122,7 @@ test('one retained polite pause message survives controls toggling and resets on
     expect(view.getByTestId('player-pause-announcement')).toBe(region);
     expect(region.props.accessibilityLabel).toBe(message);
   }
-  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(0);
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(1);
   expect(mockMedia.currentTime).toBe(position);
   expect(mockGuard.requestSeek).not.toHaveBeenCalled();
   act(() => { mockMedia.play(); });
@@ -128,6 +130,7 @@ test('one retained polite pause message survives controls toggling and resets on
   act(() => mockMedia.pause());
   act(() => jest.advanceTimersByTime(6000));
   expect(region.props.accessibilityLabel).toBe(message);
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(2);
 });
 
 test('opening in a paused state is silent until actual playback and a later pause', () => {
@@ -198,4 +201,20 @@ test('choosing the active caption track closes its menu without changing media o
   expect(mockGuard.card).toBe(card);
   expect(mockGuard.covered).toBe(true);
   expect(mockSeekFocus).toHaveBeenCalledTimes(2);
+});
+
+
+test('a quick resume cancels pending pause speech and unmount cancels it too', () => {
+  resetAnnouncements();
+  const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
+  const view = startPlayer();
+  act(() => mockMedia.pause());
+  act(() => jest.advanceTimersByTime(100));
+  act(() => { mockMedia.play(); });
+  act(() => jest.advanceTimersByTime(700));
+  expect(speak.mock.calls.some(([text]) => text === 'Paused. Press Play to continue.')).toBe(false);
+  act(() => mockMedia.pause());
+  view.unmount();
+  act(() => jest.advanceTimersByTime(700));
+  expect(speak.mock.calls.some(([text]) => text === 'Paused. Press Play to continue.')).toBe(false);
 });

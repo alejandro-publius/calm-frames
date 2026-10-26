@@ -262,7 +262,8 @@ const ParentAreaScreen = ({
       : bottom + margin > box.offset + box.viewport ? Math.max(0, bottom + margin - box.viewport) : box.offset;
     if (offset !== box.offset) {
       scrollRef.current?.scrollTo({ y: offset, animated: false });
-      box.offset = offset;
+      // Keep the last observed offset until native onScroll confirms it.
+      // A focus/layout pass may clamp or replace this requested correction.
     }
   }, []);
   const onViewportLayout = React.useCallback((event: import('react-native').LayoutChangeEvent) => {
@@ -271,7 +272,10 @@ const ParentAreaScreen = ({
   }, [revealComfort]);
   const onParentsScroll = React.useCallback((event: import('react-native').NativeSyntheticEvent<import('react-native').NativeScrollEvent>) => {
     comfortLayout.current.offset = event.nativeEvent.contentOffset.y;
-  }, []);
+    // Native focus scrolling can finish after the enlarged row onLayout.
+    // Reconcile that actual position while this switch still owns focus.
+    revealComfort();
+  }, [revealComfort]);
   const saving = externalSaving || comfortPending;
   const [unlocked, setUnlocked] = React.useState(false);
   const [extraReturnFocus, setExtraReturnFocus] = React.useState<string>();

@@ -2911,3 +2911,7 @@ Decision: produce title/credit overlays and an unfilled edit assembly from the
 approved story. Why: these assets can advance before native takes and speech
 exist while production preflight continues to refuse missing inputs. Cost: local
 rendering with existing licensed fonts only. No paid generation or private upload.
+
+## 2026-10-25: targeted fixes from the Mac receipt
+
+Use separate branch from frozen 773334a. Repair only demonstrated opening, pause speech and comfort scroll defects. Preserve fail-closed black pauses and #4 focus. Cost: local tests/builds and disposable-device checks only; no paid services. See native-receipt-fixes-773334a.md.

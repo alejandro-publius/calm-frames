@@ -348,6 +348,21 @@ describe('useCoverHarness', () => {
     expect(screen.getByTestId('covered').props.children).toBe('covered');
   });
 
+  it('keeps an ordinary pause opaque even away from scheduled covers', () => {
+    const media = makeMediaElement();
+    render(<Harness media={media} mode="timing" intervals={[]} />);
+    media.currentTime = 12;
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    expect(screen.getByTestId('covered').props.children).toBe('clear');
+    act(() => media.fire('pause'));
+    act(() => jest.advanceTimersByTime(6000));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    expect(screen.getByTestId('covered').props.children).toBe('clear');
+  });
+
   it('keeps the cover on until playback is confirmed again', () => {
     const media = makeMediaElement();
     const intervals = buildCoverIntervals([{ startMs: 60_000, endMs: 61_000 }]);
