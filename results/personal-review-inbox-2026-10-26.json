@@ -1,25 +1,23 @@
 {
   "baseline_main": "5147f2dd3af8209f185f323392bbeefa9f829741",
-  "product_source": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
+  "product_source": "3a8a3600adeec7aa90486e6e8fb7f73f2c5a8415",
   "scope": "Read-only selection of staged caregiver reports inside unlocked Parents; not raw video selection or activation",
   "focused_tests": {
-    "passed": 28,
+    "passed": 35,
     "suites": 2,
     "failed": 0,
-    "limitation": "Passing mocks used POSIX mode values inconsistent with the installed SDK contract; these tests do not establish native import acceptance."
+    "limitation": "Metadata mocks now use the installed native IDL FileType enum, but the JavaScript bridge per-file response remains unobserved. Passing tests do not establish native selection."
   },
   "typecheck": "pass",
   "focused_lint": "pass",
   "build": {
-    "source_commit": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
-    "variant": "Only package/component identity and app registration changed to separate validation app; canonical manifests restored",
-    "package_id": "io.github.alejandropublius.calmframes.intakevalidation",
-    "component_id": "io.github.alejandropublius.calmframes.intakevalidation.main",
-    "build": "Debug",
-    "bytes": 132676821,
-    "sha256": "49d5bef682d0f2b8dbf4739a07e147585721dedc192e80cf11855f0aa78f0892",
-    "sha384": "282642e82cd0f83cde39d01285b110d753be18245aef73cace9627a8701586e6f3316b8397b3b213b1bf97d35418b4d0",
-    "normal_pre_and_post_gates": "pass"
+    "source_commit": "3a8a3600adeec7aa90486e6e8fb7f73f2c5a8415",
+    "variant": "Only separate validation identity; canonical manifests restored",
+    "bytes": 132677017,
+    "sha256": "449678aa34003f5bf6a6b7b786d940aceed77a4469eff7d3271570f3b52ab964",
+    "sha384": "929ef0ccc22b37c4bcbd8f8b0141a44c9daa61347d36e7b10eaff109488fb0a9375f6b28650b855f20f5277078d021bf",
+    "normal_pre_and_post_gates": "pass",
+    "build": "Debug"
   },
   "producer": {
     "input": "self-created steady-color silent fixture; never played",
@@ -41,9 +39,17 @@
     "app_data_directory_comparison": "same structured IsADirectoryError response",
     "correction": "Accept only that exact directory response with noFollow still true; preserve resolved-link rejection, regular-file type/size checks and report validation",
     "regression": "Observed SDK response fails before the correction, passes after; other error messages still refuse",
-    "final_result": "FAIL: fixed Debug retest opens the inbox, but shows Some reports could not be opened; no report selection or summary accepted.",
+    "final_result": "FAIL after the single contract-corrected retest; no report appears for selection. Stop this dependent path pending actual bridge metadata/error observation.",
     "frame_sha256": "3450725fc6174fc13105befd2745bfa21ad914ce783b5c032a8b690266e50ae3",
-    "source_review_blocker": "Installed kepler-file-system 0.0.7 Metadata.mode is OpenMode (0 through 5), not documented POSIX file-type bits. Adapter and passing mocks incorrectly assumed POSIX type bits. No safe supported link/type rejection established for this native flow."
+    "source_review_blocker": "Native IDL Metadata.entryType defines FILE=5, DIRECTORY=2 and SYMLINK=4, distinct from JS OpenMode. Whether and how the installed JavaScript bridge returns this field has not been observed. Do not infer a supported bridge contract solely from the native IDL.",
+    "contract_retest": {
+      "result": "FAIL",
+      "visible_response": "Some reports could not be opened. Export them again from the caregiver computer.",
+      "frame_sha256": "3450725fc6174fc13105befd2745bfa21ad914ce783b5c032a8b690266e50ae3",
+      "selection_or_summary_observed": false,
+      "per_file_sdk_payload": "Not captured; do not attribute the refusal to a specific vendor response."
+    },
+    "source_correction": "Replace POSIX mode-bit assumption with native IDL FileType enum; use component-owned scratch root instead of a user-staged intermediate directory. Negative regression fails against previous source. Native retest still refuses report."
   },
   "trust_changed": false,
   "media_changed": false,
@@ -59,5 +65,5 @@
   "attempt_branch": "codex/personal-review-inbox-2026-10-26",
   "attempt_head": "001921e76709a30d0b00ee6b951f3ae9aad612ef",
   "runtime_feature_merged": false,
-  "next_boundary": "Preserve the failed source branch; do not expose the inbox on main or relax link/privacy checks to make the fixture pass. Direct native arbitrary-video selection remains unimplemented. Exact-edition activation still requires existing authorized signing authority."
+  "next_boundary": "Keep feature off main. Observe the actual per-file bridge metadata/error before changing this adapter again. No further builds or refusal relaxation in this bounded pass; original native file selection and trusted activation remain open."
 }
