@@ -609,6 +609,9 @@ const ParentAreaScreen = ({
   const blocked = saving ? { disabled: true } : {};
 
   return (
+    // Keep safe-area padding outside the measured scrolling viewport.
+    // Row coordinates and viewport height must describe the same rectangle.
+    <View style={styles.screen}>
     <ScrollView
       ref={scrollRef}
       onLayout={onViewportLayout}
@@ -616,7 +619,7 @@ const ParentAreaScreen = ({
       scrollEventThrottle={16}
       onContentSizeChange={revealComfort}
       testID={`${testID}-open`}
-      style={styles.screen}
+      style={styles.viewport}
       contentContainerStyle={styles.content}>
       <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} onBackFocus={() => setInitialBackFocus(false)} preferredBack={initialBackFocus && !editingName && !extraReturnFocus && !renameReturnFocus && !comfortPending && !comfortReturnFocus} backDisabled={saving || renamePending} />
       <View style={styles.header}>
@@ -1154,6 +1157,7 @@ const ParentAreaScreen = ({
         </FocusRow>
       ) : null}
     </ScrollView>
+    </View>
   );
 };
 
@@ -1175,6 +1179,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
+  viewport: { flex: 1 },
   content: {
     width: '100%',
     maxWidth: scale(1560),

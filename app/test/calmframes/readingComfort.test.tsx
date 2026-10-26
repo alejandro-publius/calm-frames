@@ -188,6 +188,37 @@ describe('Reading comfort in Parents', () => {
     scroll.mockRestore();
   });
 
+  it.each([720, 1080])('reveals first and repeated enlargement inside the safe viewport at %s', height => {
+    const scroll = jest.spyOn(ScrollView.prototype, 'scrollTo').mockImplementation(() => {});
+    const { view, props } = openParents();
+    press('parent-area-profiles-profile-2');
+    // onLayout must measure the clipping rectangle, not safe-area padding.
+    expect(style('parent-area-open').paddingVertical ?? 0).toBe(0);
+    const viewport = height * (1 - 2 * CALM_SPACE.SAFE_Y / 1080);
+    const layout = (id: string, y: number, h: number) => fireEvent(screen.getByTestId(id), 'layout', {
+      nativeEvent: { layout: { x: 0, y, width: 1000, height: h } },
+    });
+    layout('parent-area-open', 0, viewport);
+    layout('parent-area-reading-group', 1500, 300);
+    layout('parent-area-reading-comfort', 60, 140);
+    fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: 1700 - viewport } } });
+    fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'focus');
+    for (let repeat = 0; repeat < 2; repeat++) {
+      scroll.mockClear();
+      view.rerender(<ParentAreaScreen {...props} family={setProfileReadingComfort(family, 'profile-2', true)} />);
+      layout('parent-area-reading-comfort', 60, 220);
+      const last = scroll.mock.calls[scroll.mock.calls.length - 1][0] as { y: number; animated: boolean };
+      expect(1780 - last.y).toBeLessThanOrEqual(viewport - scale(24));
+      expect(screen.getByTestId('parent-area-reading-comfort').props.focusable).toBe(true);
+      expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+      fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: last.y } } });
+      view.rerender(<ParentAreaScreen {...props} family={family} />);
+      layout('parent-area-reading-comfort', 60, 140);
+      fireEvent.scroll(screen.getByTestId('parent-area-open'), { nativeEvent: { contentOffset: { x: 0, y: 1700 - viewport } } });
+    }
+    scroll.mockRestore();
+  });
+
   it('does not steal focus if the remote moved away during the save', async () => {
     let complete!: (accepted: boolean) => void;
     const save = jest.fn((_next: Family) => new Promise<boolean>(resolve => { complete = resolve; }));

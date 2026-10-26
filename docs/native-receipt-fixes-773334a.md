@@ -26,3 +26,9 @@ The revised pause fix FAILED the final Release native retest: two actual pauses 
 Result: observed pale-opening defect closed within recorded cases; Reading comfort clipping and intermittent pause speech remain open. Black pause cover retained by design. No new complete numbered checklist item; ledger stays 7 complete, 11 partial, 2 blocked. Final revision 720p speech and comfort cases remain unobserved. Disposable viewport restored to 720p and VoiceView disabled; main device, baseline and rollback untouched.
 
 Sanitized local receipt: `native-fixes-773334a/receipt.json` in the enclosing Mac task, with exact package hashes and recording provenance. These changes are local and not ready for promotion as a complete repair.
+
+## Reading comfort only continuation
+
+The previous fix reconciled scroll events but kept a mismatched coordinate system: the ScrollView's onLayout height included safe-area padding while the reading group's position was relative to its content. The native receipt shows the enlarged control retained focus but extended below the window. The old tests supplied an unpadded viewport and missed this distinction.
+
+Move the existing safe-area style onto a static enclosing View and give the ScrollView flex: 1. Its onLayout now measures the actual inset viewport used by the row-bound reveal calculation. Preserve all focus/save handlers and existing safety, navigation, speech and media behavior. No delay or polling added. Focused regressions cover first/repeated enlargements against inset viewport bounds at both sizes. Native retest pending.
