@@ -1,0 +1,15 @@
+{
+  "observed": "Reading comfort reachable and Off in the separate fictional validation profile; no real PIN requested or captured",
+  "save_path_VoiceView": "NOT RUN",
+  "supported_utility_response": "error obtaining user profile object",
+  "utility_contexts": [
+    "device shell",
+    "separate validation component shell"
+  ],
+  "system_UI": "Observed virtual-device Settings shows Account Settings; no account screen entered or changed",
+  "VoiceView_changed": false,
+  "comfort_preference_changed": false,
+  "limitation": "This does not prove all supported VoiceView access is unavailable. A supported enable route must be established before speech acceptance. Prior VoiceView-off viewport evidence is retained.",
+  "owner_comfort_accepted": false,
+  "whole_item_closed": false
+}

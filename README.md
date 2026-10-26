@@ -41,7 +41,8 @@ McWay imagery: MoneySavingVideos, CC BY 3.0.
   protection floor.
 - **A separate file pre-check.** The local caregiver browser can analyze an
   eligible personal file without playing it. Processing permission, preparation,
-  trusted signing and TV delivery remain distinct steps.
+  trusted signing and TV delivery remain distinct steps. Exported reports can be
+  read in unlocked Parents; this does not activate personal-video playback.
 
 ## Architecture
 
@@ -90,10 +91,11 @@ The [architecture guide](docs/presentation/ARCHITECTURE.md) and
 
 ## Running locally
 
-This consolidated tree includes product head `001b4867`, whose application code
-matches `3512344`, plus the public documentation cleanup. Use this checkout's
-instructions and lockfiles together. Record the full source SHA before preparing
-an artifact; older screenshots and the public demo identify different builds.
+Main is the consolidated development branch, including baseline `001b4867` and
+later bounded fixes. Use this checkout's instructions and lockfiles together.
+The [report-inbox receipt](results/personal-review-inbox-2026-10-26.json) identifies
+its tested source and separate validation package. Record the full source SHA
+before preparing an artifact; older screenshots and the demo identify other builds.
 
 Requires the pinned Node 22, Python 3.12, ffmpeg/ffprobe, and JDK 21. A native
 build also needs the documented Vega SDK installation. No private signing key
@@ -103,8 +105,7 @@ or cloud account is needed to inspect the bundled catalog.
 git clone https://github.com/alejandro-publius/calm-frames.git
 cd calm-frames
 git rev-parse HEAD
-# Select the reviewed integration ref when main has not yet been updated.
-git checkout codex/consolidate-main-2026-10-26
+git checkout main
 ```
 
 ### App checks without a simulator
@@ -148,7 +149,8 @@ python3.12 -m venv .venv
 ```
 
 These are reproduction commands, not a claim they all passed on this revision.
-For optional caregiver file review, see the [local workflow](docs/overnight-2026-10-25/personal-import/README.md).
+For optional caregiver file review, see the [computer workflow](docs/overnight-2026-10-25/personal-import/README.md)
+and [read-only TV report transfer](docs/PERSONAL_REVIEW_INBOX.md).
 
 ## Evidence and limits
 

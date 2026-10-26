@@ -1,25 +1,25 @@
 {
-  "baseline_main": "5147f2dd3af8209f185f323392bbeefa9f829741",
-  "product_source": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
-  "scope": "Read-only selection of staged caregiver reports inside unlocked Parents; not raw video selection or activation",
+  "baseline_main": "369f268b4cfc7ad108aa00f38beefcb541c4bb3c",
+  "product_source": "4cb3780e3167839e556cf0afc6c3bcc57a83fd82",
+  "scope": "Protected native selection/readback of staged caregiver reports; no raw-video selection or activation",
   "focused_tests": {
-    "passed": 28,
+    "passed": 48,
     "suites": 2,
     "failed": 0,
-    "limitation": "Passing mocks used POSIX mode values inconsistent with the installed SDK contract; these tests do not establish native import acceptance."
+    "negative_controls": "Observed string entryType and summary-offset regressions fail against preceding source, then pass after correction"
   },
   "typecheck": "pass",
   "focused_lint": "pass",
   "build": {
-    "source_commit": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
-    "variant": "Only package/component identity and app registration changed to separate validation app; canonical manifests restored",
-    "package_id": "io.github.alejandropublius.calmframes.intakevalidation",
-    "component_id": "io.github.alejandropublius.calmframes.intakevalidation.main",
+    "source_commit": "4cb3780e3167839e556cf0afc6c3bcc57a83fd82",
+    "variant": "Only separate validation identity; canonical manifests restored",
+    "bytes": 132677382,
+    "sha256": "3137736843c200b17dffeb3f0dc0002d4efea3c2a309cc38a71990b61100a93e",
+    "sha384": "4af502e63b1adfd3d1c61e47e71de70dbf2a97ebd84202cad7c623fbf5464a3178b69b0022e17815af726c0268ef2e2d",
+    "normal_pre_and_post_gates": "pass",
     "build": "Debug",
-    "bytes": 132676821,
-    "sha256": "49d5bef682d0f2b8dbf4739a07e147585721dedc192e80cf11855f0aa78f0892",
-    "sha384": "282642e82cd0f83cde39d01285b110d753be18245aef73cace9627a8701586e6f3316b8397b3b213b1bf97d35418b4d0",
-    "normal_pre_and_post_gates": "pass"
+    "package_id": "io.github.alejandropublius.calmframes.intakevalidation",
+    "component_id": "io.github.alejandropublius.calmframes.intakevalidation.main"
   },
   "producer": {
     "input": "self-created steady-color silent fixture; never played",
@@ -32,8 +32,29 @@
     "tv_playback_authorized": false,
     "no_signer_created_or_read": true
   },
-  "transfer": "SDK exact-filename copy to separate validation component scratch succeeded",
+  "transfer": "Exact generated JSON report copied into the component-owned scratch root via SDK; original media not transferred",
+  "bridge_observation": "personal-review-bridge-metadata-2026-10-26.json",
   "native_ui": {
+    "result": "PASS in final normal-built package",
+    "resolution": "1280x720",
+    "VoiceView": "off",
+    "ordinary_route": "Parents unlock in a separate fictional validation app, then Personal file reviews",
+    "observed": [
+      "Only the regular generated report appears; owned symlink and directory are not selectable",
+      "Report summary matches original-file hash, duration and three plans",
+      "Summary starts at top with visible focused Back and readable playback/signing limits",
+      "Hardware Back returns focus to selected report, then exact Parents opener"
+    ],
+    "frame_sha256": {
+      "intake-final-package-list.png": "b1794b90f4965d201955801d4eaeba05c9d9c7c68fca73f68674db67fea7cb9d",
+      "intake-final-package-summary-top.png": "6f54c79aebf139ed96843121a39d2d3edf872ed55bd429efc64f20426526bb22",
+      "intake-final-package-list-return.png": "e3639c1acde2997e28037a9872c39e152d56d48858d5c3d3e34016eade3a53fa",
+      "intake-final-package-parent-return.png": "3025b83b3b9378146c9aeabeeafb64ec13a76257c037a1655188a6b0e3260314"
+    },
+    "raw_captures_published": false,
+    "limits": "No Release, 1080p or VoiceView report-inbox acceptance inferred"
+  },
+  "earlier_failed_attempts": {
     "initial_result": "FAIL before compatibility correction: normal Parents entry opens inbox, then directory metadata rejects before report read",
     "exact_sdk_response": {
       "message": "[com.amazon.kepler.file_system.IsADirectoryError]: "
@@ -41,23 +62,39 @@
     "app_data_directory_comparison": "same structured IsADirectoryError response",
     "correction": "Accept only that exact directory response with noFollow still true; preserve resolved-link rejection, regular-file type/size checks and report validation",
     "regression": "Observed SDK response fails before the correction, passes after; other error messages still refuse",
-    "final_result": "FAIL: fixed Debug retest opens the inbox, but shows Some reports could not be opened; no report selection or summary accepted.",
+    "final_result": "FAIL after the single contract-corrected retest; no report appears for selection. Stop this dependent path pending actual bridge metadata/error observation.",
     "frame_sha256": "3450725fc6174fc13105befd2745bfa21ad914ce783b5c032a8b690266e50ae3",
-    "source_review_blocker": "Installed kepler-file-system 0.0.7 Metadata.mode is OpenMode (0 through 5), not documented POSIX file-type bits. Adapter and passing mocks incorrectly assumed POSIX type bits. No safe supported link/type rejection established for this native flow."
+    "source_review_blocker": "Native IDL Metadata.entryType defines FILE=5, DIRECTORY=2 and SYMLINK=4, distinct from JS OpenMode. Whether and how the installed JavaScript bridge returns this field has not been observed. Do not infer a supported bridge contract solely from the native IDL.",
+    "contract_retest": {
+      "result": "FAIL",
+      "visible_response": "Some reports could not be opened. Export them again from the caregiver computer.",
+      "frame_sha256": "3450725fc6174fc13105befd2745bfa21ad914ce783b5c032a8b690266e50ae3",
+      "selection_or_summary_observed": false,
+      "per_file_sdk_payload": "Not captured; do not attribute the refusal to a specific vendor response."
+    },
+    "source_correction": "Replace POSIX mode-bit assumption with native IDL FileType enum; use component-owned scratch root instead of a user-staged intermediate directory. Negative regression fails against previous source. Native retest still refuses report."
   },
   "trust_changed": false,
   "media_changed": false,
   "security_policy_changed": false,
   "main_household_touched": false,
   "raw_media_played": false,
+  "remaining_item_13": "Arbitrary native raw-video selection unimplemented; exact-edition preparation/activation still requires existing authorized signer, approval, verification and checked build/install",
   "whole_item_closed": false,
   "counts": {
     "complete": 7,
     "partial": 11,
     "blocked": 2
   },
-  "attempt_branch": "codex/personal-review-inbox-2026-10-26",
-  "attempt_head": "001921e76709a30d0b00ee6b951f3ae9aad612ef",
-  "runtime_feature_merged": false,
-  "next_boundary": "Preserve the failed source branch; do not expose the inbox on main or relax link/privacy checks to make the fixture pass. Direct native arbitrary-video selection remains unimplemented. Exact-edition activation still requires existing authorized signing authority."
+  "publication": "Receipt precedes normal reviewed merge; resolve current main and PR for publication identity",
+  "modeled_ui": {
+    "capture_tests_passed": 18,
+    "screens_and_transitions": 100,
+    "profiles": [
+      "wcag",
+      "broadcast with regular pattern rule"
+    ],
+    "result": "pass",
+    "scope": "Actual rendered trees, including inbox loading/list/summary/refusal/empty/error and repeated focus; modeled surfaces are not native pixels or medical acceptance"
+  }
 }

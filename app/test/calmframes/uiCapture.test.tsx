@@ -30,7 +30,10 @@ import {
   BENIGN_STORY_LABEL,
 } from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { CALM_COLORS, COASTAL_COLORS } from '../../src/calmframes/calmStyles';
+import CaregiverReviewsScreen from '../../src/calmframes/CaregiverReviewsScreen';
+import {CoastalAppearance} from '../../src/calmframes/CoastalAppearance';
+import {ReviewReader} from '../../src/calmframes/caregiverReviewInbox';
 import CornerPlate from '../../src/calmframes/CornerPlate';
 import {
   Card,
@@ -557,7 +560,7 @@ describe('the capture path', () => {
     expect(recordUiFrame(KID_HOME_FRAME, 'kid home', 1_000)).toBe(false);
   });
 
-  it('records every screen and transition the app can show, and writes them out', () => {
+  it('records every screen and transition the app can show, and writes them out', async () => {
     // A path through the whole app, in the order a household meets it: the
     // first run one step at a time, a shelf with nothing on it, a shelf with
     // the service down, a title, the player through a flagged part, and the
@@ -823,6 +826,38 @@ describe('the capture path', () => {
       }
       unmount();
     }
+
+    // The new inbox paints actual async states, not a declared stand-in.
+    const reportName = `calm-frames-review-${'a'.repeat(32)}.json`;
+    const review = require('../../../results/overnight-2026-10-25/personal-import/caregiver-review.json');
+    const reader: ReviewReader = {exists: async () => true, getEntries: jest.fn(async () => [reportName]),
+      getMetadata: async () => ({entryType: '5', size: 1692}), readFileAsString: async () => JSON.stringify(review)};
+    const inbox = render(<CoastalAppearance.Provider value={true}><CaregiverReviewsScreen reader={reader} onBack={jest.fn()} /></CoastalAppearance.Provider>);
+    const captureReview = (name: string) => {
+      const frame = frameFromTree(`caregiver-reviews-${name}`, screen.toJSON() as unknown as RenderedNode);
+      expect(frame.background).toBe(COASTAL_COLORS.BACKGROUND);
+      recordUiFrame(frame, 'native report screen rendered state', atMs); atMs += 250; stops += 1;
+    };
+    captureReview('loading'); await flushReact(async () => {}); captureReview('list');
+    for (let n = 0; n < 6; n++) {
+      fireEvent(screen.getByTestId(`caregiver-review-${reportName}`), n % 2 ? 'blur' : 'focus');
+      captureReview(`file-focus-${n}`);
+    }
+    fireEvent.press(screen.getByTestId(`caregiver-review-${reportName}`));
+    await flushReact(async () => {}); captureReview('summary');
+    for (let n = 0; n < 6; n++) {
+      fireEvent(screen.getByTestId('caregiver-review-summary'), n % 2 ? 'blur' : 'focus');
+      captureReview(`summary-focus-${n}`);
+    }
+    fireEvent.press(screen.getByTestId('caregiver-review-close')); captureReview('return-list');
+    reader.getEntries = jest.fn(async () => {throw new Error('Fixture read failure');});
+    fireEvent.press(screen.getByTestId('caregiver-reviews-refresh')); await flushReact(async () => {}); captureReview('unreadable');
+    reader.getEntries = jest.fn(async () => []);
+    fireEvent.press(screen.getByTestId('caregiver-reviews-refresh')); await flushReact(async () => {}); captureReview('empty');
+    reader.getEntries = jest.fn(async () => [reportName]);
+    reader.readFileAsString = async () => '{malformed';
+    fireEvent.press(screen.getByTestId('caregiver-reviews-refresh')); await flushReact(async () => {}); captureReview('refused');
+    inbox.unmount();
 
     const timeline = getUiCaptureTimeline();
     expect(timeline.length).toBeGreaterThanOrEqual(stops - 1);

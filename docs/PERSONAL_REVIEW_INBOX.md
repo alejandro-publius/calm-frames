@@ -1,36 +1,64 @@
-# Native caregiver review attempt: not accepted
+# Read a caregiver report on the TV
 
-The bounded item-13 attempt did not pass native report selection and is not
-part of main. Its source is preserved on
-[codex/personal-review-inbox-2026-10-26](https://github.com/alejandro-publius/calm-frames/tree/001921e76709a30d0b00ee6b951f3ae9aad612ef).
-Do not follow that branch as a working TV import guide.
+The Parents inbox selects reports exported by the existing caregiver-computer
+intake. It does not select or import raw videos, add a playable title, recheck
+the original file on the TV or grant signing/playback permission.
 
-The existing caregiver-computer intake produced a report from a self-created
-steady-color silent fixture. SDK transfer to a separate fictional validation app
-succeeded. The original media was not played or transferred to the TV. Preparation
-stopped at `signing_blocked`, with no signer supplied or trust change.
+## Transfer and read
 
-The Debug screen opened through unlocked Parents. Its first failure was a
-structured directory `IsADirectoryError`. A precise compatibility correction
-passed its focused regression, but the native retest still refused the report.
-No successful native selection, summary or delivery acceptance was observed.
+1. Use the [caregiver-computer page](overnight-2026-10-25/personal-import/README.md)
+   to select a non-DRM file you own or have permission to process. Confirm
+   processing permission, analyze it, then save the caregiver review JSON.
+   Keep its generated `calm-frames-review-<job-id>.json` filename.
+2. Start the installed app on your intended development device. Use the SDK's
+   [component scratch transfer](https://developer.amazon.com/docs/vega/0.24/developer-mode#file-operations)
+   with the exact destination filename:
 
-Review then found that installed `kepler-file-system` 0.0.7 declares
-`Metadata.mode` as `OpenMode` (values 0 through 5). The adapter and its passing
-mocks instead assumed POSIX file-type bits. Removing the refusal would not
-establish link/privacy protection. The feature therefore stays off main.
-A supported way to validate file/link types is required before continuing this
-particular scratch-inbox design; another build without that diagnosis is not
-a useful next step.
+   ```sh
+   vega device copy-to --device <device-serial> --source path/to/calm-frames-review-<job-id>.json --destination /tmp/scratch/io.github.alejandropublius.calmframes/calm-frames-review-<job-id>.json
+   ```
 
-The [receipt](../results/personal-review-inbox-2026-10-26.json) preserves the
-exact source, fixture and Debug package identities. Its 28 passing focused tests,
-typecheck, lint and build gates are source-bound engineering evidence, with the
-mock limitation recorded. They are not native acceptance.
+   Use the component-owned scratch root directly. Do not create an intermediate
+   inbox directory or link. Transfer only the exported report, never household
+   files, keys or original media. Scratch is a development transfer area, not
+   durable installed content or an end-user sharing service. The current inbox
+   allows at most eight staged entries and bounds each report before reading.
+3. Open **Parents**, unlock normally, then choose **Personal file reviews**.
+   Refresh and choose the report to read its original-file identity and reported
+   plans. Back returns to the selected report, then the Parents opener.
 
-Original item 13 remains partial: arbitrary native TV file selection is not
-implemented, and exact-edition activation still requires existing authorized
-signing authority, approval, verification and a checked build/install. The
-caregiver-computer intake remains available as documented in its
-[existing guide](overnight-2026-10-25/personal-import/README.md). No new playable
-title, signer, protection floor, package budget or security policy is introduced.
+Reports must retain the existing schema, confirmed processing permission,
+non-playable status and absence of TV playback authorization. Unknown names,
+links, directories, oversized and malformed reports are refused. One refused
+entry does not prevent an intact report from appearing. Selection rereads the
+current report and refuses changed bytes.
+
+## Scope and trust
+
+The TV does not independently rehash the original media or authenticate the
+report's author. A displayed report is not medical safety, comfort, rights or
+seizure-prevention validation. Existing rights/DRM refusal, protection floors,
+signed media and compiled membership remain unchanged.
+
+Arbitrary native TV video selection remains unimplemented. Exact-edition
+preparation/activation still requires existing authorized signing authority,
+approval, verification and a checked build/install. The generated fixture
+correctly stops at `signing_blocked` without a signer. Original item 13 stays
+partial; report readback alone does not finish the personal-video journey.
+
+## SDK correction and evidence
+
+The installed JavaScript declaration annotates `Metadata.mode` as an open mode.
+Read-only debugger observation of the actual 0.24.9914 / file-system 0.0.7 bridge
+instead returned `entryType: "5"` for the owned regular report, `"4"` for its
+symlink, no `mode`, and `IsADirectoryError` for the directory. The sanitized
+[bridge observation](../results/personal-review-bridge-metadata-2026-10-26.json)
+records these values. The adapter accepts only the regular native file type;
+it does not infer file type from open modes or POSIX bits.
+
+The [receipt](../results/personal-review-inbox-2026-10-26.json) separates earlier
+failed attempts, the successful native debugger-connected list/readback and
+final packaged validation. The focused regressions fail against the preceding
+adapter and summary-offset behavior. No Release or VoiceView acceptance is
+inferred. Raw captures remain outside the repository; only sanitized evidence
+identities are published.
