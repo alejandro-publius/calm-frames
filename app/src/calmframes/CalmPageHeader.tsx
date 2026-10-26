@@ -2,13 +2,13 @@
 import { WorldAppearance, WORLD } from './CoastalWorld';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CalmButton from './CalmButton';
+import CalmButton, {CalmButtonProps} from './CalmButton';
 import { COASTAL_COLORS as CALM_COLORS, CALM_FONT, CALM_TEXT, scale } from './calmStyles';
-export default function CalmPageHeader({ onBack, backLabel = 'Back', backTestID, preferredBack = false, onBackFocus, backDisabled = false, wordmark = true, children }: { onBack?: () => void; backLabel?: string; backTestID?: string; preferredBack?: boolean; onBackFocus?: () => void; backDisabled?: boolean; /** Home carries the name as its heading, so its header leaves the slot empty. */ wordmark?: boolean; children?: React.ReactNode }) {
+export default function CalmPageHeader({ onBack, backLabel = 'Back', backTestID, preferredBack = false, onBackFocus, backButtonRef, backDisabled = false, wordmark = true, children }: { onBack?: () => void; backLabel?: string; backTestID?: string; preferredBack?: boolean; onBackFocus?: () => void; backButtonRef?: CalmButtonProps['buttonRef']; backDisabled?: boolean; /** Home carries the name as its heading, so its header leaves the slot empty. */ wordmark?: boolean; children?: React.ReactNode }) {
   const world = React.useContext(WorldAppearance);
   return <View style={styles.header}>
     <View style={styles.identity}>
-      {onBack ? <CalmButton quiet tertiary compact disabled={backDisabled} label={backLabel} testID={backTestID} onPress={onBack} onFocus={onBackFocus} hasTVPreferredFocus={preferredBack} /> : wordmark ? <Text style={[styles.wordmark, world && { color: WORLD.TEXT }]}>Calm Frames</Text> : null}
+      {onBack ? <CalmButton buttonRef={backButtonRef} quiet tertiary compact disabled={backDisabled} label={backLabel} testID={backTestID} onPress={onBack} onFocus={onBackFocus} hasTVPreferredFocus={preferredBack} /> : wordmark ? <Text style={[styles.wordmark, world && { color: WORLD.TEXT }]}>Calm Frames</Text> : null}
     </View>
     <View style={styles.actions}>{children}</View>
   </View>;

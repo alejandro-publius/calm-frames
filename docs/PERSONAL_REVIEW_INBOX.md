@@ -59,6 +59,19 @@ it does not infer file type from open modes or POSIX bits.
 The [receipt](../results/personal-review-inbox-2026-10-26.json) separates earlier
 failed attempts, the successful native debugger-connected list/readback and
 final packaged validation. The focused regressions fail against the preceding
-adapter and summary-offset behavior. No Release or VoiceView acceptance is
-inferred. Raw captures remain outside the repository; only sanitized evidence
+adapter and summary-offset behavior. Those dated Debug observations do not
+establish Release or VoiceView acceptance. Raw captures remain outside the repository; only sanitized evidence
 identities are published.
+
+
+## Release navigation correction, October 26
+
+The canonical Release exposed a summary-opening defect: native focus scrolling
+hid the header Back. A keyed-scroll attempt also failed and remains unpublished.
+Navigation now sits outside the report scroller and requests the supported
+native host focus after its measured layout. First and repeated summary opening,
+D-pad reading of essential limitations, visible Back activation, malformed-report
+refusal and both return-focus targets passed on the isolated 720p Release device.
+See the [exact package and native receipt](../results/report-summary-release-2026-10-26.json).
+This bounded pass does not establish 1080p, VoiceView, owner comfort, new-edition
+activation or full Release acceptance. Original item 13 remains partial.

@@ -1,3 +1,9 @@
+**October 26 Release report navigation:** canonical Release reproduced hidden
+summary Back; the bounded correction passes first/repeated visible focus,
+reading, refusal and return navigation on the fictional 720p disposable. See the
+[receipt](../results/report-summary-release-2026-10-26.json). No whole item closes:
+7 complete, 11 partial, 2 blocked. Audit, VoiceView and owner comfort remain open.
+
 **Current cloud continuation, October 25:** implemented source `fc83982220bf1b87774b75377e3b779043550cea`, from `dce5d40`. [Current changes, assets and evidence](cloud-completion-2026-10-25/README.md) advance caregiver error/delivery handling and editorial production. The approved codegen experiment c1f57f4 was rejected before install and remains excluded. Canonical app/locks/media are unchanged; fresh Audit still fails with four advisories and two expired groups. Status remains 6 complete, 12 partial, 2 blocked. The single current native queue is linked from the current record; no idle retest, new native acceptance or publication.
 
 <!-- October 19, rollback: the delivery rollback test reaches its rollback again and a budget-refusal test was added, both seen to fail; 37,144,901 of 66,492,442 library bytes are identical preset copies, which the current format cannot share without new owner-approved bundle identities. -->

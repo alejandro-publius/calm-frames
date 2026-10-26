@@ -1,9 +1,9 @@
 /** Mounted only inside unlocked Parents. No media, signer or household writes. */
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {BackHandler, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {BackHandler, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
-import ReadingStop from './ReadingStop';
+import ReadingStop, {READING_STOP_ROOM} from './ReadingStop';
 import {CALM_SPACE, CALM_TEXT, COASTAL_COLORS, scale} from './calmStyles';
 import {loadReviewInbox, readReviewFile, ReviewFile, ReviewReader} from './caregiverReviewInbox';
 
@@ -12,9 +12,9 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
   const [status, setStatus] = useState('Loading caregiver reviews.'), [refresh, setRefresh] = useState(0);
   const [backFocus, setBackFocus] = useState(true), [returnFile, setReturnFile] = useState<string>();
   const generation = useRef<object | undefined>(undefined);
-  const scroll = useRef<ScrollView>(null);
-  useLayoutEffect(() => {if (selected) scroll.current?.scrollTo({y: 0, animated: false});}, [selected]);
-  const leave = () => {if (selected) {setReturnFile(selected.name); setSelected(undefined);} else onBack();};
+  const back = useRef<React.ComponentRef<typeof TouchableOpacity>>(null);
+  const summaryFocusPending = useRef(false);
+  const leave = () => {summaryFocusPending.current = false; if (selected) {setReturnFile(selected.name); setSelected(undefined);} else onBack();};
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {leave(); return true;});
     return () => sub.remove();
@@ -34,11 +34,20 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
     try {
       const current = await readReviewFile(file.name, reader);
       if (current.text !== file.text) throw new Error('Changed review');
-      if (generation.current === version) {setBackFocus(true); setSelected(current);}
+      if (generation.current === version) {summaryFocusPending.current = true; setReturnFile(undefined); setBackFocus(true); setSelected(current);}
     } catch {if (generation.current === version) {setSelected(undefined); setStatus('This review changed or could not be read. Refresh before choosing it again.');}}
   };
-  return <ScrollView ref={scroll} testID="caregiver-reviews" style={styles.screen} contentContainerStyle={styles.content}>
-    <CalmPageHeader onBack={leave} backTestID="caregiver-reviews-back" preferredBack={backFocus && !returnFile} onBackFocus={() => setBackFocus(false)} />
+  // Navigation does not belong to the scroll/focus reconciliation of report text.
+  // Request the supported native focus only once the new header has laid out.
+  return <View style={styles.screen}>
+    <View key={selected ? 'summary' : 'list'} testID="caregiver-reviews-navigation" onLayout={event => {
+      if (!selected || !summaryFocusPending.current || event.nativeEvent.layout.height <= 0) return;
+      const handle = back.current as unknown as {requestTVFocus?: () => void} | null;
+      if (handle?.requestTVFocus) {summaryFocusPending.current = false; handle.requestTVFocus();}
+    }}>
+    <CalmPageHeader backButtonRef={back} onBack={leave} backTestID="caregiver-reviews-back" preferredBack={backFocus && !returnFile} onBackFocus={() => setBackFocus(false)} />
+    </View>
+    <ScrollView testID="caregiver-reviews" style={styles.viewport} contentContainerStyle={styles.content}>
     <Text accessibilityRole="header" style={[CALM_TEXT.screen, styles.text]}>Personal file reviews</Text>
     <ReadingStop testID="caregiver-reviews-limits" flush>
       <Text style={[CALM_TEXT.body, styles.text]}>These reports come from the caregiver computer. This TV has not rechecked the original video. A report does not add a playable title.</Text>
@@ -60,11 +69,13 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
         testID={`caregiver-review-${file.name}`} onPress={() => choose(file)} />)}
       <CalmButton label="Refresh reviews" testID="caregiver-reviews-refresh" onPress={() => setRefresh(value => value + 1)} />
     </>}
-  </ScrollView>;
+    </ScrollView>
+  </View>;
 }
 const styles = StyleSheet.create({
-  screen: {flex: 1, backgroundColor: COASTAL_COLORS.BACKGROUND},
-  content: {paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), gap: scale(CALM_SPACE.ROW)},
+  screen: {flex: 1, backgroundColor: COASTAL_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y)},
+  viewport: {flex: 1, marginHorizontal: -scale(READING_STOP_ROOM)},
+  content: {padding: scale(READING_STOP_ROOM), gap: scale(CALM_SPACE.ROW)},
   text: {color: COASTAL_COLORS.TEXT},
   section: {gap: scale(CALM_SPACE.ROW)},
 });
