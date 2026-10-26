@@ -13,12 +13,18 @@ const manifest = index => JSON.parse(fs.readFileSync(path.join(root, approvals[i
 const reportFor = title => fs.readFileSync(path.join(root, 'reports', `${title.verification.reportSha256}.json`));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
-test('the checked-in summary reproduces exactly without timestamps or machine paths', () => {
-  const first = playbackProofModule(app), second = playbackProofModule(app);
-  assert.equal(first, second);
-  assert.equal(first, fs.readFileSync(path.join(app, 'src/calmframes/approvedPlaybackProof.ts'), 'utf8'));
-  assert.equal((first.match(/"sha512":/g) ?? []).length, 12);
-  assert.ok(!first.includes('/Users/') && !first.includes('PRIVATE KEY'));
+test('historical summaries retain exact measurements but private reports block new proof generation', () => {
+  const stored = fs.readFileSync(path.join(app, 'src/calmframes/approvedPlaybackProof.ts'), 'utf8');
+  const records = JSON.parse(/= (\[[\s\S]*\]);\n$/.exec(stored)[1]);
+  const historical = approvals.flatMap((approval, index) => approval.consumer ?
+    manifest(index).titles.flatMap(title => ['wcag', 'broadcast', 'extra-cautious'].map(preset => {
+      const raw = JSON.stringify(summarizeTitle(manifest(index), title, preset, reportFor(title)));
+      return { raw, sha512: createHash('sha512').update(raw).digest('hex') };
+    })) : []);
+  assert.deepEqual(historical, records);
+  assert.equal(records.length, 12);
+  assert.ok(!stored.includes('/Users/') && !stored.includes('PRIVATE KEY'));
+  assert.throws(() => playbackProofModule(app), /local filesystem path/);
 });
 
 test('Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof', () => {

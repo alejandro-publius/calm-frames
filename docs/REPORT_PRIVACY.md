@@ -64,4 +64,7 @@ fail; the generator regression also failed before the implementation changed.
 
 Current source assets intentionally fail `node app/tools/check_prepared_library.mjs
 --require-reports` pending regeneration. A passing historical integrity check or
-source CI run does not mean those assets are ready to ship.
+source test run does not mean those assets are ready to ship. CI's Vega prepared
+asset step also invokes the strict gate through `playback_proof.mjs --check` and
+fails on these historical paths. Keep that failure visible until regenerated
+evidence clears it; do not bypass the guard to make CI green.
