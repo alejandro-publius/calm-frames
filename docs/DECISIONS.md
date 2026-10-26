@@ -2934,3 +2934,16 @@ The narrow correction passes first/repeated opening and return focus in the
 [Release receipt](../results/report-summary-release-2026-10-26.json).
 Cost: local focused checks and one corrected Release build/observation; no media,
 trust, dependency or security-policy changes.
+
+
+## October 26, 2026: repair inherited CI without weakening its controls
+
+Reserve Parents reading-ring room inside the clipping viewport with paired
+horizontal margin/padding; preserve text width and vertical comfort geometry.
+Reconcile only the pause snapshot's stale live-region expectation with the
+existing explicit speech path. Flush asynchronous navigation-fixture hydration
+before query deadlines; keep the concurrent-root confirmation mutation intact.
+The copied cold control passes and still kills the original bug. See the
+[focused and native receipt](../results/inherited-ci-repairs-2026-10-26.json).
+Cost: focused tests, one Release build and isolated ring checks at both sizes.
+No speech timing, trust, media, audit policy or exception changes.

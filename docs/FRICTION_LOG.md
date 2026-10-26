@@ -1338,3 +1338,20 @@ cover both issues; no host fault or native acceptance is inferred.
   in the [corrected Release receipt](../results/report-summary-release-2026-10-26.json).
 - Suggestion: keep navigation ownership explicit and validate native focus after
   replacing scroll content. Mocked command delivery cannot prove visible focus.
+
+
+## October 26: inherited CI failures had distinct causes
+
+- Task and steps: compare PR/main job logs with prior main; run each failing
+  suite and the copied mutation control with cold caches.
+- Expected versus actual: Parents flush rings needed room inside the scroller;
+  the pause snapshot still expected a polite live node after speech became
+  explicit; first-Home queries could time out before fixture hydration flushed.
+- Severity: inaccessible clipped ring plus red app/mutation jobs; Audit remained
+  a separate dependency failure.
+- Workaround and outcome: paired ring inset, one semantic snapshot correction
+  and awaited fixture hydration. No longer query before initial async rendering
+  settles. Cold control passes; original concurrent-root mutant remains killed.
+  [Receipt and native capture limits](../results/inherited-ci-repairs-2026-10-26.json).
+- Suggestion: assert semantic announcement ownership and layout invariants;
+  make async fixture initialization explicit rather than increasing timeouts.

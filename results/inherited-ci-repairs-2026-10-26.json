@@ -1,0 +1,87 @@
+{
+  "baseline_main": "a2d820537aa253f8b108639069912c7187bd3abc",
+  "product_source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+  "scope": "Three inherited CI defects: Parents ReadingStop clipping, stale pause snapshot, cold copied-control hydration",
+  "changes": {
+    "reading_ring": "Reserve horizontal clipping room with equal outward viewport margin/inward content padding; enlarge capped container by twice that room to retain text width. Vertical measured comfort viewport stays unchanged.",
+    "pause_snapshot": "Change only the obsolete polite expectation to none; add a semantic assertion. Existing explicit announcement/no-duplicate tests remain intact. No player code or speech timing change.",
+    "copied_control": "Render normally, then await async act to flush household hydration before query deadlines. Leave behavioral assertions, timeouts, concurrent-root act-off scenario and mutation thresholds intact."
+  },
+  "focused_checks": {
+    "ring_and_comfort": {
+      "passed": 52,
+      "suites": 2
+    },
+    "ten_foot": {
+      "passed": 48,
+      "suites": 1
+    },
+    "snapshot_and_playback_semantics": {
+      "passed": 33,
+      "suites": 2
+    },
+    "cold_navigation": {
+      "passed": 8,
+      "suites": 1
+    },
+    "copied_cold_navigation": {
+      "passed": 8,
+      "suites": 1
+    },
+    "targeted_mutation": {
+      "control_tests": 8,
+      "killed": 1,
+      "attempted": 1,
+      "evidence": "Concurrent-root selection-sound confirmation test catches the original bug"
+    },
+    "typecheck": "pass",
+    "focused_lint": "pass",
+    "modeled_ui": {
+      "capture_tests": 18,
+      "states": 100,
+      "paint_sequence_identical_to_prior_analyzed_input": true
+    }
+  },
+  "native": {
+    "build": {
+      "source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+      "variant": "canonical aarch64 Release",
+      "normal_gates": "pass",
+      "bytes": 132117790,
+      "sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+      "sha384": "0054e3a439fedced71a98b8b3e6cf3dc68db5aa793ae963e387a3ce15824380afd92af985ef6b64c47f25a3d43d43fd7"
+    },
+    "installed_sha384_verified": true,
+    "device": "Previously isolated fictional disposable; existing devices and household untouched",
+    "VoiceView": "off",
+    "ring": "Complete focus ring observed in canonical Release at SDK 1280x720 and 1920x1080",
+    "comfort": "On state, complete control and focus observed at 720p and in the final recorded 1080p frame",
+    "frame_sha256": {
+      "ci-repair-reading-ring-720.png": "34ca162c578bc8d341d8c29356e8add6267b45e71a8ddb649b4620502912e99c",
+      "ci-repair-comfort-first-on-720.png": "a6b97cf6ff26a2fb8b939011d659094c5e9cbdb4060cdbab1dabf15616d47a73",
+      "ci-repair-reading-ring-confirmed-1080.png": "a051e6cb9b209c5a60c9ac9e22fb8d6fc1a7c07676c4b21948348e2ea00ab39c",
+      "comfort-last-frame-1080.png": "1b2288a5397ea2ce257bc5d89050aef6b7e3a6b811600b9878a930d74298364a"
+    },
+    "recording_sha256": "a199165cf7bab31abbf516b381b4588116be14eb53c0675531d02c10e02265d9",
+    "limits": [
+      "Blank/stale repeated-toggle PNGs excluded; no new full repeated-toggle acceptance inferred.",
+      "Initial 1080p automation started from an unverified route; those wrong-route captures excluded. App restarted and public Home/Parents visually confirmed before accepted observations.",
+      "No new VoiceView, owner comfort or broad device acceptance."
+    ],
+    "raw_captures_published": false,
+    "disposable_stopped": true
+  },
+  "review": "Separate verifier found no actionable source findings; native observations remain source-bound",
+  "hosted_CI": "Pending publication; do not infer green from focused results",
+  "Audit": "Existing four advisories and expired reviews unchanged; no exception renewal or policy edits",
+  "trust_changed": false,
+  "media_changed": false,
+  "main_household_touched": false,
+  "full_release_accepted": false,
+  "whole_item_12_closed": false,
+  "counts": {
+    "complete": 7,
+    "partial": 11,
+    "blocked": 2
+  }
+}
