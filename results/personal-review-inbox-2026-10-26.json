@@ -86,5 +86,15 @@
     "partial": 11,
     "blocked": 2
   },
-  "publication": "Receipt precedes normal reviewed merge; resolve current main and PR for publication identity"
+  "publication": "Receipt precedes normal reviewed merge; resolve current main and PR for publication identity",
+  "modeled_ui": {
+    "capture_tests_passed": 18,
+    "screens_and_transitions": 100,
+    "profiles": [
+      "wcag",
+      "broadcast with regular pattern rule"
+    ],
+    "result": "pass",
+    "scope": "Actual rendered trees, including inbox loading/list/summary/refusal/empty/error and repeated focus; modeled surfaces are not native pixels or medical acceptance"
+  }
 }
