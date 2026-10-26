@@ -16,13 +16,25 @@ __all__ = ["signed_package"]
 
 
 @pytest.fixture
-def app(tmp_path):
+def app(tmp_path, signed_package):
     target = tmp_path / "checkout" / "app"
     source = REPO / "app"
-    shutil.copytree(source / edition.ASSETS, target / edition.ASSETS)
+    # Keep the delivery/rollback controls reachable after privacy enforcement.
+    # The production library intentionally contains historical private reports.
+    # Use its already portable signed Acadia bytes, plus a clearly synthetic
+    # metadata-only baseline catalog. No map, report or signature is rewritten.
+    assets = target / edition.ASSETS
+    shutil.copytree(signed_package, assets)
+    rewrite(assets, lambda value: value["titles"][0].update(title="Synthetic regression catalog"))
+    shutil.copytree(signed_package / BUNDLE, assets / BUNDLE)
     for relative in (edition.REGISTRY, edition.GENERATED, *edition.TOOLS):
         (target / relative).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source / relative, target / relative)
+    registry = json.loads((target / edition.REGISTRY).read_text())
+    registry["catalogs"] = [entry for entry in registry["catalogs"] if entry["bundleId"] == BUNDLE]
+    (target / edition.REGISTRY).write_text(json.dumps(registry))
+    subprocess.run(["node", str(target / "tools/approved_prepared_libraries.mjs"), "--write"],
+                   check=True, capture_output=True)
     return target
 
 
@@ -51,6 +63,19 @@ def test_existing_exact_fixture_is_idempotent(app, signed_package, tmp_path):
     assert not result["generated_changed"]
     assert snapshot(app) == before
     assert edition.apply_delivery(root, ticket, app) == result
+
+
+def test_retained_historical_private_report_blocks_delivery_without_rewriting_it(app, signed_package, tmp_path):
+    source = REPO / "app" / edition.ASSETS
+    legacy = json.loads((source / "catalog.json").read_text())
+    digest = legacy["titles"][0]["verification"]["reportSha256"]
+    shutil.copytree(source / legacy["bundleId"], app / edition.ASSETS / legacy["bundleId"])
+    shutil.copyfile(source / "reports" / f"{digest}.json", app / edition.ASSETS / "reports" / f"{digest}.json")
+    root, ticket = stage(signed_package, tmp_path)
+    before = snapshot(app)
+    with pytest.raises(PipelineError, match="local filesystem path"):
+        edition.apply_delivery(root, ticket, app)
+    assert snapshot(app) == before
 
 
 def test_missing_bundle_is_copied_without_replacing_regression_catalog(app, signed_package, tmp_path):
