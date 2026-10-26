@@ -1,0 +1,86 @@
+{
+  "baseline_main": "15e0c1651a6d34e213ffd366f551d6a4cbd66f8f",
+  "product_source": "d37b0750958b1b65c2794491b108aee86995e6f1",
+  "scope": "Report summary initial Back visibility/focus and return navigation in canonical Release",
+  "root_cause": "Back was inside scrolling report content; native focus scrolling could hide it when selection replaced the list. A scrollTo call and an unpublished keyed-scroll attempt both failed native validation.",
+  "correction": "Lay out navigation outside the text scroller. Request the SDK native Back host focus once after nonzero header layout; cancel pending focus when leaving.",
+  "reading_comfort_comparison": "Reuse measured native layout boundaries rather than timers; no Reading comfort code or acceptance was changed.",
+  "build": {
+    "source": "d37b0750958b1b65c2794491b108aee86995e6f1",
+    "bytes": 132113920,
+    "sha256": "3b100051f2a6f432c99c42477fc798df3711666c2f315924d1713a1f94887db1",
+    "sha384": "9c9dc3b47c643cba7229e4015c9dc3c44da2db28d4175e39dd602c0e65ec771dd0e1146c06f98e108c4caeb9f3739179",
+    "variant": "canonical Release",
+    "normal_gates": "pass"
+  },
+  "installed_sha384_matches_package": true,
+  "device": "Separate fictional SDK factory-image disposable; existing devices and household untouched",
+  "native": {
+    "result": "PASS for this bounded correction",
+    "resolution": "1280x720",
+    "VoiceView": "off",
+    "observed": [
+      "First report opening has visible focused header Back",
+      "D-pad Down reaches readable essential scope/rights/medical limitations",
+      "Visible header Back activates and restores focus to the selected report",
+      "Harmless malformed report is refused while intact report remains selectable",
+      "Repeated report opening has visible focused Back and readable title, limitations and matching summary",
+      "Hardware Back restores selected report focus, then exact Parents opener focus"
+    ],
+    "refusal_scope": "Malformed JSON observed in this Release; link/directory native behavior is retained from the earlier source-bound Debug receipt, not newly claimed here.",
+    "raw_frame_sha256": {
+      "stationary-release-malformed-refusal.png": "96a45830c1498cdc2923c67b0c0097b81d0ed52c0a1bb65ec51112fd23d47089",
+      "stationary-release-staged-list.png": "16cf9aa2e3d66e45491ebb5fe9e0c1865080df441d34bd32db8325e910f03b9e",
+      "stationary-release-limits-focus.png": "24ded7e50c5e8406d7d3fbe9b3d854d64f02d2e7e99dabd2c22f4bff8abfdd32",
+      "stationary-release-repeated-summary.png": "fe25d936c5f99c33787a6c2efb9184ecd80c6119bdee4b414cb3b5a41e1027e5",
+      "stationary-release-parent-return.png": "8804d4ab6ecfc789e1be0fd29dc3e5c035b755f8ae356c4ec7ef46ee28219c65",
+      "stationary-release-repeated-list-return.png": "6443e9f40d4a672cf9f37f0371c2625b150b569f6e992097bd450322b034902e",
+      "stationary-release-summary-top.png": "fe25d936c5f99c33787a6c2efb9184ecd80c6119bdee4b414cb3b5a41e1027e5",
+      "stationary-release-list-return.png": "44ebe381b4f9923cecdf7d472d099398da11afa03789b4a2446f42eb5cc70a6a",
+      "stationary-release-inbox-list.png": "6a2d84f803e322c344de114fefac2dad54f23b37cc6e42ed74dafd5e30d70b05"
+    },
+    "raw_captures_published": false
+  },
+  "focused_tests": {
+    "passed": 48,
+    "suites": 2,
+    "failed": 0,
+    "negative_control": "New structural regression fails against unchanged main because Back remains in the scroller. Host-command mock proves wiring, not native delivery."
+  },
+  "typecheck": "pass",
+  "focused_lint": "pass",
+  "modeled_ui": {
+    "capture_tests": 18,
+    "states": 100,
+    "paint_sequence_identical_to_prior_analyzed_input": true,
+    "prior_WCAG_and_Broadcast_results_reused": true,
+    "scope": "Modeled paint evidence, not native geometry or medical acceptance"
+  },
+  "source_review": "Separate read-only verifier found no actionable issue and confirmed the installed SDK native host-ref chain",
+  "package_provenance": {
+    "source_map_bundle_id_matches_package": true,
+    "hermes_matches_build_output": true,
+    "sources": 925,
+    "outside_app_sources": 0,
+    "versioned_instances": 76,
+    "inventory_sha256": "5c6a7cc8f4cad0970435d21ba6236efb38878913b8b8f1e8bc23f26d9144f421",
+    "four_known_vulnerable_instances_in_app_package": false,
+    "limit": "This application package only; device system bundles and build-host Audit are separate."
+  },
+  "unchanged_playback_evidence": "Earlier canonical main Release smoke observed launch, McWay Watch/Back/resume. Those files are unchanged by this inbox-only patch; no new broad playback pass claimed.",
+  "security_policy_changed": false,
+  "trust_changed": false,
+  "media_changed": false,
+  "main_household_touched": false,
+  "new_edition_activated": false,
+  "owner_comfort_accepted": false,
+  "Audit": "Unchanged failed with four advisories and expired review groups",
+  "full_release_accepted": false,
+  "public_binary_release_created": false,
+  "whole_item_closed": false,
+  "counts": {
+    "complete": 7,
+    "partial": 11,
+    "blocked": 2
+  }
+}

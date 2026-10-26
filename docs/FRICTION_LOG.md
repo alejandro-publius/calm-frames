@@ -1323,3 +1323,18 @@ cover both issues; no host fault or native acceptance is inferred.
 - Suggestion: align the JavaScript Metadata declaration with the bridge, including
   enum serialization and directory behavior. Reuse is suitable for this bounded
   developer-staged report flow, not established as a system file picker.
+
+
+## October 26: report summary navigation clipped in canonical Release
+
+- Task and steps: build/install canonical Release on a fictional disposable,
+  open Parents, select the generated caregiver report, then return with Back.
+- Expected versus actual: Back should be visible and focused on summary entry;
+  native focus scrolling hid it. An earlier passing Debug observation and mocked
+  scrollTo assertion did not establish Release behavior. Keyed-scroll retry failed.
+- Severity: navigation/accessibility defect; hardware Back still worked.
+- Workaround and outcome: keep navigation outside scrolling text and request its
+  supported host focus after layout. First/repeated entry and return focus pass
+  in the [corrected Release receipt](../results/report-summary-release-2026-10-26.json).
+- Suggestion: keep navigation ownership explicit and validate native focus after
+  replacing scroll content. Mocked command delivery cannot prove visible focus.

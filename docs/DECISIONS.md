@@ -2923,3 +2923,14 @@ Use separate branch from frozen 773334a. Repair only demonstrated opening, pause
 ## October 25, 2026: consolidate intended product and public documentation
 
 The owner authorized normal integration of product `001b4867` with documentation `d2f92e4`. Preserve original history and rollback refs. Resolve documentation conflicts against current product source, keep the dated native gallery and restore the historical screening table required by existing evidence checks. No product code, media, trust or gate changes are needed for these conflict resolutions. Native acceptance and dependency risk remain separate from source consolidation. Lee Point woodland stays outside the repository pending scene/audio, budget and trusted-preparation decisions.
+
+
+## October 26, 2026: separate report navigation from native text scrolling
+
+Keep the inbox Back header outside the report scroller and request its supported
+native focus after nonzero layout. Native Release reproduced clipping after both
+an imperative scroll reset and a keyed-scroller attempt; the latter stays local.
+The narrow correction passes first/repeated opening and return focus in the
+[Release receipt](../results/report-summary-release-2026-10-26.json).
+Cost: local focused checks and one corrected Release build/observation; no media,
+trust, dependency or security-policy changes.
