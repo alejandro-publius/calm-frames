@@ -365,6 +365,18 @@ describe('a flush reading stop', () => {
     expect(reach + left(flat(scroller.props.contentContainerStyle), 'padding')).toBe(0);
   });
 
+  it('preserves Parents text width and vertical comfort viewport while reserving ring room', () => {
+    render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}
+      onSettingsChange={jest.fn()} log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} titles={shelf} nowMs={() => 0} onBack={jest.fn()} />);
+    for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+    const scroller = screen.getByTestId('parent-area-open');
+    const viewport = flat(scroller.props.style), content = flat(scroller.props.contentContainerStyle);
+    expect(left(viewport, 'margin')).toBeLessThan(0);
+    expect(left(viewport, 'margin') + left(content, 'padding')).toBe(0);
+    expect(Number(content.maxWidth) - 2 * left(content, 'padding')).toBe(scale(1560));
+    expect(viewport.paddingVertical ?? 0).toBe(0);
+  });
+
   it('takes the room for its ring out of its margins, so the text does not move', () => {
     render(<ReadingStop testID="stop" flush><Text>Line</Text></ReadingStop>);
     const style = StyleSheet.flatten(screen.getByTestId('stop').props.style);

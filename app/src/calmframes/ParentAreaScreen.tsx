@@ -132,7 +132,7 @@ import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import PinKeypad from './PinKeypad';
 import ProfileNameEditor from './ProfileNameEditor';
 import ProfilePicker from './ProfilePicker';
-import ReadingStop from './ReadingStop';
+import ReadingStop, { READING_STOP_ROOM } from './ReadingStop';
 import {
   addProfile,
   allProfileHides,
@@ -1192,10 +1192,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
-  viewport: { flex: 1 },
+  // Flush reading rings need room inside the native clipping rectangle.
+  // Equal outward margin/inward padding preserve text width and row geometry.
+  viewport: { flex: 1, marginHorizontal: -scale(READING_STOP_ROOM) },
   content: {
     width: '100%',
-    maxWidth: scale(1560),
+    maxWidth: scale(1560 + 2 * READING_STOP_ROOM),
+    paddingHorizontal: scale(READING_STOP_ROOM),
     alignSelf: 'center',
     paddingBottom: scale(CALM_SPACE.SAFE_Y),
   },
