@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {act, fireEvent, render} from '@testing-library/react-native';
+import CalmPageHeader from '../../src/calmframes/CalmPageHeader';
 import CaregiverReviewsScreen from '../../src/calmframes/CaregiverReviewsScreen';
 import {loadReviewInbox, MAX_REVIEW_BYTES, parseCaregiverReview, readReviewFile, REVIEW_INBOX, ReviewReader} from '../../src/calmframes/caregiverReviewInbox';
 const fixture = require('../../../results/overnight-2026-10-25/personal-import/caregiver-review.json');
@@ -95,14 +95,28 @@ test('OpenMode alone cannot establish a regular file', async () => {
   await expect(readReviewFile(name, source)).rejects.toThrow();
   expect(source.readFileAsString).not.toHaveBeenCalled();
 });
-test('opening a report resets the list offset so the preferred Back control stays visible', async () => {
-  const scroll = jest.spyOn(ScrollView.prototype, 'scrollTo');
-  try {
-    const source = reader(), view = render(<CaregiverReviewsScreen reader={source} onBack={jest.fn()} />);
-    await act(async () => {});
-    scroll.mockClear();
-    fireEvent.press(view.getByTestId(`caregiver-review-${name}`)); await act(async () => {});
-    expect(view.getByTestId('caregiver-review-summary')).toBeTruthy();
-    expect(scroll).toHaveBeenCalledWith({y: 0, animated: false});
-  } finally {scroll.mockRestore();}
+test('report navigation stays outside scroll content and requests focus after native layout', async () => {
+  const focus = jest.fn(), source = reader();
+  const view = render(<CaregiverReviewsScreen reader={source} onBack={jest.fn()} />);
+  await act(async () => {});
+  const scroller = view.getByTestId('caregiver-reviews');
+  expect(scroller.findAll(node => node.props.testID === 'caregiver-reviews-back')).toHaveLength(0);
+  fireEvent.press(view.getByTestId(`caregiver-review-${name}`)); await act(async () => {});
+  // Supply only the native host command; Jest does not create a Vega host view.
+  view.UNSAFE_getByType(CalmPageHeader).props.backButtonRef.current = {requestTVFocus: focus};
+  expect(focus).not.toHaveBeenCalled();
+  fireEvent(view.getByTestId('caregiver-reviews-navigation'), 'layout', {nativeEvent: {layout: {height: 0, width: 0}}});
+  expect(focus).not.toHaveBeenCalled();
+  fireEvent(view.getByTestId('caregiver-reviews-navigation'), 'layout', {nativeEvent: {layout: {height: 80, width: 1100}}});
+  expect(focus).toHaveBeenCalledTimes(1);
+  fireEvent(view.getByTestId('caregiver-reviews-navigation'), 'layout', {nativeEvent: {layout: {height: 80, width: 1100}}});
+  expect(focus).toHaveBeenCalledTimes(1);
+  fireEvent.press(view.getByTestId('caregiver-reviews-back'));
+  expect(view.queryByTestId('caregiver-review-summary')).toBeNull();
+  expect(view.getByTestId(`caregiver-review-${name}`).props.hasTVPreferredFocus).toBe(true);
+  fireEvent(view.getByTestId(`caregiver-review-${name}`), 'focus');
+  fireEvent.press(view.getByTestId(`caregiver-review-${name}`)); await act(async () => {});
+  view.UNSAFE_getByType(CalmPageHeader).props.backButtonRef.current = {requestTVFocus: focus};
+  fireEvent(view.getByTestId('caregiver-reviews-navigation'), 'layout', {nativeEvent: {layout: {height: 80, width: 1100}}});
+  expect(focus).toHaveBeenCalledTimes(2);
 });
