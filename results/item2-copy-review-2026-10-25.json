@@ -1,0 +1,50 @@
+{
+  "source": "3088d16b81f1cad3199bd4273989a73f380cb271",
+  "scope": "Original item 2 only: redundant copy and retained safety/accessibility/error instructions",
+  "source_copy_changes": false,
+  "focused_tests": {
+    "suites": 5,
+    "passed": 81,
+    "failed": 0,
+    "command": "npx jest --runInBand --watchman=false --coverage=false --ci test/calmframes/copy.test.ts test/calmframes/playbackCopy.test.ts test/calmframes/nativePlaybackRecovery.test.tsx test/calmframes/PersonalCoversScreen.test.tsx test/screens/householdRestart.test.tsx"
+  },
+  "browser_evidence_reused": "results/cloud-completion-2026-10-25/browser/browser-checks.json",
+  "browser_tested_file_hashes_match_current": true,
+  "normal_native_sweep": "Existing fbe53bf receipt reports no redundant or missing normal-flow copy at both sizes. Relevant ErrorView, household storage, shared copy and extra-cover screens are unchanged since the later 773334a native baseline.",
+  "missing_evidence": "Native missing/unchecked-title error views and playback-error Try again route at both supported sizes; prior receipt explicitly says not reachable without fault injection.",
+  "no_new_native_observation": true,
+  "no_fault_injection_or_household_mutation": true,
+  "item2_status": "partial",
+  "whole_item_closed": false,
+  "checklist": {
+    "complete": [
+      4,
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ],
+    "complete_count": 7,
+    "partial_count": 11,
+    "blocked_count": 2
+  }
+}
