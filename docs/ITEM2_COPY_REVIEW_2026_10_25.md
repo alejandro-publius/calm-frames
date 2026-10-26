@@ -1,4 +1,49 @@
-# Item 2: copy review and exact remaining evidence
+# Item 2: copy review
+
+**Completed on October 26, 2026.** The [native error-copy receipt](../results/item2-production-errors-2026-10-26/receipt.json)
+closes the previously recorded missing/unchecked-title and playback-error recovery
+observations at 1280 by 720 and 1920 by 1080. No product copy correction was needed.
+Combined with the retained ordinary-flow sweep and source/browser checks below,
+item 2 is complete. Original totals are **11 complete, 8 partial, 1 blocked**.
+
+## Controlled native error observations
+
+The owner authorized bounded reversible fault inputs on the isolated fictional
+device. A local-only driver supplied an unknown prepared-title route, an unchecked
+McWay route, and one absent-file input at the public SDK source boundary. The
+actual production guard, player, native media error, ErrorView and recovery
+handlers ran unchanged. Maps, trusted approval, media, manifest and dependencies
+were unchanged. No driver or harness code enters product source or Git history.
+
+At both sizes, missing/unchecked routes kept the picture hidden and displayed
+“This video is unavailable” with “This video cannot be opened. Go back to the
+library.” VoiceView read the library instruction, and remote Back returned to the
+real library. The real file-open error displayed “Playback stopped”, focused
+“Try again”, and retained “Go back”; VoiceView read “Try again from saved position”.
+The first activation closed the decoder, with release confirmed. The second
+explicit activation reached covered, seeking, confirming and ready at the saved
+paused position. Back returned to the library. The existing two-activation safety
+semantics were retained; no automatic retry was added.
+
+Actual native frames are retained for [720p refusal](../results/item2-production-errors-2026-10-26/unchecked720.png),
+[720p error/retry](../results/item2-production-errors-2026-10-26/playback720.png),
+[1080p refusal](../results/item2-production-errors-2026-10-26/unchecked1080.png)
+and [1080p error/retry](../results/item2-production-errors-2026-10-26/playback1080.png).
+The receipt binds source, validation-package hash, unchanged production-file
+hashes, raw recording hashes and precise observation limits. Raw recordings and
+the local driver stay outside the published repository. These controlled-fault
+observations are not normal Release acceptance or native compositor timing proof.
+The older empty-library/storage-error gaps are not relabeled as observed here.
+
+The verified Release was restored and normal Home captured. Temporary driver
+state and source are absent; the main household and screen-lock/security settings
+were untouched. Pause speech and Audit remain open. No unchanged broad suite or
+identical product rebuild was repeated for closure.
+
+## Earlier bounded review, October 25
+
+The dated partial status and counts below record the earlier evidence boundary;
+they are superseded by the controlled native observations above.
 
 Source reviewed: `3088d16b81f1cad3199bd4273989a73f380cb271`.
 Item 2 remains **partially completed**. No product copy correction was needed.

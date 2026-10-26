@@ -1,0 +1,206 @@
+{
+  "date_utc": "2026-10-26",
+  "item": 2,
+  "status": "completed",
+  "source_main": "c71045ad90d78d63c941040f99d418a481994f46",
+  "scope": "Complete the previously missing native error/recovery copy observations at 1280x720 and 1920x1080. Reuse the accepted ordinary-flow copy sweep, source/browser checks and 81 focused tests. No product copy change needed.",
+  "environment": "Owned disposable Vega Virtual Device with fictional household; main device untouched; app-window capture and app audio only, microphone disabled.",
+  "controlled_fault_boundary": {
+    "authorization": "Owner authorized bounded reversible production error triggers, preserving actual rendering and handlers.",
+    "validation_package": {
+      "base_main": "c71045ad90d78d63c941040f99d418a481994f46",
+      "variant": "Debug with local-only input/fault driver using native stack",
+      "bytes": 132680221,
+      "sha256": "f58202930cdc0f3a7916a41db918e8b37e1c4399f71875404d4edc847b264668",
+      "normal_gates": "pass",
+      "typecheck": "pass",
+      "eslint": "pass"
+    },
+    "driver_published": false,
+    "driver_or_harness_history_merged": false,
+    "source_edits_in_product": false,
+    "method": "Local native-stack driver supplies route inputs and a one-shot public src dependency fault. Actual AppStack/PlayerScreen/guard/VideoHandler/ErrorView/retry handlers execute. No isolated copy replica or manually set error state.",
+    "unchanged_production_sha256": {
+      "app/src/screens/PlayerScreen.tsx": "64b82cf6663ecd70adb6e5a1a2301ded6ceaea3c4f82a28c57afd573b64fe36a",
+      "app/src/utils/VideoHandler.ts": "964852614aacc1fc82fd6771e932c32b60ad670f90b1c30c7d5a1a221461e043",
+      "app/src/components/ErrorView.tsx": "4a9350c6ea9c9331ad5ba04a14eff4320524c4e86c8387cc96a72144912e95f7",
+      "app/src/calmframes/playerAccess.ts": "34354bbb3d585006eaef9316281c475aba84f0bf090561cc786b10ce8f870153",
+      "app/src/calmframes/CalmCard.tsx": "51da81fa8facfdb9899d363da795d4bcfd151eb8a73fca1988acdd95e2ad2e4a",
+      "app/manifest.toml": "6a2e53601fefbffca689dfde458fa776c7b98ba889b882a1e1a535cf061842d0",
+      "app/package.json": "29f62e664f83d037dc902636e660ed1f27db5537daf71947768967ffcd7b40c9",
+      "app/package-lock.json": "8aba497341474812b44ec555cfeaf0cece4b14fba105b5137abfe9988b2dbbee"
+    },
+    "trust_maps_media_manifest_dependencies_changed": false,
+    "household_storage_corrupted": false
+  },
+  "observations": [
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "case": "missing title",
+      "condition": "Unknown prepared-prefixed route without guarded params",
+      "visible_copy": [
+        "This video is unavailable",
+        "This video cannot be opened. Go back to the library."
+      ],
+      "picture_hidden": true,
+      "spoken_guidance": "This video is unavailable. Go back to the library.",
+      "offline_transcript": " This video is unavailable. Go back to the library.",
+      "recovery": "Hardware Back returned to the actual library",
+      "screenshot": "missing720.png",
+      "result": "pass for copy and essential guidance"
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "case": "unchecked title",
+      "condition": "Compiled McWay route without guarded params",
+      "visible_copy": [
+        "This video is unavailable",
+        "This video cannot be opened. Go back to the library."
+      ],
+      "picture_hidden": true,
+      "spoken_guidance": "This video is unavailable. Go back to the library.",
+      "offline_transcript": " button. This video is unavailable. Go back to the library. ocean forest",
+      "recovery": "Hardware Back returned to the actual library",
+      "screenshot": "unchecked720.png",
+      "result": "pass for copy and essential guidance"
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "case": "native file-open failure and explicit retry",
+      "condition": "One public SDK src assignment substituted with a deliberately absent pkg file; substitution disarmed immediately. Original media, maps, route identity and guard unchanged.",
+      "native_error": "filesrc No such file; set_src_uri failed apiStatus=50004",
+      "visible_copy": [
+        "Playback stopped",
+        "Try again",
+        "Go back"
+      ],
+      "picture_hidden_on_error": true,
+      "initial_focus": "Try again",
+      "spoken_accessibility_label": "Try again from saved position, button",
+      "offline_transcript": " Back, try again from saved position, button.",
+      "retry": "First activation: Closing player, native release confirmed. Second explicit activation: recovery covered, seeking, confirming, ready. The saved paused position is retained; hardware Back returns to library.",
+      "retry_observation_limit": "720p recording includes the saved 3:43 native picture. 1080p recording establishes ready state, paused instruction and Back; no decoded-picture/compositor timing claim.",
+      "screenshot": "playback720.png",
+      "result": "pass for copy, available action and recorded recovery path"
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "case": "missing title",
+      "condition": "Unknown prepared-prefixed route without guarded params",
+      "visible_copy": [
+        "This video is unavailable",
+        "This video cannot be opened. Go back to the library."
+      ],
+      "picture_hidden": true,
+      "spoken_guidance": "This video is unavailable. Go back to the library.",
+      "offline_transcript": " Missing Title Input, Button This video is unavailable. Go back to the library Ocean. Forest",
+      "recovery": "Hardware Back returned to the actual library",
+      "screenshot": "missing1080.png",
+      "result": "pass for copy and essential guidance"
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "case": "unchecked title",
+      "condition": "Compiled McWay route without guarded params",
+      "visible_copy": [
+        "This video is unavailable",
+        "This video cannot be opened. Go back to the library."
+      ],
+      "picture_hidden": true,
+      "spoken_guidance": "This video is unavailable. Go back to the library.",
+      "offline_transcript": " button. This video is unavailable. Go back to the library. Ocean. Forest.",
+      "recovery": "Hardware Back returned to the actual library",
+      "screenshot": "unchecked1080.png",
+      "result": "pass for copy and essential guidance"
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "case": "native file-open failure and explicit retry",
+      "condition": "One public SDK src assignment substituted with a deliberately absent pkg file; substitution disarmed immediately. Original media, maps, route identity and guard unchanged.",
+      "native_error": "filesrc No such file; set_src_uri failed apiStatus=50004",
+      "visible_copy": [
+        "Playback stopped",
+        "Try again",
+        "Go back"
+      ],
+      "picture_hidden_on_error": true,
+      "initial_focus": "Try again",
+      "spoken_accessibility_label": "Try again from saved position, button",
+      "offline_transcript": " Way Falls. Resume at 3, back. Try again from Saved Position, button. Closing Player, Go Back, Button, Playback Stop, Back, Button. Current Progress is 75%. current progress is 75%",
+      "retry": "First activation: Closing player, native release confirmed. Second explicit activation: recovery covered, seeking, confirming, ready. The saved paused position is retained; hardware Back returns to library.",
+      "retry_observation_limit": "720p recording includes the saved 3:43 native picture. 1080p recording establishes ready state, paused instruction and Back; no decoded-picture/compositor timing claim.",
+      "screenshot": "playback1080.png",
+      "result": "pass for copy, available action and recorded recovery path"
+    }
+  ],
+  "evidence": {
+    "sanitized_screenshots": {
+      "missing720.png": "18fc90b75ff3ae4e0af9085e199f9dd3afd4b3b9ba9767357bfe5c872975da01",
+      "unchecked720.png": "51e58042fa4d343724d6a20bcd1a9e366809de0a23725eb05039696726bbc279",
+      "playback720.png": "bcd420223b62173a8161d3690f97e9f49bc1828d723e86cc184ab679c913196e",
+      "missing1080.png": "38a593c24b3935722781cd112143ed0408213fc691ac3d9a0b5afca54e0d6dd6",
+      "unchecked1080.png": "726332b14a579bf71a20ad1dc167effbf8e490f6d3df7acad7046659f02a473c",
+      "playback1080.png": "51c7e6e0017e2bfe0b958536088a6ce8eff54ed6bdd6e875ec636fd7cc473e99"
+    },
+    "raw_capture_sha256": {
+      "item2-missing720.mp4": "b1839e083ec54dd9d8b6b92d31aa39ba681b17e9baaa0b870821c5f25a702009",
+      "item2-missing720-back.mp4": "a22cb25c234bedf979ca3732d03c253dfa02e6a4dc795586e841a9249920cf8d",
+      "item2-unchecked720-resume.mp4": "6ec9fd13419ce53af423d7ad7b00117ac2f3f974c3360b6650084b4bd1ec8dfd",
+      "item2-playback720-error.mp4": "8d1e02235e7c99b7b6bf2016439e29da8431eb215c3a24e63b33cbad928ab87b",
+      "item2-playback720-retry.mp4": "e4fdc2e053aaefd2dd2d3079080938b4e316d2032cb00866cc6bc52915358ed2",
+      "item2-playback720-second-stage.mp4": "a6298595df3fb71371c4e670e79b09c26ec4f2fc323449231e0aaed4f1898ab7",
+      "item2-missing1080.mp4": "7b285276424ba87469007ea664bd3eed26c9954ac05c64d525142915d834c4f4",
+      "item2-unchecked1080.mp4": "6befb42fe52b8f7406c8293a927367ed1e53ebd1709ce0ea3b97ba204809288a",
+      "item2-playback1080-error-retry.mp4": "0954e37ad9fb35a23d6b9f6c78f6ce686532a059d127ea0f5af86cec3fef711d"
+    },
+    "raw_capture_availability": "Retained outside the published repository. No private filesystem links or raw logs are published. Screenshots here are actual extracted app-window frames; no fabricated UI.",
+    "speech_method": "Offline transcription of app-only recordings, checked alongside visible copy and actual actions. Not a platform delivery acknowledgement."
+  },
+  "cleanup": {
+    "verified_release_restored": true,
+    "release_source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+    "release_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+    "release_app_tree_matches_main": true,
+    "SDK_install_success": true,
+    "canonical_component_launched": true,
+    "normal_home_capture_recorded": true,
+    "temporary_driver_source_absent": true,
+    "app_bootstrap_navigation_source_clean": true,
+    "log_streams_stopped": true,
+    "disposable_final_viewport": [
+      1920,
+      1080
+    ],
+    "main_device_untouched": true,
+    "screen_lock_security_settings_changed": false
+  },
+  "limitations": [
+    "These are controlled-fault native observations of unchanged production rendering/handlers, not a newly accepted normal Release package.",
+    "Empty-library/storage-corruption states were not injected; retained source/browser evidence is not relabeled as native evidence.",
+    "No whole-item closure for 3, 10, 11, 12, 13, 16, 17 or 19 follows. Pause speech and Audit remain unresolved.",
+    "No medical validation, seizure guarantee, native compositor timing, new title activation or live submission change."
+  ],
+  "counts": {
+    "complete": 11,
+    "partial": 8,
+    "blocked": 1
+  }
+}

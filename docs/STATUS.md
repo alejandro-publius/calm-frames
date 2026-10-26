@@ -1,3 +1,12 @@
+**October 26 native error-copy closure:** original item 2 is complete. Missing and
+unchecked titles, native file-open error instructions, explicit Retry and Back
+were observed at 720p and 1080p under labeled controlled faults through unchanged
+production handlers. No copy change needed. Verified Release restored; temporary
+driver excluded. Totals are **11 complete, 8 partial, 1 blocked**.
+[Evidence and limits](../results/item2-production-errors-2026-10-26/receipt.json).
+Pause speech and Audit remain unresolved; this is not release acceptance.
+Older dated counts below remain historical.
+
 **October 26 owner acceptance and native speech follow-through:** original items
 1, 8 and 20 close; totals are **10 complete, 9 partial, 1 blocked**. The owner
 accepted comfort reviews in chat, waiving a separate witnessed/package-named
