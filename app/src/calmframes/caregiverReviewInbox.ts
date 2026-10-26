@@ -58,8 +58,16 @@ export function parseCaregiverReview(text: string): CaregiverReview {
     }) };
 }
 async function checkInbox(reader: ReviewReader): Promise<void> {
-  const stat = await reader.getMetadata(REVIEW_INBOX, true);
-  if (!Number.isInteger(stat.mode) || Math.floor(stat.mode / 4096) !== 4) throw new Error('Not a regular inbox directory');
+  try {
+    const stat = await reader.getMetadata(REVIEW_INBOX, true);
+    if (!Number.isInteger(stat.mode) || Math.floor(stat.mode / 4096) !== 4) throw new Error('Not a regular inbox directory');
+  } catch (error) {
+    // Kepler 0.0.7 rejects directory metadata with this structured response.
+    // noFollow stays true; other failures and resolved link metadata refuse.
+    if (error && typeof error === 'object' && 'message' in error &&
+        typeof error.message === 'string' && /^\[com\.amazon\.kepler\.file_system\.IsADirectoryError\]:\s*$/.test(error.message)) return;
+    throw error;
+  }
 }
 export async function readReviewFile(name: string, reader: ReviewReader = KeplerFileSystem): Promise<ReviewFile> {
   if (!NAME.test(name)) throw new Error('Unsupported review filename');

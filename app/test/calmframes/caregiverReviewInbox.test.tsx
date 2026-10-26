@@ -68,3 +68,17 @@ test('selection rechecks changed bytes instead of showing an old analysis', asyn
   fireEvent.press(view.getByTestId(`caregiver-review-${name}`)); await act(async () => {});
   expect(view.queryByTestId('caregiver-review-summary')).toBeNull(); expect(view.getByText(/changed or could not be read/)).toBeTruthy();
 });
+
+test('accepts the observed SDK directory response, while retaining regular-file checks', async () => {
+  const source = reader(); source.getMetadata = jest.fn(async path => {
+    if (path === REVIEW_INBOX) throw {message: '[com.amazon.kepler.file_system.IsADirectoryError]: '};
+    return {mode: 0o100600, size: 1000};
+  });
+  expect((await loadReviewInbox(source)).files[0].review.title).toBe(fixture.title);
+});
+test.each(['[com.amazon.kepler.file_system.PermissionDenied]: ', 'IsADirectoryError', '[com.amazon.kepler.file_system.IsADirectoryError]: changed'])(
+  'does not treat another metadata failure as a directory: %s', async message => {
+    const source = reader(); source.getMetadata = jest.fn(async () => {throw {message};});
+    await expect(loadReviewInbox(source)).rejects.toBeTruthy();
+    expect(source.readFileAsString).not.toHaveBeenCalled();
+  });
