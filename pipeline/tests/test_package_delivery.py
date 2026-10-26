@@ -127,15 +127,16 @@ def test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket(
     review = {**job["review"], "source_sha256": ACADIA}
     package = path / "runs" / "fixture" / "package"
     shutil.copytree(signed_package, package)
+    snapshot = {**intake.inspect_package(package, ACADIA), "relative_directory": "runs/fixture/package"}
     intake.update(path, status="package_review", source_sha256=ACADIA,
                   review=review, review_digest=fingerprint(review),
-                  package={"relative_directory": "runs/fixture/package"})
+                  package=snapshot)
     staged = store.action(job["id"], "stage-delivery")["delivery"]
     store.action(job["id"], "cancel")
     with pytest.raises(delivery.DeliveryError, match="canceled"):
         delivery.check_delivery(path / "delivery-reviews", staged["ticket_id"])
     intake.update(path, status="package_review", review=review, review_digest=fingerprint(review),
-                  package={"relative_directory": "runs/fixture/package"})
+                  package=snapshot)
     store.action(job["id"], "stage-delivery")
     next(package.rglob("extra-cautious.mp4")).write_bytes(b"changed")
     with pytest.raises(PipelineError):

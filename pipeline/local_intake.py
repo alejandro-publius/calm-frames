@@ -74,6 +74,7 @@ def read_job(path: Path) -> dict:
     ):
         raise IntakeError("Import metadata is incomplete or unreadable.")
     validate_saved_review(data)
+    validate_saved_delivery(data)
     return data
 
 
@@ -150,6 +151,60 @@ def validate_saved_review(job: dict) -> None:
         or fingerprint(review) != job.get("review_digest")
     ):
         raise IntakeError(error)
+
+
+def validate_saved_delivery(job: dict) -> None:
+    """Check saved presentation fields, never infer current approval from them.
+
+    Every delivery action still verifies package bytes and the approval registry.
+    A damaged saved snapshot must not break the whole browser import list.
+    """
+    package, delivery, plan = (job.get(key) for key in ("package", "delivery", "delivery_plan"))
+
+    def digest(value) -> bool:
+        return isinstance(value, str) and re.fullmatch(r"[a-f0-9]{64}", value) is not None
+
+    def strings(value) -> bool:
+        return isinstance(value, list) and all(isinstance(part, str) for part in value)
+
+    error = "The saved delivery review is unreadable. Remove its local import and select the original again."
+    if package is not None or job["status"] == "package_review":
+        if (
+            not isinstance(package, dict)
+            or not digest(package.get("bundle_id"))
+            or not digest(package.get("catalog_sha256"))
+            or not isinstance(package.get("public_key_fingerprint"), str)
+            or not re.fullmatch(r"sha256:[a-f0-9]{64}", package["public_key_fingerprint"])
+            or not isinstance(package.get("relative_directory"), str)
+        ):
+            raise IntakeError(error)
+        relative = Path(package["relative_directory"])
+        if not relative.parts or relative.is_absolute() or ".." in relative.parts:
+            raise IntakeError(error)
+    if delivery is not None:
+        if (
+            not isinstance(delivery, dict) or package is None
+            or not isinstance(delivery.get("state"), str)
+            or delivery.get("state") not in {"ready_for_approval", "approved_for_build", "blocked", "canceled"}
+            or not isinstance(delivery.get("ticket_id"), str)
+            or not JOB_ID.fullmatch(delivery["ticket_id"])
+            or delivery.get("can_watch") is not False
+            or not isinstance(delivery.get("message"), str)
+            or not strings(delivery.get("blockers"))
+        ):
+            raise IntakeError(error)
+    if plan is not None:
+        if (
+            not isinstance(plan, dict) or delivery is None
+            or delivery["state"] == "canceled"
+            or not isinstance(plan.get("state"), str)
+            or plan.get("state") not in {"ready_to_apply", "blocked"}
+            or plan.get("ticket_id") != delivery["ticket_id"]
+            or plan.get("can_watch") is not False
+            or not all(strings(plan.get(key)) for key in ("blockers", "files_to_add", "files_already_present"))
+            or not all(isinstance(plan.get(key), str) for key in ("app_directory", "staging_root"))
+        ):
+            raise IntakeError(error)
 
 
 def update(path: Path, **fields) -> dict:

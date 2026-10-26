@@ -177,3 +177,69 @@ def test_damaged_saved_review_cannot_hide_other_imports_or_authorize_work(
         assert (good_path / "job.json").read_bytes() == good_before
     finally:
         restarted.close()
+
+
+@pytest.mark.parametrize("damage", [
+    "missing-package", "list-package", "missing-bundle", "outside-package",
+    "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+    "missing-files", "different-plan-ticket", "canceled-plan",
+])
+def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+    monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+    store = intake.IntakeStore(tmp_path / "imports")
+    path, job = ready(store)
+    good_path, good = ready(store)
+    package = {
+        "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+        "public_key_fingerprint": "sha256:" + "c" * 64,
+        "relative_directory": "runs/fixture/package",
+    }
+    delivery = {
+        "state": "approved_for_build", "ticket_id": "d" * 32,
+        "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+    }
+    plan = {
+        "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+        "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+        "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+    }
+    saved = {**job, "status": "package_review", "package": package,
+             "delivery": delivery, "delivery_plan": plan}
+    if damage == "missing-package":
+        saved.pop("package")
+    elif damage == "list-package":
+        saved["package"] = ["damaged"]
+    elif damage == "missing-bundle":
+        package.pop("bundle_id")
+    elif damage == "outside-package":
+        package["relative_directory"] = "../../outside"
+    elif damage == "list-delivery":
+        saved["delivery"] = ["damaged"]
+    elif damage == "unknown-delivery":
+        delivery["state"] = "installed"
+    elif damage == "invalid-ticket":
+        delivery["ticket_id"] = ["damaged"]
+    elif damage == "list-plan":
+        saved["delivery_plan"] = ["damaged"]
+    elif damage == "missing-files":
+        plan.pop("files_to_add")
+    elif damage == "different-plan-ticket":
+        plan["ticket_id"] = "e" * 32
+    else:
+        delivery["state"] = "canceled"
+    intake._write_json(path / "job.json", saved, path)
+    original = (path / "original.mp4").read_bytes()
+    bad_before = (path / "job.json").read_bytes()
+    good_before = (good_path / "job.json").read_bytes()
+    try:
+        jobs = {j["id"]: j for j in store.poll()}
+        assert jobs[job["id"]]["status"] == "unreadable"
+        assert jobs[good["id"]]["status"] == "review"
+        for action in ("approve", "stage-delivery", "check-delivery", "plan-delivery"):
+            with pytest.raises(intake.IntakeError):
+                store.action(job["id"], action)
+        assert (path / "job.json").read_bytes() == bad_before
+        assert (path / "original.mp4").read_bytes() == original
+        assert (good_path / "job.json").read_bytes() == good_before
+    finally:
+        store.close()

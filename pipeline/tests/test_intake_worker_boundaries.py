@@ -8,7 +8,7 @@ from pipeline.hashing import fingerprint
 from pipeline.hideplan import HidePlan
 from pipeline.layout import TitleLayout
 
-from .test_local_intake import ready
+from .test_local_intake import package_snapshot, ready
 
 
 @pytest.fixture
@@ -66,7 +66,7 @@ def test_preparation_publishes_only_after_approved_plan_and_unchanged_source(
         return {"status": "failed" if failure == "failed" else "ready"}
     monkeypatch.setattr(intake, "prepare_local_title", prepare)
     monkeypatch.setattr(intake, "export_packaged_library", lambda *a, **kw: calls.append("export"))
-    monkeypatch.setattr(intake, "inspect_package", lambda *a: {"bundle_id": "fabricated", "playable_in_current_tv_app": False})
+    monkeypatch.setattr(intake, "inspect_package", lambda *a: package_snapshot())
     if failure:
         with pytest.raises(intake.IntakeError):
             intake.prepare_worker(path, key, pub)

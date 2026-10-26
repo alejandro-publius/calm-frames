@@ -71,6 +71,26 @@ def ready(store):
     )
 
 
+def package_snapshot():
+    """Shape-complete producer stub; no media or signing claim."""
+    return {
+        "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+        "public_key_fingerprint": "sha256:" + "c" * 64,
+        "relative_directory": "runs/fixture/package", "playable_in_current_tv_app": False,
+    }
+
+
+def delivery_snapshot():
+    return {"state": "blocked", "ticket_id": "d" * 32, "message": "Fixture only",
+            "blockers": ["Fixture only"], "can_watch": False}
+
+
+def plan_snapshot():
+    return {"state": "blocked", "ticket_id": "d" * 32, "can_watch": False,
+            "files_to_add": [], "files_already_present": [], "blockers": ["Fixture only"],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/reviews"}
+
+
 @pytest.mark.parametrize(
     "changes",
     [
@@ -394,7 +414,7 @@ def test_retry_preparation_clears_old_signer_error(store, monkeypatch):
     def success(path, mode):
         assert mode == "prepare"
         assert intake.read_job(path)["error"] is None
-        intake.update(path, status="package_review", package={"bundle_id": "fixture"})
+        intake.update(path, status="package_review", package=package_snapshot())
 
     monkeypatch.setattr(store, "launch", success)
     result = store.action(job["id"], "approve")
@@ -425,8 +445,8 @@ def test_delivery_plan_is_read_only_and_clears_stale_result(store, monkeypatch):
     from pipeline import edition_delivery
 
     path, job = ready(store)
-    intake.update(path, status="package_review", delivery={"ticket_id": "a" * 32})
-    result = {"state": "blocked", "can_watch": False, "files_to_add": []}
+    intake.update(path, status="package_review", package=package_snapshot(), delivery=delivery_snapshot())
+    result = plan_snapshot()
     monkeypatch.setattr(edition_delivery, "plan_delivery", lambda root, ticket, app: result.copy())
     planned = store.action(job["id"], "plan-delivery")
     assert planned["delivery_plan"]["state"] == "blocked"
@@ -442,11 +462,14 @@ def test_delivery_plan_is_read_only_and_clears_stale_result(store, monkeypatch):
     assert intake.read_job(path)["delivery_plan"] is None
 
 
-def test_cancel_and_retry_discard_delivery_plan(store):
+def test_cancel_and_retry_discard_delivery_plan(store, monkeypatch):
+    from pipeline import package_delivery
+
+    monkeypatch.setattr(package_delivery, "cancel_delivery", lambda *_: {"state": "canceled"})
     path, job = ready(store)
-    intake.update(path, delivery_plan={"state": "ready_to_apply"})
+    intake.update(path, package=package_snapshot(), delivery=delivery_snapshot(), delivery_plan=plan_snapshot())
     store.action(job["id"], "cancel")
     assert intake.read_job(path)["delivery_plan"] is None
-    intake.update(path, delivery_plan={"state": "ready_to_apply"})
+    intake.update(path, package=package_snapshot(), delivery=delivery_snapshot(), delivery_plan=plan_snapshot())
     store.action(job["id"], "retry")
     assert intake.read_job(path)["delivery_plan"] is None
