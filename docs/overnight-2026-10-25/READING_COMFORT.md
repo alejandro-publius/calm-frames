@@ -1,5 +1,17 @@
 # Optional Reading comfort
 
+**Current machine-evidence reconciliation:** `3512344` passed first/repeated
+Debug toggles, whole-switch visibility and retained focus at both requested
+sizes, with VoiceView off. The [native repair record](../native-receipt-fixes-773334a.md)
+retains the exact scope. Earlier per-profile persistence/isolation, wrapping,
+More info and VoiceView-label observations remain valid for their source.
+The original acceptance sheet additionally requires speech/focus on the updated
+save path and the owner's reading-comfort judgment. Parents is protected again
+after the disposable relaunch. This continuation does not request the PIN again,
+enter or persist it, or claim that the missing protected-state observation ran.
+No whole item 20 closure is inferred. Historical remaining-acceptance text below
+must be read with the completed viewport evidence above.
+
 Original checklist item 20 is **partially completed**. The default-off source
 implementation and cloud regressions are complete; native layout, focus,
 VoiceView and owner comfort acceptance remain open. It was implemented after

@@ -221,3 +221,23 @@ test('a quick resume cancels pending pause speech and unmount cancels it too', (
   act(() => jest.advanceTimersByTime(700));
   expect(speak.mock.calls.some(([text]) => text === 'Paused. Press Play to continue.')).toBe(false);
 });
+
+
+test('a native pause before the controls timer cannot erase observed playback before the pause prop arrives', () => {
+  resetAnnouncements();
+  const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockImplementation(() => {}).mockClear();
+  const media = makeMedia();
+  media.paused = false;
+  const props = { videoRef: { current: media } as never, navigateBack: jest.fn(), title: 'Fictional race test',
+    setCaptionStatus: jest.fn(), setSelectedCaptionInVideoPlayer: jest.fn(),
+    bifFrameImagesRef: { current: null }, videoData: {} as never };
+  const view = render(<VideoPlayerUI {...props} paused={false} />);
+  // Native media changes first. The controls timer commits before the delayed
+  // pause event updates the React prop. That timer must not forget playback.
+  media.paused = true;
+  act(() => jest.advanceTimersByTime(6000));
+  view.rerender(<VideoPlayerUI {...props} paused />);
+  act(() => jest.advanceTimersByTime(700));
+  expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('Paused. Press Play to continue.');
+  expect(speak.mock.calls.filter(([text]) => text === 'Paused. Press Play to continue.')).toHaveLength(1);
+});

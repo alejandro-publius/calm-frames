@@ -1,0 +1,60 @@
+{
+  "baseline_main": "84cd4778b587de1c849d2236c9814319ccc55512",
+  "product_source": "54d0256d2d6a19044be12157b76d14a580c48c2b",
+  "item": 11,
+  "scope": "Retain observed playback across native pause/React prop ordering",
+  "regression_before": "New delayed-pause test fails on baseline: explicit pause accessibility label remains empty.",
+  "focused_tests": {
+    "suites": 3,
+    "passed": 46,
+    "failed": 0
+  },
+  "typecheck": "pass",
+  "focused_lint": "pass",
+  "debug_build": "pass with unchanged normal pre/post gates",
+  "package": {
+    "build": "Debug",
+    "bytes": 132660532,
+    "sha256": "b815a411b8da062c60e585437076e64a4af0434fc80233458779cf396dcda234",
+    "sha384": "15a21bf984f6eb4475d04457e94bdb29bbc24aa6f9ec10859cbc2869c94902c59a5a473db903e5acfa19ede192bd59c3"
+  },
+  "install": "Explicit emulator-5556 SDK update reported success; original main device untouched.",
+  "native_pause_retest": {
+    "result": "FAIL",
+    "source": "54d0256d2d6a19044be12157b76d14a580c48c2b",
+    "build": "Debug",
+    "viewport": "1280x720",
+    "VoiceView": "enabled; focus speech and native focus rectangle observed before test",
+    "recording_sha256": "738c154e790901b68b99176195eb7aea025712a62c69ebe9f1ab38dc2781b26b",
+    "observed": "Restored pause first; playback, two real pauses separated by resumed playback, then Back. Guidance is visible on both actual pauses. Offline transcript contains one pause instruction across the recording.",
+    "expected_actual_pause_instructions": 2,
+    "transcribed_pause_instructions": 1,
+    "limitation": "ASR and sampled frames are machine evidence, not human listening acceptance. Change-only frame capture is not a decoder/screen-timing measurement. Raw app-only recording remains local outside Git.",
+    "later_cases": "No unchanged repeat at another size or Release; failure already establishes that reliable native delivery is unresolved."
+  },
+  "unchanged": [
+    "announcement delay",
+    "queue option",
+    "cover/seek logic",
+    "media",
+    "dependencies",
+    "household schema",
+    "signer trust",
+    "security policy"
+  ],
+  "whole_item_closed": false,
+  "checklist_counts": {
+    "complete": 7,
+    "partial": 11,
+    "blocked": 2
+  },
+  "privacy_note": "An unexpected blank Parents keypad screenshot during system-menu navigation was immediately excluded/deleted. No PIN entered, recorded or requested; no private household read. All raw device captures remain outside Git.",
+  "disposable_final_state": {
+    "viewport": "1280x720",
+    "VoiceView": "Off shortcut issued after confirmed active state; subsequent public focus-check transcript contains no speech. Audio is not digitally silent.",
+    "max_focus_audio_amplitude": 905,
+    "main_device_touched": false,
+    "PIN_entered": false,
+    "focus_check_recording_sha256": "167e24c77cc78c0d6f8c2d72f02222c868e33edb3c320b0906d362b64fa63722"
+  }
+}
