@@ -22,6 +22,7 @@ test('the real caregiver export is selectable but never grants playback', async 
   expect(view.queryByText('Watch')).toBeNull();
   fireEvent.press(view.getByTestId('caregiver-review-close'));
   expect(view.queryByTestId('caregiver-review-summary')).toBeNull();
+  expect(view.getByTestId(`caregiver-review-${name}`).props.hasTVPreferredFocus).toBe(true);
 });
 test.each(['processing_permission_confirmed', 'tv_playback_authorized', 'permission_verified_by_application'])(
   'refuses an unsupported %s claim', key => {

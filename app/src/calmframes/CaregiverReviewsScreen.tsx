@@ -10,8 +10,9 @@ import {loadReviewInbox, readReviewFile, ReviewFile, ReviewReader} from './careg
 export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void; reader?: ReviewReader}) {
   const [files, setFiles] = useState<ReviewFile[]>([]), [selected, setSelected] = useState<ReviewFile>();
   const [status, setStatus] = useState('Loading caregiver reviews.'), [refresh, setRefresh] = useState(0);
+  const [backFocus, setBackFocus] = useState(true), [returnFile, setReturnFile] = useState<string>();
   const generation = useRef<object | undefined>(undefined);
-  const leave = () => selected ? setSelected(undefined) : onBack();
+  const leave = () => {if (selected) {setReturnFile(selected.name); setSelected(undefined);} else onBack();};
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {leave(); return true;});
     return () => sub.remove();
@@ -31,11 +32,11 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
     try {
       const current = await readReviewFile(file.name, reader);
       if (current.text !== file.text) throw new Error('Changed review');
-      if (generation.current === version) setSelected(current);
+      if (generation.current === version) {setBackFocus(true); setSelected(current);}
     } catch {if (generation.current === version) {setSelected(undefined); setStatus('This review changed or could not be read. Refresh before choosing it again.');}}
   };
   return <ScrollView testID="caregiver-reviews" style={styles.screen} contentContainerStyle={styles.content}>
-    <CalmPageHeader onBack={leave} backTestID="caregiver-reviews-back" preferredBack />
+    <CalmPageHeader onBack={leave} backTestID="caregiver-reviews-back" preferredBack={backFocus && !returnFile} onBackFocus={() => setBackFocus(false)} />
     <Text accessibilityRole="header" style={CALM_TEXT.screen}>Personal file reviews</Text>
     <ReadingStop testID="caregiver-reviews-limits" flush>
       <Text style={CALM_TEXT.body}>These reports come from the caregiver computer. This TV has not rechecked the original video. A report does not add a playable title.</Text>
@@ -49,10 +50,11 @@ export default function CaregiverReviewsScreen({onBack, reader}: {onBack(): void
         {selected.review.plans.map(plan => <Text key={plan.preset} style={CALM_TEXT.body}>{`${({'wcag': 'WCAG', 'broadcast': 'Broadcast', 'extra-cautious': 'Extra cautious'})[plan.preset]}: ${plan.intervals} reported replacement intervals, ${(plan.coveredMs / 1000).toFixed(1)} seconds`}</Text>)}
         <Text style={CALM_TEXT.body}>Playback remains unavailable. An existing authorized signer, exact edition approval and a checked app build are still required.</Text>
       </ReadingStop>
-      <CalmButton label="Back to reviews" onPress={() => setSelected(undefined)} testID="caregiver-review-close" />
+      <CalmButton label="Back to reviews" onPress={leave} testID="caregiver-review-close" />
     </View> : <>
       <Text accessibilityLiveRegion="polite" style={CALM_TEXT.body}>{status}</Text>
       {files.map(file => <CalmButton key={file.name} label={file.review.title} accessibilityLabel={`Read caregiver review: ${file.review.title}`}
+        hasTVPreferredFocus={returnFile === file.name} onFocus={() => setReturnFile(undefined)}
         testID={`caregiver-review-${file.name}`} onPress={() => choose(file)} />)}
       <CalmButton label="Refresh reviews" testID="caregiver-reviews-refresh" onPress={() => setRefresh(value => value + 1)} />
     </>}

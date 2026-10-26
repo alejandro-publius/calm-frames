@@ -1,5 +1,44 @@
 # Calm Frames canonical product checkpoint
 
+Codex owns the current implementation on the connected Mac, with parent-task
+supervision. Work uses isolated branches and the disposable fictional device;
+the main household and preserved rollback packages remain untouched. The owner
+has authorized normal reviewed main merges. No enforced protection may be
+bypassed, and this authority does not establish release or human acceptance.
+
+## Current source and publication
+
+- Verified main before this item-13 continuation:
+  `5147f2dd3af8209f185f323392bbeefa9f829741` ([source](https://github.com/alejandro-publius/calm-frames/tree/5147f2dd3af8209f185f323392bbeefa9f829741)).
+- Current work: `codex/personal-review-inbox-2026-10-26`; native report selection
+  inside unlocked Parents. Its exact implemented/tested source belongs in the
+  resulting receipt; it is not arbitrary-file playback or trusted activation.
+- The public default branch contains the reviewed product/docs consolidation.
+  [PR 4](https://github.com/alejandro-publius/calm-frames/pull/4),
+  [PR 6](https://github.com/alejandro-publius/calm-frames/pull/6) and
+  [PR 8](https://github.com/alejandro-publius/calm-frames/pull/8) preserve the
+  integration, bounded pause regression and actual native-route evidence.
+- The repository is public with its [Apache 2.0 license](../../LICENSE).
+  Parent read-only verification confirms five Amazon reviewers with active write
+  access. No collaborator or visibility change is requested by this checkpoint.
+- Parent verification found Devpost **Submitted**, with Alex and Rachel listed,
+  and rechecked the [official rules](https://amazonappdev2026.devpost.com/rules).
+  The closed form prevents reading saved track, mini-challenge, feedback and
+  team-pending answers. Public tags do not establish those saved answers.
+- The public [earlier YouTube demonstration](https://www.youtube.com/watch?v=6lAP1FH16vc)
+  runs 2:31 and remains historical. It is not a recording of current main.
+  Devpost/YouTube edits and the Janet follow-up remain explicitly deferred.
+
+Audit still fails with the recorded four advisories and expired review groups;
+the known hosted app tests remain separate from this bounded feature. No gate,
+exception, signing trust or package budget changes. Owner audiovisual/comfort
+judgment, missing native error/retry observations and release acceptance remain
+open. The rejected experiment and every documented excluded harness commit stay
+outside product history.
+
+<details>
+<summary>Historical October 25 cloud handoff and limits, superseded where stated above</summary>
+
 This cloud thread is the sole implementation owner. The October 25 native handoff
 is received, reconciled and preserved. Further native/human observations wait
 until the owner is home; independent cloud work does not wait for Mac access.
@@ -61,6 +100,8 @@ when home, without repeating the completed idle test. Owner audiovisual/comfort
 acceptance remains separate. No hosted CI, native build, remote push, merge,
 publication or live-submission change occurred.
 
+</details>
+
 ## One 20-item product checklist
 
 **Current baseline: 7 completed, 11 partially completed, 2 blocked.** Completed **4, 5, 6, 9, 14, 15 and 18** remain closed. This reconciles the later native receipt; the earlier cloud continuation below did not close item 4. The bounded [item 2 review](../ITEM2_COPY_REVIEW_2026_10_25.md) closes no additional whole outcome. These statuses cover each
@@ -81,11 +122,11 @@ whole original outcome; source-tested subparts do not imply native acceptance.
 | 11 | Native readability, D-pad order/focus, VoiceView and reduced motion | Partially completed | Completed #4 focus retained. [Pause-history race correction](../PAUSE_HISTORY_RACE_2026_10_26.md) fixes a source event-ordering defect with a failing-before regression, but the bounded Debug 720p VoiceView retest still yields one instruction across two actual pauses; reliable delivery remains unresolved. No unchanged repeat or speculative delay added. Device system reduced motion remains unavailable. |
 | 12 | Core technical depth, dependency/audit remediation and final validation | Partially completed | [Official SDK research and owner-approved isolated experiment](../cloud-followup-2026-10-25/SDK_MIGRATION_PROPOSAL.md) are complete. Experiment c1f57f4 failed before installation with new critical findings and is excluded. The canonical [fresh Audit](../../results/cloud-completion-2026-10-25/audit.json) still has four advisories and two expired review groups. Closure requires a supported vendor correction or separately scoped wider migration, unchanged gates and exact native inventories. |
 | 13 | Working personal-file import and caregiver pre-check with rights/DRM boundaries | Partially completed | [Cloud import/review/delivery verification](../cloud-completion-2026-10-25/README.md) now isolates malformed package/plan records, preserves intact reports and supplies actionable failure guidance. Real HTTP/browser checks and existing signed-package delivery fixtures pass; no new signer/trust. Direct TV file selection and authorized exact-edition preparation/delivery remain absent. Supporting browser footage does not add a TV title. |
-| 14 | GitHub presentation with actual screenshots, architecture, setup and build identity | Completed | [README](../../README.md) and [native gallery](../presentation/README.md) use inspected, unmodified fbe53bf review captures with exact provenance and pre-fix limits. [Architecture](../presentation/ARCHITECTURE.md), setup, current source identity and evidence links are reconciled. Prepared repository presentation is complete; no publication or current-fix screenshot is claimed. |
+| 14 | GitHub presentation with actual screenshots, architecture, setup and build identity | Completed | Public [README](../../README.md) and [native gallery](../presentation/README.md) use inspected fbe53bf captures with exact provenance and pre-fix limits. [Architecture](../presentation/ARCHITECTURE.md), setup and current source identity are reconciled on main. No screenshot of an unobserved current fix is claimed. |
 | 15 | Final accurate Devpost and YouTube description drafts | Completed | [Reconciled private Devpost/YouTube drafts](PRESENTATION_DRAFTS.md) tie behavior to source and received native evidence. They distinguish unresolved defects, medical/rights boundaries and missing production media. No live submission or approved narration rewrite. Reconcile again with the selected accepted build before publication. |
 | 16 | Replacement-demo tooling/assembly from real footage/assets, with missing production inputs queued | Partially completed | [Actual title/credit overlays, editable picture assembly and unchanged narration subtitle drafts](../cloud-completion-2026-10-25/README.md) are produced and checked. The preserved 25.80-second caregiver recording remains supporting browser evidence. All five story-art slots, five accepted-build native takes and eight audio cues remain empty. Production preflight rejects the unfilled assembly; final composition, measured narration and human full-video review remain. |
-| 17 | Verify submission/judge-access requirements; queue account/eligibility steps | Blocked | [Current official rules/resources attempts and precise account checks](../cloud-completion-2026-10-25/ASSETS_AND_ACCESS.md) are recorded. Official pages returned proxy 403. Need current authoritative rules and owner confirmation of actual submitted track/status, selected mini challenges, eligibility and repository/video judge access. Public tags are not form selections. No inferred account answers or submission changes. |
-| 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Current implemented source `fc83982220bf1b87774b75377e3b779043550cea` on `codex/native-defect-fixes-2026-10-25`; final documentation SHA and transfer hashes are in the verified export. Original numbering/criteria and 6/12/2 status retained. Rejected experiment c1f57f4 remains separate and excluded. [Current evidence](../cloud-completion-2026-10-25/README.md) and one native queue replace older next actions without rewriting their history. |
+| 17 | Verify submission/judge-access requirements; queue account/eligibility steps | Blocked | Parent read-only verification confirms current official rules, public Apache-2.0 repository, five active Amazon reviewers, Submitted status, Alex/Rachel listed and the public historical 2:31 demo. Saved track/mini-challenge/feedback/team-pending answers remain unreadable in the closed Devpost form. Janet follow-up deferred. No inferred answers or live submission edits. |
+| 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Public main baseline `5147f2dd3af8209f185f323392bbeefa9f829741` contains the reviewed product/docs consolidation and subsequent bounded fixes/evidence. Current counts are 7 complete, 11 partial, 2 blocked. Exact new item-13 source/checks are recorded separately; excluded harness history and rejected experiment remain absent. |
 | 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | The refreshed verified transfer includes current source, unchanged 365be08 generated-player inputs and actual editorial assets. [One current native batch](../cloud-followup-2026-10-25/NATIVE_VERIFICATION.md) gives separate-worktree build/install/rollback and explicitly excludes the rejected experiment. Exact new Debug/Release packages/inventories, native checks, unresolved Audit and owner review still block release promotion. |
 | 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Partially completed | First/repeated Debug toggles, visibility and retained focus passed at both sizes on 3512344 with VoiceView off. Prior profile isolation, restart/Release persistence, wrapping and VoiceView-label evidence retained. [Current reconciliation](../overnight-2026-10-25/READING_COMFORT.md) leaves updated save-path VoiceView observation and owner comfort pending. Protected Parents was not bypassed and no repeat PIN request was made. |
 
@@ -101,4 +142,5 @@ Narration, calm built-in voice and budget decisions already exist; do not ask
 again. Manga and ElevenLabs generation remain parked until product acceptance
 and exact-build script reconciliation. Missing production takes and secure API
 access are later-stage requirements, not reasons to stop available source work.
-The submission freeze and unchanged fallback remain in force.
+Normal reviewed development-main merges are authorized. Live submission/demo
+changes remain deferred, and the earlier submitted fallback stays preserved.
