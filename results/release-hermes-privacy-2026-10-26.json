@@ -1,0 +1,72 @@
+{
+  "date_utc": "2026-10-26",
+  "base_commit": "0aa61ccdff9c4a10cf1e62a04746b884744f65c8",
+  "change": "Supported Hermes -g0 for Release in both npm command and direct SDK release helper; no Debug, vendor input, dependency, signer, runtime source, media or policy change.",
+  "compiler_probe": {
+    "compiler_sha256": "3283e48fa956f02b15f883534c2116cdd9b995fd0f49e1782cee09f540f73105",
+    "compiler": "Installed Vega RN0.83 Hermes1.0.0/HBC98",
+    "actual_input": "JS extracted unchanged from approved package",
+    "compiles": [
+      {
+        "root": "root-a",
+        "mode": "default",
+        "sha256": "e2c068736efff4a4d558cfddb1120cf0f5d2f254b84c8bae90b97685909e1d1e",
+        "bytes": 3956383,
+        "personal_path_occurrences": 1,
+        "input_bundle_sha256": "4f9d62d9230efcadc4365eacda00e3f5b11f5d677d2ad28344f2383d75140c39"
+      },
+      {
+        "root": "root-a",
+        "mode": "g0",
+        "sha256": "8c4dfb18e8b80c724605af9c2b3a00014a28237a27643babe89bd0ea19148f33",
+        "bytes": 3237888,
+        "personal_path_occurrences": 0,
+        "input_bundle_sha256": "4f9d62d9230efcadc4365eacda00e3f5b11f5d677d2ad28344f2383d75140c39"
+      },
+      {
+        "root": "root-b",
+        "mode": "default",
+        "sha256": "f892df2dcc0a08beb30d308fe908c54b54629394d10d69f6ee2c253c5a77a1fe",
+        "bytes": 3956383,
+        "personal_path_occurrences": 1,
+        "input_bundle_sha256": "4f9d62d9230efcadc4365eacda00e3f5b11f5d677d2ad28344f2383d75140c39"
+      },
+      {
+        "root": "root-b",
+        "mode": "g0",
+        "sha256": "8c4dfb18e8b80c724605af9c2b3a00014a28237a27643babe89bd0ea19148f33",
+        "bytes": 3237888,
+        "personal_path_occurrences": 0,
+        "input_bundle_sha256": "4f9d62d9230efcadc4365eacda00e3f5b11f5d677d2ad28344f2383d75140c39"
+      }
+    ],
+    "g0_cross_root_identical": true,
+    "default_cross_root_identical": false,
+    "tradeoff": "-g0 suppresses bytecode debug info. Normal Metro source map remains private; Debug build defaults unchanged. No runtime/native acceptance or public upload claimed."
+  },
+  "approved_old_package_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+  "old_package_preserved": true,
+  "new_package_built": false,
+  "new_package_native_validated": false,
+  "new_package_published": false,
+  "license_review": {
+    "official_archive_url": "https://amzndevresources.com/vega/media-player/shaka-rel-v4.8.5-r1.2-devices_scope.tar.gz",
+    "archive_sha256": "f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e",
+    "byte_identical_to_tracked": true,
+    "license_notice_members": [],
+    "sdk_notice": "Vega0.24.9914 root LICENSE.txt points to Program Materials License Agreement, without identifying applicability to the conflicting sample file notices.",
+    "affected_runtime_files": [
+      "ShakaPlayer.ts",
+      "DocumentPolyfill.ts",
+      "DOMParserPolyfill.ts",
+      "ElementPolyfill.ts",
+      "MiscPolyfill.ts",
+      "TextDecoderPolyfill.ts",
+      "W3CMediaPolyfill.ts"
+    ],
+    "resolution": "Unresolved scope of permission, no prohibition or clearance inferred. Applicable Amazon terms/clarification needed; no vendor communication sent.",
+    "publication_held": true
+  },
+  "validation_limit": "Actual compiler probe only. No new native package or acceptance; no public upload; no whole-package reproducibility claim.",
+  "focused_regression": "Release helper regression initially failed because it bypasses npm flags; after correction Debug and Release preparation/receipt reuse pass. Fake-package helper tests do not establish native behavior."
+}

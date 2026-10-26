@@ -28,7 +28,15 @@ not bypass this requirement. Preparation does not establish native execution.
 Use repeatable `--arch` options to choose targets, `--build-type Release` for
 Release packages, or `--all-architectures` when that broader scope is needed.
 Release package names omit the `-debug` suffix. Release builds strip
-`console.log`; measurement runs need Debug packages.
+`console.log`; measurement runs need Debug packages. The Release command also
+passes the supported Hermes `-g0` option, removing bytecode debug metadata that
+otherwise embeds the build host's absolute bundle filename. This reduces crash
+location detail. Debug compilation and the private Metro source map are unchanged.
+The compiler check in [release-hermes-privacy-2026-10-26.json](../results/release-hermes-privacy-2026-10-26.json)
+compares the same actual Release JavaScript in different directories. It establishes
+bytecode path independence for that input, not reproducibility of the whole native
+package. A changed compiler command requires a new package, hash and native check;
+the earlier package's approval and observations do not certify the changed bytes.
 
 Follow [MAC_FINISH.md](MAC_FINISH.md) to install the exact prepared package,
 check the native journeys and record a new demo. Fresh installs choose their

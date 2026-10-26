@@ -152,8 +152,12 @@ def main():
         command(['node', 'tools/check_native_inputs.mjs'])
         command(['node', 'tools/check_prepared_library.mjs', '--require-reports'])
         for arch in arches:
-            command(['npm', 'exec', '--', 'react-native', 'build-kepler',
-                     '--build-type', args.build_type, '--target', arch])
+            build_command = ['npm', 'exec', '--', 'react-native', 'build-kepler',
+                             '--build-type', args.build_type, '--target', arch]
+            if args.build_type == 'Release':
+                # Match npm's Release path: do not embed the host bundle filename.
+                build_command.append('--hermes-flags=-O,-w,-g0')
+            command(build_command)
         after = source_inventory()
         # The SDK regenerates manifest module declarations during a build.
         require([x for x in sources if x['path'] != 'app/manifest.toml'] ==
