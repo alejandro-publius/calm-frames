@@ -1,0 +1,56 @@
+{
+  "baseline_main": "5147f2dd3af8209f185f323392bbeefa9f829741",
+  "product_source": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
+  "scope": "Read-only selection of staged caregiver reports inside unlocked Parents; not raw video selection or activation",
+  "focused_tests": {
+    "passed": 28,
+    "suites": 2,
+    "failed": 0
+  },
+  "typecheck": "pass",
+  "focused_lint": "pass",
+  "build": {
+    "source_commit": "0ec97d3767ab5ee3d93595a2433f790f7a7df550",
+    "variant": "Only package/component identity and app registration changed to separate validation app; canonical manifests restored",
+    "package_id": "io.github.alejandropublius.calmframes.intakevalidation",
+    "component_id": "io.github.alejandropublius.calmframes.intakevalidation.main",
+    "build": "Debug",
+    "bytes": 132676821,
+    "sha256": "49d5bef682d0f2b8dbf4739a07e147585721dedc192e80cf11855f0aa78f0892",
+    "sha384": "282642e82cd0f83cde39d01285b110d753be18245aef73cace9627a8701586e6f3316b8397b3b213b1bf97d35418b4d0",
+    "normal_pre_and_post_gates": "pass"
+  },
+  "producer": {
+    "input": "self-created steady-color silent fixture; never played",
+    "source_sha256": "d4484dcc389692f305a7f3c92ef2e1bb479c71922de7105a1f8b71ff358472d6",
+    "report_filename": "calm-frames-review-20438be7479c497a92fd603c247b1d7d.json",
+    "report_sha256": "761c4dfe00c4188a6a6c07e12c108273258ad142b6c53b8ee4b97d276639ee03",
+    "analysis_frames": 12,
+    "analysis_duration_ms": 1000.0,
+    "preparation_status": "signing_blocked",
+    "tv_playback_authorized": false,
+    "no_signer_created_or_read": true
+  },
+  "transfer": "SDK exact-filename copy to separate validation component scratch succeeded",
+  "native_ui": {
+    "initial_result": "FAIL before compatibility correction: normal Parents entry opens inbox, then directory metadata rejects before report read",
+    "exact_sdk_response": {
+      "message": "[com.amazon.kepler.file_system.IsADirectoryError]: "
+    },
+    "app_data_directory_comparison": "same structured IsADirectoryError response",
+    "correction": "Accept only that exact directory response with noFollow still true; preserve resolved-link rejection, regular-file type/size checks and report validation",
+    "regression": "Observed SDK response fails before the correction, passes after; other error messages still refuse",
+    "final_result": "Fixed retest in progress; no native selection success claimed by this commit."
+  },
+  "trust_changed": false,
+  "media_changed": false,
+  "security_policy_changed": false,
+  "main_household_touched": false,
+  "raw_media_played": false,
+  "whole_item_closed": false,
+  "counts": {
+    "complete": 7,
+    "partial": 11,
+    "blocked": 2
+  }
+}

@@ -1287,3 +1287,21 @@ cover both issues; no host fault or native acceptance is inferred.
 - Severity: acceptance blocking for those subcriteria.
 - Workaround: leave both open and retain exact native evidence; no claim of completion.
 - Suggestion: next authorized fix should reproduce native scroll geometry and VoiceView delivery competition before selecting another patch.
+
+
+## October 26: Kepler directory metadata differs from the typed result
+
+- Task: select bounded caregiver-computer reports in unlocked Parents.
+- Steps: transfer a generated-file review to a separate fictional validation app;
+  request directory metadata with noFollow true before listing or reading reports.
+- Expected versus actual: a directory metadata object; the SDK rejects with the
+  structured IsADirectoryError object, including for the app-data directory.
+  The initial generic error hid this distinction. No report was read.
+- Severity: blocks the new native report-selection path, not existing playback.
+- Workaround: recognize only the observed directory response, keep noFollow and
+  file/type/size/schema checks, and retain other errors as refusals. The focused
+  regression fails before the correction and passes after; fixed native retest
+  remains separately recorded.
+- Suggestion: document directory behavior and expose typed, inspectable SDK
+  exceptions. The filesystem API remains useful for bounded sandbox records;
+  this experience does not establish a system-wide file picker.
