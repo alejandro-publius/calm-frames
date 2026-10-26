@@ -1,3 +1,13 @@
+**October 26 transition-evidence reconciliation:** original item 3 is complete
+using retained native startup/ordinary transitions, the verified pale-opening
+repair and item 2's existing error/retry recordings at both sizes. No new device
+pass, build or product edit. Totals are **12 complete, 7 partial, 1 blocked**.
+Item 10 retains flagged-interval recovery and native supported-caption gaps;
+positions/floors and explicit error retry are observed.
+[Evidence map and exact limits](../results/item3-transition-reconciliation-2026-10-26.json).
+Pause speech and Audit remain unresolved; no release acceptance follows.
+Older dated counts below remain historical.
+
 **October 26 native error-copy closure:** original item 2 is complete. Missing and
 unchecked titles, native file-open error instructions, explicit Retry and Back
 were observed at 720p and 1080p under labeled controlled faults through unchanged
