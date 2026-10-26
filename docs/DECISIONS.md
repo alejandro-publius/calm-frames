@@ -2947,3 +2947,12 @@ The copied cold control passes and still kills the original bug. See the
 [focused and native receipt](../results/inherited-ci-repairs-2026-10-26.json).
 Cost: focused tests, one Release build and isolated ring checks at both sizes.
 No speech timing, trust, media, audit policy or exception changes.
+
+## October 26, 2026: portable verification reports before hashing
+
+Generate exact-media identifiers and omit successful CLI path chatter before
+report hashes are recorded. Invalidate only the verification cache version and
+reject private paths at export/native packaging, preserving historical bytes for
+integrity inspection. Do not rewrite hash-bound reports or change signer trust.
+Cost: focused cloud regression tests, no service or native build cost.
+[Regeneration boundary and controls](REPORT_PRIVACY.md).

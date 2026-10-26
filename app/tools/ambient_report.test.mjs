@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { checkAmbientReport, strictJson } from './ambient_report.mjs';
+import { checkVerificationReport } from './check_prepared_library.mjs';
 const fixture = () => JSON.parse(fs.readFileSync(new URL('../../pipeline/tests/fixtures/ambient-report.json', import.meta.url), 'utf8'));
 const hash = (s, a='sha256') => createHash(a).update(s).digest('hex');
 function refresh(data) {
@@ -20,6 +21,16 @@ test('accepts distinct synthetic ambient report and rejects duplicate JSON',()=>
   const {report,title}=fixture();checkAmbientReport(JSON.stringify(report),[title]);
   assert.throws(()=>strictJson('{"recipe":1,"recipe":2}'));
   assert.throws(()=>checkAmbientReport(JSON.stringify(report),[]));
+});
+for (const group of ['ambientAnalysis', 'outputAnalysis']) test(`delivery refuses rebound private ${group}`, () => {
+  const data = fixture(), entry = data.report.presets.wcag[group].wcag;
+  const analysis = JSON.parse(entry.raw);
+  analysis.source.path = '/Users/fictional/clip.mp4';
+  entry.raw = JSON.stringify(analysis); refresh(data);
+  const raw = Buffer.from(JSON.stringify(data.report));
+  checkAmbientReport(raw.toString(), [data.title]);
+  assert.throws(() => checkVerificationReport(raw, hash(raw), [data.title], { distributable: true }),
+    /local filesystem path/);
 });
 for (const [field,value] of [['renditionSha256','f'.repeat(64)],['durationMs',10001],['renditionStartOffsetMs',1],['preset','broadcast'],['audioPreserved',false],['frameTimingPreserved',false],['ambientSha256','f'.repeat(64)],['intervals',[{startMs:501,endMs:2500}]],['version',true]]) {
   test(`rejects rebound metadata ${field}`,()=>{

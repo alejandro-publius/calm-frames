@@ -278,7 +278,7 @@ test('rejects alternate archive paths and link members before reading any prepar
   const entries = [...fixture.entries()].map(([name, bytes]) => ({ name: 'assets/raw/prepared-library/' + name, bytes }));
   try {
     fs.writeFileSync(archive, tar(entries));
-    assert.deepEqual(checkPreparedPackage(archive, check(fixture).catalogSha256), check(fixture));
+    assert.throws(() => checkPreparedPackage(archive, check(fixture).catalogSha256), /local filesystem path/);
     for (const name of ['/assets/raw/prepared-library/catalog.json', 'assets/raw/./prepared-library/catalog.json']) {
       fs.writeFileSync(archive, tar([...entries, { name, bytes: Buffer.from('{}') }]));
       assert.throws(() => checkPreparedPackage(archive), /Noncanonical/);
@@ -292,6 +292,44 @@ test('rejects alternate archive paths and link members before reading any prepar
   } finally {
     fs.rmSync(directory, { recursive: true, force: true });
   }
+});
+
+test('portable reports preserve media identity and pass the native archive gate', () => {
+  const files = reportFixture(report => { report.source_path = `sha256:${report.sha256}`; });
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'calm-portable-report-'));
+  const archive = path.join(directory, 'synthetic.vpkg');
+  try {
+    fs.writeFileSync(archive, tar([...files.entries()].map(([name, bytes]) => ({
+      name: 'assets/raw/prepared-library/' + name, bytes,
+    }))));
+    assert.deepEqual(checkPreparedPackage(archive), check(files));
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
+
+for (const value of ['/Users/fictional/clip.mp4', '/home/fictional/clip.mp4',
+  'C:\\Users\\fictional\\clip.mp4', '\\\\server\\household\\clip.mp4', 'file:///Users/fictional/clip.mp4', '~/Movies/clip.mp4',
+  '/家/fictional/clip.mp4', '//server/household/clip.mp4', 'FILE:///Users/fictional/clip.mp4']) {
+  for (const field of ['source_path', 'detail', 'nested']) test(`distribution refuses ${field} path ${value}`, () => {
+    const files = reportFixture(report => {
+      if (field === 'source_path') report.source_path = value;
+      if (field === 'detail') report.checks[0].detail = `checked ${value}`;
+      if (field === 'nested') report.checks[0].data.diagnostics = JSON.stringify({ path: value });
+    });
+    assert.throws(() => checkPreparedNamespace([...files.keys()], name => files.get(name), undefined,
+      { requireReports: true }), /local filesystem path/);
+  });
+}
+
+test('media identifier cannot disagree with the source hash', () => {
+  const files = reportFixture(report => { report.source_path = `sha256:${'0'.repeat(64)}`; });
+  assert.throws(() => checkPreparedNamespace([...files.keys()], name => files.get(name), undefined,
+    { requireReports: true }), /media identifier/);
+});
+
+test('historical reports retain integrity but block native prebuild until regenerated', () => {
+  assert.doesNotThrow(() => check(fixture));
+  assert.throws(() => checkPreparedNamespace([...fixture.keys()], name => fixture.get(name), undefined,
+    { requireReports: true }), /local filesystem path/);
 });
 
 test('refuses build scripts outside the prepared namespace in a native package', () => {

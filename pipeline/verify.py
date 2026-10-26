@@ -499,7 +499,9 @@ def verify_title(
     source = Path(source)
     report = VerifyReport(
         sha256=layout.sha256,
-        source_path=str(source),
+        # The report is hashed into receipts and distributed unchanged. Keep
+        # local paths in failure diagnostics, never in its media identifier.
+        source_path=f"sha256:{layout.sha256}",
         presets=list(presets),
         started_at=time.time(),
     )
@@ -590,8 +592,10 @@ def verify_title(
             report.add(
                 f"map_signature:{preset}",
                 result.ok,
-                f"{prefix}flashmap verify exited {result.returncode}: "
-                f"{(result.stderr or result.stdout).strip()[-400:]}",
+                (f"{prefix}flashmap verified the signature and exact source hash"
+                 if result.ok else
+                 f"{prefix}flashmap verify exited {result.returncode}: "
+                 f"{(result.stderr or result.stdout).strip()[-400:]}"),
                 returncode=result.returncode,
             )
 

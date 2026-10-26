@@ -783,6 +783,9 @@ def _prepare(
     checked_bytes = artifact_bytes()
     verify_payload = {
         "scene_verification_version": 2,
+        # Re-run verification once for historical path-bearing reports without
+        # invalidating signed maps, renders or any other preparation step.
+        "report_representation": "portable-media-id-v1",
         "presets": presets,
         "pub": options.pub,
         "public_key_bytes": sha256_file(options.pub) if options.pub and Path(options.pub).is_file() else None,

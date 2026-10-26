@@ -264,7 +264,12 @@ def _ready_receipt(result: IngestResult, source: Path, root: Path,
     # The verifier's geometry data uses tuples in memory; JSON records arrays.
     # Compare their JSON representations, without coercing unsupported objects.
     recorded_result = json.loads(json.dumps(result.verify_report, allow_nan=False))
-    if recorded_result != data or Path(report.source_path).resolve() != source:
+    # New reports identify exact bytes. Historical local reports still require
+    # their original path; export separately refuses their private paths.
+    source_matches = (report.source_path == f"sha256:{layout.sha256}"
+                      if report.source_path.startswith("sha256:")
+                      else Path(report.source_path).resolve() == source)
+    if recorded_result != data or not source_matches:
         raise LocalLibraryError("The verification result belongs to a different preparation.")
     _checked_entry(layout, presets)
     return {

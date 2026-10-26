@@ -1,3 +1,9 @@
+**October 26 cloud report privacy fix:** new verification reports use exact-media
+identifiers before hashing; export and native packaging refuse host paths.
+Historical reports remain unchanged and native prebuild is blocked until owner
+regeneration and exact catalog approval. [Source change and regeneration boundary](REPORT_PRIVACY.md).
+Original checklist remains **12 complete, 7 partial, 1 blocked**; no native claim.
+
 **October 26 transition-evidence reconciliation:** original item 3 is complete
 using retained native startup/ordinary transitions, the verified pale-opening
 repair and item 2's existing error/retry recordings at both sizes. No new device

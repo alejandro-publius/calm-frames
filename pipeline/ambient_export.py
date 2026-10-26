@@ -13,6 +13,7 @@ from .hashing import fingerprint, sha256_file
 from .packaged_library import (
     _bounded_file,
     _check_bundle,
+    _check_report,
     _copy_checked,
     _json_text,
     _root,
@@ -92,6 +93,7 @@ def export_ambient_catalog(*, source: Path, ambient: Path, source_manifest: Path
         title['renditions'][p].update(sha256=candidate_hashes[p], durationMs=title['durationMs'], startOffsetMs=0)
         manifest['files'][title['renditions'][p]['path']] = candidate_hashes[p]
     check_ambient_report(report, [title])
+    _check_report(report_raw.encode(), report_sha, [title], distributable=True)
     manifest.pop('bundleId')
     manifest['bundleId'] = fingerprint(manifest)
     output.mkdir(parents=True)
