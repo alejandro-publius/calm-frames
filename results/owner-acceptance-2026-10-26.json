@@ -1,0 +1,85 @@
+{
+  "main": "ca1be2a19e18226112dd9e8f83ca7682755083b0",
+  "release_source": "b91a1f2c059b680b53b4e3fd1a9866147a9e5f01",
+  "package_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e",
+  "scope": "isolated fictional profile, Release 1280x720, VoiceView enabled",
+  "observed": [
+    "On to Off saved-state speech includes off and not selected; visible state Off",
+    "Off to On saved-state speech includes on and selected; visible state On",
+    "Full switch and focus ring remain visible after both saves",
+    "Focus retained after both saves; subsequent Down moves to Gentle artwork motion, not Back"
+  ],
+  "clip_sha256": "ac384ec8dc50c867c6d27c65a3cbbdd1a52087ffb644ae044ef43315ee6233f5",
+  "prior_evidence_reused": "VoiceView-off first/repeated toggles at 720p and 1080p; source-bound persistence and isolation evidence",
+  "not_claimed": [
+    "1080p VoiceView save recording",
+    "witnessed personal comfort observation",
+    "deliberately delayed or failed native storage write"
+  ],
+  "owner_comfort_accepted": true,
+  "whole_item_20_closed": true,
+  "main_household_untouched": true,
+  "no_protected_input_captured": true,
+  "owner_decision": {
+    "date": "2026-10-26",
+    "source": "Owner chat decision relayed by supervising parent task",
+    "scope": "Accept comfort reviews and remove the owner-comfort blocker",
+    "not_claimed": [
+      "Witnessed owner viewing or listening",
+      "Owner review of a named package",
+      "Clinical validation or seizure-prevention guarantee"
+    ],
+    "waived": "Separate witnessed, package-named personal comfort review"
+  },
+  "item_outcomes": {
+    "1": "Completed: existing cohesive native design and both-size focus evidence, plus owner acceptance decision",
+    "8": "Completed by owner acceptance and explicit waiver of separate witnessed/package-named review; not a performed audiovisual test",
+    "20": "Completed: retained persistence/isolation/wrapping and both-size viewport evidence, updated 720p Release VoiceView saved-state/focus pass, owner acceptance",
+    "11": "Partially completed: native pause speech remains failed; no completion inferred"
+  },
+  "counts": {
+    "complete": 10,
+    "partial": 9,
+    "blocked": 1
+  },
+  "complete_items": [
+    1,
+    4,
+    5,
+    6,
+    8,
+    9,
+    14,
+    15,
+    18,
+    20
+  ],
+  "blocked_items": [
+    17
+  ],
+  "speech_diagnostic": {
+    "package_sha256": "5373ec674fbbefd7a2ef51e5322a6d68a04be0405f15fa0905f3bb33e7bfa43d",
+    "base_main": "ca1be2a19e18226112dd9e8f83ca7682755083b0",
+    "patch": "Debug traces only, reverted; no product behavior change",
+    "clip_sha256": "7793b76469fb3a2a10558c0882226fea45473f38d406799c293cbdd83cbae8b7",
+    "observed": "Two actual pauses with intervening resumed playback; both helper requests returned true; neither pause instruction transcribed",
+    "limitation": "Successful invocation is not native delivery acknowledgement; progress speech competes, exact arbitration cause unproven",
+    "supported_contract": "https://developer.amazon.com/docs/react-native-vega/0.72/accessibilityinfo",
+    "new_focused_tests": 15,
+    "typecheck": "pass",
+    "focused_lint": "pass",
+    "build": "one Debug build passed normal pre/post gates",
+    "release_restored_sha256": "bb108d63346bd205a1ae0068a2d1ea7723f2fdcc1d2dce60bc8198658d5e251e"
+  },
+  "dependency_read_only_followup": {
+    "date": "2026-10-26",
+    "registry_security_manager_latest": "1.0.1767254405",
+    "registry_security_manager_codegen_pin": "0.66.0",
+    "registry_codegen_latest": "0.71.0",
+    "registry_codegen_latest_RN_pin": "0.64.1",
+    "official_drop_in_fix_found": false,
+    "new_consumer_finding": "Published security-manager dist JS/types use keplerscript-turbomodule-api; codegen-types reference found only in package.json outside source maps. This does not authorize removing a declared dependency or prove regeneration compatibility.",
+    "next_decision": "Vendor-corrected package metadata, or separately reviewed SDK package repack/fork with full published artifact and generation/native compatibility verification; not a ws leaf override or rejected 0.71 experiment",
+    "audit_status": "Four existing advisories and expired groups remain; no dependency/policy changes or exception renewal"
+  }
+}

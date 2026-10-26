@@ -1,3 +1,13 @@
+**October 26 owner acceptance and native speech follow-through:** original items
+1, 8 and 20 close; totals are **10 complete, 9 partial, 1 blocked**. The owner
+accepted comfort reviews in chat, waiving a separate witnessed/package-named
+review. Updated Release 720p Reading comfort save speech/focus passes, combined
+with retained both-size layout and persistence evidence. Pause speech still fails
+despite both helper requests returning true in a trace-only Debug observation;
+instrumentation reverted and verified Release restored. Audit remains unchanged.
+[Decision, exact evidence and limitations](../results/owner-acceptance-2026-10-26.json).
+Older dated counts below remain historical.
+
 **October 26 inherited CI repairs:** Parents ring insets, pause snapshot
 semantics and copied-control hydration are corrected with focused regressions.
 Canonical Release shows complete reading rings at both sizes; capture limits
