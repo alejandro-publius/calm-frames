@@ -1,0 +1,146 @@
+[
+  {
+    "id": "manga_01",
+    "kind": "illustration",
+    "start": 0,
+    "duration": 12,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "native_home",
+    "kind": "native_video",
+    "start": 12,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "native_details",
+    "kind": "native_video",
+    "start": 22,
+    "duration": 12,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "manga_02",
+    "kind": "illustration",
+    "start": 34,
+    "duration": 11,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "native_ambient",
+    "kind": "native_video",
+    "start": 45,
+    "duration": 70,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "manga_03",
+    "kind": "illustration",
+    "start": 115,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "native_return",
+    "kind": "native_video",
+    "start": 125,
+    "duration": 20,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "manga_04",
+    "kind": "illustration",
+    "start": 145,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "native_proof",
+    "kind": "native_video",
+    "start": 155,
+    "duration": 9,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "manga_05",
+    "kind": "illustration",
+    "start": 164,
+    "duration": 6,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n01",
+    "kind": "narration",
+    "start": 0,
+    "duration": 12,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n02",
+    "kind": "narration",
+    "start": 12,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n03",
+    "kind": "narration",
+    "start": 22,
+    "duration": 12,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n04",
+    "kind": "narration",
+    "start": 34,
+    "duration": 11,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n05",
+    "kind": "narration",
+    "start": 115,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n06",
+    "kind": "narration",
+    "start": 125,
+    "duration": 20,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n07",
+    "kind": "narration",
+    "start": 145,
+    "duration": 10,
+    "path": null,
+    "status": "missing"
+  },
+  {
+    "id": "n08",
+    "kind": "narration",
+    "start": 155,
+    "duration": 9,
+    "path": null,
+    "status": "missing"
+  }
+]

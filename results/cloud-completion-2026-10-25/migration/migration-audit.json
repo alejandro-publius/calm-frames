@@ -1,0 +1,318 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@react-native-community/cli": {
+      "name": "@react-native-community/cli",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@react-native-community/cli-hermes",
+        "@react-native-community/cli-server-api",
+        "metro",
+        "metro-config"
+      ],
+      "effects": [
+        "react-native"
+      ],
+      "range": "<=9.3.5 || 11.0.2 - 11.4.0 || 12.0.0-alpha.0 - 12.3.5 || 13.0.0 - 13.5.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli"
+      ],
+      "fixAvailable": true
+    },
+    "@react-native-community/cli-hermes": {
+      "name": "@react-native-community/cli-hermes",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "ip"
+      ],
+      "effects": [
+        "@react-native-community/cli"
+      ],
+      "range": "<=10.2.0 || 11.0.0-alpha.0 - 11.4.0 || 12.0.0-alpha.0 - 12.3.5 || 13.0.0 - 13.5.2",
+      "nodes": [
+        "node_modules/@react-native-community/cli-hermes"
+      ],
+      "fixAvailable": true
+    },
+    "@react-native-community/cli-server-api": {
+      "name": "@react-native-community/cli-server-api",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "ws"
+      ],
+      "effects": [
+        "@react-native-community/cli"
+      ],
+      "range": "<=6.4.3 || 7.0.1",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api"
+      ],
+      "fixAvailable": true
+    },
+    "hermes-engine": {
+      "name": "hermes-engine",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1088707,
+          "name": "hermes-engine",
+          "dependency": "hermes-engine",
+          "title": "Access of Resource Using Incompatible Type in Hermes",
+          "url": "https://github.com/advisories/GHSA-7mhc-prgv-r3q4",
+          "severity": "critical",
+          "cwe": [
+            "CWE-843"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<=0.9.0"
+        },
+        {
+          "source": 1088944,
+          "name": "hermes-engine",
+          "dependency": "hermes-engine",
+          "title": "Use After Free in Hermes",
+          "url": "https://github.com/advisories/GHSA-mph8-6787-r8hw",
+          "severity": "critical",
+          "cwe": [
+            "CWE-416"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<=0.7.2"
+        }
+      ],
+      "effects": [
+        "react-native"
+      ],
+      "range": "<=0.9.0",
+      "nodes": [
+        "node_modules/hermes-engine"
+      ],
+      "fixAvailable": true
+    },
+    "image-size": {
+      "name": "image-size",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1239766,
+          "name": "image-size",
+          "dependency": "image-size",
+          "title": "image-size: ICNS parser allows denial of service through an infinite loop",
+          "url": "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=0.6.3 <=2.0.2"
+        }
+      ],
+      "effects": [],
+      "range": "0.6.3 - 2.0.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/image-size"
+      ],
+      "fixAvailable": true
+    },
+    "ip": {
+      "name": "ip",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1101851,
+          "name": "ip",
+          "dependency": "ip",
+          "title": "ip SSRF improper categorization in isPublic",
+          "url": "https://github.com/advisories/GHSA-2p57-rm9w-gvfp",
+          "severity": "high",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<=2.0.1"
+        }
+      ],
+      "effects": [
+        "@react-native-community/cli-hermes"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/ip"
+      ],
+      "fixAvailable": true
+    },
+    "metro": {
+      "name": "metro",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro-config",
+        "metro-inspector-proxy",
+        "metro-transform-worker",
+        "ws"
+      ],
+      "effects": [
+        "@react-native-community/cli",
+        "metro-config",
+        "metro-transform-worker"
+      ],
+      "range": "0.24.5 - 0.66.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/metro"
+      ],
+      "fixAvailable": true
+    },
+    "metro-config": {
+      "name": "metro-config",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro"
+      ],
+      "effects": [
+        "metro"
+      ],
+      "range": "<=0.66.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/metro-config"
+      ],
+      "fixAvailable": true
+    },
+    "metro-inspector-proxy": {
+      "name": "metro-inspector-proxy",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "ws"
+      ],
+      "effects": [
+        "metro"
+      ],
+      "range": "0.53.0 - 0.66.2",
+      "nodes": [
+        "node_modules/metro-inspector-proxy"
+      ],
+      "fixAvailable": true
+    },
+    "metro-transform-worker": {
+      "name": "metro-transform-worker",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro"
+      ],
+      "effects": [
+        "metro"
+      ],
+      "range": "0.60.0 - 0.66.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/metro-transform-worker"
+      ],
+      "fixAvailable": true
+    },
+    "react-native": {
+      "name": "react-native",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "@react-native-community/cli",
+        "hermes-engine"
+      ],
+      "effects": [
+        "react-native-tscodegen-types"
+      ],
+      "range": "<=0.0.0-ffdfbbec0 || 0.59.0-rc.0 - 0.67.5",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/react-native"
+      ],
+      "fixAvailable": true
+    },
+    "react-native-tscodegen-types": {
+      "name": "react-native-tscodegen-types",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "react-native"
+      ],
+      "effects": [],
+      "range": ">=0.67.1",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types"
+      ],
+      "fixAvailable": true
+    },
+    "ws": {
+      "name": "ws",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1123262,
+          "name": "ws",
+          "dependency": "ws",
+          "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+          "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770",
+            "CWE-1050"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=1.1.0 <5.2.5"
+        }
+      ],
+      "effects": [
+        "@react-native-community/cli-server-api",
+        "metro",
+        "metro-inspector-proxy"
+      ],
+      "range": "1.1.0 - 5.2.4",
+      "nodes": [
+        "node_modules/metro-inspector-proxy/node_modules/ws",
+        "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api/node_modules/ws",
+        "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/ws"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 10,
+      "critical": 3,
+      "total": 13
+    },
+    "dependencies": {
+      "prod": 881,
+      "dev": 487,
+      "optional": 2,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 1368
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "calm-frames-caregiver-review-v1",
+  "title": "Fictional caregiver example",
+  "source": {
+    "sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a",
+    "bytes": 2992
+  },
+  "analysis": {
+    "analysis_complete": true,
+    "analysis_run": "e1170584b0bd453a94920ea071378365",
+    "analysis_width": 160,
+    "duration_ms": 1000,
+    "flagged_intervals": {
+      "broadcast": [],
+      "wcag": []
+    },
+    "frame_count": 12,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "extra-cautious": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "wcag": {
+        "covered_ms": 0,
+        "intervals": []
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "9874c4724d47e8e16d0926a1b6edd5d4196321ddf6c202229c65a14baded88dc",
+      "wcag": "ba7cc000cd0ec95166dcf4e7f68e2b8d75d5cc43221f969354e19fa7eed59346"
+    },
+    "source_sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a"
+  },
+  "processing_permission_confirmed": true,
+  "permission_verified_by_application": false,
+  "tv_playback_authorized": false,
+  "limitations": [
+    "Analysis does not establish medical safety, seizure prevention or comfort.",
+    "Use only non-DRM videos you own or have permission to process. Rights are not verified by this application.",
+    "This review does not authorize original playback or add a title to the TV library.",
+    "TV delivery requires a separately authorized signer, exact edition approval and a checked app build."
+  ]
+}

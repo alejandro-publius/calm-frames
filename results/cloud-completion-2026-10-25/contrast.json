@@ -1,0 +1,31 @@
+{
+  "method": "WCAG sRGB relative luminance for actual solid text/background colors",
+  "text_threshold": 4.5,
+  "observations": [
+    {
+      "surface": "editorial text",
+      "foreground": "#fff8e8",
+      "background": "#143c3f",
+      "contrast": 11.353
+    },
+    {
+      "surface": "browser error",
+      "foreground": "#f2bdb1",
+      "background": "#0c131a",
+      "contrast": 11.292
+    },
+    {
+      "surface": "browser guidance",
+      "foreground": "#c4cdd2",
+      "background": "#0c131a",
+      "contrast": 11.578
+    },
+    {
+      "surface": "browser notice",
+      "foreground": "#f0f2ef",
+      "background": "#0c131a",
+      "contrast": 16.599
+    }
+  ],
+  "native_acceptance": false
+}

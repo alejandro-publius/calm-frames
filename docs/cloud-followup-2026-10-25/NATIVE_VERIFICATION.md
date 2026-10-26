@@ -3,13 +3,16 @@
 This is the single home verification queue for the preserved native fixes plus
 the new dependency lock. It is not another full acceptance pass on fbe53bf. Keep completed #5/#6 and the accepted disclaimer. Use the final
 full source SHA in the transfer's `SYNC_MANIFEST.json`; product changes end at
-`5bd9f6c4cdc6b8ea4b9427270810cd5de2c78b53`. No new native package exists in this
+`fc83982220bf1b87774b75377e3b779043550cea`. No new native package exists in this
 cloud. The received fbe53bf package hashes cannot identify the new build.
-The 67e10f0 transfer is preserved but superseded for new work. This continuation
-changes the local caregiver workflow and capture tooling only. Native app source,
+The dce5d40 and older transfers are preserved but superseded for new work. This
+continuation repairs caregiver failure/delivery handling and produces editorial
+assets. The source transfer manifest selects the latest canonical SHA. Native app source,
 D1/D2/D3, dependency locks and generated inputs remain byte-identical to 67e10f0.
 Reuse the verified 365be08 input archive included with the latest transfer; no
-player regeneration was needed. Keep one native batch, bound to the final SHA.
+player regeneration was needed. Keep one native batch, bound to the final SHA. Do not build or import rejected
+experiment `c1f57f4831d11f476b7e06d05cf7e239d2601374`; its dependencies failed
+the first Audit gate. Do not rerun the completed device idle-timeout test.
 
 ## Separate worktree
 
@@ -113,6 +116,15 @@ and launch/Watch/Back check; Debug success does not supply them.
    updated manifest builder and locked toolchain build both Debug and Release.
    Queue unavailable retry/caption/reduced-motion observations truthfully. The
    owner separately reviews picture, sound, palette, pacing and reading comfort.
+6. **#2/#3/#10/#13:** inspect only normally reachable error/recovery views in the
+   fictional household at both sizes. Record the displayed recovery action and
+   essential protection/caption guidance; mark unreached paths unobserved. Direct
+   TV file selection is not implemented and authorized personal-edition delivery
+   remains absent, so do not mark either passed or invent a native picker test.
+   Cloud import/report/delivery-fixture checks are recorded separately. If a later
+   authorized exact edition is supplied, bind its approval/build/installed hashes
+   and test its library entry, presets, captions if present and Back without
+   changing household data. No unsigned import or old harness can fill that gap.
 
 Passing D1 can close its focus subcriteria; D2 can close #20's machine/native
 focus/layout subcriteria; D3 can close the pause-speech defect. None alone

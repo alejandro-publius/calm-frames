@@ -1,0 +1,752 @@
+FFFFFFFFFFF                                                              [100%]
+=================================== FAILURES ===================================
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-package] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05577bb90>
+damage = 'missing-package'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+__ test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-package] __
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05579fcb0>
+damage = 'list-package'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-bundle] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05579f3e0>
+damage = 'missing-bundle'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[outside-package] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05579fc50>
+damage = 'outside-package'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-delivery] __
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05579fcb0>
+damage = 'list-delivery'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[unknown-delivery] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa05579f3b0>
+damage = 'unknown-delivery'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[invalid-ticket] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa0557ac5c0>
+damage = 'invalid-ticket'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+___ test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-plan] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa0557ad880>
+damage = 'list-plan'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-files] __
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa0557aec00>
+damage = 'missing-files'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[different-plan-ticket] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa0557adcd0>
+damage = 'different-plan-ticket'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+_ test_damaged_delivery_snapshot_keeps_other_imports_reachable[canceled-plan] __
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-60/test_damaged_delivery_snapshot10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa0557afce0>
+damage = 'canceled-plan'
+
+    @pytest.mark.parametrize("damage", [
+        "missing-package", "list-package", "missing-bundle", "outside-package",
+        "list-delivery", "unknown-delivery", "invalid-ticket", "list-plan",
+        "missing-files", "different-plan-ticket", "canceled-plan",
+    ])
+    def test_damaged_delivery_snapshot_keeps_other_imports_reachable(tmp_path, monkeypatch, damage):
+        monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
+        store = intake.IntakeStore(tmp_path / "imports")
+        path, job = ready(store)
+        good_path, good = ready(store)
+        package = {
+            "bundle_id": "a" * 64, "catalog_sha256": "b" * 64,
+            "public_key_fingerprint": "sha256:" + "c" * 64,
+            "relative_directory": "runs/fixture/package",
+        }
+        delivery = {
+            "state": "approved_for_build", "ticket_id": "d" * 32,
+            "can_watch": False, "message": "Fixture snapshot only", "blockers": [],
+        }
+        plan = {
+            "state": "ready_to_apply", "ticket_id": delivery["ticket_id"],
+            "can_watch": False, "blockers": [], "files_to_add": [], "files_already_present": [],
+            "app_directory": "/fictional/app", "staging_root": "/fictional/staging",
+        }
+        saved = {**job, "status": "package_review", "package": package,
+                 "delivery": delivery, "delivery_plan": plan}
+        if damage == "missing-package":
+            saved.pop("package")
+        elif damage == "list-package":
+            saved["package"] = ["damaged"]
+        elif damage == "missing-bundle":
+            package.pop("bundle_id")
+        elif damage == "outside-package":
+            package["relative_directory"] = "../../outside"
+        elif damage == "list-delivery":
+            saved["delivery"] = ["damaged"]
+        elif damage == "unknown-delivery":
+            delivery["state"] = "installed"
+        elif damage == "invalid-ticket":
+            delivery["ticket_id"] = ["damaged"]
+        elif damage == "list-plan":
+            saved["delivery_plan"] = ["damaged"]
+        elif damage == "missing-files":
+            plan.pop("files_to_add")
+        elif damage == "different-plan-ticket":
+            plan["ticket_id"] = "e" * 32
+        else:
+            delivery["state"] = "canceled"
+        intake._write_json(path / "job.json", saved, path)
+        original = (path / "original.mp4").read_bytes()
+        bad_before = (path / "job.json").read_bytes()
+        good_before = (good_path / "job.json").read_bytes()
+        try:
+            jobs = {j["id"]: j for j in store.poll()}
+>           assert jobs[job["id"]]["status"] == "unreadable"
+E           AssertionError: assert 'package_review' == 'unreadable'
+E
+E             - unreadable
+E             + package_review
+
+pipeline/tests/test_intake_corrupt_record.py:236: AssertionError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-package]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-package]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-bundle]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[outside-package]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-delivery]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[unknown-delivery]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[invalid-ticket]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[list-plan]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[missing-files]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[different-plan-ticket]
+FAILED pipeline/tests/test_intake_corrupt_record.py::test_damaged_delivery_snapshot_keeps_other_imports_reachable[canceled-plan]
+11 failed, 15 deselected in 0.37s

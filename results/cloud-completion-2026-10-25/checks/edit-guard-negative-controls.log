@@ -1,0 +1,71 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_unreconciled_changes_refused_before_writing[script] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-66/test_unreconciled_changes_refu0')
+change = 'script'
+
+    @pytest.mark.parametrize('change', ['script', 'order', 'existing-media'])
+    def test_unreconciled_changes_refused_before_writing(tmp_path, change):
+        plan = json.loads((edit.DEMO / 'timeline.json').read_text())
+        if change == 'script':
+            plan['narration_cues'][0]['text'] = 'Unapproved replacement'
+        elif change == 'order':
+            plan['segments'].reverse()
+        else:
+            plan['assets']['manga_01']['path'] = str(Path('/existing/owned-art.png'))
+        source = tmp_path / 'unreviewed.json'
+        source.write_text(json.dumps(plan))
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+eval/tests/test_prepare_demo_edit.py:46: Failed
+___________ test_unreconciled_changes_refused_before_writing[order] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-66/test_unreconciled_changes_refu1')
+change = 'order'
+
+    @pytest.mark.parametrize('change', ['script', 'order', 'existing-media'])
+    def test_unreconciled_changes_refused_before_writing(tmp_path, change):
+        plan = json.loads((edit.DEMO / 'timeline.json').read_text())
+        if change == 'script':
+            plan['narration_cues'][0]['text'] = 'Unapproved replacement'
+        elif change == 'order':
+            plan['segments'].reverse()
+        else:
+            plan['assets']['manga_01']['path'] = str(Path('/existing/owned-art.png'))
+        source = tmp_path / 'unreviewed.json'
+        source.write_text(json.dumps(plan))
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+eval/tests/test_prepare_demo_edit.py:46: Failed
+_______ test_unreconciled_changes_refused_before_writing[existing-media] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-66/test_unreconciled_changes_refu2')
+change = 'existing-media'
+
+    @pytest.mark.parametrize('change', ['script', 'order', 'existing-media'])
+    def test_unreconciled_changes_refused_before_writing(tmp_path, change):
+        plan = json.loads((edit.DEMO / 'timeline.json').read_text())
+        if change == 'script':
+            plan['narration_cues'][0]['text'] = 'Unapproved replacement'
+        elif change == 'order':
+            plan['segments'].reverse()
+        else:
+            plan['assets']['manga_01']['path'] = str(Path('/existing/owned-art.png'))
+        source = tmp_path / 'unreviewed.json'
+        source.write_text(json.dumps(plan))
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+eval/tests/test_prepare_demo_edit.py:46: Failed
+=========================== short test summary info ============================
+FAILED eval/tests/test_prepare_demo_edit.py::test_unreconciled_changes_refused_before_writing[script]
+FAILED eval/tests/test_prepare_demo_edit.py::test_unreconciled_changes_refused_before_writing[order]
+FAILED eval/tests/test_prepare_demo_edit.py::test_unreconciled_changes_refused_before_writing[existing-media]
+3 failed, 3 deselected in 0.18s
+Three guarded-input tests reject the disabled validation; source files were not mutated.

@@ -1,0 +1,52 @@
+......................................F.....................             [100%]
+=================================== FAILURES ===================================
+_ test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket __
+
+store = <pipeline.local_intake.IntakeStore object at 0x7fd5dedc3ad0>
+signed_package = PosixPath('/tmp/pytest-of-agent/pytest-61/test_intake_stage_recheck_fail0/package')
+
+    def test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket(store, signed_package):
+        from pipeline import local_intake as intake
+        from pipeline.hashing import fingerprint
+
+        from .test_local_intake import ready
+
+        path, job = ready(store)
+        review = {**job["review"], "source_sha256": ACADIA}
+        package = path / "runs" / "fixture" / "package"
+        shutil.copytree(signed_package, package)
+        intake.update(path, status="package_review", source_sha256=ACADIA,
+                      review=review, review_digest=fingerprint(review),
+                      package={"relative_directory": "runs/fixture/package"})
+>       staged = store.action(job["id"], "stage-delivery")["delivery"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_package_delivery.py:133:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <pipeline.local_intake.IntakeStore object at 0x7fd5dedc3ad0>
+job_id = '2c3a5bec1af24fbb9df5e0d8301a682a', action = 'stage-delivery'
+
+    def action(self, job_id: str, action: str) -> dict:
+        with self.mutex:
+            self.poll()
+            path = job_dir(self.root, job_id)
+            job = self.display_job(path)
+            if job.get("record_unreadable"):
+                if action == "cancel":
+                    self.stop_child(job_id)
+                    return self.display_job(path)
+                if action == "delete" and job_id not in self.children:
+                    import shutil
+
+                    shutil.rmtree(path)
+                    return {"deleted": job_id}
+>               raise IntakeError(
+                    "This record cannot authorize analysis, review or delivery. Cancel any active work before removing its local copy."
+                )
+E               pipeline.local_intake.IntakeError: This record cannot authorize analysis, review or delivery. Cancel any active work before removing its local copy.
+
+pipeline/local_intake.py:668: IntakeError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_package_delivery.py::test_intake_stage_recheck_failure_clears_snapshot_and_cancel_revokes_ticket
+1 failed, 59 passed in 40.69s

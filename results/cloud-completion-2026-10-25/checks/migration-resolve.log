@@ -1,0 +1,3 @@
+npm error code EOVERRIDE
+npm error Override for @amazon-devices/security-manager-lib@~1.0.1767254405 conflicts with direct dependency
+npm error A complete log of this run can be found in: /home/agent/.npm/_logs/2026-10-26T00_14_18_395Z-debug-0.log

@@ -1,0 +1,297 @@
+{
+  "base": "64810c4a909e238af97b4361fa4eab124aa38511",
+  "branch": "codex/codegen-compatibility-experiment-2026-10-25",
+  "owner_authorized_isolated_experiment": true,
+  "status": "rejected_before_install",
+  "reason": "Four new advisories, including two critical Hermes findings; retained old ws finding. Further remediation would exceed the bounded migration.",
+  "node": "22.23.2",
+  "npm": "10.9.8",
+  "package_sha256": "b3d19f96397271e183ead97cdc4561bfb296db948726772f99d5d60bd9f953d6",
+  "lock_sha256": "9e166d730ba0bfafb1c0b69ec84a05fb5b95d850e98c9ec8ae563693f7e19e98",
+  "package_version_changes": 324,
+  "audit_distinct_findings": 5,
+  "install_run": false,
+  "runtime_or_native_checks": false,
+  "canonical_dependencies_modified": false,
+  "affected_consumers": [
+    {
+      "name": "hermes-engine",
+      "advisories": [
+        "https://github.com/advisories/GHSA-7mhc-prgv-r3q4",
+        "https://github.com/advisories/GHSA-mph8-6787-r8hw"
+      ],
+      "nodes": [
+        {
+          "path": "node_modules/hermes-engine",
+          "version": "0.7.2",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "hermes-engine",
+              "requested": "~0.7.0",
+              "path": "node_modules/hermes-engine",
+              "version": "0.7.2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "image-size",
+      "advisories": [
+        "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr"
+      ],
+      "nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/image-size",
+          "version": "0.6.3",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "@react-native-community/cli",
+              "requested": "^5.0.1-alpha.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "5.0.1"
+            },
+            {
+              "package": "metro",
+              "requested": "^0.64.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+              "version": "0.64.0"
+            },
+            {
+              "package": "image-size",
+              "requested": "^0.6.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/image-size",
+              "version": "0.6.3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ip",
+      "advisories": [
+        "https://github.com/advisories/GHSA-2p57-rm9w-gvfp"
+      ],
+      "nodes": [
+        {
+          "path": "node_modules/ip",
+          "version": "1.1.9",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "@react-native-community/cli",
+              "requested": "^5.0.1-alpha.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "5.0.1"
+            },
+            {
+              "package": "@react-native-community/cli-hermes",
+              "requested": "^5.0.1",
+              "path": "node_modules/@react-native-community/cli-hermes",
+              "version": "5.0.1"
+            },
+            {
+              "package": "ip",
+              "requested": "^1.1.5",
+              "path": "node_modules/ip",
+              "version": "1.1.9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ws",
+      "advisories": [
+        "https://github.com/advisories/GHSA-96hv-2xvq-fx4p"
+      ],
+      "nodes": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "@react-native-community/cli",
+              "requested": "^5.0.1-alpha.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "5.0.1"
+            },
+            {
+              "package": "metro",
+              "requested": "^0.64.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+              "version": "0.64.0"
+            },
+            {
+              "package": "metro-inspector-proxy",
+              "requested": "0.64.0",
+              "path": "node_modules/metro-inspector-proxy",
+              "version": "0.64.0"
+            },
+            {
+              "package": "ws",
+              "requested": "^1.1.5",
+              "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+              "version": "1.1.5"
+            }
+          ]
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api/node_modules/ws",
+          "version": "1.1.5",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "@react-native-community/cli",
+              "requested": "^5.0.1-alpha.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "5.0.1"
+            },
+            {
+              "package": "@react-native-community/cli-server-api",
+              "requested": "^5.0.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api",
+              "version": "5.0.1"
+            },
+            {
+              "package": "ws",
+              "requested": "^1.1.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api/node_modules/ws",
+              "version": "1.1.5"
+            }
+          ]
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/ws",
+          "version": "1.1.5",
+          "chain": [
+            {
+              "package": "@amazon-devices/security-manager-lib",
+              "requested": "~1.0.1767254405",
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "package": "react-native-tscodegen-types",
+              "requested": "0.66.0",
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.71.0"
+            },
+            {
+              "package": "react-native",
+              "requested": "0.64.1",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.64.1"
+            },
+            {
+              "package": "@react-native-community/cli",
+              "requested": "^5.0.1-alpha.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "5.0.1"
+            },
+            {
+              "package": "metro",
+              "requested": "^0.64.0",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+              "version": "0.64.0"
+            },
+            {
+              "package": "ws",
+              "requested": "^1.1.5",
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/ws",
+              "version": "1.1.5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

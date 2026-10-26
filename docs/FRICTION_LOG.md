@@ -1250,3 +1250,31 @@ its worker exited, so an immediate approval was refused. Severity: moderate
 transient workflow disruption. The corrected finishing state retains ownership
 until actual exit. The [tests and browser evidence](cloud-followup-2026-10-25/IMPORT_RECOVERY.md)
 cover both issues; no host fault or native acceptance is inferred.
+
+## October 25: security-manager codegen upgrade has no bounded clean path
+
+- Task: resolve the four residual advisories without weakening Audit.
+- Steps: read official package/sample metadata; inspect codegen 0.71.0; after
+  owner approval, resolve it at the security-manager boundary in an isolated tree.
+- Expected versus actual: a compatible corrected graph was sought; the graph
+  instead introduces two critical Hermes advisories and other findings. The
+  current vendor release and RN83 alpha still pin codegen 0.66.0.
+- Severity: high for dependency acceptance; this does not establish exploit
+  exposure in shipped bytes or a defect in the device runtime.
+- Workaround: preserve the canonical graph and failing Audit, reject the isolated
+  experiment before install. Exact evidence is in results/cloud-completion-2026-10-25.
+- Suggestion: publish an SDK-supported codegen dependency update with runtime/type
+  compatibility guidance and a tested debugger/inspector matrix.
+
+## October 25: source and rules retrieval blocked by the cloud network
+
+- Task: verify qualifying licensed long footage and current official rules.
+- Steps: request the official Devpost pages and alternative Pexels, Mixkit,
+  Internet Archive and aquarium source pages through the configured proxy.
+- Expected versus actual: readable source pages; all returned CONNECT 403.
+- Severity: blocking for acquisition and current-rule verification.
+- Workaround: preserve prior provenance, identify missing inputs and continue
+  independent import/editorial work. Do not bypass access restrictions.
+- Suggestion: provide a supported reviewed source-access route or exact source
+  files with their rights records. This is a cloud access-policy limitation, not
+  evidence of an Amazon SDK, Mac or browser defect. No organizer message was sent.

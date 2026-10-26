@@ -1,4 +1,6 @@
-# Five findings traced; one more compatible fix
+# Four canonical findings remain
+
+Current continuation: [official SDK investigation and the approved experiment](SDK_MIGRATION_PROPOSAL.md) found no supported drop-in fix. The isolated 0.71.0 codegen experiment was rejected before installation because it introduced new critical findings. Canonical dependencies remain unchanged; the fresh [Audit report](../../results/cloud-completion-2026-10-25/audit.json) still fails. The completed notifier remediation and exact consumers below retain their original scope.
 
 Baseline: `cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0`. The worktree was clean
 and matched that exact checkpoint. Product/toolchain commit

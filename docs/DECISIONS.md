@@ -2893,3 +2893,21 @@ groups or treat approval as Mac availability. Product acceptance also needs the 
 Mac checks and explicit human observations. Manga and narration remain parked;
 prior script, built-in voice-selection and unlimited-budget approvals remain
 recorded and will not be requested again. The submitted fallback is preserved.
+
+## October 25: caregiver errors and bounded migration result
+
+Decision: isolate incomplete saved delivery snapshots and announce failed analysis
+and absent signers without moving focus. Damaged reports now name the available
+remove/reselect action. Why: eleven saved-record cases and four actual-browser
+guidance checks failed before the corrections. Cost: focused and integrated
+cloud checks only; original files, app/native behavior and authorization remain.
+
+Decision: execute the owner-approved codegen experiment in a separate worktree,
+then reject it at the first gate. Why: the new graph introduced critical Hermes
+findings and retained the old WebSocket issue. Cost: registry/lockfile analysis;
+no install or native session wasted on the rejected graph. No exceptions renewed.
+
+Decision: produce title/credit overlays and an unfilled edit assembly from the
+approved story. Why: these assets can advance before native takes and speech
+exist while production preflight continues to refuse missing inputs. Cost: local
+rendering with existing licensed fonts only. No paid generation or private upload.

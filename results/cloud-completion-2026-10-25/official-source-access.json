@@ -1,0 +1,61 @@
+{
+  "checked_utc": "2026-10-25T23:59:19.149108+00:00",
+  "requests": [
+    {
+      "name": "sample-tags",
+      "url": "https://api.github.com/repos/AmazonAppDev/vega-video-sample/tags?per_page=30",
+      "status": 200,
+      "bytes": 2724,
+      "sha256": "28f42777bace6318120c6065bb98ee17627e7766615d5fe97504178879185381",
+      "saved": "sample-tags.response"
+    },
+    {
+      "name": "sample-main-readme",
+      "url": "https://raw.githubusercontent.com/AmazonAppDev/vega-video-sample/main/README.md",
+      "status": 200,
+      "bytes": 44662,
+      "sha256": "32585a00e2bf4c93032e2e34ae4312f159b78769c3c453bb3daee206202c5f92",
+      "saved": "sample-main-readme.response"
+    },
+    {
+      "name": "sample-rn83-package",
+      "url": "https://raw.githubusercontent.com/AmazonAppDev/vega-video-sample/v0.24-RN83/package.json",
+      "status": 200,
+      "bytes": 6093,
+      "sha256": "872ff555af90c07e4c7edd19ba7a5a532b9a678a5176a556752b0792eb243f4a",
+      "saved": "sample-rn83-package.response"
+    },
+    {
+      "name": "sample-main-package",
+      "url": "https://raw.githubusercontent.com/AmazonAppDev/vega-video-sample/main/package.json",
+      "status": 200,
+      "bytes": 6093,
+      "sha256": "872ff555af90c07e4c7edd19ba7a5a532b9a678a5176a556752b0792eb243f4a",
+      "saved": "sample-main-package.response"
+    },
+    {
+      "name": "codegen-guidance",
+      "url": "https://raw.githubusercontent.com/microsoft/react-native-tscodegen/master/README.md",
+      "status": 200,
+      "bytes": 4901,
+      "sha256": "5d1b9411674ea643e517427df7f2eb285a279a661267357428197a003a3b6266",
+      "saved": "codegen-guidance.response"
+    },
+    {
+      "name": "organizer-hackathon-repos",
+      "url": "https://api.github.com/search/repositories?q=hackathon+org%3AAmazonAppDev&per_page=15",
+      "status": 200,
+      "bytes": 55,
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "saved": "organizer-hackathon-repos.response"
+    },
+    {
+      "name": "organizer-search",
+      "url": "https://api.github.com/search/repositories?q=amazonappdev2026&per_page=15",
+      "status": 200,
+      "bytes": 55,
+      "sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+      "saved": "organizer-search.response"
+    }
+  ]
+}

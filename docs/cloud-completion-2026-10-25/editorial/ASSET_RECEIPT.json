@@ -1,0 +1,35 @@
+{
+  "candidate_source": "fc83982220bf1b87774b75377e3b779043550cea",
+  "accepted_source": null,
+  "story_sha256": "5f08a7a99017bb984a9301f085f6a74d115ed3c52d6203499ba834dfe7884724",
+  "narration_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "timeline_sha256": "315a18cbaa20aa4b16e9bc1c13ed4d6a5db75d359a6c5fc3ac0fd94ae42ca49e",
+  "tool_sha256": "3e8ef461c9d75851bc8f3dfe23307c23edf62542936b0c312e10ada3043f47c7",
+  "editorial_overlays_produced": [
+    "opening-title.svg",
+    "closing-credits.svg"
+  ],
+  "produced_native_footage": false,
+  "produced_story_art": false,
+  "produced_narration": false,
+  "source_files": {
+    "LICENSE-Fraunces": "6732d6cc72c5d09292ff754dc1f39d9ea14918f74e87a17afa3f00a5120c3d48",
+    "LICENSE-Inter": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+    "README.txt": "6b8eec71ac8f20fcdb69178cd071da4304e562e2178d08f89e72c69115ffb339",
+    "assembly.draft.json": "6da3ae5eed5f472111ca75db86825024d07b4e718a4b5900d1b827d7e01eb864",
+    "closing-credits.svg": "27eb8a99e6af06feeb78062b2328776628e391245eee4d1e83b56edd6f8a42cb",
+    "narration.draft.srt": "3b9ae638dfb7960757553f36fd7af8979a2eedbad5eca0e155f981124dcbb670",
+    "narration.draft.vtt": "67da50007e86c92c51b319bfa84d6a2229213477fef847e72aece9961c162327",
+    "opening-title.svg": "08600435d1459a1bf9985ea106cf6da666add71c282fac58a9c4a2f2802aae99",
+    "picture-slots.edl": "06115a048a19e45d77fcabeaa41e51455215ad6014de2f21fdb81bcbaf02c1f7",
+    "required-inputs.json": "9c471c6b0c7f2bf11e3bcea6d424650d4e2315ba41b10983799ef4f9c306a107"
+  },
+  "archived_license_formatting": [
+    {
+      "path": "docs/cloud-completion-2026-10-25/editorial/LICENSE-Fraunces",
+      "original_sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+      "stored_sha256": "6732d6cc72c5d09292ff754dc1f39d9ea14918f74e87a17afa3f00a5120c3d48",
+      "operation": "Trailing whitespace normalized; no result or license words changed."
+    }
+  ]
+}
