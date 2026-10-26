@@ -1,5 +1,7 @@
 # Status
 
+> **Public documentation update, October 26, 2026.** The September status below is retained as history. Current source navigation and acceptance limits are in the [README](../README.md); repository submission text is a [status note](SUBMISSION.md), not a submitted answer. The newer local repair branch still requires publication review. This docs-only change does not update application source, resolve acceptance gaps or publish a release.
+
 Updated Sat Sep 19, 2026, late.
 
 ## 0. Where things stand

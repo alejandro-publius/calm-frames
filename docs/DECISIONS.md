@@ -1412,3 +1412,13 @@ second way.
   100 mV. BT.1886 is what the recommendation in force asks for and Appendix I
   describes itself as a typical CRT relationship, so nothing was changed. The table
   and the arithmetic are in SPEC_SOURCES 8.4.
+
+## 2026-10-26: separate public description from source and acceptance
+
+Replace the mixed September/October landing page and placeholder submission draft
+with a bounded prototype description and pinned public source navigation. Retain
+engineering results and dated records, marking their historical scope. The newer
+local repairs are not public and Debug observations are not Release acceptance.
+This isolated documentation branch changes no product code or gates; review and
+merge into main is still needed to update the default landing page. Cost: no
+product rebuild, media preparation, native test or external submission change.

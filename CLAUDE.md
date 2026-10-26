@@ -1,5 +1,7 @@
 # Calm Frames: rules for every session
 
+> **Documentation scope update, October 26, 2026.** The phase, visibility and product thesis below are historical September instructions. The repository is now public. Use the [README](README.md) for the current prototype description, source provenance and acceptance limits. It supersedes the old "not a video player" thesis and any implication of clinical validation or guaranteed safe viewing. Preserve engineering evidence and existing safety gates.
+
 **Current phase:** Phase 9, the pattern rule's precision, Sat Sep 19, 2026. Phases 0 to 2
 are done apart from what needs the stick, and all five phase 8 features are in, tested,
 documented and reachable in the running app. Phase 9 so far: the regular-pattern rule

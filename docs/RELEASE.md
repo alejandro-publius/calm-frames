@@ -1,5 +1,7 @@
 # Releasing
 
+> **Historical September procedure.** This file is not a published release or an accepted build. For the exact public October source and its matching build instructions, start with the [README](../README.md#start-here). No public downloadable release for the latest local repairs is verified.
+
 Two things get released: the app, as three `.vpkg` files on a GitHub Release,
 and flashmap, as a package on PyPI. Neither has been released yet.
 
