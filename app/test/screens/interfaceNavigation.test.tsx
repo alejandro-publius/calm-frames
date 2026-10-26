@@ -18,7 +18,7 @@ const feedback = { confirm: jest.fn(), stop: jest.fn() };
 const soundHook = useInterfaceSound as jest.Mock;
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60000;
 
-function open(family = newFamily()) {
+async function open(family = newFamily()) {
   let disk = JSON.stringify({
     version: 1,
     family: { ...family, interfaceSoundsEnabled: true },
@@ -37,12 +37,16 @@ function open(family = newFamily()) {
       return () => { delete listeners[name]; };
     }),
   };
+  // The fixture includes asynchronous household hydration. Flush that initial
+  // render before starting query deadlines; cold copied-lane verification can
+  // otherwise consume the first wait while React still holds the loaded record.
   render(<KidModeScreen
     navigation={navigation as never}
     catalog={[offlineTitle('file:///pkg/assets/raw/offline/calm_gradient.mp4')]}
     householdStorage={storage}
     nowMs={() => NOW}
   />);
+  await act(async () => {});
   return { navigation, listeners, storage };
 }
 
@@ -63,7 +67,7 @@ beforeEach(() => {
 });
 
 it('silences menu audio before opening playback and restores the route on focus', async () => {
-  const { navigation, listeners } = open();
+  const { navigation, listeners } = await open();
   await screen.findByTestId('kid-mode-home');
   feedback.confirm.mockClear();
   fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
@@ -80,7 +84,7 @@ it('silences menu audio before opening playback and restores the route on focus'
 });
 
 it('confirms a saved menu preference only after persistence succeeds', async () => {
-  const { storage } = open();
+  const { storage } = await open();
   await unlock();
   let finish!: () => void;
   storage.setItem.mockImplementationOnce(() => new Promise<void>((resolve) => { finish = resolve; }));
@@ -156,7 +160,7 @@ it('confirms the press that turns selection sounds on, on the concurrent root th
 });
 
 it('keeps a failed settings write silent while presenting recovery', async () => {
-  const { storage } = open();
+  const { storage } = await open();
   await unlock();
   storage.setItem.mockRejectedValueOnce(new Error('storage unavailable'));
   fireEvent.press(screen.getByTestId('kid-mode-parent-interface-motion'));
@@ -166,7 +170,7 @@ it('keeps a failed settings write silent while presenting recovery', async () =>
 });
 
 it('waits for an added profile to save before confirming it', async () => {
-  const { storage } = open();
+  const { storage } = await open();
   await unlock();
   let finish!: () => void;
   storage.setItem.mockImplementationOnce(() => new Promise<void>((resolve) => { finish = resolve; }));
@@ -177,7 +181,7 @@ it('waits for an added profile to save before confirming it', async () => {
 });
 
 it('does not confirm an added profile when its save fails', async () => {
-  const { storage } = open();
+  const { storage } = await open();
   await unlock();
   storage.setItem.mockRejectedValueOnce(new Error('storage unavailable'));
   fireEvent.press(screen.getByTestId('kid-mode-parent-add-profile'));
@@ -186,7 +190,7 @@ it('does not confirm an added profile when its save fails', async () => {
 });
 
 it.each(['saved', 'failed'] as const)('confirms profile removal only when its write is saved: %s', async (outcome) => {
-  const { storage } = open(addProfile(newFamily(), 'Sam'));
+  const { storage } = await open(addProfile(newFamily(), 'Sam'));
   await unlock();
   fireEvent.press(screen.getByTestId('kid-mode-parent-profiles-profile-2'));
   fireEvent.press(screen.getByTestId('kid-mode-parent-remove-profile'));

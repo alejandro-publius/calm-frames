@@ -1,3 +1,9 @@
+**October 26 inherited CI repairs:** Parents ring insets, pause snapshot
+semantics and copied-control hydration are corrected with focused regressions.
+Canonical Release shows complete reading rings at both sizes; capture limits
+and pending hosted outcomes are in the [receipt](../results/inherited-ci-repairs-2026-10-26.json).
+Audit remains unresolved; original totals stay 7 complete, 11 partial, 2 blocked.
+
 **October 26 Release report navigation:** canonical Release reproduced hidden
 summary Back; the bounded correction passes first/repeated visible focus,
 reading, refusal and return navigation on the fictional 720p disposable. See the

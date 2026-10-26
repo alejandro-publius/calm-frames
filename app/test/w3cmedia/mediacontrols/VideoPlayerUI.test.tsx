@@ -160,6 +160,9 @@ describe('VideoPlayerUI Test Cases', () => {
   });
   it('renders correctly', () => {
     const tree = render(renderVideoPlayerUI());
+    // Pause speech is explicitly queued by the retained announcement path.
+    // The text node stays silent so it cannot announce the same pause twice.
+    expect(tree.getByTestId('player-pause-announcement').props.accessibilityLiveRegion).toBe('none');
     expect(tree).toMatchSnapshot();
   });
 

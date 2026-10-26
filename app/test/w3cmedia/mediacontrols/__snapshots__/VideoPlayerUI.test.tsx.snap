@@ -14,7 +14,7 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
 >
   <View
     accessibilityLabel=""
-    accessibilityLiveRegion="polite"
+    accessibilityLiveRegion="none"
     accessibilityRole="text"
     accessible={true}
     style={
