@@ -1306,3 +1306,20 @@ cover both issues; no host fault or native acceptance is inferred.
   for this path is deferred until that boundary is established.
 - Outcome: [bounded receipt](../results/personal-review-inbox-2026-10-26.json);
   no original item closure or submission-answer claim.
+
+## October 26: observed native metadata resolves the inbox mismatch
+
+- Task: diagnose the failed bounded native report read without another speculative build.
+- Steps: connect the separate installed Debug app to the documented Metro
+  inspector; read metadata only for an owned report, its symlink and directory.
+- Expected versus actual: JavaScript declarations advertise `mode`; the bridge
+  returns string `entryType` values, with no `mode`. Regular file is `"5"`, link
+  is `"4"`, and the directory throws the recorded `IsADirectoryError`.
+- Severity: prevented report selection; no existing playback change.
+- Workaround: use the observed native entryType contract and component-owned
+  scratch root; keep bounded size, filename, link and schema refusals. Native
+  list/readback succeeds after the correction; packaged acceptance is recorded
+  separately in the [receipt](../results/personal-review-inbox-2026-10-26.json).
+- Suggestion: align the JavaScript Metadata declaration with the bridge, including
+  enum serialization and directory behavior. Reuse is suitable for this bounded
+  developer-staged report flow, not established as a system file picker.

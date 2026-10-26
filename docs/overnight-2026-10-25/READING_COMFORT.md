@@ -107,3 +107,15 @@ and exclude names, letters and digits from captured logs.
   this acceptance item or authorize a submitted replacement.
 
 Status: optional source work completed locally; native acceptance pending.
+
+## October 26 bounded access observation
+
+The switch is reachable in a separate fictional validation profile; no real PIN
+was requested, captured or persisted. The supported `a11y-tv-util settings list`
+returns `error obtaining user profile object` in both inspected shell contexts.
+The observed virtual-device Settings page exposes Account Settings; no account
+screen was entered or changed. This is not proof that every supported VoiceView
+route is unavailable. Save-path speech was not tested, and the earlier
+VoiceView-off viewport passes are not repeated or extended. See the
+[access receipt](../../results/reading-comfort-voiceview-access-2026-10-26.json).
+Owner comfort and whole-item acceptance remain open.

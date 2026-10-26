@@ -1,23 +1,25 @@
 {
-  "baseline_main": "5147f2dd3af8209f185f323392bbeefa9f829741",
-  "product_source": "3a8a3600adeec7aa90486e6e8fb7f73f2c5a8415",
-  "scope": "Read-only selection of staged caregiver reports inside unlocked Parents; not raw video selection or activation",
+  "baseline_main": "369f268b4cfc7ad108aa00f38beefcb541c4bb3c",
+  "product_source": "4cb3780e3167839e556cf0afc6c3bcc57a83fd82",
+  "scope": "Protected native selection/readback of staged caregiver reports; no raw-video selection or activation",
   "focused_tests": {
-    "passed": 35,
+    "passed": 48,
     "suites": 2,
     "failed": 0,
-    "limitation": "Metadata mocks now use the installed native IDL FileType enum, but the JavaScript bridge per-file response remains unobserved. Passing tests do not establish native selection."
+    "negative_controls": "Observed string entryType and summary-offset regressions fail against preceding source, then pass after correction"
   },
   "typecheck": "pass",
   "focused_lint": "pass",
   "build": {
-    "source_commit": "3a8a3600adeec7aa90486e6e8fb7f73f2c5a8415",
+    "source_commit": "4cb3780e3167839e556cf0afc6c3bcc57a83fd82",
     "variant": "Only separate validation identity; canonical manifests restored",
-    "bytes": 132677017,
-    "sha256": "449678aa34003f5bf6a6b7b786d940aceed77a4469eff7d3271570f3b52ab964",
-    "sha384": "929ef0ccc22b37c4bcbd8f8b0141a44c9daa61347d36e7b10eaff109488fb0a9375f6b28650b855f20f5277078d021bf",
+    "bytes": 132677382,
+    "sha256": "3137736843c200b17dffeb3f0dc0002d4efea3c2a309cc38a71990b61100a93e",
+    "sha384": "4af502e63b1adfd3d1c61e47e71de70dbf2a97ebd84202cad7c623fbf5464a3178b69b0022e17815af726c0268ef2e2d",
     "normal_pre_and_post_gates": "pass",
-    "build": "Debug"
+    "build": "Debug",
+    "package_id": "io.github.alejandropublius.calmframes.intakevalidation",
+    "component_id": "io.github.alejandropublius.calmframes.intakevalidation.main"
   },
   "producer": {
     "input": "self-created steady-color silent fixture; never played",
@@ -30,8 +32,29 @@
     "tv_playback_authorized": false,
     "no_signer_created_or_read": true
   },
-  "transfer": "SDK exact-filename copy to separate validation component scratch succeeded",
+  "transfer": "Exact generated JSON report copied into the component-owned scratch root via SDK; original media not transferred",
+  "bridge_observation": "personal-review-bridge-metadata-2026-10-26.json",
   "native_ui": {
+    "result": "PASS in final normal-built package",
+    "resolution": "1280x720",
+    "VoiceView": "off",
+    "ordinary_route": "Parents unlock in a separate fictional validation app, then Personal file reviews",
+    "observed": [
+      "Only the regular generated report appears; owned symlink and directory are not selectable",
+      "Report summary matches original-file hash, duration and three plans",
+      "Summary starts at top with visible focused Back and readable playback/signing limits",
+      "Hardware Back returns focus to selected report, then exact Parents opener"
+    ],
+    "frame_sha256": {
+      "intake-final-package-list.png": "b1794b90f4965d201955801d4eaeba05c9d9c7c68fca73f68674db67fea7cb9d",
+      "intake-final-package-summary-top.png": "6f54c79aebf139ed96843121a39d2d3edf872ed55bd429efc64f20426526bb22",
+      "intake-final-package-list-return.png": "e3639c1acde2997e28037a9872c39e152d56d48858d5c3d3e34016eade3a53fa",
+      "intake-final-package-parent-return.png": "3025b83b3b9378146c9aeabeeafb64ec13a76257c037a1655188a6b0e3260314"
+    },
+    "raw_captures_published": false,
+    "limits": "No Release, 1080p or VoiceView report-inbox acceptance inferred"
+  },
+  "earlier_failed_attempts": {
     "initial_result": "FAIL before compatibility correction: normal Parents entry opens inbox, then directory metadata rejects before report read",
     "exact_sdk_response": {
       "message": "[com.amazon.kepler.file_system.IsADirectoryError]: "
@@ -56,14 +79,12 @@
   "security_policy_changed": false,
   "main_household_touched": false,
   "raw_media_played": false,
+  "remaining_item_13": "Arbitrary native raw-video selection unimplemented; exact-edition preparation/activation still requires existing authorized signer, approval, verification and checked build/install",
   "whole_item_closed": false,
   "counts": {
     "complete": 7,
     "partial": 11,
     "blocked": 2
   },
-  "attempt_branch": "codex/personal-review-inbox-2026-10-26",
-  "attempt_head": "001921e76709a30d0b00ee6b951f3ae9aad612ef",
-  "runtime_feature_merged": false,
-  "next_boundary": "Keep feature off main. Observe the actual per-file bridge metadata/error before changing this adapter again. No further builds or refusal relaxation in this bounded pass; original native file selection and trusted activation remain open."
+  "publication": "Receipt precedes normal reviewed merge; resolve current main and PR for publication identity"
 }
