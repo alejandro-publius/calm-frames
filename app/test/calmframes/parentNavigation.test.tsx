@@ -61,3 +61,16 @@ describe('parent header navigation', () => {
   });
 
 });
+
+test('caregiver review inbox remains behind the existing PIN and restores its opener', async () => {
+  const view = render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'test-fixture', 4)}
+    onGateChange={jest.fn()} settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()}
+    log={emptyHideLog()} titles={[]} onBack={jest.fn()} />);
+  expect(view.queryByTestId('parent-area-reviews')).toBeNull();
+  for (const digit of '1357') fireEvent.press(view.getByTestId(`parent-area-key-${digit}`));
+  fireEvent.press(view.getByTestId('parent-area-reviews')); await act(async () => {});
+  expect(view.getByTestId('caregiver-reviews')).toBeTruthy();
+  fireEvent.press(view.getByTestId('caregiver-reviews-back'));
+  expect(view.queryByTestId('caregiver-reviews')).toBeNull();
+  expect(view.getByTestId('parent-area-reviews').props.hasTVPreferredFocus).toBe(true);
+});

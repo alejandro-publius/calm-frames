@@ -158,6 +158,7 @@ import { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import PersonalCoversScreen from './PersonalCoversScreen';
+import CaregiverReviewsScreen from './CaregiverReviewsScreen';
 import { personalCoverAsset } from './personalCovers';
 import { useUiCapture } from './uiCapture';
 import {
@@ -279,6 +280,8 @@ const ParentAreaScreen = ({
   const saving = externalSaving || comfortPending;
   const [unlocked, setUnlocked] = React.useState(false);
   const [extraReturnFocus, setExtraReturnFocus] = React.useState<string>();
+  const [reviewsOpen, setReviewsOpen] = React.useState(false);
+  const [reviewsReturnFocus, setReviewsReturnFocus] = React.useState(false);
   const [extraTitle, setExtraTitle] = React.useState<CheckedTitle>();
   const [entered, setEntered] = React.useState('');
   const [savingPin, setSavingPin] = React.useState(false);
@@ -462,6 +465,8 @@ const ParentAreaScreen = ({
       </View>
     );
   }
+
+  if (reviewsOpen) return <CaregiverReviewsScreen onBack={() => {setReviewsOpen(false); setReviewsReturnFocus(true);}} />;
 
   const extraAsset = extraTitle ? personalCoverAsset(extraTitle.title) : undefined;
   if (extraTitle && extraAsset) {
@@ -1129,6 +1134,14 @@ const ParentAreaScreen = ({
           </Text>
         ))}
         </ReadingStop>
+      </View>
+
+      <View style={styles.group}>
+        <Text style={styles.section} accessibilityRole="header">Personal files</Text>
+        <Text style={styles.explainerLine}>Select reports staged from the caregiver computer. This does not import or authorize video playback.</Text>
+        <CalmButton label="Personal file reviews" testID={`${testID}-reviews`} disabled={saving || undefined}
+          hasTVPreferredFocus={reviewsReturnFocus} onFocus={() => {setInitialBackFocus(false); setReviewsReturnFocus(false);}}
+          onPress={() => setReviewsOpen(true)} />
       </View>
 
       {onBack || onCredits ? (
