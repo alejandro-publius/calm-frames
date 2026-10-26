@@ -1,69 +1,36 @@
-# Read a caregiver review on the TV
+# Native caregiver review attempt: not accepted
 
-The implemented Parents inbox selects staged reports from the existing caregiver-computer intake.
-Fixed native selection acceptance is still pending in the receipt.
-This is a read-only report inbox, not a system file picker or video importer.
-Original media is neither transferred nor played by this flow. A report never
-adds a library title, signer or playback permission.
+The bounded item-13 attempt did not pass native report selection and is not
+part of main. Its source is preserved on
+[codex/personal-review-inbox-2026-10-26](https://github.com/alejandro-publius/calm-frames/tree/001921e76709a30d0b00ee6b951f3ae9aad612ef).
+Do not follow that branch as a working TV import guide.
 
-## Prepare and transfer a report
+The existing caregiver-computer intake produced a report from a self-created
+steady-color silent fixture. SDK transfer to a separate fictional validation app
+succeeded. The original media was not played or transferred to the TV. Preparation
+stopped at `signing_blocked`, with no signer supplied or trust change.
 
-1. Use the [local caregiver page](overnight-2026-10-25/personal-import/README.md)
-   on your computer. Select a non-DRM video you own or have permission to process,
-   confirm processing permission, analyze it, then choose **Save caregiver review
-   (JSON)**. Keep its generated `calm-frames-review-<job-id>.json` name.
-2. Start the installed TV app. In Developer Mode, use the SDK's documented
-   [component scratch transfer](https://developer.amazon.com/docs/vega/0.24/developer-mode#file-operations).
-   Target your intended device explicitly. Create only this report directory:
+The Debug screen opened through unlocked Parents. Its first failure was a
+structured directory `IsADirectoryError`. A precise compatibility correction
+passed its focused regression, but the native retest still refused the report.
+No successful native selection, summary or delivery acceptance was observed.
 
-   ```sh
-   vega exec vda -s <device-serial> shell -t component-id io.github.alejandropublius.calmframes.main 'mkdir -p /scratch/calm-frames-reviews'
-   vega device copy-to --device <device-serial> --source path/to/calm-frames-review-<job-id>.json --destination /tmp/scratch/io.github.alejandropublius.calmframes/calm-frames-reviews/calm-frames-review-<job-id>.json
-   ```
+Review then found that installed `kepler-file-system` 0.0.7 declares
+`Metadata.mode` as `OpenMode` (values 0 through 5). The adapter and its passing
+mocks instead assumed POSIX file-type bits. Removing the refusal would not
+establish link/privacy protection. The feature therefore stays off main.
+A supported way to validate file/link types is required before continuing this
+particular scratch-inbox design; another build without that diagnosis is not
+a useful next step.
 
-   Use an exact destination filename, not only a trailing directory. Do not copy
-   original media, keys or household files. Scratch is a development transfer
-   area, not durable installed content or an end-user sharing service.
-3. Open **Parents**, unlock normally, then choose **Personal file reviews**.
-   Refresh, select a report and read its file identity and reported plans.
-   Back returns to the list and then to the exact Parents opener.
+The [receipt](../results/personal-review-inbox-2026-10-26.json) preserves the
+exact source, fixture and Debug package identities. Its 28 passing focused tests,
+typecheck, lint and build gates are source-bound engineering evidence, with the
+mock limitation recorded. They are not native acceptance.
 
-Product limits are eight report files and a bounded report size, enforced
-in [caregiverReviewInbox.ts](../app/src/calmframes/caregiverReviewInbox.ts).
-Non-report names, links, oversized or malformed reports, absent processing
-permission and playback-authorization claims are refused. A damaged report is
-isolated from intact ones. Selection rechecks the staged bytes. The app does not
-independently rehash the original video or authenticate the report's author;
-those limitations are visible beside the report.
-
-## Exact boundary
-
-The installed [file-system API](https://developer.amazon.com/docs/vega-api/0.24/interfaces.KeplerFileSystem.amazon-devices_kepler-file-system)
-provides sandbox file operations, not a documented system picker. This addition
-supplies native report selection and viewing using the existing report format.
-Arbitrary TV video selection remains unimplemented. Do not describe the inbox
-as direct personal-video playback or production file import.
-
-Preparation and activation still require an existing authorized signer, exact
-edition approval, verified export and a checked app build/installation. No new
-signer or trust root was introduced. The current generated-input check correctly
-stops at signing_blocked when no signer is configured. Rights/DRM refusal,
-protection floors and compiled membership remain unchanged.
-
-The [receipt](../results/personal-review-inbox-2026-10-26.json) records
-<!--n results/personal-review-inbox-2026-10-26.json:focused_tests.passed -->28<!--/n-->
-focused tests, typecheck, targeted lint, a normal Debug build and exact fixture
-identities. The validation package has a separate application identity and
-fictional data; it does not replace the existing app household. Native UI
-observations are recorded separately in that receipt. No Release, medical,
-comfort or whole-item-13 acceptance is inferred.
-
-## SDK directory compatibility
-
-The native run rejected directory metadata with the structured response
-`[com.amazon.kepler.file_system.IsADirectoryError]: `. The correction recognizes
-only that precise response with noFollow still true; other metadata failures,
-resolved link types, file limits and report refusals retain their guards. Its
-regression fails before the correction and passes afterward. Temporary diagnostic
-UI and API probes are removed. Source merge readiness does not close original
-item 13 or imply final native acceptance.
+Original item 13 remains partial: arbitrary native TV file selection is not
+implemented, and exact-edition activation still requires existing authorized
+signing authority, approval, verification and a checked build/install. The
+caregiver-computer intake remains available as documented in its
+[existing guide](overnight-2026-10-25/personal-import/README.md). No new playable
+title, signer, protection floor, package budget or security policy is introduced.

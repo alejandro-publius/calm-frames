@@ -1,7 +1,10 @@
 /** Read-only caregiver reports. These records can never introduce playable media. */
 import { KeplerFileSystem } from '@amazon-devices/kepler-file-system';
 
-export const REVIEW_INBOX = '/scratch/calm-frames-reviews';
+// Component-owned SDK mount: no user-staged intermediate directory or alias.
+export const REVIEW_INBOX = '/scratch';
+// SDK 0.24 native file_system.idl FileType.FILE; not POSIX st_mode bits.
+const REGULAR_FILE = 5;
 export const MAX_REVIEW_BYTES = 256 * 1024;
 export const MAX_REVIEWS = 8;
 const NAME = /^calm-frames-review-[a-f0-9]{32}\.json$/;
@@ -15,7 +18,7 @@ export interface ReviewFile { name: string; review: CaregiverReview; text: strin
 export interface ReviewReader {
   exists(path: string): Promise<boolean>;
   getEntries(path: string): Promise<string[]>;
-  getMetadata(path: string, noFollow: boolean): Promise<{size: number; mode: number}>;
+  getMetadata(path: string, noFollow: boolean): Promise<{size: number; mode: number; entryType?: number}>;
   readFileAsString(path: string, encoding: string): Promise<string>;
 }
 function record(value: unknown): Record<string, unknown> {
@@ -57,33 +60,21 @@ export function parseCaregiverReview(text: string): CaregiverReview {
       return {preset, coveredMs: sum, intervals: plan.intervals.length};
     }) };
 }
-async function checkInbox(reader: ReviewReader): Promise<void> {
-  try {
-    const stat = await reader.getMetadata(REVIEW_INBOX, true);
-    if (!Number.isInteger(stat.mode) || Math.floor(stat.mode / 4096) !== 4) throw new Error('Not a regular inbox directory');
-  } catch (error) {
-    // Kepler 0.0.7 rejects directory metadata with this structured response.
-    // noFollow stays true; other failures and resolved link metadata refuse.
-    if (error && typeof error === 'object' && 'message' in error &&
-        typeof error.message === 'string' && /^\[com\.amazon\.kepler\.file_system\.IsADirectoryError\]:\s*$/.test(error.message)) return;
-    throw error;
-  }
-}
 export async function readReviewFile(name: string, reader: ReviewReader = KeplerFileSystem): Promise<ReviewFile> {
   if (!NAME.test(name)) throw new Error('Unsupported review filename');
-  await checkInbox(reader);
   const path = `${REVIEW_INBOX}/${name}`;
   const stat = await reader.getMetadata(path, true);
-  // Fail closed on links, directories and unknown mode formats. Do not follow
-  // an inbox alias into household data or other app files.
-  if (!Number.isInteger(stat.mode) || Math.floor(stat.mode / 4096) !== 8 ||
+  // The native SDK exposes FileType through metadata; the JS declaration's
+  // OpenMode annotation must not be interpreted as POSIX permission bits.
+  // Prefer explicit entryType if present and reject conflicting representations.
+  const type = stat.entryType ?? stat.mode;
+  if (type !== REGULAR_FILE || (stat.entryType !== undefined && stat.mode !== type) ||
       !Number.isInteger(stat.size) || stat.size <= 0 || stat.size > MAX_REVIEW_BYTES) throw new Error('Not a bounded regular review file');
   const text = await reader.readFileAsString(path, 'UTF-8');
   return {name, text, review: parseCaregiverReview(text)};
 }
 export async function loadReviewInbox(reader: ReviewReader = KeplerFileSystem): Promise<{files: ReviewFile[]; refused: number}> {
   if (!await reader.exists(REVIEW_INBOX)) return {files: [], refused: 0};
-  await checkInbox(reader);
   const entries = await reader.getEntries(REVIEW_INBOX);
   if (entries.length > MAX_REVIEWS) throw new Error('Keep at most eight reports in the review inbox, then refresh.');
   const files: ReviewFile[] = []; let refused = 0;

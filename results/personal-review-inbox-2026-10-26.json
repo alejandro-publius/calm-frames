@@ -5,7 +5,8 @@
   "focused_tests": {
     "passed": 28,
     "suites": 2,
-    "failed": 0
+    "failed": 0,
+    "limitation": "Passing mocks used POSIX mode values inconsistent with the installed SDK contract; these tests do not establish native import acceptance."
   },
   "typecheck": "pass",
   "focused_lint": "pass",
@@ -40,7 +41,9 @@
     "app_data_directory_comparison": "same structured IsADirectoryError response",
     "correction": "Accept only that exact directory response with noFollow still true; preserve resolved-link rejection, regular-file type/size checks and report validation",
     "regression": "Observed SDK response fails before the correction, passes after; other error messages still refuse",
-    "final_result": "Fixed retest in progress; no native selection success claimed by this commit."
+    "final_result": "FAIL: fixed Debug retest opens the inbox, but shows Some reports could not be opened; no report selection or summary accepted.",
+    "frame_sha256": "3450725fc6174fc13105befd2745bfa21ad914ce783b5c032a8b690266e50ae3",
+    "source_review_blocker": "Installed kepler-file-system 0.0.7 Metadata.mode is OpenMode (0 through 5), not documented POSIX file-type bits. Adapter and passing mocks incorrectly assumed POSIX type bits. No safe supported link/type rejection established for this native flow."
   },
   "trust_changed": false,
   "media_changed": false,
@@ -52,5 +55,9 @@
     "complete": 7,
     "partial": 11,
     "blocked": 2
-  }
+  },
+  "attempt_branch": "codex/personal-review-inbox-2026-10-26",
+  "attempt_head": "001921e76709a30d0b00ee6b951f3ae9aad612ef",
+  "runtime_feature_merged": false,
+  "next_boundary": "Preserve the failed source branch; do not expose the inbox on main or relax link/privacy checks to make the fixture pass. Direct native arbitrary-video selection remains unimplemented. Exact-edition activation still requires existing authorized signing authority."
 }

@@ -1289,19 +1289,20 @@ cover both issues; no host fault or native acceptance is inferred.
 - Suggestion: next authorized fix should reproduce native scroll geometry and VoiceView delivery competition before selecting another patch.
 
 
-## October 26: Kepler directory metadata differs from the typed result
+## October 26: native report inbox blocked by filesystem metadata contract
 
-- Task: select bounded caregiver-computer reports in unlocked Parents.
-- Steps: transfer a generated-file review to a separate fictional validation app;
-  request directory metadata with noFollow true before listing or reading reports.
-- Expected versus actual: a directory metadata object; the SDK rejects with the
-  structured IsADirectoryError object, including for the app-data directory.
-  The initial generic error hid this distinction. No report was read.
-- Severity: blocks the new native report-selection path, not existing playback.
-- Workaround: recognize only the observed directory response, keep noFollow and
-  file/type/size/schema checks, and retain other errors as refusals. The focused
-  regression fails before the correction and passes after; fixed native retest
-  remains separately recorded.
-- Suggestion: document directory behavior and expose typed, inspectable SDK
-  exceptions. The filesystem API remains useful for bounded sandbox records;
-  this experience does not establish a system-wide file picker.
+- Task: select a bounded caregiver-computer report inside unlocked Parents.
+- Steps: generate a harmless report; transfer it into a separate fictional app;
+  open the inbox; correct the observed directory exception; repeat the native check.
+- Expected versus actual: the directory check progresses, but the report is still
+  refused. Source review finds `Metadata.mode` declared as `OpenMode`, while the
+  attempted adapter and mocks assume POSIX file-type bits. The precise failing
+  per-file operation was not separately instrumented; no selection success is claimed.
+- Severity: blocks this new inbox path; existing playback is unaffected.
+- Workaround: leave the attempted native feature off main and preserve the
+  caregiver-computer flow. Do not drop link/type guards to obtain a passing demo.
+- Suggestion: document directory exceptions and provide explicit regular-file
+  and symbolic-link metadata, or a supported safe read/picker API. Filesystem reuse
+  for this path is deferred until that boundary is established.
+- Outcome: [bounded receipt](../results/personal-review-inbox-2026-10-26.json);
+  no original item closure or submission-answer claim.

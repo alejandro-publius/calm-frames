@@ -7,7 +7,7 @@ const name = `calm-frames-review-${'a'.repeat(32)}.json`;
 const report = () => JSON.parse(JSON.stringify(fixture));
 function reader(data = report()): ReviewReader {
   return {exists: jest.fn(async () => true), getEntries: jest.fn(async () => [name]),
-    getMetadata: jest.fn(async path => ({size: 1000, mode: path === REVIEW_INBOX ? 0o040700 : 0o100600})),
+    getMetadata: jest.fn(async () => ({size: 1000, mode: 5})),
     readFileAsString: jest.fn(async () => JSON.stringify(data))};
 }
 test('the real caregiver export is selectable but never grants playback', async () => {
@@ -42,10 +42,9 @@ test.each(['source', 'duration', 'plan', 'title', 'map', 'playable'])(
 test.each(['../household.json', '/data/household.json', `${name}/../../x`])('never reads a path outside its inbox: %s', async path => {
   const source = reader(); await expect(readReviewFile(path, source)).rejects.toThrow(); expect(source.readFileAsString).not.toHaveBeenCalled();
 });
-test.each(['file-link', 'directory-link', 'oversized', 'unknown-mode'])('refuses %s before reading any file', async state => {
-  const source = reader(); source.getMetadata = jest.fn(async path => ({
-    mode: state === 'directory-link' && path === REVIEW_INBOX ? 0o120777
-      : path === REVIEW_INBOX ? 0o040700 : state === 'file-link' ? 0o120777 : state === 'unknown-mode' ? 0 : 0o100600,
+test.each(['file-link', 'directory', 'oversized', 'unknown-mode', 'old-posix-mode'])('refuses %s before reading any file', async state => {
+  const source = reader(); source.getMetadata = jest.fn(async () => ({
+    mode: state === 'file-link' ? 4 : state === 'directory' ? 2 : state === 'unknown-mode' ? 0 : state === 'old-posix-mode' ? 0o100600 : 5,
     size: state === 'oversized' ? MAX_REVIEW_BYTES + 1 : 1000}));
   await expect(readReviewFile(name, source)).rejects.toThrow(); expect(source.readFileAsString).not.toHaveBeenCalled();
 });
@@ -69,16 +68,20 @@ test('selection rechecks changed bytes instead of showing an old analysis', asyn
   expect(view.queryByTestId('caregiver-review-summary')).toBeNull(); expect(view.getByText(/changed or could not be read/)).toBeTruthy();
 });
 
-test('accepts the observed SDK directory response, while retaining regular-file checks', async () => {
-  const source = reader(); source.getMetadata = jest.fn(async path => {
-    if (path === REVIEW_INBOX) throw {message: '[com.amazon.kepler.file_system.IsADirectoryError]: '};
-    return {mode: 0o100600, size: 1000};
-  });
-  expect((await loadReviewInbox(source)).files[0].review.title).toBe(fixture.title);
+test('SDK native FileType.FILE is accepted without treating it as POSIX mode bits', async () => {
+  const source = reader();
+  const result = await loadReviewInbox(source);
+  expect(result.files[0].review.title).toBe(fixture.title);
+  expect(source.getMetadata).toHaveBeenCalledWith(`${REVIEW_INBOX}/${name}`, true);
+  expect(source.getMetadata).not.toHaveBeenCalledWith(REVIEW_INBOX, expect.anything());
 });
-test.each(['[com.amazon.kepler.file_system.PermissionDenied]: ', 'IsADirectoryError', '[com.amazon.kepler.file_system.IsADirectoryError]: changed'])(
-  'does not treat another metadata failure as a directory: %s', async message => {
-    const source = reader(); source.getMetadata = jest.fn(async () => {throw {message};});
-    await expect(loadReviewInbox(source)).rejects.toBeTruthy();
-    expect(source.readFileAsString).not.toHaveBeenCalled();
-  });
+test.each([0, 1, 2, 3, 4, 6, -1, 7])('refuses native non-file or unknown type %s before any read', async mode => {
+  const source = reader(); source.getMetadata = jest.fn(async () => ({mode, size: 1000}));
+  await expect(readReviewFile(name, source)).rejects.toThrow();
+  expect(source.readFileAsString).not.toHaveBeenCalled();
+});
+test('does not accept contradictory explicit and bridged file types', async () => {
+  const source = reader(); source.getMetadata = jest.fn(async () => ({mode: 5, entryType: 4, size: 1000}));
+  await expect(readReviewFile(name, source)).rejects.toThrow();
+  expect(source.readFileAsString).not.toHaveBeenCalled();
+});
