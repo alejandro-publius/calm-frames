@@ -91,7 +91,7 @@ def stub_workspace(tmp_path, monkeypatch, keypair):
                 map_path=str(layout.map_path(preset)), plan_path=str(layout.plan_path(preset)),
                 bif_path=str(layout.bif_path(preset)), bif_manifest=str(layout.bif_manifest(preset)),
             )
-        report = VerifyReport(layout.sha256, str(source_path), options.presets)
+        report = VerifyReport(layout.sha256, f"sha256:{layout.sha256}", options.presets)
         report.add("source_hash", True, "FABRICATED WRAPPER CHECK")
         for preset in options.presets:
             for name in library._CORE_CHECKS:
@@ -188,7 +188,7 @@ def test_a_pipeline_result_is_not_ready_merely_because_artifacts_exist(stub_work
 
 
 @pytest.mark.parametrize("fault", [
-    "missing_report", "source_sha", "source_path", "partial_presets", "passed_false",
+    "missing_report", "source_sha", "source_path", "media_identifier", "partial_presets", "passed_false",
     "empty_checks", "failed_check", "truthy_string", "missing_core", "duplicate_check",
     "ledger_missing", "ledger_report_hash", "result_report_mismatch",
 ])
@@ -211,6 +211,8 @@ def test_report_must_be_current_complete_and_belong_to_the_source(stub_workspace
                     data["sha256"] = "0" * 64
                 elif fault == "source_path":
                     data["source_path"] = str(stub_workspace.source.with_name("other.bin"))
+                elif fault == "media_identifier":
+                    data["source_path"] = "sha256:" + "0" * 64
                 elif fault == "partial_presets":
                     data["presets"] = ["wcag"]
                 elif fault == "passed_false":

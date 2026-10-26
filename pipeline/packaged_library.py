@@ -93,7 +93,31 @@ def _read_report(path: Path) -> bytes:
         os.close(descriptor)
 
 
-def _check_report(raw: bytes, digest: str, titles: list[dict]) -> None:
+def _check_report_privacy(value) -> None:
+    """Reject host paths, including nested JSON evidence, without rewriting it."""
+    if isinstance(value, dict):
+        for key, item in value.items():
+            _check_report_privacy(key)
+            _check_report_privacy(item)
+    elif isinstance(value, list):
+        for item in value:
+            _check_report_privacy(item)
+    elif isinstance(value, str):
+        # Decode embedded analyzer/metadata JSON before inspecting its strings.
+        if value.lstrip().startswith(("{", "[")):
+            try:
+                nested = json.loads(value)
+            except ValueError:
+                pass
+            else:
+                _check_report_privacy(nested)
+                return
+        if re.search(r'''(?:^|[\s"'=(:,])(?:/(?!/)[^\s/]+(?:/|$)|[A-Za-z]:[\\/]|\\\\|file:/|~/)|(?:^|[\s"'=(,])//''', value, re.IGNORECASE):
+            raise PackagedLibraryError(
+                "A distributable report contains a local filesystem path; regenerate verification and export.")
+
+
+def _check_report(raw: bytes, digest: str, titles: list[dict], *, distributable: bool = False) -> None:
     if len(raw) > MAX_REPORT_BYTES or hashlib.sha256(raw).hexdigest() != digest:
         raise PackagedLibraryError("Verification report bytes differ from the recorded report hash.")
     # Never turn a key file into an attachment, even inside otherwise valid JSON.
@@ -106,6 +130,12 @@ def _check_report(raw: bytes, digest: str, titles: list[dict]) -> None:
             return float(value)
         raise PackagedLibraryError("The verification report contains an undefined measurement.")
     data = json.loads(raw, parse_constant=constant)
+    if distributable:
+        _check_report_privacy(data)
+        if (isinstance(data, dict) and isinstance(data.get("source_path"), str)
+                and data["source_path"].startswith("sha256:")
+                and data["source_path"] != f"sha256:{data.get('sha256')}"):
+            raise PackagedLibraryError("The report media identifier differs from its source hash.")
     if isinstance(data, dict) and data.get("recipe") == "baked-ambient-v1":
         from .ambient_report import check_ambient_report, strict_json
         try:
@@ -155,7 +185,7 @@ def _check_reports(destination: Path, references: dict[str, list[dict]], *,
             if path.name != f"{digest}.json" or digest not in references:
                 raise PackagedLibraryError("An unreferenced verification report is present.")
             raw = _read_report(path)
-            _check_report(raw, digest, references[digest])
+            _check_report(raw, digest, references[digest], distributable=require_reports)
             present.add(digest)
             total += len(raw)
     missing = sorted(set(references) - present)
@@ -173,7 +203,7 @@ def _publish_reports(destination: Path, reports: dict[str, bytes], references: d
     for digest, raw in reports.items():
         if digest not in references:
             raise PackagedLibraryError("The supplied report is not referenced by a packaged title.")
-        _check_report(raw, digest, references[digest])
+        _check_report(raw, digest, references[digest], distributable=True)
     directory = destination / "reports"
     fresh = {digest: raw for digest, raw in reports.items() if not (directory / f"{digest}.json").exists()}
     final_size = total + sum(map(len, fresh.values())) if projected_total is None else projected_total
@@ -376,7 +406,7 @@ def _title(receipt: dict, root: Path, staged: Path, public, files: dict, reports
             "verification": {"reportSha256": verification["report_sha256"],
                              "checkedInputsSha256": verification["checked_inputs_sha256"],
                              "outcome": verification["outcome"]}}
-    _check_report(report_bytes, verification["report_sha256"], [title])
+    _check_report(report_bytes, verification["report_sha256"], [title], distributable=True)
     reports[verification["report_sha256"]] = report_bytes
     return title, total
 
@@ -477,7 +507,7 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
             _check_bundle(manifest, staged)
             immutable = destination / bundle_id
             local._path_inside(immutable, destination)
-            existing_size = _check_output_root(destination, staging=staged)
+            existing_size = _check_output_root(destination, staging=staged, require_reports=True)
             pointer_size = sum(path.stat().st_size for path in
                                (destination / "catalog.json", destination / "catalog.ts")
                                if path.exists())
@@ -672,7 +702,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     export.add_argument("--source-sha", action="append")
     check = actions.add_parser("check")
     check.add_argument("--output", required=True)
-    check.add_argument("--require-reports", action="store_true")
+    check.add_argument("--require-reports", action="store_true",
+                       help="require complete, path-private reports suitable for distribution")
     attach = actions.add_parser("attach-reports")
     attach.add_argument("--output", required=True)
     attach.add_argument("--report", required=True, action="append")

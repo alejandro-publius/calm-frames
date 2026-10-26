@@ -120,10 +120,23 @@ def check_named(report, name):
 
 
 class TestAGoodTitlePasses:
-    def test_nothing_broken_means_it_passes(self, built):
+    def test_nothing_broken_means_it_passes(self, built, monkeypatch):
+        from pipeline.packaged_library import _check_report_privacy
+
+        # Real successful CLI output may echo both absolute input paths.
+        original = FlashmapAdapter.verify
+        def verbose_success(self, *args, **kwargs):
+            result = original(self, *args, **kwargs)
+            assert result.ok
+            return SimpleNamespace(ok=True, returncode=0, stderr="",
+                                   stdout=f"OK {args[0]} verifies against {args[1]}")
+        monkeypatch.setattr(FlashmapAdapter, "verify", verbose_success)
         report = run_verify(built)
         assert report.passed, failed_names(report)
         assert len(report.checks) > 10
+        assert report.source_path == f"sha256:{built['layout'].sha256}"
+        _check_report_privacy(report.to_dict())
+        assert str(built["source"].parent) not in json.dumps(report.to_dict())
 
 
 class TestARenditionWithAViolation:

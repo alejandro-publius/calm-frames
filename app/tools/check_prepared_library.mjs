@@ -79,7 +79,24 @@ function verificationReference(title) {
   return value;
 }
 
-export function checkVerificationReport(raw, digest, titles) {
+function checkReportPrivacy(value) {
+  if (Array.isArray(value)) value.forEach(checkReportPrivacy);
+  else if (value && typeof value === 'object') {
+    for (const [key, item] of Object.entries(value)) {
+      checkReportPrivacy(key); checkReportPrivacy(item);
+    }
+  } else if (typeof value === 'string') {
+    if (/^\s*[{[]/.test(value)) {
+      let nested;
+      try { nested = JSON.parse(value); } catch { /* Inspect non-JSON diagnostics below. */ }
+      if (nested !== undefined) { checkReportPrivacy(nested); return; }
+    }
+    requireThat(!/(?:^|[\s"'=(:,])(?:\/(?!\/)[^\s/]+(?:\/|$)|[A-Za-z]:[\\/]|\\\\|file:\/|~\/)|(?:^|[\s"'=(,])\/\//iu.test(value),
+      'A distributable report contains a local filesystem path; regenerate verification and export.');
+  }
+}
+
+export function checkVerificationReport(raw, digest, titles, { distributable = false } = {}) {
   requireThat(raw.length <= MAX_REPORT && sha(raw) === digest,
     'Verification report bytes differ from the recorded report hash.');
   const text = raw.toString('utf8');
@@ -90,6 +107,11 @@ export function checkVerificationReport(raw, digest, titles) {
   const compatible = text.replace(/"(?:\\.|[^"\\])*"|(?<=[\s[:,])(-?Infinity)(?=[\s,}\]])/g,
     (token, infinite) => infinite ? (infinite.startsWith('-') ? '-1e999' : '1e999') : token);
   const report = record(JSON.parse(compatible));
+  if (distributable) {
+    checkReportPrivacy(report);
+    requireThat(typeof report.source_path !== 'string' || !report.source_path.startsWith('sha256:') ||
+      report.source_path === `sha256:${report.sha256}`, 'The report media identifier differs from its source hash.');
+  }
   if (report.recipe === 'baked-ambient-v1') return checkAmbientReport(text, titles);
   requireThat(exactKeys(report, ['sha256', 'source_path', 'presets', 'passed', 'outcome', 'started_at', 'finished_at', 'checks']) &&
     report.passed === true && typeof report.source_path === 'string' && report.source_path.length > 0 &&
@@ -224,7 +246,7 @@ export function checkPreparedNamespace(names, read, expectedCatalogSha256, { req
     const match = /^reports\/([0-9a-f]{64})\.json$/.exec(name);
     requireThat(match && reportReferences.has(match[1]), 'An unreferenced verification report is present.');
     const digest = match[1];
-    checkVerificationReport(bytes(name, MAX_REPORT), digest, reportReferences.get(digest));
+    checkVerificationReport(bytes(name, MAX_REPORT), digest, reportReferences.get(digest), { distributable: requireReports });
     allowed.add(name);
     presentReports.add(digest);
   }
@@ -286,7 +308,7 @@ export function checkPreparedPackage(packagePath, expectedCatalogSha256, options
   }
   return checkPreparedNamespace(names, (name, limit) =>
     execFileSync('tar', ['-xOf', packagePath, PREFIX + name],
-      { ...tarOptions, maxBuffer: Math.max(4096, limit + 1) }), expectedCatalogSha256, options);
+      { ...tarOptions, maxBuffer: Math.max(4096, limit + 1) }), expectedCatalogSha256, { ...options, requireReports: true });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

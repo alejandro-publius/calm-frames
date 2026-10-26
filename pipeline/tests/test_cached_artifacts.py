@@ -84,3 +84,34 @@ def test_unchanged_checked_outputs_preserve_a_work_free_restart(cached_title, ff
     assert "verify" in second.steps_skipped
     assert not ffmpeg_calls
     assert second.publishable
+
+
+@needs_ffmpeg
+def test_historical_report_cache_regenerates_only_verification(tmp_path, analyzer, keypair, monkeypatch):
+    from pipeline import ingest
+    from pipeline.hashing import sha256_file
+
+    private, public = keypair
+    source = make_calm_clip(tmp_path / "calm.mp4", seconds=2)
+    options = IngestOptions(presets=["wcag"], key=str(private), pub=str(public),
+                            x264_preset="ultrafast", poster_count=1, bif_interval_ms=3000)
+    fingerprint, verify = ingest.fingerprint, ingest.verify_title
+    def historical_fingerprint(value):
+        if isinstance(value, dict) and value.get("step") == "verify":
+            value = {**value, "in": {k: v for k, v in value["in"].items() if k != "report_representation"}}
+        return fingerprint(value)
+    def historical_verify(*args, **kwargs):
+        report = verify(*args, **kwargs)
+        report.source_path = str(kwargs["source"])
+        return report
+    with monkeypatch.context() as patch:
+        patch.setattr(ingest, "fingerprint", historical_fingerprint)
+        patch.setattr(ingest, "verify_title", historical_verify)
+        old = ingest_title(source, tmp_path / "work", options)
+    assert old.publishable
+    paths = [old.layout.map_path("wcag"), old.layout.safe_master("wcag")]
+    before = [sha256_file(path) for path in paths]
+    fresh = ingest_title(source, old.layout.workdir, options)
+    assert fresh.publishable and fresh.steps_run == ["verify"]
+    assert fresh.verify_report["source_path"] == f"sha256:{fresh.sha256}"
+    assert [sha256_file(path) for path in paths] == before

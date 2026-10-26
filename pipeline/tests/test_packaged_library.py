@@ -46,6 +46,23 @@ def export(state):
     return packaged.export_packaged_library(state.root, state.output, pub=state.public)
 
 
+def test_private_report_is_rejected_before_replacing_catalog_and_without_rewriting_evidence(ready):
+    export(ready)
+    before = (ready.output / "catalog.ts").read_bytes()
+    _replace_report(ready.result, lambda data: data.update(source_path="/Users/fictional/clip.mp4"))
+    path = ready.result.layout.verify_report_path
+    original = path.read_bytes()
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    receipt["verification"]["report_sha256"] = sha256_file(path)
+    receipt["verification"]["checked_inputs_sha256"] = packaged.local._inputs_digest(ready.result.layout)
+    receipt_path.write_text(json.dumps(receipt))
+    with pytest.raises(packaged.PackagedLibraryError, match="local filesystem path"):
+        export(ready)
+    assert path.read_bytes() == original
+    assert (ready.output / "catalog.ts").read_bytes() == before
+
+
 def test_complete_export_has_separate_source_and_delivered_hashes_and_no_source_or_key(ready):
     manifest = export(ready)
     title = manifest["titles"][0]
