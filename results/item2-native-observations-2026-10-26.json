@@ -1,0 +1,63 @@
+{
+  "baseline_main": "bfa59b7f0504de0eea2666a55d6796d8ccefdfb7",
+  "installed_product_source": "54d0256d2d6a19044be12157b76d14a580c48c2b",
+  "app_source_tree_matches_main": true,
+  "viewport": "1280x720",
+  "item2_original_criterion_commit": "cc1590c",
+  "original_next_action": "current-build screen sweep, preserving necessary protective/error disclosures",
+  "item2_scope_decision": "Remains partial. Original ledger says current-build screen sweep preserving protective/error disclosures. Current native error/retry requirement remains unfulfilled; no scope narrowing or closure claimed.",
+  "reused_focused_copy_recovery_tests_passed": 81,
+  "unchanged_since_native_copy_sweep_sha256": {
+    "app/src/components/ErrorView.tsx": "4a9350c6ea9c9331ad5ba04a14eff4320524c4e86c8387cc96a72144912e95f7",
+    "app/src/calmframes/copy.ts": "b581e62decae917032f3555c6c4cb971289b72b572684e8f91356bd066cf5000",
+    "app/src/calmframes/playerAccess.ts": "34354bbb3d585006eaef9316281c475aba84f0bf090561cc786b10ce8f870153",
+    "app/src/calmframes/HouseholdStorageScreen.tsx": "b2f6e16066fea750953095ac597c2630efe346ac14e117d018772077050e0e5b",
+    "app/src/calmframes/PersonalCoversScreen.tsx": "4b34876ea2491f82c92b0255bba58b09560290f4a5cd1b581f8371640a106d39",
+    "app/src/calmframes/FirstRunScreen.tsx": "baf3752c59066b4185c43a366d426097a3c28af9384f69e6f7dc33c184b4b798",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "707200b7e0612c350d1502eb84eb15cd81ef7ee9d91405fd10b64fc721eb73df"
+  },
+  "new_native_observations": {
+    "supported_mcway_resume": "Resume at 4:33, visible restored-pause instruction, normal playback through final still; no error or slow retry appeared.",
+    "acadia_preview": "Fictional Kid 2 Details reports 2 scenes / 7 seconds. Recorded Scene ahead followed by Scenes replaced during ordinary moving preview, then explicit Back.",
+    "recovery_route_limit": "RecoverablePlayerScreen explicitly excludes ambientPreview routes. Acadia preview reentry starts at zero without a checkpoint choice. McWay supports recovery but has no flagged intervals.",
+    "not_claimed": [
+      "stricter-profile acceptance",
+      "native error/retry execution",
+      "caption restoration",
+      "physical cover/compositor timing",
+      "VoiceView acceptance",
+      "owner comfort"
+    ]
+  },
+  "recordings": {
+    "item2-supported-resume-entry.mp4": {
+      "sha256": "8634cc820b50da32479e47425de3605af82827fd73be6b614e7b752027e8693d",
+      "published": false
+    },
+    "item2-supported-playback-recovery-window.mp4": {
+      "sha256": "2028ef49ea0abdb4d17bc0d00e287e0654ffcec7c80d05dcadacad391216e3b3",
+      "published": false
+    },
+    "item10-acadia-back-during-preview.mp4": {
+      "sha256": "e510c22c84db702cfe186c6d495c22cf02d1c896ea34d87498b9dc3ad20b3fbb",
+      "published": false
+    }
+  },
+  "whole_item_closed": false,
+  "counts": {
+    "complete": 7,
+    "partial": 11,
+    "blocked": 2
+  },
+  "no_product_edits": true,
+  "no_fault_injection": true,
+  "no_pin_or_private_storage_access": true,
+  "main_device_touched": false,
+  "disposable_final_state": {
+    "viewport": "1280x720",
+    "profile": "original fictional Kid restored",
+    "screen": "Home, McWay Watch focused",
+    "VoiceView": "unchanged off",
+    "capture_sha256": "7834d1a67e2348fd76859070e1a727fe3e9672f9d4a7653d9401921c187c686a"
+  }
+}

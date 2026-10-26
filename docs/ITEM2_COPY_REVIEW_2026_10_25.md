@@ -57,3 +57,35 @@ repeat the already-passed normal copy sweep or broaden into playback acceptance.
 
 Totals remain seven complete, eleven partial and two blocked. Item 2 is partial
 because of missing native evidence, not because another copy rewrite is needed.
+
+## Supported-route continuation
+
+Reviewed on main `bfa59b7f`; installed product source `54d0256` has the same app
+source tree. The [native observation record](../results/item2-native-observations-2026-10-26.json)
+contains exact hashes and source comparisons. No product edit or repeated suite.
+
+The supported McWay Resume action opened at its saved position, retained the
+paused instruction and completed normally. No error or slow-playback Try again
+appeared. The compiled shelf supplies checked local titles. Missing/unchecked
+and empty states therefore have no ordinary input trigger; backgrounding
+intentionally leaves the player. No media, trust or household storage was
+altered to induce failure.
+
+The earliest reconciled ledger (`cc1590c`) describes a current-build copy sweep
+that preserves protective/error disclosures. Native error-view execution remains
+unobserved in the later acceptance record. This continuation retains the current
+requirement and partial status rather than declaring closure from source review.
+
+For item 10, normal Acadia preview playback was recorded with Scene ahead and
+Scenes replaced feedback, followed by explicit Back. Kid 2 currently shows two
+replaced scenes and seven seconds; no stricter setting is inferred from the old
+receipt. Preview reentry starts at zero because RecoverablePlayerScreen
+explicitly excludes ambientPreview routes. McWay supports checkpoint recovery
+but has no flagged intervals. Existing supported routes cannot demonstrate
+recovery through a flagged interval. No native retry, stricter-profile recovery,
+caption restoration or compositor timing pass is claimed.
+
+The original fictional Kid profile, McWay Watch focus and unchanged VoiceView-off
+state were restored. No PIN was requested/entered and the main device was not
+touched. Raw app-only captures remain outside Git. Totals stay seven complete,
+eleven partial and two blocked.
