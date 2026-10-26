@@ -42,6 +42,7 @@ ACTIVE = {"queued", "checking", "analyzing", "preparing", "verifying", "exportin
 TERMINAL = {"review", "signing_blocked", "package_review", "failed", "canceled", "interrupted"}
 JOB_ID = re.compile(r"[a-f0-9]{32}")
 WORKER_RUN: tuple[str, int] | None = None
+REIMPORT_GUIDANCE = "Remove this local import and select the original file again. Your original file is unchanged."
 
 
 class IntakeError(PipelineError):
@@ -97,7 +98,7 @@ def validate_saved_review(job: dict) -> None:
     def digest(value) -> bool:
         return isinstance(value, str) and re.fullmatch(r"[a-f0-9]{64}", value) is not None
 
-    error = "The saved analysis review is incomplete or changed. Analyze again."
+    error = "The saved analysis review is incomplete or changed. " + REIMPORT_GUIDANCE
     if (
         not isinstance(review, dict)
         or review.get("analysis_complete") is not True
@@ -367,18 +368,18 @@ def checked_review(path: Path) -> tuple[dict, Path]:
         or review.get("source_sha256") != job["source_sha256"]
         or fingerprint(review) != job.get("review_digest")
     ):
-        raise IntakeError("The complete analysis review is missing or changed. Analyze again.")
+        raise IntakeError("The complete analysis review is missing or changed. " + REIMPORT_GUIDANCE)
     map_root = path
     if review.get("analysis_run"):
         if not JOB_ID.fullmatch(review["analysis_run"]):
-            raise IntakeError("Invalid analysis identity. Analyze again.")
+            raise IntakeError("Invalid analysis identity. " + REIMPORT_GUIDANCE)
         map_root = _path_inside(path / "runs" / review["analysis_run"], path)
     for profile, expected in review["review_map_hashes"].items():
         if (
             profile not in {"wcag", "broadcast"}
             or sha256_file(_file(map_root / (profile + ".json"), path)) != expected
         ):
-            raise IntakeError("An analysis file changed. Analyze again.")
+            raise IntakeError("An analysis file changed. " + REIMPORT_GUIDANCE)
     return job, source
 
 
@@ -633,7 +634,7 @@ class IntakeStore:
             path = job_dir(self.root, job_id)
             visible = self.display_job(path)
             if visible.get("record_unreadable"):
-                raise IntakeError("The saved analysis review is incomplete or changed. Analyze again.")
+                raise IntakeError("The saved analysis review is incomplete or changed. " + REIMPORT_GUIDANCE)
             if visible["status"] not in {"review", "signing_blocked", "package_review"}:
                 raise IntakeError("Wait for a complete current analysis before saving its review.")
             job, _ = checked_review(path)
@@ -817,7 +818,7 @@ def serve(root: Path, port: int, key: Path | None = None, pub: Path | None = Non
                 except IntakeError as exc:
                     self.send(400, {"error": str(exc)})
                 except (OSError, ValueError, PipelineError):
-                    self.send(400, {"error": "The review files could not be verified. Analyze again."})
+                    self.send(400, {"error": "The review files could not be verified. " + REIMPORT_GUIDANCE})
             else:
                 self.send(
                     404, {"error": "Not found. Original and prepared media are never served here."}

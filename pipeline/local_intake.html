@@ -16,15 +16,27 @@ summary:focus-visible{outline:3px solid #9cc1cb;outline-offset:3px}
 const $=id=>document.getElementById(id);let uploadController=null,last='',busy=false,connectionLost=false;
 let observedStates=new Map();
 function announceCompletedReview(jobs){
-const completed=jobs.find(job=>['queued','checking','analyzing'].includes(observedStates.get(job.id))&&job.status==='review');
-if(completed)$('notice').textContent='Analysis complete for '+completed.title+'. Review the planned interruptions below.';
+const messages=[];
+for(const job of jobs){const previous=observedStates.get(job.id);if(previous===undefined||previous===job.status)continue;
+if(job.status==='review')messages.push('Analysis complete for '+job.title+'. Review the planned interruptions below.');
+else if(['failed','interrupted','canceled','signing_blocked','package_review','unreadable'].includes(job.status))messages.push(job.title+': '+job.stage+'. '+(job.error||''));}
+if(messages.length)$('notice').textContent=messages.join(' ');
 observedStates=new Map(jobs.map(job=>[job.id,job.status]));
 }
 function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
 function seconds(ms){return (ms/1000).toFixed(2)+' s'}
-async function request(url,options={}){const r=await fetch(url,options);const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d}
+async function request(url,options={}){
+let r;try{r=await fetch(url,options)}catch(e){if(e.name==='AbortError')throw e;throw Error('The local request did not finish. Reopen the same local server and check the import list before trying again.')}
+let d;try{d=await r.json()}catch{throw Error('The local server returned an unreadable response. Reopen the same local server and check the import list before trying again.')}
+if(!d||typeof d!=='object')throw Error('The local server returned an unreadable response. Check the import list before trying again.');
+if(!r.ok)throw Error(typeof d.error==='string'?d.error:'The request was refused. Check the import list before trying again.');return d}
 function button(label,action,primary=false){const b=el('button',label,primary?'primary':'');b.type='button';b.dataset.control=label;b.onclick=action;return b}
-async function action(id,name){try{$('notice').textContent='';await request('/jobs/'+id+'/'+name,{method:'POST'});last='';await refresh()}catch(e){$('notice').textContent=e.message}}
+async function action(id,name){try{$('notice').textContent='';const result=await request('/jobs/'+id+'/'+name,{method:'POST'});
+if(name==='delete')$('notice').textContent='Local import removed. Your original file is unchanged.';
+else if(name==='cancel-delivery')$('notice').textContent='Delivery review canceled. The local prepared files have been kept.';
+else if(['stage-delivery','check-delivery'].includes(name))$('notice').textContent=result.delivery.message;
+else if(name==='plan-delivery')$('notice').textContent='Delivery plan checked. '+(result.delivery_plan.state==='ready_to_apply'?'The exact approval was found; a checked build and installation are still required.':'Exact approval is still required before import into the TV build.');
+last='';await refresh()}catch(e){$('notice').textContent=e.message}}
 async function saveReview(id){try{const review=await request('/jobs/'+id+'/review');const url=URL.createObjectURL(new Blob([JSON.stringify(review,null,2)+'\n'],{type:'application/json'}));const link=el('a');link.href=url;link.download='calm-frames-review-'+id+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('notice').textContent='Caregiver review download ready. This report does not authorize TV playback.'}catch(e){$('notice').textContent=e.message}}
 function render(job){const a=el('article');a.dataset.job=job.id;a.tabIndex=-1;a.append(el('h2',job.title),el('p',job.stage,'stage'));if(job.error)a.append(el('p',job.error,'error'));
 if(job.review){const r=job.review;a.append(el('p','Duration: '+seconds(r.duration_ms)+' · '+r.frame_count+' frames analyzed.'));a.append(el('p','Review the interruptions below. These include the app’s guard time around flagged scenes.'));
@@ -36,7 +48,7 @@ if(active)a.append(el('p','The whole file is being processed. Progress is shown 
 if(['review','signing_blocked'].includes(job.status)){a.append(button(job.status==='signing_blocked'?'Retry preparation with configured signer':'Approve review and prepare',()=>action(job.id,'approve'),true));a.append(el('p','Preparation requires an existing authorized signer. Without one, the reviewed file stays blocked from TV playback.'))}
 if(['failed','interrupted','canceled'].includes(job.status))a.append(button('Analyze again',()=>action(job.id,'retry')));
 if(job.status==='package_review'){a.append(el('p','The prepared package passed verification. TV delivery still requires exact approval, a checked build and installation.'),el('code','Bundle '+job.package.bundle_id),el('p','Public key fingerprint: '+job.package.public_key_fingerprint),el('p','Catalog SHA-256: '+job.package.catalog_sha256));
-const d=job.delivery;if(d){a.append(el('p',d.state==='canceled'?'Delivery review canceled':d.state==='blocked'?'Delivery validation blocked':d.state==='approved_for_build'?'Exact approval already recorded':'Ready for exact approval','stage'),el('p',d.message),el('p','This is a validation snapshot. No video was installed or made playable.'),el('code','Review '+d.ticket_id));if(d.approval_label)a.append(el('p',d.approval_label));for(const reason of d.blockers||[])a.append(el('p',reason));if(d.state!=='canceled')a.append(button('Recheck delivery files',()=>action(job.id,'check-delivery')),button('Show delivery plan',()=>action(job.id,'plan-delivery')),button('Cancel delivery review',()=>action(job.id,'cancel-delivery')))}
+const d=job.delivery;if(d){a.append(el('p',d.state==='canceled'?'Delivery review canceled':d.state==='blocked'?'Delivery validation blocked':d.state==='approved_for_build'?'Last check: exact approval recorded':'Last check: ready for exact approval','stage'),el('p',d.message),el('p','Saved validation snapshot. Recheck delivery files before relying on it. No video was installed or made playable.'),el('code','Review '+d.ticket_id));if(d.approval_label)a.append(el('p',d.approval_label));for(const reason of d.blockers||[])a.append(el('p',reason));if(d.state!=='canceled')a.append(button('Recheck delivery files',()=>action(job.id,'check-delivery')),button('Show delivery plan',()=>action(job.id,'plan-delivery')),button('Cancel delivery review',()=>action(job.id,'cancel-delivery')))}
 const p=job.delivery_plan;if(p){const detail=el('details');detail.open=true;detail.append(el('summary','Creator edition delivery plan'),el('p',p.state==='ready_to_apply'?'This exact edition is approved for this checkout. An operator can import its checked assets.':'This edition needs exact approval before it can enter the TV build.'),el('p','New asset files: '+p.files_to_add.length+'. Already present: '+p.files_already_present.length+'.'),el('p','Target checkout: '+p.app_directory),el('p','Staging reviews: '+p.staging_root),el('code','Ticket '+p.ticket_id));for(const reason of p.blockers)detail.append(el('p',reason));detail.append(el('p','After exact approval, the operator runs pipeline.edition_delivery apply with this staging root, ticket and app path. A checked build and installation follow separately. This page cannot approve, build or install an edition.'));a.append(detail)}
 if(!d||d.state==='canceled')a.append(button('Stage delivery review',()=>action(job.id,'stage-delivery')))}
 if(!active)a.append(button('Remove local import',()=>{if(confirm('Remove this copied file, analysis and prepared artifacts from this intake workspace? Your original file is unchanged.'))action(job.id,'delete')}));return a}
