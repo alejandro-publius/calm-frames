@@ -114,7 +114,9 @@ export const VideoPlayerUI = React.memo(
     useEffect(() => {
       if (!paused) {
         // Opening/restored paused media is not a new user pause.
-        played.current = videoRef.current?.paused === false && !videoRef.current?.ended;
+        // Native pause state can precede its React prop. A controls update
+        // must not erase playback already observed by this player instance.
+        if (videoRef.current?.paused === false && !videoRef.current?.ended) played.current = true;
         setPauseNotice('');
         pauseAnnounced.current = false;
         return;
