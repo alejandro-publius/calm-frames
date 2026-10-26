@@ -1,0 +1,72 @@
+{
+  "status": "local silent review candidate only; not analyzed, signed, installed, accepted or published",
+  "input_prepared_sha256": "13dc742713622580fea9a96217c1e06cf0933b809b257715ab30d5bac9d2f531",
+  "output_sha256": "66d44d0888b0bc2bbc6da55614babcbf88108632b282275f115000cc5a85d9d3",
+  "output_bytes": 18253867,
+  "video_packet_bytes_and_timestamps_identical": true,
+  "video_packets": 7500,
+  "decoded_audio_bytes": 57600000,
+  "nonzero_decoded_audio_bytes": 0,
+  "baseline_main": "c5bb89281a2d46c48d8c1ca6b7bd38f5977a8c54",
+  "candidate_filename": "lee-point-woodland-300s-silent-review.mp4",
+  "duration_seconds": 300,
+  "video_width": 1280,
+  "video_height": 720,
+  "video_fps": 25,
+  "audio": "AAC-LC stereo 48000 Hz; decoded PCM is all zero",
+  "source_original_sha256": "2f6d768bbf81281a771100201924bf1edec3fd073c2dd70e0b8f9be027401785",
+  "excerpt_sha256": "0bebcec06896321e39ec5f23a42d119fdcdc03b932c035ee83d97b57290f7256",
+  "original_and_excerpt_hashes_reverified": true,
+  "source_url": "https://commons.wikimedia.org/wiki/File:Lee_Point_woodland_in_the_Northern_Territory,_Australia.webm",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "creator": "Gary wanders a lot",
+  "license_review_note": "Commons records CC BY 3.0 and still marks its external license review pending. Earlier handoff reports original YouTube license inspected. No new rights or endorsement inferred.",
+  "human_picture_or_comfort_accepted": false,
+  "app_media_changed": false,
+  "trust_or_budget_changed": false,
+  "whole_item_closed": false,
+  "budget_review": {
+    "limit_bytes": 134217728,
+    "current_namespace_bytes": 129255687,
+    "current_headroom_bytes": 4962041,
+    "candidate_one_copy_bytes": 18253867,
+    "candidate_three_copies_bytes": 54761601,
+    "nonconsumer_bundle_bytes": 8466825,
+    "existing_forest_bundle_bytes": 7537060,
+    "headroom_if_nonconsumer_and_old_forest_replaced_bytes": 20965926,
+    "minimum_three_copy_deficit_after_those_replacements_bytes": 33795675,
+    "note": "Arithmetic review only, before new maps/report/catalog/still overhead. Nothing removed. No existing supported deduplication path identified; exporter writes separate preset media paths and checker rejects aliases."
+  },
+  "bundles": [
+    {
+      "bundle": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+      "bytes": 17891254,
+      "consumer_approved": true
+    },
+    {
+      "bundle": "4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee",
+      "bytes": 690912,
+      "consumer_approved": false
+    },
+    {
+      "bundle": "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101",
+      "bytes": 7775913,
+      "consumer_approved": false
+    },
+    {
+      "bundle": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "bytes": 7537060,
+      "consumer_approved": true
+    },
+    {
+      "bundle": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+      "bytes": 65919427,
+      "consumer_approved": true
+    },
+    {
+      "bundle": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "bytes": 29207835,
+      "consumer_approved": true
+    }
+  ]
+}
