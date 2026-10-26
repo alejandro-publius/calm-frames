@@ -23,7 +23,7 @@
     "app:launch": "kepler device launch-app",
     "app:build:debug": "run-s build:debug && npm run app:install:debug && npm run app:launch",
     "app:build": "run-s build:release && npm run app:install && npm run app:launch",
-    "build:release": "react-native build-kepler --build-type Release",
+    "build:release": "react-native build-kepler --build-type Release --hermes-flags=-O,-w,-g0",
     "build:debug": "react-native build-kepler --build-type Debug",
     "prebuild:release": "node tools/check_native_inputs.mjs && node tools/check_prepared_library.mjs --require-reports && node tools/approved_baked_ambient.mjs --check && node tools/playback_proof.mjs --check",
     "prebuild:debug": "node tools/check_native_inputs.mjs && node tools/check_prepared_library.mjs --require-reports && node tools/approved_baked_ambient.mjs --check && node tools/playback_proof.mjs --check",

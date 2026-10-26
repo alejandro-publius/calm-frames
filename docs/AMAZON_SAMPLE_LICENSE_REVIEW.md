@@ -92,3 +92,21 @@ new license grant.
 > redistribution in source and compiled Vega applications, or provide the
 > applicable LICENSE.TXT and clarify the conflicting notices? We have preserved
 > the existing notices.
+
+## October 26 official distribution check
+
+The [official Vega Shaka integration guide](https://developer.amazon.com/docs/vega/0.24/media-player-shaka-player.html)
+links the [4.8.5-r1.2 distribution](https://amzndevresources.com/vega/media-player/shaka-rel-v4.8.5-r1.2-devices_scope.tar.gz).
+That download is byte-identical to the tracked archive, SHA-256
+`f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e`.
+It contains no license or notice member, so it supplies no missing `LICENSE.TXT`
+to restore. The installed Vega SDK root license points to Amazon's
+[Program Materials License Agreement](https://developer.amazon.com/support/legal/pml).
+That general SDK notice does not identify the conflicting integration files or
+resolve which terms apply to their source and compiled redistribution. No terms
+were copied into a fabricated license file, notices removed or new agreement accepted.
+
+The exact Release inventory still includes the wrapper and six polyfills with
+these notices. This check leaves publication held for applicable terms or an
+upstream clarification covering those files. The existing unsent request above
+remains a draft. See [the bounded review](../results/release-hermes-privacy-2026-10-26.json).

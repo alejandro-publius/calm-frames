@@ -205,14 +205,19 @@ def test_invalid_options_stop_before_build(project, args):
     assert not (project / 'commands.log').exists()
 
 
-def test_build_uses_selected_target_and_creates_reusable_receipt(project):
-    result = run_release(project, '--tag', 'fresh')
+@pytest.mark.parametrize('kind', ['Debug', 'Release'])
+def test_build_uses_selected_target_and_creates_reusable_receipt(project, kind):
+    result = run_release(project, '--tag', 'fresh', '--build-type', kind)
     assert result.returncode == 0, result.stderr
     commands = (project / 'commands.log').read_text()
-    assert 'exec -- react-native build-kepler --build-type Debug --target aarch64' in commands
-    proof = project / 'app/build/aarch64-debug/release-build-receipt.json'
+    assert f'exec -- react-native build-kepler --build-type {kind} --target aarch64' in commands
+    # The helper invokes the SDK directly, so npm's Release flags alone cannot
+    # prevent disclosure of an absolute host filename in Hermes debug metadata.
+    assert ('--hermes-flags=-O,-w,-g0' in commands) == (kind == 'Release')
+    proof = project / f'app/build/aarch64-{kind.lower()}/release-build-receipt.json'
     assert proof.exists()
-    reused = run_release(project, '--skip-build', '--tag', 'reuse', '--receipt', str(proof))
+    reused = run_release(project, '--skip-build', '--tag', 'reuse', '--build-type', kind,
+                         '--receipt', str(proof))
     assert reused.returncode == 0, reused.stderr
 
 
