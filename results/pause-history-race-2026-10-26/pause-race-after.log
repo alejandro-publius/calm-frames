@@ -1,0 +1,31 @@
+PASS test/calmframes/playbackUi.test.tsx
+PASS test/calmframes/nativePlaybackRecovery.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:743:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:743:15)
+
+PASS test/calmframes/playbackCopy.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       46 passed, 46 total
+Snapshots:   0 total
+Time:        1.521 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/playbackCopy.test.ts|test\/calmframes\/nativePlaybackRecovery.test.tsx/i.

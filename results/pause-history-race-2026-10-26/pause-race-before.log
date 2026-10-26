@@ -1,0 +1,39 @@
+FAIL test/calmframes/playbackUi.test.tsx
+  ✕ a native pause before the controls timer cannot erase observed playback before the pause prop arrives (323 ms)
+  ○ skipped seekbar yields initial and restored preferred focus to Skip during none
+  ○ skipped seekbar yields initial and restored preferred focus to Skip during countdown
+  ○ skipped initialized playback exposes named captions and a stationary contrasting focus ring
+  ○ skipped ambient Harbor starts Off, honors explicit On through playback updates, and can return Off
+  ○ skipped pause stays visible after controls hide in covering state and clears on Play
+  ○ skipped pause stays visible after controls hide in countdown state and clears on Play
+  ○ skipped pause stays visible after controls hide in none state and clears on Play
+  ○ skipped one explicit pause announcement survives controls toggling and repeats only after new playback
+  ○ skipped opening in a paused state is silent until actual playback and a later pause
+  ○ skipped the covering scene card owns its pause announcement without the generic notice
+  ○ skipped the countdown scene card owns its pause announcement without the generic notice
+  ○ skipped recovery paints above the retained cover and Back leaves once
+  ○ skipped choosing the active caption track closes its menu without changing media or the hold
+  ○ skipped a quick resume cancels pending pause speech and unmount cancels it too
+
+  ● a native pause before the controls timer cannot erase observed playback before the pause prop arrives
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Paused. Press Play to continue."
+    Received: ""
+
+      239 |   view.rerender(<VideoPlayerUI {...props} paused />);
+      240 |   act(() => jest.advanceTimersByTime(700));
+    > 241 |   expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('Paused. Press Play to continue.');
+          |                                                                                  ^
+      242 |   expect(speak.mock.calls.filter(([text]) => text === 'Paused. Press Play to continue.')).toHaveLength(1);
+      243 | });
+      244 |
+
+      at Object.toBe (test/calmframes/playbackUi.test.tsx:241:82)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 14 skipped, 15 total
+Snapshots:   0 total
+Time:        3.625 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx/i with tests matching "native pause before the controls timer".
