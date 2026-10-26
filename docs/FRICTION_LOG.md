@@ -1,5 +1,7 @@
 # Friction log
 
+> **Historical September friction record.** The [coverage reconciliation](FEEDBACK_RECONCILIATION.md) points to newer public records and identifies what needs owner confirmation. This file is not a record of answers submitted to Devpost. Later AWS deployment and native capture evidence supersede the old claims that neither existed.
+
 Developer friction found while building Calm Frames, in the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion.
 
 Everything here is real. Each entry is something that cost time on this build, with the exact commands and the exact output, and each one is traceable to a commit, a log, a results file or an entry in [`docs/DECISIONS.md`](DECISIONS.md). **Nothing was invented to reach a number, and nothing was softened.** Where we are stating a platform constraint we designed around rather than a failure we watched happen, the entry says so in its own words.

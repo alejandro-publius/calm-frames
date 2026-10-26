@@ -5,6 +5,9 @@ Start with the [project overview and public provenance](../README.md). The
 submitted answer. The README links to the newer public October source snapshot;
 relative source links on this default-branch lineage still refer to September.
 
+See the [feedback and judge-access reconciliation](FEEDBACK_RECONCILIATION.md)
+for existing coverage, bounded draft entries and remaining confirmation needs.
+
 ## Historical engineering evidence
 
 - [Evaluation plan](EVAL_PLAN.md) and [committed results](../results/) preserve

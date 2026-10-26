@@ -1,5 +1,7 @@
 # Product feedback
 
+> **Historical September feedback record.** The [coverage reconciliation](FEEDBACK_RECONCILIATION.md) points to newer public records and identifies what needs owner confirmation. This file is not a record of answers submitted to Devpost. Later AWS deployment and native capture evidence supersede the old claims that neither existed.
+
 Amazon asks five questions about every tool an entry used. This file answers them once per tool, for every tool Calm Frames actually used, and then lists what we would like added, each marked Critical, Important or Nice-to-have.
 
 **The five questions, in the order they appear in each section:**

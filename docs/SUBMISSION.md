@@ -21,3 +21,7 @@ New media preparation and editorial assets are not a finished native demo.
 The actual live form, submitted answers, eligibility and organizer decisions must
 be checked on Devpost separately. This documentation change does not edit or
 attest to that form, publish a release or change the demo video.
+
+The [feedback coverage review](FEEDBACK_RECONCILIATION.md) maps existing public
+records to the requested feedback fields and distinguishes them from unread
+submitted answers. It also records the remaining judge-build access check.

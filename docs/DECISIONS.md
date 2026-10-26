@@ -1422,3 +1422,10 @@ local repairs are not public and Debug observations are not Release acceptance.
 This isolated documentation branch changes no product code or gates; review and
 merge into main is still needed to update the default landing page. Cost: no
 product rebuild, media preparation, native test or external submission change.
+
+The feedback follow-up reuses the structurally complete numbered records in the
+public October handoff and marks the older main copies historical. A concise
+reconciliation normalizes dated notes without inventing experiences, identifies
+owner confirmation and unread-form limits, and records that public clone-to-build
+access still needs a separate check. The existing video's description identifies
+an older branch; its private-access note is stale and was not edited.

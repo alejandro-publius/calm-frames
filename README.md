@@ -20,7 +20,7 @@ Prime Video, DRM content or arbitrary streams system-wide.
 |---|---|
 | [Public October source snapshot](https://github.com/alejandro-publius/calm-frames/tree/37d10c2db57fc0868499adc133cff7560600d5cc) | Public native-validation handoff at `37d10c2`. Includes the earlier product tree and its handoff record. It predates the latest local native repairs. |
 | [Build preparation instructions for that snapshot](https://github.com/alejandro-publius/calm-frames/blob/37d10c2db57fc0868499adc133cff7560600d5cc/docs/RELEASE.md) | Developer instructions, not a downloadable accepted build. Use the source and instructions from the same snapshot. Preparation still requires the documented SDK and media verification inputs. |
-| [Earlier demo video](https://www.youtube.com/watch?v=6lAP1FH16vc) | Historical demonstration of an earlier build. It is not evidence that the latest repairs passed, and no exact source-to-video build identity is established here. |
+| [Earlier demo video](https://www.youtube.com/watch?v=6lAP1FH16vc) | Historical demonstration of an earlier build on the Vega Virtual Device. The video description names `claude/ocean-layout-fix-2026-10-19`, without pinning an exact build; its private-repository access note is stale. The video does not establish that the latest repairs passed. |
 | [Documentation guide](docs/README.md) | Separates current public status from the September engineering record. |
 | [Submission status note](docs/SUBMISSION.md) | Repository documentation only. A draft is not a submitted Devpost answer. |
 
