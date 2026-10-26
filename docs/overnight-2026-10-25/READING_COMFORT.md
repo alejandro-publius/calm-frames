@@ -1,18 +1,22 @@
 # Optional Reading comfort
 
-**Current machine-evidence reconciliation:** `3512344` passed first/repeated
-Debug toggles, whole-switch visibility and retained focus at both requested
-sizes, with VoiceView off. The [native repair record](../native-receipt-fixes-773334a.md)
-retains the exact scope. Earlier per-profile persistence/isolation, wrapping,
-More info and VoiceView-label observations remain valid for their source.
-The original acceptance sheet additionally requires speech/focus on the updated
-save path and the owner's reading-comfort judgment. Parents is protected again
-after the disposable relaunch. This continuation does not request the PIN again,
-enter or persist it, or claim that the missing protected-state observation ran.
-No whole item 20 closure is inferred. Historical remaining-acceptance text below
-must be read with the completed viewport evidence above.
+**Current outcome, October 26: completed.** The owner accepted comfort reviews
+in chat on October 26, waiving a separate witnessed/package-named personal
+review. This is an owner decision, not a test performed or a medical claim.
 
-Original checklist item 20 is **partially completed**. The default-off source
+Retained evidence covers per-profile persistence/isolation, wrapping and earlier
+VoiceView labels, plus corrected first/repeated toggle visibility and focus at
+both sizes. Canonical Release `b91a1f2` (app tree matching main `ca1be2a`) now
+passes the updated save-path VoiceView check at 720p: Off/On spoken, whole switch
+visible, focus retained, and next Down reaches Gentle artwork motion rather than
+Back. No 1080p VoiceView save recording, delayed/failed native write or new
+personal comfort observation is claimed. [Source/package and observation record](../../results/owner-acceptance-2026-10-26.json).
+The original machine criteria are satisfied by the combined retained and new
+scope; item 11's independent pause-speech failure remains open.
+
+## Historical implementation and acceptance plan
+
+At the time of the original implementation, checklist item 20 was **partially completed**. The default-off source
 implementation and cloud regressions are complete; native layout, focus,
 VoiceView and owner comfort acceptance remain open. It was implemented after
 the higher-priority overnight product changes at
@@ -85,7 +89,7 @@ navigation and ten-foot checks also run. Text-bound tests use the repository's
 conservative wrapping ruler on the rendered styles; they are estimates, not
 native captures or evidence of VoiceView pronunciation.
 
-## Remaining native acceptance
+## Historical remaining native acceptance (superseded above)
 
 Use the eventual exact-build native package and record its source and package
 hash. Keep the existing household and rollback. Enter any real PIN privately
@@ -108,7 +112,7 @@ and exclude names, letters and digits from captured logs.
 
 Status: optional source work completed locally; native acceptance pending.
 
-## October 26 bounded access observation
+## Earlier October 26 bounded access observation (superseded above)
 
 The switch is reachable in a separate fictional validation profile; no real PIN
 was requested, captured or persisted. The supported `a11y-tv-util settings list`
@@ -118,4 +122,5 @@ screen was entered or changed. This is not proof that every supported VoiceView
 route is unavailable. Save-path speech was not tested, and the earlier
 VoiceView-off viewport passes are not repeated or extended. See the
 [access receipt](../../results/reading-comfort-voiceview-access-2026-10-26.json).
-Owner comfort and whole-item acceptance remain open.
+At that earlier checkpoint, owner comfort and whole-item acceptance remained open.
+The current outcome above supersedes that status.

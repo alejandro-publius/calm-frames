@@ -165,7 +165,7 @@ does not renew exceptions or certify release acceptance.
 Lee Point Australian woodland has been acquired and prepared separately, but is
 unaccepted and unintegrated. Its temporary signatures are not trusted by the app.
 The owner selected the woodland scene and a silent candidate for review; package
-budget, authorized preparation and human comfort acceptance remain open. It is
+budget, authorized preparation and native activation checks remain open. It is
 not the current Prairie Creek Forest scene. No qualifying Sea Otters replacement
 is available. Editorial overlays are drafts, not a completed native demo.
 
