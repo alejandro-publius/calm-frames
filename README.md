@@ -100,6 +100,8 @@ before preparing an artifact; older screenshots and the demo identify other buil
 Requires the pinned Node 22, Python 3.12, ffmpeg/ffprobe, and JDK 21. A native
 build also needs the documented Vega SDK installation. No private signing key
 or cloud account is needed to inspect the bundled catalog.
+The [reviewer quickstart](docs/submission/REVIEWER_QUICKSTART.md) gives the current
+public-source and isolated install path; older private-branch directions are superseded.
 
 ```sh
 git clone https://github.com/alejandro-publius/calm-frames.git
@@ -156,9 +158,10 @@ and [read-only TV report transfer](docs/PERSONAL_REVIEW_INBOX.md).
 
 The [native repair record](docs/native-receipt-fixes-773334a.md) distinguishes
 source tests, package checks and observed device behavior. Pale openings passed
-within recorded cases. Reading comfort visibility and focus passed the scoped
-Debug checks at both requested resolutions with VoiceView off; Release and
-VoiceView-enabled acceptance remain open. Pause announcements remain unreliable
+within recorded cases. Reading comfort visibility and focus passed at both requested resolutions;
+Release 720p VoiceView save speech/focus also passed, with the recorded
+[owner acceptance scope](results/owner-acceptance-2026-10-26.json). No new 1080p
+VoiceView save recording is claimed. Pause announcements remain unreliable
 in the recorded Release retest. Dependency Audit remains blocked; consolidation
 does not renew exceptions or certify release acceptance.
 
