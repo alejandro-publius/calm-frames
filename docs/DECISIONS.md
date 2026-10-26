@@ -2919,3 +2919,7 @@ Use separate branch from frozen 773334a. Repair only demonstrated opening, pause
 2026-10-25: End this bounded fix pass after the final Release two-pause test still missed its second announcement and the 1080p comfort toggle still clipped. Preserve failed evidence and do not treat mocked test success as native acceptance. Keep safety cover and #4 focus unchanged. Cost: two fixes remain unresolved; no expanded audit or speculative iteration.
 
 2026-10-25: Scope continuation to Reading comfort. Align the measured ScrollView viewport with content-relative row coordinates by moving safe-area padding to an enclosing View. No timers, speech work or dependency changes. Cost: one Debug rebuild and two targeted viewport checks.
+
+## October 25, 2026: consolidate intended product and public documentation
+
+The owner authorized normal integration of product `001b4867` with documentation `d2f92e4`. Preserve original history and rollback refs. Resolve documentation conflicts against current product source, keep the dated native gallery and restore the historical screening table required by existing evidence checks. No product code, media, trust or gate changes are needed for these conflict resolutions. Native acceptance and dependency risk remain separate from source consolidation. Lee Point woodland stays outside the repository pending scene/audio, budget and trusted-preparation decisions.

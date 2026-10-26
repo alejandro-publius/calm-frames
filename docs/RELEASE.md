@@ -3,7 +3,7 @@
 The current hackathon entry uses the Vega Virtual Device. Prepare an Apple
 Silicon aarch64 Debug package by default. Other architectures, Release builds
 and PyPI publication are separate choices, not simulator-demo prerequisites.
-No final release or Devpost entry has been published.
+No accepted downloadable release is established here. Actual Devpost answers and submission state are separate and have not been verified by this consolidation.
 
 ## The app
 

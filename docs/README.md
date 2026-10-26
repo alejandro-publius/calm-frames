@@ -21,6 +21,10 @@ rather than tidied away. They record how the work was done, not what the
 product is, and an older record keeps the words it had on its date, so read
 the date before relying on it.
 
+Current public overview and exact source scope are in the [README](../README.md).
+See the [feedback reconciliation](FEEDBACK_RECONCILIATION.md) for submitted-form limits.
+Historical drafts below retain their dates and do not establish current acceptance.
+
 ## For readers
 
 ### Safety and trust

@@ -103,3 +103,12 @@ regexes = [
   '''^\s*"app/test/calmframes/playerAccess\.test\.ts":\s*"8c60ea48beb51ebbe1a6d244a5e359c4b548420f95b9b06b4a4da263b3c1e002",?\s*$''',
   '''^\s*"app/test/calmframes/revokedKey\.test\.ts":\s*"8213b1a595918c0ec117c15f307b1c6447db7a30c5b47d1b23c6ae2d616af8a2",?\s*$''',
 ]
+
+# Literal report digests verified during consolidation; no credential field is excluded.
+[[allowlists]]
+description = "Verified literal source-access report digests"
+regexTarget = "line"
+regexes = [
+  '''^\s*"official\-source\-access\.json":\s*"5c004de7cd26e7459d6f27bf3f00056dedc2a6aa0b584d0001598625ebea6285",?\s*$''',
+  '''^\s*"source\-access\.json":\s*"03f27c40e8dae722f4e421d38cc4ac8722183137350101e57ba9838b61360971",?\s*$''',
+]

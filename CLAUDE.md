@@ -1,3 +1,5 @@
+**Current consolidation, October 25, 2026 (Pacific).** The owner authorized integrating product `001b4867` and documentation `d2f92e4` into an updated main through normal reviewed Git history. Preserve exclusions, rollback refs and all existing gates. Older no-push/no-merge scope statements below are historical. No exception renewal, SDK migration, new signer, media activation or external submission change is authorized by this consolidation. Lee Point woodland was acquired separately and is not integrated or accepted.
+
 **Reading comfort continuation completed:** 3512344 corrects padded viewport measurement. Isolated Debug first/repeated toggles, visibility and focus pass at 720p and 1080p. Pause speech remains unresolved and was untouched. Stop after this scoped pass.
 
 **Targeted native retest outcome:** pale-opening cases pass; pause speech and comfort clipping still fail. No promotion. Exact product source and limits are in `docs/native-receipt-fixes-773334a.md`.

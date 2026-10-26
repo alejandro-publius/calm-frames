@@ -1,5 +1,7 @@
 # Safety
 
+> **Current scope clarification, October 26, 2026.** Calm Frames is a prepared-media prototype, not a medical device. It has not been clinically validated and cannot guarantee seizure prevention or safe viewing for an individual. Historical terms such as "safe" describe engineering intentions, not certification. See the [README](../README.md) for public source and acceptance limits. The handling precautions below remain in force.
+
 ## Rules for the team (read these first)
 
 1. **Nobody watches strobes at full speed.** Hazard files carry the `HAZARD_` prefix, stay under `media/` (gitignored), never autoplay anywhere, and are inspected only as plots or as slowed, dimmed playback.

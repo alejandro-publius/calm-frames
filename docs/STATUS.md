@@ -1816,3 +1816,7 @@ Three bounded repairs implemented in an isolated branch; focused native retest p
 Bounded native retest finished: pale openings pass in recorded cases; pause speech and initial Reading comfort clipping still fail. Black safety cover preserved. Debug/Release built, Release installed hash matched. No full numbered closures; 7 complete, 11 partial, 2 blocked. No push.
 
 Reading comfort continuation: initial/repeated toggle clipping resolved on 3512344; isolated Debug 720p and 1080p visibility/focus checks pass. 26 focused tests and typecheck pass. Speech and other prior open checks unchanged; no whole numbered closure or push.
+
+## October 25, 2026: reviewed main consolidation
+
+Product source `001b4867` and public documentation `d2f92e4` are combined in an isolated worktree. The last application change is `3512344`; `001b4867` adds receipt/status documentation only. Native pause speech, Release/VoiceView comfort acceptance and dependency Audit remain open. Existing gates and exception expiry are preserved. Lee Point woodland is acquired but unaccepted and unintegrated; its temporary signing maps cannot authorize playback. No source media, credentials or household data are added by consolidation. Main promotion depends on the reviewed branch and checks.

@@ -29,3 +29,20 @@ def test_digest_exception_requires_exact_field_and_verified_value(tmp_path, fiel
     result = subprocess.run([GITLEAKS, "dir", str(tmp_path), "--config", str(REPO / ".gitleaks.toml"),
                              "--redact", "--no-banner"], capture_output=True, text=True, check=False)
     assert result.returncode == expected, "unexpected scanner result (values intentionally omitted)"
+
+
+@pytest.mark.skipif(not GITLEAKS, reason="gitleaks is checked by the separate security job")
+@pytest.mark.parametrize("name", ["official-source-access.json", "source-access.json"])
+@pytest.mark.parametrize("mutation", ["none", "digest", "field"])
+def test_report_digest_allowlist_requires_exact_report_and_bytes(tmp_path, name, mutation):
+    import json
+
+    source = REPO / "results/cloud-completion-2026-10-25" / name
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    if mutation == "digest":
+        digest = hashlib.sha256(b"synthetic secret scanner bait").hexdigest()
+    field = "api_key" if mutation == "field" else name
+    (tmp_path / "manifest.json").write_text(json.dumps({field: digest}, indent=2) + "\n")
+    result = subprocess.run([GITLEAKS, "dir", str(tmp_path), "--config", str(REPO / ".gitleaks.toml"),
+                             "--redact", "--no-banner"], capture_output=True, text=True, check=False)
+    assert result.returncode == (0 if mutation == "none" else 1), "unexpected scanner result (values omitted)"
