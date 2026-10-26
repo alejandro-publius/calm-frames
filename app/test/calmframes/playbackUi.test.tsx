@@ -108,11 +108,13 @@ test('one explicit pause announcement survives controls toggling and repeats onl
   const region = view.getByTestId('player-pause-announcement');
   expect(region.props.accessibilityLabel).toBe('');
   act(() => mockMedia.pause());
-  // Speech waits briefly for the pause commit, independently of controls visibility.
+  // Native seekbar speech owns the visible controls; announce after they settle.
   expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(0);
   act(() => jest.advanceTimersByTime(700));
-  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(1);
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(0);
   act(() => jest.advanceTimersByTime(6000));
+  act(() => jest.advanceTimersByTime(700));
+  expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(1);
   expect(view.getByTestId('player-pause-announcement')).toBe(region);
   expect(region.props.accessibilityLiveRegion).toBe('none');
   expect(region.props.accessibilityLabel).toBe(message);
@@ -129,6 +131,7 @@ test('one explicit pause announcement survives controls toggling and repeats onl
   expect(region.props.accessibilityLabel).toBe('');
   act(() => mockMedia.pause());
   act(() => jest.advanceTimersByTime(6000));
+  act(() => jest.advanceTimersByTime(700));
   expect(region.props.accessibilityLabel).toBe(message);
   expect(speak.mock.calls.filter(([text]) => text === message)).toHaveLength(2);
 });

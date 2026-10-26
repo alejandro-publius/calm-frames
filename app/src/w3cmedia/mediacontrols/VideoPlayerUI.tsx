@@ -110,24 +110,28 @@ export const VideoPlayerUI = React.memo(
     const [showMediaControls, setShowMediaControls] = useState(true);
     const played = useRef(false);
     const [pauseNotice, setPauseNotice] = useState('');
+    const pauseAnnounced = useRef(false);
     useEffect(() => {
       if (!paused) {
         // Opening/restored paused media is not a new user pause.
         played.current = videoRef.current?.paused === false && !videoRef.current?.ended;
         setPauseNotice('');
+        pauseAnnounced.current = false;
         return;
       }
       if (!played.current) return;
       const message = 'Paused. Press Play to continue.';
       setPauseNotice(message);
-      // A live-region mutation can be lost alongside native control focus.
-      // Speak once for this playback-to-pause transition, independently of
-      // controls visibility. Resume/unmount cancels superseded speech.
+      // Native seekbar focus/progress speech can interrupt an early notice.
+      // Wait until controls settle, then explicitly speak once for this pause.
+      // Show/hide cannot repeat it; resume/unmount cancels pending speech.
+      if (showMediaControls || pauseAnnounced.current) return;
       const timer = setTimeout(() => {
+        pauseAnnounced.current = true;
         announceForAccessibility(message, { force: true, queue: false });
       }, CARD_ANNOUNCEMENT_SETTLE_MS);
       return () => clearTimeout(timer);
-    }, [paused, videoRef]);
+    }, [paused, showMediaControls, videoRef]);
     useEffect(() => { trace('playback', `controls ${showMediaControls ? 'shown' : 'hidden'}`); }, [showMediaControls]);
     const { handleShowControls, handleShowControlsOnKeyEvent, cancelTimer } =
       useMediaControls(showMediaControls, setShowMediaControls);
