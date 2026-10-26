@@ -1287,3 +1287,22 @@ cover both issues; no host fault or native acceptance is inferred.
 - Severity: acceptance blocking for those subcriteria.
 - Workaround: leave both open and retain exact native evidence; no claim of completion.
 - Suggestion: next authorized fix should reproduce native scroll geometry and VoiceView delivery competition before selecting another patch.
+
+
+## October 26: native report inbox blocked by filesystem metadata contract
+
+- Task: select a bounded caregiver-computer report inside unlocked Parents.
+- Steps: generate a harmless report; transfer it into a separate fictional app;
+  open the inbox; correct the observed directory exception; repeat the native check.
+- Expected versus actual: the directory check progresses, but the report is still
+  refused. Source review finds `Metadata.mode` declared as `OpenMode`, while the
+  attempted adapter and mocks assume POSIX file-type bits. The precise failing
+  per-file operation was not separately instrumented; no selection success is claimed.
+- Severity: blocks this new inbox path; existing playback is unaffected.
+- Workaround: leave the attempted native feature off main and preserve the
+  caregiver-computer flow. Do not drop link/type guards to obtain a passing demo.
+- Suggestion: document directory exceptions and provide explicit regular-file
+  and symbolic-link metadata, or a supported safe read/picker API. Filesystem reuse
+  for this path is deferred until that boundary is established.
+- Outcome: [bounded receipt](../results/personal-review-inbox-2026-10-26.json);
+  no original item closure or submission-answer claim.
