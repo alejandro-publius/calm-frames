@@ -1812,3 +1812,5 @@ Test-only harness 9c28e93 remains separate and uninstalled.
 ## 2026-10-25 targeted native fixes
 
 Three bounded repairs implemented in an isolated branch; focused native retest pending. Baseline ledger remains 7 complete, 11 partial, 2 blocked. Unobserved cases and human acceptance remain open. Claude #7 stays independent.
+
+Bounded native retest finished: pale openings pass in recorded cases; pause speech and initial Reading comfort clipping still fail. Black safety cover preserved. Debug/Release built, Release installed hash matched. No full numbered closures; 7 complete, 11 partial, 2 blocked. No push.

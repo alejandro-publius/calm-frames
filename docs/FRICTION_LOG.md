@@ -1278,3 +1278,12 @@ cover both issues; no host fault or native acceptance is inferred.
 - Suggestion: provide a supported reviewed source-access route or exact source
   files with their rights records. This is a cloud access-policy limitation, not
   evidence of an Amazon SDK, Mac or browser defect. No organizer message was sent.
+
+## October 25: focused fixes do not fully reproduce native layout and speech
+
+- Task: fix receipt-proven pause speech and initial Reading comfort clipping.
+- Steps: targeted failing tests, bounded changes, Debug/Release builds, isolated native retests.
+- Expected versus actual: mocked regressions pass, but 1080p first comfort enable still clips and the second actual Release pause lacks a transcribed instruction.
+- Severity: acceptance blocking for those subcriteria.
+- Workaround: leave both open and retain exact native evidence; no claim of completion.
+- Suggestion: next authorized fix should reproduce native scroll geometry and VoiceView delivery competition before selecting another patch.

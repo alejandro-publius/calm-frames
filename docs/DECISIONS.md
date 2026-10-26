@@ -2915,3 +2915,5 @@ rendering with existing licensed fonts only. No paid generation or private uploa
 ## 2026-10-25: targeted fixes from the Mac receipt
 
 Use separate branch from frozen 773334a. Repair only demonstrated opening, pause speech and comfort scroll defects. Preserve fail-closed black pauses and #4 focus. Cost: local tests/builds and disposable-device checks only; no paid services. See native-receipt-fixes-773334a.md.
+
+2026-10-25: End this bounded fix pass after the final Release two-pause test still missed its second announcement and the 1080p comfort toggle still clipped. Preserve failed evidence and do not treat mocked test success as native acceptance. Keep safety cover and #4 focus unchanged. Cost: two fixes remain unresolved; no expanded audit or speculative iteration.
