@@ -1,0 +1,67 @@
+{
+ "command": "vega device run-cmd --device VirtualDevice --command 'vpm info io.github.alejandropublius.calmframes'",
+ "fields_kept": [
+  "app_id",
+  "version",
+  "install_time",
+  "update_time",
+  "installed_sha384"
+ ],
+ "reads": [
+  {
+   "read": "before this pass",
+   "device": "main instance (real household)",
+   "app_id": "io.github.alejandropublius.calmframes",
+   "version": "0.1.0",
+   "install_time": "Fri Oct 23 03:58:40 2026 GMT",
+   "update_time": "Sun Oct 25 06:45:56 2026 GMT",
+   "installed_sha384": "480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59",
+   "equals": "a672f57 retained rollback (recorded)",
+   "source_log_kept_locally": "installed-main-before.txt"
+  },
+  {
+   "read": "after the package-scoped Debug install",
+   "device": "main instance (real household)",
+   "app_id": "io.github.alejandropublius.calmframes",
+   "version": "0.1.0",
+   "install_time": "Fri Oct 23 03:58:40 2026 GMT",
+   "update_time": "Sun Oct 25 15:50:11 2026 GMT",
+   "installed_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "equals": "fbe53bf Debug (packages.sha384)",
+   "source_log_kept_locally": "installed-debug-main.txt"
+  },
+  {
+   "read": "after the disposable session and the restart at its default size",
+   "device": "main instance (real household)",
+   "app_id": "io.github.alejandropublius.calmframes",
+   "version": "0.1.0",
+   "install_time": "Fri Oct 23 03:58:40 2026 GMT",
+   "update_time": "Sun Oct 25 15:50:11 2026 GMT",
+   "installed_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "equals": "fbe53bf Debug (packages.sha384)",
+   "source_log_kept_locally": "installed-main-after.txt"
+  },
+  {
+   "read": "after the package-scoped Debug install on a fresh instance",
+   "device": "disposable instance (fictional household)",
+   "app_id": "io.github.alejandropublius.calmframes",
+   "version": "0.1.0",
+   "install_time": "Sun Oct 25 17:20:49 2026 GMT",
+   "update_time": "Sun Oct 25 17:20:49 2026 GMT",
+   "installed_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+   "equals": "fbe53bf Debug (packages.sha384)",
+   "source_log_kept_locally": "installed-debug-disposable.txt"
+  },
+  {
+   "read": "after the package-scoped Release install over Debug",
+   "device": "disposable instance (fictional household)",
+   "app_id": "io.github.alejandropublius.calmframes",
+   "version": "0.1.0",
+   "install_time": "Sun Oct 25 17:20:49 2026 GMT",
+   "update_time": "Sun Oct 25 18:41:02 2026 GMT",
+   "installed_sha384": "ace30351afc9ed7ea251b026bec789bd0f14eb2a871b85eae50ec17c032624ebc257bdfb35401248f74703785e5a2557",
+   "equals": "fbe53bf Release (packages.sha384)",
+   "source_log_kept_locally": "installed-release-disposable.txt"
+  }
+ ]
+}

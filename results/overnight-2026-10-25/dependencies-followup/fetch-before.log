@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+not ok 1 - the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+  ---
+  duration_ms: 4.398311
+  type: 'test'
+  location: './app/tools/legacy_fetch_dependency.test.mjs:67:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '1.7.3' !== '2.7.0'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '2.7.0'
+  actual: '1.7.3'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_fetch_dependency.test.mjs:70:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: the actual fallback strips sensitive headers on a redirect to a different loopback host
+not ok 2 - the actual fallback strips sensitive headers on a redirect to a different loopback host
+  ---
+  duration_ms: 61.908427
+  type: 'test'
+  location: './app/tools/legacy_fetch_dependency.test.mjs:76:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    authorization
+    + actual - expected
+
+    + 'fixture-auth-only'
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: 'fixture-auth-only'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_fetch_dependency.test.mjs:84:52)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: same-host redirects retain headers and convert POST to GET without retaining its body
+ok 3 - same-host redirects retain headers and convert POST to GET without retaining its body
+  ---
+  duration_ms: 12.37508
+  type: 'test'
+  ...
+# Subtest: the installed polyfill exports retain Headers, Request and cloned Response contracts
+ok 4 - the installed polyfill exports retain Headers, Request and cloned Response contracts
+  ---
+  duration_ms: 11.176702
+  type: 'test'
+  ...
+# Subtest: the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+ok 5 - the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+  ---
+  duration_ms: 12.954604
+  type: 'test'
+  ...
+# Subtest: FBJS still prefers an existing native fetch implementation
+ok 6 - FBJS still prefers an existing native fetch implementation
+  ---
+  duration_ms: 3.80281
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 4
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 231.44251

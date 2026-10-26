@@ -1,0 +1,494 @@
+{
+  "status": "bounded_native_pass_remaining_acceptance_gaps",
+  "installed": {
+    "source_commit": "3bc658f0491b02b92fa22bc454a40887ecbf23ae",
+    "sha256": "b333b344ae61aa769743c82fb48086826b5e35e55afe9a58b203b2ae8a237057",
+    "sha384": "0cf033fc9ea9102e5c9e8e0f434c73d04789d3d24915821fd7fc5f357845b236f7284ae14ad95ae86a0ed8e7c451004f",
+    "bytes": 132599614,
+    "installed_sha384_match": true
+  },
+  "tests": {
+    "app_passed": 1796,
+    "app_skipped": 4,
+    "suites_passed": 171,
+    "snapshots_passed": 57,
+    "typescript": "passed",
+    "scoped_lint": "passed",
+    "regression": "Native property update after pause event fails before read-only reconciliation, passes after."
+  },
+  "earlier_installed_source": "e0f2ee747851f5a47fba8d0605c186e55873e414",
+  "earlier_progress": {
+    "fresh": {
+      "samples": 253,
+      "wall_seconds": 63.238,
+      "media_seconds": 63.236,
+      "ratio": 0.9999683734463455,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723085594,
+        "mediaTimeMs": 240,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -40,
+          "worstTickGapMs": 104
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723148832,
+        "mediaTimeMs": 63476,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -40,
+          "worstTickGapMs": 142
+        }
+      }
+    },
+    "fresh_capture_overlap": {
+      "samples": 71,
+      "wall_seconds": 17.571,
+      "media_seconds": 17.577,
+      "ratio": 1.0003414717432133,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723112185,
+        "mediaTimeMs": 26828,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -40,
+          "worstTickGapMs": 142
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723129756,
+        "mediaTimeMs": 44405,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -40,
+          "worstTickGapMs": 142
+        }
+      }
+    },
+    "recovered": {
+      "samples": 362,
+      "wall_seconds": 90.594,
+      "media_seconds": 90.50800100000001,
+      "ratio": 0.999050720798287,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723254221,
+        "mediaTimeMs": 64376.998999999996,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -63624,
+          "worstTickGapMs": 150
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723344815,
+        "mediaTimeMs": 154885,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -63624,
+          "worstTickGapMs": 150
+        }
+      }
+    },
+    "recovered_capture_overlap": {
+      "samples": 47,
+      "wall_seconds": 11.548,
+      "media_seconds": 11.544,
+      "ratio": 0.9996536196744026,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723318209,
+        "mediaTimeMs": 128286,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -63624,
+          "worstTickGapMs": 150
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723329757,
+        "mediaTimeMs": 139830,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -63624,
+          "worstTickGapMs": 150
+        }
+      }
+    }
+  },
+  "earlier_observations": {
+    "pause": "Opaque black cover and paused guidance observed.",
+    "saved_resume": "Saved paused 63.624 seconds; native seeking, confirming and ready events. No advancing playhead until explicit first Play; resumed picture observed.",
+    "back_release": "Async destroy called 02:39:31.748 UTC, teardown ok 02:39:32.001 UTC, Details Watch focus restored.",
+    "background_release": "KEY_HOMEPAGE, capture off. Async destroy 02:42:25.397 UTC, native callback 02:42:25.826 UTC, teardown ok and Details focus. Foreground restored explicitly.",
+    "capture_limit": "A standalone paused screenshot was black; the transition recording shows paused guidance. Do not treat every still capture as compositor proof.",
+    "timing_causality": "Old slowdown not reproduced in these runs. Code ownership/teardown defects were corrected, but host pressure changed too; no isolated causal attribution."
+  },
+  "audio": {
+    "captured_stream": "AAC stereo 48000 Hz",
+    "recovered_sample_duration_seconds": 15.991667,
+    "mean_db": -25.0,
+    "peak_db": -7.4,
+    "human_listening": false
+  },
+  "recordings": [
+    {
+      "path": ".logs/native-async-2026-10-23/fresh-playback-20s.mp4",
+      "sha256": "01f22fc9d5c1e8cba175fdce783af43ba95f39f1e39b545d1effdce9fb33bc53",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "21.328333",
+          "size": "19430125"
+        }
+      },
+      "source_commit": "e0f2ee747851f5a47fba8d0605c186e55873e414"
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/resume-transition-30s.mp4",
+      "sha256": "ffd6c93eb84011d9c9e775c696650e2b1614a062d3f6502686af700f46e89d4f",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "30.238126",
+          "size": "288156"
+        }
+      },
+      "source_commit": "e0f2ee747851f5a47fba8d0605c186e55873e414"
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/recovered-playback-15s.mp4",
+      "sha256": "967c8532ca77bad06e17f09e639879053929216089f378e31d56c1b645d485c9",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "15.991667",
+          "size": "14448505"
+        }
+      },
+      "source_commit": "e0f2ee747851f5a47fba8d0605c186e55873e414"
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/final-ending-45s.mp4",
+      "sha256": "fed1e96b2da30b4b41b8d62da7d29111996a5a1272819d08a99f76c11b9f4816",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "duration": "42.771667",
+            "nb_frames": "534"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "duration": "47.954687",
+            "nb_frames": "2250"
+          }
+        ],
+        "format": {
+          "duration": "47.969376",
+          "size": "21806854"
+        }
+      },
+      "source_commit": "3bc658f0491b02b92fa22bc454a40887ecbf23ae"
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/final-paused-10s.mp4",
+      "sha256": "27fdb683e9e63bbf976ff9ba76017ca876a4e7617003696dc3c4a66452aec5d7",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "duration": "0.095000",
+            "nb_frames": "3"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "duration": "10.579021",
+            "nb_frames": "498"
+          }
+        ],
+        "format": {
+          "duration": "10.598042",
+          "size": "15308"
+        }
+      },
+      "source_commit": "3bc658f0491b02b92fa22bc454a40887ecbf23ae"
+    }
+  ],
+  "edition": {
+    "bundleId": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+    "sourceSha256": "c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2",
+    "renditionSha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+    "renditionPath": "file:///pkg/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4",
+    "renditionStartOffsetMs": 0,
+    "preset": "extra-cautious",
+    "maps": [
+      {
+        "preset": "wcag",
+        "sha256": "b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"
+      },
+      {
+        "preset": "broadcast",
+        "sha256": "d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"
+      },
+      {
+        "preset": "extra-cautious",
+        "sha256": "bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"
+      }
+    ],
+    "reportSha256": "d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb",
+    "checkedInputsSha256": "4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62",
+    "outcome": "no flagged segments"
+  },
+  "publication": false,
+  "remaining": [
+    "Explicit native Retry after an actual failure remains unobserved; no unsafe failure was manufactured.",
+    "Cross-profile and caption restoration have not been demonstrated natively. Current profile is Extra cautious and McWay has no caption track; no PIN bypass or household edits.",
+    "Simulated-practice cover/Skip compositor check not completed in this bounded pass. McWay recovery cover sequence was sampled, not exhaustive frame-level proof.",
+    "Human audio listening, palette comfort and full replacement-demo acceptance remain pending.",
+    "Hosted CI allowlist remains a separate environment blocker."
+  ],
+  "native_final": {
+    "source_commit": "3bc658f0491b02b92fa22bc454a40887ecbf23ae",
+    "full_run": {
+      "samples": 1196,
+      "wall_seconds": 300.097,
+      "media_seconds": 299.742,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792723866081,
+        "mediaTimeMs": 257,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -45,
+          "worstTickGapMs": 76
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792724166178,
+        "mediaTimeMs": 299999,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": 375,
+          "worstTickGapMs": 123
+        }
+      }
+    },
+    "natural_ending_utc": "2026-10-23T02:56:06.226514Z",
+    "native_release_callback_utc": "2026-10-23T02:56:06.590813Z",
+    "final_hold_observed_utc": "2026-10-23T02:56:45.828Z",
+    "hold_observed_seconds_after_end": 39.601486,
+    "no_auto_repeat_or_exit_during_observation": true,
+    "completion_checkpoint_cleared": "Next Watch opened fresh playback without Resume dialog.",
+    "paused_recovery": "Ready at 02:57:30.521 UTC after settled native seek. Paused guidance visible in recorded frame; first explicit Play resumed.",
+    "back_release_seconds": 0.236112,
+    "background": "Package-specific background event at 02:59:10.847 UTC, teardown ok at 02:59:11.170 UTC. Returned to Details, then explicit Back to Home.",
+    "background_release_seconds": 0.32299,
+    "resting_screen": "Home",
+    "capture_active": false,
+    "log_collector_active": false,
+    "simulator_owner_session": 79214,
+    "slow_events_during_full_run": 0,
+    "retry_native": "Not exercised: the previously observed natural failure did not recur. Unit delayed/rejected/canceled release checks are not a native Retry result."
+  },
+  "capture_limitations": [
+    "Final paused recording has only three video frames over 0.095 seconds and 10.579 seconds of audio; its initial frame establishes the visible paused label, not ten seconds of changing video.",
+    "Capture helper window reports can lag the simulator foreground: initial Home image was followed by launcher. One explicit app launch restored Home; cause was not established.",
+    "App audio signal was measured, not listened to by a human."
+  ],
+  "test_logs": {
+    ".logs/paused-state-baseline.log": {
+      "sha256": "2b2467d120227542dd620cddfbf5bb77bb967c7280fa9f97c085c1994e96ea12",
+      "bytes": 3159
+    },
+    ".logs/paused-state-green2.log": {
+      "sha256": "4bafc12be0bdcd2f706aff6829ce25eb123a01851797d2e8ad936934405ebfa5",
+      "bytes": 2370
+    },
+    ".logs/paused-state-full.log": {
+      "sha256": "53f7a8b2729efb9daaf003f03ed9fd177d9e29f890ea69ebeb2bafc232eea0c7",
+      "bytes": 160345
+    }
+  },
+  "evidence": [
+    {
+      "path": "results/native-async-retest-2026-10-23/earlier-events.log",
+      "sha256": "60674d3df3afe2121cece6b074fc66f37fd67708ae9fab9ef6ff685b1ca6a1f1",
+      "bytes": 36113
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-ended-hold.png",
+      "sha256": "f600a351a413d9c10a00f2e55de4127c170cba4605997063f75cf57ceefc0ffa",
+      "bytes": 1756833
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-events.log",
+      "sha256": "defcbabb46f2282344e73f3c0d2a03c9e27d4fa6f22a50501de56a3a710d9ea9",
+      "bytes": 48350
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-paused-frame.png",
+      "sha256": "0073577489d6966226a5c017c5d986e5be77b6a9b74d48e273ed1292a8533063",
+      "bytes": 65805
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-resting-home.png",
+      "sha256": "f79815f5a19c53378a84f56651f1401c70c18cf7814e1c383448e9b582b377c5",
+      "bytes": 541112
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-timing.jsonl",
+      "sha256": "0714858b582707cf225a975738c041d51b484d35a1a3ed9044e85311a2d08170",
+      "bytes": 350111
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/retest-trace.log",
+      "sha256": "553c8d30b2b688a3c807309ab1d30529787c7cf520362c137ff3a517c6285111",
+      "bytes": 665731,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/final-trace.log",
+      "sha256": "ddf995ae1479ed5e4e2e8d43109b40bcaf34611ca4d84b2e4071d9a1eafa89b3",
+      "bytes": 1417756,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/host-final-run.json",
+      "sha256": "191856bfa532dfbe58fe9293f6ef785de8a5d9592b58e90fe24b7ee104f68c5f",
+      "bytes": 1340,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/paused-build.log",
+      "sha256": "ed120ab3428491ea1218958187fb81d0639601872ede0ce40599f9574ffab6df",
+      "bytes": 19853,
+      "local_only": true
+    }
+  ]
+}

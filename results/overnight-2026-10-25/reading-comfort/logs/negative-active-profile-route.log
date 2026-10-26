@@ -1,0 +1,28 @@
+FAIL test/screens/readingComfortSave.test.tsx
+  ✕ persists one preference, applies it only to the watching kid and retains it after remount (716 ms)
+  ○ skipped keeps the original record on write failure and retries the same preference behind the PIN
+
+  ● persists one preference, applies it only to the watching kid and retains it after remount
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 40
+    Received: 36
+
+      93 |   press('kid-mode-home-more-info');
+      94 |   press('kid-mode-details-show-info');
+    > 95 |   expect(infoFont()).toBe(scale(40));
+         |                      ^
+      96 |   view.unmount();
+      97 |   open(storage);
+      98 |   await screen.findByTestId('kid-mode-home');
+
+      at Object.toBe (test/screens/readingComfortSave.test.tsx:95:22)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 skipped, 2 total
+Snapshots:   0 total
+Time:        2.307 s, estimated 6 s
+Ran all test suites matching /test\/screens\/readingComfortSave.test.tsx/i with tests matching "persists one preference".

@@ -1,0 +1,375 @@
+{
+  "recorded_utc": "2026-10-23T21:29:40.783939+00:00",
+  "item": 12,
+  "status": "Compatible remediation batch complete; Audit and exact-source hosted/native acceptance remain open.",
+  "checked_code_source": "121270e802df1f150f09a4216319f1af1f1fd67b",
+  "branch": "codex/dependency-followup-2026-10-23",
+  "mac_acceptance_snapshot_preserved": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "not_integrated_into_mac_snapshot": true,
+  "changes": {
+    "ajv": "Only Ajv 8 overridden to 8.18.0. Old 8.12.0 and nested 8.13.0 replaced/deduplicated. Ajv 6.15.0 unchanged.",
+    "zod": "Only Zod 4 overridden to 4.6.6 from 4.6.5; the hooks plugin remains 7.1.1.",
+    "transitive": "Ajv adds fast-uri 3.1.9. Existing uri-js and punycode become dev-only lock nodes without version changes.",
+    "consumers": "Rushstack 5.4.1, TSDoc config 0.17.1, SDK, API Extractor and hooks lint plugin versions unchanged."
+  },
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "cyclonedx-py": "7.4.0",
+    "cyclonedx-python-lib": "11.12.0",
+    "cyclonedx-npm": "6.0.1",
+    "cyclonedx-library": "10.3.0",
+    "gitleaks": "8.30.1"
+  },
+  "checks": {
+    "install-before": {
+      "name": "install-before",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 20.58
+    },
+    "compatibility-before": {
+      "name": "compatibility-before",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/build_dependency_compat.test.mjs"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.77
+    },
+    "zod-before": {
+      "name": "zod-before",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/build_dependency_compat.test.mjs"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 1.24
+    },
+    "lock-update": {
+      "name": "lock-update",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "install",
+        "--package-lock-only",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.59
+    },
+    "clean-install": {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 26.94
+    },
+    "compatibility": {
+      "name": "compatibility",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/build_dependency_compat.test.mjs",
+        "app/tools/legacy_shell_quote.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.72
+    },
+    "typecheck": {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.08
+    },
+    "lint": {
+      "name": "lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 12.96
+    },
+    "app-tests": {
+      "name": "app-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "test",
+        "--",
+        "--runInBand",
+        "--ci"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 142.8
+    },
+    "prepared-guards": {
+      "name": "prepared-guards",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/playback_proof.test.mjs",
+        "app/tools/check_prepared_library.test.mjs",
+        "app/tools/approved_prepared_libraries.test.mjs",
+        "app/tools/check_native_inputs.test.mjs",
+        "app/tools/catalog_resolution.test.cjs",
+        "app/tools/seek_lint_guard.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.73
+    },
+    "sbom-write": {
+      "name": "sbom-write",
+      "command": [
+        "python",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.47
+    },
+    "sbom-check": {
+      "name": "sbom-check",
+      "command": [
+        "python",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "/workspace/shared/calm-frames-dependency-wave3/sbom-reproduction"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.68
+    },
+    "published-numbers": {
+      "name": "published-numbers",
+      "command": [
+        "python",
+        "eval/readme_sync.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.11
+    },
+    "style": {
+      "name": "style",
+      "command": [
+        "python",
+        "eval/style_check.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.91
+    },
+    "secrets-code": {
+      "name": "secrets-code",
+      "command": [
+        "bash",
+        "scripts/gitleaks_scan.sh",
+        "staged"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.98
+    }
+  },
+  "app_result": {
+    "passed": 1838,
+    "skipped": 4,
+    "passed_suites": 173,
+    "skipped_suites": 1,
+    "snapshots_passed": 57,
+    "coverage_thresholds": "Unchanged normal command."
+  },
+  "lint_result": {
+    "errors": 0,
+    "source_warnings": 104,
+    "test_warnings": 4
+  },
+  "regressions": {
+    "ajv_before": "Five assertions failed on the original installed validators: fixed-version identity and both consumers bypassing a supplied regex engine or throwing on invalid data-pattern syntax. Nine compatibility tests passed.",
+    "zod_before": "After Ajv correction, two tests failed on Zod 4.6.5: constrained array and set still parsed oversized inputs. Sixteen tests passed.",
+    "after": "Twenty-two build-tool and shell-quote checks pass, including actual Rushstack draft/schema/format rejection, TSDoc valid/invalid file loading and hooks lint behavior.",
+    "bounded_inputs": "Only harmless regex sentinels, invalid bracket syntax and three-element collections. No catastrophic regex, OOM payload, external service or timing benchmark."
+  },
+  "exposure_limits": {
+    "ajv": "Observed Rushstack and TSDoc constructors do not enable $data. The upstream fix honors the chosen regex engine and rejects invalid dynamic syntax; default JavaScript regexes are not made universally resistant to hostile patterns.",
+    "zod": "Observed consumer is eslint-plugin-react-hooks. The upstream change rejects oversized containers before element parsing when applicable leading size constraints are present. Unbounded schemas still parse every element; no global memory cap is claimed.",
+    "native": "Build-time consumers were inspected; current native bundle inventory and Mac acceptance were not performed here.",
+    "ws": "Affected installed majors are 1 and 3; the oldest fixed version is major 5. A blind major override was excluded."
+  },
+  "audit_delta": {
+    "before": {
+      "info": 0,
+      "low": 2,
+      "moderate": 28,
+      "high": 21,
+      "critical": 4,
+      "total": 55
+    },
+    "after": {
+      "info": 0,
+      "low": 2,
+      "moderate": 20,
+      "high": 20,
+      "critical": 4,
+      "total": 46
+    },
+    "unique_advisories_before": 23,
+    "unique_advisories_after": 21,
+    "removed_advisories": [
+      "GHSA-2g4f-4pwh-qvx6",
+      "GHSA-mrhx-c7xc-m3w5"
+    ],
+    "added_advisories": [],
+    "new_since_previous_recorded_scan": [
+      "GHSA-mrhx-c7xc-m3w5"
+    ],
+    "note": "Fresh matching scans. Previous checkpoint had 22 unique advisories; this fresh baseline includes a Zod advisory absent from that scan. Propagated package counts are not independent exploits."
+  },
+  "audit_acceptance": "Blocked by remaining findings and expired exception groups. No exception dates, owner acceptance, SDK or TOML policy changed. No Python audit rescan in this npm-only batch.",
+  "sbom": {
+    "reproduced": true,
+    "native_inventory": false,
+    "known_peer_tree_warnings_retained": true,
+    "tree_warnings": [
+      "npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react",
+      "npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin",
+      "npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser",
+      "npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier",
+      "npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch",
+      "npm error invalid: react@19.2.0 ./app/node_modules/react",
+      "npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0"
+    ],
+    "generator_report": "sbom-reproduction.json"
+  },
+  "preserved": {
+    "compared_to": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+    "unchanged_paths": [
+      "app/src",
+      "app/test",
+      "pipeline",
+      "app/manifest.toml",
+      "scripts/audit_exceptions.toml",
+      "docs/judging-package",
+      "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md"
+    ],
+    "frozen_integration": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "submitted": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "no_push_merge_publication": true
+  },
+  "input_files": {
+    "app/package.json": {
+      "bytes": 12474,
+      "sha256": "c0b14073780f40592bd5fff2872533fcfcce64b87f803a96a2ba6f3e05875914"
+    },
+    "app/package-lock.json": {
+      "bytes": 805986,
+      "sha256": "9d7b38297e91c6ace5b9346dae9266181fd5f3fbe43ac55a205a68be45be6f01"
+    },
+    "app/tools/build_dependency_compat.test.mjs": {
+      "bytes": 13453,
+      "sha256": "5b281d4e6660a6bb5373227c3fd7b87da1b09f71f2404c22c2dfcb979b0fde33"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2253233,
+      "sha256": "ba1ae9ae6ab293cd70faf438009b531c95ab52ee2f2b7853ce535874b965e951"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "455bf68691225a20d0b542397d51d8bb7b16317fd908b77169efb6983123bd01"
+    }
+  },
+  "logs": {
+    "install-before": {
+      "raw_sha256": "35f7c477e040675344f549295281be25a8a59f02f6397d68f01b429da98b0624",
+      "normalized_sha256": "35f7c477e040675344f549295281be25a8a59f02f6397d68f01b429da98b0624"
+    },
+    "compatibility-before": {
+      "raw_sha256": "71448fed0d95e80a40e7357682b8b4c0ec4c8ec6ec92e9a7feac84cb783c1dad",
+      "normalized_sha256": "d31a8105d3e0adea31eb20082046b2188955b216a2b0b3b59c10b81374cd8ad8"
+    },
+    "zod-before": {
+      "raw_sha256": "e03047710f9569421224d0306b9ea5e51b0162832d13b76c902309837715865e",
+      "normalized_sha256": "0245af984859c5cc8da3b82a36b7421fe60171babc795050088bd7e11a7a1b47"
+    },
+    "lock-update": {
+      "raw_sha256": "ce7bf91f54adc7390cff6bf1c2572fd00ce9cfbd0611637e273059c4710a80c9",
+      "normalized_sha256": "ce7bf91f54adc7390cff6bf1c2572fd00ce9cfbd0611637e273059c4710a80c9"
+    },
+    "clean-install": {
+      "raw_sha256": "11e6fe1c3f12e43569bb6cfd32f6b604bc7b3e9f09a550f4e45bf97be639da88",
+      "normalized_sha256": "11e6fe1c3f12e43569bb6cfd32f6b604bc7b3e9f09a550f4e45bf97be639da88"
+    },
+    "compatibility": {
+      "raw_sha256": "8f6adb79cb382f55ffd9b73953cbe645bee34be7bbcd0d7fcf9d6bdfbd8c4dc8",
+      "normalized_sha256": "8f6adb79cb382f55ffd9b73953cbe645bee34be7bbcd0d7fcf9d6bdfbd8c4dc8"
+    },
+    "typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    },
+    "lint": {
+      "raw_sha256": "975a3e4e37b3ed4466d960294a3f6dc0f7a659e0f1b0e57887fb42f675b15d54",
+      "normalized_sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714"
+    },
+    "app-tests": {
+      "raw_sha256": "12299ca5227f76f72ebf541f0229f1549aa4e7a8595bc13175c0f8e83e5b8625",
+      "normalized_sha256": "f75982cad62af37d7eda02685dd2303b15da9cbdaa7075612c6029fa0f259ac7"
+    },
+    "prepared-guards": {
+      "raw_sha256": "4be99fc1f3369f94abb46c93585260f9931c4e5be2b64b428b864e4e6a620566",
+      "normalized_sha256": "4be99fc1f3369f94abb46c93585260f9931c4e5be2b64b428b864e4e6a620566"
+    },
+    "sbom-write": {
+      "raw_sha256": "877cb30c9a232e8c64c82e707c040ccd96674f25a3277e9a158774b3fdb42a25",
+      "normalized_sha256": "959881f64e5acbc4d04d970dd56f0ebb1de5d40a4f446494021cab186fff1a09"
+    },
+    "sbom-check": {
+      "raw_sha256": "5e0ec32b1f75a40698ff4fe9dc85adce2c44c24cc228082f318a387eb0810db1",
+      "normalized_sha256": "402ba3ac8f38797815b2cbd5ddf29c95e0eb3a511388d7f12db7a350b70956ee"
+    },
+    "published-numbers": {
+      "raw_sha256": "965697fb02971a11cb802175414d013528a3f12d51982e2d37eba3a009bf74a3",
+      "normalized_sha256": "965697fb02971a11cb802175414d013528a3f12d51982e2d37eba3a009bf74a3"
+    },
+    "style": {
+      "raw_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "normalized_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca"
+    },
+    "secrets-code": {
+      "raw_sha256": "10ffbaea58edba5c60eca781dec92df8c1d00e72e26fa2282e3d990edd792942",
+      "normalized_sha256": "10ffbaea58edba5c60eca781dec92df8c1d00e72e26fa2282e3d990edd792942"
+    }
+  },
+  "log_normalization": "ANSI color, absolute checkout prefix and trailing whitespace removed; diagnostics and outcomes retained.",
+  "hosted": "No hosted result for this local follow-up. Do not apply frozen-branch runs to it.",
+  "rules_access": "Official Devpost rules request failed at the managed proxy with HTTP 403. No alternative route or new verification claim."
+}

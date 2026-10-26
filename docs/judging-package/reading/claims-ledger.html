@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Claims ledger | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../CLAIMS_LEDGER.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="claims-ledger">Claims ledger</h1>
+<p>Every important claim is scoped to a source, build or observation. Counts below are imported release evidence, not new benchmarks or cloud reruns. This ledger does not upgrade historical evidence into current deployment or clinical claims. The full original release JSON is identified by its source SHA-256 in the <a href="../evidence/release-selected.json">selected fields</a>. <a href="../claims.json">Machine-readable ledger</a>.</p>
+<h2 id="c01-approved-product-wording-and-scope">C01. Approved product wording and scope</h2>
+<p><strong>Statement:</strong> Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="guide.html">GUIDE.md</a>; <a href="architecture.html">ARCHITECTURE.md</a>; <a href="spec-sources.html">evidence/spec-sources.md</a>.</p>
+<p><strong>Boundary:</strong> Threshold-based technical aim, not proof of medical safety or personal comfort.</p>
+<h2 id="c02-submitted-baseline-preserved">C02. Submitted baseline preserved</h2>
+<p><strong>Statement:</strong> Submitted candidate bf2f615; native source 60c3bbb has identical app and hook trees.</p>
+<p><strong>Version:</strong> <code>bf2f615 / 60c3bbb</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: bases.submitted_candidate, native.fallback_source.</p>
+<p><strong>Boundary:</strong> Tree equality checked with Git in this task; no submitted artifact or live submission was changed.</p>
+<h2 id="c03-upgrade-identity">C03. Upgrade identity</h2>
+<p><strong>Statement:</strong> Validated source d96c088; integration evidence commit 13551e45bd853c392489dbecce7158a04036f615.</p>
+<p><strong>Version:</strong> <code>d96c088 / 13551e4</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: tested_commit, evidence_commit, bases.</p>
+<p><strong>Boundary:</strong> A historical local validation receipt, not hosted CI success or a new cloud run.</p>
+<h2 id="c04-python-results">C04. Python results</h2>
+<p><strong>Statement:</strong> <!--n results/release-validation-2026-10-22/validation.json:python.full.passed -->2049<!--/n--> passed, <!--n results/release-validation-2026-10-22/validation.json:python.full.failed -->0<!--/n--> failed, <!--n results/release-validation-2026-10-22/validation.json:python.full.skipped -->0<!--/n--> skipped, <!--n results/release-validation-2026-10-22/validation.json:python.full.deselected_slow -->2<!--/n--> slow tests deselected.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: python.full.</p>
+<p><strong>Boundary:</strong> Recorded full local run with optional test dependencies installed. Other configurations must retain their different counts.</p>
+<h2 id="c05-app-results">C05. App results</h2>
+<p><strong>Statement:</strong> <!--n results/release-validation-2026-10-22/validation.json:app.jest.tests_passed -->1729<!--/n--> passed, <!--n results/release-validation-2026-10-22/validation.json:app.jest.tests_skipped -->4<!--/n--> skipped, <!--n results/release-validation-2026-10-22/validation.json:app.jest.tests_failed -->0<!--/n--> failed.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: app.jest.</p>
+<p><strong>Boundary:</strong> Recorded Jest results; not a native, audio, clinical or usability outcome.</p>
+<h2 id="c06-recovery-scenarios-and-guard-mutations">C06. Recovery scenarios and guard mutations</h2>
+<p><strong>Statement:</strong> <!--n results/release-validation-2026-10-22/validation.json:recovery.scenarios.passed -->16<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:recovery.scenarios.scenarios -->16<!--/n--> scenarios passed; <!--n results/release-validation-2026-10-22/validation.json:recovery.guard_mutations.killed -->24<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:recovery.guard_mutations.mutations -->24<!--/n--> recovery guard mutations killed.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: recovery.scenarios, recovery.guard_mutations; <a href="preparation-recovery.html">evidence/preparation-recovery.md</a>.</p>
+<p><strong>Boundary:</strong> One Mac/APFS, mostly fake analyzer, one real-analyzer scenario; no power cut. Not a detector-accuracy or performance benchmark.</p>
+<h2 id="c07-general-mutation-gate">C07. General mutation gate</h2>
+<p><strong>Statement:</strong> <!--n results/release-validation-2026-10-22/validation.json:mutation_gate.totals.killed -->68<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:mutation_gate.totals.mutations -->70<!--/n--> mutations killed; two documented equivalent survivors.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: mutation_gate.totals; <a href="release-readiness.html">evidence/release-readiness.md</a>.</p>
+<p><strong>Boundary:</strong> Do not say all 70 were killed. Recovery mutations are a separate set.</p>
+<h2 id="c08-native-images-are-authentic">C08. Native images are authentic</h2>
+<p><strong>Statement:</strong> Home/Details/ending depict 60c3bbb; four integration crops depict d96c088.</p>
+<p><strong>Version:</strong> <code>60c3bbb / d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../assets.json">assets.json</a>; <a href="../evidence/release-selected.json">evidence/release-selected.json</a>: native.committed_crops; <a href="capture-history.html">evidence/capture-history.md</a>.</p>
+<p><strong>Boundary:</strong> Reused unchanged, no new native capture. Architecture is documentation. validation/*.png are web-guide renders.</p>
+<h2 id="c09-playback-evidence-boundary">C09. Playback evidence boundary</h2>
+<p><strong>Statement:</strong> The included McWay playback still came from a shorter separate run; the full-duration observation used trace lines.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="release-readiness.html">evidence/release-readiness.md</a>: On the Vega Virtual Device / Not established.</p>
+<p><strong>Boundary:</strong> The Mac was locked during the full run; audio was not listened to; no picture-timing or full-duration video proof follows from the still.</p>
+<h2 id="c10-proof-page-semantics">C10. Proof-page semantics</h2>
+<p><strong>Statement:</strong> Source, Prepared and Selection separate measurements, output checks and selected identity.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="code-excerpts.html">evidence/code-excerpts.md</a>: PlaybackProofPanel.tsx; <a href="../assets/f04-proof-selection.png">assets/f04-proof-selection.png</a>.</p>
+<p><strong>Boundary:</strong> Read-only explanation, not runtime rescanning or authority to trust a new title.</p>
+<h2 id="c11-build-time-versus-runtime-identity">C11. Build-time versus runtime identity</h2>
+<p><strong>Statement:</strong> Media bytes are checked at build time; selection binds to expected route/map identities.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="architecture.html">ARCHITECTURE.md</a>; <a href="code-excerpts.html">evidence/code-excerpts.md</a>: packagedLibrary.ts; <a href="../assets/f04-proof-selection.png">assets/f04-proof-selection.png</a>.</p>
+<p><strong>Boundary:</strong> Do not imply the info page rehashes or reanalyzes all playback bytes.</p>
+<h2 id="c12-missing-analyzer-version">C12. Missing analyzer version</h2>
+<p><strong>Statement:</strong> McWay report lacks its output analyzer version and the UI says so.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="../assets/f12-mcway-proof-prepared.png">assets/f12-mcway-proof-prepared.png</a>; <a href="release-readiness.html">evidence/release-readiness.md</a>.</p>
+<p><strong>Boundary:</strong> Do not infer a version from another report. No flagged output segments does not demonstrate an activated protective cover.</p>
+<h2 id="c13-remote-reading-improvement">C13. Remote reading improvement</h2>
+<p><strong>Statement:</strong> Reading sections are focus stops and the validation records reaching the analysis record and returning with Back.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="code-excerpts.html">evidence/code-excerpts.md</a>: ReadingStop.tsx; <a href="../assets/f07-reading-wcag.png">assets/f07-reading-wcag.png</a>; <a href="release-readiness.html">evidence/release-readiness.md</a>.</p>
+<p><strong>Boundary:</strong> No full VoiceView or physical Fire TV acceptance is established. Total key counts include an earlier build, so this package does not promote them as final-build counts.</p>
+<h2 id="c14-need-and-intended-impact">C14. Need and intended impact</h2>
+<p><strong>Statement:</strong> Published flashing guidance and photosensitivity context motivate an inspectable prepared-library workflow.</p>
+<p><strong>Version:</strong> <code>Primary-source context</code>.</p>
+<p><strong>Evidence:</strong> <a href="primary-sources.html">PRIMARY_SOURCES.md</a>: P2/P3; <a href="spec-sources.html">evidence/spec-sources.md</a>; <a href="outreach-status.html">evidence/outreach-status.md</a>.</p>
+<p><strong>Boundary:</strong> No fresh source-page verification, interviews, adoption, market sizing, medical outcome or comfort measurement.</p>
+<h2 id="c15-differentiation">C15. Differentiation</h2>
+<p><strong>Statement:</strong> This implementation combines preparation, exact-edition checks, guarded playback and a readable proof record.</p>
+<p><strong>Version:</strong> <code>d96c088</code>.</p>
+<p><strong>Evidence:</strong> <a href="architecture.html">ARCHITECTURE.md</a>; <a href="code-excerpts.html">evidence/code-excerpts.md</a>.</p>
+<p><strong>Boundary:</strong> Describes this project, not a first/only claim or assertion about competitor limitations.</p>
+<h2 id="c16-official-criteria">C16. Official criteria</h2>
+<p><strong>Statement:</strong> Recorded criteria: Tech Implementation, Design, Potential Impact, Quality of the Idea.</p>
+<p><strong>Version:</strong> <code>Dated official-rules record</code>.</p>
+<p><strong>Evidence:</strong> <a href="rubric-matrix.html">RUBRIC_MATRIX.md</a>; <a href="recorded-rules.html">evidence/recorded-rules.md</a>; <a href="../evidence/source-access.json">evidence/source-access.json</a>.</p>
+<p><strong>Boundary:</strong> Live Devpost fetch blocked. Current wording/weights/eligibility unverified; no score or bonus guaranteed.</p>
+<h2 id="c17-sdk-friction">C17. SDK friction</h2>
+<p><strong>Statement:</strong> F1-F6 summarize historical package-URI, image-source, frame-statistic, CLI, focus and staging observations.</p>
+<p><strong>Version:</strong> <code>Recorded issue checkpoints; fixes 52138fe / ac5a610 where stated</code>.</p>
+<p><strong>Evidence:</strong> <a href="friction-log-draft.html">FRICTION_LOG_DRAFT.md</a>; <a href="friction-records.html">evidence/friction-records.md</a>.</p>
+<p><strong>Boundary:</strong> No new repro or current SDK resolution claim. Mac lock state, ScreenCaptureKit, browser policy and unrelated runner issues are excluded from Amazon defect attribution.</p>
+<h2 id="c18-unavailable-work">C18. Unavailable work</h2>
+<p><strong>Statement:</strong> Claude newer benchmarks and the replacement video are not part of this evidence snapshot.</p>
+<p><strong>Version:</strong> <code>Package scope</code>.</p>
+<p><strong>Evidence:</strong> <a href="handoff.html">HANDOFF.md</a>; <a href="demo-evidence-brief.html">DEMO_EVIDENCE_BRIEF.md</a>; <a href="release-readiness.html">evidence/release-readiness.md</a>.</p>
+<p><strong>Boundary:</strong> Label newer results unavailable. Planned work is not implemented or measured by this package.</p>
+<h2 id="c19-offline-guide-and-accessibility">C19. Offline guide and accessibility</h2>
+<p><strong>Statement:</strong> Bundled runtime has no remote fetch or autoplay; keyboard, focus, contrast, reduced motion and responsive behavior are checked on the browser guide.</p>
+<p><strong>Version:</strong> <code>This package only</code>.</p>
+<p><strong>Evidence:</strong> <a href="../validation/checks.json">validation/checks.json</a>; <a href="../validation/desktop.png">validation/desktop.png</a>; <a href="../validation/narrow.png">validation/narrow.png</a>.</p>
+<p><strong>Boundary:</strong> Checks cover the static guide, not native application accessibility or full WCAG conformance. Managed browser file-URL policy required HTTP for cloud rendering.</p>
+<h2 id="excluded-statements">Excluded statements</h2>
+<p>No claim of seizure prevention, medical safety, universal comfort, guaranteed score, hosted CI success, external user validation, competitor deficiency, new benchmark result or completed replacement video is permitted by this evidence. No private account details or signing material are needed to support the retained claims.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../CLAIMS_LEDGER.md">docs/judging-package/CLAIMS_LEDGER.md</a></p><p>Source SHA-256: <code>d1a0bcc5189d27524f7b484e1fa70d4ebb01bb1817a26d183037a298e4787d25</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

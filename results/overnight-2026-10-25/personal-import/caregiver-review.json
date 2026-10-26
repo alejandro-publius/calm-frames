@@ -1,0 +1,49 @@
+{
+  "schema": "calm-frames-caregiver-review-v1",
+  "title": "Generated steady-color fixture",
+  "source": {
+    "sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a",
+    "bytes": 2992
+  },
+  "analysis": {
+    "analysis_complete": true,
+    "analysis_run": "0c6c66714ca54370bf06137bb217cc95",
+    "analysis_width": 160,
+    "duration_ms": 1000,
+    "flagged_intervals": {
+      "broadcast": [],
+      "wcag": []
+    },
+    "frame_count": 12,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "extra-cautious": {
+        "covered_ms": 0,
+        "intervals": []
+      },
+      "wcag": {
+        "covered_ms": 0,
+        "intervals": []
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "b632f27837f52fb0e565a636e57a74ee0735d57b9e753ed919e571471d610073",
+      "wcag": "fbeb6b0eed03f9eb21d695b1420f8094ba21a042d610ba6a16c812a58c060a98"
+    },
+    "source_sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a"
+  },
+  "processing_permission_confirmed": true,
+  "permission_verified_by_application": false,
+  "tv_playback_authorized": false,
+  "limitations": [
+    "Analysis does not establish medical safety, seizure prevention or comfort.",
+    "Use only non-DRM videos you own or have permission to process. Rights are not verified by this application.",
+    "This review does not authorize original playback or add a title to the TV library.",
+    "TV delivery requires a separately authorized signer, exact edition approval and a checked app build."
+  ]
+}

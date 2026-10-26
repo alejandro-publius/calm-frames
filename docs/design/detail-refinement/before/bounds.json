@@ -1,0 +1,620 @@
+{
+  "library": [
+    {
+      "id": "kid-home",
+      "text": "Calm Frames\nParental controls\nOriginal story\nHarbor\nSettle into a quiet harbor at sunset.\nWatch now\nMore info\nYour libra",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "kid-home-parent-area",
+      "text": "Parental controls",
+      "x": 1343.609375,
+      "y": 54,
+      "width": 336.390625,
+      "height": 82
+    },
+    {
+      "id": "kid-home-parent-area-label",
+      "text": "Parental controls",
+      "x": 1369.609375,
+      "y": 72,
+      "width": 284.390625,
+      "height": 46
+    },
+    {
+      "id": "kid-home-hero-motion",
+      "text": "",
+      "x": 600,
+      "y": 148,
+      "width": 720,
+      "height": 240
+    },
+    {
+      "id": "kid-home-hero-art",
+      "text": "",
+      "x": 600,
+      "y": 148,
+      "width": 720,
+      "height": 240
+    },
+    {
+      "id": "kid-home-watch",
+      "text": "Watch now",
+      "x": 712.53125,
+      "y": 574,
+      "width": 263.5,
+      "height": 98
+    },
+    {
+      "id": "kid-home-watch-label",
+      "text": "Watch now",
+      "x": 750.53125,
+      "y": 600,
+      "width": 187.5,
+      "height": 46
+    },
+    {
+      "id": "kid-home-more-info",
+      "text": "More info",
+      "x": 996.03125,
+      "y": 574,
+      "width": 211.4375,
+      "height": 82
+    },
+    {
+      "id": "kid-home-more-info-label",
+      "text": "More info",
+      "x": 1022.03125,
+      "y": 592,
+      "width": 159.4375,
+      "height": 46
+    },
+    {
+      "id": "kid-home-title",
+      "text": "Your library",
+      "x": 847.890625,
+      "y": 680,
+      "width": 224.203125,
+      "height": 54
+    },
+    {
+      "id": "kid-home-poster-calm-frames-benign-story",
+      "text": "Harbor demo\nPractice holds",
+      "x": 340,
+      "y": 738,
+      "width": 400,
+      "height": 244
+    },
+    {
+      "id": "kid-home-poster-image-calm-frames-benign-story",
+      "text": "",
+      "x": 352,
+      "y": 750,
+      "width": 376,
+      "height": 120
+    },
+    {
+      "id": "kid-home-poster-title-calm-frames-benign-story",
+      "text": "Harbor demo",
+      "x": 352,
+      "y": 878,
+      "width": 376,
+      "height": 48
+    },
+    {
+      "id": "kid-home-poster-qualifier-calm-frames-benign-story",
+      "text": "Practice holds",
+      "x": 352,
+      "y": 926,
+      "width": 376,
+      "height": 42
+    },
+    {
+      "id": "kid-home-poster-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nOriginal story",
+      "x": 760,
+      "y": 738,
+      "width": 400,
+      "height": 244
+    },
+    {
+      "id": "kid-home-poster-image-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "",
+      "x": 772,
+      "y": 750,
+      "width": 376,
+      "height": 120
+    },
+    {
+      "id": "kid-home-poster-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor",
+      "x": 772,
+      "y": 878,
+      "width": 376,
+      "height": 48
+    },
+    {
+      "id": "kid-home-poster-qualifier-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Original story",
+      "x": 772,
+      "y": 926,
+      "width": 376,
+      "height": 42
+    },
+    {
+      "id": "kid-home-poster-calm-frames-offline",
+      "text": "Calm gradient\nPlayback test",
+      "x": 1180,
+      "y": 738,
+      "width": 400,
+      "height": 244
+    },
+    {
+      "id": "kid-home-poster-image-calm-frames-offline",
+      "text": "",
+      "x": 1192,
+      "y": 750,
+      "width": 376,
+      "height": 120
+    },
+    {
+      "id": "kid-home-poster-title-calm-frames-offline",
+      "text": "Calm gradient",
+      "x": 1192,
+      "y": 878,
+      "width": 376,
+      "height": 48
+    },
+    {
+      "id": "kid-home-poster-qualifier-calm-frames-offline",
+      "text": "Playback test",
+      "x": 1192,
+      "y": 926,
+      "width": 376,
+      "height": 42
+    }
+  ],
+  "details-harbor": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. A",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 320,
+      "y": 152,
+      "width": 1280,
+      "height": 480
+    },
+    {
+      "id": "title-details-artwork",
+      "text": "",
+      "x": 320,
+      "y": 152,
+      "width": 1280,
+      "height": 480
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 824.390625,
+      "y": 694,
+      "width": 271.203125,
+      "height": 96
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 806,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Watch now",
+      "x": 828.25,
+      "y": 918,
+      "width": 263.5,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Watch now",
+      "x": 866.25,
+      "y": 944,
+      "width": 187.5,
+      "height": 46
+    },
+    {
+      "id": "title-details-summary",
+      "text": "This story plays without picture holds. Some flashing may still go undetected.",
+      "x": 440,
+      "y": 1166,
+      "width": 1040,
+      "height": 96
+    },
+    {
+      "id": "title-details-strip",
+      "text": "",
+      "x": 440,
+      "y": 1348,
+      "width": 1040,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan",
+      "text": "Your viewing settings\nStandard\n55 inch television, seats about 8 feet away\nFlash limits: WCAG 2.3.1.\nWhen a part is hidd",
+      "x": 440,
+      "y": 1432,
+      "width": 1040,
+      "height": 650
+    },
+    {
+      "id": "title-details-plan-preset",
+      "text": "Standard",
+      "x": 440,
+      "y": 1571,
+      "width": 1040,
+      "height": 46
+    },
+    {
+      "id": "title-details-plan-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 440,
+      "y": 1629,
+      "width": 1040,
+      "height": 42
+    },
+    {
+      "id": "title-details-plan-maps",
+      "text": "Flash limits: WCAG 2.3.1.",
+      "x": 440,
+      "y": 1683,
+      "width": 1040,
+      "height": 42
+    },
+    {
+      "id": "title-details-plan-continuity",
+      "text": "When a part is hidden, a still image or dark screen covers the picture while sound and captions continue.",
+      "x": 440,
+      "y": 1761,
+      "width": 1040,
+      "height": 84
+    },
+    {
+      "id": "title-details-plan-limits",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 440,
+      "y": 1973,
+      "width": 1040,
+      "height": 109
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 440,
+      "y": 2147,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 466,
+      "y": 2165,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "details-harbor-scrolled": [],
+  "details-demo": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nPractice holds\nHarbor\nTwo scheduled practice holds show how the picture pauses while sound and captions ",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 320,
+      "y": 152,
+      "width": 1280,
+      "height": 480
+    },
+    {
+      "id": "title-details-artwork",
+      "text": "",
+      "x": 320,
+      "y": 152,
+      "width": 1280,
+      "height": 480
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 824.390625,
+      "y": 694,
+      "width": 271.203125,
+      "height": 96
+    },
+    {
+      "id": "title-details-demo-label",
+      "text": "Two scheduled practice holds show how the picture pauses while sound and captions continue.",
+      "x": 460,
+      "y": 806,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Watch demo",
+      "x": 816.25,
+      "y": 918,
+      "width": 287.484375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Watch demo",
+      "x": 854.25,
+      "y": 944,
+      "width": 211.484375,
+      "height": 46
+    },
+    {
+      "id": "title-details-summary",
+      "text": "2 scheduled holds are included, 8 seconds in all.",
+      "x": 440,
+      "y": 1286,
+      "width": 1040,
+      "height": 48
+    },
+    {
+      "id": "title-details-strip",
+      "text": "",
+      "x": 440,
+      "y": 1420,
+      "width": 1040,
+      "height": 28
+    },
+    {
+      "id": "title-details-strip-mark-0",
+      "text": "",
+      "x": 702,
+      "y": 1422,
+      "width": 208,
+      "height": 24
+    },
+    {
+      "id": "title-details-strip-mark-1",
+      "text": "",
+      "x": 1066,
+      "y": 1422,
+      "width": 208,
+      "height": 24
+    },
+    {
+      "id": "title-details-plan",
+      "text": "Your viewing settings\nExtra cautious\n55 inch television, seats about 8 feet away\nFlash limits: WCAG 2.3.1 and broadcast.",
+      "x": 440,
+      "y": 1504,
+      "width": 1040,
+      "height": 650
+    },
+    {
+      "id": "title-details-plan-preset",
+      "text": "Extra cautious",
+      "x": 440,
+      "y": 1643,
+      "width": 1040,
+      "height": 46
+    },
+    {
+      "id": "title-details-plan-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 440,
+      "y": 1701,
+      "width": 1040,
+      "height": 42
+    },
+    {
+      "id": "title-details-plan-maps",
+      "text": "Flash limits: WCAG 2.3.1 and broadcast.",
+      "x": 440,
+      "y": 1755,
+      "width": 1040,
+      "height": 42
+    },
+    {
+      "id": "title-details-plan-continuity",
+      "text": "When a part is hidden, a still image or dark screen covers the picture while sound and captions continue.",
+      "x": 440,
+      "y": 1833,
+      "width": 1040,
+      "height": 84
+    },
+    {
+      "id": "title-details-plan-limits",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 440,
+      "y": 2045,
+      "width": 1040,
+      "height": 109
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 440,
+      "y": 2219,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 466,
+      "y": 2237,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "details-demo-scrolled": [],
+  "details-unavailable": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. A",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 320,
+      "y": 152,
+      "width": 1280,
+      "height": 480
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 824.390625,
+      "y": 694,
+      "width": 271.203125,
+      "height": 96
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 806,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 918,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 944,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 440,
+      "y": 1048,
+      "width": 1040,
+      "height": 178
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 480,
+      "y": 1080,
+      "width": 968,
+      "height": 114
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 1080,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable. The picture stays hidden.",
+      "x": 480,
+      "y": 1146,
+      "width": 968,
+      "height": 48
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 440,
+      "y": 1291,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 466,
+      "y": 1309,
+      "width": 240.671875,
+      "height": 46
+    }
+  ]
+}

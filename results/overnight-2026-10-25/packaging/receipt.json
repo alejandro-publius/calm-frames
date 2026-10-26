@@ -1,0 +1,109 @@
+{
+  "recorded_utc": "2026-10-25T07:35:47.026614+00:00",
+  "checked_code_source": "95096125a9092aefca0571ee2b453229f6dc5f65",
+  "base": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "items": [
+    12,
+    19
+  ],
+  "status": "Build-source exclusion implemented and locally verified; native rebuild is not available here.",
+  "moves": [
+    {
+      "from": "app/assets/brand/make_logo.py",
+      "to": "app/tools/brand/make_logo.py"
+    },
+    {
+      "from": "app/assets/brand/render.sh",
+      "to": "app/tools/brand/render.sh"
+    },
+    {
+      "from": "app/assets/brand/render_qt.cpp",
+      "to": "app/tools/brand/render_qt.cpp"
+    },
+    {
+      "from": "app/assets/raw/sound/generate_menu_select.py",
+      "to": "app/tools/sound/generate_menu_select.py"
+    }
+  ],
+  "checks": {
+    "archive_regression_before": {
+      "status": "expected failure observed",
+      "command": "node --test --test-name-pattern=\"refuses build scripts outside\" app/tools/check_prepared_library.test.mjs",
+      "reason": "Old check accepted a synthetic native-package archive containing assets/brand/make_logo.py."
+    },
+    "source_tree_before": {
+      "status": "expected failure observed",
+      "reason": "New source preflight found the actual generator still under assets/brand/make_logo.py before the move."
+    },
+    "package_tests": {
+      "status": "passed",
+      "command": "node --test app/tools/check_prepared_library.test.mjs",
+      "node": "22.23.2",
+      "passed": 27
+    },
+    "generator_brand_design_tests": {
+      "status": "passed",
+      "command": "python -m pytest eval/tests/test_asset_tool_locations.py eval/tests/test_design_page.py eval/tests/test_brand_assets.py -q",
+      "passed": 25,
+      "writes_and_encoder": "intercepted; no media files generated"
+    },
+    "attribution_release_tests_initial": {
+      "status": "passed with skips",
+      "passed": 54,
+      "skipped": 3,
+      "skip_reason": "Gitleaks was not on PATH in the initial shell; rerun below enabled it. Initial release-driver Node was 24.19.0; rerun uses pinned Node22.23.2."
+    },
+    "pinned_release_and_security_tests": {
+      "status": "inherited failure discovered",
+      "command": "PATH=<gitleaks8.30.1>:<node22.23.2>:$PATH python -m pytest eval/tests/test_secret_scan_manifest.py eval/tests/test_release_package_gate.py -q",
+      "passed": 12,
+      "failed": 1,
+      "failure": "Known PinKeypad source-digest allowlist case expected Gitleaks exit0 but got1. PinKeypad.tsx and .gitleaks.toml are unchanged in this lane; two detector-bait refusals pass. Routed to privacy lane; not bypassed."
+    },
+    "source_and_prepared_gate": {
+      "status": "passed",
+      "command": "node app/tools/check_prepared_library.mjs --require-reports"
+    },
+    "negative_controls": {
+      "asset-source-exclusion": {
+        "exit_code": 1,
+        "assertion": "Missing expected exception",
+        "restored": true
+      },
+      "linked-source-exclusion": {
+        "exit_code": 1,
+        "assertion": "Missing expected exception",
+        "restored": true
+      }
+    },
+    "ruff": {
+      "status": "passed",
+      "version": "0.17.0",
+      "scope": "Moved Python tools and changed Python tests/helpers"
+    },
+    "shell_syntax": {
+      "status": "passed",
+      "command": "bash -n app/tools/brand/render.sh"
+    },
+    "runtime_asset_preservation": {
+      "status": "passed",
+      "files": 153,
+      "media_or_font_generation": false
+    },
+    "style_published_numbers_links_whitespace": {
+      "status": "passed"
+    },
+    "staged_gitleaks": {
+      "status": "passed",
+      "version": "8.30.1",
+      "findings": 0
+    }
+  },
+  "limits": [
+    "No Vega SDK or native package rebuild is available in this environment. Synthetic package fixtures test archive refusal, not a new native installation.",
+    "The Qt/C++ renderer was relocated but not compiled or executed; its SVG/font lookup stays rooted at the actual asset path.",
+    "No media, fonts, catalogs, signing data, trust approval, app UI, dependency tree or exception dates changed. The sound README and explanatory generator path in the license ledger changed.",
+    "The inherited exact-digest security-test failure remains explicit for the integration owner."
+  ],
+  "log_normalization": "Trailing whitespace removed from captured tool logs; original copies remain outside Git in the isolated check directory."
+}

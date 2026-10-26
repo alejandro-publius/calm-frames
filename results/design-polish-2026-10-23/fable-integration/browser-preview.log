@@ -1,0 +1,14 @@
+1080/01-kid-selected {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": null}
+1080/02-editor-open {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+1080/03-editor-typing {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+1080/04-editor-refused {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+1080/05-editor-saving {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+1080/06-editor-failed {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": false}
+1080/07-renamed {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": null}
+720/01-kid-selected {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": null}
+720/02-editor-open {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+720/03-editor-typing {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+720/04-editor-refused {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+720/05-editor-saving {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": true}
+720/06-editor-failed {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": false}
+720/07-renamed {"watched_controls_inside_horizontal_safe_area": true, "save_or_retry_in_first_viewport": null}

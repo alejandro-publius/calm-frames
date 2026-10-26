@@ -1,0 +1,135 @@
+{
+  "source_inspected": "6360417814d684d41c94789a9e406fc27de53c66",
+  "application_source": "12125b2970342b5376b0bc7964383e547b407376",
+  "reference_images": [
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/37-polish-picker.png",
+      "bytes": 256366,
+      "sha256": "39356b75d9a33034894ace30b4634f27f0e2756407d5a7812d1ec35aa8e69d2f",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/38-polish-selected.png",
+      "bytes": 535449,
+      "sha256": "f227ae747d44691ae0e04cd11de51db268386edacb555e35a7c81835d76321b4",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/40-polish-details.png",
+      "bytes": 476776,
+      "sha256": "f85b31d3f142d15149bccf07b07bbc20991f76ed829cb95f117e2bfa11baba5f",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+      "not_current_source_capture": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/17-kid2-resume.png",
+      "bytes": 259457,
+      "sha256": "7234d03696329e033ec090abe76aaa63cfbcee94090835e64dd9ef040b33350d",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+      "not_current_source_capture": true
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/22-kid-isolated.png",
+      "bytes": 259455,
+      "sha256": "0908a2bd2694ce22d076eb45559b97c16ba783c25c4dd2f4b13c2f3ba78e15c6",
+      "kind": "historical_native_still_reference_only",
+      "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+      "not_current_source_capture": true
+    }
+  ],
+  "render_inputs": {
+    "manga_01": {
+      "status": "missing",
+      "kind": "illustration"
+    },
+    "n01": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "native_home": {
+      "status": "missing",
+      "kind": "native_video"
+    },
+    "n02": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "native_details": {
+      "status": "missing",
+      "kind": "native_video"
+    },
+    "n03": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "manga_02": {
+      "status": "missing",
+      "kind": "illustration"
+    },
+    "n04": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "native_ambient": {
+      "status": "missing",
+      "kind": "native_video"
+    },
+    "manga_03": {
+      "status": "missing",
+      "kind": "illustration"
+    },
+    "n05": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "native_return": {
+      "status": "missing",
+      "kind": "native_video"
+    },
+    "n06": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "manga_04": {
+      "status": "missing",
+      "kind": "illustration"
+    },
+    "n07": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "native_proof": {
+      "status": "missing",
+      "kind": "native_video"
+    },
+    "n08": {
+      "status": "missing",
+      "kind": "narration"
+    },
+    "manga_05": {
+      "status": "missing",
+      "kind": "illustration"
+    }
+  },
+  "excluded_retry_harness_images": [
+    "30-probe-focused.png",
+    "31-probe-error.png",
+    "33-retry-ready.png",
+    "35-retry-playing.png"
+  ],
+  "old_demo": {
+    "path": "results/replacement-demo-2026-10-22/demo.json",
+    "media_received": false,
+    "source_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+    "not_current_source_capture": true
+  },
+  "blackbox_reference_frames": "not_received; supplied URL access blocked",
+  "paid_generation": "not_performed",
+  "human_full_video_acceptance": "pending"
+}

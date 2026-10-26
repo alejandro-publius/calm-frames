@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Calm Frames: a guided review | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../GUIDE.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="calm-frames-a-guided-review">Calm Frames: a guided review</h1>
+<p>Prepared nature scenes, an explicit choice to watch, and a readable record of the checks behind each edition. <strong>Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.</strong></p>
+<p>This is the Markdown alternative to <a href="../index.html">the offline guide</a>. It uses existing native captures, not mockups. Nothing here plays a video. For the shortest review, follow the tour below, then the <a href="rubric-matrix.html">rubric matrix</a> and <a href="claims-ledger.html">claims ledger</a>.</p>
+<h2 id="which-version-is-this">Which version is this?</h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>What it means here</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Submitted baseline <code>bf2f615</code></td>
+<td>The submitted candidate described by the release receipt. Its app and hook trees match native source <code>60c3bbb</code>. The submitted version and public video are preserved.</td>
+</tr>
+<tr>
+<td>Upgraded source <code>d96c088</code></td>
+<td>Preparation recovery and Playback Proof integrated and validated on the Mac. The evidence was committed in <code>13551e45bd853c392489dbecce7158a04036f615</code>, this package&#39;s base.</td>
+</tr>
+<tr>
+<td>This judging package</td>
+<td>Documentation and browser presentation only. It reuses the reviewer-page implementation from <code>3db0505</code>, with clearer navigation and portable assets. No native build or new benchmark run.</td>
+</tr>
+<tr>
+<td>Planned or unavailable</td>
+<td>The replacement video, further native review, user research and Claude&#39;s newer benchmarks are not supplied by this package. Newer benchmark results are <strong>unavailable</strong>, not inferred.</td>
+</tr>
+</tbody></table>
+<p>Source: <a href="../evidence/release-selected.json">release receipt selection</a>, original <code>bases</code>, <code>tested_commit</code> and <code>native.fallback</code> fields; <a href="release-readiness.html">release report</a>. Old “not pushed” wording in historical documents predates the owner&#39;s confirmed private integration push. It is not current GitHub or hosted CI status.</p>
+<h2 id="start-without-installing-anything">Start without installing anything</h2>
+<p>Open <code>index.html</code> from this directory in a browser, or read this file. Keep the directory and its children together; images, fonts, readable documents and evidence excerpts are bundled. The page has no remote runtime dependencies and does not fetch external resources. Original-source and license links are optional links to the Internet, clearly separate from the local review.</p>
+<p>Use Tab and Enter for controls and links. Choose a tour stop or use Previous and Next. All stops remain visible with JavaScript disabled. Nothing animates or autoplays. The architecture&#39;s text explanation is also in <a href="architecture.html">Architecture and code map</a>.</p>
+<p>Some managed browsers block <code>file:</code> URLs. The cloud checks used a temporary loopback server as a test fixture; direct file opening could not be tested under that browser policy. The package itself uses no fetch or module imports and requires no server or installation in a browser that permits local files.</p>
+<h2 id="the-product-walkthrough">The product walkthrough</h2>
+<h3 id="choose-a-scene">Choose a scene</h3>
+<p><img src="../assets/home.png" alt="Earlier native Home, with McWay Falls selected"></p>
+<p><strong>Historical native source <code>60c3bbb</code>.</strong> Home groups the approved nature scenes and gives the selected title a clear Watch and Details route. The image explains the journey; it is not an integration-build capture. <a href="capture-history.html">Capture history</a>.</p>
+<h3 id="know-what-opens">Know what opens</h3>
+<p><img src="../assets/details.png" alt="Earlier native McWay Details screen"></p>
+<p><strong>Historical native source <code>60c3bbb</code>.</strong> McWay states its duration and that it ends on a still frame until Back. This screenshot does not establish comfort or sound quality.</p>
+<h3 id="watch-the-selected-edition">Watch the selected edition</h3>
+<p><img src="../assets/f15-mcway-playing.png" alt="Existing integration capture of McWay playback"></p>
+<p><strong>Integration source <code>d96c088</code>.</strong> This still is from a shorter, separate native run. The full-duration McWay observation used trace lines while the Mac was locked. A still does not prove motion cadence, full-duration playback or audio quality. No new playback occurred in this cloud task.</p>
+<h3 id="check-the-edition">Check the edition</h3>
+<p><img src="../assets/f04-proof-selection.png" alt="Acadia Selection stage on the integration build"></p>
+<p><strong>Integration source <code>d96c088</code>.</strong> Source, Prepared and Selection separate what was measured, what was rendered and checked, and which approved edition is selected. The media bytes are checked when the app is built. This information page does not rescan the video or authorize a new title.</p>
+<h3 id="read-the-record-and-its-limits">Read the record and its limits</h3>
+<p><img src="../assets/f07-reading-wcag.png" alt="Remote focus on the WCAG analysis record"></p>
+<p>The native record was made reachable with remote focus stops. McWay&#39;s Prepared page explicitly says its output analyzer version was not recorded. <a href="../assets/f12-mcway-proof-prepared.png">View that existing capture</a>. McWay has no flagged output segments and does not demonstrate a protective cover activating.</p>
+<h2 id="how-the-checks-connect">How the checks connect</h2>
+<p>Licensed source → analysis and signing → rendering and output verification → exact catalog approval → route and map checks → guarded native playback. Unresolved verification keeps the picture covered. The pipeline prepares media separately; the app plays its approved packaged library and does not intercept other apps or streaming services.</p>
+<p><a href="architecture.html">Architecture and code evidence</a> connects each step to the pinned implementation. <a href="preparation-recovery.html">Recovery evidence</a> explains interrupted-work handling. Its scenario evidence comes from one Mac/APFS; most scenarios use a fake analyzer, and no power was cut.</p>
+<h2 id="review-kit">Review kit</h2>
+<ul>
+<li><a href="rubric-matrix.html">Rubric-to-evidence matrix</a>: the four recorded judging criteria, user benefit, support and gaps.</li>
+<li><a href="impact-and-differentiation.html">Impact and differentiation</a>: a specific intended audience, implementation distinctions and unvalidated hypotheses.</li>
+<li><a href="friction-log-draft.html">Friction log draft</a> and <a href="product-feedback-draft.html">product feedback</a>: recorded issues, reproduction paths and suggested SDK improvements.</li>
+<li><a href="presentation-drafts.html">Presentation drafts</a>: proposed README opening, Devpost story and screenshot order.</li>
+<li><a href="demo-evidence-brief.html">Replacement-demo evidence brief</a>: evidence and boundaries for Claude&#39;s video work.</li>
+<li><a href="claims-ledger.html">Claims ledger</a> and <a href="primary-sources.html">primary-source register</a>: what each statement rests on and what could not be rechecked.</li>
+<li><a href="handoff.html">Mac integration handoff</a>: apply only this package, without changing the integration branch or live submission.</li>
+</ul>
+<h2 id="what-this-package-cannot-establish">What this package cannot establish</h2>
+<p>There are no recorded external interviews, adoption figures or medical outcomes supporting this package. Audio and owner visual acceptance remain open. Physical Fire TV, full VoiceView acceptance and precise on-screen cover timing are not established here. Some native screenshots failed; trace evidence is labelled separately. No hosted CI success, competition score, new detector benchmark or replacement video is claimed.</p>
+<p>The official Devpost rules URL was blocked by the cloud proxy. The rubric uses the repository&#39;s dated official-source record, whose stated last live review was October 17, 2026. Current wording and eligibility still need a live source check. W3C and Epilepsy Foundation requests were also blocked; their primary-source excerpts are labelled historical, not freshly fetched. See <a href="../evidence/source-access.json">source-access results</a>.</p>
+<h2 id="credits">Credits</h2>
+<p>McWay Falls footage and extracted still: MoneySavingVideos, <em>Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset</em>, CC BY 3.0. The prepared edition uses an excerpt, downsampling, H.264/AAC encoding, a closing audio fade and an extracted final still. Other visible artwork: NPS Video, Acadia National Park; NOAA Fisheries; NPS: G Litten. This package reuses existing native crops unchanged. Full source URLs, license terms and changes are in <a href="capture-history.html">capture credits</a>. No creator or agency endorsement is implied.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../GUIDE.md">docs/judging-package/GUIDE.md</a></p><p>Source SHA-256: <code>cfb40b42364cdf48d9b810f84057272c02900537299c65b18c971e9b2569a933</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

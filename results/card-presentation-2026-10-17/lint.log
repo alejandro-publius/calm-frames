@@ -1,0 +1,7 @@
+
+/Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/src/calmframes/useFlashGuard.ts
+  344:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+  587:7  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+✖ 2 problems (0 errors, 2 warnings)
+

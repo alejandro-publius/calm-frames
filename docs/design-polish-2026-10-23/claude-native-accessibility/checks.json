@@ -1,0 +1,117 @@
+{
+ "item": 11,
+ "base": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+ "branch": "claude/native-accessibility-2026-10-24",
+ "integration_candidate": "3b0174b6c7dd8a4e31a84b3ddb8d479ddb759d27",
+ "production_commits": [
+  "4d4152c816666cd78df8668417c4d6478f07f7e6",
+  "3ede1fad2afc134682449b4a39a465f847f0e3e9",
+  "88c171666e9ab32d6993338c7ab77173d2f3e088",
+  "eeaaf16f4c655fb44ebdb0aa3c17fc2c869ad9a9",
+  "3b0174b6c7dd8a4e31a84b3ddb8d479ddb759d27"
+ ],
+ "notes_commits": [
+  "0eab3c4b85096a9116c9e74526dcc1766a792498",
+  "this commit"
+ ],
+ "harness_commits_never_merge": {
+  "claude/native-accessibility-harness-2026-10-24-never-merge": "5e48655c8900f330f4ce353c3bb3f5aec512d8d6",
+  "claude/native-accessibility-harness-v2-2026-10-24-never-merge": "4553ee3fb5d268850acb15529e820328dc0c1e93"
+ },
+ "device": "Vega Virtual Device, SDK 0.24.9914, 1920 x 1080 (960 x 540 dp) and 1280 x 720 (640 x 360 dp)",
+ "screen_reader": "VoiceView, heard through window recordings transcribed on the Mac",
+ "implementation": "done on the branch",
+ "native_acceptance": "partial",
+ "final_integration": "not done: cloud follow-up 226d317 missing; item 6 dd1ec6c separate",
+ "fixed": [
+  "profile button names who is watching",
+  "cards say their drawn line without the separator",
+  "no false selected state on cards",
+  "Details title heading",
+  "Watch hint carries the covered strip",
+  "How it works, More info safety text and the Parents record reachable",
+  "Extra picture covers names its title",
+  "How it works ring whole",
+  "Parents footer holds Left and Right",
+  "Parents presets and switches say name, state and role before the description",
+  "name editor field reachable and announced as it changes",
+  "resume prompt title is a heading",
+  "resume prompt: Back no longer takes focus while the saved place loads",
+  "Parents How Calm Frames works reachable and read"
+ ],
+ "partly_fixed": [
+  "resume prompt: VoiceView still said Back, button once and a bare button once in 5 recorded openings, with no app focus change"
+ ],
+ "blocked": [
+  "seek bar percent announcements: Kepler UI Components 3.2.2 SeekBar drops accessibility props (SeekBar.js 616 to 617, Slider.js 57) and its progress bars hard-code the value (ProgressBarWithSegments.js 49 to 51, ProgressBarLight.js 20 to 24); four app-level arrangements all failed on the device"
+ ],
+ "unobserved": [
+  "Down from the Parents explainer to the footer at 1280 x 720",
+  "profile chooser and player at 1280 x 720",
+  "Parents in the real household on the second pass builds (heard in the harness)",
+  "reduced motion on the device",
+  "VoiceView during playback with Dolby on",
+  "physical Fire TV",
+  "human listening"
+ ],
+ "packages": {
+  "rollback": {
+   "sha256": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d",
+   "sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458"
+  },
+  "4d4152c": {
+   "sha256": "15f68f9810e21873ffbaddecface19a18de7a910ec925fbf99fe2d6f618c3f81",
+   "sha384": "5e64a1b4c65d69664ce417b9908b38a117c8890c3ea8a9587a023f862c729c8368d9bc6fb5869b8f406350f2ff558f18"
+  },
+  "3ede1fa": {
+   "sha256": "b4272a5f872afbc21b7296563c02ea03efee278dccdf3ca6ebb8b40703c8aad5",
+   "sha384": "f28c9a96482d598ee3ec3cbae04a58f387369aafb8d54b1449927201a345dd5df50d04f2bf9cbf85406ab4baa82968d3"
+  },
+  "88c1716": {
+   "sha256": "eb00d6cda82e8a6c2ce42f43d0c958a5b7f512a70cd6943559a25db06f50bd7b",
+   "sha384": "db345c97ea49acc9198914302941b8822f9f0324ac854d5278bfa2756e931e62b986f607d6fd23d35b876d6f4952fd30"
+  },
+  "eeaaf16": {
+   "sha256": "b6550574423f8a63181d2258ac8b99e252e625e1bc1814707f5848e4a4f683d7",
+   "sha384": "5de996347431bd3bc5de47efb948a244f13f3a232b210c4c53ed8c9cfe211d927e3917f10dff8d7d4f9158887bcf93ea"
+  },
+  "3b0174b": {
+   "sha256": "e0da8c73168e1a91f298f265e9632b0150b799485f7eeddd66f39f30787d8478",
+   "sha384": "072c79160f161235adc510357073ee95158197a2ad19ecfeefdcba0b2d58cbcd952681fa4cb75abf4ed28c87b1ca3f65"
+  },
+  "harness_5e48655": {
+   "sha256": "f6300da367045e1c740477d39f66a0eff340f552dd847b3e734b942483b47416",
+   "sha384": "ea33633d8235314723fa0806c3b51aa77bd02f7ba4e1d5afa6139956d71848de4fd2285bc881b7dc1c77b11dc6e3d1d7"
+  },
+  "harness_4553ee3": {
+   "sha256": "3b39ef5f87a61fba3f98004f0a9ba2e6a6ea4556aaaedd6ef52626c2328ef4f2",
+   "sha384": "1b7c65be35fd62a81d8e1ebf5ea5d7007db9d66d98e6bef25ec19ae77639479068286d271e84d8571aad616b99c3974c"
+  }
+ },
+ "rollback_restored": true,
+ "final_device_sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458",
+ "voiceview_final": "off",
+ "display_final": "1920 x 1080",
+ "saved_place_mcway": "moved from 0:36 to 0:55 in the first pass; unchanged at 0:55 in the second",
+ "owner_pin_entries": {
+  "first_pass": 4,
+  "second_pass": 0
+ },
+ "checks": {
+  "typecheck": "pass on 3b0174b",
+  "lint": "pass on 3b0174b (0 errors; 104 warnings, none in a changed file)",
+  "style": "pass",
+  "jest_full_3b0174b": "175 suites passed, 1 skipped; 1868 tests passed, 4 skipped",
+  "native_accessibility_tests": 27,
+  "mutations_seen_to_fail": {
+   "first_pass": 15,
+   "second_pass": 10
+  }
+ },
+ "not_signed_off": [
+  "medical safety",
+  "human comfort",
+  "owner listening",
+  "all 20 items"
+ ]
+}

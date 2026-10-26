@@ -1,0 +1,51 @@
+PASS test/screens/returnFocus.test.tsx
+PASS test/calmframes/detailDiscovery.test.tsx
+PASS test/calmframes/coveredSections.test.ts
+PASS test/calmframes/homeComposition.test.tsx
+PASS test/calmframes/playerOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:591:15)
+
+PASS test/calmframes/coveredSectionsStrip.test.tsx
+PASS test/calmframes/openingAlignment.test.tsx
+FAIL test/calmframes/hookMirror.test.ts
+  ● the hook package mirror › is byte for byte what the sync script would write today
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 1
+
+    @@ -113,11 +113,8 @@
+        body: typography(36, 48, CALM_FONT.regular),
+        control: typography(36, 46, CALM_FONT.semibold),
+        supporting: typography(32, 42, CALM_FONT.regular),
+      } as const;
+
+    - /** Details and its opening shell keep the same title size, including long names. */
+    - export const heroTitleTypography = (title: string) => title.length > 20 ? CALM_TEXT.screen : CALM_TEXT.feature;
+    -
+      /** Shared reading geometry for choosing a video and reviewing its analysis. */
+    - export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 96, HERO_HEIGHT: 700, HERO_TITLE_WIDTH: 720 } as const;
+    + export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 96, HERO_HEIGHT: 700 } as const;
+      ↵
+
+      59 |       // The mirror carries a header saying where it came from, then the file.
+      60 |       expect(hookText).toContain('Mirrored from app/src/calmframes');
+    > 61 |       expect(hookText.slice(hookText.indexOf('\n */\n') + 5)).toBe(expected);
+         |                                                               ^
+      62 |     }
+      63 |   });
+      64 |
+
+      at Object.toBe (test/calmframes/hookMirror.test.ts:61:63)
+
+Test Suites: 1 failed, 7 passed, 8 total
+Tests:       1 failed, 70 passed, 71 total
+Snapshots:   0 total
+Time:        6.077 s, estimated 7 s
+Ran all test suites within paths "test/calmframes/coveredSections.test.ts", "test/calmframes/coveredSectionsStrip.test.tsx", "test/calmframes/openingAlignment.test.tsx", "test/calmframes/detailDiscovery.test.tsx", "test/calmframes/playerOpening.test.tsx", "test/calmframes/homeComposition.test.tsx", "test/calmframes/hookMirror.test.ts", "test/screens/returnFocus.test.tsx".

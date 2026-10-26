@@ -1,0 +1,236 @@
+{
+  "security_manager": {
+    "versions": {
+      "1.0.1767254401": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      },
+      "1.0.1767254403": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      },
+      "1.0.1767254404-rn-83": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      },
+      "1.0.1767254404": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      },
+      "1.0.1767254405-rn-83": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      },
+      "1.0.1767254405": {
+        "react-native-tscodegen-types": "0.66.0",
+        "@amazon-devices/keplerscript-turbomodule-api": "^1.0.0"
+      }
+    },
+    "dist_tags": {
+      "latest": "1.0.1767254405",
+      "rn83-alpha": "1.0.1767254405-rn-83",
+      "last_published": "1.0.1767254405"
+    }
+  },
+  "official_sample_tag": {
+    "name": "v0.24-RN83",
+    "zipball_url": "https://api.github.com/repos/AmazonAppDev/vega-video-sample/zipball/refs/tags/v0.24-RN83",
+    "tarball_url": "https://api.github.com/repos/AmazonAppDev/vega-video-sample/tarball/refs/tags/v0.24-RN83",
+    "commit": {
+      "sha": "ef8e4da89b22ef7973d0d41beedfa2b42f7bb272",
+      "url": "https://api.github.com/repos/AmazonAppDev/vega-video-sample/commits/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272"
+    },
+    "node_id": "REF_kwDOPuAXu7RyZWZzL3RhZ3MvdjAuMjQtUk44Mw"
+  },
+  "official_sample_package": {
+    "name": "@amazon-devices/Keplervideoapp",
+    "version": "3.24.0",
+    "files": [
+      "dist"
+    ],
+    "scripts": {
+      "clean": "rm -rf build bundle kepler-build node_modules package-lock.json generated coverage shaka-setup/shaka-player",
+      "postinstall": "cd shaka-setup && ./build.sh && ./copyOutputs.sh",
+      "build": "npm-run-all compile lint:fix test",
+      "compile": "tsc -p tsconfig.json",
+      "test:snapshot": "jest --colors --updateSnapshot",
+      "start": "react-native start",
+      "typecheck": "tsc -p tsconfig.json --noEmit",
+      "test": "jest --colors --coverage",
+      "test:clearCache": "jest --clearCache",
+      "lint": "eslint src --ext .ts,.tsx && eslint test --ext .ts,.tsx",
+      "lint:fix": "eslint src --ext .ts,.tsx --fix && eslint test --ext .ts,.tsx --fix",
+      "start:simulator": "kepler device simulator start",
+      "app:install": "kepler device install-app --dir .",
+      "app:install:debug": "kepler device install-app -b Debug --dir .",
+      "app:launch": "kepler device launch-app",
+      "app:build:debug": "run-s build:debug && npm run app:install:debug && npm run app:launch",
+      "app:build": "run-s build:release && npm run app:install && npm run app:launch",
+      "build:release": "react-native build-kepler --build-type Release",
+      "build:debug": "react-native build-kepler --build-type Debug",
+      "build:app": "npm-run-all build:release build:debug"
+    },
+    "dependencies": {
+      "@amazon-devices/headless-task-manager": "~1.2.8",
+      "@amazon-devices/kepler-channel": "~1.1.110",
+      "@amazon-devices/kepler-content-personalization": "~1.3.3",
+      "@amazon-devices/kepler-epg-provider": "~1.9.124",
+      "@amazon-devices/kepler-epg-sync-scheduler": "~1.2.140",
+      "@amazon-devices/kepler-file-system": "~0.0.7",
+      "@amazon-devices/kepler-media-account-login": "~1.1.24",
+      "@amazon-devices/kepler-media-content-launcher": "~2.0.22",
+      "@amazon-devices/kepler-media-controls": "~1.0.25",
+      "@amazon-devices/kepler-media-types": "~1.0.0",
+      "@amazon-devices/kepler-ui-components": "~3.2.0",
+      "@amazon-devices/keplerscript-appstore-iap-lib": "~2.13.0",
+      "@amazon-devices/keplerscript-netmgr-lib": "~2.0.20",
+      "@amazon-devices/lottie-react-native": "~3.0.9000000000+6.0.0-rc.1",
+      "@amazon-devices/react-linear-gradient": "~2.0.0",
+      "@amazon-devices/react-native-async-storage__async-storage": "~2.1.0",
+      "@amazon-devices/react-native-device-info": "~2.1.9000000000+10.11.0",
+      "@amazon-devices/react-native-gesture-handler": "~4.0.0+2.29.0",
+      "@amazon-devices/react-native-kepler": "~4.0.0+rn0.83.0",
+      "@amazon-devices/react-native-localize": "~2.1.9000000001+3.0.4",
+      "@amazon-devices/react-native-reanimated": "~4.0.0+4.1.3",
+      "@amazon-devices/react-native-safe-area-context": "~8.0.9000000000+5.2.0",
+      "@amazon-devices/react-native-screens": "~3.0.0",
+      "@amazon-devices/react-native-svg": "~3.0.9000000000+15.11.1",
+      "@amazon-devices/react-native-vector-icons": "~2.1.0",
+      "@amazon-devices/react-native-w3cmedia": "~2.3.2",
+      "@amazon-devices/react-native-worklets": "~1.0.0+0.6.0",
+      "@amazon-devices/react-navigation__core": "~8.0.9000000000+7.13.3",
+      "@amazon-devices/react-navigation__drawer": "~8.0.9000000000+7.7.5",
+      "@amazon-devices/react-navigation__native": "~8.0.9000000000+7.1.22",
+      "@amazon-devices/react-navigation__routers": "~8.0.9000000000+7.5.2",
+      "@amazon-devices/react-navigation__stack": "~8.0.9000000000+7.6.8",
+      "@amazon-devices/security-manager-lib": "~1.0.1767254405",
+      "@amazon-devices/vega-carousel": "~1.0.0",
+      "@jest/globals": "^29.7.0",
+      "@react-native-async-storage/async-storage": "npm:@amazon-devices/react-native-async-storage__async-storage@~2.1.0",
+      "@reduxjs/toolkit": "~2.2.4",
+      "@shopify/flash-list": "~2.1.0",
+      "@types/react-test-renderer": "^19.1.0",
+      "base-64": "1.0.0",
+      "fastestsmallesttextencoderdecoder": "~1.0.22",
+      "formik": "~2.4.6",
+      "jest-fetch-mock": "~3.0.3",
+      "lodash": "~4.17.21",
+      "react": "19.2.0",
+      "react-native": "0.83.0",
+      "react-native-event-listeners": "~1.0.7",
+      "react-native-responsive-screen": "~1.4.2",
+      "react-redux": "~9.1.2",
+      "recyclerlistview": "^4.2.1",
+      "underscore": "^1.13.7",
+      "xmldom": "~0.6.0",
+      "yup": "~1.4.0"
+    },
+    "devDependencies": {
+      "@amazon-devices/kepler-cli-platform": "~0.22.7",
+      "@amazon-devices/kepler-performance-api": "~0.1.0",
+      "@amazon-devices/keplerscript-commonmodules": "~1.1.0",
+      "@babel/core": "^7.25.2",
+      "@babel/runtime": "^7.25.0",
+      "@react-native-community/cli": "^20.0.0",
+      "@react-native/babel-preset": "0.83.0",
+      "@react-native/eslint-config": "0.83.0",
+      "@react-native/metro-config": "0.83.0",
+      "@react-native/typescript-config": "0.83.0",
+      "@testing-library/jest-native": "~5.4.3",
+      "@testing-library/react-native": "~11.5.4",
+      "@trivago/prettier-plugin-sort-imports": "~4.3.0",
+      "@types/base-64": "~1.0.2",
+      "@types/jest": "^29.5.14",
+      "@types/lodash": "~4.17.0",
+      "@types/react": "^19.2.0",
+      "@types/redux-mock-store": "^1.0.6",
+      "@types/xmldom": "~0.1.34",
+      "@typescript-eslint/eslint-plugin": "~6.10.0",
+      "babel-jest": "^29.6.3",
+      "babel-plugin-transform-remove-console": "^6.9.4",
+      "eslint": "^8.57.1",
+      "eslint-config-prettier": "~6.15.0",
+      "eslint-plugin-simple-import-sort": "~5.0.3",
+      "jest": "^29.7.0",
+      "mustache": "~4.2.0",
+      "npm-run-all": "~4.1.5",
+      "prettier": "2.8.8",
+      "prettier-plugin-organize-imports": "~3.2.4",
+      "react-native-dotenv": "~3.4.11",
+      "react-test-renderer": "19.2.0",
+      "redux-mock-store": "^1.5.4",
+      "run-s": "^0.0.0",
+      "ts-jest": "^29.2.5",
+      "typescript": "5.8.3"
+    },
+    "resolutions": {
+      "@types/react": "^19.2.0"
+    },
+    "engines": {
+      "node": ">=22"
+    },
+    "eslintConfig": {
+      "extends": "@react-native",
+      "root": true,
+      "ignorePatterns": [
+        "src/w3cmedia/shakaplayer/dist/"
+      ]
+    },
+    "kepler": {
+      "projectType": "application",
+      "appName": "Keplervideoapp",
+      "targets": [
+        "tv"
+      ],
+      "os": [
+        "vega"
+      ],
+      "api": 0.1
+    }
+  },
+  "codegen_071_package": {
+    "name": "react-native-tscodegen-types",
+    "version": "0.71.0",
+    "description": "TypeScript Code Generation for React Native Turbo Module",
+    "main": "./index.js",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/microsoft/react-native-tscodegen.git"
+    },
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/microsoft/react-native-tscodegen/issues"
+    },
+    "homepage": "https://github.com/microsoft/react-native-tscodegen#readme",
+    "devDependencies": {},
+    "dependencies": {
+      "@react-native/assets": "1.0.0",
+      "@types/react-native": "0.69.5",
+      "@types/react-native__assets": "1.0.0",
+      "react-native": "0.64.1"
+    }
+  },
+  "codegen_071_runtime_exports": "export const TurboModuleRegistry = require('react-native').TurboModuleRegistry;\nexport const codegenNativeComponent = require('react-native/Libraries/Utilities/codegenNativeComponent.js').default;\nexport const codegenNativeCommands = require('react-native/Libraries/Utilities/codegenNativeCommands.js').default;\n",
+  "codegen_upstream_readme_status": "## All works are ported to react-native, this project has stopped developing.",
+  "raw_file_hashes": {
+    "amazon-repositories.response": "0c7dafcba642ce786bee3c68eb869b9dc23313ae2654be84260a557e25d41459",
+    "amazon-search.response": "b0edbf2c3f0d41a20dac3126bbce2cfeee5b0f7e8ba3a253dc040a6a858ac8d7",
+    "codegen-0.71.0-package_package.json": "2e640ad6b25a1cfdd84b48f5d30dafd65b303373ca8473f44c4627417cf732c5",
+    "security-manager.response": "6343990f5386a24595724e92094d96e6acbe12f7f92c359af8c7ae8d3d12de4e",
+    "codegen-0.71.0-package_index.d.ts": "7e88c79d985cfa877d8ba400f62064b0813b0718d796f162c836e59043ecb163",
+    "kepler-cli.response": "69d884a91587322d938aa2312bafa535bbb2a9d690106e5dacc480ad0a007419",
+    "sample-rn83-package.response": "872ff555af90c07e4c7edd19ba7a5a532b9a678a5176a556752b0792eb243f4a",
+    "codegen-0.71.0-package_index.js": "368fb0fe18dc7cacde372d4ea3ce10be378b4f7d263a2da6157294ff127fa34f",
+    "organizer-hackathon-repos.response": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+    "sample-main-package.response": "872ff555af90c07e4c7edd19ba7a5a532b9a678a5176a556752b0792eb243f4a",
+    "codegen-0.71.0.tgz": "42f342a0d4fc150248d960e94c17f140db03617b6004ac63c8437181fff013d5",
+    "sample-main-readme.response": "32585a00e2bf4c93032e2e34ae4312f159b78769c3c453bb3daee206202c5f92",
+    "organizer-guidance-repos.response": "40b3648660e592a4822d9d176af12b652287f7a738339aa690b8e1c1ed496970",
+    "codegen-guidance.response": "5d1b9411674ea643e517427df7f2eb285a279a661267357428197a003a3b6266",
+    "forest-cc0-repos.response": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+    "organizer-search.response": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f",
+    "sample-tags.response": "28f42777bace6318120c6065bb98ee17627e7766615d5fe97504178879185381",
+    "codegen.response": "cfffec2e67fa1d9d6ad633d83ad69eb972b47c2f8bf6ec74d10456ecc41bd366",
+    "otter-license-repos.response": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+  }
+}

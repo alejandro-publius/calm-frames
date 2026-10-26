@@ -22,7 +22,14 @@ import {
   APPROVED_SAFETY_CLAUSE,
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
+  CANCEL_NAME_LABEL,
+  CAPTIONS_CONTINUE_LINE,
+  CHECKED_BEFORE_ADDED_LINE,
+  coverLine,
+  EDIT_NAME_LABEL,
+  editNameTitle,
   describeHiddenTotal,
+  DETECTION_LIMITS_LINE,
   EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TARGET_SECONDS,
@@ -31,24 +38,33 @@ import {
   hiddenSummary,
   hideDayHeading,
   keepKidLabel,
+  NAME_EMPTY_HINT,
+  nameLengthLine,
+  nameProblemLine,
+  NAME_SAVE_FAILED,
+  NAME_SAVING,
   nextKidName,
   Notice,
   noticeForTitle,
   nothingHiddenFor,
   NOTHING_HIDDEN_YET,
   NO_TITLES,
+  ONLY_IN_CALM_FRAMES_LINE,
   PIN_NOT_SET,
   PIN_PROMPT,
   PROFILE_ONLY_ADDS,
+  PURPOSE_LINE,
   readingSeconds,
   removeKidLabel,
   removeKidPrompt,
   ROOM_ONLY_ADDS,
   ROOM_TITLE,
   SAFETY_NOTE,
+  SAVE_NAME_LABEL,
   seatChosen,
   SEAT_DISTANCE_TITLE,
   sectionFor,
+  shiftLabel,
   STRICTNESS_TITLE,
   televisionChosen,
   TV_SIZE_TITLE,
@@ -71,6 +87,7 @@ const ALL_NOTICES: Notice[] = [
   TITLE_STALE,
   PIN_NOT_SET,
   PIN_PROMPT,
+  NAME_SAVE_FAILED,
 ];
 
 function entry(overrides: Partial<CheckedTitle>): CheckedTitle {
@@ -103,7 +120,12 @@ describe('the sentence about what this is', () => {
 
   it('never turns into a promise anywhere in the app', () => {
     const banned = [/prevents? seizures/i, /seizure[- ]proof/i, /stops? seizures/i];
-    for (const name of fs.readdirSync(SOURCE_DIR)) {
+    // Every file, in every folder: on Oct 18 an integration/ folder made this
+    // read a directory and throw, and the guard stopped checking anything.
+    const names = (fs.readdirSync(SOURCE_DIR, { recursive: true }) as string[])
+      .filter((name) => fs.statSync(path.join(SOURCE_DIR, name)).isFile());
+    expect(names.some((name) => name.startsWith(`integration${path.sep}`))).toBe(true);
+    for (const name of names) {
       const text = fs.readFileSync(path.join(SOURCE_DIR, name), 'utf8');
       for (const phrase of banned) {
         expect(`${name}: ${phrase.source} ${phrase.test(text)}`).toBe(
@@ -141,6 +163,27 @@ describe('house style', () => {
       removeKidPrompt('Robin').detail,
       removeKidLabel('Robin'),
       keepKidLabel('Robin'),
+      // What the app says it does, on How it works and More info.
+      PURPOSE_LINE,
+      CAPTIONS_CONTINUE_LINE,
+      CHECKED_BEFORE_ADDED_LINE,
+      ONLY_IN_CALM_FRAMES_LINE,
+      DETECTION_LIMITS_LINE,
+      coverLine(1, false),
+      coverLine(3, true),
+      // Renaming a kid: the buttons, the field and every refusal.
+      EDIT_NAME_LABEL,
+      SAVE_NAME_LABEL,
+      CANCEL_NAME_LABEL,
+      NAME_EMPTY_HINT,
+      NAME_SAVING,
+      editNameTitle('Robin'),
+      nameLengthLine(3, 16),
+      shiftLabel(true),
+      shiftLabel(false),
+      nameProblemLine('empty', '', 16),
+      nameProblemLine('long', 'Robin', 16),
+      nameProblemLine('taken', 'Robin', 16),
     ];
     for (const line of lines) {
       expect(`${line} has em dash: ${line.includes('—')}`).toBe(
@@ -180,7 +223,7 @@ describe('house style', () => {
 
 describe('the record in the parent area', () => {
   it('counts one part as one part, and reads long totals as minutes', () => {
-    expect(hiddenSummary(1, 4_000, 1)).toBe('1 part, 4 seconds in all.');
+    expect(hiddenSummary(1, 4_000, 1)).toBe('1 scene hidden, 4 seconds in total.');
     // One second used to read "1 seconds".
     expect(describeHiddenTotal(1_000)).toBe('1 second');
     expect(describeHiddenTotal(59_000)).toBe('59 seconds');
@@ -191,9 +234,9 @@ describe('the record in the parent area', () => {
 
   it('says where the list stops, and stays quiet when it does not stop', () => {
     expect(hiddenSummary(25, 100_000, 20)).toBe(
-      '25 parts, 1 minute 40 seconds in all. The 20 most recent are below.',
+      '25 scenes hidden, 1 minute 40 seconds in total. The 20 most recent are below.',
     );
-    expect(hiddenSummary(3, 12_000, 3)).toBe('3 parts, 12 seconds in all.');
+    expect(hiddenSummary(3, 12_000, 3)).toBe('3 scenes hidden, 12 seconds in total.');
   });
 
   it('names the day rather than leaving a bare time to be guessed at', () => {
@@ -212,8 +255,8 @@ describe('the record in the parent area', () => {
   });
 
   it('says the same thing whether the record is one kid or the household', () => {
-    expect(NOTHING_HIDDEN_YET).toBe('Nothing has been hidden yet.');
-    expect(nothingHiddenFor('Robin')).toBe('Nothing has been hidden for Robin yet.');
+    expect(NOTHING_HIDDEN_YET).toBe('No scenes hidden yet.');
+    expect(nothingHiddenFor('Robin')).toBe('No scenes hidden for Robin yet.');
   });
 });
 
@@ -237,7 +280,7 @@ describe('the room chips, in words', () => {
 
   it('gives both rows a name, because two rows of numbers are not one row', () => {
     expect(TV_SIZE_TITLE).toBe('Television size');
-    expect(SEAT_DISTANCE_TITLE).toBe('How far away the sofa is');
+    expect(SEAT_DISTANCE_TITLE).toBe('Viewing distance');
   });
 });
 
@@ -287,6 +330,35 @@ describe('naming a new kid', () => {
   });
 });
 
+describe('what the app says it does', () => {
+  /**
+   * The covers are black unless a signed scene hold exists for the interval,
+   * and the prepared Acadia maps carry none, so neither line may promise a
+   * still picture. Captions are promised only where a title ships them.
+   */
+  it('says covered, never a still picture, and promises nothing it cannot keep', () => {
+    for (const line of [PURPOSE_LINE, CAPTIONS_CONTINUE_LINE, ...EXPLAINER_LINES, coverLine(2, false)]) {
+      expect(line).not.toMatch(/still picture|safe|guaranteed|nothing flagged|never holds/i);
+      expect(line.endsWith('.')).toBe(true);
+    }
+    expect(PURPOSE_LINE).toMatch(/covered/);
+    expect(PURPOSE_LINE).toMatch(/sound continues/);
+  });
+
+  it('says plainly which videos it works with, and names what it does not cover', () => {
+    expect(PURPOSE_LINE).toMatch(/^Flashing scenes are covered/);
+    expect(ONLY_IN_CALM_FRAMES_LINE).toBe(
+      'Calm Frames works only with prepared videos in this app, not other apps or live TV.',
+    );
+  });
+
+  it('names captions only for a title that has them', () => {
+    expect(coverLine(3, false)).toBe('Flagged scenes are covered. Original audio is kept when the video has sound.');
+    expect(coverLine(3, true)).toBe('Flagged scenes are covered. Original audio is kept when the video has sound. Captions continue too.');
+    expect(coverLine(1, false)).toBe('The flagged scene is covered. Original audio is kept when the video has sound.');
+  });
+});
+
 describe('the explainer', () => {
   it('is about twenty seconds of reading', () => {
     const seconds = readingSeconds(EXPLAINER_LINES, EXPLAINER_WORDS_PER_MINUTE);
@@ -326,15 +398,15 @@ describe('which notice a title gets', () => {
     expect(notice?.tone).toBe('blocked');
   });
 
-  it('keeps the wording from the reader underneath the general line', () => {
+  it('explains a refusal once, without repeating the general status', () => {
     const notice = noticeForTitle(
       entry({
         status: 'failed',
         rejection: 'wrong-file',
-        reason: 'The check for this title belongs to a different file.',
+        reason: 'The check for flashing belongs to a different version of this video.',
       }),
     );
-    expect(notice?.detail).toContain(TITLE_FAILED.detail);
-    expect(notice?.detail).toContain('belongs to a different file');
+    expect(notice?.title).toBe(TITLE_FAILED.title);
+    expect(notice?.detail).toBe('The check for flashing belongs to a different version of this video. The picture stays hidden.');
   });
 });

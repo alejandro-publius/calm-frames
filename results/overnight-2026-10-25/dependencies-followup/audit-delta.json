@@ -1,0 +1,29 @@
+{
+  "before_source": "../dependencies/audit-after.json",
+  "before_source_commit": "fea683258b7425e829beba521574e15355a598d6",
+  "before_sha256": "4ab259f133e3c9122f7c4f2724eada0ad3dfeee5852628d213cf22e4949a162b",
+  "before": {
+    "info": 0,
+    "low": 0,
+    "moderate": 21,
+    "high": 17,
+    "critical": 0,
+    "total": 38
+  },
+  "after": {
+    "info": 0,
+    "low": 0,
+    "moderate": 19,
+    "high": 14,
+    "critical": 0,
+    "total": 33
+  },
+  "unique_advisories_before": 17,
+  "unique_advisories_after": 15,
+  "removed_advisories": [
+    "GHSA-4xcv-9jjx-gfj3",
+    "GHSA-r683-j2x4-v87g"
+  ],
+  "added_advisories": [],
+  "note": "The before scan is the preceding same-day exact-lock npm 10.9.8 result; the after scan is fresh. Package totals include propagated findings, not independent exploits."
+}

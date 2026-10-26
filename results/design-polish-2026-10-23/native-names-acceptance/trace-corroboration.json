@@ -1,0 +1,18 @@
+{
+  "observation_capture_hash_references_checked": 130,
+  "reference_mismatches": [],
+  "ledger_capture_hash_references_checked": 126,
+  "manifest_images_not_in_step_snap_events": [
+    "evidence/00-baseline-home.full.png",
+    "evidence/00-baseline-home.png"
+  ],
+  "captures_available_for_visual_inspection": false,
+  "scope": "Aggregated CALM_TRACE identifiers corroborate route/focus events only. They do not establish visible ring geometry, VoiceView speech, frame timing or human comfort.",
+  "adjacent_recorded_focus_event_counts": {
+    "kid-mode-parent-name-save -> kid-mode-parent-rename-profile": 2,
+    "kid-mode-parent-name-cancel -> kid-mode-parent-rename-profile": 1,
+    "kid-mode-parent-back-top -> kid-mode-parent-rename-profile": 1,
+    "kid-mode-parent-back -> kid-mode-parent-rename-profile": 1
+  },
+  "private_input_handling": "Private key events retain their place in the sequence as an opaque marker; no letters, digits or personal values are exported."
+}

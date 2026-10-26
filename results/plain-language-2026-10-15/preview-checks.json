@@ -1,0 +1,20 @@
+{
+  "method": "Headless DOM, keyboard and geometry assertions; no screenshots, video or visual inspection",
+  "checks": [
+    {
+      "composition": "a",
+      "return_focus_routes": "pass",
+      "home_arrows": "pass",
+      "large_view_content_within_frame": "pass"
+    },
+    {
+      "composition": "b",
+      "return_focus_routes": "pass",
+      "home_arrows": "pass",
+      "large_view_content_within_frame": "pass"
+    }
+  ],
+  "fonts": "loaded",
+  "color_toggle": "pass",
+  "javascript_errors": []
+}

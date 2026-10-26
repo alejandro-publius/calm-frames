@@ -1,0 +1,87 @@
+{
+  "recorded_utc": "2026-10-25T08:48:49.835604+00:00",
+  "verified_remote_base": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "local_branch": "codex/overnight-completion-2026-10-25",
+  "last_product_code_commit": "b603be9cb3a8dc13407f8f6f6408aad984f6f836",
+  "pre_export_document_checkpoint": "639bae1389ca88e5333d56261ae30d73a18f18a5",
+  "final_transfer_sha_location": "The external export SYNC_MANIFEST.json records the later immutable docs/evidence commit. It is not fabricated here before the commit exists.",
+  "source_scope": {
+    "app_suite": "Final application code at b603be9; later additions are documentation/evidence and the isolated handoff helper. Own locked install, repository test flags and coverage floors.",
+    "python_suite": "Full suite began at 596418e. The only later Python change is two METHOD metadata lines in the offline fixture; final-aws-fixture reruns its 34 tests on the integrated source. Production Python/hooks/scripts/eval bytes are identical.",
+    "generated_player": "Generated at 596418e; all six recorded build-input hashes match final source. All eight inputs reverified and normal preflight/typecheck/lint passed. Not a native build."
+  },
+  "results": {
+    "app_tests": {
+      "passed": 1900,
+      "skipped_existing": 4,
+      "suites_passed": 180,
+      "suites_skipped_existing": 1,
+      "snapshots_passed": 57
+    },
+    "python_tests": {
+      "passed": 2122,
+      "skipped": 0,
+      "deselected_normal_slow_marker": 2,
+      "subtests_passed": 8
+    },
+    "node_release_and_dependency_tests": {
+      "passed": 119,
+      "skipped": 0
+    },
+    "demo_preflight_tests": {
+      "passed": 24
+    },
+    "aws_fixture_followup_tests": {
+      "passed": 34
+    }
+  },
+  "checks": "checks.json",
+  "coverage": "coverage.json",
+  "preservation": "preservation.json",
+  "source_hashes": "validated-source-hashes.json",
+  "restore_helper": "final-restore-helper.json",
+  "honest_nonpasses": [
+    {
+      "check": "Dependency policy",
+      "result": "Nonzero, two groups expired 2026-10-21. 15 unique npm advisory IDs remain. The five TOML-only approved findings retain 2026-10-30. No renewal or owner acceptance."
+    },
+    {
+      "check": "Native build/device/human review",
+      "result": "Vega/kepler SDK absent. No new .vpkg, focus/VoiceView/decoder or owner audiovisual acceptance."
+    },
+    {
+      "check": "ARM64 container execution",
+      "result": "Pinned ARM64 base pulled; execute returned 255 (exec format error) on x86_64 daemon. No privileged emulation installed, no ARM64 build pass claimed."
+    },
+    {
+      "check": "Hosted CI",
+      "result": "No runs at exact remote handoff 15ef; later work local only. No hosted run claimed or started."
+    }
+  ],
+  "superseded_initial_results": [
+    {
+      "check": "integrated-python-suite",
+      "result": "9 failed, 2094 passed, 3 skipped. Seven offline AWS fixture/profile collisions and two Linux dead-zombie fixture assertions fixed; final 2122 passes supersede this run. Original failure evidence retained in offline-aws and recovery-fixture."
+    },
+    {
+      "check": "native-input-preflight",
+      "result": "Missing generated player inputs initially. Normal setup:player later succeeded; final preflight passes. Still not a native package."
+    },
+    {
+      "check": "player lane number-sync",
+      "result": "SECURITY component count was stale at its source snapshot. Canonical presentation corrected with generated numbers; final docs check records the outcome."
+    }
+  ],
+  "status_counts": {
+    "completed": 4,
+    "partially_completed": 14,
+    "blocked": 2,
+    "deferred": 0
+  },
+  "publication": {
+    "pushed": false,
+    "merged": false,
+    "submitted_materials_changed": false,
+    "human_acceptance_claimed": false
+  }
+}

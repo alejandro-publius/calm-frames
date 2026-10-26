@@ -1,0 +1,241 @@
+{
+  "status": "source checked; not built, installed, launched, navigated, captured or recorded",
+  "branch": "claude/tv-experience-2026-10-16",
+  "base_commit": "63a0bcb3547df218a634a0ecca100c3bca05cc4e",
+  "head_before_receipt": "852ce268d641e10d36bc6b7c64d05f868dceb26a",
+  "commits_oldest_first": [
+    "f51ae29 Test the player's refusal of an altered prepared route",
+    "a5c34f4 Latch Watch so two quick presses launch the player once",
+    "4e221d7 Return focus to the profile button after Back closes the picker",
+    "e6e7cd2 Say covered, not still picture, and promise captions only where they exist",
+    "852ce26 Record the Oct 16 TV experience decisions"
+  ],
+  "files_changed_by_feature": {
+    "prepared route refusal suite": [
+      "app/test/calmframes/playerRouteRefusal.test.tsx"
+    ],
+    "one launch per Watch press": [
+      "app/src/screens/KidModeScreen.tsx",
+      "app/test/screens/repeatedPresses.test.tsx"
+    ],
+    "focus return after the profile picker": [
+      "app/src/calmframes/KidHomeScreen.tsx",
+      "app/test/calmframes/pickerFocusReturn.test.tsx"
+    ],
+    "words built from the data": [
+      "app/src/calmframes/copy.ts",
+      "app/src/calmframes/TitleDetailsScreen.tsx",
+      "app/src/calmframes/PictureHoldIntroduction.tsx",
+      "app/src/calmframes/ViewingPlan.tsx",
+      "app/test/calmframes/copy.test.ts",
+      "app/test/calmframes/detailDiscovery.test.tsx",
+      "app/test/calmframes/screens.test.tsx"
+    ],
+    "records": [
+      "docs/DECISIONS.md",
+      "docs/evidence/tv-experience-2026-10-16.md",
+      "results/tv-experience-2026-10-16/receipt.json"
+    ]
+  },
+  "acadia_facts_the_copy_now_follows": {
+    "segments_per_preset": 3,
+    "scene_holds": 0,
+    "caption_tracks": 0,
+    "audio_stream": "aac, 2 channels, read with ffprobe from the compiled wcag rendition; nothing was played",
+    "source": "app/src/calmframes/acadiaCatalog.ts and the compiled bundle 4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+  },
+  "checks": {
+    "baseline_before_edits": {
+      "command": "jest on the 13 suites later touched",
+      "suites": 13,
+      "tests": 188,
+      "pass": true
+    },
+    "focused_after_edits": {
+      "suites": 17,
+      "tests": 224,
+      "pass": true,
+      "note": "final run of the five last-touched suites and the refusal suite recorded in focused-2 and focused-3 logs"
+    },
+    "full_jest": {
+      "command": "cd app && node_modules/.bin/jest --watchman=false --ci --coverage=false --colors=false --maxWorkers=4 --testPathIgnorePatterns='uiCapture|coastalExport|controlStudy'",
+      "passed_suites": 135,
+      "skipped_suites": 1,
+      "passed_tests": 1336,
+      "skipped_tests": 4,
+      "text_snapshots": {
+        "passed": 57,
+        "written": 0,
+        "obsolete": 0
+      },
+      "excluded_suites": [
+        "uiCapture",
+        "coastalExport",
+        "controlStudy"
+      ],
+      "included_guards": [
+        "tenFoot",
+        "hookMirror"
+      ],
+      "exit": 0
+    },
+    "typecheck": {
+      "command": "cd app && npm run typecheck",
+      "pass": true
+    },
+    "lint": {
+      "command": "cd app && npx eslint src test --ext .ts,.tsx",
+      "errors": 0,
+      "warnings": 101,
+      "baseline_from_acadia_first_receipt": {
+        "source_warnings": 97,
+        "test_warnings": 4
+      },
+      "warnings_in_changed_files": 0
+    }
+  },
+  "mutations_each_applied_run_and_reverted_by_reverse_replacement": [
+    {
+      "guard": "player refuses an altered prepared route",
+      "edit": "PlayerScreen.tsx: const guardedParams = route.params.guarded; (refusal removed)",
+      "result": "9 failed, 1 passed of 10"
+    },
+    {
+      "guard": "one launch per Watch press",
+      "edit": "KidModeScreen.tsx: launching.current = false; where it latches",
+      "result": "2 failed of 2"
+    },
+    {
+      "guard": "focus returns to the profile button",
+      "edit": "KidHomeScreen.tsx: setReturnToHeader('profile') removed from the picker's Back handler",
+      "result": "2 failed, 1 passed of 3"
+    },
+    {
+      "guard": "captions promised only where shipped",
+      "edit": "copy.ts: coverLine always appends Captions continue too.",
+      "result": "2 failed, 29 passed of 31 across copy.test and detailDiscovery.test"
+    }
+  ],
+  "snapshot_changes": [],
+  "native": {
+    "build": false,
+    "install": false,
+    "launch_or_restart": false,
+    "navigation": false,
+    "screenshots_or_recording": false,
+    "simulator": "not touched",
+    "installed_demo": "untouched; older than this source"
+  },
+  "unchanged_on_purpose": {
+    "player card wording in the mirrored engine (cards.ts)": "still says sound and captions continue for every title; noted in the evidence record",
+    "one-video rail on Home": "Codex's Oct 16 behaviour kept",
+    "ErrorView wording": "Playback stopped / Go back and try playing the video again, already one explanation and one action"
+  },
+  "trust_or_asset_implications": "none; no media, map, key, catalog, signing or parental control change",
+  "remaining": [
+    "owner build and install after approval, then native checks of Acadia Home, Details, Watch, Back and the picker focus return",
+    "audible sound during covers remains a native check; headless evidence only shows the cover layer never pauses or mutes the element",
+    "decide whether the generic player card should stop naming captions for a title without a caption track"
+  ],
+  "logs": {
+    "tv-experience-baseline-focused.log": {
+      "path": ".logs/tv-experience-baseline-focused.log",
+      "sha256": "3e83775b2789f83e309f77295505d1c17f26ec20d5ef2582838baf1647ef3d80"
+    },
+    "tv-experience-focused-1.log": {
+      "path": ".logs/tv-experience-focused-1.log",
+      "sha256": "b1dae6b4c00ab7263f41d203081116efb7bc10ea7deb3d545bf5fdb28f8deeaa"
+    },
+    "tv-experience-focused-2.log": {
+      "path": ".logs/tv-experience-focused-2.log",
+      "sha256": "97bbe0c13ea0f622037dcdd55b893d990440c72ec586f33c2a493a2adc46c864"
+    },
+    "tv-experience-focused-3.log": {
+      "path": ".logs/tv-experience-focused-3.log",
+      "sha256": "400e42e0bd42765e8770e63ec564370520ace36a3030089df9ac0e3ec79b57af"
+    },
+    "tv-experience-suite.log": {
+      "path": ".logs/tv-experience-suite.log",
+      "sha256": "0cba57256d1a05bf2f53ce221e623347dcc5a3f1eebebfc58252d6bb05a80497"
+    },
+    "tv-experience-lint.log": {
+      "path": ".logs/tv-experience-lint.log",
+      "sha256": "2d51183111ecd448a87db76cde0df03f7e9adf3113338474432aba66224709a4"
+    }
+  },
+  "review_fixes_2026-10-16": {
+    "commits": [
+      "Clear the picker's focus request when How it works opens",
+      "Promise sound, not captions, on the covering and after cards"
+    ],
+    "files": {
+      "focus request": [
+        "app/src/calmframes/KidHomeScreen.tsx",
+        "app/test/calmframes/pickerFocusReturn.test.tsx"
+      ],
+      "card copy": [
+        "app/src/calmframes/cards.ts",
+        "app/src/calmframes/usePlaybackPresentation.ts",
+        "app/test/calmframes/cards.test.tsx",
+        "app/test/calmframes/useFlashGuard.test.tsx",
+        "hook/src/engine/cards.ts",
+        "hook/src/mirror.json"
+      ]
+    },
+    "checks": {
+      "focused_jest": {
+        "suites": 14,
+        "tests": 253,
+        "pass": true,
+        "log": ".logs/review-fixes-focused.log"
+      },
+      "full_jest": {
+        "command": "cd app && node_modules/.bin/jest --watchman=false --ci --coverage=false --colors=false --maxWorkers=4 --testPathIgnorePatterns='uiCapture|coastalExport|controlStudy'",
+        "passed_suites": 135,
+        "skipped_suites": 1,
+        "passed_tests": 1337,
+        "skipped_tests": 4,
+        "text_snapshots": {
+          "passed": 57,
+          "written": 0,
+          "obsolete": 0
+        },
+        "log": ".logs/review-fixes-suite.log"
+      },
+      "typecheck": "pass",
+      "lint": {
+        "errors": 0,
+        "warnings": 101,
+        "log": ".logs/review-fixes-lint.log"
+      },
+      "hook_package": {
+        "test:package": "10 pass, 0 fail",
+        "check:package": "offline_install true, metro_resolution true, react_native_transform true",
+        "logs": [
+          ".logs/review-fixes-hook-test.log",
+          ".logs/review-fixes-hook-check.log"
+        ]
+      },
+      "mirror": "node hook/tools/sync.mjs (25 files copied); hookMirror.test.ts passes"
+    },
+    "mutation": {
+      "guard": "How it works clears the picker focus request",
+      "edit": "KidHomeScreen.tsx: setReturnToHeader(null) removed from the How it works press",
+      "result": "1 failed, 3 passed of 4 in pickerFocusReturn.test.tsx; restored",
+      "log": ".logs/review-fixes-mutation.log"
+    },
+    "left_unchanged_on_purpose": [
+      "playerAccess.ts unavailable card announcement still says sound and captions keep playing",
+      "benignStory.ts demo card copy names captions; the demo ships them"
+    ],
+    "logs_sha256": {
+      "review-fixes-focused.log": "2805e13c8e668543bea4495bad66cd730c1a3ea407ac2ad8c158364cb1dd2a60",
+      "review-fixes-suite.log": "c4caacabfaf37a8eaf9cca892f2f8980c0daf99ec51bdb95ff108a6bda66a4eb",
+      "review-fixes-lint.log": "dbb6977207e3f710753c51bf11f9a1aa94077cbaa6536adbbb2d64e4ee005015",
+      "review-fixes-hook-test.log": "bb548d22071ce1cccc0da55104f03396cf5884bcccfcf307e171fea68558717a",
+      "review-fixes-hook-check.log": "da43866e670dccd714dd5307ef088ee1b1af3caf6f80b625603f53b6c94dcf02",
+      "review-fixes-mutation.log": "740843b43281f9f20cee12ed7744c81887fc27b1f6b9697594417bd5a793d0de"
+    },
+    "native": "nothing built, installed, launched, captured or recorded"
+  }
+}

@@ -1,0 +1,13 @@
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+
+/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/test/blocks/screen/SearchResultsScreen/SearchResultsScreen.test.tsx
+  36:3  warning  Tests should not be skipped  jest/no-disabled-tests
+  48:3  warning  Tests should not be skipped  jest/no-disabled-tests
+  63:3  warning  Tests should not be skipped  jest/no-disabled-tests
+
+/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/test/calmframes/harnessConfig.test.ts
+  126:33  warning  '@typescript-eslint/no-var-requires' rule is disabled but never reported  eslint-comments/no-unused-disable
+
+✖ 4 problems (0 errors, 4 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.

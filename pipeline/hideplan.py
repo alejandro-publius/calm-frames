@@ -25,10 +25,22 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Iterable, Sequence
 
+from . import PipelineError
 from .flashmap_adapter import GENERAL, PATTERN, RED, MapSegment
 
 DEFAULT_GUARD_BAND_MS = 500.0
 DEFAULT_MIN_COVER_MS = 400.0
+
+# Playback policy mirrors app/src/calmframes/household.ts, not detector limits.
+APP_PLAYBACK_RECIPE = "app-v1"
+APP_PLAYBACK_TIMING = {
+    "wcag": (500.0, 400.0), "broadcast": (500.0, 400.0),
+    "extra-cautious": (1000.0, 800.0),
+}
+APP_PLAYBACK_MAPS = {
+    "wcag": ("wcag",), "broadcast": ("wcag", "broadcast"),
+    "extra-cautious": ("wcag", "broadcast"),
+}
 
 # A poster, a BIF frame or a cover still must be this far outside every cover
 # interval before it counts as a calm moment.
@@ -339,6 +351,7 @@ class HidePlan:
     duration_ms: float
     allow_dim: bool
     intervals: list[CoverInterval]
+    recipe: str | None = None
 
     @property
     def has_red(self) -> bool:
@@ -372,6 +385,7 @@ class HidePlan:
             "dim_max_luminance": DIM_MAX_LUMINANCE,
             "total_covered_ms": total_covered_ms(self.intervals),
             "intervals": [i.to_dict() for i in self.intervals],
+            **({"recipe": self.recipe} if self.recipe is not None else {}),
         }
 
     @classmethod
@@ -384,7 +398,29 @@ class HidePlan:
             duration_ms=float(data["duration_ms"]),
             allow_dim=bool(data.get("allow_dim", True)),
             intervals=[CoverInterval.from_dict(i) for i in data.get("intervals", [])],
+            recipe=data.get("recipe"),
         )
+
+
+def build_app_playback_plan(maps: dict, *, source_sha256: str,
+                            duration_ms: float, preset: str) -> HidePlan:
+    """Recompute the app's full source-map union and fixed timing for one preset."""
+    import math
+    if preset not in APP_PLAYBACK_MAPS or not math.isfinite(duration_ms) or duration_ms <= 0:
+        raise PipelineError("The app playback recipe needs a known preset and finite duration.")
+    required = APP_PLAYBACK_MAPS[preset]
+    segments = []
+    for profile in required:
+        document = maps.get(profile)
+        if (document is None or document.source_sha256 != source_sha256
+                or document.profile != profile):
+            raise PipelineError("The app playback recipe needs every required source-bound profile map.")
+        segments.extend(document.segments)
+    guard, minimum = APP_PLAYBACK_TIMING[preset]
+    return HidePlan(preset, source_sha256, guard, minimum, duration_ms, False,
+                    build_cover_intervals(segments, guard_band_ms=guard,
+                                          min_cover_ms=minimum, duration_ms=duration_ms),
+                    recipe=APP_PLAYBACK_RECIPE)
 
 
 def build_hide_plan(

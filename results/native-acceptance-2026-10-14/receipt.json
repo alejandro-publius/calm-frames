@@ -1,0 +1,114 @@
+{
+  "status": "native acceptance by the app's own debug breadcrumbs and media events; no screenshot, video or capture",
+  "recorded_utc": "2026-10-15T00:38:58Z",
+  "branch": "claude/final-candidate-2026-10-14",
+  "source_commit": "ac5a610e63deeaeca672d34da43279a1394ca65a",
+  "package": {
+    "path": "build/release/final-candidate-3-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "4d36c177c000eb6470ac39acef7e02bdfb72300697f4142e65522d3d3315a6c5",
+    "bytes": 28716350,
+    "target": "aarch64 Debug",
+    "recorded_inputs": 736,
+    "installed": true,
+    "install_mode": "vega device install-app over the existing install; no uninstall, no data reset, no PIN entered"
+  },
+  "device": "Vega Virtual Device (Simulator), aarch64, OS 1.2 (TV Ship/101520710), started detached by the session",
+  "method": "The driver pressed remote keys through inputd-cli on the device and read the app's Debug-build console lines from vega device start-log-stream: CALM_TRACE screen and focus breadcrumbs, CALM_TRACE still load or error, and CALM_TIMING media events. Each journey is judged from those lines only.",
+  "journeys": [
+    {
+      "journey": "J1 cold launch reaches Home",
+      "verdict": "observed-pass",
+      "evidence": "screen=None focus=kid-mode-home-watch running=True",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J2 remote reaches Home controls",
+      "verdict": "observed-pass",
+      "evidence": "focus ids seen: ['kid-mode-home-choose-profile', 'kid-mode-home-demo', 'kid-mode-home-learn', 'kid-mode-home-more-info', 'kid-mode-home-watch']",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J3 Details opens and Back restores focus",
+      "verdict": "observed-pass",
+      "evidence": "reached Details control=True screen after Enter=details focus on details=kid-mode-details-play after Back screen=home focus=kid-mode-home-more-info",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J4 ordinary Harbor plays to the end with zero holds",
+      "verdict": "observed-pass",
+      "evidence": "playing=True ended=True interval covers=0 recovery screen during playback=False screen now=player-left', focus=kid-mode-home-watch",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J5 pause, resume and Back from playback",
+      "verdict": "observed-pass",
+      "evidence": "pause=True resume=True left=True screen=player-left', focus=kid-mode-home-watch",
+      "driver_verdict": "observed-fail",
+      "note": "The driver marked this fail only because its last screen breadcrumb was 'player-left': the device's log limiter dropped the 'screen home' line after playback, as it does after every playback. The evidence itself shows pause, playing again and the player leaving, with focus on kid-mode-home-watch afterwards, which only Home draws."
+    },
+    {
+      "journey": "J6 practice demo shows both holds with the calm still",
+      "verdict": "observed-pass",
+      "evidence": "details=details covers=['cover-on media=5017 interval 5000-9000', 'cover-on media=12030 interval 12000-16000'] stills=['still loaded', 'still loaded', 'still loaded', 'still loaded']",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J7 seek inside the demo and reach the caption control",
+      "verdict": "observed-partial",
+      "evidence": "seek events=False covers after seek=['cover-on media=5050 interval 5000-9000'] focus after three Down=kid-mode-details-back-bottom events=['focus', 'focus', 'cover-on media=5050 interval 5000-9000', 'still loaded', 'still loaded', 'pause media=6752']",
+      "driver_verdict": "observed-partial",
+      "note": "Seeking by remote inside the player produced no seeking or seeked event; a pause event at 6752 ms followed the presses, so the keys reached the player but the seek path by remote is not established in this session. The guarded seek is covered by tests and by the Oct 10 on-device receipt."
+    },
+    {
+      "journey": "J8 Help opens and Back returns",
+      "verdict": "observed-pass",
+      "evidence": "reached Help=True focus in Help=picture-hold-start screen=home after Back screen=home focus=kid-mode-home-learn",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J9 Settings opens its PIN gate and Back returns",
+      "verdict": "observed-pass",
+      "evidence": "reached Settings=True screen=parent focus=kid-mode-parent-key-1 after Back screen=home focus=kid-mode-home-demo",
+      "driver_verdict": "observed-pass",
+      "note": "Back from the PIN gate returned focus to the practice entry, the last opened title, not to Settings; two existing tests encode that as the design."
+    },
+    {
+      "journey": "J10 relaunch lands on the saved Home, no setup",
+      "verdict": "observed-pass",
+      "evidence": "screen=home focus=kid-mode-home-watch",
+      "driver_verdict": "observed-pass"
+    }
+  ],
+  "trace_kinds_seen": [
+    "screen details",
+    "screen home",
+    "screen parent",
+    "screen player',",
+    "screen player-left',",
+    "still loaded"
+  ],
+  "image_loader_errors_distinct": 35,
+  "not_observed": [
+    "Pixels: artwork, fonts, focus rings, caption text and the hold still were not seen; the still is judged by its load event.",
+    "Audio: not heard; continuity during holds is inferred from the media clock advancing through each hold.",
+    "The parent settings interior: the household PIN was not entered.",
+    "VoiceView and physical-television timing."
+  ],
+  "log_lines": 29118,
+  "session_log": "kept outside git under .logs/final/native-acceptance-2/",
+  "summary": {
+    "observed-pass": 9,
+    "observed-partial": 1,
+    "observed-fail": 0,
+    "blocked": [
+      "parent settings interior (household PIN not entered)",
+      "VoiceView",
+      "caption menu operation (not reached in this session)"
+    ]
+  },
+  "fixed_before_this_session": [
+    "Practice holds showed black: the device loader refuses data URIs, so the two signed stills now ship as bundled copies swapped in on an exact match (52138fe); this session logged \"still loaded\" at both holds.",
+    "The recovery screen appeared about fourteen seconds into every playback: the opening shell waited on a frame counter the device never fills; a moving clock now readies it (ac5a610); this session saw no recovery screen during playback."
+  ],
+  "open_observation": "One image loader error is logged at every screen mount that draws the home scene, while the scene and demo tile images both report successful loads; the remaining candidate is the scene gradient view. No visible defect is established."
+}

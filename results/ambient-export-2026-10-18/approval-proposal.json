@@ -1,0 +1,14 @@
+{
+  "bundleId": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
+  "catalogSha256": "6b590929ffd622454803caf87354a653190dcb89afa12e906bbaaedfe0e9012d",
+  "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+  "reportSha256": "45c6f62f741bbc133d01a0d80b3d4da13d9f2dff0e49d045796592eda0071493",
+  "metadataSha512": {
+    "wcag": "656772167101e256dd312e9091cf0e64993cd1a51f31de886232edda219c5e04cee5143600142e1a1e5e44a608301287c59c501bdcaf44d2d6f1a6086aedc979",
+    "broadcast": "1c29dde114135b6e71c507b83552da16031acf8f2afff170e456637727c780f925c6de2f17208c0ed164f7435f30fdc4691ac547d0de3c410b64a41d3a1039bf",
+    "extra-cautious": "a76ed258f29964f5d503d19ee876d2e0493f14b4fdc2f32cb1cbae3e6824f0e89d39b94f46766c3c929505161750be761f7d9c8df44609fdf353c24f2c6b16e6"
+  },
+  "approved": false,
+  "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/ambient-export-2026-10-18/prepared-library",
+  "existingSigner": true
+}

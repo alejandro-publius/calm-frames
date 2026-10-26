@@ -1,0 +1,83 @@
+{
+  "status": "layout and plain-language copy implemented, built and log-checked",
+  "source_commit": "689c484efca088e65e76e0c7efeaf51f210c818e",
+  "baseline_source": "b6b134c2402bd51e1048178e7e117744ff4ad4f3",
+  "layout_source": "69df28c8215920ae5a1cc8e82a3124d4a68d65b3",
+  "branch": "codex/home-comparison-2026-10-15",
+  "selected_composition": "A - Left reading area",
+  "package": {
+    "path": "build/release/home-reading-a-plain-copy-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "8163aee15b6062a085b79c225994ed199b85ae3c253be1dc978c4d668c72595f",
+    "bytes": 28732131,
+    "target": "aarch64 Debug",
+    "input_count": 736,
+    "preparation": "preparation.json"
+  },
+  "checks": {
+    "node": "22.23.2",
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "existing_source_warnings": 97,
+      "existing_test_warnings": 4,
+      "total_warnings": 101
+    },
+    "jest": {
+      "passed_suites": 130,
+      "passed_tests": 1292,
+      "passed_snapshots": 57,
+      "skipped_tests": 4,
+      "excluded_suites": [
+        "uiCapture",
+        "coastalExport",
+        "controlStudy"
+      ]
+    },
+    "hook_package_unit_tests": 10,
+    "hook_offline_consumer": "pass, 31 files and 90 exports; real Vega peers, TypeScript, Metro and React Native transform",
+    "docs_design_attribution_brand_measured_sources": 49,
+    "style": "pass",
+    "published_number_checks": 664,
+    "preview": "preview-checks.json"
+  },
+  "scope": "Layout and visible copy implemented. Copy changes preserve route IDs, PIN rules, media timing, detection and verification. No new media or art.",
+  "remaining_owner_checks": [
+    "Appearance and text wrapping at TV viewing distance",
+    "Visible remote focus",
+    "Sound continuity",
+    "Caption appearance and caption menu",
+    "Existing PIN and parent settings interior",
+    "VoiceView if available",
+    "Sample notice scope and artwork permissions before distribution"
+  ],
+  "not_reobserved_natively": [
+    "Pause/resume",
+    "Remote seek",
+    "Caption menu"
+  ],
+  "isolation": {
+    "independent_clone": true,
+    "original_candidate_clean": true,
+    "shared_sdk_app_link_preserved": true,
+    "capture_performed": false,
+    "public_publication": false,
+    "main_merge": false,
+    "release_tag": false,
+    "aws_or_credentials_changes": false
+  },
+  "access_blocks": "No remaining access block. Approved escalation used for GitHub, localhost, headless DOM and device access. Shared SDK writes avoided with isolated workspace.",
+  "native": {
+    "receipt": "native.json",
+    "event_log": "events.log",
+    "observed_pass_journeys": 7,
+    "interpretation": "App-reported focus, routes, media events and still-load callbacks only. No pixels or sound inspected.",
+    "capture_performed": false,
+    "pin_entered": false,
+    "household_reset": false,
+    "simulator_restarted": false,
+    "final_app_left_running": true,
+    "host_start_utc": "2026-10-15T20:24:09Z",
+    "host_end_utc": "2026-10-15T20:26:24Z",
+    "note": "Simulator log timestamps differ from host time; use ordering and media milliseconds, not wall-clock subtraction."
+  }
+}

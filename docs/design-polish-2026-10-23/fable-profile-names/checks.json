@@ -1,0 +1,99 @@
+{
+  "written": "2026-10-23",
+  "by": "Claude Code (Fable), separate worktree calm-frames-fable-profile-names",
+  "source": {
+    "frozen_canonical_base": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "starting_head": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+    "starting_branch_in_bundle": "codex/design-polish-2026-10-23",
+    "local_branch": "claude/profile-names-fable-2026-10-23",
+    "transfer_zip_sha256": "8e1b1e19b6e7a1f5656a4edf00a69b301891f8a4f26f8eed633bed6035d132f5",
+    "transfer_checks": [
+      "shasum -a 256 calm-frames-fable-profile-names-d7da316.zip: matched the brief",
+      "shasum -a 256 -c SHA256SUMS: CLAUDE_FABLE_PROFILE_NAMES.md, MANIFEST.json, START_HERE.md, review-source.bundle all OK",
+      "git fetch origin codex/integration-owner-2026-10-23, then git cat-file -e 2cf54e0^{commit}: base present",
+      "git bundle verify review-source.bundle: requires 2cf54e0, verified",
+      "git worktree add ../calm-frames-fable-profile-names claude/profile-names-fable-2026-10-23: HEAD d7da316, git status --porcelain empty, base is an ancestor"
+    ],
+    "commits": {
+      "feature_and_tests": "9546c0f530e2bd99966c1836f2b9ae0246fb3dec",
+      "notes_and_previews": "the commit that adds this file"
+    }
+  },
+  "toolchain": {
+    "node": "v22.23.2",
+    "npm": "10.9.8",
+    "install": "npm ci --ignore-scripts in the worktree's app folder, from the unchanged package-lock.json",
+    "flags_or_guards_changed": "none"
+  },
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "result": "tsc -p tsconfig.json --noEmit, exit 0"
+    },
+    {
+      "command": "npm run lint",
+      "result": "0 errors, 104 warnings, all in files this change did not touch; exit 0"
+    },
+    {
+      "command": "npx eslint <the twelve touched source and test files> --ext .ts,.tsx --max-warnings 0",
+      "result": "exit 0"
+    },
+    {
+      "command": "npx jest --coverage=false test/calmframes/profileNames.test.tsx",
+      "result": "21 passed"
+    },
+    {
+      "command": "npx jest --coverage=false test/screens/profileNameSave.test.tsx",
+      "result": "2 passed"
+    },
+    {
+      "command": "npx jest --coverage=false test/calmframes/profiles.test.ts test/calmframes/copy.test.ts test/calmframes/uiCapture.test.tsx test/calmframes/tenFoot.test.tsx test/calmframes/parentNavigation.test.tsx test/calmframes/hardwareBack.test.tsx test/calmframes/profilePicker.test.tsx test/calmframes/hookMirror.test.ts test/screens/householdRestart.test.tsx",
+      "result": "all suites passed (uiCapture, tenFoot, profileNames and profileNameSave rerun together after the last layout change: 88 passed)"
+    },
+    {
+      "command": "npx jest (full app suite with coverage and thresholds), before the final same-frame test and spacing change",
+      "result": "Test Suites: 1 skipped, 173 passed, 173 of 174 total. Tests: 4 skipped, 1834 passed, 1838 total. exit 0"
+    },
+    {
+      "command": "npx jest (full app suite with coverage and thresholds), on the committed source",
+      "result": "Test Suites: 1 skipped, 173 passed, 173 of 174 total. Tests: 4 skipped, 1835 passed, 1839 total. All files 83.99% statements, 83.08% branches, 79.79% functions, 83.94% lines. exit 0"
+    },
+    {
+      "command": "python3 eval/style_check.py",
+      "result": "style: no dashes and none of the three words in what we wrote; the new untracked files were also grepped and are clean"
+    },
+    {
+      "command": "node hook/tools/sync.mjs",
+      "result": "not needed: no mirrored engine file changed; hookMirror.test.ts passes"
+    },
+    {
+      "command": "mutations, see mutations.json",
+      "result": "10 guards broken one at a time, 10 caught by a red test"
+    }
+  ],
+  "input_api_verification": {
+    "package": "@amazon-devices/react-native-kepler (locked install)",
+    "found": "Libraries/Components/TextInput/KeplerTextInputNativeComponent.js; TextInput.js documents Kepler-only props auxOptions (a TV-based keyboard) and keyboardUiMode (system-default, half-screen, full-screen)",
+    "not_observed": "no capture, log or note in this repository shows the on-screen keyboard appearing on the Vega Virtual Device; installing was outside this assignment",
+    "decision": "letter keys built from the same component as the PIN keypad, which has been pressed on that device; a TextInput can join them once the keyboard has been seen"
+  },
+  "previews": {
+    "how": "docs/design-polish-2026-10-23/fable-profile-names/preview/profileNamesPreview.fixture.tsx copied to app/test/calmframes/profileNamesPreview.test.tsx, run with npx jest --coverage=false, removed; then render_preview.py with Playwright and the cached Chromium 153.0.8010.12",
+    "what": "browser approximations of exported React Native host trees, not Vega captures; 720p is the 1080p tree at two thirds",
+    "states": [
+      "01-kid-selected",
+      "02-editor-open",
+      "03-editor-typing",
+      "04-editor-refused",
+      "05-editor-saving",
+      "06-editor-failed",
+      "07-renamed"
+    ],
+    "bounds": "preview/bounds.json: watched controls inside the horizontal 5% safe area at both sizes; Save inside the first viewport's safe area for the open, typing, refused and saving states; Try again in the failed state is below the first viewport and holds preferred focus"
+  },
+  "not_done_here": [
+    "no push, merge, install, release, submission change, narration or video",
+    "no native D-pad, VoiceView or keyboard observation on this source",
+    "no docs/DECISIONS.md or docs/STATUS.md entry: outside the owned lane"
+  ]
+}

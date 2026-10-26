@@ -1,0 +1,57 @@
+{
+  "head": "3cce0b708855087f1e978e71dd056210bb81672a",
+  "tested_files": {
+    "pipeline/local_intake.py": "b8965fcdb630db1459f941bdae1efff31e4d548cdee41ffd80fc27fbfb0c68b8",
+    "pipeline/local_intake.html": "f8de63f6186e53856a29139b0f9f67fcdea0d5abddf2b6d83b898b787f72ddce",
+    "eval/check_intake_browser_errors.py": "61bc800bf85430b83107462289a4d01b3e39926350a85a4b961b7a54b6ee3f00"
+  },
+  "checks": {
+    "permission_required_without_sending_file": {
+      "passed": true
+    },
+    "unsupported_extension_refused_without_job": {
+      "passed": true
+    },
+    "analysis_failure_announced": {
+      "passed": false,
+      "error": "AssertionError"
+    },
+    "explicit_removal_preserves_original": {
+      "passed": true
+    },
+    "missing_signer_announced": {
+      "passed": false,
+      "error": "AssertionError"
+    },
+    "blocked_preparation_retains_downloadable_analysis": {
+      "passed": true
+    },
+    "changed_report_has_reachable_recovery_guidance": {
+      "passed": false,
+      "error": "AssertionError"
+    },
+    "changed_map_refused_original_report_restored": {
+      "passed": true
+    },
+    "unreadable_response_has_actionable_guidance": {
+      "passed": false,
+      "error": "AssertionError"
+    },
+    "disconnect_preserves_review_and_recovers": {
+      "passed": true
+    },
+    "damaged_package_isolated_from_intact_report": {
+      "passed": true
+    },
+    "responsive_focus_reduced_motion_no_external_requests": {
+      "passed": true
+    }
+  },
+  "page_errors": [],
+  "external_requests": [],
+  "fixture": {
+    "kind": "generated steady color and silent audio, never played",
+    "sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a"
+  },
+  "native_or_signer_acceptance": false
+}

@@ -1,0 +1,32 @@
+{
+  "initial_staged_scan_findings": 5,
+  "findings": [
+    {
+      "path": "eval/fuzz_corpus/duplicate_keys.json",
+      "sha256": "69cf49202a42c2fa508bdd97cb4efb18ae259eb883892d508b68e6893aedae79",
+      "classification": "Full SHA-256 of the named tracked file, independently recomputed; not a credential."
+    },
+    {
+      "path": "eval/fuzz_corpus/huge_string_key.json",
+      "sha256": "1a89eda2a72caca6626006afddc3610db5fc24ccda4869056e992ea3b39d36fe",
+      "classification": "Full SHA-256 of the named tracked file, independently recomputed; not a credential."
+    },
+    {
+      "path": "eval/labeling/pool_key.json",
+      "sha256": "ade473ed8d0c9548274f4bf54c0df71d19d43334906e7b1ef74236cd7ca78c41",
+      "classification": "Full SHA-256 of the named tracked file, independently recomputed; not a credential."
+    },
+    {
+      "path": "eval/tests/test_secret_scan_manifest.py",
+      "sha256": "665e67a70cb0628feb59c182da0ac04be5bde65494c9638568cc478f69ae56e5",
+      "classification": "Full SHA-256 of the named tracked file, independently recomputed; not a credential."
+    },
+    {
+      "path": "scripts/make_revoked_key_fixture.py",
+      "sha256": "89d0aaac2c8d384f9b0004f83d61b83b71b592767137794d63cc609e44bda056",
+      "classification": "Full SHA-256 of the named tracked file, independently recomputed; not a credential."
+    }
+  ],
+  "resolution": "Use explicit path and sha256 fields for the source manifest, matching the artifact manifest schema. No scan rule disabled and no allowlist added.",
+  "all_file_digests_verified": true
+}

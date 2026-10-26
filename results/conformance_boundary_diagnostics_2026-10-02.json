@@ -1,0 +1,378 @@
+{
+  "date": "2026-10-02",
+  "design_sha256": "834a719bbd3bbad3e62e1f9bd1a4062b7fd766b1864a2ba9340c8927d5397c7b",
+  "detector_and_renderer_sha256": {
+    "eval/conformance/render.py": "7f8a8d99882aeb051234b9b06aa9d2c6fb670901b3e1e19b4d6e814cb2e39453",
+    "flashmap/docs/SPEC_SOURCES.md": "2bc46f47b0d23801eaef2bafa5b668518858db4be1316e1fe91008f01d193015",
+    "flashmap/src/flashmap/__init__.py": "dc9409216ab1c59cdbeba98f0982c021a57d1cdfe693c5100e7287004d019270",
+    "flashmap/src/flashmap/__main__.py": "a39d126b13eec328d5f748b00b58986af066fb6225ba439cb5ebcfcf47680500",
+    "flashmap/src/flashmap/analyze.py": "46734d89fc36863b800314247967281c772f85361d7567c5056daef61a6cb4ba",
+    "flashmap/src/flashmap/area.py": "1d2e64d08bf5644e269e24ce8695e07be780397b98e581cbfe293c6e1c732acc",
+    "flashmap/src/flashmap/ci.py": "22e9c9b2d329543d9a830aeb62dbe08165e769d69914b9da8461264e82f855bb",
+    "flashmap/src/flashmap/cli.py": "34c8d80daeb53229fd12f763a078195f824637f6cefde4aab91299af738e00d0",
+    "flashmap/src/flashmap/color.py": "cf6730eda0b210818d8fa996bffb7e2c52f32ce224047a783e48dadde889f3e8",
+    "flashmap/src/flashmap/decode.py": "a807be5c69c404542a128d5a67c2c53aa8baf9239ad55817672c7cf8ca9587bc",
+    "flashmap/src/flashmap/flash.py": "42609764538beef77e5ff7b88fb800cc75e5db720bd13ee11aac777299db2be3",
+    "flashmap/src/flashmap/pattern.py": "c40d3574b5bf1e55101dd506a3f01508428d68721666eb8ecbd164941299b07c",
+    "flashmap/src/flashmap/picture.py": "dcaa67814922783cdfe9801f7bd780545db41ec610d18c0cababd2644dfe0a21",
+    "flashmap/src/flashmap/pngout.py": "c8170701fb23398b40be6c0cedaf26204d3c8016b236bba3428e0cacea40eb9e",
+    "flashmap/src/flashmap/profiles.py": "938e9a58e6d5c5ef7511a216304e88303158f86f4759725087cf2f7020ee8f88",
+    "flashmap/src/flashmap/report.py": "21dc98cbcb40cef898dc71a11a4b2b0cd255e67625565aaebe2fac0924778189",
+    "flashmap/src/flashmap/room.py": "b70535de3b40424ac57387e4607dc20fd26e03394ebb5f63c0f97395ddb693fb",
+    "flashmap/src/flashmap/sidecar.py": "465126c88bb1565ea3721ffbb1c5c4ad355a70a10b15bcc8cf4cc6d732697324",
+    "flashmap/src/flashmap/signing.py": "b11b554a200d445ef45ed7af1e10b47788505c64a99d14d01831578fa5eda1c7"
+  },
+  "encoding_protocol": "legacy implicit YUV conversion, before explicit-yuv-matrix-range-v2-2026-10-02",
+  "hazard_files_retained": 0,
+  "kind": "diagnostic_probes_not_aggregate_score",
+  "limits": "Diagnostic cases selected to investigate existing misses; not a random sample, recall estimate, clinical test or corrected-protocol result. Native-width analysis is not the production configuration. Encoded luminance and chromaticity can move across thresholds, and area downscaling can change classification.",
+  "method": "Three frozen near-limit cases were generated, decoded and analyzed without playback, with per-job finally cleanup. The first probe used the public default 192-pixel analysis width. A separate diagnostic decoded center RGB and analyzed at native 854-pixel width. This file assembles the raw earlier probes; it does not rerun or relabel them.",
+  "observations": [
+    "Luminance-step case remains missed at native width; decoded delta is below 0.10 under the old protocol.",
+    "Area case is missed at default width and detected at native width, identifying a production resolution limitation.",
+    "Red case remains missed at native width; decoded UCS distance is below 0.20 under the old protocol. Static-color regression tests subsequently identified the generator matrix/range defect."
+  ],
+  "production_width_changed": false,
+  "raw_probe_sha256": {
+    ".logs/conformance-current-diagnostics-2026-10-02.json": "07a8a6ea20a8427fc37bac31c8ff0e42a33134109dd1d6a2beecca94cb9b0002",
+    ".logs/conformance-current-probe-2026-10-02.json": "85c927542f987562e15631cfdbf0d3883f9aab5632f81583dc2c979535c4a8cd"
+  },
+  "rows": [
+    {
+      "axis": "luminance_step",
+      "clip_id": "0c261d6f1d227428",
+      "default_analysis_width": 192,
+      "default_measurement": {
+        "axis": "luminance_step",
+        "clip_id": "0c261d6f1d227428",
+        "elapsed_seconds": 1.383,
+        "encode": {
+          "bytes": 43916,
+          "first_pts_ms": 0.0,
+          "frames_written": 90,
+          "last_pts_ms": 2966.6666666666665
+        },
+        "fidelity": {
+          "frames_decoded": 90,
+          "frames_planned": 90,
+          "max_abs_deviation": 0.007106,
+          "max_timestamp_gap_ms": 0.3333,
+          "timestamps_match": true
+        },
+        "flashmap": {
+          "first_pts_ms": 0.0,
+          "frame_count": 90,
+          "last_pts_ms": 2967.0,
+          "picture": [
+            192,
+            108
+          ],
+          "profile": "wcag",
+          "seconds": 0.677,
+          "segments": [],
+          "variable_frame_rate": false,
+          "version": "1.0.0"
+        },
+        "order_index": 37
+      },
+      "intended_state_a_rgb": [
+        170,
+        170,
+        170
+      ],
+      "intended_state_b_rgb": [
+        188,
+        188,
+        188
+      ],
+      "intended_truth": {
+        "area_qualifies": true,
+        "coded_frame_mean_luminance_by_state": [
+          0.138741,
+          0.163909
+        ],
+        "darker_luminance": 0.401978,
+        "drawn_area_fraction": 0.249415,
+        "failing_flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "field_coverage": 1.0,
+        "flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "frames": 90,
+        "general_delta": 0.100909,
+        "general_qualifies": true,
+        "mean_luminance_by_state": [
+          0.138741,
+          0.163909
+        ],
+        "n_windows": 3,
+        "observed_flash_rate_hz": 9.5,
+        "positive_windows": [
+          1,
+          2
+        ],
+        "red_qualifies": false,
+        "red_ratio_max": 0.333333,
+        "ucs_distance": 0.0,
+        "window_ms": 1000
+      },
+      "native_analysis_width": 854,
+      "native_width_diagnostic": {
+        "axis": "luminance_step",
+        "clip_id": "0c261d6f1d227428",
+        "decoded_center_rgb": {
+          "0": [
+            168.0,
+            168.0,
+            168.0
+          ],
+          "1": [
+            186.0,
+            186.0,
+            186.0
+          ]
+        },
+        "decoded_delta": 0.09944836955558956,
+        "decoded_red_ratio": 0.33333333333333337,
+        "decoded_ucs_distance": 2.7755575615628914e-17,
+        "full_resolution_segments": [],
+        "seconds": 5.046
+      }
+    },
+    {
+      "axis": "area",
+      "clip_id": "a8fa7b73b682bd19",
+      "default_analysis_width": 192,
+      "default_measurement": {
+        "axis": "area",
+        "clip_id": "a8fa7b73b682bd19",
+        "elapsed_seconds": 0.869,
+        "encode": {
+          "bytes": 18260,
+          "first_pts_ms": 0.0,
+          "frames_written": 90,
+          "last_pts_ms": 2966.6666666666665
+        },
+        "fidelity": {
+          "frames_decoded": 90,
+          "frames_planned": 90,
+          "max_abs_deviation": 0.003676,
+          "max_timestamp_gap_ms": 0.3333,
+          "timestamps_match": true
+        },
+        "flashmap": {
+          "first_pts_ms": 0.0,
+          "frame_count": 90,
+          "last_pts_ms": 2967.0,
+          "picture": [
+            192,
+            108
+          ],
+          "profile": "wcag",
+          "seconds": 0.684,
+          "segments": [],
+          "variable_frame_rate": false,
+          "version": "1.0.0"
+        },
+        "order_index": 57
+      },
+      "intended_state_a_rgb": [
+        124,
+        124,
+        124
+      ],
+      "intended_state_b_rgb": [
+        170,
+        170,
+        170
+      ],
+      "intended_truth": {
+        "area_qualifies": true,
+        "coded_frame_mean_luminance_by_state": [
+          0.055659,
+          0.061512
+        ],
+        "darker_luminance": 0.201556,
+        "drawn_area_fraction": 0.029206,
+        "failing_flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "field_coverage": 0.263108,
+        "flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "frames": 90,
+        "general_delta": 0.200422,
+        "general_qualifies": true,
+        "mean_luminance_by_state": [
+          0.055659,
+          0.061512
+        ],
+        "n_windows": 3,
+        "observed_flash_rate_hz": 9.5,
+        "positive_windows": [
+          1,
+          2
+        ],
+        "red_qualifies": false,
+        "red_ratio_max": 0.333333,
+        "ucs_distance": 0.0,
+        "window_ms": 1000
+      },
+      "native_analysis_width": 854,
+      "native_width_diagnostic": {
+        "axis": "area",
+        "clip_id": "a8fa7b73b682bd19",
+        "decoded_center_rgb": {
+          "0": [
+            122.0,
+            122.0,
+            122.0
+          ],
+          "1": [
+            168.0,
+            168.0,
+            168.0
+          ]
+        },
+        "decoded_delta": 0.1969546729551323,
+        "decoded_red_ratio": 0.33333333333333337,
+        "decoded_ucs_distance": 2.7755575615628914e-17,
+        "full_resolution_segments": [
+          {
+            "area_fraction": 0.263468,
+            "area_window": "wcag-10deg",
+            "breaks_baseline": true,
+            "end_ms": 2967,
+            "flash_first_ms": 1100,
+            "flash_last_ms": 2900,
+            "max_flashes_in_window": 11,
+            "reason": "general",
+            "start_ms": 400,
+            "triggered_by": [
+              "wcag-10deg"
+            ]
+          }
+        ],
+        "seconds": 5.287
+      }
+    },
+    {
+      "axis": "red",
+      "clip_id": "207d290e8f4ceaf2",
+      "default_analysis_width": 192,
+      "default_measurement": {
+        "axis": "red",
+        "clip_id": "207d290e8f4ceaf2",
+        "elapsed_seconds": 0.906,
+        "encode": {
+          "bytes": 590714,
+          "first_pts_ms": 0.0,
+          "frames_written": 90,
+          "last_pts_ms": 2966.6666666666665
+        },
+        "fidelity": {
+          "frames_decoded": 90,
+          "frames_planned": 90,
+          "max_abs_deviation": 0.004735,
+          "max_timestamp_gap_ms": 0.3333,
+          "timestamps_match": true
+        },
+        "flashmap": {
+          "first_pts_ms": 0.0,
+          "frame_count": 90,
+          "last_pts_ms": 2967.0,
+          "picture": [
+            192,
+            108
+          ],
+          "profile": "wcag",
+          "seconds": 0.69,
+          "segments": [],
+          "variable_frame_rate": false,
+          "version": "1.0.0"
+        },
+        "order_index": 115
+      },
+      "intended_state_a_rgb": [
+        136,
+        136,
+        136
+      ],
+      "intended_state_b_rgb": [
+        255,
+        58,
+        58
+      ],
+      "intended_truth": {
+        "area_qualifies": true,
+        "coded_frame_mean_luminance_by_state": [
+          0.099888,
+          0.099817
+        ],
+        "darker_luminance": 0.245916,
+        "drawn_area_fraction": 0.249415,
+        "failing_flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "field_coverage": 1.0,
+        "flashes_per_window": [
+          0,
+          9,
+          10
+        ],
+        "frames": 90,
+        "general_delta": 0.000285,
+        "general_qualifies": false,
+        "mean_luminance_by_state": [
+          0.099888,
+          0.099817
+        ],
+        "n_windows": 3,
+        "observed_flash_rate_hz": 9.5,
+        "positive_windows": [
+          1,
+          2
+        ],
+        "red_qualifies": true,
+        "red_ratio_max": 0.921979,
+        "ucs_distance": 0.209979,
+        "window_ms": 1000
+      },
+      "native_analysis_width": 854,
+      "native_width_diagnostic": {
+        "axis": "red",
+        "clip_id": "207d290e8f4ceaf2",
+        "decoded_center_rgb": {
+          "0": [
+            134.0,
+            134.0,
+            134.0
+          ],
+          "1": [
+            255.0,
+            74.0,
+            53.0
+          ]
+        },
+        "decoded_delta": 0.02574840463468686,
+        "decoded_red_ratio": 0.9057318858902591,
+        "decoded_ucs_distance": 0.1949219548140768,
+        "full_resolution_segments": [],
+        "seconds": 5.063
+      }
+    }
+  ]
+}

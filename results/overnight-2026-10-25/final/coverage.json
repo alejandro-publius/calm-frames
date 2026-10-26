@@ -1,0 +1,52 @@
+{
+  "app": {
+    "lines": {
+      "total": 7372,
+      "covered": 6198,
+      "skipped": 0,
+      "pct": 84.07
+    },
+    "statements": {
+      "total": 8045,
+      "covered": 6769,
+      "skipped": 0,
+      "pct": 84.13
+    },
+    "functions": {
+      "total": 1807,
+      "covered": 1445,
+      "skipped": 0,
+      "pct": 79.96
+    },
+    "branches": {
+      "total": 6260,
+      "covered": 5222,
+      "skipped": 0,
+      "pct": 83.41
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "app_required_percent": {
+    "statements": 77,
+    "branches": 74,
+    "functions": 71,
+    "lines": 77
+  },
+  "python": {
+    "covered_lines": 6787,
+    "num_statements": 7517,
+    "percent_covered": 90.28867899427964,
+    "percent_covered_display": "90",
+    "missing_lines": 730,
+    "excluded_lines": 16,
+    "percent_statements_covered": 90.28867899427964,
+    "percent_statements_covered_display": "90"
+  },
+  "python_required_percent": 90,
+  "floors_unchanged": true
+}

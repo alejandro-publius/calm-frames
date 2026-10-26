@@ -1,0 +1,59 @@
+{
+  "checked_at_utc": "2026-10-23T18:06:08.999257+00:00",
+  "node": "v22.23.4",
+  "scope": "Scratch-only parser compatibility for the exact current manifest; no repository dependency change, no install scripts, no Vega build or runtime acceptance",
+  "packages": [
+    {
+      "name": "toml",
+      "version": "3.0.0",
+      "metadata_url": "https://registry.npmjs.org/toml/3.0.0",
+      "tarball_url": "https://registry.npmjs.org/toml/-/toml-3.0.0.tgz",
+      "integrity": "sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==",
+      "sha256": "ae9c6cb8ddba786798a56068078f50f8de09e645f82103b7b5b514a454d17e51",
+      "bytes": 21376,
+      "license": "MIT",
+      "engines": null,
+      "dependencies": {},
+      "integrity_verified": true
+    },
+    {
+      "name": "toml",
+      "version": "5.0.1",
+      "metadata_url": "https://registry.npmjs.org/toml/5.0.1",
+      "tarball_url": "https://registry.npmjs.org/toml/-/toml-5.0.1.tgz",
+      "integrity": "sha512-EqYNA/YvUNndrA2B3O2ojzLQoTQrBxeZ9UIjQwk8t10oe6n7dwclBwd9IdZQTOKwe6vWX+AXtl6IntXRbepdxQ==",
+      "sha256": "e9dd3f26a6f7c5fcfcf3fb13cca67f641da5c7fc144471c7ceec5accedbda323",
+      "bytes": 19565,
+      "license": "MIT",
+      "engines": {
+        "node": ">=20"
+      },
+      "dependencies": {},
+      "integrity_verified": true
+    }
+  ],
+  "command_exit_code": 0,
+  "result": {
+    "commonjs_parse_exports": [
+      "function",
+      "function"
+    ],
+    "exact_manifest_equal": true,
+    "privileges_equal": true,
+    "privileges": [
+      "com.amazon.media.secureplayback",
+      "com.amazon.privilege.security.file-sharing",
+      "com.amazon.network.privilege.net-info"
+    ],
+    "representative_parser_result": {
+      "old": "{\"name\":\"Calm Frames\",\"count\":3}",
+      "next": "{\"name\":\"Calm Frames\",\"count\":3}"
+    }
+  },
+  "manifest_sha256": "7e651ea0dd4f8ddcea842bae7616e7d9a49a8f59298e52ba888cf78ce9650c24",
+  "limitations": [
+    "Does not establish SDK support for an override outside the declared ^3.0.0 range",
+    "Does not establish future-manifest equivalence, all parser semantics, native build success or native app behavior",
+    "No malformed-input exploit demonstration was run"
+  ]
+}

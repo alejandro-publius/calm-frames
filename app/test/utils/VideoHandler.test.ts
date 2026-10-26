@@ -73,7 +73,62 @@ describe('VideoHandler', () => {
     };
   };
 
+  it.each([
+    ['file:///pkg/assets/raw/benign-story/harbor.vtt', '/pkg/assets/raw/benign-story/harbor.vtt'],
+    ['https://example.invalid/captions.vtt', 'https://example.invalid/captions.vtt'],
+  ])('passes the native subtitle source for %s', (uri, expected) => {
+    // Native filesrc treated file:///pkg/... as a literal filename and
+    // aborted Harbor playback. Keep remote URLs unchanged.
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    const addTextTrack = jest.fn();
+    mockVideoRef.current = { addTextTrack, textTracks: [] } as unknown as VideoPlayer;
+    videoHandler.data.textTrack = [{ uri, label: 'English', language: 'en', mimeType: 'text/vtt' }];
+    videoHandler.loadSubtitles();
+    expect(addTextTrack).toHaveBeenCalledWith('subtitles', 'English', 'en', expected, 'text/vtt');
+  });
+
+  it('does not dismiss waiting on a repeated MP4 clock value or a seek jump', () => {
+    const { mockVideoRef, videoHandler, mockSetShowBuffering } = createVideoHandler();
+    const media = { currentTime: 6, paused: false, seeking: false };
+    mockVideoRef.current = media as unknown as VideoPlayer;
+    videoHandler.onWaiting();
+    mockSetShowBuffering.mockClear();
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+    media.seeking = true; media.currentTime = 15;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+    media.seeking = false; media.currentTime = 15.1;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).toHaveBeenCalledWith(false);
+    videoHandler.onWaiting(); mockSetShowBuffering.mockClear();
+    media.paused = true; media.currentTime = 15.2;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+  });
+
+  it('cancels setup before allocation when teardown wins the first microtask', async () => {
+    const { videoHandler, mockVideoRef } = createVideoHandler();
+    const allocations = (VideoPlayer as unknown as jest.Mock).mock.calls.length;
+    const pending = videoHandler.preBufferVideo({} as never);
+    videoHandler.destroyVideoElements();
+    await pending;
+    expect((VideoPlayer as unknown as jest.Mock).mock.calls).toHaveLength(allocations);
+    expect(mockVideoRef.current).toBeNull();
+  });
+
   describe('preBufferVideo', () => {
+    it('opens a packaged video using its native path without changing catalog identity', () => {
+      const { videoHandler } = createVideoHandler();
+      const uri = 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
+      videoHandler.data.uri = uri;
+      const video = { src: '', autoplay: false, pause: jest.fn(), load: jest.fn() };
+      videoHandler.loadStaticMediaPlayer(video);
+      expect(video.src).toBe('/pkg/assets/raw/benign-story/harbor.precovered.mp4');
+      expect(videoHandler.data.uri).toBe(uri);
+      expect(video.load).toHaveBeenCalled();
+    });
+
     it('should initialize video player and setup event listeners', async () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
 
@@ -99,7 +154,138 @@ describe('VideoHandler', () => {
     });
   });
 
+  it('settles quietly when leaving while media control focus is pending', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveFocus!: () => void;
+    const focus = new Promise<void>((resolve) => { resolveFocus = resolve; });
+    const initialize = jest.fn().mockResolvedValue(undefined);
+    let signalFocus!: () => void;
+    const focusCalled = new Promise<void>(resolve => {signalFocus = resolve;});
+    const setMediaControlFocus = jest.fn(() => {signalFocus(); return focus;});
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    mockVideoRef.current = { initialize, setMediaControlFocus } as unknown as VideoPlayer;
+    const pending = videoHandler.preBufferVideo({} as never);
+    await focusCalled;
+    expect(setMediaControlFocus).toHaveBeenCalled();
+    mockVideoRef.current = null;
+    resolveFocus();
+    await expect(pending).resolves.toBeUndefined();
+    expect(initialize).not.toHaveBeenCalled();
+  });
+  it('invalidates initialization before native construction when destroyed without an instance', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    (VideoPlayer as unknown as jest.Mock).mockClear();
+    const pending = videoHandler.preBufferVideo();
+    videoHandler.destroyVideoElements();
+    await pending;
+    expect(VideoPlayer).not.toHaveBeenCalled();
+    expect(mockVideoRef.current).toBeNull();
+  });
+
+  it('does not attach listeners or load after leaving during initialization', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveInitialize!: () => void;
+    const initialized = new Promise<void>((resolve) => { resolveInitialize = resolve; });
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    videoHandler.setupEventListeners = jest.fn();
+    videoHandler.loadVideoElements = jest.fn();
+    mockVideoRef.current = { initialize: jest.fn(() => initialized) } as unknown as VideoPlayer;
+    await videoHandler.preBufferVideo();
+    mockVideoRef.current = null;
+    resolveInitialize();
+    await new Promise(process.nextTick);
+    expect(videoHandler.setupEventListeners).not.toHaveBeenCalled();
+    expect(videoHandler.loadVideoElements).not.toHaveBeenCalled();
+  });
+
+  it.each(['initialize', 'load'] as const)(
+    'reports a %s failure immediately for the current player',
+    async (failure) => {
+      const { mockVideoRef, mockSetIsVideoError, videoHandler } = createVideoHandler();
+      videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+      videoHandler.setupEventListeners = jest.fn();
+      videoHandler.loadVideoElements = jest.fn(() => {
+        if (failure === 'load') { throw new Error('Asset unavailable'); }
+      });
+      mockVideoRef.current = {
+        initialize: jest.fn(() => failure === 'initialize'
+          ? Promise.reject(new Error('Native initialization failed'))
+          : Promise.resolve()),
+      } as unknown as VideoPlayer;
+
+      await videoHandler.preBufferVideo();
+      await new Promise(process.nextTick);
+
+      expect(mockSetIsVideoError).toHaveBeenCalledTimes(1);
+      expect(mockSetIsVideoError).toHaveBeenCalledWith(true);
+    },
+  );
+
+  it('ignores an initialization failure after leaving playback', async () => {
+    const { mockVideoRef, mockSetIsVideoError, videoHandler } = createVideoHandler();
+    let rejectInitialize!: (reason: Error) => void;
+    const initialized = new Promise<void>((_resolve, reject) => { rejectInitialize = reject; });
+    videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+    mockVideoRef.current = { initialize: jest.fn(() => initialized) } as unknown as VideoPlayer;
+    await videoHandler.preBufferVideo();
+    mockVideoRef.current = null;
+    rejectInitialize(new Error('Initialization completed after Back'));
+    await new Promise(process.nextTick);
+    expect(mockSetIsVideoError).not.toHaveBeenCalled();
+  });
+
+  it('confirms asynchronous native destruction only after the SDK completion promise', async () => {
+    const {mockVideoRef, videoHandler} = createVideoHandler();
+    let complete!: () => void;
+    const done = new Promise<void>(resolve => {complete = resolve;});
+    const media = {pause: jest.fn(), clearSurfaceHandle: jest.fn(), clearCaptionViewHandle: jest.fn(),
+      deinitialize: jest.fn(() => done)};
+    mockVideoRef.current = media as unknown as VideoPlayer;
+    videoHandler.removeEventListeners = jest.fn();
+    const released = videoHandler.destroyVideoElementsConfirmed(); await Promise.resolve();
+    expect(media.deinitialize).toHaveBeenCalledTimes(1);
+    expect(videoHandler.destroyVideoElements()).toBe(false);
+    expect(mockVideoRef.current).toBe(media);
+    complete(); expect(await released).toBe(true);
+    expect(mockVideoRef.current).toBeNull();
+  });
+
+  it('a different owner cannot initialize while asynchronous native release is pending', async () => {
+    const first = createVideoHandler(), second = createVideoHandler();
+    let complete!: () => void;
+    const done = new Promise<void>(resolve => {complete = resolve;});
+    first.mockVideoRef.current = {pause: jest.fn(), clearSurfaceHandle: jest.fn(), clearCaptionViewHandle: jest.fn(),
+      deinitialize: jest.fn(() => done)} as unknown as VideoPlayer;
+    first.videoHandler.removeEventListeners = jest.fn();
+    const released = first.videoHandler.destroyVideoElementsConfirmed();
+    const initialize = jest.fn().mockResolvedValue(undefined);
+    second.mockVideoRef.current = {initialize} as unknown as VideoPlayer;
+    second.videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+    second.videoHandler.setupEventListeners = jest.fn(); second.videoHandler.loadVideoElements = jest.fn();
+    const started = second.videoHandler.preBufferVideo();
+    await Promise.resolve(); await Promise.resolve(); expect(initialize).not.toHaveBeenCalled();
+    complete(); expect(await released).toBe(true); await started;
+    expect(initialize).toHaveBeenCalledTimes(1);
+  });
+
   describe('destroyMediaPlayerSync', () => {
+    it.each(['timeout', 'failure'])('does not report completed teardown after native %s', (status) => {
+      const { mockVideoRef, videoHandler } = createVideoHandler();
+      const native = { pause: jest.fn(), deinitializeSync: jest.fn(() => status) };
+      mockVideoRef.current = native as unknown as VideoPlayer;
+      videoHandler.removeEventListeners = jest.fn();
+      expect(videoHandler.destroyVideoElements()).toBe(false);
+      expect(native.deinitializeSync).toHaveBeenCalledWith(1500);
+      expect(mockVideoRef.current).toBe(native);
+    });
+
+    it('does not report completed teardown when native deinitialization throws', () => {
+      const { mockVideoRef, videoHandler } = createVideoHandler();
+      mockVideoRef.current = { pause: jest.fn(), deinitializeSync: () => { throw Error('native failure'); } } as unknown as VideoPlayer;
+      videoHandler.removeEventListeners = jest.fn();
+      expect(videoHandler.destroyVideoElements()).toBe(false);
+    });
+
     it('should successfully destroy media player for MP4 content', () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
 

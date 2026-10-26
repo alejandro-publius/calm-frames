@@ -1,0 +1,4 @@
+> node tools/check_prepared_library.mjs
+{"prepared_library":"checked","titles":1,"bundles":4,"bytes":28551507,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":4,"present":4,"missing":[]},"approvedBundles":["4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"]}
+> node tools/check_prepared_library.mjs --packages Debug
+{"prepared_library":"checked","titles":1,"bundles":4,"bytes":28551507,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":4,"present":4,"missing":[]},"approvedBundles":["4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"]}

@@ -1,0 +1,439 @@
+{
+  "baseline": "cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0",
+  "lock_sha256": "7cfe95817d0ba9d8cb59706b552eca23b230f3cf7d7c1d684721304168df5380",
+  "method": "Resolve each locked dependency by Node-style upward node_modules search; shortest root path plus all immediate declared consumers. Match numeric release versions against primary advisory comparators. Optional peer consumption is documented separately.",
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-5fw9-fq32-wv5p",
+      "title": "OS Command Injection in node-notifier",
+      "source": "https://github.com/advisories/GHSA-5fw9-fq32-wv5p",
+      "primary_sha256": "5f1b620e4c5d54a8f7e30a307df53127fb76a6e0d4eefbde3bc647703e3f5ae7",
+      "primary_ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "node-notifier"
+          },
+          "vulnerable_version_range": "< 8.0.1",
+          "first_patched_version": "8.0.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "affected_nodes_at_cb96e21": [
+        {
+          "path": "node_modules/node-notifier",
+          "version": "5.4.5",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "2.10.0"
+            },
+            {
+              "path": "node_modules/node-notifier",
+              "version": "5.4.5"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "2.10.0",
+              "request": "^5.2.1"
+            }
+          ]
+        }
+      ],
+      "prior_ledger_nodes_outside_this_advisory_range": []
+    },
+    {
+      "ghsa_id": "GHSA-rxrc-rgv4-jpvx",
+      "title": "React Developer Tools extension Improper Authorization vulnerability",
+      "source": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+      "primary_sha256": "23a349e06d633028ee1c814f761f477fbb9f4d3344322d97242101338a3842e5",
+      "primary_ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-devtools-core"
+          },
+          "vulnerable_version_range": "< 4.28.4",
+          "first_patched_version": "4.28.4",
+          "vulnerable_functions": []
+        }
+      ],
+      "affected_nodes_at_cb96e21": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+          "version": "3.6.3",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+              "version": "3.6.3"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6",
+              "request": "^3.6.1"
+            }
+          ]
+        }
+      ],
+      "prior_ledger_nodes_outside_this_advisory_range": []
+    },
+    {
+      "ghsa_id": "GHSA-7f53-fmmv-mfjv",
+      "title": "Regular expression denial of service in react-native",
+      "source": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+      "primary_sha256": "78cadc11c17e7373e903685ea6b699384851e9be3e35b76e5f1e945324ebb67c",
+      "primary_ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-native"
+          },
+          "vulnerable_version_range": ">= 0.59.0, < 0.62.3",
+          "first_patched_version": "0.62.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "react-native"
+          },
+          "vulnerable_version_range": ">= 0.63.0, < 0.64.1",
+          "first_patched_version": "0.64.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "affected_nodes_at_cb96e21": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+          "version": "0.60.6",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0",
+              "request": "^0.60.6"
+            }
+          ]
+        }
+      ],
+      "prior_ledger_nodes_outside_this_advisory_range": []
+    },
+    {
+      "ghsa_id": "GHSA-3h5v-q93c-6h6q",
+      "title": "ws affected by a DoS when handling a request with many HTTP headers",
+      "source": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+      "primary_sha256": "91837b8ea227a07e823b336650b145ec48e21bfd310afe09e90e6a5f37032061",
+      "primary_ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 2.1.0, < 5.2.4",
+          "first_patched_version": "5.2.4",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 6.0.0, < 6.2.3",
+          "first_patched_version": "6.2.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 7.0.0, < 7.5.10",
+          "first_patched_version": "7.5.10",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 8.0.0, < 8.17.1",
+          "first_patched_version": "8.17.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "affected_nodes_at_cb96e21": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+              "version": "3.6.3"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+              "version": "3.3.3"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+              "version": "3.6.3",
+              "request": "^3.3.1"
+            }
+          ]
+        }
+      ],
+      "prior_ledger_nodes_outside_this_advisory_range": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "version": "1.1.5"
+        }
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-96hv-2xvq-fx4p",
+      "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "source": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+      "primary_sha256": "a3d4db1afd790f3eba1f703f2e890959fc33d2857ee9b5da1bf646418042ea12",
+      "primary_ranges": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 1.1.0, < 5.2.5",
+          "first_patched_version": "5.2.5",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 6.0.0, < 6.2.4",
+          "first_patched_version": "6.2.4",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 7.0.0, < 7.5.11",
+          "first_patched_version": "7.5.11",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "ws"
+          },
+          "vulnerable_version_range": ">= 8.0.0, < 8.21.0",
+          "first_patched_version": "8.21.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "affected_nodes_at_cb96e21": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "2.10.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+              "version": "0.54.1"
+            },
+            {
+              "path": "node_modules/metro-inspector-proxy",
+              "version": "0.54.1"
+            },
+            {
+              "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+              "version": "1.1.5"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/metro-inspector-proxy",
+              "version": "0.54.1",
+              "request": "^1.1.5"
+            }
+          ]
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+              "version": "3.6.3"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+              "version": "3.3.3"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+              "version": "3.6.3",
+              "request": "^3.3.1"
+            }
+          ]
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "version": "1.1.5",
+          "shortest_dependency_path": [
+            {
+              "path": "<app>",
+              "version": "0.1.0"
+            },
+            {
+              "path": "node_modules/@amazon-devices/security-manager-lib",
+              "version": "1.0.1767254405"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types",
+              "version": "0.66.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+              "version": "0.60.6"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "2.10.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+              "version": "1.1.5"
+            }
+          ],
+          "direct_consumers": [
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+              "version": "2.10.0",
+              "request": "^1.1.0"
+            },
+            {
+              "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+              "version": "0.54.1",
+              "request": "^1.1.5"
+            }
+          ]
+        }
+      ],
+      "prior_ledger_nodes_outside_this_advisory_range": []
+    }
+  ]
+}

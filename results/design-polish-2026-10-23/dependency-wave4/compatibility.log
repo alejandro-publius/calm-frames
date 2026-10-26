@@ -1,0 +1,172 @@
+TAP version 13
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 1 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 20.103823
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 2 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 46.366571
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 3 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.857164
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 4 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 51.836618
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 5 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 948.663537
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 6 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 21.704289
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 7 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 7.904008
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 8 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 0.895688
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 9 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 66.819104
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 10 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 66.181757
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 11 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 32.002988
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 12 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 39.441472
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 13 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 49.062692
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 14 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 2.505409
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 15 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 98.886096
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 16 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.816156
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 17 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.854806
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 18 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 525.160448
+  type: 'test'
+  ...
+# Subtest: the legacy CLI resolves the fixed logger without upgrading the CLI
+ok 19 - the legacy CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 32.702269
+  type: 'test'
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+ok 20 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 5.254727
+  type: 'test'
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+ok 21 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 1.882665
+  type: 'test'
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+ok 22 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 23.649987
+  type: 'test'
+  ...
+# Subtest: the actual legacy CLI retains React Native tag filtering and formatted events
+ok 23 - the actual legacy CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 65.000028
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 24 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 34.668198
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 25 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 1.305482
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 26 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 2.73204
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 27 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 22.537977
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2175.037725

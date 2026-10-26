@@ -55,9 +55,9 @@ export interface Notice {
 
 /** Nothing has been checked yet, so the shelf is empty. */
 export const NO_TITLES: Notice = {
-  title: 'Nothing is ready to watch yet',
+  title: 'Nothing to watch yet',
   detail:
-    'Every title is checked all the way through before it can show up here. A grown up can see what is being checked in the parent area.',
+    'Checked videos appear here. A parent can review unavailable videos in Parents.',
   tone: 'waiting',
 };
 
@@ -69,55 +69,69 @@ export const NO_TITLES: Notice = {
  * signed check, so it keeps working with no network at all.
  */
 export const BACKEND_UNREACHABLE: Notice = {
-  title: 'We cannot look for new titles',
+  title: 'New videos are unavailable',
   detail:
-    'The title that came with the app still plays, because its check is inside the app. Anything new stays off the shelf until this works again.',
+    'You can still watch the videos on this television. Try again later for new ones.',
   tone: 'waiting',
 };
 
 /** The backend is unreachable and there is not even a bundled title. */
 export const BACKEND_UNREACHABLE_EMPTY: Notice = {
-  title: 'We cannot look for new titles',
+  title: 'New videos are unavailable',
   detail:
-    'There is nothing checked on this device yet, so there is nothing to watch. Nothing plays here until it has been checked.',
+    'There are no videos on this television yet. Try again later.',
   tone: 'waiting',
 };
 
 /** A title whose check has not finished. */
 export const TITLE_PENDING: Notice = {
-  title: 'Still being checked',
+  title: 'Not ready to watch',
   detail:
-    'This title is not ready. The picture stays hidden until the check is finished.',
+    'This video is still being checked. The picture stays hidden for now.',
   tone: 'waiting',
 };
 
 /** A title whose check was there and did not pass. */
 export const TITLE_FAILED: Notice = {
-  title: 'This title did not pass its check',
-  detail: 'The picture stays hidden. Nothing plays until a check passes.',
+  title: 'This video is unavailable',
+  detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
   tone: 'blocked',
 };
 
 /** A title whose check is too old to trust. */
 export const TITLE_STALE: Notice = {
-  title: 'This check is too old',
+  title: 'This video needs an update',
   detail:
-    'The picture stays hidden until the title is checked again. An old check may have been made using older limits.',
+    'The picture stays hidden until a newer version is available.',
   tone: 'blocked',
 };
 
-/** The parent area, before a PIN exists. */
+/** Parental controls, before a PIN exists. */
 export const PIN_NOT_SET: Notice = {
-  title: 'No PIN yet',
-  detail: 'Set a four digit PIN so the settings stay where a child cannot change them.',
+  title: 'Set up a PIN to continue',
+  detail:
+    'A four digit PIN keeps parental controls where a child cannot change them.',
   tone: 'waiting',
 };
 
-/** The keypad, before anyone has typed anything. */
+/**
+ * The keypad, before anyone has typed anything.
+ *
+ * The heading above it already says Parental controls, so the notice does not
+ * say it again. The title is the one thing to do, and the detail says what the
+ * PIN is for and where it stays.
+ */
 export const PIN_PROMPT: Notice = {
-  title: 'Enter the PIN',
-  detail: 'Enter the PIN to change settings.',
+  title: 'Enter your PIN',
+  detail:
+    'Your PIN opens parental controls. It stays on this TV and is never sent anywhere.',
   tone: 'calm',
+};
+
+/** Visible feedback while the attempt is saved; no unlock is implied. */
+export const PIN_CHECKING: Notice = {
+  ...PIN_PROMPT,
+  title: 'Checking your PIN…',
 };
 
 /**
@@ -125,18 +139,45 @@ export const PIN_PROMPT: Notice = {
  *
  * The line underneath comes from parentGate, which counts the tries and the
  * lockout, so the numbers in it are the ones the gate is really using rather
- * than a second copy that could disagree.
+ * than a second copy that could disagree. The titles name no number and no
+ * time for the same reason: the gate's own line carries both.
  */
-export const PIN_WRONG_TITLE = 'Try that again';
-export const PIN_LOCKED_TITLE = 'Locked for a minute';
+export const PIN_WRONG_TITLE = 'Try again';
+export const PIN_LOCKED_TITLE = 'Locked for now';
 
-export const KID_HOME_TITLE = 'Ready to watch';
-export const KID_HOME_SUBTITLE = 'Every title here has been checked all the way through.';
-export const PARENT_AREA_TITLE = 'Parent area';
+/** A PIN attempt that could not be written down, so the gate stays shut. */
+export const PIN_SAVE_FAILED: Notice = {
+  title: 'Parental controls stay locked',
+  detail: "The PIN attempt couldn't be saved. Try again.",
+  tone: 'blocked',
+};
+
+/** What Home calls the way in. The page itself is headed Parental controls. */
+export const PARENT_AREA_TITLE = 'Parental controls';
+export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
+/** One line under the heading, saying what the page is for. */
+export const PARENTAL_CONTROLS_LEAD =
+  'Choose viewing settings for your family and see which scenes were hidden.';
+/** While a change is being written to the household record. */
+export const SAVING_CHANGES = 'Saving your changes…';
+
+/** Button labels, the ones a television usually uses. Back is one word: the hardware key says the same. */
+export const BACK_TO_LIBRARY_LABEL = 'Back';
+export const SET_PIN_LABEL = 'Set up a PIN';
+export const CREDITS_LABEL = 'Credits and licences';
+export const ADD_KID_LABEL = 'Add a kid';
+
+/**
+ * The word at the edge of a chosen settings row.
+ *
+ * The same word the room chips use in their sentences and in their screen
+ * reader labels, so a page has one word for one state.
+ */
+export const CHOSEN_WORD = 'Chosen';
 
 /** What the room settings can and cannot do, said the same way everywhere. */
 export const ROOM_ONLY_ADDS =
-  'A bigger television or a closer sofa can only add hidden parts. It never takes any away.';
+  'A larger TV or a closer seat can hide more of the video, never less.';
 
 /**
  * The two rows of room chips, and which chip in each is the chosen one.
@@ -166,7 +207,7 @@ export const ROOM_ONLY_ADDS =
  * vocabulary to a screen that already has enough.
  */
 export const TV_SIZE_TITLE = 'Television size';
-export const SEAT_DISTANCE_TITLE = 'How far away the sofa is';
+export const SEAT_DISTANCE_TITLE = 'Viewing distance';
 
 export function televisionChosen(inches: number): string {
   return `${Math.round(inches)} inch is chosen.`;
@@ -223,10 +264,10 @@ export const SETTINGS_STATE_WORD = 'showing';
  * or one kid's own setting. Those two are not the same thing and the screen
  * should never let them look the same. Every section says whose it is now.
  */
-export const STRICTNESS_TITLE = 'How strict';
-export const ROOM_TITLE = 'The room';
-export const HIDDEN_TITLE = 'What was hidden';
-export const CHECKED_TITLES_TITLE = 'Titles';
+export const STRICTNESS_TITLE = 'Viewing preset';
+export const ROOM_TITLE = 'TV and seating';
+export const HIDDEN_TITLE = 'Hidden scenes';
+export const CHECKED_TITLES_TITLE = 'Videos';
 
 export function sectionFor(title: string, name: string | null): string {
   return name ? `${title} for ${name}` : title;
@@ -244,12 +285,12 @@ export function nextKidName(base: string, taken: string[]): string {
   return `${base} ${index}`;
 }
 
-/** The rule about profiles, said the same way as the one about rooms. */
+/** The rule about kids' settings, said the same way as the one about rooms. */
 export const PROFILE_ONLY_ADDS =
-  'A profile can only add hidden parts to what Everyone is set to. It never takes any away.';
+  "A kid's settings can hide more than Everyone's settings, never less.";
 
-/** Four is the most, and the parent area says so before the button is gone. */
-export const PROFILES_FULL = 'Four profiles is the most. Remove one to add another.';
+/** Four is the most, and the page says so before the button is gone. */
+export const PROFILES_FULL = 'Up to four kids can be added. Remove one to add another.';
 
 /**
  * The question before a kid is removed.
@@ -281,7 +322,7 @@ export const PROFILES_FULL = 'Four profiles is the most. Remove one to add anoth
 export function removeKidPrompt(name: string): Notice {
   return {
     title: `Remove ${name}?`,
-    detail: `${name}'s own settings and ${name}'s record of what was hidden both go. Everyone else is left as they are, and this cannot be undone.`,
+    detail: `${name}'s settings and ${name}'s record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.`,
     tone: 'calm',
   };
 }
@@ -295,12 +336,76 @@ export function keepKidLabel(name: string): string {
   return `Keep ${name}`;
 }
 
+/**
+ * Renaming a kid.
+ *
+ * A new kid is called Kid, or Kid 2, because this screen had no way to type.
+ * The editor is a row of letter keys for the remote, the PIN keypad's shape
+ * with more keys, with the name being typed above them and Save and Cancel
+ * below. Everything it refuses, it refuses in words under the field: a blank,
+ * a name another chip already carries, and a name longer than the picker can
+ * draw on one line.
+ */
+export const EDIT_NAME_LABEL = 'Edit name';
+export const SAVE_NAME_LABEL = 'Save name';
+export const CANCEL_NAME_LABEL = 'Cancel';
+export const TRY_NAME_AGAIN_LABEL = 'Try again';
+export const NAME_SHIFT_LABEL = 'Shift';
+export const NAME_SPACE_LABEL = 'Space';
+export const NAME_DELETE_LABEL = 'Delete';
+/** The field before anything is typed. */
+export const NAME_EMPTY_HINT = 'Type a name';
+/** The save button while the name is being written to the household record. */
+export const NAME_SAVING = 'Saving the name…';
+
+export function editNameTitle(name: string): string {
+  return `New name for ${name}`;
+}
+
+/** How much of the line is used, beside the field. Spaces count: they take room too. */
+export function nameLengthLine(count: number, maxLength: number): string {
+  return `${count} of ${maxLength} characters`;
+}
+
+/** What a screen reader hears when the letter keys change case. */
+export function shiftLabel(nextIsCapital: boolean): string {
+  return `Shift. The next letter is ${nextIsCapital ? 'a capital' : 'small'}.`;
+}
+
+export function nameProblemLine(
+  problem: 'empty' | 'long' | 'taken',
+  name: string,
+  maxLength: number,
+): string {
+  if (problem === 'empty') {
+    return 'Type a name before saving.';
+  }
+  if (problem === 'long') {
+    return `A name can be up to ${maxLength} characters.`;
+  }
+  return `${name} is already in this household. Choose a different name.`;
+}
+
+/**
+ * The new name could not be written down.
+ *
+ * Nothing changed: the old name stays until a write commits, and the draft
+ * stays in the field so nobody types it twice. The two answers are beside
+ * it, and both say what they do.
+ */
+export const NAME_SAVE_FAILED: Notice = {
+  title: 'Name not saved yet',
+  detail:
+    "This TV couldn't write the change down. Try again, or cancel to keep the old name.",
+  tone: 'blocked',
+};
+
 /** The record, before anything has been hidden. */
-export const NOTHING_HIDDEN_YET = 'Nothing has been hidden yet.';
+export const NOTHING_HIDDEN_YET = 'No scenes hidden yet.';
 
 /** One kid's record, before anything has been hidden for them. */
 export function nothingHiddenFor(name: string): string {
-  return `Nothing has been hidden for ${name} yet.`;
+  return `No scenes hidden for ${name} yet.`;
 }
 
 /**
@@ -316,8 +421,8 @@ export function nothingHiddenFor(name: string): string {
  * parent has to do in their head.
  */
 export function hiddenSummary(count: number, totalMs: number, shown: number): string {
-  const parts = `${count} part${count === 1 ? '' : 's'}`;
-  const line = `${parts}, ${describeHiddenTotal(totalMs)} in all.`;
+  const parts = `${count} scene${count === 1 ? '' : 's'} hidden`;
+  const line = `${parts}, ${describeHiddenTotal(totalMs)} in total.`;
   return shown < count ? `${line} The ${shown} most recent are below.` : line;
 }
 
@@ -427,17 +532,18 @@ export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
 /**
  * The chime before a hide.
  *
- * The label says what the sound does, not what the feature is called, and it
- * carries its own state so a parent reading it from the sofa does not have to
- * work out whether a highlighted row means on or off. The note underneath says
- * the thing that matters most about the switch: turning it off changes nothing
- * about what is hidden.
+ * It is one settings row: a plain label, the state word at the row's edge, and
+ * a helper line under the label saying the thing that matters most about the
+ * switch, which is that turning it off changes nothing about what is hidden.
+ * The state is a word rather than a highlight, so a parent reading it from the
+ * sofa does not have to work out which way round a colour means.
  */
-export const CHIME_SECTION_TITLE = 'Sound before a hide';
-export const CHIME_ON_LABEL = 'A soft chime plays first: on';
-export const CHIME_OFF_LABEL = 'A soft chime plays first: off';
+export const CHIME_SECTION_TITLE = 'Sound';
+export const CHIME_ROW_TITLE = 'Warning chime';
+export const CHIME_ON_LABEL = 'On';
+export const CHIME_OFF_LABEL = 'Off';
 export const CHIME_NOTE =
-  'The chime sounds a couple of seconds before the picture goes dark, so nobody is taken by surprise. Turning it off changes nothing about what is hidden.';
+  'A soft chime plays before a scene is hidden. Turning it off does not change which scenes are hidden.';
 
 /**
  * The first run explainer.
@@ -450,13 +556,79 @@ export const CHIME_NOTE =
 export const EXPLAINER_TARGET_SECONDS = 20;
 export const EXPLAINER_WORDS_PER_MINUTE = 150;
 
-export const EXPLAINER_TITLE = 'What Calm Frames hides, and why';
+export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
-  'Calm Frames checks a whole title before it plays.',
-  'Any part that goes over the published flash limits is hidden while the sound and the captions keep going.',
-  'A card says what is coming, and what was hidden.',
+  'Videos are checked for flashing before they are added.',
+  'Flashing scenes are covered while the sound continues. Captions continue when a video has them.',
+  'Some flashing may go undetected.',
   SAFETY_NOTE,
 ];
+
+/**
+ * What Calm Frames does, in one line, said the same way on Home's How it
+ * works page and on a title's More info page.
+ *
+ * "Covered", not "replaced by a still picture". The still is drawn only when
+ * a title's signed map carries a scene hold for that interval, and the
+ * prepared Acadia maps carry none, so its covers are plain black. Captions
+ * are promised only for a title that ships them, for the same reason: Acadia
+ * has none, the Harbor demo has one track.
+ */
+export const PURPOSE_LINE =
+  'Flashing scenes are covered while the sound continues.';
+/** Home's one line under the title: the benefit, without a promise about tracks. */
+export const HOME_BENEFIT_LINE = 'Watch with flashing scenes covered.';
+
+/**
+ * A running time as a person would say it: "37 seconds", "2 minutes 5 seconds".
+ * Home and Details read the same helper so the two never disagree.
+ */
+export function runtimeLabel(durationMs: number | undefined): string | null {
+  if (durationMs === undefined || !(durationMs > 0)) {
+    return null;
+  }
+  return describeHiddenTotal(durationMs);
+}
+
+/**
+ * A line drawn on screen, as a screen reader should say it: the separator as
+ * a pause and short units as whole words. VoiceView on the TV read the
+ * separator aloud as "middle dot".
+ */
+export function spoken(line: string): string {
+  return line.split(' · ').join(', ')
+    .replace(/\b(\d+) min\b/g, (_, n: string) => `${n} minute${n === '1' ? '' : 's'}`)
+    .replace(/\b(\d+) sec\b/g, (_, n: string) => `${n} second${n === '1' ? '' : 's'}`);
+}
+export const CAPTIONS_CONTINUE_LINE =
+  'When a video has captions, the captions continue too.';
+export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';
+export const ONLY_IN_CALM_FRAMES_LINE =
+  'Calm Frames works only with prepared videos in this app, not other apps or live TV.';
+export const DETECTION_LIMITS_LINE =
+  'Detection can miss flashing. This prototype has not been medically validated.';
+
+/**
+ * The More info line about one title's own covers, built from what the
+ * title carries: how many covered parts its schedule has and whether it
+ * ships captions. It never names a still picture, because the schedule does
+ * not say whether a still exists for each part.
+ */
+export function coverLine(count: number, hasCaptions: boolean, ocean = false): string {
+  // Acadia's baked replacement is cut from the start of its own video, which is a
+  // still, near-black frame (measured Oct 19: 90% of pixels at video black), not
+  // ocean footage; and its rendition is silent (-91 dB). Say only what is shown,
+  // and not "still picture", which names a signed scene hold Acadia does not carry.
+  if (ocean) {
+    const replaced = count === 1 ? 'The flagged scene is replaced' : 'Flagged scenes are replaced';
+    return `${replaced} with moving ocean from this video. Original audio is kept when the video has sound.`;
+  }
+  const parts =
+    count === 1
+      ? 'The flagged scene is covered.'
+      : 'Flagged scenes are covered.';
+  return `${parts} Original audio is kept when the video has sound.${hasCaptions ? ' Captions continue too.' : ''}`;
+}
 
 /** How long the explainer takes to read, in seconds, at the pace above. */
 export function readingSeconds(
@@ -485,7 +657,8 @@ export function noticeForTitle(entry: CheckedTitle): Notice | null {
   // The reader's own wording for this rejection is more specific than the
   // general line, so it goes underneath rather than replacing it.
   return entry.reason && entry.reason !== base.detail
-    ? { ...base, detail: `${base.detail} ${entry.reason}` }
+    ? { ...base, detail: /picture stays hidden/i.test(entry.reason)
+        ? entry.reason : `${entry.reason} The picture stays hidden.` }
     : base;
 }
 

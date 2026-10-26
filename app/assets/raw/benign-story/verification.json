@@ -1,0 +1,800 @@
+{
+  "assets_sha256": {
+    "README.md": "cf4347c33401cec31d8f80190ffe238bf6da7d10c522e6980d3c690bd5ed54da",
+    "demo.pub.pem": "8e2cde9f818b629e7979b2a7624bf33313234637af1e17dc22e978c46380612a",
+    "harbor.broadcast.json": "5e03d4e73700121478fa0612f4f575bb5520f81f15be6b29231f669e0cca2983",
+    "harbor.extra-cautious.json": "8c69bf78b462915275976c0b7c272b688ccece0a39b14b12e89e67f1477b7b14",
+    "harbor.mp4": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+    "harbor.precovered.mp4": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150",
+    "harbor.vtt": "a4f0acb9d117a58df7398be9b2752541b7568f1493c3b3a339a64efc5b92a21d",
+    "harbor.wcag.json": "7bebdd670cf782b7fe1185cdb6d52e7376f2967a631fb61999c8afd0d1532428",
+    "measured-source.broadcast.json": "cdae9ac1ea67bc92df73122329d79e648e5bf67e9c9b6ef4e6ed91ae852ef92a",
+    "measured-source.extra-cautious.json": "42c06a97e82ee48e427057935e3c2d6690dedac3dcb553c2836528cff2f4d7a2",
+    "measured-source.wcag.json": "d76ae34848f28077bafa8ac8e0adb2920afacca1d6ae7664159bce784b1bce8b"
+  },
+  "checks": [
+    {
+      "data": {
+        "actual": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+        "expected": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043"
+      },
+      "detail": "source hashes to a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043, title is filed under a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+      "name": "source_hash",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] map parsed",
+      "name": "map_readable:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043"
+      },
+      "detail": "[wcag] map says source a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043, title is a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+      "name": "map_hash:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[wcag] flashmap verify exited 0: OK build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/maps/wcag.json verifies against build/benign-story/harbor.mp4",
+      "name": "map_signature:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 2,
+        "recipe": null,
+        "stored": 2
+      },
+      "detail": "[wcag] hide plan has 2 intervals, the map produces 2",
+      "name": "plan_matches_map:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] 2 signed images match checked local assets and provenance",
+      "name": "scene_assets:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[wcag] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 0
+      },
+      "detail": "[wcag] flashmap found 0 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335
+      },
+      "detail": "[wcag] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples": 6,
+        "samples_per_interval": 3,
+        "worst_db": 40.581793
+      },
+      "detail": "[wcag] each described scene hold and sampled black fallback match the rendition at the first frame, the middle and the last frame of the span",
+      "name": "cover_actually_drawn:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 2,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[wcag] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 0
+      },
+      "detail": "[wcag] the cover schedule over the original video left 0 violation(s)",
+      "name": "cover_model_clean:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] the complete HLS output has 0 violations including boundaries",
+      "name": "hls_rendition_clean:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.334000000003,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335,
+        "transport_pts_shift_ms": 1483.333
+      },
+      "detail": "[wcag] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] the delivered HLS uses the checked interval images",
+      "name": "scene_hls_drawn:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[wcag] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[wcag] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[wcag] 0 of 1 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] map parsed",
+      "name": "map_readable:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043"
+      },
+      "detail": "[broadcast] map says source a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043, title is a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+      "name": "map_hash:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[broadcast] flashmap verify exited 0: OK build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/maps/broadcast.json verifies against build/benign-story/harbor.mp4",
+      "name": "map_signature:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 2,
+        "recipe": null,
+        "stored": 2
+      },
+      "detail": "[broadcast] hide plan has 2 intervals, the map produces 2",
+      "name": "plan_matches_map:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] 2 signed images match checked local assets and provenance",
+      "name": "scene_assets:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[broadcast] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 0
+      },
+      "detail": "[broadcast] flashmap found 0 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335
+      },
+      "detail": "[broadcast] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples": 6,
+        "samples_per_interval": 3,
+        "worst_db": 40.581793
+      },
+      "detail": "[broadcast] each described scene hold and sampled black fallback match the rendition at the first frame, the middle and the last frame of the span",
+      "name": "cover_actually_drawn:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 2,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[broadcast] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 0
+      },
+      "detail": "[broadcast] the cover schedule over the original video left 0 violation(s)",
+      "name": "cover_model_clean:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] the complete HLS output has 0 violations including boundaries",
+      "name": "hls_rendition_clean:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.334000000003,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335,
+        "transport_pts_shift_ms": 1483.333
+      },
+      "detail": "[broadcast] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] the delivered HLS uses the checked interval images",
+      "name": "scene_hls_drawn:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[broadcast] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[broadcast] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[broadcast] 0 of 1 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] map parsed",
+      "name": "map_readable:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043"
+      },
+      "detail": "[extra-cautious] map says source a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043, title is a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+      "name": "map_hash:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[extra-cautious] flashmap verify exited 0: OK build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/maps/extra-cautious.json verifies against build/benign-story/harbor.mp4",
+      "name": "map_signature:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 2,
+        "recipe": null,
+        "stored": 2
+      },
+      "detail": "[extra-cautious] hide plan has 2 intervals, the map produces 2",
+      "name": "plan_matches_map:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] 2 signed images match checked local assets and provenance",
+      "name": "scene_assets:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[extra-cautious] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 0
+      },
+      "detail": "[extra-cautious] flashmap found 0 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335
+      },
+      "detail": "[extra-cautious] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples": 6,
+        "samples_per_interval": 3,
+        "worst_db": 40.581793
+      },
+      "detail": "[extra-cautious] each described scene hold and sampled black fallback match the rendition at the first frame, the middle and the last frame of the span",
+      "name": "cover_actually_drawn:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 2,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[extra-cautious] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 0
+      },
+      "detail": "[extra-cautious] the cover schedule over the original video left 0 violation(s)",
+      "name": "cover_model_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] the complete HLS output has 0 violations including boundaries",
+      "name": "hls_rendition_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.334000000003,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 720.0,
+          "coded_width": 1280.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 480.0,
+          "last_pts_ms": 19958.333,
+          "median_interval_ms": 41.667,
+          "picture_coded": [
+            0,
+            0,
+            1280,
+            720
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 20.8335,
+        "transport_pts_shift_ms": 1483.333
+      },
+      "detail": "[extra-cautious] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] the delivered HLS uses the checked interval images",
+      "name": "scene_hls_drawn:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[extra-cautious] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[extra-cautious] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[extra-cautious] 0 of 1 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_presets": [],
+        "still_ms": 18500.0
+      },
+      "detail": "the cover still at 18500 ms is inside a flagged span for no preset",
+      "name": "cover_still_calm",
+      "passed": true
+    }
+  ],
+  "label": "Benign demonstration: scheduled practice holds, no flashing.",
+  "physical_tv_validated": false,
+  "playback": "bundled verified extra-cautious pre-covered master with live guard",
+  "playback_sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150",
+  "prepared_renditions": {
+    "broadcast": {
+      "path": "build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/safe/broadcast/safe.mp4",
+      "sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150"
+    },
+    "extra-cautious": {
+      "path": "build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/safe/extra-cautious/safe.mp4",
+      "sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150"
+    },
+    "wcag": {
+      "path": "build/benign-story/pipeline/titles/a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043/safe/wcag/safe.mp4",
+      "sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150"
+    }
+  },
+  "production_pipeline_passed": true,
+  "source_license": "Apache-2.0; generated Harbor artwork, Blender animation, original captions and synthesized ambience",
+  "source_measured_clean_presets": [
+    "broadcast",
+    "extra-cautious",
+    "wcag"
+  ],
+  "source_sha256": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+  "synthetic_intervals": [
+    {
+      "end_ms": 8000,
+      "reason": "general",
+      "start_ms": 6000
+    },
+    {
+      "end_ms": 15000,
+      "reason": "general",
+      "start_ms": 13000
+    }
+  ],
+  "version": 1
+}

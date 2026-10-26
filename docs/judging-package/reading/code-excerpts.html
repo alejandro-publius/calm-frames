@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Pinned code excerpts | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/code-excerpts.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="pinned-code-excerpts">Pinned code excerpts</h1>
+<p>Read-only extracts from <code>13551e4</code>, which contains validated application source <code>d96c088</code>. These are partial implementation references, not new test results or a complete proof. Original paths and line spans are recorded for inspection.</p>
+<h2 id="pipelineverifypy">pipeline/verify.py</h2>
+<p>Lines 486 to 517; complete source SHA-256 <code>2faaa2a59a3d4a5dc951e3f32c24741436ce801faa91e55f9d9667df66ec6c28</code>.</p>
+<pre><code class="language-python">def verify_title(
+    layout: TitleLayout,
+    *,
+    source: str | Path,
+    presets: Sequence[str],
+    adapter: FlashmapAdapter,
+    pub_key: str | Path | None,
+    diag_in: float | None = None,
+    distance_ft: float | None = None,
+    calm_margin_ms: float = DEFAULT_CALM_MARGIN_MS,
+    rerender_cover_model: bool = True,
+    playback_compatible: bool | None = None,
+) -&gt; VerifyReport:
+    source = Path(source)
+    report = VerifyReport(
+        sha256=layout.sha256,
+        source_path=str(source),
+        presets=list(presets),
+        started_at=time.time(),
+    )
+
+    # 1. The source is the file this title was built from.
+    if not source.exists():
+        report.add(&quot;source_present&quot;, False, f&quot;source file is missing: {source}&quot;)
+        report.finished_at = time.time()
+        return report
+    actual_sha = sha256_file(source)
+    report.add(
+        &quot;source_hash&quot;,
+        actual_sha == layout.sha256,
+        f&quot;source hashes to {actual_sha}, title is filed under {layout.sha256}&quot;,
+        actual=actual_sha,
+</code></pre>
+<h2 id="pipelinepackaged_librarypy">pipeline/packaged_library.py</h2>
+<p>Lines 437 to 467; complete source SHA-256 <code>ce271fc2eede41e5414b38dc1514989d28b50911b3c6df5ab06c9ba09cdc29bb</code>.</p>
+<pre><code class="language-python">def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str | Path,
+                           source_shas: Sequence[str] | None = None) -&gt; dict:
+    root, destination = _root(workdir), _root(output)
+    if destination == root or destination.is_relative_to(root) or root.is_relative_to(destination):
+        raise PackagedLibraryError(&quot;The package output and preparation workspace must be separate.&quot;)
+    public = load_public_key(pub)
+    public_raw = public.public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
+    selected = set(source_shas) if source_shas is not None else None
+    if selected is not None and (not selected or any(not _SHA.fullmatch(sha) for sha in selected)):
+        raise PackagedLibraryError(&quot;Select complete source SHA-256 identifiers.&quot;)
+    destination.mkdir(parents=True, exist_ok=True)
+    with local._lock(root), local._lock(destination):
+        _check_output_root(destination)
+        catalog = local._snapshot(root)
+        receipts = [item for item in catalog[&quot;titles&quot;] if selected is None or item[&quot;source_sha256&quot;] in selected]
+        if selected is not None and {item[&quot;source_sha256&quot;] for item in receipts} != selected:
+            raise PackagedLibraryError(&quot;A selected title has no current verified local receipt.&quot;)
+        if not receipts or len(receipts) &gt; MAX_TITLES:
+            raise PackagedLibraryError(&quot;Export between one and sixteen verified local titles.&quot;)
+        with tempfile.TemporaryDirectory(prefix=&quot;.stage-&quot;, dir=destination) as temporary:
+            staged = Path(temporary)
+            files: dict[str, dict] = {}
+            titles: list[dict] = []
+            reports: dict[str, bytes] = {}
+            total = 0
+            for receipt in receipts:
+                title, size = _title(receipt, root, staged, public, files, reports)
+                total += size
+                if total &gt; MAX_BUNDLE_BYTES:
+                    raise PackagedLibraryError(&quot;The prepared library exceeds the package byte budget.&quot;)
+                titles.append(title)
+</code></pre>
+<h2 id="appsrccalmframespackagedlibraryts">app/src/calmframes/packagedLibrary.ts</h2>
+<p>Lines 244 to 252; complete source SHA-256 <code>fc10728d6d28f878366953f290f09448fbc88f68316f98f4a44e15a20f048a9b</code>.</p>
+<pre><code class="language-tsx">  const match = (title: CatalogTitle, settings: HouseholdSettings) =&gt;
+    titles(settings).find((expected) =&gt; expected.id === title.id &amp;&amp;
+      expected.uri === title.uri &amp;&amp; expected.sha256 === title.sha256 &amp;&amp;
+      expected.durationMs === title.durationMs &amp;&amp;
+      expected.renditionSha256 === title.renditionSha256 &amp;&amp;
+      expected.renditionStartOffsetMs === title.renditionStartOffsetMs &amp;&amp;
+      sameMaps(title.maps, expected.maps) &amp;&amp;
+      JSON.stringify(title.textTrack) === JSON.stringify(expected.textTrack));
+  return {
+</code></pre>
+<h2 id="appsrccalmframesuseflashguardts">app/src/calmframes/useFlashGuard.ts</h2>
+<p>Lines 382 to 420; complete source SHA-256 <code>45a7a9140b564c7885bae6d0b238e1644e15cff6b457cb4603056abaae419b40</code>.</p>
+<pre><code class="language-tsx">  // The schedule itself, on the harness that GATE 1 measured.
+  const harness = useCoverHarness(mediaRef, {
+    mode: activeStatus === &#39;verified&#39; &amp;&amp; ready ? &#39;timing&#39; : &#39;off&#39;,
+    intervals,
+    foreground,
+    ready,
+    scheduleLabel: `flash-guard:${titleId}`,
+    onUncertainty: latchSceneAt,
+  });
+
+  const seekEngine = useMemo(
+    () =&gt;
+      createSeekEngine({
+        getIntervals: () =&gt; intervalsRef.current,
+        getDurationMs: () =&gt; durationMs,
+        onPlan: (plan) =&gt; {
+          latchSceneAt(plan.targetMs);
+          latchSceneInterval(plan.interval);
+          setSceneSeekDisruptions((count) =&gt; count + 1);
+        },
+        setCover: (covered, reason) =&gt; {
+          trace(&#39;seek&#39;, JSON.stringify({ phase: &#39;cover-request&#39;, covered, reason }));
+          setSeekHolding(covered);
+        },
+        seekTo: (targetMs) =&gt; {
+          const element = mediaRef.current as
+            | (MediaElementLike &amp; { currentTime?: number })
+            | null;
+          if (element) {
+            trace(&#39;seek&#39;, JSON.stringify({ phase: &#39;playhead-write&#39;, targetMs }));
+            element.currentTime = targetMs / 1000;
+          }
+        },
+        announce: (text) =&gt; announceForAccessibility(text),
+      }),
+    // A new engine per title, not per render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [durationMs, mediaRef, titleId],
+  );
+</code></pre>
+<h2 id="appsrccalmframesplaybackproofpaneltsx">app/src/calmframes/PlaybackProofPanel.tsx</h2>
+<p>Lines 10 to 55; complete source SHA-256 <code>23d55ab62ac4429c17894ff7a180b18b9909b856dae171cfb8d48728438d3759</code>.</p>
+<pre><code class="language-tsx">
+export default function PlaybackProofPanel({ entry, settings, testID = &#39;playback-proof&#39; }: {
+  entry: CheckedTitle; settings: HouseholdSettings; testID?: string;
+}) {
+  const [stage, setStage] = React.useState&lt;&#39;source&#39; | &#39;prepared&#39; | &#39;binding&#39;&gt;(&#39;source&#39;);
+  const proof = playbackProofFor(entry, settings);
+  if (!proof) return &lt;View testID={`${testID}-unavailable`} style={styles.stage}&gt;
+    &lt;Text accessibilityRole=&quot;header&quot; style={styles.heading}&gt;Playback proof unavailable&lt;/Text&gt;
+    &lt;Text style={styles.line}&gt;No matching report summary is available for this selection. This page cannot confirm its measurements.&lt;/Text&gt;
+  &lt;/View&gt;;
+  const findings = buildCoverIntervals(entry.segments, { guardBandMs: 0, minCoverMs: 0, durationMs: proof.durationMs });
+  const covered = buildCoverIntervals(entry.segments, { ...coverOptionsFor(settings), durationMs: proof.durationMs });
+  const profileLabel = (name: string) =&gt; name === &#39;wcag&#39; ? &#39;WCAG&#39; : name === &#39;broadcast&#39; ? &#39;Broadcast&#39; : &#39;Extra cautious&#39;;
+  return &lt;View testID={testID} style={styles.record}&gt;
+    &lt;Text accessibilityRole=&quot;header&quot; style={styles.heading}&gt;Playback proof&lt;/Text&gt;
+    &lt;Text style={styles.line}&gt;{`${PRESETS[settings.preset].title} · ${(proof.durationMs / 1000).toFixed(1)} seconds · selected video edition`}&lt;/Text&gt;
+    &lt;View style={styles.steps}&gt;
+      {([&#39;source&#39;, &#39;prepared&#39;, &#39;binding&#39;] as const).map((step, index) =&gt; &lt;CalmButton key={step} quiet
+        testID={`${testID}-step-${step}`} label={`${index + 1} · ${step === &#39;binding&#39; ? &#39;Selection&#39; : step === &#39;source&#39; ? &#39;Source&#39; : &#39;Prepared&#39;}`}
+        accessibilityLabel={`${step === &#39;binding&#39; ? &#39;Selection&#39; : step === &#39;source&#39; ? &#39;Source&#39; : &#39;Prepared&#39;} evidence${stage === step ? &#39;, selected&#39; : &#39;&#39;}`}
+        onPress={() =&gt; setStage(step)} /&gt;)}
+    &lt;/View&gt;
+    {stage === &#39;source&#39; ? &lt;View style={styles.stage} testID={`${testID}-source`}&gt;
+      &lt;Text style={styles.label}&gt;1 · Source measured&lt;/Text&gt;
+      &lt;Text style={styles.metric}&gt;{`${findings.length} flagged period${findings.length === 1 ? &#39;&#39; : &#39;s&#39;}`}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;Overlapping source findings are counted once. The original video is not played here.&lt;/Text&gt;
+      {proof.source.map(item =&gt; &lt;Text key={item.profile} style={styles.line}&gt;{`${profileLabel(item.profile)} map: ${item.findings} findings · ${item.analyzer ?? &#39;analyzer version not recorded&#39;}`}&lt;/Text&gt;)}
+    &lt;/View&gt; : stage === &#39;prepared&#39; ? &lt;View style={styles.stage} testID={`${testID}-prepared`}&gt;
+      &lt;Text style={styles.label}&gt;2 · Prepared file checked&lt;/Text&gt;
+      {proof.output.map(item =&gt; &lt;Text key={item.profile} style={styles.metric}&gt;{`${profileLabel(item.profile)}: ${item.findings === null ? &#39;finding count not recorded&#39; : `${item.findings} output findings`}`}&lt;/Text&gt;)}
+      &lt;Text style={styles.line}&gt;{`${covered.length} covered period${covered.length === 1 ? &#39;&#39; : &#39;s&#39;} · ${(totalCoveredMs(covered) / 1000).toFixed(1)} seconds including margins`}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{proof.outcome === &#39;no flagged segments&#39;
+        ? &#39;Nothing was flagged, so this result does not demonstrate a cover working.&#39;
+        : proof.outcome === &#39;cover proven drawn&#39; ? &#39;The report verifies that the replacement picture was drawn.&#39; : &#39;The report does not prove that the cover was drawn.&#39;}&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;{proof.timingPreserved &amp;&amp; proof.frameCount !== null
+        ? `${proof.frameCount} frames · frame timing checked against the source`
+        : &#39;Complete frame-timing measurements are not recorded in this summary.&#39;}&lt;/Text&gt;
+      {proof.output.map(item =&gt; &lt;Text key={item.profile} style={styles.line}&gt;{`${profileLabel(item.profile)} output analyzer: ${item.analyzer ?? &#39;version not recorded in this report&#39;}`}&lt;/Text&gt;)}
+    &lt;/View&gt; : &lt;View style={styles.stage} testID={`${testID}-binding`}&gt;
+      &lt;Text style={styles.label}&gt;3 · Selection matches&lt;/Text&gt;
+      &lt;Text style={styles.line}&gt;The selected edition and signed timing maps match the approved file record. Media bytes are checked when the app is built; this page does not rescan the video.&lt;/Text&gt;
+      &lt;Text style={styles.identifier}&gt;{`Prepared file ${proof.renditionSha256.slice(0, 12)} · report ${proof.reportSha256.slice(0, 12)}`}&lt;/Text&gt;
+    &lt;/View&gt;}
+    &lt;Text style={styles.line}&gt;These checks do not establish personal comfort or medical safety. Detection can miss flashing. The full record below explains the limits.&lt;/Text&gt;
+  &lt;/View&gt;;
+}
+</code></pre>
+<h2 id="appsrccalmframesreadingstoptsx">app/src/calmframes/ReadingStop.tsx</h2>
+<p>Lines 24 to 40; complete source SHA-256 <code>ea408665a263c8b8ab559e361dc2a0a95be291db3acd2afdad3f1a816467b154</code>.</p>
+<pre><code class="language-tsx">export default function ReadingStop({ testID, style, children }: {
+  testID: string; style?: StyleProp&lt;ViewStyle&gt;; children: React.ReactNode;
+}) {
+  const coastal = React.useContext(CoastalAppearance);
+  const colors = coastal ? COASTAL_COLORS : CALM_COLORS;
+  const [focused, setFocused] = React.useState(false);
+  return &lt;CalmControlAppearance.Provider value={false}&gt;
+    &lt;TouchableOpacity testID={testID} accessibilityRole=&quot;text&quot; activeOpacity={1}
+      // React Native makes a touchable focusable only when it has a press handler.
+      onPress={() =&gt; undefined}
+      onFocus={() =&gt; setFocused(true)} onBlur={() =&gt; setFocused(false)}
+      style={[styles.stop, style, focused ? { borderColor: colors.FOCUS_RING, backgroundColor: colors.SURFACE_FOCUSED } : null]}&gt;
+      {children}
+    &lt;/TouchableOpacity&gt;
+  &lt;/CalmControlAppearance.Provider&gt;;
+}
+</code></pre>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/code-excerpts.md">docs/judging-package/evidence/code-excerpts.md</a></p><p>Source SHA-256: <code>7766b4dbaed93328233f75bb4ebebebbf7db02657def872134394b8da47991f6</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

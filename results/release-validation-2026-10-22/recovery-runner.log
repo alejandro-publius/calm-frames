@@ -1,0 +1,57 @@
+reference: an uninterrupted preparation
+scenario: no_op_restart
+  pass
+scenario: sigkill_after_commit
+  pass
+scenario: sigkill_mid_rewrite
+  pass
+scenario: sigkill_during_verify
+  pass
+scenario: sigkill_sweep
+  pass
+scenario: truncated_ledger
+  pass
+scenario: malformed_ledgers
+  pass
+scenario: missing_output
+  pass
+scenario: same_size_corruption
+  pass
+scenario: changed_signing_key
+  pass
+scenario: changed_guard_band
+  pass
+scenario: duplicate_invocation
+  pass
+scenario: failed_verification
+  pass
+scenario: negative_controls
+  pass
+scenario: real_analyzer
+  pass
+  killed   ledger-reuse-checks-recorded-output-bytes
+  killed   step-record-withdrawn-before-work
+  killed   dependents-follow-upstream-bytes
+  killed   maps-follow-the-signing-key
+  killed   ledger-file-flushed-before-rename
+  killed   ledger-rename-made-durable
+  killed   temporary-names-are-unpredictable
+  killed   unreadable-ledger-not-trusted
+  killed   unreadable-ledger-kept-aside
+  killed   step-without-its-output-is-not-committed
+  killed   title-withdrawn-before-cached-work-is-trusted
+  killed   verified-bytes-must-hold-still
+  killed   published-bytes-flushed-first
+  killed   receipt-names-only-verified-bytes
+  killed   one-preparation-per-title
+  killed   hls-files-are-recorded-outputs
+  killed   relative-workdir-anchored
+  killed   analysis-map-kept-apart
+  killed   failed-verdict-never-reused
+  killed   lock-refuses-links
+  killed   index-update-holds-the-index-lock
+  killed   withdrawal-reaches-the-index
+  killed   scene-holds-bound-to-publication
+  killed   oversized-timestamp-drops-only-its-record
+16 of 16 scenarios met their expectation; evidence in results/preparation-recovery-2026-10-22/evidence.json
+  control green py   pipeline/tests/test_preparation_recovery.py (77 tests, 68.3s)

@@ -1,0 +1,81 @@
+{
+  "source_commit": "9cc57ca04077611c9bf535ce5083b23c83c7bb4a",
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/final-clarity-2026-10-18/calm-frames-clarity-aarch64-debug.vpkg",
+  "package_sha256": "8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd",
+  "install_count": 1,
+  "inputs_matched": 730,
+  "commands": [
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vlcm terminate-app --force --pkg-id io.github.alejandropublius.calmframes"
+      ],
+      "start_utc": "2026-10-18T01:11:44.667970+00:00",
+      "end_utc": "2026-10-18T01:11:45.604771+00:00",
+      "exit": 0,
+      "output": "Force stopping pkg: io.github.alejandropublius.calmframes\n"
+    },
+    {
+      "args": [
+        "device",
+        "install-app",
+        "--device",
+        "VirtualDevice",
+        "--packagePath",
+        "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/final-clarity-2026-10-18/calm-frames-clarity-aarch64-debug.vpkg",
+        "--buildType",
+        "Debug"
+      ],
+      "start_utc": "2026-10-18T01:11:45.607246+00:00",
+      "end_utc": "2026-10-18T01:11:47.086487+00:00",
+      "exit": 0,
+      "output": "Installing/Updating '/tmp/calm-frames-clarity-aarch64-debug.vpkg' ...success\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "sha256sum /tmp/calm-frames-clarity-aarch64-debug.vpkg"
+      ],
+      "start_utc": "2026-10-18T01:11:47.086979+00:00",
+      "end_utc": "2026-10-18T01:11:47.875880+00:00",
+      "exit": 0,
+      "output": "8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd  /tmp/calm-frames-clarity-aarch64-debug.vpkg\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+      ],
+      "start_utc": "2026-10-18T01:11:47.876390+00:00",
+      "end_utc": "2026-10-18T01:11:48.647436+00:00",
+      "exit": 0,
+      "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+    },
+    {
+      "args": [
+        "device",
+        "running-apps",
+        "--device",
+        "VirtualDevice"
+      ],
+      "start_utc": "2026-10-18T01:11:48.647856+00:00",
+      "end_utc": "2026-10-18T01:11:49.434150+00:00",
+      "exit": 0,
+      "output": "com.amazon.kcp.component.service\ncom.amazon.otad.main\ncom.amazon.map.async.service.main\ncom.amazon.dev.shell.service\ncom.amazon.aplext.alert.10.service.main\ncom.amazon.kepler.keyvault.service.main\ncom.amazon.rdm.service.main\ncom.amazon.keplerlauncherapp.main\nio.github.alejandropublius.calmframes.main\n"
+    }
+  ],
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true
+}

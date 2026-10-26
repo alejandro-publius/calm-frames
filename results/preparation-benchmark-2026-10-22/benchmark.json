@@ -1,0 +1,755 @@
+{
+  "tool": "eval/preparation_benchmark.py",
+  "command": "python -m eval.preparation_benchmark --samples 3 --out results/preparation-benchmark-2026-10-22/benchmark.json --transcript results/preparation-benchmark-2026-10-22/transcript.txt",
+  "tested_commit": "d9f8d296bbc5766fbe6bb496990cfd9e68d6ae3e",
+  "tested_tree_has_uncommitted_changes": false,
+  "started_utc": "2026-10-22T07:23:37Z",
+  "finished_utc": "2026-10-22T07:32:49Z",
+  "seconds": 551.2,
+  "measured_not_estimated": "every seconds value is the wall-clock time of one command, measured by this tool",
+  "machine": {
+    "platform": "macOS-15.1.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu": "Apple M1",
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "macos": "15.1.1",
+    "python": "3.12.13",
+    "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "flashmap": "1.0.0"
+  },
+  "fixture": {
+    "what": "the owned, non-flashing Harbor story: picture animated by eval/render_harbor.py with synthesized ambience, and the neutral captions from eval/benign_story.py, assembled by eval/prepare_owned_harbor.py",
+    "sha256": "e0d9970808c0ba2b0a172aed86b5b9d3d373f441bbe16b3ed3aecfc9a64ffa9a",
+    "bytes": 4538952,
+    "seconds": 20.0,
+    "width": 1280,
+    "height": 720,
+    "fps": 24.0,
+    "video_codec": "h264",
+    "audio": "aac 48000 Hz, 1 channel(s)"
+  },
+  "settings": {
+    "presets": [
+      "wcag",
+      "broadcast",
+      "extra-cautious"
+    ],
+    "analyzer": "the real flashmap CLI (python -m flashmap)",
+    "command": "python -m pipeline.local_library prepare <source> --workdir <dir> --key <test key> --pub <test key> --presets wcag,broadcast,extra-cautious --title 'Harbor story (prepared locally)'",
+    "encoding": "the pipeline's defaults for local preparation (app-v1 recipe)",
+    "keys": "one Ed25519 test pair made for this run and deleted with its directory",
+    "interruption": "the runner's ffmpeg wrapper cuts safe/extra-cautious/safe.mp4 in half and pauses; the process group is SIGKILLed there"
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "cold": {
+        "seconds": 95.45,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [
+          "probe",
+          "analyze:wcag",
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "plan:wcag",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "luma",
+          "still",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "rendition:broadcast",
+          "bif:broadcast",
+          "posters:broadcast",
+          "signed_map:broadcast",
+          "cover_model:broadcast",
+          "rendition:extra-cautious",
+          "bif:extra-cautious",
+          "posters:extra-cautious",
+          "signed_map:extra-cautious",
+          "cover_model:extra-cautious",
+          "verify"
+        ],
+        "steps_reused": [],
+        "extra_cautious_master_bytes": 2583164
+      },
+      "warm": {
+        "seconds": 0.49,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [],
+        "steps_reused": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:extra-cautious",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:extra-cautious",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:extra-cautious",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:extra-cautious",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:extra-cautious",
+          "signed_map:wcag",
+          "still",
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "interrupted": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 28.55
+        },
+        "committed_at_kill": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:wcag",
+          "still"
+        ],
+        "incomplete_files": [
+          {
+            "file": "safe/extra-cautious/safe.mp4",
+            "bytes": 1291582
+          }
+        ],
+        "scratch_files_without_record": 5,
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "restart": {
+          "seconds": 61.73,
+          "exit": 0,
+          "status": "ready",
+          "verification": "passed",
+          "outcome": "no flagged segments",
+          "steps": 25,
+          "steps_run": [
+            "rendition:extra-cautious",
+            "bif:extra-cautious",
+            "posters:extra-cautious",
+            "signed_map:extra-cautious",
+            "cover_model:extra-cautious",
+            "verify"
+          ],
+          "steps_reused": [
+            "analyze:broadcast",
+            "analyze:extra-cautious",
+            "analyze:wcag",
+            "bif:broadcast",
+            "bif:wcag",
+            "cover_model:broadcast",
+            "cover_model:wcag",
+            "luma",
+            "plan:broadcast",
+            "plan:extra-cautious",
+            "plan:wcag",
+            "posters:broadcast",
+            "posters:wcag",
+            "probe",
+            "rendition:broadcast",
+            "rendition:wcag",
+            "signed_map:broadcast",
+            "signed_map:wcag",
+            "still"
+          ]
+        },
+        "kill_plus_restart_seconds": 90.28,
+        "identity_differences": []
+      }
+    },
+    {
+      "sample": 2,
+      "cold": {
+        "seconds": 87.66,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [
+          "probe",
+          "analyze:wcag",
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "plan:wcag",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "luma",
+          "still",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "rendition:broadcast",
+          "bif:broadcast",
+          "posters:broadcast",
+          "signed_map:broadcast",
+          "cover_model:broadcast",
+          "rendition:extra-cautious",
+          "bif:extra-cautious",
+          "posters:extra-cautious",
+          "signed_map:extra-cautious",
+          "cover_model:extra-cautious",
+          "verify"
+        ],
+        "steps_reused": [],
+        "extra_cautious_master_bytes": 2583164
+      },
+      "warm": {
+        "seconds": 0.46,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [],
+        "steps_reused": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:extra-cautious",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:extra-cautious",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:extra-cautious",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:extra-cautious",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:extra-cautious",
+          "signed_map:wcag",
+          "still",
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "interrupted": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 27.28
+        },
+        "committed_at_kill": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:wcag",
+          "still"
+        ],
+        "incomplete_files": [
+          {
+            "file": "safe/extra-cautious/safe.mp4",
+            "bytes": 1291582
+          }
+        ],
+        "scratch_files_without_record": 5,
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "restart": {
+          "seconds": 62.95,
+          "exit": 0,
+          "status": "ready",
+          "verification": "passed",
+          "outcome": "no flagged segments",
+          "steps": 25,
+          "steps_run": [
+            "rendition:extra-cautious",
+            "bif:extra-cautious",
+            "posters:extra-cautious",
+            "signed_map:extra-cautious",
+            "cover_model:extra-cautious",
+            "verify"
+          ],
+          "steps_reused": [
+            "analyze:broadcast",
+            "analyze:extra-cautious",
+            "analyze:wcag",
+            "bif:broadcast",
+            "bif:wcag",
+            "cover_model:broadcast",
+            "cover_model:wcag",
+            "luma",
+            "plan:broadcast",
+            "plan:extra-cautious",
+            "plan:wcag",
+            "posters:broadcast",
+            "posters:wcag",
+            "probe",
+            "rendition:broadcast",
+            "rendition:wcag",
+            "signed_map:broadcast",
+            "signed_map:wcag",
+            "still"
+          ]
+        },
+        "kill_plus_restart_seconds": 90.23,
+        "identity_differences": []
+      }
+    },
+    {
+      "sample": 3,
+      "cold": {
+        "seconds": 93.21,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [
+          "probe",
+          "analyze:wcag",
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "plan:wcag",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "luma",
+          "still",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "rendition:broadcast",
+          "bif:broadcast",
+          "posters:broadcast",
+          "signed_map:broadcast",
+          "cover_model:broadcast",
+          "rendition:extra-cautious",
+          "bif:extra-cautious",
+          "posters:extra-cautious",
+          "signed_map:extra-cautious",
+          "cover_model:extra-cautious",
+          "verify"
+        ],
+        "steps_reused": [],
+        "extra_cautious_master_bytes": 2583164
+      },
+      "warm": {
+        "seconds": 0.45,
+        "exit": 0,
+        "status": "ready",
+        "verification": "passed",
+        "outcome": "no flagged segments",
+        "steps": 25,
+        "steps_run": [],
+        "steps_reused": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:extra-cautious",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:extra-cautious",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:extra-cautious",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:extra-cautious",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:extra-cautious",
+          "signed_map:wcag",
+          "still",
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "interrupted": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 28.21
+        },
+        "committed_at_kill": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "analyze:wcag",
+          "bif:broadcast",
+          "bif:wcag",
+          "cover_model:broadcast",
+          "cover_model:wcag",
+          "luma",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "plan:wcag",
+          "posters:broadcast",
+          "posters:wcag",
+          "probe",
+          "rendition:broadcast",
+          "rendition:wcag",
+          "signed_map:broadcast",
+          "signed_map:wcag",
+          "still"
+        ],
+        "incomplete_files": [
+          {
+            "file": "safe/extra-cautious/safe.mp4",
+            "bytes": 1291582
+          }
+        ],
+        "scratch_files_without_record": 5,
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "restart": {
+          "seconds": 62.07,
+          "exit": 0,
+          "status": "ready",
+          "verification": "passed",
+          "outcome": "no flagged segments",
+          "steps": 25,
+          "steps_run": [
+            "rendition:extra-cautious",
+            "bif:extra-cautious",
+            "posters:extra-cautious",
+            "signed_map:extra-cautious",
+            "cover_model:extra-cautious",
+            "verify"
+          ],
+          "steps_reused": [
+            "analyze:broadcast",
+            "analyze:extra-cautious",
+            "analyze:wcag",
+            "bif:broadcast",
+            "bif:wcag",
+            "cover_model:broadcast",
+            "cover_model:wcag",
+            "luma",
+            "plan:broadcast",
+            "plan:extra-cautious",
+            "plan:wcag",
+            "posters:broadcast",
+            "posters:wcag",
+            "probe",
+            "rendition:broadcast",
+            "rendition:wcag",
+            "signed_map:broadcast",
+            "signed_map:wcag",
+            "still"
+          ]
+        },
+        "kill_plus_restart_seconds": 90.28,
+        "identity_differences": []
+      }
+    }
+  ],
+  "integrity_demonstration": {
+    "damaged_file": "safe/wcag/hls/seg_0_00002.ts",
+    "sha256_before": "55a8946fd8e0584cb55cdd60c12f771b59ffbf75190ced5ebac67f4502abd4af",
+    "sha256_after_damage": "0457e3d60ba4d5e61520cdffc63de584d32a54bfbf6fb13da3fd1a7d928bfd18",
+    "size_kept": true,
+    "mtime_kept": true,
+    "listed_before": 1,
+    "listed_while_damaged": 0,
+    "repair": {
+      "seconds": 1.46,
+      "exit": 0,
+      "status": "ready",
+      "verification": "passed",
+      "outcome": "no flagged segments",
+      "steps": 25,
+      "steps_run": [
+        "rendition:wcag"
+      ],
+      "steps_reused": [
+        "analyze:broadcast",
+        "analyze:extra-cautious",
+        "analyze:wcag",
+        "bif:broadcast",
+        "bif:extra-cautious",
+        "bif:wcag",
+        "cover_model:broadcast",
+        "cover_model:extra-cautious",
+        "cover_model:wcag",
+        "luma",
+        "plan:broadcast",
+        "plan:extra-cautious",
+        "plan:wcag",
+        "posters:broadcast",
+        "posters:extra-cautious",
+        "posters:wcag",
+        "probe",
+        "rendition:broadcast",
+        "rendition:extra-cautious",
+        "signed_map:broadcast",
+        "signed_map:extra-cautious",
+        "signed_map:wcag",
+        "still",
+        "verify"
+      ]
+    },
+    "listed_after_repair": 1,
+    "receipt_names_cold_bytes": true,
+    "identity_differences": []
+  },
+  "summary": {
+    "cold_seconds": {
+      "samples": [
+        95.45,
+        87.66,
+        93.21
+      ],
+      "median": 93.21,
+      "min": 87.66,
+      "max": 95.45
+    },
+    "warm_seconds": {
+      "samples": [
+        0.49,
+        0.46,
+        0.45
+      ],
+      "median": 0.46,
+      "min": 0.45,
+      "max": 0.49
+    },
+    "kill_after_seconds": {
+      "samples": [
+        28.55,
+        27.28,
+        28.21
+      ],
+      "median": 28.21,
+      "min": 27.28,
+      "max": 28.55
+    },
+    "restart_seconds": {
+      "samples": [
+        61.73,
+        62.95,
+        62.07
+      ],
+      "median": 62.07,
+      "min": 61.73,
+      "max": 62.95
+    },
+    "steps": 25,
+    "steps_reused_on_restart": [
+      19
+    ],
+    "steps_rebuilt_on_restart": [
+      6
+    ],
+    "checks": 34,
+    "checks_passed": 34
+  },
+  "checks": [
+    {
+      "check": "sample 1: the cold run is ready and verification passed",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: the warm run is ready and reuses every step",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: the warm run's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: every process of the killed run ended",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: a partial extra-cautious master was on disk without a record",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: nothing was ready or listed while the run was dead",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: the restart is ready with the cold run's outcome",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: every step committed before the kill was reused",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: the interrupted rendition was rebuilt",
+      "result": "pass"
+    },
+    {
+      "check": "sample 1: the restart's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the cold run is ready and verification passed",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the warm run is ready and reuses every step",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the warm run's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: every process of the killed run ended",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: a partial extra-cautious master was on disk without a record",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: nothing was ready or listed while the run was dead",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the restart is ready with the cold run's outcome",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: every step committed before the kill was reused",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the interrupted rendition was rebuilt",
+      "result": "pass"
+    },
+    {
+      "check": "sample 2: the restart's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the cold run is ready and verification passed",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the warm run is ready and reuses every step",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the warm run's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: every process of the killed run ended",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: a partial extra-cautious master was on disk without a record",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: nothing was ready or listed while the run was dead",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the restart is ready with the cold run's outcome",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: every step committed before the kill was reused",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the interrupted rendition was rebuilt",
+      "result": "pass"
+    },
+    {
+      "check": "sample 3: the restart's identity equals the cold run's",
+      "result": "pass"
+    },
+    {
+      "check": "the refresh left the damaged title out",
+      "result": "pass"
+    },
+    {
+      "check": "the repair rebuilt the damaged rendition and is ready",
+      "result": "pass"
+    },
+    {
+      "check": "the repaired title equals the cold run",
+      "result": "pass"
+    },
+    {
+      "check": "the refresh lists the repaired title again",
+      "result": "pass"
+    }
+  ],
+  "limitations": [
+    "One owned clip (20 s, 1280x720, 24 fps) on one Mac. Timings depend on the clip's length, resolution and content, the machine and its load; they are not a rate for other videos.",
+    "The interrupted run is stopped at one injected point, while the extra-cautious rendition is being written. How much a restart saves depends on where a real interruption lands.",
+    "The interrupted runs pass every ffmpeg call through the runner's wrapper, which adds a process start per call before the kill; the restart and the other phases use ffmpeg directly.",
+    "Real analyzer maps carry created_utc and a signature over it, so identities are compared without those fields, exactly as eval/preparation_recovery.py compares them."
+  ]
+}

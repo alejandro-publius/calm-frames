@@ -1,0 +1,12 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --ci --coverage=false test/calmframes/profileNamesPreview.test.tsx
+
+ PASS  test/calmframes/profileNamesPreview.test.tsx
+  ✓ export the name editor states from an in-memory household (1410 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        2.467 s
+Ran all test suites matching /test\/calmframes\/profileNamesPreview.test.tsx/i.

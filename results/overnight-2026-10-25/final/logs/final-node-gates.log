@@ -1,0 +1,731 @@
+{"prepared_library":"checked","runtime_assets":{"files":155,"build_sources":"excluded"},"titles":1,"bundles":6,"bytes":129255687,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":6,"present":6,"missing":[]},"approvedBundles":["0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb","b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef","77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f","96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3"]}
+Compiled ambient metadata matches exact approved catalogs.
+Playback proof reproduces from exact approved catalogs and reports.
+TAP version 13
+# Subtest: existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+ok 1 - existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+  ---
+  duration_ms: 24.238619
+  type: 'test'
+  ...
+# Subtest: rejects catalog substitution without changing approval
+ok 2 - rejects catalog substitution without changing approval
+  ---
+  duration_ms: 4.980268
+  type: 'test'
+  ...
+# Subtest: rejects key substitution without changing approval
+ok 3 - rejects key substitution without changing approval
+  ---
+  duration_ms: 3.654451
+  type: 'test'
+  ...
+# Subtest: rejects bundle substitution without changing approval
+ok 4 - rejects bundle substitution without changing approval
+  ---
+  duration_ms: 3.625758
+  type: 'test'
+  ...
+# Subtest: rejects duplicate substitution without changing approval
+ok 5 - rejects duplicate substitution without changing approval
+  ---
+  duration_ms: 4.022323
+  type: 'test'
+  ...
+# Subtest: rejects generated substitution without changing approval
+ok 6 - rejects generated substitution without changing approval
+  ---
+  duration_ms: 4.324141
+  type: 'test'
+  ...
+# Subtest: rejects missing-generated substitution without changing approval
+ok 7 - rejects missing-generated substitution without changing approval
+  ---
+  duration_ms: 25.423699
+  type: 'test'
+  ...
+# Subtest: rejects symlink substitution without changing approval
+ok 8 - rejects symlink substitution without changing approval
+  ---
+  duration_ms: 2.914873
+  type: 'test'
+  ...
+# Subtest: consumer membership is generated from reviewed data rather than title-specific code
+ok 9 - consumer membership is generated from reviewed data rather than title-specific code
+  ---
+  duration_ms: 7.112704
+  type: 'test'
+  ...
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 10 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 2.211157
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 11 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 576.523261
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 12 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 129.570773
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 13 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 14.0741
+  type: 'test'
+  ...
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 14 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 53.456213
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 15 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 64.386174
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 16 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.649696
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 17 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 68.159334
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 18 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 1490.033091
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 19 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 3.444058
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 20 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 21.510193
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 21 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 1.315789
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 22 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 104.69533
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 23 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 105.762581
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 24 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 65.181812
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 25 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 68.458414
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 26 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 78.025058
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 27 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 8.227127
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 28 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 160.558194
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 29 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 6.151035
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 30 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 1.453621
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 31 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 1044.697902
+  type: 'test'
+  ...
+# Subtest: the compiled catalog import resolves to its TypeScript module in Metro
+ok 32 - the compiled catalog import resolves to its TypeScript module in Metro
+  ---
+  duration_ms: 6.61769
+  type: 'test'
+  ...
+# Subtest: a headless-only checkout gets actionable missing-runtime instructions
+ok 33 - a headless-only checkout gets actionable missing-runtime instructions
+  ---
+  duration_ms: 4.606341
+  type: 'test'
+  ...
+# Subtest: incomplete dependencies and unsupported Node are reported together
+ok 34 - incomplete dependencies and unsupported Node are reported together
+  ---
+  duration_ms: 0.734797
+  type: 'test'
+  ...
+# Subtest: runtime syntax is checked without executing it and a partial repair still fails
+ok 35 - runtime syntax is checked without executing it and a partial repair still fails
+  ---
+  duration_ms: 119.646246
+  type: 'test'
+  ...
+# Subtest: native builds require Node 22 even when all generated inputs are present
+ok 36 - native builds require Node 22 even when all generated inputs are present
+  ---
+  duration_ms: 338.208923
+  type: 'test'
+  ...
+# tar: Removing leading `/' from member names
+# tar: Removing leading `/' from member names
+# tar: Removing leading `../' from hard link targets
+# tar: Removing leading `../' from hard link targets
+# Subtest: runtime assets contain no Python, shell or C/C++ build sources
+ok 37 - runtime assets contain no Python, shell or C/C++ build sources
+  ---
+  duration_ms: 4.361707
+  type: 'test'
+  ...
+# Subtest: asset source exclusions retain generated catalogs and reject aliased build paths
+ok 38 - asset source exclusions retain generated catalogs and reject aliased build paths
+  ---
+  duration_ms: 1.128523
+  type: 'test'
+  ...
+# Subtest: runtime asset source check cannot be bypassed through a linked directory
+ok 39 - runtime asset source check cannot be bypassed through a linked directory
+  ---
+  duration_ms: 1.554371
+  type: 'test'
+  ...
+# Subtest: runtime assets remain valid beneath a linked parent directory
+ok 40 - runtime assets remain valid beneath a linked parent directory
+  ---
+  duration_ms: 1.974307
+  type: 'test'
+  ...
+# Subtest: runtime assets reject a directly linked root including trailing separators
+ok 41 - runtime assets reject a directly linked root including trailing separators
+  ---
+  duration_ms: 0.80024
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 42 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 1943.993071
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 43 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 52.440008
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 44 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 7.86927
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 45 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 8.796541
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 46 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 7.874045
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 47 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 7.418057
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 48 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 8.547267
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 49 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 8.07007
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 50 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 7.966016
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 51 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 8.833698
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 52 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 27.949123
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 53 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 7.479028
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 54 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 198.766169
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 55 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 117.894651
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 56 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 20.910777
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 57 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 68.991331
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 58 - refuses changed prepared json bytes
+  ---
+  duration_ms: 1.517894
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 59 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.399696
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 60 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 482.74255
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 61 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 139.371312
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 62 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 0.816435
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 63 - refuses aliases to files outside the package
+  ---
+  duration_ms: 205.932875
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 64 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 5400.43878
+  type: 'test'
+  ...
+# Subtest: refuses build scripts outside the prepared namespace in a native package
+ok 65 - refuses build scripts outside the prepared namespace in a native package
+  ---
+  duration_ms: 1378.256938
+  type: 'test'
+  ...
+# Subtest: the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+ok 66 - the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+  ---
+  duration_ms: 38.611672
+  type: 'test'
+  ...
+# Subtest: the actual fallback strips sensitive headers on a redirect to a different loopback host
+ok 67 - the actual fallback strips sensitive headers on a redirect to a different loopback host
+  ---
+  duration_ms: 175.137215
+  type: 'test'
+  ...
+# Subtest: same-host redirects retain headers and convert POST to GET without retaining its body
+ok 68 - same-host redirects retain headers and convert POST to GET without retaining its body
+  ---
+  duration_ms: 36.861966
+  type: 'test'
+  ...
+# Subtest: the installed polyfill exports retain Headers, Request and cloned Response contracts
+ok 69 - the installed polyfill exports retain Headers, Request and cloned Response contracts
+  ---
+  duration_ms: 55.379192
+  type: 'test'
+  ...
+# Subtest: the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+ok 70 - the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+  ---
+  duration_ms: 30.05399
+  type: 'test'
+  ...
+# Subtest: FBJS still prefers an existing native fetch implementation
+ok 71 - FBJS still prefers an existing native fetch implementation
+  ---
+  duration_ms: 10.920611
+  type: 'test'
+  ...
+# Subtest: the unchanged old locale consumer receives only the reviewed CommonJS cache line
+ok 72 - the unchanged old locale consumer receives only the reviewed CommonJS cache line
+  ---
+  duration_ms: 2.30496
+  type: 'test'
+  ...
+# Subtest: expired entries are removed from the supplied cache without rereading each key
+ok 73 - expired entries are removed from the supplied cache without rereading each key
+  ---
+  duration_ms: 116.408005
+  type: 'test'
+  ...
+# Subtest: the actual locale module retains environment priority, normalization and explicit cache clearing
+ok 74 - the actual locale module retains environment priority, normalization and explicit cache clearing
+  ---
+  duration_ms: 12.141215
+  type: 'test'
+  ...
+# Subtest: the actual locale module keeps command parsing and memoization for sync and async callers
+ok 75 - the actual locale module keeps command parsing and memoization for sync and async callers
+  ---
+  duration_ms: 4.084766
+  type: 'test'
+  ...
+# Subtest: the actual locale module retains its default for disabled spawning and failed commands
+ok 76 - the actual locale module retains its default for disabled spawning and failed commands
+  ---
+  duration_ms: 15.917745
+  type: 'test'
+  ...
+# Subtest: the legacy CLI resolves the fixed logger without upgrading the CLI
+ok 77 - the legacy CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 57.245296
+  type: 'test'
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+ok 78 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 19.762752
+  type: 'test'
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+ok 79 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 3.902123
+  type: 'test'
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+ok 80 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 40.215405
+  type: 'test'
+  ...
+# Subtest: the actual legacy CLI retains React Native tag filtering and formatted events
+ok 81 - the actual legacy CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 48.06982
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 82 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 34.53081
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 83 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 9.128551
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 84 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 10.09737
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 85 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 51.393046
+  type: 'test'
+  ...
+# Subtest: only legacy spawn consumers use the existing fixed 6.x version
+ok 86 - only legacy spawn consumers use the existing fixed 6.x version
+  ---
+  duration_ms: 23.374794
+  type: 'test'
+  ...
+# Subtest: the Windows argument escaper handles long literal backslashes in bounded child processes
+ok 87 - the Windows argument escaper handles long literal backslashes in bounded child processes
+  ---
+  duration_ms: 244.343798
+  type: 'test'
+  ...
+# Subtest: the old locale dependency keeps async/sync arguments, environment and failure results
+ok 88 - the old locale dependency keeps async/sync arguments, environment and failure results
+  ---
+  duration_ms: 964.106155
+  type: 'test'
+  ...
+# Subtest: the actual FBJS dependency checker retains child streams and the requested directory
+ok 89 - the actual FBJS dependency checker retains child streams and the requested directory
+  ---
+  duration_ms: 253.497446
+  type: 'test'
+  ...
+# Subtest: only the unchanged legacy editor receives the fixed temporary-file dependency
+ok 90 - only the unchanged legacy editor receives the fixed temporary-file dependency
+  ---
+  duration_ms: 2.20867
+  type: 'test'
+  ...
+# Subtest: temporary names reject a symlink outside their configured base
+ok 91 - temporary names reject a symlink outside their configured base
+  ---
+  duration_ms: 20.957224
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in prefix
+ok 92 - temporary names reject traversal in prefix
+  ---
+  duration_ms: 1.288184
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in prefix
+ok 93 - temporary names reject a non-string traversal bypass in prefix
+  ---
+  duration_ms: 1.722581
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in postfix
+ok 94 - temporary names reject traversal in postfix
+  ---
+  duration_ms: 8.60619
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in postfix
+ok 95 - temporary names reject a non-string traversal bypass in postfix
+  ---
+  duration_ms: 1.013779
+  type: 'test'
+  ...
+# Subtest: temporary-file mode, cleanup and the actual editor text round trip are retained
+ok 96 - temporary-file mode, cleanup and the actual editor text round trip are retained
+  ---
+  duration_ms: 145.732115
+  type: 'test'
+  ...
+# Subtest: the checked-in summary reproduces exactly without timestamps or machine paths
+ok 97 - the checked-in summary reproduces exactly without timestamps or machine paths
+  ---
+  duration_ms: 1149.113479
+  type: 'test'
+  ...
+# Subtest: Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof
+ok 98 - Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof
+  ---
+  duration_ms: 8.323475
+  type: 'test'
+  ...
+# Subtest: absent measurements stay unknown, never zero or timing success
+ok 99 - absent measurements stay unknown, never zero or timing success
+  ---
+  duration_ms: 0.965384
+  type: 'test'
+  ...
+# Subtest: refuses a substituted sourceSha256 before summarizing
+ok 100 - refuses a substituted sourceSha256 before summarizing
+  ---
+  duration_ms: 1.582704
+  type: 'test'
+  ...
+# Subtest: refuses a substituted renditionSha256 before summarizing
+ok 101 - refuses a substituted renditionSha256 before summarizing
+  ---
+  duration_ms: 1.497477
+  type: 'test'
+  ...
+# Subtest: refuses a substituted reportSha256 before summarizing
+ok 102 - refuses a substituted reportSha256 before summarizing
+  ---
+  duration_ms: 0.401511
+  type: 'test'
+  ...
+# Subtest: refuses a substituted preset before summarizing
+ok 103 - refuses a substituted preset before summarizing
+  ---
+  duration_ms: 0.362128
+  type: 'test'
+  ...
+# Subtest: normal report and rendition substitution cannot bypass exact catalog approval
+ok 104 - normal report and rendition substitution cannot bypass exact catalog approval
+  ---
+  duration_ms: 6.157149
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime = 1;
+ok 105 - refuses an unguarded seek: player.currentTime = 1;
+  ---
+  duration_ms: 3575.14447
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] = 1;
+ok 106 - refuses an unguarded seek: player['currentTime'] = 1;
+  ---
+  duration_ms: 16.117266
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime += 1;
+ok 107 - refuses an unguarded seek: player.currentTime += 1;
+  ---
+  duration_ms: 13.339622
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] -= 1;
+ok 108 - refuses an unguarded seek: player['currentTime'] -= 1;
+  ---
+  duration_ms: 9.113946
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime++;
+ok 109 - refuses an unguarded seek: player.currentTime++;
+  ---
+  duration_ms: 10.142332
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: --player.currentTime;
+ok 110 - refuses an unguarded seek: --player.currentTime;
+  ---
+  duration_ms: 10.705618
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: ++player['currentTime'];
+ok 111 - refuses an unguarded seek: ++player['currentTime'];
+  ---
+  duration_ms: 11.676912
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime']--;
+ok 112 - refuses an unguarded seek: player['currentTime']--;
+  ---
+  duration_ms: 32.659619
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.fastSeek(1);
+ok 113 - refuses an unguarded seek: player.fastSeek(1);
+  ---
+  duration_ms: 30.401729
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['fastSeek'](1);
+ok 114 - refuses an unguarded seek: player['fastSeek'](1);
+  ---
+  duration_ms: 16.51341
+  type: 'test'
+  ...
+# Subtest: the guarded seek implementation retains its named exemption
+ok 115 - the guarded seek implementation retains its named exemption
+  ---
+  duration_ms: 16.140513
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+ok 116 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+  ---
+  duration_ms: 18.14901
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+ok 117 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 14.003263
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+ok 118 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+  ---
+  duration_ms: 6.05624
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+ok 119 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 6.264722
+  type: 'test'
+  ...
+1..119
+# tests 119
+# suites 0
+# pass 119
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11755.253797

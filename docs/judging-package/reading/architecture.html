@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Architecture grounded in the pinned code | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../ARCHITECTURE.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="architecture-grounded-in-the-pinned-code">Architecture grounded in the pinned code</h1>
+<p><img src="../assets/architecture.png" alt="Existing architecture diagram"></p>
+<p>This original project illustration describes the packaged-media workflow. It is documentation, not a new native screenshot. The rendered PNG and SVG are reused unchanged from <code>13551e4</code>. <a href="../assets/architecture.svg">Full SVG</a>. The validated application source is <code>d96c088</code>.</p>
+<h2 id="the-path-in-words">The path, in words</h2>
+<p>Preparation starts with a licensed source and its identity. Analysis produces maps; rendering produces the prepared output. Verification checks source/output binding and the required reports before export. The build accepts exact approved catalogs and verifies packaged bytes. At playback, route and signed-map checks bind the selection. The guarded seek and cover paths operate in the Vega player. McWay&#39;s approved ending holds a final still until Back.</p>
+<p>Offline preparation is separate from the TV app. There is no general interception of other apps. Playback Proof explains existing evidence; it does not confer trust or run the analyzer. Recovery protects preparation state and publication gates; it is not a new detector benchmark.</p>
+<h2 id="code-map">Code map</h2>
+<p>All original links below are pinned to <code>13551e4</code>, which contains validated <code>d96c088</code>. They are optional online source links. <a href="code-excerpts.html">Bundled exact code excerpts</a> support an offline inspection without opening the repository on GitHub.</p>
+<table>
+<thead>
+<tr>
+<th>Boundary</th>
+<th>Implementation and source</th>
+<th>User/developer meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prepare a source</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/local_library.py">pipeline/local_library.py</a>, <code>prepare_local_title</code></td>
+<td>Coordinates the local preparation workflow and receipts. A candidate is not automatically a playable title.</td>
+</tr>
+<tr>
+<td>Verify output</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/verify.py">pipeline/verify.py</a>, <code>verify_title</code></td>
+<td>Source identity, output and verification records are checked before publication. The excerpt shows source binding; the complete method contains the other checks.</td>
+</tr>
+<tr>
+<td>Export exact prepared content</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/packaged_library.py">pipeline/packaged_library.py</a>, <code>export_packaged_library</code></td>
+<td>Requires current verified receipts and enforces package boundaries. Possession of a key is not blanket catalog approval.</td>
+</tr>
+<tr>
+<td>Bind selection</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/packagedLibrary.ts">app/src/calmframes/packagedLibrary.ts</a> and <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/tools/check_prepared_library.mjs">build gate</a></td>
+<td>Expected route metadata and approved catalog identity are checked. Media-byte checking at build time is distinct from reading the proof page at runtime.</td>
+</tr>
+<tr>
+<td>Guard seek and cover</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/useFlashGuard.ts">useFlashGuard.ts</a> and <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/seekSafety.ts">seekSafety.ts</a></td>
+<td>Route playhead changes through the guard. Source code and tests do not establish physical-screen timing.</td>
+</tr>
+<tr>
+<td>Explain, without authorizing</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/PlaybackProofPanel.tsx">PlaybackProofPanel.tsx</a></td>
+<td>Source, Prepared and Selection separate evidence stages and display missing information explicitly.</td>
+</tr>
+<tr>
+<td>Reach the record</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/ReadingStop.tsx">ReadingStop.tsx</a></td>
+<td>Provides focusable reading sections with visible focused state. A code pattern is not full accessibility acceptance.</td>
+</tr>
+</tbody></table>
+<h2 id="resilience-and-limits">Resilience and limits</h2>
+<p>The <a href="preparation-recovery.html">recovery report</a> explains locks, durable writes and dependency identity. Its recorded scenarios cover interruption and corruption on one Mac/APFS, mostly using a fake analyzer. No power-cut or cross-machine workspace test is implied. Analyzer-version changes alone do not invalidate every cache key, as the report explicitly records.</p>
+<p>The <a href="release-readiness.html">release evidence</a> is a separate layer: source tests, exact package identity and native observations. The claims ledger keeps these layers from turning into an unsupported claim of clinical safety, global device compatibility or hosted CI success.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../ARCHITECTURE.md">docs/judging-package/ARCHITECTURE.md</a></p><p>Source SHA-256: <code>552bad5a88f4280d5a235333107180fc11ff641f2edfab284c09eba05a6e9f9d</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

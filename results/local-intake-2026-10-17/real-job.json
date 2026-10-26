@@ -1,0 +1,111 @@
+{
+  "bytes": 4049669,
+  "created_at": 1792281350.096559,
+  "error": null,
+  "id": "4ae85ae972d145c8b960ab92600bbe6f",
+  "playable": false,
+  "review": {
+    "analysis_complete": true,
+    "analysis_run": "141bcd8d32c345c29570fb8a08eb1ea6",
+    "analysis_width": 192,
+    "duration_ms": 37641.756,
+    "flagged_intervals": {
+      "broadcast": [
+        {
+          "end_ms": 9906.0,
+          "reason": "general",
+          "start_ms": 8343.0
+        },
+        {
+          "end_ms": 11699.0,
+          "reason": "general",
+          "start_ms": 9135.0
+        },
+        {
+          "end_ms": 30593.0,
+          "reason": "general",
+          "start_ms": 29113.0
+        }
+      ],
+      "wcag": [
+        {
+          "end_ms": 9864.0,
+          "reason": "general",
+          "start_ms": 8343.0
+        },
+        {
+          "end_ms": 11699.0,
+          "reason": "general",
+          "start_ms": 9135.0
+        },
+        {
+          "end_ms": 30593.0,
+          "reason": "general",
+          "start_ms": 29113.0
+        }
+      ]
+    },
+    "frame_count": 1804,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 6836.0,
+        "intervals": [
+          {
+            "end_ms": 12199.0,
+            "reason": "general",
+            "start_ms": 7843.0
+          },
+          {
+            "end_ms": 31093.0,
+            "reason": "general",
+            "start_ms": 28613.0
+          }
+        ]
+      },
+      "extra-cautious": {
+        "covered_ms": 8836.0,
+        "intervals": [
+          {
+            "end_ms": 12699.0,
+            "reason": "general",
+            "start_ms": 7343.0
+          },
+          {
+            "end_ms": 31593.0,
+            "reason": "general",
+            "start_ms": 28113.0
+          }
+        ]
+      },
+      "wcag": {
+        "covered_ms": 6836.0,
+        "intervals": [
+          {
+            "end_ms": 12199.0,
+            "reason": "general",
+            "start_ms": 7843.0
+          },
+          {
+            "end_ms": 31093.0,
+            "reason": "general",
+            "start_ms": 28613.0
+          }
+        ]
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "ed44f4f2295ec06b003c7f35539c509504be19e226f8b94acc07355b36a6033a",
+      "wcag": "a86b3b96c730d3e678c70badc7a999fd730dfa3cb32e629d8c8e91d3e5c2b87d"
+    },
+    "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+  },
+  "review_digest": "d1c7f716bd6d44c33ba78ea54084870aad9bf530d42e46c2ceb1f0cb78863226",
+  "run_id": "141bcd8d32c345c29570fb8a08eb1ea6",
+  "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "stage": "Review the planned interruptions",
+  "status": "review",
+  "title": "Existing Acadia source analysis check",
+  "updated_at": 1792281406.498336
+}

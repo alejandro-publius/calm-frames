@@ -1,0 +1,35 @@
+{
+  "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+  "reported_defect": "Step 3 room footer clipped below simulator viewport in user-supplied screenshot",
+  "change": "bounded scroll body and nonshrinking sibling footer on preset, room and review; removed brand tagline and duplicate selected room sentences",
+  "settings_pin_and_guard_logic_changed": false,
+  "checks": {
+    "focused_tests": 57,
+    "typescript": "passed",
+    "eslint": "passed, zero errors and warnings",
+    "native_build": "passed",
+    "prepared_media_and_provenance": "passed"
+  },
+  "package": {
+    "path": "build/release/native-onboarding-footer-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132597309,
+    "sha256": "2bfac62fe2bd992186dd5d948a18b47dc5392f5e003c1cc49280be2476963101"
+  },
+  "installed": true,
+  "native_layout_or_focus_observed": false,
+  "reason": "capture denied by automatic approval review after successful preserving-data install; package-filtered recent diagnostics returned no usable events",
+  "production_installed_source": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+  "capture_and_app_logs": "capture not executed; empty diagnostic collector stopped",
+  "user_reset_confirmation": "parent relayed new PIN setup confirmation at 04:32 UTC",
+  "remaining": [
+    "native non-secret footer and D-pad verification",
+    "cross-profile position/protection checks",
+    "explicit native Retry/teardown test-build observation",
+    "human audiovisual review and hosted CI remain separate"
+  ],
+  "installed_sha384": "3b78a239f9c53d822fe5c5909bb95c0b68a74f45bff0094809401fc72ff6a9c7b7cd0d686c597e7de058daa35558edf2",
+  "installed_sha384_matches_package": true,
+  "app_running_verified": true,
+  "second_profile": "creation reported by user through parent, not independently observed after installation",
+  "retry_harness": "9c28e93 remains isolated and uninstalled; no blind native run"
+}

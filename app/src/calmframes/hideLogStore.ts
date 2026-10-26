@@ -23,8 +23,8 @@
  *   mounted, and the provider would sit inside the navigator.
  *
  * What it is not: storage. This is memory, so it empties when the app is
- * killed, the same as the PIN and the room setting, which is written down in
- * docs/STATUS.md rather than hidden. Writing it to /data is a separate job.
+ * killed. Household setup and PIN lockouts have their own durable record;
+ * writing hide history to storage is a separate job.
  *
  * Nothing here leaves the device.
  */

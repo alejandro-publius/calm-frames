@@ -1,0 +1,30 @@
+{
+  "scope": "Browser approximation of native components; not a Vega capture. CSS browser layout is not Yoga, and native focus or screen-reader behavior is not certified.",
+  "checks": [
+    {
+      "height": 1080,
+      "locked_json_and_png_unchanged": true,
+      "pending_before": "Enter your PIN",
+      "pending_after": "Checking your PIN\u2026",
+      "horizontal_gap": 64,
+      "notice_geometry_unchanged": true,
+      "text_clipping_flags": 0,
+      "text_outside_viewport": 0,
+      "external_requests": 0,
+      "browser_errors": 0
+    },
+    {
+      "height": 720,
+      "locked_json_and_png_unchanged": true,
+      "pending_before": "Enter your PIN",
+      "pending_after": "Checking your PIN\u2026",
+      "horizontal_gap": 43,
+      "notice_geometry_unchanged": true,
+      "text_clipping_flags": 0,
+      "text_outside_viewport": 0,
+      "external_requests": 0,
+      "browser_errors": 0
+    }
+  ],
+  "visual_review": "Actual screenshots inspected at 1080p and 720p. Notice and keypad remain separated; pending title change fits one line without layout shift. No visible notice/keypad text clipping. Numeric glyph intrinsic overflow uses CSS overflow visible and is unchanged from baseline; not treated as actual clipping. Native Yoga, VoiceView, focus behavior and actual TV appearance remain unverified."
+}

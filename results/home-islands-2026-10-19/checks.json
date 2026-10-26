@@ -1,0 +1,41 @@
+{
+  "about": "October 19 checks on branch claude/ocean-layout-fix-2026-10-19. Each figure names the commit it covers. None of this ran on Vega.",
+  "app_suite": {
+    "commit": "3e1a26f",
+    "command": "npx jest --ci --watchman=false (app/)",
+    "suites_passed": 163,
+    "tests_passed": 1676,
+    "failed": 0,
+    "skipped": 4
+  },
+  "python_suite": {
+    "commit": "d9c9e2f",
+    "command": ".venv/bin/python -m pytest -q -m \"not slow\" flashmap pipeline eval",
+    "passed": 1880,
+    "failed": 0,
+    "skipped": 9,
+    "slow_deselected": 2,
+    "log": "results/home-islands-2026-10-19/python-suite-d9c9e2f.txt"
+  },
+  "mutation_gate": {
+    "started_from": "53a1c51",
+    "killed": 68,
+    "mutations": 70,
+    "matches_committed_report": true,
+    "log": "results/home-islands-2026-10-19/mutation-check-53a1c51.json"
+  },
+  "ui_flashmap": {
+    "commit": "53a1c51",
+    "screens_and_transitions": 37,
+    "segments_over_threshold": 0,
+    "profiles": [
+      "wcag",
+      "broadcast"
+    ]
+  },
+  "layout_tests": {
+    "file": "app/test/calmframes/homeIslands.test.tsx",
+    "tests": 24,
+    "seen_to_fail_breaks": 12
+  }
+}

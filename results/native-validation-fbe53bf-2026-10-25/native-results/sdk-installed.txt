@@ -1,0 +1,6 @@
+Installed SDK Versions:
+
+Channel: main
+→ 0.24.9914 - Active SDK Version
+
+Total: 1 versions

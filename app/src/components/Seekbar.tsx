@@ -1,3 +1,6 @@
+import SceneTimeline from '../calmframes/SceneTimeline';
+import { CoverInterval } from '../calmframes/coverSchedule';
+import { CALM_COLORS, CALM_TEXT } from '../calmframes/calmStyles';
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
@@ -12,6 +15,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 import { SeekSource } from '../calmframes/seekSafety';
+import { trace } from '../calmframes/trace';
 import { getImageForVideoSecond } from '../services/bif/bifService';
 import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
@@ -46,12 +50,15 @@ const Seekbar = ({
   testID,
   handleShowControlsOnKeyEvent,
   requestSeek,
+  sceneIntervals,
+  hasTVPreferredFocus = true,
 }: {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
   videoData: TitleData;
   bifFrameImagesRef: React.MutableRefObject<FrameImageSource | null>;
   seekBarRef: React.MutableRefObject<null>;
   testID?: string;
+  hasTVPreferredFocus?: boolean;
   handleShowControlsOnKeyEvent;
   /**
    * Calm Frames: the one safe seek function. When it is given, the bar never
@@ -59,6 +66,7 @@ const Seekbar = ({
    * moves the playhead.
    */
   requestSeek?: (source: SeekSource, targetMs: number) => void;
+  sceneIntervals?: CoverInterval[];
 }) => {
   const [progress, setProgress] = useState<number>(
     videoRef.current?.currentTime || 0,
@@ -105,6 +113,7 @@ const Seekbar = ({
         // target inside a flagged part is covered before the picture changes.
         requestSeek('seek-bar', value * SECOND_IN_MILIS);
       } else {
+        // eslint-disable-next-line no-restricted-syntax -- the sample's fallback, reached only when no requestSeek is wired; the Calm Frames player always wires one
         videoRef.current.fastSeek(value);
       }
       videoRef.current.play();
@@ -335,7 +344,7 @@ const Seekbar = ({
    *
    */
   const getIndicatorColor = (focusedValue: boolean) =>
-    focusedValue ? COLORS.ORANGE : COLORS.GRAY;
+    focusedValue ? CALM_COLORS.FOCUS_RING : CALM_COLORS.TEXT_DIM;
 
   /**
    * Formats the thumbnail label to display human-readable time.
@@ -363,11 +372,17 @@ const Seekbar = ({
           </Text>
         </View>
         <TVFocusGuideView
-          hasTVPreferredFocus={true}
+          testID="seekbar-focus-guide"
+          hasTVPreferredFocus={hasTVPreferredFocus}
           autoFocus
           style={styles.seekbar}>
+          {sceneIntervals && sceneIntervals.length > 0 ? <View style={styles.sceneTrack} testID="player-scene-context" accessible focusable={false}
+            accessibilityLabel={`${sceneIntervals.length} planned scene${sceneIntervals.length === 1 ? '' : 's'} marked on the timeline`}>
+            <SceneTimeline intervals={sceneIntervals} durationMs={totalValue * SECOND_IN_MILIS} currentMs={progress * SECOND_IN_MILIS} testID="player-scenes" />
+          </View> : null}
           <KUICSeekbar
             ref={seekBarRef}
+            onFocus={() => trace('focus', 'player-seekbar')}
             currentValue={progress}
             totalValue={totalValue}
             disabledWhenNotFocused={true}
@@ -422,17 +437,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     padding: scaleUxToDp(25),
-    marginBottom: scaleUxToDp(80),
+    marginBottom: scaleUxToDp(160),
     zIndex: 2,
   },
+  sceneTrack: { width: '100%', marginBottom: scaleUxToDp(8) },
   seekbar: {
     width: '90%',
     marginBottom: scaleUxToDp(10),
   },
   time: {
-    color: COLORS.WHITE,
-    fontSize: scaleUxToDp(25),
-    marginHorizontal: 30,
+    color: CALM_COLORS.TEXT,
+    ...CALM_TEXT.supporting,
+    marginHorizontal: scaleUxToDp(20),
   },
   hiddenBar: {
     backgroundColor: 'transparent',
@@ -460,6 +476,8 @@ export default React.memo(Seekbar, (prevProps, nextProps) => {
     prevProps.videoRef === nextProps.videoRef &&
     prevProps.videoData === nextProps.videoData &&
     prevProps.bifFrameImagesRef === nextProps.bifFrameImagesRef &&
-    prevProps.seekBarRef === nextProps.seekBarRef
+    prevProps.seekBarRef === nextProps.seekBarRef &&
+    prevProps.hasTVPreferredFocus === nextProps.hasTVPreferredFocus &&
+    prevProps.sceneIntervals === nextProps.sceneIntervals
   );
 });

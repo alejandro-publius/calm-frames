@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-13",
+  "base_commit": "2f15069dc8d211be92952e2f78c5c38ff4557edd",
+  "trigger": {
+    "audit_run": 38397363534,
+    "implementation_ci_run": 38397363545,
+    "implementation_ci_conclusion": "success",
+    "failure": "npm advisory 1242173, GHSA-p8wg-vrv2-v86f, not covered by a reviewed exception"
+  },
+  "change": {
+    "package": "handlebars",
+    "from": "4.7.9",
+    "to": "4.7.10",
+    "location": "ts-jest development dependency",
+    "other_installed_packages_changed": 0,
+    "exception_removed": true,
+    "exception_review_dates_extended": false,
+    "advisories_resolved": [
+      "GHSA-xw65-4hp5-5hc7",
+      "GHSA-8r5x-fm3f-whwj",
+      "GHSA-p8wg-vrv2-v86f"
+    ]
+  },
+  "verification": {
+    "dependency_audit_exit_code": 0,
+    "remaining_findings": "results/audit.json",
+    "remaining_findings_are_exceptions_not_zero_vulnerabilities": true,
+    "app_tests_passed": 144,
+    "app_suites_passed": 4,
+    "sbom_npm": "10.9.8",
+    "app_sbom_repeated_bytes_match": true,
+    "hosted_recheck": "pending next push"
+  },
+  "source_sha256": {
+    "app/package-lock.json": "96079510bdd29a6dc826eb969d416ccfd927fb76735f498eb48cf2c874508eca",
+    "docs/SBOM.app.cdx.json": "44d469f5d52c44891465428d8ffa46e4c86925b92745452ced9de25ebdd41870",
+    "scripts/audit_exceptions.toml": "cad4a091c3b2ae924aaa1357341fba10224a93148e37ab3bca77f4dacd2e16a7",
+    "results/audit.json": "4e81b716e29eca7c293d2b9043c2d2fec6433c0aa162178da839301abe9e3417"
+  },
+  "logs": {
+    ".logs/finish-audit-fixed.log": "dcad3174c5664ff1e67bdc7379af972e557a3c9c60b5f311db9dff1711cafe71",
+    ".logs/finish-handlebars-sbom.log": "970506ad1c48885b72178708bd499a2c8b208c9cbb7926b2b0247b24eda34eee",
+    ".logs/finish-handlebars-tests.log": "4f7bb28705ab38d084b67980f2bfc070fe0a75413fe389aa7d85a66503dea041"
+  }
+}

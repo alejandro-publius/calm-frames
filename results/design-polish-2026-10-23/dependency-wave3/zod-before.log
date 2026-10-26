@@ -1,0 +1,158 @@
+TAP version 13
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 1 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 15.403938
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 2 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 18.968894
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 3 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.128815
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 4 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 20.137753
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 5 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 472.44498
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 6 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 2.0264
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 7 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 7.64905
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 8 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 0.912477
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 9 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 69.714814
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 10 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 34.464811
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 11 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 25.332884
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 12 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 23.862989
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 13 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 23.669632
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 14 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 3.134933
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+not ok 15 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 59.208289
+  type: 'test'
+  location: './app/tools/build_dependency_compat.test.mjs:253:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/build_dependency_compat.test.mjs:262:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+not ok 16 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.037568
+  type: 'test'
+  location: './app/tools/build_dependency_compat.test.mjs:253:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/build_dependency_compat.test.mjs:262:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 17 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.548975
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 18 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 291.958193
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 16
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1188.302276

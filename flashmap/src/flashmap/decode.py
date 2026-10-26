@@ -394,6 +394,7 @@ def iter_frames(
     with _open(path) as container:
         stream = container.streams.video[0]
         stream.thread_type = "AUTO"
+        declared_frames = stream.frames
         time_base = stream.time_base
         try:
             for stamp, frame in _iter_coded_pictures(container, stream):
@@ -454,5 +455,14 @@ def iter_frames(
                 previous = current
                 yield current
                 index += 1
+            # MP4 can end cleanly at a packet boundary even when its sample
+            # table still declares missing frames. A decoded prefix is not
+            # evidence for the whole title. Zero means the count is unknown;
+            # do not invent a count from duration or assumed frame rate.
+            if declared_frames > 0 and index < declared_frames:
+                raise UnsupportedInput(
+                    f"{path} decoded only {index} of {declared_frames} declared video frames; "
+                    "the video evidence is incomplete, so flashmap cannot measure the whole file."
+                )
         except (av.FFmpegError, OSError) as exc:
             raise UnsupportedInput(f"{path} could not be decoded: {exc}") from exc

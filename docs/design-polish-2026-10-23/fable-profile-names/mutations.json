@@ -1,0 +1,110 @@
+{
+  "note": "Each mutation is one exact text swap in one source file, applied, tested with jest, and reverted. Caught means the named tests went red.",
+  "jest": "npx jest --coverage=false --silent <files>",
+  "mutations": [
+    {
+      "mutation": "save ignores the pending guard",
+      "file": "app/src/calmframes/ParentAreaScreen.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 20 passed, 21 total",
+      "verdict": "caught (tests went red)",
+      "note": "First run stayed green: the editor's own saving gate stops a second press after a re-render, so a same-frame double press test was added and the mutation was run again."
+    },
+    {
+      "mutation": "editor closes before the write answers",
+      "file": "app/src/calmframes/ParentAreaScreen.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       4 failed, 16 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "duplicate check is case sensitive",
+      "file": "app/src/calmframes/profiles.ts",
+      "tests": [
+        "test/calmframes/profiles.test.ts",
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       2 failed, 43 passed, 45 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "closing the editor does not return focus",
+      "file": "app/src/calmframes/ParentAreaScreen.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       5 failed, 15 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "Edit name offered for Everyone",
+      "file": "app/src/calmframes/ParentAreaScreen.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 19 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "a second space in a row is accepted",
+      "file": "app/src/calmframes/ProfileNameEditor.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 19 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "the length limit is not enforced on letters",
+      "file": "app/src/calmframes/ProfileNameEditor.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 19 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "Back does nothing while editing",
+      "file": "app/src/calmframes/ParentAreaScreen.tsx",
+      "tests": [
+        "test/calmframes/profileNames.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       2 failed, 18 passed, 20 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "the edit-name frame declares the wrong paint order",
+      "file": "app/src/calmframes/uiFrames.ts",
+      "tests": [
+        "test/calmframes/uiCapture.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 17 passed, 18 total",
+      "verdict": "caught (tests went red)"
+    },
+    {
+      "mutation": "the route reports every write as not committed",
+      "file": "app/src/screens/KidModeScreen.tsx",
+      "tests": [
+        "test/screens/profileNameSave.test.tsx"
+      ],
+      "jest_exit": 1,
+      "summary": "Tests:       1 failed, 1 passed, 2 total",
+      "verdict": "caught (tests went red)"
+    }
+  ],
+  "caught": 10,
+  "total": 10
+}

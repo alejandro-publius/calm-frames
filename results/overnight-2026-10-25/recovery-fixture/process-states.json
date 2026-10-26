@@ -1,0 +1,21 @@
+{
+  "pytest_exit_code": 1,
+  "killed_groups": [
+    439561,
+    443103
+  ],
+  "remaining_group_members": [
+    {
+      "pid": 439615,
+      "ppid": 1,
+      "pgid": 439561,
+      "state": "Z"
+    },
+    {
+      "pid": 443348,
+      "ppid": 1,
+      "pgid": 443103,
+      "state": "Z"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "source_commit": "50bc01fcfcfd82f4138b0cd0268beab60da286ee",
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/scene-bridge-native-2026-10-18/calm-frames-bridge-fixture-aarch64-debug.vpkg",
+  "package_sha256": "44322944fc3fee3b353e5b20f12133a89273773ce57c742cbac10abdb6187bbd",
+  "install_count": 1,
+  "inputs_matched": 781,
+  "commands": [
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vlcm terminate-app --force --pkg-id io.github.alejandropublius.calmframes"
+      ],
+      "start_utc": "2026-10-18T02:32:17.284359+00:00",
+      "end_utc": "2026-10-18T02:32:17.983168+00:00",
+      "exit": 0,
+      "output": "Force stopping pkg: io.github.alejandropublius.calmframes\n"
+    },
+    {
+      "args": [
+        "device",
+        "install-app",
+        "--device",
+        "VirtualDevice",
+        "--packagePath",
+        "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/scene-bridge-native-2026-10-18/calm-frames-bridge-fixture-aarch64-debug.vpkg",
+        "--buildType",
+        "Debug"
+      ],
+      "start_utc": "2026-10-18T02:32:17.983667+00:00",
+      "end_utc": "2026-10-18T02:32:19.341362+00:00",
+      "exit": 0,
+      "output": "Installing/Updating '/tmp/calm-frames-bridge-fixture-aarch64-debug.vpkg' ...success\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "sha256sum /tmp/calm-frames-bridge-fixture-aarch64-debug.vpkg"
+      ],
+      "start_utc": "2026-10-18T02:32:19.341887+00:00",
+      "end_utc": "2026-10-18T02:32:20.156140+00:00",
+      "exit": 0,
+      "output": "44322944fc3fee3b353e5b20f12133a89273773ce57c742cbac10abdb6187bbd  /tmp/calm-frames-bridge-fixture-aarch64-debug.vpkg\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+      ],
+      "start_utc": "2026-10-18T02:32:20.156613+00:00",
+      "end_utc": "2026-10-18T02:32:20.928395+00:00",
+      "exit": 0,
+      "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+    },
+    {
+      "args": [
+        "device",
+        "running-apps",
+        "--device",
+        "VirtualDevice"
+      ],
+      "start_utc": "2026-10-18T02:32:20.928782+00:00",
+      "end_utc": "2026-10-18T02:32:21.760027+00:00",
+      "exit": 0,
+      "output": "com.amazon.kcp.component.service\ncom.amazon.otad.main\ncom.amazon.map.async.service.main\ncom.amazon.dev.shell.service\ncom.amazon.aplext.alert.10.service.main\ncom.amazon.kepler.keyvault.service.main\ncom.amazon.rdm.service.main\nio.github.alejandropublius.calmframes.main\n"
+    }
+  ],
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true
+}

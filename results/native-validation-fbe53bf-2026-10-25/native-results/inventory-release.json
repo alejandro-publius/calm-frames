@@ -1,0 +1,522 @@
+{
+ "package_file_sha256": "8ce683285c12172dd515a7758313d60572fdd511f7a94c0e66bd22efbf020fea",
+ "entries": 221,
+ "packaged_manifest": {
+  "needs_modules": [
+   "/com.amazon.kepler.appstore.iap.purchase.core@IAppstoreIAPPurchaseCoreService",
+   "/com.amazon.vega.os@IVega_1_2",
+   "/com.amazon.kepler.kepler_content_personalization_1@IKeplerContentPersonalization_3",
+   "/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9",
+   "/com.amazon.kepler.kepler_file_system_0@IKeplerFileSystem_0",
+   "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0",
+   "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1",
+   "/com.amazon.kepler.appstore_iap_lib_2@IAppstoreIapLib_12",
+   "/com.amazon.kepler.keplerscript_netmgr_lib_2@INetmgrTurbomodule_0",
+   "/com.amazon.kepler.lottie_3@ILottie_0",
+   "/com.amazon.kepler.linear_gradient_2@ILinearGradient_0",
+   "/com.amazon.kepler.async_storage__async_storage_2@IAsyncStorage__AsyncStorage_1",
+   "/com.amazon.kepler.device_info_2@IDeviceInfo_1",
+   "/com.amazon.kepler.gesture_handler_4@IGestureHandler_0",
+   "/com.amazon.kepler.keplerscript_4@IKeplerScript_0",
+   "/com.amazon.kepler.localize_2@ILocalize_1",
+   "/com.amazon.kepler.reanimated_4@IReanimated_0",
+   "/com.amazon.kepler.safe_area_context_8@ISafeAreaContext_0",
+   "/com.amazon.kepler.screens_3@IScreens_0",
+   "/com.amazon.kepler.svg_3@ISVG_0",
+   "/com.amazon.kepler.vector_icons_2@IVectorIcons_1",
+   "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3",
+   "/com.amazon.kepler.worklets_1@IWorklets_0",
+   "/com.amazon.kepler.navigation__core_8@INavigation__Core_0",
+   "/com.amazon.kepler.navigation__drawer_8@INavigation__Drawer_0",
+   "/com.amazon.kepler.navigation__elements_8@INavigation__Elements_0",
+   "/com.amazon.kepler.navigation__native_8@INavigation__Native_0",
+   "/com.amazon.kepler.navigation__routers_8@INavigation__Routers_0",
+   "/com.amazon.kepler.navigation__stack_8@INavigation__Stack_0",
+   "/com.amazon.kepler.security_manager_lib_1@ISecurityManagerLib_0",
+   "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"
+  ],
+  "wants_modules": [
+   "/com.amazon.iap.core@IIAPCoreUI",
+   "/com.amazonappstore.iap.tester@IIAPTesterUI"
+  ],
+  "needs_privileges": [
+   "com.amazon.media.secureplayback",
+   "com.amazon.privilege.security.file-sharing",
+   "com.amazon.network.privilege.net-info"
+  ],
+  "wants_services": [
+   "com.amazon.inputmethod.service",
+   "com.amazon.kepler.pcon.service.main",
+   "com.amazon.drm.key",
+   "com.amazon.drm.crypto",
+   "com.amazon.media.server",
+   "com.amazon.mediametrics.service",
+   "com.amazon.inputd.service",
+   "com.amazon.media.playersession.service",
+   "com.amazon.mediabuffer.service",
+   "com.amazon.mediatransform.service",
+   "com.amazon.gipc.uuid.*",
+   "com.amazon.audio.stream",
+   "com.amazon.audio.control",
+   "com.amazon.audio.system",
+   "com.amazon.network.service",
+   "com.amazon.iap.core.service",
+   "com.amazon.iap.tester.service"
+  ]
+ },
+ "native_libraries": {
+  "lib/aarch64/com.amazon.keplerscript.carousel.so": "11833a0d5db8c5544aad29a2a10e448a7803972b5b72b4ee3bc64fa54162abdd"
+ },
+ "bundle": {
+  "file": "bundle/index.bundle",
+  "sha256": "2ee4a5fc7891fb26315049477d7a9d58107122fd62047302dc8c11ddb33c152f",
+  "debug": false,
+  "node_module_files": 0,
+  "npm_packages": {},
+  "app_module_files": 0
+ },
+ "hermes_bundle_sha256": "a07a66f208a04b517a0a7c3087317542b505cf56f64cd17e162a42d696223a68",
+ "non_runtime_files_packaged": [],
+ "audit_reconciliation": {
+  "advisories": {
+   "python_packages_with_advisories": 0,
+   "npm_packages_with_advisories": 33,
+   "npm_advisories_total": 15,
+   "npm_critical": 0,
+   "npm_high": 14,
+   "exception_groups": 3,
+   "exceptions_in_the_shipped_bundle": 1
+  },
+  "problems": [
+   "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+   "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21"
+  ],
+  "summary": {
+   "group matches this bundle": 27,
+   "grouped as shipping, absent from this Debug bundle": 6
+  },
+  "findings": [
+   {
+    "package": "@amazon-devices/kepler-cli-platform",
+    "severity": "high",
+    "direct": true,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "@amazon-devices/kepler-module-manifest-builder",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "@amazon-devices/react-navigation__core",
+    "severity": "moderate",
+    "direct": true,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "@amazon-devices/react-navigation__native",
+    "severity": "moderate",
+    "direct": true,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "@amazon-devices/security-manager-lib",
+    "severity": "high",
+    "direct": true,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "@jest/fake-timers",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "@react-native-community/cli",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "@react-native-community/cli-platform-ios",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "anymatch",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "braces",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1098094"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "decode-uri-component",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [
+     "1147955"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "jest-haste-map",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "jest-message-util",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "jest-util",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "metro",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "metro-cache",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "metro-config",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "metro-core",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "metro-inspector-proxy",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "micromatch",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1098681"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "node-notifier",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [
+     "1086436"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "query-string",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "react-devtools-core",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1099563"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "in-the-device-bundle",
+    "group_ships": true,
+    "group_review_by": "2026-10-21",
+    "verdict": "grouped as shipping, absent from this Debug bundle"
+   },
+   {
+    "package": "react-native",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1089027"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "react-native-tscodegen-types",
+    "severity": "high",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "sane",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "source-map-resolve",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "toml",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1164824",
+     "1164825",
+     "1242862",
+     "1242863",
+     "1242864"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "owner-approved-controlled-toml-builds-2026-10-23",
+    "group_ships": false,
+    "group_review_by": "2026-10-30",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "uuid",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [
+     "1119441"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "ws",
+    "severity": "high",
+    "direct": false,
+    "ids": [
+     "1118731",
+     "1123262"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "xcode",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "yargs",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   },
+   {
+    "package": "yargs-parser",
+    "severity": "moderate",
+    "direct": false,
+    "ids": [
+     "1088811"
+    ],
+    "in_debug_bundle": false,
+    "bundle_modules": 0,
+    "exception_group": "not-in-the-device-bundle",
+    "group_ships": false,
+    "group_review_by": "2026-10-21",
+    "verdict": "group matches this bundle"
+   }
+  ]
+ }
+}

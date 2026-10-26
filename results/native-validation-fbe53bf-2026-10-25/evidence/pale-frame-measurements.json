@@ -1,0 +1,116 @@
+{
+ "what": "frames at mean luma 230 of 255 or brighter in each recorded fbe53bf Debug transition on the disposable device; the recorder writes a frame only on a picture change, so a duration is the time until the next darker frame was written",
+ "crop": "TV picture only (1826x1026 at 1920x1080 window, 1280x720 at 720)",
+ "derived_after_the_zip": "computed from the same private recordings listed by hash in ledger/steps.jsonl; not in the receipt ZIP",
+ "cause": "not established",
+ "transitions": [
+  {
+   "recording": "t01-1080-open-library.mp4",
+   "recording_sha256": "030bdcca950ef03bffa97d281e1a18bfaece2eecd5c9347fafafffef51cca310",
+   "transition": "first run: Open library to Home",
+   "frames_written": 8,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t02-1080-acadia-watch.mp4",
+   "recording_sha256": "7d32512c6b226d48a37382ee78dcbfde74df9abc0d463c6a1896d357ccc663b2",
+   "transition": "Home Watch on Acadia: still scene opens",
+   "frames_written": 5,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t03-1080-mcway-watch.mp4",
+   "recording_sha256": "ae62c34c051399f338d598f731c8a3b2310de60a362bdc3b98ae2987de2ce3b0",
+   "transition": "Home Watch on McWay: player opens and plays",
+   "frames_written": 550,
+   "near_white_frames": 2,
+   "first_near_white_s": 2.233,
+   "near_white_lasted_at_least_s": 0.068
+  },
+  {
+   "recording": "t05-1080-kid2-resume.mp4",
+   "recording_sha256": "c9d0be2aafe4cf6de6891a4390929e3a1dcbaefe6532cd3dfdf0187cd5f0fd35",
+   "transition": "Details Watch on McWay with a saved place: resume prompt opens",
+   "frames_written": 18,
+   "near_white_frames": 2,
+   "first_near_white_s": 2.363,
+   "near_white_lasted_at_least_s": 0.068
+  },
+  {
+   "recording": "t10-1080-otters-still.mp4",
+   "recording_sha256": "8ed736738664b10fa39734217a2dea49dbff6177ab6fb72c8c24404691ec1318",
+   "transition": "Sea Otters Details opens",
+   "frames_written": 5,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t11-1080-otters-still.mp4",
+   "recording_sha256": "4e871192fbc44aaafa1073c6a5b96d52370c462b4c0c80c53d97c658fe70b8ef",
+   "transition": "Sea Otters Watch: still scene opens",
+   "frames_written": 6,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t12-1080-otters-preview.mp4",
+   "recording_sha256": "9b308230dea43aeda0164f8ce51ccb26fefef3b5457a2b4c62937b90dd5f4e14",
+   "transition": "Sea Otters still scene: Video preview 20 sec starts",
+   "frames_written": 579,
+   "near_white_frames": 3,
+   "first_near_white_s": 2.228,
+   "near_white_lasted_at_least_s": 0.417
+  },
+  {
+   "recording": "t13-1080-forest-still.mp4",
+   "recording_sha256": "9e0319153f5b57664b1611c7fd9521ad6448271cafe0eea88768b64b16c8f9f1",
+   "transition": "Home Watch on Forest: still scene opens",
+   "frames_written": 5,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t14-1080-forest-preview.mp4",
+   "recording_sha256": "2538600e8733cc031efee9124dff1ad30dc360ea8e4f97dad2ec6f9a30eab4f3",
+   "transition": "Forest still scene: Video preview 12 sec starts",
+   "frames_written": 352,
+   "near_white_frames": 4,
+   "first_near_white_s": 2.235,
+   "near_white_lasted_at_least_s": 0.468
+  },
+  {
+   "recording": "t20-1080-cold-start.mp4",
+   "recording_sha256": "dabd380cda4ffd929b5c0ca6996515ecb6fd259b313897506870a4ec322ca343",
+   "transition": "cold launch after terminate-app",
+   "frames_written": 150,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t30-720-cold-start.mp4",
+   "recording_sha256": "29d36dfc8349212e711398fdbf0220b9d77abfb6133573e3d64de1c21bef6160",
+   "transition": "cold launch at 1280x720 after a device restart",
+   "frames_written": 511,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  },
+  {
+   "recording": "t40-720-release-cold-start.mp4",
+   "recording_sha256": "7f304e669158c6b67a2ce31bf284328ffa53932d8ac2b4bc0706e64d98c68a55",
+   "transition": "Release cold launch at 1280x720",
+   "frames_written": 17,
+   "near_white_frames": 0,
+   "first_near_white_s": null,
+   "near_white_lasted_at_least_s": null
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+{
+  "source_commit": "fc83982220bf1b87774b75377e3b779043550cea",
+  "base": "dce5d40bc26bfc150265f971da85bbf5f605eaad",
+  "branch": "codex/native-defect-fixes-2026-10-25",
+  "checks": {
+    "saved_delivery_regressions": {
+      "before_failed": 11,
+      "before_log": "checks/delivery-before.log",
+      "after_passed": 97,
+      "after_log": "checks/delivery-final.log",
+      "initial_fixture_failure": "An existing stub omitted the actual producer package metadata. The fixture now uses the real inspected package snapshot; assertions are retained."
+    },
+    "browser": {
+      "before_failed": 4,
+      "after_passed": 12,
+      "before": "browser/before.json",
+      "after": "browser/browser-checks.json",
+      "actual_http_analysis": true,
+      "native": false,
+      "harness_corrections": [
+        "Preserved the virtual-environment entry point rather than resolving its symlink; the base interpreter lacked OpenCV.",
+        "Used actual keyboard travel before checking focus-visible styling."
+      ]
+    },
+    "editorial": {
+      "tests_passed": 6,
+      "tests_log": "checks/edit-tests-final.log",
+      "script_guard_negative_cases": 3,
+      "negative_log": "checks/edit-guard-negative-controls.log",
+      "caption_punctuation_failed_before": true,
+      "caption_negative_log": "checks/edit-captions-before.log",
+      "render_receipt": "editorial/render-checks.json",
+      "alpha_and_bounds_checked": true,
+      "images_inspected": true,
+      "slots_missing": 18,
+      "production_preflight_refuses": true,
+      "editor_import_observed": false,
+      "completed_demo": false
+    },
+    "integrated": {
+      "exit_code": 0,
+      "passed": 187,
+      "subtests_passed": 26,
+      "log": "checks/integrated-tests.log",
+      "command": "PYTHONPATH=flashmap/src:. <pipeline-python> -m pytest pipeline/tests/test_local_intake.py pipeline/tests/test_local_intake_review.py pipeline/tests/test_local_intake_media.py pipeline/tests/test_local_intake_http.py pipeline/tests/test_intake_corrupt_record.py pipeline/tests/test_intake_worker_boundaries.py pipeline/tests/test_package_delivery.py pipeline/tests/test_edition_delivery.py eval/tests/test_prepare_demo_edit.py docs/cloud-integration-2026-10-23/demo/test_render_preflight.py -q",
+      "overlaps_focused_checks": true
+    },
+    "python": {
+      "ruff_exit_code": 0,
+      "ruff_log": "checks/ruff.log",
+      "normal_mypy_exit_code": 0,
+      "mypy_sources": 28,
+      "mypy_log": "checks/mypy.log"
+    },
+    "audit": {
+      "exit_code": 1,
+      "report": "audit.json",
+      "log": "checks/final-audit.log",
+      "script_and_policy_unchanged": true,
+      "distinct_npm_advisories": 4,
+      "affected_npm_package_entries": 9,
+      "python_findings": 0,
+      "python_scopes": [
+        12,
+        14,
+        54
+      ],
+      "expired_groups": [
+        "in-the-device-bundle",
+        "not-in-the-device-bundle"
+      ],
+      "review_dates_unchanged": true,
+      "output_override": "Saved under .logs to preserve the prior canonical audit history; no gate or scanner arguments relaxed."
+    },
+    "experiment": {
+      "owner_approved": true,
+      "head": "c1f57f4831d11f476b7e06d05cf7e239d2601374",
+      "branch": "codex/codegen-compatibility-experiment-2026-10-25",
+      "result": "migration/migration-result.json",
+      "status": "rejected_before_install",
+      "new_advisories": 4,
+      "new_critical_advisories": 2,
+      "total_distinct_advisories": 5,
+      "package_version_changes": 324,
+      "promoted": false,
+      "runtime_or_native_checks": false
+    },
+    "preservation": "preservation.json",
+    "contrast": "contrast.json",
+    "unchanged_app_suites": {
+      "rerun": false,
+      "reason": "Native app, hook, locks, generated inputs, approved media and signing are unchanged."
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "reason": "No remote push or dispatch in this pass"
+    },
+    "documentation": {
+      "published_numbers_checked": 749,
+      "local_links": {
+        "local_links_checked": 269,
+        "broken": []
+      },
+      "all_20_criteria_and_statuses_unchanged": true,
+      "style": "pass",
+      "git_diff_check": "pass after recorded whitespace-only archival normalization"
+    },
+    "privacy": {
+      "tool": "gitleaks 8.30.1",
+      "code_commits_findings": 0,
+      "staged_files_scanned": 59,
+      "staged_findings": 0,
+      "rejected_experiment_findings": 0,
+      "no_private_capture_or_upload": true
+    }
+  },
+  "original_checklist": {
+    "newly_closed": [],
+    "completed": [
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ]
+  },
+  "limits": [
+    "No native package or acceptance for the latest candidate",
+    "No new qualifying long footage or license acquired",
+    "No approved personal-edition signer/delivery or native file picker",
+    "No Rowan art, voice recording or final native replacement demo",
+    "No current official rules access or submitted account verification",
+    "No human/medical acceptance",
+    "No push, merge, publication, purchase, private upload or submission change"
+  ]
+}

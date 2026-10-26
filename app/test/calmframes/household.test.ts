@@ -192,14 +192,14 @@ describe('per title status', () => {
     },
     {
       id: 'waiting',
-      title: 'Not checked yet',
+      title: 'This video is unavailable',
       uri: 'https://example.invalid/b.m3u8',
       sha256: 'b'.repeat(64),
       maps: {},
     },
     {
       id: 'broken',
-      title: 'Check failed',
+      title: 'Unavailable',
       uri: 'https://example.invalid/c.m3u8',
       sha256: 'c'.repeat(64),
       maps: { wcag: burstsMapText },
@@ -246,7 +246,7 @@ describe('per title status', () => {
       settings: strict,
     });
     expect(checked[0].status).toBe('pending');
-    expect(checked[0].reason).toMatch(/stricter than the check/);
+    expect(checked[0].reason).toMatch(/current viewing settings/);
     expect(kidModeTitles(checked)).toHaveLength(0);
   });
 
@@ -261,9 +261,9 @@ describe('per title status', () => {
   });
 
   it('has a plain badge for each status', () => {
-    expect(badgeLabel('verified')).toBe('Checked');
-    expect(badgeLabel('pending')).toBe('Being checked');
-    expect(badgeLabel('failed')).toBe('Check failed');
+    expect(badgeLabel('verified')).toBe('Ready to watch');
+    expect(badgeLabel('pending')).toBe('Preparing');
+    expect(badgeLabel('failed')).toBe('Unavailable');
   });
 });
 
@@ -304,10 +304,10 @@ describe('the hide log', () => {
       '19:05 Sintel: hid 4 seconds at 1:05',
     );
     expect(describeHideEntry(entry({ cause: 'seek' }))).toMatch(
-      /after moving the playhead$/,
+      /after seeking$/,
     );
     expect(describeHideEntry(entry({ cause: 'unverified' }))).toBe(
-      '19:05 Sintel: kept the picture hidden, title not checked',
+      '19:05 Sintel: kept the picture hidden, video unavailable',
     );
   });
 });

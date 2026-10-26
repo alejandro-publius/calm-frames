@@ -275,7 +275,7 @@ def pages() -> dict[str, str]:
 
 
 def find_chrome() -> str:
-    """Headless Chrome, the renderer app/assets/brand/render.sh already uses."""
+    """Headless Chrome, the renderer app/tools/brand/render.sh already uses."""
     named = os.environ.get("CALM_FRAMES_CHROME")
     if named:
         if not Path(named).is_file():
@@ -289,12 +289,12 @@ def find_chrome() -> str:
             return found
     raise FileNotFoundError(
         "no Chrome or Chromium was found. Set CALM_FRAMES_CHROME to one, or install "
-        "google-chrome. app/assets/brand/render.sh says why this repo renders with Chrome."
+        "google-chrome. app/tools/brand/render.sh says why this repo renders with Chrome."
     )
 
 
 def screenshot(chrome: str, html: Path, out: Path, width: int, height: int) -> None:
-    """One page into one PNG, with the same flags app/assets/brand/render.sh uses.
+    """One page into one PNG, with the same flags app/tools/brand/render.sh uses.
 
     --force-device-scale-factor=1 stops a retina display doubling everything,
     and --hide-scrollbars keeps a scrollbar out of the picture, where it would

@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-10-23T18:07:00.970200+00:00",
+  "packages": [
+    {
+      "name": "@amazon-devices/kepler-cli-platform",
+      "version": "0.22.14",
+      "metadata_url": "https://registry.npmjs.org/@amazon-devices%2Fkepler-cli-platform/latest",
+      "dependencies": {
+        "@amazon-devices/kepler-module-manifest-builder": "^0.1.0"
+      },
+      "engines": {
+        "node": ">=16"
+      }
+    },
+    {
+      "name": "@amazon-devices/kepler-module-manifest-builder",
+      "version": "0.1.16",
+      "metadata_url": "https://registry.npmjs.org/@amazon-devices%2Fkepler-module-manifest-builder/latest",
+      "dependencies": {
+        "toml": "^3.0.0"
+      },
+      "engines": null
+    },
+    {
+      "name": "launch-editor",
+      "version": "2.14.2",
+      "metadata_url": "https://registry.npmjs.org/launch-editor/latest",
+      "dependencies": {},
+      "engines": null
+    },
+    {
+      "name": "toml",
+      "version": "5.0.1",
+      "metadata_url": "https://registry.npmjs.org/toml/latest",
+      "dependencies": {},
+      "engines": {
+        "node": ">=20"
+      }
+    }
+  ]
+}

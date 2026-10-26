@@ -1,0 +1,10 @@
+[  0.00-  1.00] !
+[  1.00-  4.52] Muey Falls.
+[  4.52- 11.08] Resume at 142 button.
+[ 11.08- 12.84] Back button.
+[ 12.84- 22.00] Current progress is 34%.
+[ 22.00- 24.00] You
+[ 52.00- 59.00] Try again, play back slow.
+[ 59.00- 67.00] Ocean.
+[ 67.00- 68.00] Forest.
+[ 68.00- 71.00] Watch Quay Falls, Button.

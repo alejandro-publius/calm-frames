@@ -1,0 +1,408 @@
+PASS test/calmframes/tenFoot.test.tsx (30.736 s)
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:481:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:485:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:481:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:485:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:481:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:485:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:481:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:485:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:481:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:485:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+PASS test/calmframes/profileNames.test.tsx (14.339 s)
+PASS test/calmframes/profiles.test.ts
+PASS test/screens/profileNameSave.test.tsx
+PASS test/calmframes/householdStorage.test.ts
+PASS test/calmframes/pickerFocusReturn.test.tsx
+PASS test/calmframes/parentNavigation.test.tsx
+PASS test/calmframes/nameEditorIntegration.test.tsx
+PASS test/screens/readingComfortSave.test.tsx
+PASS test/calmframes/readingComfort.test.tsx
+
+Test Suites: 10 passed, 10 total
+Tests:       155 passed, 155 total
+Snapshots:   0 total
+Time:        59.334 s
+Ran all test suites matching /test\/calmframes\/profiles.test.ts|test\/calmframes\/householdStorage.test.ts|test\/calmframes\/profileNames.test.tsx|test\/calmframes\/nameEditorIntegration.test.tsx|test\/screens\/profileNameSave.test.tsx|test\/calmframes\/pickerFocusReturn.test.tsx|test\/calmframes\/parentNavigation.test.tsx|test\/calmframes\/tenFoot.test.tsx|test\/calmframes\/readingComfort.test.tsx|test\/screens\/readingComfortSave.test.tsx/i.

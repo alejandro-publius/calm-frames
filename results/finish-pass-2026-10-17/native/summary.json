@@ -1,0 +1,105 @@
+{
+  "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+  "native_pid": 13627,
+  "surface_checks": {
+    "checks": [
+      "Home Details More info Back Back returns Home Details focus",
+      "How it works Back returns its opener",
+      "Parents hardware Back cancelled without PIN entry; Parents focus restored",
+      "Parents on-screen Back cancelled without PIN entry; Parents focus restored"
+    ],
+    "result": "completed"
+  },
+  "playback_checks": {
+    "checks": [
+      {
+        "check": "Pause/resume during first cover",
+        "evidence": "pause then playing and first cover-off events; inspect timing samples for exact pause duration"
+      },
+      {
+        "check": "Activate Skip during second cover",
+        "evidence": "Skip focused; Enter caused guarded playhead-write, seeked and cover-off"
+      },
+      {
+        "check": "End-of-video return",
+        "evidence": "Native ended -> existing teardown -> Home Watch without presentation delay"
+      },
+      {
+        "check": "Manual Back during playback",
+        "evidence": "Returned Home Watch before video ended"
+      }
+    ],
+    "pause_observed": true,
+    "result": "completed"
+  },
+  "pause": {
+    "kind": "pause",
+    "wallClockMs": 1792229267081,
+    "mediaTimeMs": 8435,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": 114,
+      "worstTickGapMs": 110
+    }
+  },
+  "resume": {
+    "kind": "playing",
+    "wallClockMs": 1792229269949,
+    "mediaTimeMs": 8566,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -131,
+      "worstTickGapMs": 110
+    }
+  },
+  "pause_wall_ms": 2868,
+  "pause_media_ms": 131,
+  "clock_segments": [
+    {
+      "segment": "before-pause",
+      "media_ms": 8371,
+      "wall_ms": 8500
+    },
+    {
+      "segment": "after-resume-before-skip",
+      "media_ms": 20574,
+      "wall_ms": 20577
+    }
+  ],
+  "guarded_skip": {
+    "target_ms": 31693,
+    "cover_before_write": true,
+    "seeked": {
+      "kind": "seeked",
+      "wallClockMs": 1792229291091,
+      "mediaTimeMs": 32049,
+      "covered": true,
+      "playbackRate": 1,
+      "extra": {
+        "worstDriftMs": -2433,
+        "worstTickGapMs": 110
+      }
+    },
+    "cover_released_after_seeked": true
+  },
+  "natural_end": {
+    "native_ended_to_app_end_effect_ms": 25,
+    "native_ended_to_teardown_ms": 335,
+    "native_ended_to_home_watch_ms": 361,
+    "presentation_delay_removed": true
+  },
+  "manual_back_to_home_watch_ms": 356,
+  "slow_status_on_observed": false,
+  "final_focus": "kid-mode-home-watch",
+  "final_device_clock_log": "2026-10-17 09:28:21.746",
+  "clock_note": "Durations use one device clock only. Guest wall clock differs from host after interruptions; device timestamps are not asserted as true UTC.",
+  "feedback_limits": "Opening and seeking waiting transitions logged; sustained native loading/slow display and VoiceView/audio quality not visually or audibly verified. No slowdown cure claimed.",
+  "collector_stopped": {
+    "pid": 98424,
+    "identity": "/Library/Frameworks/Python.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python /Users/alexvintera/Documents/Codex/2026-10-15/task/finish-native/helper.py stream",
+    "stopped": true,
+    "host_utc": "2026-10-17T23:10:22.826003+00:00"
+  }
+}

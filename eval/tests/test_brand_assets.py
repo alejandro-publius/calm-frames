@@ -31,7 +31,9 @@ def test_every_shipped_image_is_in_the_list():
         path.resolve()
         for folder in SEARCHED
         if folder.is_dir()
-        for path in folder.glob("*.png")
+        for pattern in ("*.png", "*.jpg", "*.jpeg")
+        # JPEGs too: until Oct 19 only PNGs were looked for, and two card photos shipped unchecked.
+        for path in folder.rglob(pattern)
     }
     listed = {asset.resolve() for asset in ASSETS}
 

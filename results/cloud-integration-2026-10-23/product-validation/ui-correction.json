@@ -1,0 +1,61 @@
+{
+  "observed_at_utc": "2026-10-23T18:55:53.018110+00:00",
+  "previous_head": "f9c210b7e00f050846a8f16a85fa715ecbb8d513",
+  "trigger": "Exact-source hosted Vega Test failed; reproduced locally as six stale UI surface declarations and one stale primary-action assertion",
+  "before": {
+    "failed": 7,
+    "passed": 1797,
+    "skipped": 4
+  },
+  "correction": "Declared resting Watch surfaces match existing deep teal fill; focused simplified Home retains warm fill; primary-action assertion preserves its uniqueness check",
+  "normal_full_app": {
+    "exit": 0,
+    "passed": 1804,
+    "skipped": 4,
+    "failed": 0,
+    "suites_passed": 171,
+    "suites_skipped": 1,
+    "snapshots_passed": 57,
+    "coverage_floors_unchanged": true
+  },
+  "normal_typecheck_exit": 0,
+  "normal_lint_exit": 0,
+  "ui_flashmap": {
+    "exit": 0,
+    "scope": "79 modeled rendered-tree screen/transition samples, not native capture",
+    "wcag": "pass",
+    "broadcast": "pass",
+    "negative_controls": "expected hazardous fixtures rejected; WCAG grating passes"
+  },
+  "dependency_lock_changed": false,
+  "toml_approval_changed": false,
+  "remaining_capture_limit": "Watch-focused declaration/recording for generic/profile Home and Details is not fully tracked by useUiCapture; this pass verifies sampled rendered-tree timeline, not every possible focused state",
+  "native_acceptance": "pending",
+  "logs": {
+    "full-app": {
+      "path": "/tmp/calm-corrected-full-app.log",
+      "sha256": "c117903c8f14f64f3338cb743cafc762f60fd55e6adcca25de1a90bf656d5d6a",
+      "bytes": 237031
+    },
+    "typecheck": {
+      "path": "/tmp/calm-corrected-typecheck.log",
+      "sha256": "7f09368d1c1bbe040cbf5b34cf83957d985a877326c77aad71ab060fce233b31",
+      "bytes": 276
+    },
+    "lint": {
+      "path": "/tmp/calm-corrected-lint.log",
+      "sha256": "2cc57f88123703f1abc313ad0c90a08673d43835c7659b82ae24d8a1dc43f0de",
+      "bytes": 9553
+    },
+    "ui-flash": {
+      "path": "/tmp/calm-corrected-ui-flash.log",
+      "sha256": "741ba31233d399b22748c297b7dd27be21b657f249d6cfec944c5170e033e915",
+      "bytes": 484
+    },
+    "ui-negative": {
+      "path": "/tmp/calm-corrected-ui-negative.log",
+      "sha256": "479589e20089a934c3d53c626ba68c30b9b0180e51df922d4b920eaf3a748dd4",
+      "bytes": 163
+    }
+  }
+}

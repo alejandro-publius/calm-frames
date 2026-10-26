@@ -11,7 +11,7 @@
  */
 import { act, render, screen } from '@testing-library/react-native';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import {
@@ -29,6 +29,29 @@ describe('CoverLayer', () => {
     render(<CoverLayer visible={true} />);
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.queryByTestId('calm-frames-cover-top')).toBeNull();
+  });
+
+  it('keeps the scheduled cover opaque without a redundant large message', () => {
+    const view = render(<CoverLayer visible calmFallback />);
+    expect(StyleSheet.flatten(screen.getByTestId('calm-frames-cover').props.style)).toMatchObject({
+      opacity: 1, backgroundColor: '#22303B', left: 0, top: 0, right: 0, bottom: 0, zIndex: 1,
+    });
+    expect(screen.queryByText('This scene is covered')).toBeNull();
+    expect(screen.getByTestId('calm-frames-cover').props.pointerEvents).toBe('none');
+    view.rerender(<CoverLayer visible={false} calmFallback />);
+    expect(screen.queryByTestId('calm-frames-cover')).toBeNull();
+  });
+
+  it('keeps signed stills, dim mode and measurement patches outside the fallback', () => {
+    const view = render(<CoverLayer visible calmFallback imageUri="verified-fixture" />);
+    expect(screen.getByTestId('calm-frames-cover-still')).toBeTruthy();
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    view.rerender(<CoverLayer visible calmFallback mode="dim" dimOpacity={0.1} />);
+    expect(StyleSheet.flatten(screen.getByTestId('calm-frames-cover').props.style).opacity).toBe(0.9);
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    view.rerender(<CoverLayer visible calmFallback referencePatch={{ x: 0, y: 0, width: 10, height: 10 }} screenWidth={1920} screenHeight={1080} />);
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    expect(screen.getByTestId('calm-frames-cover-top')).toBeTruthy();
   });
 
   it('leaves the reference patch visible', () => {
@@ -98,18 +121,27 @@ const Harness = ({
   mode,
   intervals,
   foreground = true,
+  onUncertainty,
 }: {
   media: MediaElementLike;
   mode: 'layering' | 'timing';
   intervals?: ReturnType<typeof buildCoverIntervals>;
   foreground?: boolean;
+  onUncertainty?: (mediaTimeMs: number) => void;
 }) => {
   const ref = React.useRef<MediaElementLike | null>(media);
-  const state = useCoverHarness(ref, { mode, intervals, tickMs: 50, foreground });
+  const state = useCoverHarness(ref, {
+    mode,
+    intervals,
+    tickMs: 50,
+    foreground,
+    onUncertainty,
+  });
   return (
     <>
       <Text testID="covered">{state.covered ? 'covered' : 'clear'}</Text>
       <Text testID="worstDriftMs">{String(Math.round(state.worstDriftMs))}</Text>
+      <Text testID="uncertaintyCount">{state.uncertaintyCount}</Text>
       <CoverLayer visible={state.covered} />
     </>
   );
@@ -173,6 +205,60 @@ describe('useCoverHarness', () => {
     expect(screen.getByTestId('covered').props.children).toBe('clear');
 
     act(() => media.fire('waiting'));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('keeps fail-closed coverage when an optional presentation callback throws', () => {
+    const media = makeMediaElement();
+    render(
+      <Harness
+        media={media}
+        mode="timing"
+        intervals={[]}
+        onUncertainty={() => {
+          throw new Error('presentation failed');
+        }}
+      />,
+    );
+    expect(() => act(() => media.fire('waiting'))).not.toThrow();
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+    expect(screen.getByTestId('uncertaintyCount').props.children).toBe(1);
+    act(() => jest.advanceTimersByTime(500));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('keeps the committed presentation callback during an abandoned suspended render', () => {
+    const media = makeMediaElement();
+    const original = jest.fn();
+    const neverShown = jest.fn();
+    const pending = new Promise<void>(() => {});
+    function Suspender({ block }: { block: boolean }) {
+      if (block) {
+        throw pending;
+      }
+      return null;
+    }
+    function Scenario({
+      callback,
+      block,
+    }: {
+      callback: (mediaTimeMs: number) => void;
+      block: boolean;
+    }) {
+      return (
+        <React.Suspense fallback={<Text testID="pending-harness">Pending</Text>}>
+          <Harness media={media} mode="timing" onUncertainty={callback} />
+          <Suspender block={block} />
+        </React.Suspense>
+      );
+    }
+    const view = render(<Scenario callback={original} block={false} />);
+    view.rerender(<Scenario callback={neverShown} block />);
+    expect(screen.getByTestId('pending-harness')).toBeTruthy();
+    act(() => media.fire('waiting'));
+    expect(neverShown).not.toHaveBeenCalled();
+    expect(original).toHaveBeenCalledTimes(1);
+    view.rerender(<Scenario callback={original} block={false} />);
     expect(screen.getByTestId('covered').props.children).toBe('covered');
   });
 
@@ -260,6 +346,21 @@ describe('useCoverHarness', () => {
 
     act(() => media.fire('seeking'));
     expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('keeps an ordinary pause opaque even away from scheduled covers', () => {
+    const media = makeMediaElement();
+    render(<Harness media={media} mode="timing" intervals={[]} />);
+    media.currentTime = 12;
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    expect(screen.getByTestId('covered').props.children).toBe('clear');
+    act(() => media.fire('pause'));
+    act(() => jest.advanceTimersByTime(6000));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    expect(screen.getByTestId('covered').props.children).toBe('clear');
   });
 
   it('keeps the cover on until playback is confirmed again', () => {

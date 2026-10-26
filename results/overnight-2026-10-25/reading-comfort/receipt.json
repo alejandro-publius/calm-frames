@@ -1,0 +1,279 @@
+{
+  "recorded_utc": "2026-10-25T08:26:36.937319+00:00",
+  "base": "ba39bc76e022d69dd0290487874b3b2eb8225b1a",
+  "source_commit": "e6ebec43abd6896db9aabac1c80757059b7d8f93",
+  "branch": "codex/reading-comfort-2026-10-25",
+  "item": 20,
+  "status": "partially completed: source and cloud regression work complete; native acceptance pending",
+  "scope": "Default-off per-profile Reading comfort for scrollable Parents help/body text and Details > More info only.",
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "lock_sha256": "eb9e7cc870cc351a5e57bfcf43641b6621a4d49d3ce7e0a401319836986d4240",
+  "installation": {
+    "command": "npm --prefix app ci --ignore-scripts --no-audit --no-fund --cache /workspace/.cache/npm",
+    "exit_code": 0,
+    "clean_worktree_install": true,
+    "node_modules_symlink": false
+  },
+  "checks": {
+    "new_regressions": {
+      "command": "npm exec -- jest --runInBand --coverage=false test/calmframes/readingComfort.test.tsx test/screens/readingComfortSave.test.tsx",
+      "cwd": "app",
+      "passed": 19,
+      "suites_passed": 2,
+      "exit_code": 0
+    },
+    "focused_existing_and_new": {
+      "passed": 155,
+      "suites_passed": 10,
+      "exit_code": 0,
+      "log": "logs/focused-regressions.log",
+      "scope": "profiles, household storage, name editor/integration/save, picker focus, parent navigation, ten-foot layouts, Reading comfort model/UI/route"
+    },
+    "full_app": {
+      "command": "npm test -- --runInBand",
+      "cwd": "app",
+      "exit_code": 0,
+      "suites_passed": 180,
+      "suites_skipped": 1,
+      "tests_passed": 1900,
+      "tests_skipped": 4,
+      "snapshots_passed": 57,
+      "coverage": {
+        "lines": {
+          "total": 7372,
+          "covered": 6198,
+          "skipped": 0,
+          "pct": 84.07
+        },
+        "statements": {
+          "total": 8045,
+          "covered": 6769,
+          "skipped": 0,
+          "pct": 84.13
+        },
+        "functions": {
+          "total": 1807,
+          "covered": 1445,
+          "skipped": 0,
+          "pct": 79.96
+        },
+        "branches": {
+          "total": 6260,
+          "covered": 5222,
+          "skipped": 0,
+          "pct": 83.41
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "existing_floors": {
+        "branches": 74,
+        "functions": 71,
+        "lines": 77,
+        "statements": 77
+      },
+      "note": "No added skips. Full app source matches source_commit. A test-only native-host type narrowing followed this run; both new suites, normal typecheck and changed-file lint passed again afterward. Application source and coverage inputs did not change."
+    },
+    "typecheck": {
+      "command": "npm --prefix app run typecheck",
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "npm --prefix app run lint",
+      "exit_code": 0,
+      "source_warnings": 104,
+      "test_warnings": 4,
+      "changed_file_warnings": 0
+    },
+    "changed_file_lint": {
+      "exit_code": 0,
+      "log": "logs/changed-file-lint.log"
+    },
+    "source_secret_scan": {
+      "command": "gitleaks git --pre-commit --staged --redact",
+      "version": "8.30.1",
+      "exit_code": 0
+    },
+    "red_before": {
+      "exit_code": 1,
+      "scope": "initial tests fail against previous source on missing defaults, dropped persisted preference, malformed field acceptance and absent UI"
+    },
+    "negative_controls": {
+      "count": 6,
+      "all_observed_failing": true,
+      "file": "negative-controls.json"
+    },
+    "evidence_secret_scan": {
+      "tool": "gitleaks 8.30.1",
+      "exit_code": 0,
+      "scope": "staged documentation and sanitized evidence"
+    },
+    "documentation": {
+      "local_links": "passed",
+      "style": "passed",
+      "whole_repo_number_drift": {
+        "exit_code": 1,
+        "inherited_issue": "docs/SECURITY.md has app_components 1103 while results/sbom.json has 1105 on base ba39bc76; canonical owner notified, no out-of-scope edit."
+      }
+    }
+  },
+  "behavior_verified": [
+    "Legacy and new profiles default off; only literal true enables; malformed stored types are refused.",
+    "A preference save changes only the named profile flag. PIN, active profile, names, IDs, floor and other profiles are preserved.",
+    "Rename, stricter settings and profile normalization preserve the preference; new siblings default off.",
+    "The switch stays off during pending/failed saves and uses the result-aware household retry path.",
+    "Rapid presses cannot duplicate a write. Focus returns only when the remote has not moved away.",
+    "Details follows the watching profile across profile switching and remount.",
+    "Opted-in help/body text and spacing grow. Watch/technical pages, name editor and approved Parents explainer retain their prior rendering.",
+    "The enlarged More info reading stop fits conservative estimated bounds at both supported sizes; this is not native acceptance."
+  ],
+  "unchanged": [
+    "FirstRun source/disclaimer",
+    "Home",
+    "player",
+    "captions",
+    "protection settings and floors",
+    "signing",
+    "media",
+    "global typography/geometry",
+    "SDK",
+    "dependencies",
+    "household/PIN/position storage keys"
+  ],
+  "native_acceptance_pending": [
+    "supported-size wrapping and D-pad layout/focus",
+    "VoiceView saved-state speech and focus after a pending write",
+    "owner readability/comfort review"
+  ],
+  "rollback_limit": "Old app code ignores this optional field and discards it on its next household save. Reading comfort can return to off after rollback/upgrade; do not clear household data.",
+  "privacy": "Only fictional in-memory profiles/storage were used. Evidence has ANSI and workspace roots sanitized; no real household data, native captures, credentials or publication. Trailing log whitespace was normalized; raw and sanitized hashes are both recorded.",
+  "source_files": [
+    {
+      "path": "app/src/calmframes/ParentAreaScreen.tsx",
+      "sha256": "f8c19d08a969993ab11ca5d40260758114b16f26fbe7014dbe1fbadf8be357ac"
+    },
+    {
+      "path": "app/src/calmframes/TitleDetailsScreen.tsx",
+      "sha256": "707200b7e0612c350d1502eb84eb15cd81ef7ee9d91405fd10b64fc721eb73df"
+    },
+    {
+      "path": "app/src/calmframes/householdStorage.ts",
+      "sha256": "8e695e32551a3ad358782ef3d541eebd55ed1b777fec94e2bebbd1afd500c02f"
+    },
+    {
+      "path": "app/src/calmframes/profiles.ts",
+      "sha256": "707bd673a6aad64c3c26c157bdb4d8fb0383813b9cf5514b41c7d602631b3207"
+    },
+    {
+      "path": "app/src/screens/KidModeScreen.tsx",
+      "sha256": "cc73638cb562fba5f494087bc4e234270ff87cd9ee54c47fda9ba22800610cc1"
+    },
+    {
+      "path": "app/test/calmframes/readingComfort.test.tsx",
+      "sha256": "1fea05f30856bc3a560f3d555230a2dd97db773ac0cea72c6b1f34a9f696bfe2"
+    },
+    {
+      "path": "app/test/screens/readingComfortSave.test.tsx",
+      "sha256": "b5e61d73a8a799836385fca9a67964c7c732d7bf0954f7182da37846e355f814"
+    }
+  ],
+  "logs": [
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/clean-install.log",
+      "sha256": "cd3ecf7d577ce6b90f85f260b9637b0cd5eb7cd107605fd903c29ab0015198a9",
+      "bytes": 5644,
+      "raw_log_sha256": "cd3ecf7d577ce6b90f85f260b9637b0cd5eb7cd107605fd903c29ab0015198a9"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/red-before.log",
+      "sha256": "49b7e1025227acc9009995bba8a09c154d3416fa924ae1087ef1554f86412655",
+      "bytes": 15738,
+      "raw_log_sha256": "49b7e1025227acc9009995bba8a09c154d3416fa924ae1087ef1554f86412655"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/new-regressions.log",
+      "sha256": "b4eb5ff2c8d135fe814346e51aa5516a9f94fef925ea77394985192a0fb84191",
+      "bytes": 332,
+      "raw_log_sha256": "b4eb5ff2c8d135fe814346e51aa5516a9f94fef925ea77394985192a0fb84191"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/focused-regressions.log",
+      "sha256": "f50f0f9d7b78386e398b077911db7b1a7fabeb7a4c9228ee5c49a15bdb5a1cb6",
+      "bytes": 16119,
+      "raw_log_sha256": "f50f0f9d7b78386e398b077911db7b1a7fabeb7a4c9228ee5c49a15bdb5a1cb6"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/full-app.log",
+      "sha256": "73abed26dfbfe1612a07e12174fe4651fad0ffd3a86fca447a9f4d336d5f1450",
+      "bytes": 200119,
+      "raw_log_sha256": "6dd66501c7d74de36b7564f89e4fbee48e962ad6ce04525b7a1d3c6584ae0ba1"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/typecheck.log",
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "bytes": 67,
+      "raw_log_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/lint.log",
+      "sha256": "b7e9304c1f5b705d89d56d073ef6cce78ae0cae437e12daccd49980e759d4cdf",
+      "bytes": 8504,
+      "raw_log_sha256": "d60c325dc059051fe697f3340685852f114d52e4fb89fa95fb264fde222c495f"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/changed-file-lint.log",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "raw_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/source-gitleaks.log",
+      "sha256": "ad0ca261ff2cd0e4a2dca05052993d60171cf97979347203883152ee6e839014",
+      "bytes": 108,
+      "raw_log_sha256": "ad0ca261ff2cd0e4a2dca05052993d60171cf97979347203883152ee6e839014"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-active-profile-route.log",
+      "sha256": "9f50b0a1136d0b37903736325678ec7949f0191a505d9c6b017a991e3b22b942",
+      "bytes": 1234,
+      "raw_log_sha256": "9f50b0a1136d0b37903736325678ec7949f0191a505d9c6b017a991e3b22b942"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-bounded-text-height.log",
+      "sha256": "755f885f217dd673842ab7a5500c3e6819d9d68d0f138905cb63157d64a98054",
+      "bytes": 3402,
+      "raw_log_sha256": "755f885f217dd673842ab7a5500c3e6819d9d68d0f138905cb63157d64a98054"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-focus-moved-away.log",
+      "sha256": "50d79db9309245ff2c2b1f270f54a891839ff5ee94c3be2f9b167a6f2c9d7c64",
+      "bytes": 2819,
+      "raw_log_sha256": "50d79db9309245ff2c2b1f270f54a891839ff5ee94c3be2f9b167a6f2c9d7c64"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-rapid-press-guard.log",
+      "sha256": "d35782666aebb8006be187c7a1621ef1d3f3bbe40c3b4c9bf235555e04449f49",
+      "bytes": 3123,
+      "raw_log_sha256": "d35782666aebb8006be187c7a1621ef1d3f3bbe40c3b4c9bf235555e04449f49"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-saved-state-only.log",
+      "sha256": "44e69f07f651f30a4741ef07e8ee9458f07b10b3f5731e6e863ae15fb9451a9d",
+      "bytes": 3237,
+      "raw_log_sha256": "44e69f07f651f30a4741ef07e8ee9458f07b10b3f5731e6e863ae15fb9451a9d"
+    },
+    {
+      "path": "results/overnight-2026-10-25/reading-comfort/logs/negative-storage-preserves-flag.log",
+      "sha256": "432bcfc129112b1ff31f6740ec2b021b0b601cc360472205301f8d72fb22f596",
+      "bytes": 3230,
+      "raw_log_sha256": "432bcfc129112b1ff31f6740ec2b021b0b601cc360472205301f8d72fb22f596"
+    }
+  ]
+}

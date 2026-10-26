@@ -173,6 +173,8 @@ def probe_video(path: str | Path, *, read_frame_timestamps: bool = True) -> Vide
 
     duration_s = 0.0
     for candidate in (video.get("duration"), (data.get("format") or {}).get("duration")):
+        if candidate is None:
+            continue
         try:
             duration_s = float(candidate)
             break

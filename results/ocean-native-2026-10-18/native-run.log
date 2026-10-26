@@ -1,0 +1,9 @@
+PASS Single update installed; transferred package SHA-256 and all app inputs match
+PASS Home Watch selects the approved replacement and clears its opening cover
+PASS First scheduled interval requests the baked ocean surface while guard cover stays on
+PASS Second scheduled interval requests the baked ocean surface while guard cover stays on
+PASS Uninterrupted playback reports natural end, teardown and Home Watch return
+PASS Pause during scheduled ocean interval restores the opaque fallback
+PASS Resume restores eligible baked ocean presentation
+PASS Skip requests cover before playhead write, then releases after guarded seek
+PASS Manual playback Back returns Home Watch

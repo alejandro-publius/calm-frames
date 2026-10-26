@@ -1,0 +1,34 @@
+[
+  {
+    "guard": "synthetic_production_refusal",
+    "test": "test_synthetic_fixture_cannot_be_accepted_as_production_input",
+    "guard_disabled_in_memory_only": true,
+    "test_detected_breakage": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "guard": "capture_receipt_binding",
+    "test": "test_changed_capture_receipt_after_preflight_refuses",
+    "guard_disabled_in_memory_only": true,
+    "test_detected_breakage": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "guard": "manifest_binding",
+    "test": "test_changed_manifest_after_preflight_refuses",
+    "guard_disabled_in_memory_only": true,
+    "test_detected_breakage": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "guard": "snapshot_hash_binding",
+    "test": "test_snapshot_refuses_bytes_changed_during_copy",
+    "guard_disabled_in_memory_only": true,
+    "test_detected_breakage": true,
+    "failures": 1,
+    "errors": 0
+  }
+]

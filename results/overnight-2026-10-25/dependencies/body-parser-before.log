@@ -1,0 +1,99 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+not ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 2.009255
+  type: 'test'
+  location: './app/tools/body_parser_dependency.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '2.3.0' !== '2.4.0'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '2.4.0'
+  actual: '2.3.0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/body_parser_dependency.test.mjs:91:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+not ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 132.932332
+  type: 'test'
+  location: './app/tools/body_parser_dependency.test.mjs:94:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    node:events:497
+          throw er; // Unhandled 'error' event
+          ^
+
+    Error: incorrect header check
+        at genericNodeError (node:internal/errors:983:15)
+        at wrappedFn (node:internal/errors:537:14)
+        at Zlib.zlibOnError [as onerror] (node:zlib:191:17)
+    Emitted 'error' event on Gunzip instance at:
+        at Gunzip.onerror (node:internal/streams/readable:1028:14)
+        at Gunzip.emit (node:events:519:28)
+        at emitErrorNT (node:internal/streams/destroy:170:8)
+        at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+        at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+      errno: -3,
+      code: 'Z_DATA_ERROR'
+    }
+
+    Node.js v22.23.2
+
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    genericNodeError (node:internal/errors:983:15)
+    wrappedFn (node:internal/errors:537:14)
+    Zlib.zlibOnError [as onerror] (node:zlib:191:17)
+    Gunzip.onerror (node:internal/streams/readable:1028:14)
+    Gunzip.emit (node:events:519:28)
+    emitErrorNT (node:internal/streams/destroy:170:8)
+    emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+    TestContext.<anonymous> (file://./app/tools/body_parser_dependency.test.mjs:99:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 39.55314
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 5.946546
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 2
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 309.278786

@@ -1,0 +1,6 @@
+commit: d9c9e2f
+command: .venv/bin/python -m pytest -q -m "not slow" flashmap pipeline eval -p no:cacheprovider -rfE
+python: Python 3.12.3
+failures and errors:
+  none
+result: 1880 passed, 9 skipped, 2 deselected in 701.95s (0:11:41)

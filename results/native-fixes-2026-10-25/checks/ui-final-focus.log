@@ -1,0 +1,177 @@
+
+> calm-frames-app@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> calm-frames-app@0.1.0 lint
+> eslint src --ext .ts,.tsx && eslint test --ext .ts,.tsx
+
+
+<checkout>/app/src/blocks/components/MediaItemShoveler/MediaItemShoveler.tsx
+  89:20  warning  Inline style: { itemPadding: 0, selectedItemScaleFactor: 1.1 }  react-native/no-inline-styles
+
+<checkout>/app/src/blocks/components/MediaItemShovelerList/MediaItemShovelerList.tsx
+   85:20  warning  Inline style: { color: 'white', fontSize: 50 }  react-native/no-inline-styles
+  186:20  warning  Inline style: { itemPadding: 0 }                react-native/no-inline-styles
+
+<checkout>/app/src/blocks/components/MediaItemTile/MediaItemTile.tsx
+  104:9  warning  Inline style: { justifyContent: 'center', overflow: 'hidden' }  react-native/no-inline-styles
+
+<checkout>/app/src/blocks/components/VerticalNavigationBar/VerticalNavigationBar.tsx
+  128:18  warning  Inline style: { position: 'absolute', opacity: 1 }  react-native/no-inline-styles
+  174:21  warning  Inline style: { paddingTop: 80 }                    react-native/no-inline-styles
+
+<checkout>/app/src/calmframes/CoastalBoat.tsx
+  37:104  warning  Expected 'undefined' and instead saw 'void'              no-void
+  38:130  warning  Expected 'undefined' and instead saw 'void'              no-void
+  39:125  warning  Expected 'undefined' and instead saw 'void'              no-void
+  40:53   warning  Expected 'undefined' and instead saw 'void'              no-void
+  57:12   warning  Inline style: { position: 'absolute', left: 0, top: 0 }  react-native/no-inline-styles
+
+<checkout>/app/src/calmframes/CoverLayer.tsx
+   81:6   warning  Unexpected control character(s) in regular expression: \x00, \x1f  no-control-regex
+  123:11  warning  Inline style: { left: 0, top: 0 }                                  react-native/no-inline-styles
+  136:11  warning  Inline style: { left: 0 }                                          react-native/no-inline-styles
+  149:11  warning  Inline style: { left: 0 }                                          react-native/no-inline-styles
+
+<checkout>/app/src/calmframes/HarborOpening.tsx
+  83:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+<checkout>/app/src/calmframes/canonicalJson.ts
+  314:16  warning  Unexpected use of '|'   no-bitwise
+  314:24  warning  Unexpected use of '>>'  no-bitwise
+  314:36  warning  Unexpected use of '|'   no-bitwise
+  314:44  warning  Unexpected use of '&'   no-bitwise
+  317:9   warning  Unexpected use of '|'   no-bitwise
+  317:17  warning  Unexpected use of '>>'  no-bitwise
+  318:9   warning  Unexpected use of '|'   no-bitwise
+  318:17  warning  Unexpected use of '&'   no-bitwise
+  318:18  warning  Unexpected use of '>>'  no-bitwise
+  319:9   warning  Unexpected use of '|'   no-bitwise
+  319:17  warning  Unexpected use of '&'   no-bitwise
+  323:9   warning  Unexpected use of '|'   no-bitwise
+  323:17  warning  Unexpected use of '>>'  no-bitwise
+  324:9   warning  Unexpected use of '|'   no-bitwise
+  324:17  warning  Unexpected use of '&'   no-bitwise
+  324:18  warning  Unexpected use of '>>'  no-bitwise
+  325:9   warning  Unexpected use of '|'   no-bitwise
+  325:17  warning  Unexpected use of '&'   no-bitwise
+  325:18  warning  Unexpected use of '>>'  no-bitwise
+  326:9   warning  Unexpected use of '|'   no-bitwise
+  326:17  warning  Unexpected use of '&'   no-bitwise
+
+<checkout>/app/src/calmframes/chimeSound.ts
+  80:3  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+<checkout>/app/src/calmframes/ed25519.ts
+   21:12  warning  Unexpected use of '<<'   no-bitwise
+   23:4   warning  Unexpected use of '<<'   no-bitwise
+   48:9   warning  Unexpected use of '&'    no-bitwise
+   52:5   warning  Unexpected use of '>>='  no-bitwise
+   83:9   warning  Unexpected use of '&'    no-bitwise
+   87:5   warning  Unexpected use of '>>='  no-bitwise
+  103:13  warning  Unexpected use of '|'    no-bitwise
+  103:14  warning  Unexpected use of '<<'   no-bitwise
+  114:16  warning  Unexpected use of '&'    no-bitwise
+  114:17  warning  Unexpected use of '>>'   no-bitwise
+  115:13  warning  Unexpected use of '&'    no-bitwise
+  115:21  warning  Unexpected use of '<<'   no-bitwise
+  137:8   warning  Unexpected use of '&'    no-bitwise
+  154:8   warning  Unexpected use of '&'    no-bitwise
+  220:14  warning  Unexpected use of '|'    no-bitwise
+  220:15  warning  Unexpected use of '<<'   no-bitwise
+  224:16  warning  Unexpected use of '&'    no-bitwise
+  224:17  warning  Unexpected use of '>>'   no-bitwise
+
+<checkout>/app/src/calmframes/mapSource.ts
+  379:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+<checkout>/app/src/calmframes/offlineMapText.ts
+  18:0  warning  Unexpected unlimited 'eslint-disable' comment. Specify some rule names to disable  eslint-comments/no-unlimited-disable
+  18:1  warning  ESLint rules are disabled but never reported                                       eslint-comments/no-unused-disable
+
+<checkout>/app/src/calmframes/parentGate.ts
+  152:5   warning  Unexpected use of '|='  no-bitwise
+  152:19  warning  Unexpected use of '^'   no-bitwise
+
+<checkout>/app/src/calmframes/sceneBridges.ts
+  43:46  warning  Unexpected control character(s) in regular expression: \x00, \x1f  no-control-regex
+
+<checkout>/app/src/calmframes/sha512.ts
+   13:17  warning  Unexpected use of '<<'   no-bitwise
+   44:10  warning  Unexpected use of '&'    no-bitwise
+   44:11  warning  Unexpected use of '|'    no-bitwise
+   44:12  warning  Unexpected use of '>>'   no-bitwise
+   44:23  warning  Unexpected use of '<<'   no-bitwise
+   48:10  warning  Unexpected use of '>>'   no-bitwise
+   63:28  warning  Unexpected use of '&'    no-bitwise
+   64:5   warning  Unexpected use of '>>='  no-bitwise
+   74:16  warning  Unexpected use of '|'    no-bitwise
+   74:17  warning  Unexpected use of '<<'   no-bitwise
+   80:9   warning  Unexpected use of '^'    no-bitwise
+   80:9   warning  Unexpected use of '^'    no-bitwise
+   82:9   warning  Unexpected use of '^'    no-bitwise
+   82:9   warning  Unexpected use of '^'    no-bitwise
+   83:18  warning  Unexpected use of '&'    no-bitwise
+   89:18  warning  Unexpected use of '^'    no-bitwise
+   89:18  warning  Unexpected use of '^'    no-bitwise
+   90:18  warning  Unexpected use of '^'    no-bitwise
+   90:19  warning  Unexpected use of '&'    no-bitwise
+   90:29  warning  Unexpected use of '&'    no-bitwise
+   90:29  warning  Unexpected use of '&'    no-bitwise
+   90:29  warning  Unexpected use of '~'    no-bitwise
+   91:21  warning  Unexpected use of '&'    no-bitwise
+   92:18  warning  Unexpected use of '^'    no-bitwise
+   92:18  warning  Unexpected use of '^'    no-bitwise
+   93:19  warning  Unexpected use of '^'    no-bitwise
+   93:19  warning  Unexpected use of '^'    no-bitwise
+   93:20  warning  Unexpected use of '&'    no-bitwise
+   93:30  warning  Unexpected use of '&'    no-bitwise
+   93:40  warning  Unexpected use of '&'    no-bitwise
+   94:21  warning  Unexpected use of '&'    no-bitwise
+   99:11  warning  Unexpected use of '&'    no-bitwise
+  103:11  warning  Unexpected use of '&'    no-bitwise
+  108:18  warning  Unexpected use of '&'    no-bitwise
+  116:41  warning  Unexpected use of '&'    no-bitwise
+  117:7   warning  Unexpected use of '>>='  no-bitwise
+
+<checkout>/app/src/calmframes/timingLog.ts
+  142:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+  190:3  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+<checkout>/app/src/calmframes/useCoverHarness.ts
+  426:33  warning  'react-hooks/exhaustive-deps' rule is disabled but never reported  eslint-comments/no-unused-disable
+
+<checkout>/app/src/calmframes/useFlashGuard.ts
+  375:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+  629:7  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+<checkout>/app/src/components/MovieCarousel.tsx
+  224:24  warning  Inline style: { selectedItemScaleFactor: 1.1 }  react-native/no-inline-styles
+
+✖ 104 problems (0 errors, 104 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+
+<checkout>/app/test/blocks/screen/SearchResultsScreen/SearchResultsScreen.test.tsx
+  36:3  warning  Tests should not be skipped  jest/no-disabled-tests
+  48:3  warning  Tests should not be skipped  jest/no-disabled-tests
+  63:3  warning  Tests should not be skipped  jest/no-disabled-tests
+
+<checkout>/app/test/calmframes/harnessConfig.test.ts
+  126:33  warning  '@typescript-eslint/no-var-requires' rule is disabled but never reported  eslint-comments/no-unused-disable
+
+✖ 4 problems (0 errors, 4 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+PASS test/calmframes/readingComfort.test.tsx
+PASS test/navigation/AppStack.test.tsx
+PASS test/calmframes/homeFocusRouting.test.tsx
+PASS test/calmframes/playbackUi.test.tsx
+PASS test/navigation/playerRouteFallback.test.tsx
+
+Test Suites: 5 passed, 5 total
+Tests:       47 passed, 47 total
+Snapshots:   1 passed, 1 total
+Time:        4.908 s, estimated 5 s
+Ran all test suites matching /test\/calmframes\/homeFocusRouting.test.tsx|test\/calmframes\/readingComfort.test.tsx|test\/navigation\/AppStack.test.tsx|test\/navigation\/playerRouteFallback.test.tsx|test\/calmframes\/playbackUi.test.tsx/i.

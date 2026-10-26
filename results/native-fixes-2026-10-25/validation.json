@@ -1,0 +1,156 @@
+{
+  "product_source_commit": "a6bdb62276dd63603716509e24b2034451b46b44",
+  "base": "37d10c2db57fc0868499adc133cff7560600d5cc",
+  "branch": "codex/native-defect-fixes-2026-10-25",
+  "tool_versions": {
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "python": "3.12.14",
+    "java": "21.0.12.1"
+  },
+  "checks": {
+    "locked_install": {
+      "exit_code": 0,
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "own_node_modules": true,
+      "log": "checks/uuid-install-tests.log"
+    },
+    "app_jest": {
+      "exit_code": 0,
+      "command": "npm test -- --ci --runInBand",
+      "passed": 1905,
+      "skipped": 4,
+      "suites_passed": 181,
+      "suites_skipped": 1,
+      "snapshots_passed": 57,
+      "log": "checks/app-full-final.log"
+    },
+    "normal_typecheck_lint": {
+      "exit_code": 0,
+      "commands": [
+        "npm run typecheck",
+        "npm run lint"
+      ],
+      "warnings": "Existing lint warnings remain; no errors.",
+      "log": "checks/node-gates-final.log"
+    },
+    "node_and_prepared_media": {
+      "exit_code": 0,
+      "tests_passed": 129,
+      "log": "checks/node-gates-final.log"
+    },
+    "normal_player_build": {
+      "exit_code": 0,
+      "command": "npm run setup:player",
+      "log": "checks/player-build.log",
+      "archive": "generated-player-archive.json",
+      "native_build": false
+    },
+    "python_focused": {
+      "exit_code": 0,
+      "passed": 119,
+      "subtests_passed": 26,
+      "scope": "dependency policy, documentation synchronization/style, release package gates, demo assembly and preflight",
+      "log": "checks/python-focused.log"
+    },
+    "sbom": {
+      "exit_code": 0,
+      "bills_reproduced": 3,
+      "log": "checks/sbom-final.log",
+      "peer_warnings_retained": true
+    },
+    "dependency_audit": {
+      "exit_code": 1,
+      "unique_advisories": 13,
+      "unique_high": 9,
+      "unique_moderate": 4,
+      "expired_groups": [
+        "in-the-device-bundle",
+        "not-in-the-device-bundle"
+      ],
+      "renewals": false,
+      "log": "checks/audit-final.log"
+    },
+    "hosted_ci": {
+      "status": "not_run",
+      "reason": "Local-only implementation pass; no push or workflow dispatch."
+    },
+    "native_build_and_human_review": {
+      "status": "pending",
+      "previous_native_source": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f",
+      "reason": "Cloud lacks Vega SDK/device; received evidence cannot validate newer fixes."
+    },
+    "documentation_and_secret_controls": {
+      "relative_links_and_line_links": {
+        "passed": 12,
+        "log": "checks/docs-final.log"
+      },
+      "style": {
+        "exit_code": 0,
+        "log": "checks/style-final.log"
+      },
+      "helper_ruff": {
+        "exit_code": 0,
+        "log": "checks/helper-ruff.log"
+      },
+      "gitleaks_commit_diff": {
+        "exit_code": 0,
+        "commits_scanned": 8,
+        "findings": 0,
+        "log": "checks/gitleaks-commits.log"
+      },
+      "gitleaks_staged": {
+        "exit_code": 0,
+        "findings": 0,
+        "log": "checks/gitleaks-staged.log"
+      },
+      "negative_secret_controls": {
+        "passed": 3,
+        "log": "checks/secret-controls.log"
+      },
+      "html_references": {
+        "checked": 3,
+        "missing": 0
+      },
+      "synced_numbers": 749,
+      "pinned_dependencies_actions": {
+        "pinned": 51,
+        "notes": 1,
+        "loose": 0
+      }
+    }
+  },
+  "earlier_failures_retained": {
+    "first_full_suite": "checks/app-full.log",
+    "resolved": "Restored-paused guidance, persistent live-region snapshot, and real ESM transform compatibility. No test removed or weakened."
+  },
+  "original_checklist": {
+    "completed": [
+      5,
+      6,
+      9,
+      14,
+      15,
+      18
+    ],
+    "partial": [
+      1,
+      2,
+      3,
+      4,
+      7,
+      10,
+      11,
+      12,
+      13,
+      16,
+      19,
+      20
+    ],
+    "blocked": [
+      8,
+      17
+    ]
+  },
+  "scope": "Source tests and generated inputs only. No native speech, compositor timing, medical, human or release acceptance."
+}

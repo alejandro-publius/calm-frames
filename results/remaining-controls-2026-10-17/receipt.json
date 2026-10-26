@@ -1,0 +1,35 @@
+{
+  "recorded_utc": "2026-10-17T05:12:41.576546+00:00",
+  "source_commit": "c2b56d258979b9d7e968944c0780dc7fb1721f9f",
+  "head_before_evidence": "e657e9082a4da3b4fe59d5e6799acb92440b2e5e",
+  "package_sha256_previously_device_verified": "081369b932daf3786b54ad46aaa18e2a5dadcb74ef4865914d9c868a09f9cef1",
+  "package_provenance": "Existing installed app reopened after owner closed simulator. No install or rebuild. Device temporary installer file cleared at reboot, so no fresh temporary-file hash claim. Exact prepared Acadia source identity and extra-cautious rendition observed in fresh trace.",
+  "simulator_reopen": "First detached attempt exited without connection. Repository detached-shell method connected on retry. One existing-app launch, no install/rebuild.",
+  "checks": {
+    "parents_hardware_cancel": "pass: Parents -> PIN first key -> KEY_BACK -> Parents focus; no PIN entered",
+    "parents_cancel_button": "pass: PIN first key -> Up -> kid-mode-parent-back -> Enter -> Parents focus",
+    "pause_resume": "partial: pause at media 8083 ms covered=true; playing at media 8160 ms covered=true, 3382 ms later. First cover eventually cleared at 12721 ms. Smooth resumed playback fails acceptance due subsequent severe slowdown.",
+    "skip": "functional pass with performance failure: focus calm-card-skip; Enter; cover-request true before playhead-write 12799 ms; native seeked; cover release only after confirmed outside interval. Write-to-seeked about 7258 ms; visible focus/card placement unverified.",
+    "manual_back": "functional pass twice before ended. Slowed run: leavePlayer -> fallback teardown 1510 ms -> Home Watch 2257 ms. Skip run: teardown ok 859 ms -> Home Watch 884 ms."
+  },
+  "performance_finding": {
+    "run1": "Media samples advance 17.426 seconds in 122.089 seconds, including the deliberate 3.382-second pause. Not a normal-speed run.",
+    "run2_without_pause": "Slow media progression also occurs before Skip, e.g. 21 ms media in 1003 ms wall. This does not establish Pause as the root cause.",
+    "native_evidence": "Repeated leaudiosink warnings report audioPositionDiff zero and native video-queue buffering while the app reports playbackRate=1. Run 1 emitted no waiting event after startup; missing-event inference alone was not used.",
+    "cause": "unresolved: evidence points to native playback/audio pipeline behavior; no specific app-source root cause proved",
+    "code_changes": "none; no speculative clock, seek, cover, audio, or teardown workaround"
+  },
+  "driver_limits": [
+    "Original 10-second first-cover-off wait and 60-second second-cover wait expired because playback slowed. Raw results retained; later cover-off was observed.",
+    "Skip press followed a cover-on trace, but a subsequent media resync had cleared that schedule cover before Enter. It still activated the scene Skip control and the guarded seek re-covered before writing. Do not call this an activation while the schedule cover was continuously on."
+  ],
+  "final_state": "Home Watch focused at 05:10:42.704 UTC; app running confirmed; own text collector process group stopped; simulator left open",
+  "visual_audio_validation": false,
+  "screenshots_recordings": false,
+  "rebuilds": 0,
+  "installs": 0,
+  "app_launches": 1,
+  "push": false,
+  "full_filtered_text_log_path": "/tmp/calm-controls-2026-10-17/device.log",
+  "full_filtered_text_log_sha256": "d8b44595726d17c85c0b9072be098387b8e02d1b70419a5b38024adced9f0788"
+}

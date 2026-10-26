@@ -1,0 +1,57 @@
+{
+  "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+  "catalogSha256": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+  "title": {
+    "durationMs": 37641.756,
+    "id": "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    "maps": {
+      "broadcast": {
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json",
+        "sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1"
+      },
+      "extra-cautious": {
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json",
+        "sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f"
+      },
+      "wcag": {
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json",
+        "sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a"
+      }
+    },
+    "renditions": {
+      "broadcast": {
+        "durationMs": 37620.917,
+        "guardBandMs": 500.0,
+        "minCoverMs": 400.0,
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4",
+        "sha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+        "startOffsetMs": 0.0
+      },
+      "extra-cautious": {
+        "durationMs": 37620.917,
+        "guardBandMs": 1000.0,
+        "minCoverMs": 800.0,
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
+        "sha256": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59",
+        "startOffsetMs": 0.0
+      },
+      "wcag": {
+        "durationMs": 37620.917,
+        "guardBandMs": 500.0,
+        "minCoverMs": 400.0,
+        "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
+        "sha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+        "startOffsetMs": 0.0
+      }
+    },
+    "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    "title": "Acadia coastal scenery (National Park Service, public domain)",
+    "verification": {
+      "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+      "outcome": "cover proven drawn",
+      "reportSha256": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+    }
+  },
+  "harborCatalogUnchanged": true,
+  "harborDemoAndSoundAssetsUnchanged": true
+}

@@ -1,0 +1,21 @@
+{
+  "checks": [
+    {
+      "check": "Pause/resume during first cover",
+      "evidence": "pause then playing and first cover-off events; inspect timing samples for exact pause duration"
+    },
+    {
+      "check": "Activate Skip during second cover",
+      "evidence": "Skip focused; Enter caused guarded playhead-write, seeked and cover-off"
+    },
+    {
+      "check": "Manual Back during playback",
+      "evidence": "Back key followed by leavePlayer and Home Watch focus, before video ended"
+    },
+    {
+      "check": "Owner review state",
+      "evidence": "App remains open, paused in first covered scene with Skip focused"
+    }
+  ],
+  "result": "completed"
+}

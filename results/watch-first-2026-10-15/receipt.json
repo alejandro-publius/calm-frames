@@ -1,0 +1,131 @@
+{
+  "installedAppSource": "8d1bb787bb8b54b9023bee6f75baa2aac432940e",
+  "repairedSource": "9afdbe5bf72170787deb5cc0d82e3aa565a87812",
+  "repairInstalled": false,
+  "packagePath": "build/release/watch-first-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+  "packageSha256": "874d91690c4ae6893be9e0c2f075503c29c0c7aa394aaaa34a19f948e6b36409",
+  "builds": 1,
+  "installs": 1,
+  "appInputsCommitted": true,
+  "buildInputCount": 747,
+  "postBuildChanges": [
+    "app/src/calmframes/TitleDetailsScreen.tsx",
+    "app/src/screens/KidModeScreen.tsx",
+    "app/test/screens/returnFocus.test.tsx"
+  ],
+  "tests": {
+    "installedSourceAppPassed": 1313,
+    "repairedSourceAppPassed": 1314,
+    "appSuites": 131,
+    "skipped": 4,
+    "snapshots": 57,
+    "typecheck": "passed",
+    "lintErrors": 0,
+    "lintWarnings": 101,
+    "captureSuitesExcluded": [
+      "uiCapture",
+      "coastalExport",
+      "controlStudy"
+    ],
+    "hardwareBackRegression": "Observed failing on installed source; passes after removing competing parent handler and assigning nested Back ownership to Details."
+  },
+  "preservedPaths": {
+    "unchangedFrom094c93f": [
+      "app/assets",
+      "app/src/calmframes/packagedLibrary.ts",
+      "app/src/calmframes/coverSchedule.ts",
+      "app/src/calmframes/useFlashGuard.ts",
+      "hook",
+      "flashmap",
+      "pipeline"
+    ]
+  },
+  "pending": "One additional build/install of 9afdbe5 and focused native nested Back check, beyond the requested single build.",
+  "limitations": [
+    "No screenshot, recording or image capture. Logs establish focus requests and media events, not pixels, visible rings, audio, captions or compositor timing.",
+    "Native playback was brief navigation testing of approved prepared videos, not a fresh full detector/cover/seek acceptance.",
+    "The initial driver stopped after a short 1.5-second focus wait following demo Back; that observation alone is inconclusive. A continuation used longer settling without reinstalling.",
+    "The nested More info Back skip was separately reproduced by native logs and a source test. Fixed source is not claimed native-tested."
+  ],
+  "logs": {
+    ".logs/consumer-tests-final.log": "f05240cf618716e44ce6eb215e07918d65f648a6872d635319c4a9500032a370",
+    ".logs/consumer-tests-repaired.log": "4d0110b1dac1c5d5fbcba4cbed33322bd6f21bc7d9dab09cd9d68d0d67cbd5d0",
+    ".logs/consumer-hardware-back.log": "c52061f41b6cf023e84e487382fb3d82ac87a219ab7e8e38cd503cb85cbc86b6",
+    ".logs/consumer-typecheck-repaired.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/consumer-lint-repaired.log": "f23a005c5320c36aa7918cb66dfd4ffb779f332684d18debadd3b21886a06010",
+    ".logs/consumer-build.log": "04b30dab35631421ffb8d76598bc82aa022f1cdceab0e2354a50e215c1697dac"
+  },
+  "native": {
+    "observations": [
+      {
+        "journey": "Launch prioritizes Watch",
+        "verdict": "observed-pass",
+        "evidence": "kid-mode-home-watch"
+      },
+      {
+        "journey": "Home Watch and player Back",
+        "verdict": "observed-pass",
+        "evidence": "playing event; return kid-mode-home-watch"
+      },
+      {
+        "journey": "Technical details and More info Back",
+        "verdict": "observed-pass",
+        "evidence": "technical Back -> Technical details control; info Back -> More info control"
+      },
+      {
+        "journey": "stopped",
+        "verdict": "inconclusive",
+        "evidence": "Expected kid-mode-details-play, got calm-card-skip"
+      },
+      {
+        "journey": "Observed nested Back defect",
+        "verdict": "observed-defect",
+        "evidence": "kid-mode-home-more-info; regression also reproduced in source test; fixed source not yet rebuilt"
+      },
+      {
+        "journey": "Parents hardware cancel",
+        "verdict": "observed-pass",
+        "evidence": "return Parents; PIN untouched"
+      },
+      {
+        "journey": "Parents button cancel",
+        "verdict": "observed-pass",
+        "evidence": "return Parents; PIN untouched"
+      },
+      {
+        "journey": "Acadia Watch and Back",
+        "verdict": "observed-pass",
+        "evidence": "playing; exact source identity; return Details Watch"
+      },
+      {
+        "journey": "Acadia More info and Home",
+        "verdict": "observed-pass",
+        "evidence": "focus returned to Acadia card"
+      },
+      {
+        "journey": "Help Back",
+        "verdict": "observed-pass",
+        "evidence": "return How it works"
+      },
+      {
+        "journey": "Left at Home",
+        "verdict": "observed-pass",
+        "evidence": "Watch focus; no autoplay"
+      }
+    ],
+    "finalFocus": "kid-mode-home-watch",
+    "leftRunning": true,
+    "noAutoplay": true,
+    "pinOrSettingsChanged": false,
+    "touchInjectionEvents": 0
+  },
+  "evidence": {
+    "preparation.json": "102ceada6752953624410cc30dea8960c28afbb5bc465a02e1396a8c9a7c93b7",
+    "native-continuation.json": "b8b75d75e510c46710e3d0d583fda952b85adc4afa85d1f2a0c321deb99b295b",
+    "continuation-events.log": "059a712d83ce502706f5663218f09a0ed8eb14bba527bf27dcfdeabb80222a0f",
+    "native-initial.json": "b383ef49137b8c16e0db247796cae09d8092e40ef653eedbc1d8703155420a37",
+    "native-initial-progress.txt": "7fe791a71c122bb638049021799fd757fb141a9565ae1b4b04b042c3403eadf4",
+    "native-continuation-progress.txt": "74055336c7ee194307645af8c9a11ab6ba4060df8ca2946e37baec0182fb5d7c",
+    "native-events.log": "b2ad73cad5fb75a3744025a7f4b731b9c00688064bf1d0f14ecdbff362b5e4d9"
+  }
+}

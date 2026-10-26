@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 1 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 19.827759
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 2 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 24.795189
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 3 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.562278
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 4 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 44.988891
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 5 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 736.866018
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 6 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 2.945224
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 7 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 18.203517
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 8 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 1.594259
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 9 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 53.399406
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 10 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 46.749057
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 11 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 37.424539
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 12 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 28.555152
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 13 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 58.102431
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 14 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 2.415057
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 15 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 54.500299
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 16 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.290765
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 17 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.599747
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 18 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 355.835789
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 19 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 14.337059
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 20 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 1.238185
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 21 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 3.086456
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 22 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 33.281202
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1641.435789

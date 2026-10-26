@@ -1,0 +1,7 @@
+06:10:02Z STOP Expected kid-mode-home-watch, got player-seekbar
+Traceback (most recent call last):
+  File "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review/.logs/dark-cinema/resume_native.py", line 32, in <module>
+    expect('kid-mode-home-watch');record('Launch','Home Watch focus, existing installed package; no reinstall')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 23, in expect
+RuntimeError: Expected kid-mode-home-watch, got player-seekbar

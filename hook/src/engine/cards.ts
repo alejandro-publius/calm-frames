@@ -9,11 +9,14 @@
  *
  *   5 seconds before an interval: "Flashing part coming up", with a Skip
  *   button that has D-pad focus.
- *   During the interval: the cover, while sound and captions keep going.
- *   After it: one line, such as "Hid 4 seconds of flashing. Sound and captions
- *   kept playing."
+ *   During the interval: the cover, while the sound keeps going.
+ *   After it: one line, such as "Hid 4 seconds of flashing. Sound kept
+ *   playing." Captions are not promised here: a title may ship none, and the
+ *   card knows nothing about tracks.
  *   A map that did not verify: the picture stays hidden and a card says the
  *   title is not checked yet.
+ *   A map still being checked: the picture stays hidden and a card says the
+ *   check is under way. That is not a refusal, so it is not the same card.
  *
  * This module is the whole decision, as one pure function of the schedule and
  * the playhead. Keeping it pure is what lets the wording, the timing and the
@@ -23,7 +26,13 @@
 import { CoverInterval, intervalAt, nextIntervalAfter } from './coverSchedule';
 import { MapRejection, rejectionMessage } from './flashMap';
 
-export type CardKind = 'none' | 'countdown' | 'covering' | 'after' | 'unverified';
+export type CardKind =
+  | 'none'
+  | 'checking'
+  | 'countdown'
+  | 'covering'
+  | 'after'
+  | 'unverified';
 
 export interface Card {
   kind: CardKind;
@@ -35,7 +44,7 @@ export interface Card {
   announcement: string;
   /** Countdown only: whole seconds left before the cover comes on. */
   secondsLeft?: number;
-  /** Countdown only: where a Skip press should land. */
+  /** Where an explicit Skip press should land, when this card offers it. */
   skipToMs?: number;
   /** The interval this card is about. */
   interval?: CoverInterval;
@@ -49,6 +58,22 @@ export const AFTER_CARD_MS = 5_000;
 export const SKIP_MARGIN_MS = 100;
 
 export const NO_CARD: Card = { kind: 'none', title: '', announcement: '' };
+
+/**
+ * The card while the map is still being checked.
+ *
+ * Nothing has gone wrong yet, so this is not the "Not checked yet" card a
+ * refused map gets. The picture is hidden either way: the guard starts
+ * covered and only a verified map uncovers it, whatever the card says. There
+ * is nothing coming up to skip, so there is no Skip button.
+ */
+export const CHECKING_CARD: Card = {
+  kind: 'checking',
+  title: 'Preparing your video',
+  detail: 'Checking the video before playback.',
+  announcement:
+    'Preparing your video. Checking the video before playback.',
+};
 
 function secondsWord(milliseconds: number): string {
   const seconds = Math.max(1, Math.round(milliseconds / 1000));
@@ -86,9 +111,9 @@ export function cardAt(
     const detail = options.blockedDetail ?? rejectionMessage(options.rejection);
     return {
       kind: 'unverified',
-      title: 'Not checked yet',
+      title: 'This video is unavailable',
       detail,
-      announcement: `Not checked yet. ${detail}`,
+      announcement: `This video is unavailable. ${detail}`,
     };
   }
 
@@ -99,9 +124,9 @@ export function cardAt(
   if (inside) {
     return {
       kind: 'covering',
-      title: 'Hiding a flashing part',
-      detail: 'Sound and captions keep playing.',
-      announcement: 'Hiding a flashing part. Sound and captions keep playing.',
+      title: 'Flashing hidden',
+      detail: 'Sound continues while this scene is hidden.',
+      announcement: 'Flashing hidden. Sound continues while this scene is hidden.',
       interval: inside,
     };
   }
@@ -112,9 +137,9 @@ export function cardAt(
     const secondsLeft = Math.max(0, Math.ceil(remainingMs / 1000));
     return {
       kind: 'countdown',
-      title: 'Flashing part coming up',
+      title: 'Flashing coming up',
       detail: `In ${secondsLeft} second${secondsLeft === 1 ? '' : 's'}. Press Skip to jump past it.`,
-      announcement: `Flashing part coming up in ${secondsLeft} second${
+      announcement: `Flashing coming up in ${secondsLeft} second${
         secondsLeft === 1 ? '' : 's'
       }. Press Skip to jump past it.`,
       secondsLeft,
@@ -134,14 +159,26 @@ export function cardAt(
     const hidden = secondsWord(justEnded.endMs - justEnded.startMs);
     return {
       kind: 'after',
-      title: `Hid ${hidden} of flashing`,
-      detail: 'Sound and captions kept playing.',
-      announcement: `Hid ${hidden} of flashing. Sound and captions kept playing.`,
+      title: `Scene hidden for ${hidden}`,
+      detail: 'Sound continued.',
+      announcement: `Scene hidden for ${hidden}. Sound continued.`,
       interval: justEnded,
     };
   }
 
   return NO_CARD;
+}
+
+/**
+ * True when this card carries a Skip button.
+ *
+ * CalmCard draws the button from this, and the player asks the same question
+ * to decide who owns OK: while Skip is on screen it has D-pad focus, so OK is
+ * a press on Skip and not a reason to pause the title or bring up controls.
+ * The consumer presentation retains this action through the covering card.
+ */
+export function cardOffersSkip(card: Card): boolean {
+  return (card.kind === 'countdown' || card.kind === 'covering') && card.skipToMs !== undefined;
 }
 
 /**

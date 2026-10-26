@@ -1,0 +1,12 @@
+{
+  "source_commit": "603f6ce01a7f719fd719e7947525058e478646fd",
+  "package_sha256": "6a4498d66ce2bf3db59dc29614f1e035ba1db1cb75e3e2c1c05f0a18ac2fb037",
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/otter-native-2026-10-18/calm-frames-otter-aarch64-debug.vpkg",
+  "install_count": 1,
+  "inputs_matched": 812,
+  "started_utc": "2026-10-18T05:11:31.986668+00:00",
+  "install_output": "Installing/Updating '/tmp/calm-frames-otter-aarch64-debug.vpkg' ...success\n",
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true,
+  "completed_utc": "2026-10-18T05:11:39.453457+00:00"
+}

@@ -1,0 +1,134 @@
+{
+  "video": "build/submission-redesign/Calm-Frames-demo-English.mp4",
+  "sha256": "a0ed8dc308803e6b1ce48e09a579c94ed95716c393bf56a01a0c7009d2af5232",
+  "duration_seconds": 156.021354,
+  "language": "English",
+  "narration": "macOS Samantha synthetic narration",
+  "footage": "Actual Vega Virtual Device recordings and disclosed still captures; editorial brand/status cards",
+  "edits": "Cuts, scaling, constant-frame-rate encoding, footer subtitles, narration and native audio gain. No generated app footage.",
+  "shots": [
+    {
+      "source": "docs/brand/firetv-app-icon-1280x720.png",
+      "source_sha256": "935d612db62cd39b9f42fae2c62994e6734e0e435ce9d0c0d6a37ea31aeb42f5",
+      "source_start_seconds": 0,
+      "output_start_seconds": 0,
+      "duration_seconds": 6,
+      "still": true,
+      "narration": "Calm Frames. A calmer way to watch.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-library.png",
+      "source_sha256": "9f4e734c7129b53ec742bb207484395cf36ba550a68da48bfcd5bf1d7665ac14",
+      "source_start_seconds": 0,
+      "output_start_seconds": 6,
+      "duration_seconds": 10,
+      "still": true,
+      "narration": "Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-details.png",
+      "source_sha256": "2cb3fa8153c7a117a5c71325733b4e9c0b987e947364a534ad2b159032b4f398",
+      "source_start_seconds": 0,
+      "output_start_seconds": 16,
+      "duration_seconds": 12,
+      "still": true,
+      "narration": "Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-harbor.mp4",
+      "source_sha256": "861e592171d423b525d006a0cbc3681c3b472f0ec27eeb95c5a490eac2bc8c66",
+      "source_start_seconds": 2,
+      "output_start_seconds": 28,
+      "duration_seconds": 26,
+      "still": false,
+      "narration": "Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": ".logs/redesign-final-transport.mp4",
+      "source_sha256": "2a0f4a7fc0b057dfbde9f16540fc7c69d1270d445eb878f2ec16cfd5e9c06e48",
+      "source_start_seconds": 2,
+      "output_start_seconds": 54,
+      "duration_seconds": 22,
+      "still": false,
+      "narration": "The remote seeks, pauses, and resumes. Interrupted playback uses an opaque cover. This demonstrates behavior, not physical screen timing.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": ".logs/redesign-final-pin.png",
+      "source_sha256": "71a6df947a60a3a240d869d6efc29dae5c3b3d06a7184b11fc9d91b5d23babff",
+      "source_start_seconds": 0,
+      "output_start_seconds": 76,
+      "duration_seconds": 9,
+      "still": true,
+      "narration": "A PIN protects parental controls. Incorrect entries stay locked, and Delete corrects a partial entry.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-parent.png",
+      "source_sha256": "9d1ad9f6b9ff4002ccd354e908e4e504c9eea1bf674ddfe14fc04feb7afcb044",
+      "source_start_seconds": 0,
+      "output_start_seconds": 85,
+      "duration_seconds": 12,
+      "still": true,
+      "narration": "Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-history.png",
+      "source_sha256": "5b020610e53394d14549352da02116c3575c2f2b0d1fabfe6745a59c42c5472c",
+      "source_start_seconds": 0,
+      "output_start_seconds": 97,
+      "duration_seconds": 12,
+      "still": true,
+      "narration": "Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/redesign-final-prepared.mp4",
+      "source_sha256": "5fb695d6af5a5ecb8857645066fd240118342b810ef9daadfce70092e3b0ec4a",
+      "source_start_seconds": 2,
+      "output_start_seconds": 109,
+      "duration_seconds": 21,
+      "still": false,
+      "narration": "This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": "build/submission-redesign/status-card.png",
+      "source_sha256": "09c8435cf01796c1c96e18ff23158f4c316bbbd2696cccdef2e8d7d340d75f7c",
+      "source_start_seconds": 0,
+      "output_start_seconds": 130,
+      "duration_seconds": 20,
+      "still": true,
+      "narration": "The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": "docs/brand/firetv-app-icon-1280x720.png",
+      "source_sha256": "935d612db62cd39b9f42fae2c62994e6734e0e435ce9d0c0d6a37ea31aeb42f5",
+      "source_start_seconds": 0,
+      "output_start_seconds": 150,
+      "duration_seconds": 6,
+      "still": true,
+      "narration": "Calm Frames. A calmer way to watch.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    }
+  ],
+  "capture_source_commit": "cba1a29f300b17b11cfaaf723c6f34d4d8bdf190",
+  "capture_package_sha256": "12f757db105ed2aa15d19017963ec63748917e2c4141e0026120390b3be6ecd1"
+}

@@ -1,0 +1,9 @@
+[  0.00-  1.64] Scenes for Kid.
+[  1.64-  3.40] Reading for Kid.
+[  3.40- 17.80] Reading Comfort, Off, Not Selected, Disabled, TV and Seating for Kid, Selected.
+[ 17.80- 25.60] Larger Health Text and More Space in Parents and More Info.
+[ 25.60- 29.60] Other screens stay the same, on, Interface.
+[ 29.60- 34.64] Gentle artwork motion, off, switch, not selected.
+[ 34.64- 38.56] Artwork eases into place when you open home or a video.
+[ 38.56- 40.76] Reduced motion keeps it still.
+[ 40.76- 41.76] for rental controls.

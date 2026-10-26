@@ -1,0 +1,8575 @@
+{
+  "01-bootstrap": [
+    {
+      "id": "harbor-opening",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    }
+  ],
+  "01-home-parent-focused": [
+    {
+      "id": "kid-home",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "kid-home-parent-area",
+      "x": 1032.9375,
+      "y": 36,
+      "width": 183.0625,
+      "height": 59
+    },
+    {
+      "id": "kid-home-parent-area-label",
+      "x": 1049.9375,
+      "y": 51.5,
+      "width": 149.0625,
+      "height": 28
+    },
+    {
+      "id": "kid-home-title",
+      "x": 64,
+      "y": 221,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "kid-home-watch",
+      "x": 64,
+      "y": 352,
+      "width": 162.859375,
+      "height": 59
+    },
+    {
+      "id": "kid-home-watch-label",
+      "x": 89,
+      "y": 366,
+      "width": 112.859375,
+      "height": 31
+    },
+    {
+      "id": "kid-home-more-info",
+      "x": 239.859375,
+      "y": 352,
+      "width": 104.609375,
+      "height": 59
+    },
+    {
+      "id": "kid-home-more-info-label",
+      "x": 256.859375,
+      "y": 366,
+      "width": 70.609375,
+      "height": 31
+    },
+    {
+      "id": "kid-home-learn",
+      "x": 64,
+      "y": 432,
+      "width": 147.640625,
+      "height": 59
+    },
+    {
+      "id": "kid-home-learn-label",
+      "x": 81,
+      "y": 447.5,
+      "width": 113.640625,
+      "height": 28
+    }
+  ],
+  "01-home": [
+    {
+      "id": "kid-home",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "kid-home-parent-area",
+      "x": 1032.9375,
+      "y": 36,
+      "width": 183.0625,
+      "height": 59
+    },
+    {
+      "id": "kid-home-parent-area-label",
+      "x": 1049.9375,
+      "y": 51.5,
+      "width": 149.0625,
+      "height": 28
+    },
+    {
+      "id": "kid-home-title",
+      "x": 64,
+      "y": 221,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "kid-home-watch",
+      "x": 64,
+      "y": 352,
+      "width": 162.859375,
+      "height": 59
+    },
+    {
+      "id": "kid-home-watch-label",
+      "x": 89,
+      "y": 366,
+      "width": 112.859375,
+      "height": 31
+    },
+    {
+      "id": "kid-home-more-info",
+      "x": 239.859375,
+      "y": 352,
+      "width": 104.609375,
+      "height": 59
+    },
+    {
+      "id": "kid-home-more-info-label",
+      "x": 256.859375,
+      "y": 366,
+      "width": 70.609375,
+      "height": 31
+    },
+    {
+      "id": "kid-home-learn",
+      "x": 64,
+      "y": 432,
+      "width": 147.640625,
+      "height": 59
+    },
+    {
+      "id": "kid-home-learn-label",
+      "x": 81,
+      "y": 447.5,
+      "width": 113.640625,
+      "height": 28
+    }
+  ],
+  "01-how-it-works": [
+    {
+      "id": "kid-home",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "picture-hold-dismiss",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "picture-hold-dismiss-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "kid-home-parent-area",
+      "x": 1032.9375,
+      "y": 36,
+      "width": 183.0625,
+      "height": 59
+    },
+    {
+      "id": "kid-home-parent-area-label",
+      "x": 1049.9375,
+      "y": 51.5,
+      "width": 149.0625,
+      "height": 28
+    },
+    {
+      "id": "picture-hold-introduction",
+      "x": 64,
+      "y": 116,
+      "width": 613,
+      "height": 536
+    },
+    {
+      "id": "picture-hold-start",
+      "x": 64,
+      "y": 473,
+      "width": 186.203125,
+      "height": 59
+    },
+    {
+      "id": "picture-hold-start-label",
+      "x": 89,
+      "y": 487,
+      "width": 136.203125,
+      "height": 31
+    },
+    {
+      "id": "picture-hold-demo-details",
+      "x": 263.203125,
+      "y": 473,
+      "width": 199.03125,
+      "height": 59
+    },
+    {
+      "id": "picture-hold-demo-details-label",
+      "x": 280.203125,
+      "y": 487,
+      "width": 165.03125,
+      "height": 31
+    },
+    {
+      "id": "picture-hold-playback-check",
+      "x": 64,
+      "y": 593,
+      "width": 169.09375,
+      "height": 59
+    },
+    {
+      "id": "picture-hold-playback-check-label",
+      "x": 81,
+      "y": 608.5,
+      "width": 135.09375,
+      "height": 28
+    }
+  ],
+  "01-loading": [
+    {
+      "id": "household-storage",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    }
+  ],
+  "01-opening": [
+    {
+      "id": "player-home-opening",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "player-opening-back",
+      "x": 64,
+      "y": 36,
+      "width": 76.90625,
+      "height": 59
+    },
+    {
+      "id": "player-opening-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 42.90625,
+      "height": 28
+    }
+  ],
+  "01-returning": [
+    {
+      "id": "player-home-opening",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    }
+  ],
+  "01-storage-error": [
+    {
+      "id": "household-storage",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "status-notice",
+      "x": 64,
+      "y": 116,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "status-notice-announcement",
+      "x": 90,
+      "y": 137,
+      "width": 953,
+      "height": 76
+    },
+    {
+      "id": "status-notice-title",
+      "x": 90,
+      "y": 137,
+      "width": 953,
+      "height": 36
+    },
+    {
+      "id": "status-notice-detail",
+      "x": 90,
+      "y": 181,
+      "width": 953,
+      "height": 32
+    },
+    {
+      "id": "household-storage-retry",
+      "x": 90,
+      "y": 234,
+      "width": 144.609375,
+      "height": 59
+    },
+    {
+      "id": "household-storage-retry-label",
+      "x": 115,
+      "y": 248,
+      "width": 94.609375,
+      "height": 31
+    }
+  ],
+  "02-details-demo": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 1565
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 197,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-demo-label",
+      "x": 64,
+      "y": 259,
+      "width": 520,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "x": 64,
+      "y": 333,
+      "width": 177.546875,
+      "height": 59
+    },
+    {
+      "id": "title-details-play-label",
+      "x": 89,
+      "y": 347,
+      "width": 127.546875,
+      "height": 31
+    },
+    {
+      "id": "title-details-info",
+      "x": 64,
+      "y": 517,
+      "width": 693,
+      "height": 59
+    },
+    {
+      "id": "title-details-show-info",
+      "x": 64,
+      "y": 517,
+      "width": 209.0625,
+      "height": 59
+    },
+    {
+      "id": "title-details-show-info-label",
+      "x": 81,
+      "y": 531,
+      "width": 175.0625,
+      "height": 31
+    },
+    {
+      "id": "title-details-summary",
+      "x": 64,
+      "y": 726,
+      "width": 693,
+      "height": 32
+    },
+    {
+      "id": "title-details-strip",
+      "x": 64,
+      "y": 815,
+      "width": 693,
+      "height": 140
+    },
+    {
+      "id": "title-details-strip-mark-0",
+      "x": 238.25,
+      "y": 816,
+      "width": 138.59375,
+      "height": 17
+    },
+    {
+      "id": "title-details-strip-mark-1",
+      "x": 480.796875,
+      "y": 816,
+      "width": 138.59375,
+      "height": 17
+    },
+    {
+      "id": "title-details-strip-start",
+      "x": 64,
+      "y": 842,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-strip-middle",
+      "x": 392.234375,
+      "y": 842,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-strip-end",
+      "x": 720.453125,
+      "y": 842,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan",
+      "x": 64,
+      "y": 992,
+      "width": 693,
+      "height": 434
+    },
+    {
+      "id": "title-details-plan-preset",
+      "x": 64,
+      "y": 1085,
+      "width": 693,
+      "height": 31
+    },
+    {
+      "id": "title-details-plan-room",
+      "x": 64,
+      "y": 1124,
+      "width": 693,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan-maps",
+      "x": 64,
+      "y": 1160,
+      "width": 693,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan-continuity",
+      "x": 64,
+      "y": 1212,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "title-details-plan-limits",
+      "x": 64,
+      "y": 1353,
+      "width": 693,
+      "height": 73
+    },
+    {
+      "id": "title-details-back-bottom",
+      "x": 64,
+      "y": 1470,
+      "width": 183.625,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "x": 81,
+      "y": 1484,
+      "width": 149.625,
+      "height": 31
+    }
+  ],
+  "02-details-harbor": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 1476
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 700,
+      "y": 460,
+      "width": 480,
+      "height": 80
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 197,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-description",
+      "x": 64,
+      "y": 259,
+      "width": 520,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "x": 64,
+      "y": 333,
+      "width": 162.859375,
+      "height": 59
+    },
+    {
+      "id": "title-details-play-label",
+      "x": 89,
+      "y": 347,
+      "width": 112.859375,
+      "height": 31
+    },
+    {
+      "id": "title-details-info",
+      "x": 64,
+      "y": 517,
+      "width": 693,
+      "height": 59
+    },
+    {
+      "id": "title-details-show-info",
+      "x": 64,
+      "y": 517,
+      "width": 209.0625,
+      "height": 59
+    },
+    {
+      "id": "title-details-show-info-label",
+      "x": 81,
+      "y": 531,
+      "width": 175.0625,
+      "height": 31
+    },
+    {
+      "id": "title-details-summary",
+      "x": 64,
+      "y": 646,
+      "width": 693,
+      "height": 64
+    },
+    {
+      "id": "title-details-strip",
+      "x": 64,
+      "y": 767,
+      "width": 693,
+      "height": 99
+    },
+    {
+      "id": "title-details-strip-start",
+      "x": 64,
+      "y": 794,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-strip-middle",
+      "x": 392.234375,
+      "y": 794,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-strip-end",
+      "x": 720.453125,
+      "y": 794,
+      "width": 36.546875,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan",
+      "x": 64,
+      "y": 903,
+      "width": 693,
+      "height": 434
+    },
+    {
+      "id": "title-details-plan-preset",
+      "x": 64,
+      "y": 996,
+      "width": 693,
+      "height": 31
+    },
+    {
+      "id": "title-details-plan-room",
+      "x": 64,
+      "y": 1035,
+      "width": 693,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan-maps",
+      "x": 64,
+      "y": 1071,
+      "width": 693,
+      "height": 28
+    },
+    {
+      "id": "title-details-plan-continuity",
+      "x": 64,
+      "y": 1123,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "title-details-plan-limits",
+      "x": 64,
+      "y": 1264,
+      "width": 693,
+      "height": 73
+    },
+    {
+      "id": "title-details-back-bottom",
+      "x": 64,
+      "y": 1381,
+      "width": 183.625,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "x": 81,
+      "y": 1395,
+      "width": 149.625,
+      "height": 31
+    }
+  ],
+  "02-details-unavailable": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 32
+    }
+  ],
+  "03-caption-menu": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-menu",
+      "x": 944,
+      "y": 343,
+      "width": 252,
+      "height": 54
+    },
+    {
+      "id": "caption-menu-focus-element",
+      "x": 904,
+      "y": 404,
+      "width": 304,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-menu",
+      "x": 944,
+      "y": 411,
+      "width": 252,
+      "height": 54
+    }
+  ],
+  "03-controls-back": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    }
+  ],
+  "03-controls-captions": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    }
+  ],
+  "03-error": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "calm-frames-cover",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "player-error",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "error-boundary-label",
+      "x": 64,
+      "y": 272,
+      "width": 361.125,
+      "height": 51
+    },
+    {
+      "id": "player-error-back",
+      "x": 64,
+      "y": 389,
+      "width": 132.28125,
+      "height": 59
+    },
+    {
+      "id": "player-error-back-label",
+      "x": 89,
+      "y": 403,
+      "width": 82.28125,
+      "height": 31
+    }
+  ],
+  "03-hold-caption-menu": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "calm-frames-cover",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "calm-card",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116
+    },
+    {
+      "id": "calm-card-title",
+      "x": 527.125,
+      "y": 129,
+      "width": 225.75,
+      "height": 32
+    },
+    {
+      "id": "calm-card-detail",
+      "x": 400.5,
+      "y": 169,
+      "width": 479,
+      "height": 32
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-menu",
+      "x": 944,
+      "y": 343,
+      "width": 252,
+      "height": 54
+    },
+    {
+      "id": "caption-menu-focus-element",
+      "x": 904,
+      "y": 404,
+      "width": 304,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-menu",
+      "x": 944,
+      "y": 411,
+      "width": 252,
+      "height": 54
+    }
+  ],
+  "03-hold-controls": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "calm-frames-cover",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "calm-card",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116
+    },
+    {
+      "id": "calm-card-title",
+      "x": 527.125,
+      "y": 129,
+      "width": 225.75,
+      "height": 32
+    },
+    {
+      "id": "calm-card-detail",
+      "x": 400.5,
+      "y": 169,
+      "width": 479,
+      "height": 32
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    }
+  ],
+  "03-loading": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "buffering-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "buffering-status",
+      "x": 583.734375,
+      "y": 338,
+      "width": 112.53125,
+      "height": 44
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "video-player-header",
+      "x": 1048.484375,
+      "y": 48,
+      "width": 98.515625,
+      "height": 36
+    },
+    {
+      "id": "header_back_icon",
+      "x": 1172,
+      "y": 48,
+      "width": 32,
+      "height": 36
+    },
+    {
+      "id": "seekbar-focus-guide",
+      "x": 136.90625,
+      "y": 577,
+      "width": 1006.1875,
+      "height": 12
+    },
+    {
+      "id": "control-bar",
+      "x": 64,
+      "y": 616,
+      "width": 1152,
+      "height": 68
+    },
+    {
+      "id": "video-player-caption-btn",
+      "x": 1152,
+      "y": 616,
+      "width": 64,
+      "height": 68
+    }
+  ],
+  "03-paused-countdown": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "calm-card",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 216
+    },
+    {
+      "id": "calm-card-title",
+      "x": 511.25,
+      "y": 129,
+      "width": 257.484375,
+      "height": 32
+    },
+    {
+      "id": "calm-card-detail",
+      "x": 217.5,
+      "y": 169,
+      "width": 845,
+      "height": 64
+    },
+    {
+      "id": "calm-card-skip",
+      "x": 592.28125,
+      "y": 246,
+      "width": 95.4375,
+      "height": 55
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "player-paused",
+      "x": 922.484375,
+      "y": 36,
+      "width": 293.515625,
+      "height": 50
+    }
+  ],
+  "03-paused-hold": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "calm-frames-cover",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "calm-card",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116
+    },
+    {
+      "id": "calm-card-title",
+      "x": 527.125,
+      "y": 129,
+      "width": 225.75,
+      "height": 32
+    },
+    {
+      "id": "calm-card-detail",
+      "x": 351.921875,
+      "y": 169,
+      "width": 576.15625,
+      "height": 32
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "player-paused",
+      "x": 922.484375,
+      "y": 36,
+      "width": 293.515625,
+      "height": 50
+    }
+  ],
+  "03-paused-story": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "player-paused",
+      "x": 922.484375,
+      "y": 36,
+      "width": 293.515625,
+      "height": 50
+    }
+  ],
+  "03-playing-hold": [
+    {
+      "id": "safe-area-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "touchable-opacity",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "calm-frames-cover",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-caption-substitute",
+      "x": 0,
+      "y": -160,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "multiline-cue-substitute",
+      "x": 412.796875,
+      "y": 488,
+      "width": 454.390625,
+      "height": 72
+    },
+    {
+      "id": "calm-card",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116
+    },
+    {
+      "id": "calm-card-title",
+      "x": 527.125,
+      "y": 129,
+      "width": 225.75,
+      "height": 32
+    },
+    {
+      "id": "calm-card-detail",
+      "x": 400.5,
+      "y": 169,
+      "width": 479,
+      "height": 32
+    },
+    {
+      "id": "benign-demo-plate",
+      "x": 64,
+      "y": 36,
+      "width": 151.25,
+      "height": 46
+    },
+    {
+      "id": "benign-demo-label",
+      "x": 78,
+      "y": 45,
+      "width": 123.25,
+      "height": 28
+    },
+    {
+      "id": "video-player-ui-view",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "04-child": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "x": 64,
+      "y": 298,
+      "width": 174.4375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "x": 117,
+      "y": 310,
+      "width": 96.4375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "x": 251.4375,
+      "y": 298,
+      "width": 138.390625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "x": 304.4375,
+      "y": 310,
+      "width": 60.390625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "x": 402.828125,
+      "y": 298,
+      "width": 123.703125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "x": 455.828125,
+      "y": 310,
+      "width": 45.703125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "x": 64,
+      "y": 366,
+      "width": 693,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "x": 64,
+      "y": 427,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "x": 784,
+      "y": 270,
+      "width": 144.8125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "x": 809,
+      "y": 284,
+      "width": 94.8125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-remove-profile",
+      "x": 784,
+      "y": 337,
+      "width": 198.5,
+      "height": 59
+    },
+    {
+      "id": "parent-area-remove-profile-label",
+      "x": 809,
+      "y": 351,
+      "width": 148.5,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 543,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 658,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 773,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 974,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 1238,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1398,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1516,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1561,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1601,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "x": 64,
+      "y": 1727,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "x": 64,
+      "y": 1870,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "x": 64,
+      "y": 2099,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "x": 89,
+      "y": 2155,
+      "width": 764,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "x": 973.5625,
+      "y": 2151,
+      "width": 25.4375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 2328,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 2341,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 2347,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 2402,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 2415,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 2421,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 2476,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 2489,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 2495,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 2636,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 2676,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 2748,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 2788,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 2897,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 2911,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 2897,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 2911,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-full-household": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 217
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "x": 64,
+      "y": 298,
+      "width": 174.4375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "x": 117,
+      "y": 310,
+      "width": 96.4375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "x": 251.4375,
+      "y": 298,
+      "width": 138.390625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "x": 304.4375,
+      "y": 310,
+      "width": 60.390625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "x": 402.828125,
+      "y": 298,
+      "width": 123.703125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "x": 455.828125,
+      "y": 310,
+      "width": 45.703125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-3",
+      "x": 539.53125,
+      "y": 298,
+      "width": 115.5625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-3-name",
+      "x": 592.53125,
+      "y": 310,
+      "width": 37.5625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-4",
+      "x": 64,
+      "y": 366,
+      "width": 107.28125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-4-name",
+      "x": 117,
+      "y": 378,
+      "width": 29.28125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "x": 64,
+      "y": 434,
+      "width": 693,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "x": 64,
+      "y": 495,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles-full",
+      "x": 784,
+      "y": 278,
+      "width": 240,
+      "height": 84
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 611,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 726,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 841,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 1042,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 1238,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 1250,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 1238,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 1250,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 1306,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1398,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1410,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1398,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1410,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1398,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1410,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1398,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1410,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1398,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1410,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1398,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1410,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1398,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1410,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1466,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1584,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1629,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1669,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "x": 64,
+      "y": 1795,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "x": 64,
+      "y": 1938,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "x": 64,
+      "y": 2167,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "x": 89,
+      "y": 2223,
+      "width": 764,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "x": 973.5625,
+      "y": 2219,
+      "width": 25.4375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 2396,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 2409,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 2415,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 2470,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 2483,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 2489,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 2544,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 2557,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 2563,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 2704,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 2744,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 2816,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 2856,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 2965,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 2979,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 2965,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 2979,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-household": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "x": 64,
+      "y": 298,
+      "width": 174.4375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "x": 117,
+      "y": 310,
+      "width": 96.4375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "x": 251.4375,
+      "y": 298,
+      "width": 138.390625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "x": 304.4375,
+      "y": 310,
+      "width": 60.390625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "x": 402.828125,
+      "y": 298,
+      "width": 123.703125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "x": 455.828125,
+      "y": 310,
+      "width": 45.703125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "x": 64,
+      "y": 366,
+      "width": 693,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "x": 64,
+      "y": 427,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "x": 784,
+      "y": 270,
+      "width": 144.8125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "x": 809,
+      "y": 284,
+      "width": 94.8125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 543,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 658,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 773,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 974,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 1238,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1398,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1516,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1561,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1601,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "x": 64,
+      "y": 1727,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "x": 64,
+      "y": 1870,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "x": 64,
+      "y": 2099,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "x": 89,
+      "y": 2155,
+      "width": 764,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "x": 973.5625,
+      "y": 2151,
+      "width": 25.4375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 2328,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 2341,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 2347,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 2402,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 2415,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 2421,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 2476,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 2489,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 2495,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 2636,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 2676,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 2748,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 2788,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 2897,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 2911,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 2897,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 2911,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-locked": [
+    {
+      "id": "parent-area",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-message",
+      "x": 64,
+      "y": 204,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "parent-area-message-title",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "x": 90,
+      "y": 269,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "parent-area-keypad",
+      "x": 747,
+      "y": 204,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "parent-area-entered",
+      "x": 747,
+      "y": 204,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "parent-area-key-1",
+      "x": 747,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-2",
+      "x": 867,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-3",
+      "x": 987,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-4",
+      "x": 747,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-5",
+      "x": 867,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-6",
+      "x": 987,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-7",
+      "x": 747,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-8",
+      "x": 867,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-9",
+      "x": 987,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-0",
+      "x": 747,
+      "y": 562,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-delete",
+      "x": 867,
+      "y": 562,
+      "width": 227,
+      "height": 85
+    }
+  ],
+  "04-no-pin": [
+    {
+      "id": "parent-area",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-message",
+      "x": 64,
+      "y": 204,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "parent-area-message-title",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "x": 90,
+      "y": 269,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "parent-area-set-pin",
+      "x": 64,
+      "y": 375,
+      "width": 173.84375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-set-pin-label",
+      "x": 89,
+      "y": 389,
+      "width": 123.84375,
+      "height": 31
+    }
+  ],
+  "04-no-profiles": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 298,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 413,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 528,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 729,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 857,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 869,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 857,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 869,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 857,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 869,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 857,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 869,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 857,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 869,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 925,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 937,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 925,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 937,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 993,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1085,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1097,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1085,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1097,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1085,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1097,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1085,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1097,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1085,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1097,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1085,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1097,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1085,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1097,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1153,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1271,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1316,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1356,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 1482,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 1495,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 1501,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 1556,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 1569,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 1575,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 1630,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 1643,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 1649,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 1790,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 1830,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 1902,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 1942,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 2051,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 2065,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 2051,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 2065,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-remove-confirm": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles",
+      "x": 64,
+      "y": 249,
+      "width": 960,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "x": 64,
+      "y": 249,
+      "width": 960,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "x": 64,
+      "y": 298,
+      "width": 174.4375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "x": 117,
+      "y": 310,
+      "width": 96.4375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "x": 251.4375,
+      "y": 298,
+      "width": 138.390625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "x": 304.4375,
+      "y": 310,
+      "width": 60.390625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "x": 402.828125,
+      "y": 298,
+      "width": 123.703125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "x": 455.828125,
+      "y": 310,
+      "width": 45.703125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "x": 64,
+      "y": 366,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "x": 64,
+      "y": 427,
+      "width": 773,
+      "height": 56
+    },
+    {
+      "id": "parent-area-remove-question",
+      "x": 64,
+      "y": 504,
+      "width": 960,
+      "height": 238
+    },
+    {
+      "id": "parent-area-remove-question-announcement",
+      "x": 90,
+      "y": 525,
+      "width": 913,
+      "height": 108
+    },
+    {
+      "id": "parent-area-remove-question-title",
+      "x": 90,
+      "y": 525,
+      "width": 913,
+      "height": 36
+    },
+    {
+      "id": "parent-area-remove-question-detail",
+      "x": 90,
+      "y": 569,
+      "width": 913,
+      "height": 64
+    },
+    {
+      "id": "parent-area-remove-keep",
+      "x": 90,
+      "y": 654,
+      "width": 167.109375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-remove-keep-label",
+      "x": 115,
+      "y": 668,
+      "width": 117.109375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-remove-confirm",
+      "x": 270.109375,
+      "y": 654,
+      "width": 198.5,
+      "height": 59
+    },
+    {
+      "id": "parent-area-remove-confirm-label",
+      "x": 295.109375,
+      "y": 668,
+      "width": 148.5,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 828,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 943,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 1058,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 1259,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 1387,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 1399,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 1387,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 1399,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 1387,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 1399,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 1387,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 1399,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 1387,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 1399,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 1455,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 1467,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 1455,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 1467,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 1523,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1615,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1627,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1615,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1627,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1615,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1627,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1615,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1627,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1615,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1627,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1615,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1627,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1615,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1627,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1683,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1801,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1846,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1886,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "x": 64,
+      "y": 2012,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "x": 64,
+      "y": 2155,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "x": 64,
+      "y": 2384,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "x": 89,
+      "y": 2440,
+      "width": 764,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "x": 973.5625,
+      "y": 2436,
+      "width": 25.4375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 2613,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 2626,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 2632,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 2687,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 2700,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 2706,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 2761,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 2774,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 2780,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 2921,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 2961,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 3033,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 3073,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 3182,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 3196,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 3182,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 3196,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-saving": [
+    {
+      "id": "parent-area-open",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-saving-slot",
+      "x": 949,
+      "y": 116,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-saving",
+      "x": 949,
+      "y": 130,
+      "width": 267,
+      "height": 28
+    },
+    {
+      "id": "parent-area-profiles",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "x": 64,
+      "y": 249,
+      "width": 693,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "x": 64,
+      "y": 298,
+      "width": 174.4375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "x": 117,
+      "y": 310,
+      "width": 96.4375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "x": 251.4375,
+      "y": 298,
+      "width": 138.390625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "x": 304.4375,
+      "y": 310,
+      "width": 60.390625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "x": 402.828125,
+      "y": 298,
+      "width": 123.703125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "x": 455.828125,
+      "y": 310,
+      "width": 45.703125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "x": 64,
+      "y": 366,
+      "width": 693,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "x": 64,
+      "y": 427,
+      "width": 693,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "x": 784,
+      "y": 270,
+      "width": 144.8125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "x": 809,
+      "y": 284,
+      "width": 94.8125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "x": 64,
+      "y": 543,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "x": 64,
+      "y": 658,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "x": 64,
+      "y": 773,
+      "width": 960,
+      "height": 104
+    },
+    {
+      "id": "parent-area-room",
+      "x": 64,
+      "y": 974,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "x": 64,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "x": 117,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "x": 228.640625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "x": 281.640625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "x": 393.28125,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "x": 446.28125,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "x": 557.921875,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "x": 610.921875,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "x": 722.5625,
+      "y": 1102,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "x": 775.5625,
+      "y": 1114,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "x": 64,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "x": 117,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "x": 228.640625,
+      "y": 1170,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "x": 281.640625,
+      "y": 1182,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "x": 64,
+      "y": 1238,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "x": 64,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "x": 117,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "x": 187.53125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "x": 240.53125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "x": 311.0625,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "x": 364.0625,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "x": 434.59375,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "x": 487.59375,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "x": 558.125,
+      "y": 1330,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "x": 611.125,
+      "y": 1342,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "x": 681.65625,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "x": 734.65625,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "x": 817.5,
+      "y": 1330,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "x": 870.5,
+      "y": 1342,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "x": 64,
+      "y": 1398,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "x": 64,
+      "y": 1516,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "x": 64,
+      "y": 1561,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "x": 64,
+      "y": 1601,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "x": 64,
+      "y": 1727,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "x": 64,
+      "y": 1870,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "x": 64,
+      "y": 2099,
+      "width": 960,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "x": 89,
+      "y": 2155,
+      "width": 764,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "x": 973.5625,
+      "y": 2151,
+      "width": 25.4375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "x": 64,
+      "y": 2328,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "x": 849.515625,
+      "y": 2341,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "x": 859.515625,
+      "y": 2347,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 64,
+      "y": 2402,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "x": 849.515625,
+      "y": 2415,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "x": 859.515625,
+      "y": 2421,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "x": 64,
+      "y": 2476,
+      "width": 960,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "x": 849.515625,
+      "y": 2489,
+      "width": 153.484375,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "x": 859.515625,
+      "y": 2495,
+      "width": 133.484375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "x": 64,
+      "y": 2636,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "x": 64,
+      "y": 2676,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "x": 64,
+      "y": 2748,
+      "width": 960,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "x": 64,
+      "y": 2788,
+      "width": 960,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 2897,
+      "width": 199.625,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 89,
+      "y": 2911,
+      "width": 149.625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "x": 276.625,
+      "y": 2897,
+      "width": 254.203125,
+      "height": 59
+    },
+    {
+      "id": "parent-area-credits-label",
+      "x": 301.625,
+      "y": 2911,
+      "width": 204.203125,
+      "height": 31
+    }
+  ],
+  "04-wrong-pin": [
+    {
+      "id": "parent-area",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "parent-area-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "parent-area-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "parent-area-message",
+      "x": 64,
+      "y": 204,
+      "width": 640,
+      "height": 118
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 76
+    },
+    {
+      "id": "parent-area-message-title",
+      "x": 90,
+      "y": 225,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "x": 90,
+      "y": 269,
+      "width": 593,
+      "height": 32
+    },
+    {
+      "id": "parent-area-keypad",
+      "x": 747,
+      "y": 204,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "parent-area-entered",
+      "x": 747,
+      "y": 204,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "parent-area-key-1",
+      "x": 747,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-2",
+      "x": 867,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-3",
+      "x": 987,
+      "y": 268,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-4",
+      "x": 747,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-5",
+      "x": 867,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-6",
+      "x": 987,
+      "y": 366,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-7",
+      "x": 747,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-8",
+      "x": 867,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-9",
+      "x": 987,
+      "y": 464,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-0",
+      "x": 747,
+      "y": 562,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-delete",
+      "x": 867,
+      "y": 562,
+      "width": 227,
+      "height": 85
+    }
+  ],
+  "05-credits": [
+    {
+      "id": "credits",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "credits-back-top",
+      "x": 64,
+      "y": 36,
+      "width": 172.3125,
+      "height": 59
+    },
+    {
+      "id": "credits-back-top-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 138.3125,
+      "height": 28
+    },
+    {
+      "id": "credits-title",
+      "x": 64,
+      "y": 116,
+      "width": 1152,
+      "height": 51
+    },
+    {
+      "id": "credits-intro",
+      "x": 64,
+      "y": 175,
+      "width": 1000,
+      "height": 96
+    },
+    {
+      "id": "credits-count",
+      "x": 64,
+      "y": 279,
+      "width": 1152,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny",
+      "x": 64,
+      "y": 328,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny-title",
+      "x": 85,
+      "y": 341,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny-collection",
+      "x": 85,
+      "y": 373,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny-license",
+      "x": 85,
+      "y": 409,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny-credit",
+      "x": 85,
+      "y": 449,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Big Buck Bunny-condition-0",
+      "x": 85,
+      "y": 489,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Buenos Aires fireworks",
+      "x": 64,
+      "y": 538,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Buenos Aires fireworks-title",
+      "x": 85,
+      "y": 551,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Buenos Aires fireworks-collection",
+      "x": 85,
+      "y": 583,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Buenos Aires fireworks-license",
+      "x": 85,
+      "y": 619,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Buenos Aires fireworks-credit",
+      "x": 85,
+      "y": 659,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Calm gradient presentation artwork",
+      "x": 64,
+      "y": 712,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Calm gradient presentation artwork-title",
+      "x": 85,
+      "y": 725,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Calm gradient presentation artwork-collection",
+      "x": 85,
+      "y": 757,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Calm gradient presentation artwork-license",
+      "x": 85,
+      "y": 793,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Calm gradient presentation artwork-credit",
+      "x": 85,
+      "y": 833,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)",
+      "x": 64,
+      "y": 886,
+      "width": 1000,
+      "height": 262
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)-title",
+      "x": 85,
+      "y": 899,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)-collection",
+      "x": 85,
+      "y": 931,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)-license",
+      "x": 85,
+      "y": 967,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)-credit",
+      "x": 85,
+      "y": 1007,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - HightAltCloud V05)-condition-0",
+      "x": 85,
+      "y": 1079,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)",
+      "x": 64,
+      "y": 1156,
+      "width": 1000,
+      "height": 262
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)-title",
+      "x": 85,
+      "y": 1169,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)-collection",
+      "x": 85,
+      "y": 1201,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)-license",
+      "x": 85,
+      "y": 1237,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)-credit",
+      "x": 85,
+      "y": 1277,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Clouds 101 (SVS20383 - LowAltClouds V05)-condition-0",
+      "x": 85,
+      "y": 1349,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Clouds-seloncourt",
+      "x": 64,
+      "y": 1426,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Clouds-seloncourt-title",
+      "x": 85,
+      "y": 1439,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds-seloncourt-collection",
+      "x": 85,
+      "y": 1471,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Clouds-seloncourt-license",
+      "x": 85,
+      "y": 1507,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Clouds-seloncourt-credit",
+      "x": 85,
+      "y": 1547,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night",
+      "x": 64,
+      "y": 1600,
+      "width": 1000,
+      "height": 230
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night-title",
+      "x": 85,
+      "y": 1613,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night-collection",
+      "x": 85,
+      "y": 1645,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night-license",
+      "x": 85,
+      "y": 1681,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night-credit",
+      "x": 85,
+      "y": 1721,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Eastern Europe to Southeastern Asia at Night-condition-0",
+      "x": 85,
+      "y": 1761,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Fireworks in summer",
+      "x": 64,
+      "y": 1838,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Fireworks in summer-title",
+      "x": 85,
+      "y": 1851,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fireworks in summer-collection",
+      "x": 85,
+      "y": 1883,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Fireworks in summer-license",
+      "x": 85,
+      "y": 1919,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fireworks in summer-credit",
+      "x": 85,
+      "y": 1959,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fireworks in summer-condition-0",
+      "x": 85,
+      "y": 1999,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Fireworks Safety",
+      "x": 64,
+      "y": 2048,
+      "width": 1000,
+      "height": 262
+    },
+    {
+      "id": "credits-entry-Fireworks Safety-title",
+      "x": 85,
+      "y": 2061,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fireworks Safety-collection",
+      "x": 85,
+      "y": 2093,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Fireworks Safety-license",
+      "x": 85,
+      "y": 2129,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fireworks Safety-credit",
+      "x": 85,
+      "y": 2169,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Fireworks Safety-condition-0",
+      "x": 85,
+      "y": 2241,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Frozen Frolics (1930)",
+      "x": 64,
+      "y": 2318,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Frozen Frolics (1930)-title",
+      "x": 85,
+      "y": 2331,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Frozen Frolics (1930)-collection",
+      "x": 85,
+      "y": 2363,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Frozen Frolics (1930)-license",
+      "x": 85,
+      "y": 2399,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Frozen Frolics (1930)-credit",
+      "x": 85,
+      "y": 2439,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fuochi d'artificio - Rieti, capodanno 2011",
+      "x": 64,
+      "y": 2492,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Fuochi d'artificio - Rieti, capodanno 2011-title",
+      "x": 85,
+      "y": 2505,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fuochi d'artificio - Rieti, capodanno 2011-collection",
+      "x": 85,
+      "y": 2537,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Fuochi d'artificio - Rieti, capodanno 2011-license",
+      "x": 85,
+      "y": 2573,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Fuochi d'artificio - Rieti, capodanno 2011-credit",
+      "x": 85,
+      "y": 2613,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Growing cumulus clouds in time lapse",
+      "x": 64,
+      "y": 2666,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Growing cumulus clouds in time lapse-title",
+      "x": 85,
+      "y": 2679,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Growing cumulus clouds in time lapse-collection",
+      "x": 85,
+      "y": 2711,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Growing cumulus clouds in time lapse-license",
+      "x": 85,
+      "y": 2747,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Growing cumulus clouds in time lapse-credit",
+      "x": 85,
+      "y": 2787,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor cinematic presentation artwork",
+      "x": 64,
+      "y": 2840,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "credits-entry-Harbor cinematic presentation artwork-title",
+      "x": 85,
+      "y": 2853,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor cinematic presentation artwork-collection",
+      "x": 85,
+      "y": 2885,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor cinematic presentation artwork-license",
+      "x": 85,
+      "y": 2921,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor cinematic presentation artwork-credit",
+      "x": 85,
+      "y": 2961,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Harbor cinematic story (prepared locally)",
+      "x": 64,
+      "y": 3046,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "credits-entry-Harbor cinematic story (prepared locally)-title",
+      "x": 85,
+      "y": 3059,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor cinematic story (prepared locally)-collection",
+      "x": 85,
+      "y": 3091,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor cinematic story (prepared locally)-license",
+      "x": 85,
+      "y": 3127,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor cinematic story (prepared locally)-credit",
+      "x": 85,
+      "y": 3167,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Harbor opening artwork",
+      "x": 64,
+      "y": 3252,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Harbor opening artwork-title",
+      "x": 85,
+      "y": 3265,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor opening artwork-collection",
+      "x": 85,
+      "y": 3297,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor opening artwork-license",
+      "x": 85,
+      "y": 3333,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor opening artwork-credit",
+      "x": 85,
+      "y": 3373,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor presentation artwork",
+      "x": 64,
+      "y": 3426,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "credits-entry-Harbor presentation artwork-title",
+      "x": 85,
+      "y": 3439,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor presentation artwork-collection",
+      "x": 85,
+      "y": 3471,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor presentation artwork-license",
+      "x": 85,
+      "y": 3507,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor presentation artwork-credit",
+      "x": 85,
+      "y": 3547,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Harbor story (benign demo)",
+      "x": 64,
+      "y": 3632,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "credits-entry-Harbor story (benign demo)-title",
+      "x": 85,
+      "y": 3645,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor story (benign demo)-collection",
+      "x": 85,
+      "y": 3677,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor story (benign demo)-license",
+      "x": 85,
+      "y": 3713,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor story (benign demo)-credit",
+      "x": 85,
+      "y": 3753,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Harbor story (prepared locally)",
+      "x": 64,
+      "y": 3838,
+      "width": 1000,
+      "height": 198
+    },
+    {
+      "id": "credits-entry-Harbor story (prepared locally)-title",
+      "x": 85,
+      "y": 3851,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor story (prepared locally)-collection",
+      "x": 85,
+      "y": 3883,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Harbor story (prepared locally)-license",
+      "x": 85,
+      "y": 3919,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Harbor story (prepared locally)-credit",
+      "x": 85,
+      "y": 3959,
+      "width": 958,
+      "height": 64
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22",
+      "x": 64,
+      "y": 4044,
+      "width": 1000,
+      "height": 266
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-title",
+      "x": 85,
+      "y": 4057,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-collection",
+      "x": 85,
+      "y": 4089,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-license",
+      "x": 85,
+      "y": 4125,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-credit",
+      "x": 85,
+      "y": 4165,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-condition-0",
+      "x": 85,
+      "y": 4205,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Ignis Brunensis 2010-05-22-condition-1",
+      "x": 85,
+      "y": 4241,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Irminger waves without sound (OOI)",
+      "x": 64,
+      "y": 4318,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Irminger waves without sound (OOI)-title",
+      "x": 85,
+      "y": 4331,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Irminger waves without sound (OOI)-collection",
+      "x": 85,
+      "y": 4363,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Irminger waves without sound (OOI)-license",
+      "x": 85,
+      "y": 4399,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Irminger waves without sound (OOI)-credit",
+      "x": 85,
+      "y": 4439,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p",
+      "x": 64,
+      "y": 4492,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p-title",
+      "x": 85,
+      "y": 4505,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p-collection",
+      "x": 85,
+      "y": 4537,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p-license",
+      "x": 85,
+      "y": 4573,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p-credit",
+      "x": 85,
+      "y": 4613,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Jezioro Cisie - panorama 1080p-condition-0",
+      "x": 85,
+      "y": 4653,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version",
+      "x": 64,
+      "y": 4702,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version-title",
+      "x": 85,
+      "y": 4715,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version-collection",
+      "x": 85,
+      "y": 4747,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version-license",
+      "x": 85,
+      "y": 4783,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version-credit",
+      "x": 85,
+      "y": 4823,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning - condensed version-condition-0",
+      "x": 85,
+      "y": 4863,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightning in Slow Motion (Free to Use HD Stock Video Footage)",
+      "x": 64,
+      "y": 4912,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Lightning in Slow Motion (Free to Use HD Stock Video Footage)-title",
+      "x": 85,
+      "y": 4925,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning in Slow Motion (Free to Use HD Stock Video Footage)-collection",
+      "x": 85,
+      "y": 4957,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightning in Slow Motion (Free to Use HD Stock Video Footage)-license",
+      "x": 85,
+      "y": 4993,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning in Slow Motion (Free to Use HD Stock Video Footage)-credit",
+      "x": 85,
+      "y": 5033,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011",
+      "x": 64,
+      "y": 5086,
+      "width": 1000,
+      "height": 230
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011-title",
+      "x": 85,
+      "y": 5099,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011-collection",
+      "x": 85,
+      "y": 5131,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011-license",
+      "x": 85,
+      "y": 5167,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011-credit",
+      "x": 85,
+      "y": 5207,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightning seen from the International Space Station, NASA SVS 5011-condition-0",
+      "x": 85,
+      "y": 5247,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Lightningblackout1",
+      "x": 64,
+      "y": 5324,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Lightningblackout1-title",
+      "x": 85,
+      "y": 5337,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightningblackout1-collection",
+      "x": 85,
+      "y": 5369,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Lightningblackout1-license",
+      "x": 85,
+      "y": 5405,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Lightningblackout1-credit",
+      "x": 85,
+      "y": 5445,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS",
+      "x": 64,
+      "y": 5498,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS-title",
+      "x": 85,
+      "y": 5511,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS-collection",
+      "x": 85,
+      "y": 5543,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS-license",
+      "x": 85,
+      "y": 5579,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS-credit",
+      "x": 85,
+      "y": 5619,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-LightningStrike240FPS-condition-0",
+      "x": 85,
+      "y": 5659,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East",
+      "x": 64,
+      "y": 5708,
+      "width": 1000,
+      "height": 230
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East-title",
+      "x": 85,
+      "y": 5721,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East-collection",
+      "x": 85,
+      "y": 5753,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East-license",
+      "x": 85,
+      "y": 5789,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East-credit",
+      "x": 85,
+      "y": 5829,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Central Africa and the Middle East-condition-0",
+      "x": 85,
+      "y": 5869,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia",
+      "x": 64,
+      "y": 5946,
+      "width": 1000,
+      "height": 230
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia-title",
+      "x": 85,
+      "y": 5959,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia-collection",
+      "x": 85,
+      "y": 5991,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia-license",
+      "x": 85,
+      "y": 6027,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia-credit",
+      "x": 85,
+      "y": 6067,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Night Pass over Malaysia-condition-0",
+      "x": 85,
+      "y": 6107,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud",
+      "x": 64,
+      "y": 6184,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud-title",
+      "x": 85,
+      "y": 6197,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud-collection",
+      "x": 85,
+      "y": 6229,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud-license",
+      "x": 85,
+      "y": 6265,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud-credit",
+      "x": 85,
+      "y": 6305,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-PlanePassingThunderCloud-condition-0",
+      "x": 85,
+      "y": 6345,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia",
+      "x": 64,
+      "y": 6394,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia-title",
+      "x": 85,
+      "y": 6407,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia-collection",
+      "x": 85,
+      "y": 6439,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia-license",
+      "x": 85,
+      "y": 6475,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia-credit",
+      "x": 85,
+      "y": 6515,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sea of clouds over Asia-condition-0",
+      "x": 85,
+      "y": 6555,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sintel",
+      "x": 64,
+      "y": 6604,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Sintel-title",
+      "x": 85,
+      "y": 6617,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sintel-collection",
+      "x": 85,
+      "y": 6649,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sintel-license",
+      "x": 85,
+      "y": 6685,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sintel-credit",
+      "x": 85,
+      "y": 6725,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sintel-condition-0",
+      "x": 85,
+      "y": 6765,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares",
+      "x": 64,
+      "y": 6814,
+      "width": 1000,
+      "height": 294
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares-title",
+      "x": 85,
+      "y": 6827,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares-collection",
+      "x": 85,
+      "y": 6859,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares-license",
+      "x": 85,
+      "y": 6895,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares-credit",
+      "x": 85,
+      "y": 6935,
+      "width": 958,
+      "height": 96
+    },
+    {
+      "id": "credits-entry-Soldiers Fire Illumination Flares-condition-0",
+      "x": 85,
+      "y": 7039,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-Stockfootage - Setting Sun",
+      "x": 64,
+      "y": 7116,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Stockfootage - Setting Sun-title",
+      "x": 85,
+      "y": 7129,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Stockfootage - Setting Sun-collection",
+      "x": 85,
+      "y": 7161,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Stockfootage - Setting Sun-license",
+      "x": 85,
+      "y": 7197,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Stockfootage - Setting Sun-credit",
+      "x": 85,
+      "y": 7237,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset at the sea of Azov",
+      "x": 64,
+      "y": 7290,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Sunset at the sea of Azov-title",
+      "x": 85,
+      "y": 7303,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset at the sea of Azov-collection",
+      "x": 85,
+      "y": 7335,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset at the sea of Azov-license",
+      "x": 85,
+      "y": 7371,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset at the sea of Azov-credit",
+      "x": 85,
+      "y": 7411,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset in Spain",
+      "x": 64,
+      "y": 7464,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Sunset in Spain-title",
+      "x": 85,
+      "y": 7477,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset in Spain-collection",
+      "x": 85,
+      "y": 7509,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset in Spain-license",
+      "x": 85,
+      "y": 7545,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset in Spain-credit",
+      "x": 85,
+      "y": 7585,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009",
+      "x": 64,
+      "y": 7638,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009-title",
+      "x": 85,
+      "y": 7651,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009-collection",
+      "x": 85,
+      "y": 7683,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009-license",
+      "x": 85,
+      "y": 7719,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009-credit",
+      "x": 85,
+      "y": 7759,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset Time Lapse 31-12-2009-condition-0",
+      "x": 85,
+      "y": 7799,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert",
+      "x": 64,
+      "y": 7848,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert-title",
+      "x": 85,
+      "y": 7861,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert-collection",
+      "x": 85,
+      "y": 7893,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert-license",
+      "x": 85,
+      "y": 7929,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert-credit",
+      "x": 85,
+      "y": 7969,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset timelapse Lake Huron looking west from Port Albert-condition-0",
+      "x": 85,
+      "y": 8009,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025",
+      "x": 64,
+      "y": 8058,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025-title",
+      "x": 85,
+      "y": 8071,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025-collection",
+      "x": 85,
+      "y": 8103,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025-license",
+      "x": 85,
+      "y": 8139,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025-credit",
+      "x": 85,
+      "y": 8179,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Sunset under the Golden Gate Bridge, February 10 2025-condition-0",
+      "x": 85,
+      "y": 8219,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Tears of Steel",
+      "x": 64,
+      "y": 8268,
+      "width": 1000,
+      "height": 266
+    },
+    {
+      "id": "credits-entry-Tears of Steel-title",
+      "x": 85,
+      "y": 8281,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Tears of Steel-collection",
+      "x": 85,
+      "y": 8313,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Tears of Steel-license",
+      "x": 85,
+      "y": 8349,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Tears of Steel-credit",
+      "x": 85,
+      "y": 8389,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Tears of Steel-condition-0",
+      "x": 85,
+      "y": 8429,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Tears of Steel-condition-1",
+      "x": 85,
+      "y": 8465,
+      "width": 958,
+      "height": 56
+    },
+    {
+      "id": "credits-entry-The Booze Hangs High (1930)",
+      "x": 64,
+      "y": 8542,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-The Booze Hangs High (1930)-title",
+      "x": 85,
+      "y": 8555,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Booze Hangs High (1930)-collection",
+      "x": 85,
+      "y": 8587,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-The Booze Hangs High (1930)-license",
+      "x": 85,
+      "y": 8623,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Booze Hangs High (1930)-credit",
+      "x": 85,
+      "y": 8663,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames chime",
+      "x": 64,
+      "y": 8716,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-The Calm Frames chime-title",
+      "x": 85,
+      "y": 8729,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames chime-collection",
+      "x": 85,
+      "y": 8761,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-The Calm Frames chime-license",
+      "x": 85,
+      "y": 8797,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames chime-credit",
+      "x": 85,
+      "y": 8837,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames selection sound",
+      "x": 64,
+      "y": 8890,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-The Calm Frames selection sound-title",
+      "x": 85,
+      "y": 8903,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames selection sound-collection",
+      "x": 85,
+      "y": 8935,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-The Calm Frames selection sound-license",
+      "x": 85,
+      "y": 8971,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames selection sound-credit",
+      "x": 85,
+      "y": 9011,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames timing marker clip",
+      "x": 64,
+      "y": 9064,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-The Calm Frames timing marker clip-title",
+      "x": 85,
+      "y": 9077,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames timing marker clip-collection",
+      "x": 85,
+      "y": 9109,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-The Calm Frames timing marker clip-license",
+      "x": 85,
+      "y": 9145,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The Calm Frames timing marker clip-credit",
+      "x": 85,
+      "y": 9185,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The calm gradient (bundled title)",
+      "x": 64,
+      "y": 9238,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-The calm gradient (bundled title)-title",
+      "x": 85,
+      "y": 9251,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The calm gradient (bundled title)-collection",
+      "x": 85,
+      "y": 9283,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-The calm gradient (bundled title)-license",
+      "x": 85,
+      "y": 9319,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-The calm gradient (bundled title)-credit",
+      "x": 85,
+      "y": 9359,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Water Waves Greece",
+      "x": 64,
+      "y": 9412,
+      "width": 1000,
+      "height": 166
+    },
+    {
+      "id": "credits-entry-Water Waves Greece-title",
+      "x": 85,
+      "y": 9425,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Water Waves Greece-collection",
+      "x": 85,
+      "y": 9457,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Water Waves Greece-license",
+      "x": 85,
+      "y": 9493,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Water Waves Greece-credit",
+      "x": 85,
+      "y": 9533,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland",
+      "x": 64,
+      "y": 9586,
+      "width": 1000,
+      "height": 202
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland-title",
+      "x": 85,
+      "y": 9599,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland-collection",
+      "x": 85,
+      "y": 9631,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland-license",
+      "x": 85,
+      "y": 9667,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland-credit",
+      "x": 85,
+      "y": 9707,
+      "width": 958,
+      "height": 32
+    },
+    {
+      "id": "credits-entry-Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland-condition-0",
+      "x": 85,
+      "y": 9747,
+      "width": 958,
+      "height": 28
+    },
+    {
+      "id": "credits-back",
+      "x": 64,
+      "y": 9817,
+      "width": 100.328125,
+      "height": 59
+    },
+    {
+      "id": "credits-back-label",
+      "x": 89,
+      "y": 9831,
+      "width": 50.328125,
+      "height": 31
+    }
+  ],
+  "05-setup-confirm": [
+    {
+      "id": "first-run",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "first-run-step",
+      "x": 64,
+      "y": 116,
+      "width": 90.578125,
+      "height": 28
+    },
+    {
+      "id": "first-run-brand-line",
+      "x": 801.90625,
+      "y": 116,
+      "width": 195.09375,
+      "height": 28
+    },
+    {
+      "id": "first-run-title",
+      "x": 64,
+      "y": 177,
+      "width": 933,
+      "height": 51
+    },
+    {
+      "id": "first-run-notice",
+      "x": 64,
+      "y": 239,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "first-run-notice-announcement",
+      "x": 90,
+      "y": 260,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "first-run-notice-title",
+      "x": 90,
+      "y": 260,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "first-run-notice-detail",
+      "x": 90,
+      "y": 304,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "first-run-keypad",
+      "x": 747,
+      "y": 239,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "first-run-entered",
+      "x": 747,
+      "y": 239,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "first-run-key-1",
+      "x": 747,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-2",
+      "x": 867,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-3",
+      "x": 987,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-4",
+      "x": 747,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-5",
+      "x": 867,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-6",
+      "x": 987,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-7",
+      "x": 747,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-8",
+      "x": 867,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-9",
+      "x": 987,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-0",
+      "x": 747,
+      "y": 597,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-delete",
+      "x": 867,
+      "y": 597,
+      "width": 227,
+      "height": 85
+    }
+  ],
+  "05-setup-explainer": [
+    {
+      "id": "first-run",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "first-run-step",
+      "x": 64,
+      "y": 116,
+      "width": 90.578125,
+      "height": 28
+    },
+    {
+      "id": "first-run-brand-line",
+      "x": 801.90625,
+      "y": 116,
+      "width": 195.09375,
+      "height": 28
+    },
+    {
+      "id": "first-run-title",
+      "x": 64,
+      "y": 177,
+      "width": 933,
+      "height": 51
+    },
+    {
+      "id": "first-run-review",
+      "x": 64,
+      "y": 239,
+      "width": 933,
+      "height": 191
+    },
+    {
+      "id": "first-run-review-preset",
+      "x": 85,
+      "y": 304,
+      "width": 891,
+      "height": 32
+    },
+    {
+      "id": "first-run-review-room",
+      "x": 85,
+      "y": 336,
+      "width": 891,
+      "height": 32
+    },
+    {
+      "id": "first-run-explainer",
+      "x": 64,
+      "y": 451,
+      "width": 773,
+      "height": 244
+    },
+    {
+      "id": "first-run-explainer-line-0",
+      "x": 64,
+      "y": 451,
+      "width": 773,
+      "height": 32
+    },
+    {
+      "id": "first-run-explainer-line-1",
+      "x": 64,
+      "y": 496,
+      "width": 773,
+      "height": 64
+    },
+    {
+      "id": "first-run-explainer-line-2",
+      "x": 64,
+      "y": 573,
+      "width": 773,
+      "height": 32
+    },
+    {
+      "id": "first-run-explainer-line-3",
+      "x": 64,
+      "y": 618,
+      "width": 773,
+      "height": 64
+    },
+    {
+      "id": "first-run-reading-time",
+      "x": 64,
+      "y": 708,
+      "width": 773,
+      "height": 28
+    },
+    {
+      "id": "first-run-back",
+      "x": 64,
+      "y": 757,
+      "width": 84.328125,
+      "height": 59
+    },
+    {
+      "id": "first-run-back-label",
+      "x": 81,
+      "y": 771,
+      "width": 50.328125,
+      "height": 31
+    },
+    {
+      "id": "first-run-done",
+      "x": 161.328125,
+      "y": 757,
+      "width": 178.359375,
+      "height": 59
+    },
+    {
+      "id": "first-run-done-label",
+      "x": 186.328125,
+      "y": 771,
+      "width": 128.359375,
+      "height": 31
+    }
+  ],
+  "05-setup-pin": [
+    {
+      "id": "first-run",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "first-run-step",
+      "x": 64,
+      "y": 116,
+      "width": 90.578125,
+      "height": 28
+    },
+    {
+      "id": "first-run-brand-line",
+      "x": 801.90625,
+      "y": 116,
+      "width": 195.09375,
+      "height": 28
+    },
+    {
+      "id": "first-run-title",
+      "x": 64,
+      "y": 177,
+      "width": 933,
+      "height": 51
+    },
+    {
+      "id": "first-run-notice",
+      "x": 64,
+      "y": 239,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "first-run-notice-announcement",
+      "x": 90,
+      "y": 260,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "first-run-notice-title",
+      "x": 90,
+      "y": 260,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "first-run-notice-detail",
+      "x": 90,
+      "y": 304,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "first-run-keypad",
+      "x": 747,
+      "y": 239,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "first-run-entered",
+      "x": 747,
+      "y": 239,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "first-run-key-1",
+      "x": 747,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-2",
+      "x": 867,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-3",
+      "x": 987,
+      "y": 303,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-4",
+      "x": 747,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-5",
+      "x": 867,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-6",
+      "x": 987,
+      "y": 401,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-7",
+      "x": 747,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-8",
+      "x": 867,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-9",
+      "x": 987,
+      "y": 499,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-0",
+      "x": 747,
+      "y": 597,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "first-run-key-delete",
+      "x": 867,
+      "y": 597,
+      "width": 227,
+      "height": 85
+    }
+  ],
+  "05-setup-preset": [
+    {
+      "id": "first-run",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "first-run-step",
+      "x": 64,
+      "y": 116,
+      "width": 90.578125,
+      "height": 28
+    },
+    {
+      "id": "first-run-brand-line",
+      "x": 801.90625,
+      "y": 116,
+      "width": 195.09375,
+      "height": 28
+    },
+    {
+      "id": "first-run-title",
+      "x": 64,
+      "y": 177,
+      "width": 933,
+      "height": 51
+    },
+    {
+      "id": "first-run-preset-wcag",
+      "x": 64,
+      "y": 283,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "first-run-preset-broadcast",
+      "x": 64,
+      "y": 398,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "first-run-preset-extra-cautious",
+      "x": 64,
+      "y": 513,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "first-run-next",
+      "x": 64,
+      "y": 649,
+      "width": 97.234375,
+      "height": 59
+    },
+    {
+      "id": "first-run-next-label",
+      "x": 89,
+      "y": 663,
+      "width": 47.234375,
+      "height": 31
+    }
+  ],
+  "05-setup-room": [
+    {
+      "id": "first-run",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "first-run-step",
+      "x": 64,
+      "y": 116,
+      "width": 90.578125,
+      "height": 28
+    },
+    {
+      "id": "first-run-brand-line",
+      "x": 801.90625,
+      "y": 116,
+      "width": 195.09375,
+      "height": 28
+    },
+    {
+      "id": "first-run-title",
+      "x": 64,
+      "y": 177,
+      "width": 933,
+      "height": 51
+    },
+    {
+      "id": "first-run-tv-32",
+      "x": 64,
+      "y": 353,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-32-label",
+      "x": 117,
+      "y": 365,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-43",
+      "x": 228.640625,
+      "y": 353,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-43-label",
+      "x": 281.640625,
+      "y": 365,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-50",
+      "x": 393.28125,
+      "y": 353,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-50-label",
+      "x": 446.28125,
+      "y": 365,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-55",
+      "x": 557.921875,
+      "y": 353,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-55-label",
+      "x": 610.921875,
+      "y": 365,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-65",
+      "x": 722.5625,
+      "y": 353,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-65-label",
+      "x": 775.5625,
+      "y": 365,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-75",
+      "x": 64,
+      "y": 421,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-75-label",
+      "x": 117,
+      "y": 433,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-85",
+      "x": 228.640625,
+      "y": 421,
+      "width": 151.640625,
+      "height": 55
+    },
+    {
+      "id": "first-run-tv-85-label",
+      "x": 281.640625,
+      "y": 433,
+      "width": 73.640625,
+      "height": 31
+    },
+    {
+      "id": "first-run-tv-chosen",
+      "x": 64,
+      "y": 489,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "first-run-seat-48",
+      "x": 64,
+      "y": 591,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-48-label",
+      "x": 117,
+      "y": 603,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-60",
+      "x": 187.53125,
+      "y": 591,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-60-label",
+      "x": 240.53125,
+      "y": 603,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-72",
+      "x": 311.0625,
+      "y": 591,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-72-label",
+      "x": 364.0625,
+      "y": 603,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-84",
+      "x": 434.59375,
+      "y": 591,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-84-label",
+      "x": 487.59375,
+      "y": 603,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-96",
+      "x": 558.125,
+      "y": 591,
+      "width": 110.53125,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-96-label",
+      "x": 611.125,
+      "y": 603,
+      "width": 32.53125,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-120",
+      "x": 681.65625,
+      "y": 591,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-120-label",
+      "x": 734.65625,
+      "y": 603,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-144",
+      "x": 817.5,
+      "y": 591,
+      "width": 122.84375,
+      "height": 55
+    },
+    {
+      "id": "first-run-seat-144-label",
+      "x": 870.5,
+      "y": 603,
+      "width": 44.84375,
+      "height": 31
+    },
+    {
+      "id": "first-run-seat-chosen",
+      "x": 64,
+      "y": 659,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "first-run-back",
+      "x": 64,
+      "y": 712,
+      "width": 84.328125,
+      "height": 59
+    },
+    {
+      "id": "first-run-back-label",
+      "x": 81,
+      "y": 726,
+      "width": 50.328125,
+      "height": 31
+    },
+    {
+      "id": "first-run-next",
+      "x": 161.328125,
+      "y": 712,
+      "width": 97.234375,
+      "height": 59
+    },
+    {
+      "id": "first-run-next-label",
+      "x": 186.328125,
+      "y": 726,
+      "width": 47.234375,
+      "height": 31
+    }
+  ],
+  "06-bad-signature": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-generic": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 32
+    }
+  ],
+  "06-long-title": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 693,
+      "height": 102
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 245,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 266,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 266,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 310,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-missing": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-stale": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 32
+    }
+  ],
+  "06-unknown-key": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-unparseable": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-unsigned": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-viewing-settings": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-wrong-file": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ],
+  "06-wrong-version": [
+    {
+      "id": "title-details",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "x": 64,
+      "y": 36,
+      "width": 160.609375,
+      "height": 59
+    },
+    {
+      "id": "title-details-back-label",
+      "x": 81,
+      "y": 51.5,
+      "width": 126.609375,
+      "height": 28
+    },
+    {
+      "id": "title-details-title",
+      "x": 64,
+      "y": 116,
+      "width": 151.28125,
+      "height": 51
+    },
+    {
+      "id": "title-details-notice",
+      "x": 64,
+      "y": 194,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "x": 90,
+      "y": 215,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "x": 90,
+      "y": 259,
+      "width": 646,
+      "height": 64
+    }
+  ]
+}

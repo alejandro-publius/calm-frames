@@ -1,0 +1,8 @@
+
+/Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/src/calmframes/CoverLayer.tsx
+  113:11  warning  Inline style: { left: 0, top: 0 }  react-native/no-inline-styles
+  126:11  warning  Inline style: { left: 0 }          react-native/no-inline-styles
+  139:11  warning  Inline style: { left: 0 }          react-native/no-inline-styles
+
+✖ 3 problems (0 errors, 3 warnings)
+

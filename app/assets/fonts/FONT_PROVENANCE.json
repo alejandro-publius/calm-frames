@@ -1,0 +1,77 @@
+{
+  "sources": {
+    "Fraunces": "https://github.com/undercasetype/Fraunces/tree/7ccdec31c6028118dce3e47fe864e3744460371d",
+    "SourceSans3": "https://github.com/adobe-fonts/source-sans/tree/87b37a2daaed80fcb8e8ccb0085c4d72ddade12e"
+  },
+  "license": "SIL Open Font License 1.1; included alongside the fonts",
+  "faces": [
+    {
+      "file": "CalmDisplaySemibold.ttf",
+      "family": "CalmDisplaySemibold",
+      "axes": {
+        "wght": 600,
+        "opsz": 32,
+        "SOFT": 20,
+        "WONK": 0
+      },
+      "inputSHA256": "0776a870a0856b296e11639505ac0cf9be5e7800bb1849dfa21a1bd182455fc0",
+      "sha256": "017e1080cb0228096244f31e87c4b9f8cfe5400ae4da2506422bae2dd53d0882",
+      "digitAdvanceWidths": [
+        1338,
+        920,
+        1224,
+        1120,
+        1245,
+        1164,
+        1228,
+        1050,
+        1221,
+        1234
+      ],
+      "unitsPerEm": 2000,
+      "variable": false
+    },
+    {
+      "file": "CalmSansRegular.ttf",
+      "family": "CalmSansRegular",
+      "axes": null,
+      "inputSHA256": "4644c81b86ec9caaa76b634889968ed3c4f4f52f054855933acc7c2b21e53b0f",
+      "sha256": "572616be3424c0dea835f7e427b70a54a6e93bef84548d400e5757ee185f1f61",
+      "digitAdvanceWidths": [
+        497,
+        497,
+        497,
+        497,
+        497,
+        497,
+        497,
+        497,
+        497,
+        497
+      ],
+      "unitsPerEm": 1000,
+      "variable": false
+    },
+    {
+      "file": "CalmSansSemibold.ttf",
+      "family": "CalmSansSemibold",
+      "axes": null,
+      "inputSHA256": "a3f4f8dcf343a8f24dc61951de93f3ba1558b15cd250ba24af8a40e957081b7d",
+      "sha256": "f526b0017ad2c0b0c9b7078c687c8364711968512b19ddc2b55c75261e9fe2c5",
+      "digitAdvanceWidths": [
+        513,
+        513,
+        513,
+        513,
+        513,
+        513,
+        513,
+        513,
+        513,
+        513
+      ],
+      "unitsPerEm": 1000,
+      "variable": false
+    }
+  ]
+}

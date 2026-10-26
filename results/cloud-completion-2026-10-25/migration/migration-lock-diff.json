@@ -1,0 +1,1622 @@
+[
+  {
+    "path": "node_modules/@babel/plugin-external-helpers",
+    "before": "7.29.7",
+    "after": null
+  },
+  {
+    "path": "node_modules/@hapi/address",
+    "before": "2.1.4",
+    "after": null
+  },
+  {
+    "path": "node_modules/@hapi/bourne",
+    "before": "1.3.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/@hapi/joi",
+    "before": "15.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/@hapi/joi/node_modules/@hapi/hoek",
+    "before": "8.5.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/@hapi/joi/node_modules/@hapi/topo",
+    "before": "3.1.6",
+    "after": null
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-debugger-ui",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/@react-native-community/cli-platform-android",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/@react-native-community/cli-tools",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/chalk",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/cross-spawn",
+    "before": null,
+    "after": "6.0.6"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/execa",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/get-stream",
+    "before": null,
+    "after": "4.1.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/is-stream",
+    "before": null,
+    "after": "1.1.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/npm-run-path",
+    "before": null,
+    "after": "2.0.2"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/path-key",
+    "before": null,
+    "after": "2.0.1"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/semver",
+    "before": null,
+    "after": "5.7.2"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/shebang-command",
+    "before": null,
+    "after": "1.2.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/shebang-regex",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/supports-color",
+    "before": null,
+    "after": "7.2.0"
+  },
+  {
+    "path": "node_modules/@react-native-community/cli-hermes/node_modules/which",
+    "before": null,
+    "after": "1.3.1"
+  },
+  {
+    "path": "node_modules/@react-native/assets",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/@react-native/normalize-color",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/@react-native/polyfills",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/@types/react-native",
+    "before": null,
+    "after": "0.69.5"
+  },
+  {
+    "path": "node_modules/@types/react-native__assets",
+    "before": null,
+    "after": "1.0.0"
+  },
+  {
+    "path": "node_modules/ansi-cyan",
+    "before": "0.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/ansi-gray",
+    "before": "0.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/ansi-red",
+    "before": "0.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/ansi-wrap",
+    "before": "0.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/arr-diff",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/arr-flatten",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/arr-union",
+    "before": "2.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/array-slice",
+    "before": "0.2.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/art",
+    "before": "0.10.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/basic-auth",
+    "before": "2.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/basic-auth/node_modules/safe-buffer",
+    "before": "5.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/bindings",
+    "before": "1.5.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/buffer-crc32",
+    "before": "0.2.13",
+    "after": null
+  },
+  {
+    "path": "node_modules/chardet",
+    "before": "0.4.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/cli-width",
+    "before": "2.2.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/code-point-at",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/color-support",
+    "before": "1.1.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/colors",
+    "before": null,
+    "after": "1.4.0"
+  },
+  {
+    "path": "node_modules/concat-stream",
+    "before": "1.6.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/concat-stream/node_modules/isarray",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/concat-stream/node_modules/readable-stream",
+    "before": "2.3.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/concat-stream/node_modules/safe-buffer",
+    "before": "5.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/concat-stream/node_modules/string_decoder",
+    "before": "1.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/core-js",
+    "before": "2.6.12",
+    "after": null
+  },
+  {
+    "path": "node_modules/create-react-class",
+    "before": "15.7.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/dom-walk",
+    "before": "0.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/extend-shallow",
+    "before": "1.1.4",
+    "after": null
+  },
+  {
+    "path": "node_modules/extend-shallow/node_modules/kind-of",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/external-editor",
+    "before": "2.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/external-editor/node_modules/iconv-lite",
+    "before": "0.4.24",
+    "after": null
+  },
+  {
+    "path": "node_modules/fancy-log",
+    "before": "1.3.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-css-vars",
+    "before": "1.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts",
+    "before": "1.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/ansi-colors",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/cross-spawn",
+    "before": "6.0.6",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/path-key",
+    "before": "2.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/semver",
+    "before": "5.7.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/shebang-command",
+    "before": "1.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/shebang-regex",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs-scripts/node_modules/which",
+    "before": "1.3.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/fbjs/node_modules/promise",
+    "before": "7.3.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/figures",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/figures/node_modules/escape-string-regexp",
+    "before": "1.0.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/file-uri-to-path",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/global",
+    "before": "4.4.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/growly",
+    "before": "1.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/hermes-engine",
+    "before": null,
+    "after": "0.7.2"
+  },
+  {
+    "path": "node_modules/hermes-profile-transformer",
+    "before": null,
+    "after": "0.0.6"
+  },
+  {
+    "path": "node_modules/hermes-profile-transformer/node_modules/source-map",
+    "before": null,
+    "after": "0.7.6"
+  },
+  {
+    "path": "node_modules/hermesvm",
+    "before": "0.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer",
+    "before": "3.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/ansi-escapes",
+    "before": "3.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/ansi-regex",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/ansi-styles",
+    "before": "3.2.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/chalk",
+    "before": "2.4.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/color-convert",
+    "before": "1.9.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/color-name",
+    "before": "1.1.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/escape-string-regexp",
+    "before": "1.0.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/has-flag",
+    "before": "3.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/string-width",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/strip-ansi",
+    "before": "4.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/inquirer/node_modules/supports-color",
+    "before": "5.5.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/invert-kv",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/ip",
+    "before": null,
+    "after": "1.1.9"
+  },
+  {
+    "path": "node_modules/isomorphic-fetch",
+    "before": "2.2.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/jest-serializer",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/json-stable-stringify",
+    "before": "1.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/jsonify",
+    "before": "0.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/launch-editor/node_modules/shell-quote",
+    "before": "1.11.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/lcid",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/map-age-cleaner",
+    "before": "0.1.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/mem",
+    "before": "4.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-babel-register",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-babel7-plugin-react-transform",
+    "before": "0.54.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-hermes-compiler",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/ansi-regex",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/camelcase",
+    "before": "4.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/cliui",
+    "before": "3.2.0",
+    "after": "6.0.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/cliui/node_modules/is-fullwidth-code-point",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/cliui/node_modules/string-width",
+    "before": "1.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/find-up",
+    "before": null,
+    "after": "4.1.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/get-caller-file",
+    "before": "1.0.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/locate-path",
+    "before": null,
+    "after": "5.0.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/p-limit",
+    "before": null,
+    "after": "2.3.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/p-locate",
+    "before": null,
+    "after": "4.1.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/require-main-filename",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/string-width",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/string-width/node_modules/ansi-regex",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/string-width/node_modules/strip-ansi",
+    "before": "4.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/strip-ansi",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/wrap-ansi",
+    "before": "2.1.0",
+    "after": "6.2.0"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/wrap-ansi/node_modules/is-fullwidth-code-point",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/wrap-ansi/node_modules/string-width",
+    "before": "1.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/y18n",
+    "before": "3.2.2",
+    "after": "4.0.3"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/yargs",
+    "before": "9.0.1",
+    "after": "15.4.1"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/yargs-parser",
+    "before": "13.1.2",
+    "after": "18.1.3"
+  },
+  {
+    "path": "node_modules/metro-inspector-proxy/node_modules/yargs-parser/node_modules/camelcase",
+    "before": "5.3.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/metro-minify-uglify",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/metro-babel-transformer",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/metro-react-native-babel-preset",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/metro-source-map",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/metro-symbolicate",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/ob1",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/react-refresh",
+    "before": null,
+    "after": "0.4.3"
+  },
+  {
+    "path": "node_modules/metro-react-native-babel-transformer/node_modules/source-map",
+    "before": null,
+    "after": "0.5.7"
+  },
+  {
+    "path": "node_modules/min-document",
+    "before": "2.19.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/morgan",
+    "before": "1.12.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/morgan/node_modules/debug",
+    "before": "2.6.9",
+    "after": null
+  },
+  {
+    "path": "node_modules/morgan/node_modules/ms",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/mute-stream",
+    "before": "0.0.7",
+    "after": null
+  },
+  {
+    "path": "node_modules/nan",
+    "before": "2.29.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/node-notifier",
+    "before": "8.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/npm-run-all/node_modules/shell-quote",
+    "before": "1.11.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/number-is-nan",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale",
+    "before": "2.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/cross-spawn",
+    "before": "6.0.6",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/execa",
+    "before": "0.7.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/get-stream",
+    "before": "3.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/is-stream",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/npm-run-path",
+    "before": "2.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/path-key",
+    "before": "2.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/semver",
+    "before": "5.7.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/shebang-command",
+    "before": "1.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/shebang-regex",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/os-locale/node_modules/which",
+    "before": "1.3.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/p-defer",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/p-is-promise",
+    "before": "2.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/parse-node-version",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/plugin-error",
+    "before": "0.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/process",
+    "before": "0.11.10",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-deep-force-update",
+    "before": "1.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-devtools-core/node_modules/shell-quote",
+    "before": "1.11.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-codegen",
+    "before": null,
+    "after": "0.0.6"
+  },
+  {
+    "path": "node_modules/react-native-codegen/node_modules/ast-types",
+    "before": null,
+    "after": "0.14.2"
+  },
+  {
+    "path": "node_modules/react-native-codegen/node_modules/flow-parser",
+    "before": null,
+    "after": "0.121.0"
+  },
+  {
+    "path": "node_modules/react-native-codegen/node_modules/jscodeshift",
+    "before": null,
+    "after": "0.11.0"
+  },
+  {
+    "path": "node_modules/react-native-codegen/node_modules/recast",
+    "before": null,
+    "after": "0.20.5"
+  },
+  {
+    "path": "node_modules/react-native-codegen/node_modules/write-file-atomic",
+    "before": null,
+    "after": "2.4.3"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types",
+    "before": "0.66.0",
+    "after": "0.71.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/console",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/console/node_modules/slash",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/create-cache-key-function",
+    "before": null,
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/fake-timers",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/source-map",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/source-map/node_modules/source-map",
+    "before": "0.6.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/test-result",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@jest/types",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli",
+    "before": "2.10.0",
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-platform-android",
+    "before": "2.9.0",
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-platform-android/node_modules/chalk",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-platform-ios",
+    "before": "2.10.0",
+    "after": "5.0.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-platform-ios/node_modules/chalk",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-server-api/node_modules/ws",
+    "before": null,
+    "after": "1.1.5"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-tools",
+    "before": "2.8.3",
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-tools/node_modules/chalk",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli-types",
+    "before": null,
+    "after": "5.0.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli/node_modules/ansi-regex",
+    "before": null,
+    "after": "4.1.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli/node_modules/chalk",
+    "before": null,
+    "after": "3.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli/node_modules/strip-ansi",
+    "before": null,
+    "after": "5.2.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@types/istanbul-reports",
+    "before": "1.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@types/stack-utils",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/@types/yargs",
+    "before": "13.0.12",
+    "after": "15.0.20"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/ansi-regex",
+    "before": "4.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/ansi-styles",
+    "before": "3.2.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/anymatch",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/camelcase",
+    "before": null,
+    "after": "6.3.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/chalk",
+    "before": "2.4.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/ci-info",
+    "before": null,
+    "after": "2.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/cliui",
+    "before": null,
+    "after": "6.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/color-convert",
+    "before": "1.9.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/color-name",
+    "before": "1.1.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/cross-spawn/node_modules/semver",
+    "before": null,
+    "after": "5.7.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/escape-string-regexp",
+    "before": "1.0.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/eventemitter3",
+    "before": "3.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/find-up",
+    "before": null,
+    "after": "4.1.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/fs-extra",
+    "before": "7.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/fsevents",
+    "before": "1.2.13",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/get-caller-file",
+    "before": "1.0.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/has-flag",
+    "before": "3.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/image-size",
+    "before": null,
+    "after": "0.6.3"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/isarray",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-get-type",
+    "before": "24.9.0",
+    "after": "26.3.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-haste-map",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-message-util",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-message-util/node_modules/slash",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-mock",
+    "before": "24.9.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-regex-util",
+    "before": null,
+    "after": "26.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-util",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-util/node_modules/slash",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-util/node_modules/source-map",
+    "before": "0.6.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-validate",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-worker",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jest-worker/node_modules/supports-color",
+    "before": "6.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/jsonfile",
+    "before": null,
+    "after": "2.4.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/locate-path",
+    "before": null,
+    "after": "5.0.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-babel-transformer",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-cache",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-cache-key",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-config",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-core",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-react-native-babel-preset",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-resolver",
+    "before": "0.54.1",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-runtime",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-source-map",
+    "before": "0.55.0",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-symbolicate",
+    "before": "0.55.0",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-transform-plugins",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro-transform-worker",
+    "before": null,
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/ansi-regex",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/camelcase",
+    "before": "4.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/cliui",
+    "before": "3.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/cliui/node_modules/string-width",
+    "before": "1.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/is-fullwidth-code-point",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/jsonfile",
+    "before": "2.4.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/merge-stream",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/metro-source-map",
+    "before": "0.54.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/strip-ansi",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/ws",
+    "before": null,
+    "after": "1.1.5"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/y18n",
+    "before": "3.2.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/yargs",
+    "before": "9.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/mime-db",
+    "before": "1.23.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/mime-types",
+    "before": "2.1.11",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/nocache",
+    "before": null,
+    "after": "2.1.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/normalize-path",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/ob1",
+    "before": "0.55.0",
+    "after": "0.64.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/p-limit",
+    "before": null,
+    "after": "2.3.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/p-locate",
+    "before": null,
+    "after": "4.1.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/pretty-format",
+    "before": "24.9.0",
+    "after": "26.6.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/promise",
+    "before": "7.3.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+    "before": "3.6.3",
+    "after": "4.28.5"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ultron",
+    "before": "1.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+    "before": "3.3.3",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-is",
+    "before": "16.13.1",
+    "after": "17.0.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+    "before": "0.60.6",
+    "after": "0.64.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-native/node_modules/ws",
+    "before": null,
+    "after": "6.2.6"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/react-refresh",
+    "before": null,
+    "after": "0.4.3"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/readable-stream",
+    "before": "2.3.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/require-main-filename",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/safe-buffer",
+    "before": "5.1.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/scheduler",
+    "before": "0.14.0",
+    "after": "0.20.2"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/semver",
+    "before": "5.7.2",
+    "after": "6.3.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/shell-quote",
+    "before": "1.11.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/stack-utils",
+    "before": "1.0.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/stack-utils/node_modules/escape-string-regexp",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/string-width",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/string_decoder",
+    "before": "1.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/strip-ansi",
+    "before": "4.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/strip-ansi/node_modules/ansi-regex",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/supports-color",
+    "before": "5.5.0",
+    "after": "7.2.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/throat",
+    "before": "4.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/wrap-ansi",
+    "before": "2.1.0",
+    "after": "6.2.0"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/wrap-ansi/node_modules/ansi-regex",
+    "before": "2.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/wrap-ansi/node_modules/is-fullwidth-code-point",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/wrap-ansi/node_modules/string-width",
+    "before": "1.0.2",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/wrap-ansi/node_modules/strip-ansi",
+    "before": "3.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/write-file-atomic",
+    "before": "1.3.4",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+    "before": "1.1.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/y18n",
+    "before": null,
+    "after": "4.0.3"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/yargs",
+    "before": null,
+    "after": "15.4.1"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/yargs-parser",
+    "before": "13.1.2",
+    "after": "18.1.3"
+  },
+  {
+    "path": "node_modules/react-native-tscodegen-types/node_modules/yargs-parser/node_modules/camelcase",
+    "before": null,
+    "after": "5.3.1"
+  },
+  {
+    "path": "node_modules/react-proxy",
+    "before": "1.1.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/react-transform-hmr",
+    "before": "1.0.4",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/find-up",
+    "before": "2.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/load-json-file",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/locate-path",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/p-limit",
+    "before": "1.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/p-locate",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/p-try",
+    "before": "1.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/parse-json",
+    "before": "2.2.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/path-exists",
+    "before": "3.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/path-type",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/pify",
+    "before": "2.3.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/read-pkg",
+    "before": "2.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/read-pkg-up/node_modules/strip-bom",
+    "before": "3.0.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/run-async",
+    "before": "2.4.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/rx-lite",
+    "before": "4.0.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/rx-lite-aggregates",
+    "before": "4.0.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/rxjs",
+    "before": "5.5.12",
+    "after": null
+  },
+  {
+    "path": "node_modules/setimmediate",
+    "before": "1.0.5",
+    "after": null
+  },
+  {
+    "path": "node_modules/shell-quote",
+    "before": null,
+    "after": "1.11.0"
+  },
+  {
+    "path": "node_modules/shellwords",
+    "before": "0.1.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/slide",
+    "before": "1.1.6",
+    "after": null
+  },
+  {
+    "path": "node_modules/sudo-prompt",
+    "before": null,
+    "after": "9.2.1"
+  },
+  {
+    "path": "node_modules/symbol-observable",
+    "before": "1.0.1",
+    "after": null
+  },
+  {
+    "path": "node_modules/through",
+    "before": "2.3.8",
+    "after": null
+  },
+  {
+    "path": "node_modules/time-stamp",
+    "before": "1.1.0",
+    "after": null
+  },
+  {
+    "path": "node_modules/tmp",
+    "before": "0.2.7",
+    "after": null
+  },
+  {
+    "path": "node_modules/typedarray",
+    "before": "0.0.6",
+    "after": null
+  },
+  {
+    "path": "node_modules/ua-parser-js",
+    "before": "0.7.41",
+    "after": null
+  },
+  {
+    "path": "node_modules/use-subscription",
+    "before": null,
+    "after": "1.13.0"
+  },
+  {
+    "path": "node_modules/xpipe",
+    "before": "1.0.8",
+    "after": null
+  }
+]

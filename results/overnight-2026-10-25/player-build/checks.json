@@ -1,0 +1,23 @@
+{
+  "source_commit": "596418e64e83f724c5c9e4a5b34122746aec11e4",
+  "checked_at": "2026-10-25T08:24:47.045488+00:00",
+  "checks": {
+    "locked_install": "passed",
+    "normal_player_generation": "passed",
+    "normal_native_input_preflight": "passed",
+    "input_and_generated_file_hash_inventory": "passed",
+    "portable_zip_crc_member_list_and_per_file_hashes": "passed",
+    "portable_zip_retained_license_hashes": "passed",
+    "local_documentation_links": "passed",
+    "json_parse": "passed",
+    "staged_style_check": "passed",
+    "staged_diff_whitespace": "passed",
+    "staged_gitleaks_8_30_1": "passed",
+    "extracted_portable_inputs_gitleaks_8_30_1": "passed",
+    "native_sdk_discovery": "blocked: vega/kepler absent, KEPLER_SDK_PATH unset",
+    "native_compile": "not attempted: required SDK missing",
+    "native_human_acceptance": "not performed",
+    "readme_number_sync": "failed: pre-existing SECURITY app-component-count drift at declared source; 1103 in documentation versus 1105 in SBOM; audit files unchanged in this lane"
+  },
+  "scope": "Build input generation and documentation evidence only; not a native package or release approval."
+}

@@ -1,0 +1,273 @@
+{
+  "generated_utc": "2026-10-11T00:07:03.211522+00:00",
+  "source": {
+    "base_commit": "8271b3825c4310e8c9d56240a8671bc936b294e3",
+    "branch": "codex/signed-scene-holds-2026-09-29",
+    "application_inputs_changed": true,
+    "changed_input_sha256": {
+      "app/assets/image/tv/harbor.png": "4396dc2277ed83586bed0cc79a3ac8df7e9d277bb7f371074049d662c51f8870",
+      "app/src/calmframes/CalmButton.tsx": "f4322a27a868a29eea876a55983320f265e8d9b373fcc890911d8955601e727d",
+      "app/src/calmframes/FirstRunScreen.tsx": "c6d3a2abea827ca95fb6c74838ae482108434adfc95f5f585c9b2169d7746529",
+      "app/src/calmframes/KidHomeScreen.tsx": "c313895701f6915f5ff917064f0007b9aa242398161a12aaeedc41e6e5542484",
+      "app/src/calmframes/ParentAreaScreen.tsx": "f202ffa848787e88e3c865ed6ca732499b21f41df401a1235164bec82d5301b5",
+      "app/src/calmframes/TitleArtwork.tsx": "75f2357d64ab65cf7d8b9963f859d09fc66fe55549dee59084bc332b5a4adcab",
+      "app/src/calmframes/TitleDetailsScreen.tsx": "5d33a10bd65681466c6ae5e87bd82e3e0bee60a530b12d87659e27e2548e4a17",
+      "app/src/calmframes/ViewingPlan.tsx": "c6c14332db3260f1d8ed42e802277c28b70002b0d3e408e32b326e9a4f18a176",
+      "app/src/calmframes/copy.ts": "2330f2f2efc3fe95567e3c76adc2790f2c51edd180f3f11727d5c267cdb73909",
+      "app/src/calmframes/household.ts": "57cde7f7b5c90fc5259eec4e7a32f58ad07e90e064155a24a615481897408653",
+      "hook/src/engine/household.ts": "0b177ae371cd810b7a98eb636a5c60822a7c8bc6a9cbe6468363aa057f39a73e",
+      "hook/src/mirror.json": "1725ab8d0490ed3cbfe5ad63dbfd3efb89c561dfc6350d658d47a5da1fe0acc2"
+    }
+  },
+  "artwork": {
+    "path": "app/assets/image/tv/harbor.png",
+    "sha256": "4396dc2277ed83586bed0cc79a3ac8df7e9d277bb7f371074049d662c51f8870",
+    "width": 1942,
+    "height": 809,
+    "bytes": 1370342,
+    "generator": "OpenAI image generation",
+    "reference": "Previous project Harbor illustration",
+    "prompt_summary": "Panoramic restrained children's illustration, layered teal coastlines, cream and saffron sailboat, warm moon and lighthouse, soft reflections, no text, crop-safe focal subjects.",
+    "post_generation_image_edits": false,
+    "presentation_only": true,
+    "film_or_signed_hold_frame": false,
+    "superseded_vector_reference": "app/assets/brand/tv/harbor.svg",
+    "generated_file_timestamp_utc": "2026-10-10T23:49:11.650419+00:00"
+  },
+  "checks": {
+    "app": {
+      "passed": 1066,
+      "skipped": 4,
+      "suites_passed": 105,
+      "suites_skipped": 1,
+      "snapshots_passed": 57,
+      "duration_s": 38.733,
+      "exit_code": 0,
+      "log_sha256": "4313bdac0755d7e74e48d1171ee15efad107bffdee848faac6453ae986b9be29"
+    },
+    "typecheck": {
+      "exit_code": 0,
+      "log_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    "scoped_lint": {
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "brand_assets": {
+      "statement": "Every brand and title image analysed on its own, held two seconds. Native recordings and UI palette simulations check transitions separately; this individual asset check does not measure screen transitions.",
+      "tool": "eval/brand_assets_check.py",
+      "profile": "wcag",
+      "assets": [
+        {
+          "asset": "app/assets/image/tv/harbor.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmpgf38ezmu/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "app/assets/image/tv/gradient.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmp4z_je5tl/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "app/assets/image/CalmFrames.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmp6jjs83o9/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/appstore-icon-512.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmpnsrlpz1s/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/appstore-icon-114.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmppfy4qrdk/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/firetv-app-icon-1280x720.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmpcncvxvyk/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/preview-1024.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmplw6_cd17/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/preview-256.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmpoh734__k/still.mkv: below the wcag thresholds"
+        },
+        {
+          "asset": "docs/brand/preview-48.png",
+          "passed": true,
+          "flashmap": "PASS /tmp/tmpu8lxcpqy/still.mkv: below the wcag thresholds"
+        }
+      ],
+      "failed": 0
+    },
+    "ui_palette": {
+      "frames": 36,
+      "held_ms": 100,
+      "width": 640,
+      "height": 360,
+      "fps": 24,
+      "window_px": [
+        213,
+        120
+      ],
+      "video": "build/ui-capture/ui-screens.mp4",
+      "flashmap_exit": 0,
+      "flashmap_output": "PASS /workspace/calm-frames/app/build/ui-capture/ui-screens.mp4: below the wcag thresholds",
+      "pattern_profile": "broadcast",
+      "pattern_exit": 0,
+      "pattern_output": "PASS /workspace/calm-frames/app/build/ui-capture/ui-screens.mp4: below the broadcast thresholds",
+      "note": "Each painted colour is given a block a full WCAG ten degree window wide, which is larger than the real surfaces, so this overstates the flashing area rather than understating it.",
+      "pattern_note": "The broadcast pass adds ITU-R BT.1702-3 Guideline 2, which the wcag profile does not carry. These frames hold no text, so it asks whether the layout of the app's own blocks is a regular pattern. What the rule makes of glyphs is measured in results/pattern_text_precision.json."
+    },
+    "python": {
+      "full_run": {
+        "passed": 1608,
+        "failed": 7,
+        "slow_deselected": 2,
+        "duration_s": 707.11,
+        "exit_code": 1,
+        "log_sha256": "0378a8383b009de7bd012a7ed7bb1d74ea53b463db2ce6f76823f9952bdde2de",
+        "failure_cause": "Seven pipeline.tests.test_infra_ingest Moto cases could not find the inherited no-AWS-identity profile configuration."
+      },
+      "corrected_rerun": {
+        "modules": [
+          "pipeline/tests/test_aws_guard.py",
+          "pipeline/tests/test_infra_ingest.py",
+          "eval/tests/test_dep_audit.py"
+        ],
+        "passed": 104,
+        "duration_s": 12.35,
+        "exit_code": 0,
+        "log_sha256": "6927997426d13c779dca2111d52ed67d0f8e4477d02b7d7cc449d634066cc37f",
+        "correction": "Used the existing credentials-free Moto profile, retained the platform profile, and selected the writable JSII cache and Node 22. No real AWS requests or resources."
+      },
+      "all_enabled_tests_passed_across_runs": 1615,
+      "slow_tests_run": false
+    },
+    "secret_scan": {
+      "tool": "gitleaks 8.30.1",
+      "mode": "staged",
+      "exit_code": 0,
+      "findings": 0
+    },
+    "published_numbers_check": {
+      "exit_code": 0
+    }
+  },
+  "visual_review": {
+    "method": "Chromium approximation from rendered React Native component trees, bundled fonts and actual artwork",
+    "native_vega_capture": false,
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "fair_comparison": "library-before.png and library-after.png share the same standalone shelf fixture. library-family-after.png adds the actual household profile selector.",
+    "files": [
+      {
+        "path": "docs/design/polish/details-after.png",
+        "sha256": "f5950f86f29a5bfb6b54c20b3936fe16588138aeb4ee3af5fc91672989506212",
+        "bytes": 338281
+      },
+      {
+        "path": "docs/design/polish/details-bottom.png",
+        "sha256": "963e995e10121dc21c0dee65f6ca8247481c3c86eca9a7514c2ab058e9d2eb01",
+        "bytes": 203009
+      },
+      {
+        "path": "docs/design/polish/library-after.png",
+        "sha256": "51abc8523d7a4c7c290bf62c5a1070ca3fb853661723289aadccc24625c55b0e",
+        "bytes": 486383
+      },
+      {
+        "path": "docs/design/polish/library-before.png",
+        "sha256": "aa4dae6a4380bb4e7344ad66d28200a8ea4730dc1945851596378f25bff97635",
+        "bytes": 172749
+      },
+      {
+        "path": "docs/design/polish/library-family-after.png",
+        "sha256": "bb2b2dcb11cd12009f82a733d8dd76c4eda7d89e1008b31178f497f714a3cbf1",
+        "bytes": 488529
+      },
+      {
+        "path": "docs/design/polish/parent-after.png",
+        "sha256": "7e4e44bfe5bcb7c6172b99f7f1a38194ef9c9d7f7bc7f553635eb1ad17ba65fe",
+        "bytes": 118602
+      },
+      {
+        "path": "docs/design/polish/parent-bottom.png",
+        "sha256": "0e52c0ab48e6e7dd6b51e8f1b17b84420e04f482a84a558ee7259c1de8d028a8",
+        "bytes": 137740
+      },
+      {
+        "path": "docs/design/polish/setup-after.png",
+        "sha256": "33ee5aa562afb163ef1697d439b7919932e38a0ddcb4414826d342f4d2d48a5b",
+        "bytes": 84054
+      }
+    ],
+    "limitations": [
+      "CSS flex and browser text measurement approximate React Native Yoga.",
+      "Scrolling proofs do not establish native remote-driven scrolling.",
+      "No native package built or installed in this cloud pass."
+    ],
+    "layout_measurements": {
+      "library.html": [
+        {
+          "height": 858,
+          "contentHeight": 858,
+          "width": 1728,
+          "contentWidth": 1728
+        }
+      ],
+      "library-family.html": [
+        {
+          "height": 842,
+          "contentHeight": 842,
+          "width": 1728,
+          "contentWidth": 1728
+        }
+      ],
+      "details.html": [
+        {
+          "id": "title-details",
+          "height": 1080,
+          "contentHeight": 1541,
+          "width": 1920,
+          "contentWidth": 1920
+        }
+      ],
+      "parent-family.html": [
+        {
+          "id": "parent-area-open",
+          "height": 1080,
+          "contentHeight": 4060,
+          "width": 1920,
+          "contentWidth": 1920
+        }
+      ]
+    },
+    "family_library_qualifier_bottom_y": 988,
+    "safe_bottom_y": 1026
+  },
+  "native_followup": {
+    "required": true,
+    "earlier_native_source": "73fbbeddf6c259b3cb4286f770ff6c2a55a63564",
+    "earlier_receipt": "results/redesign_validation_2026-10-10.json",
+    "older_demo_updated": false,
+    "draft_release_assets_replaced": false,
+    "checks": [
+      "Rebuild and install on the Mac Vega Virtual Device.",
+      "Check family shelf, profile picker, remote focus and return navigation.",
+      "Check setup, PIN correction, saved settings and full-page scrolling.",
+      "Replay benign Harbor story and scheduled-hold demo with captions and audio.",
+      "Capture and analyze updated native screens, then refresh demo and review artifacts with matching source and package hashes."
+    ]
+  }
+}

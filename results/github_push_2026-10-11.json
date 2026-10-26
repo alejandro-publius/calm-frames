@@ -1,0 +1,37 @@
+{
+  "generated_on": "2026-10-11",
+  "kind": "github_push_record",
+  "statement": "What the hosted runners said about the Oct 11 push of codex/signed-scene-holds-2026-09-29 (draft PR #1). Recorded from the GitHub Actions API; nothing here is a claim about a device.",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "head_sha": "ba819dc83e92271f486143b64e933a77d665bd2f",
+  "pull_request": 1,
+  "runs": [
+    {
+      "name": "Audit",
+      "id": 38109283372,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38109283372",
+      "conclusion": "success",
+      "jobs": "pip-audit and npm audit; the bills of materials are current; the stack and the container rules; the ingest image builds for ARM64",
+      "first_green_audit_on_the_branch": true
+    },
+    {
+      "name": "CI",
+      "id": 38109283374,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38109283374",
+      "conclusion": "success",
+      "jobs": "Vega app; Python packages, including the conformance report rebuild; the app's own UI passes flashmap; mutation gate, property tests and the map fuzz corpus; secret scan; published numbers match results, including the style guard"
+    }
+  ],
+  "earlier_on_oct_11": {
+    "head_sha": "0adec9be866d6848bc7a08383df748e2ad18c838",
+    "ci": "success",
+    "audit": "failure, the bills of materials job only: the app bill had been regenerated under npm 10.9.4 and the runner writes it with 10.9.8"
+  },
+  "main": "unchanged at 7110893 since Sep 20; the merge is Alex's step",
+  "published": {
+    "audit_conclusion": "success",
+    "ci_conclusion": "success",
+    "audit_jobs_green": 4,
+    "ci_jobs_green": 6
+  }
+}

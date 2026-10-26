@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Historical friction excerpts | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/friction-records.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="historical-friction-excerpts">Historical friction excerpts</h1>
+<p>Exact selected sections from <code>docs/FRICTION_LOG.md</code> at <code>13551e4</code>. No commands in these records were run by this package task. Unspecified root causes remain unspecified.</p>
+<h2 id="36-a-packaged-filepkg-uri-is-not-opened-by-the-native-player-as-written">36. A packaged <code>file:///pkg/...</code> URI is not opened by the native player as written</h2>
+<p><strong>Task.</strong> Play the bundled Harbor title from the package on the Vega Virtual Device.</p>
+<p><strong>Steps.</strong> Handed the player the packaged MP4 and WebVTT as <code>file:///pkg/...</code> URIs, the form the Kepler file system documentation gives for package assets.</p>
+<p><strong>Expected.</strong> The native player opens a package asset by its documented URI.</p>
+<p><strong>Actual.</strong> Native GStreamer treated <code>file:///pkg/...</code> as a literal file name and failed to open it. The same bytes opened as <code>/pkg/...</code>.</p>
+<p><strong>Severity.</strong> High. Nothing played from the package until this was found.</p>
+<p><strong>Workaround.</strong> Normalize the package prefix to <code>/pkg/...</code> at the native media boundary only, in <code>app/src/utils/VideoHandler.ts</code>, and keep the signed catalog identity unchanged. Both Harbor titles play.</p>
+<p><strong>Suggestion.</strong> Document the URI form the native player accepts for package assets, or accept the <code>file://</code> form the file system documentation gives.</p>
+<h2 id="40-disabling-a-focused-control-drops-native-focus">40. Disabling a focused control drops native focus</h2>
+<p><strong>Task.</strong> Block repeated presses on a parent setting while its save is pending.</p>
+<p><strong>Steps.</strong> Disabled the focused preset, room and chime controls for the length of the save.</p>
+<p><strong>Expected.</strong> Focus stays where it was, or moves somewhere predictable.</p>
+<p><strong>Actual.</strong> Native focus vanished with the control, and the remote had nowhere to go.</p>
+<p><strong>Severity.</strong> Medium. A ten foot interface with no focus is stuck.</p>
+<p><strong>Workaround.</strong> Keep the control in the focus order, report the disabled accessibility state and block its handler instead, in <code>app/src/calmframes/ParentAreaScreen.tsx</code>. The deferred-write regression was seen failing before the fix.</p>
+<p><strong>Suggestion.</strong> Document focus behaviour when a focused view becomes disabled, and move focus to a neighbour by default.</p>
+<h2 id="41-the-image-loader-refuses-a-data-uri-so-a-signed-still-showed-black-on-the-device">41. The image loader refuses a data URI, so a signed still showed black on the device</h2>
+<p><strong>Task.</strong> Show the signed hold still during a practice hold. The flash map carries each still as an authenticated <code>data:image/jpeg;base64,...</code> URI, which the app rendered through <code>Image</code> with <code>{ uri }</code>, and which every unit test and browser preview had drawn.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li>Installed the Debug candidate on the Vega Virtual Device and started the practice film from Details.</li>
+<li>Streamed the device log: <code>vega device start-log-stream --device Simulator</code>.</li>
+<li>At each hold, read the app&#39;s own <code>CALM_TRACE still</code> breadcrumb and the device lines beside it.</li>
+</ol>
+<p><strong>Expected.</strong> The still from just before the hold, on top of the covered picture, as in every test and preview.</p>
+<p><strong>Actual.</strong> The hold card appeared over black. At every hold the device logged, with the data URI after the colon:</p>
+<pre><code>ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+</code></pre>
+<p>Thirty-five such lines in the Oct 14 session. Nothing in the React Native for Vega pages read so far says a data URI is unsupported, and <code>Image</code> accepts the source without a type error, so the first the build heard of it was the device.</p>
+<p><strong>Severity.</strong> High. The still is what a hold shows instead of black, so on the device the feature&#39;s picture was black until the workaround, and no test or preview could have shown it.</p>
+<p><strong>Workaround.</strong> The two practice stills ship as package assets, generated by <code>eval/benign_story_stills.py</code>, and <code>app/src/calmframes/bundledStills.ts</code> swaps one in only when the authenticated data URI matches exactly, so the signed map still decides what is shown. Commit <code>52138fe</code>. A map for any other title shows black until its stills are bundled the same way.</p>
+<p><strong>Suggestion.</strong> Load data URIs in <code>Image</code>, or document that only packaged and remote sources load, and report the refusal to JavaScript with its reason instead of only to the device log.</p>
+<hr>
+<h2 id="42-the-player-never-reports-a-decoded-frame-on-the-virtual-device">42. The player never reports a decoded frame on the virtual device</h2>
+<p><strong>Task.</strong> Keep the opening still on screen until the first real frame has decoded, then swap to the video, so a family never sees a black frame. The shell waited for <code>getVideoPlaybackQuality().totalVideoFrames</code> to move, which is what the API is for.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li>Started any title on the Vega Virtual Device with the Debug candidate installed.</li>
+<li>Streamed the device log and read the <code>CALM_TIMING</code> events beside the player&#39;s own lines.</li>
+</ol>
+<p><strong>Expected.</strong> <code>totalVideoFrames</code> climbs once playback starts.</p>
+<p><strong>Actual.</strong> Every call failed below JavaScript and the counter stayed at zero while picture and sound played:</p>
+<pre><code>E W3CMEDIA:[MSE_EME] get_video_playback_quality: MPB Call failed with code: 50001.
+</code></pre>
+<p>263 such lines in one twenty-minute session. The shell waited out its 15 second allowance and then showed the recovery screen about fourteen seconds into every playback, over a film that was playing correctly.</p>
+<p><strong>Severity.</strong> High. Every playback on the device ended on a recovery screen until the workaround, and nothing documents what code 50001 means or that the call cannot succeed on the virtual device.</p>
+<p><strong>Workaround.</strong> <code>app/src/calmframes/useOpeningFrame.ts</code> readies the shell when the counter is silent but the element reports <code>readyState</code> of 2 or more, is not paused, and its clock has advanced a quarter of a second since the first poll; a counter that does report still wins. Commit <code>ac5a610</code>, with tests that failed first.</p>
+<p><strong>Suggestion.</strong> Make <code>getVideoPlaybackQuality</code> work on the virtual device, or fail it in JavaScript with a documented error instead of silently in native code, and document code 50001.</p>
+<hr>
+<h2 id="43-the-documented-remote-button-command-looks-for-a-host-executable-that-is-not-there">43. The documented remote-button command looks for a host executable that is not there</h2>
+<p><strong>Task.</strong> Press remote buttons on the virtual device from a script. Amazon&#39;s 0.24 <code>inputd-cli</code> page (developer.amazon.com/docs/vega/0.24/inputdcli.html, read Oct 9, 2026) describes <code>inputd-cli</code>, built into Fire TV devices and the virtual device, and gives the host form <code>vega exec inputd-cli button_press KEY_BACK</code>.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li><code>vega exec inputd-cli --help</code></li>
+<li><code>vega device run-cmd --device Simulator --command &#39;inputd-cli --help&#39;</code></li>
+<li><code>vega device run-cmd --device Simulator --command &#39;inputd-cli button_press KEY_DOWN&#39;</code>, and the other keys, from the acceptance driver.</li>
+</ol>
+<p><strong>Expected.</strong> Step 1 presses buttons as the page says.</p>
+<p><strong>Actual.</strong> Step 1 prints <code>[Errno 2] No such file or directory: &#39;inputd-cli&#39;</code> and exits 0, so a script cannot even tell that it failed. Rechecked Oct 14, 2026 on Vega CLI 1.3.4. Steps 2 and 3 work: the tool runs on the device and drove both Oct 14 acceptance sessions (<code>results/native-acceptance-2026-10-14/receipt.json</code>).</p>
+<p><strong>Severity.</strong> Medium. Entry 9 was written when no route was known and the QMP socket was the only way in. The documented route exists, its documented spelling fails, and a zero exit status hides that.</p>
+<p><strong>Workaround.</strong> <code>vega device run-cmd --device Simulator --command &#39;inputd-cli button_press KEY_X&#39;</code>, with <code>KEY_UP</code>, <code>KEY_DOWN</code>, <code>KEY_LEFT</code>, <code>KEY_RIGHT</code>, <code>KEY_ENTER</code>, <code>KEY_BACK</code> and <code>KEY_PLAYPAUSE</code> all seen to work.</p>
+<p><strong>Suggestion.</strong> Make <code>vega exec inputd-cli</code> reach the device-side tool as the page says, or correct the page to the <code>run-cmd</code> form, and exit non-zero when the executable is missing.</p>
+<hr>
+<h2 id="44-the-image-loader-logs-an-error-for-every-packaged-image-and-then-loads-it">44. The image loader logs an error for every packaged image, and then loads it</h2>
+<p><strong>Task.</strong> Read the device log for the reason a signed still showed black (entry 41), and then for anything wrong with the Home scene, which logged the same error at every mount while reporting that it loaded.</p>
+<p><strong>Steps.</strong></p>
+<ol>
+<li>Installed the Debug candidate and streamed the device log: <code>vega device start-log-stream --device Simulator</code>.</li>
+<li>Opened Home, Details, the opening shell and the practice film, and lined up every <code>LocalAssetImageLoader</code> line against the app&#39;s own <code>CALM_TRACE image</code> and <code>CALM_TRACE still</code> breadcrumbs.</li>
+</ol>
+<p><strong>Expected.</strong> An error from the image loader means an image did not load.</p>
+<p><strong>Actual.</strong> On Oct 14 every packaged image, loaded with <code>require(...)</code>, produced one line a few milliseconds before its own load event, and then loaded:</p>
+<pre><code>ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+</code></pre>
+<p>Twenty distinct lines in one twenty-minute session: the coastal scene at every mount of Home and Details, the two pictures of the opening shell, and each bundled still at the holds, each followed within ten milliseconds by <code>image scene loaded</code> or <code>still loaded</code>. The loader seems to try a non-local source for a packaged asset first and log the miss as an error. Nothing distinguishes that line from the one in entry 41, where the image never loaded, except the load event the app has to print itself.</p>
+<p><strong>Severity.</strong> Low. No picture is affected. It cost an evening of chasing a gradient view that was never at fault, and it means a real image failure cannot be found in the log by its message alone.</p>
+<p><strong>Workaround.</strong> Judge an image by the app&#39;s own <code>onLoad</code> and <code>onError</code> breadcrumbs (<code>CALM_TRACE image</code> and <code>CALM_TRACE still</code>), never by the loader&#39;s line.</p>
+<p><strong>Suggestion.</strong> Log the miss at debug level, or not at all when a later source succeeds, and keep the error level for an image that did not load.</p>
+<hr>
+<h2 id="october-18-removed-prepared-media-generations-linger-in-vega-staging">October 18: removed prepared-media generations linger in Vega staging</h2>
+<p>Task: build the approved three-island package after omitting two obsolete bundles.
+Steps: replace the source prepared-library namespace with the reviewed 66,492,442-byte
+copy, run npm run build:debug. Expected: package contains the same namespace. Actual:
+native compilation completed successfully, but the unchanged postbuild gate rejected
+the package budget. All three incremental staging directories still contained the
+omitted generations, totaling 71,988,311 bytes. Severity: blocks installation.
+Workaround: preserve stale staging for evidence, replace only the staged media
+namespace with the exact source copy, repackage compiled output with installed vpt,
+and rerun all strict package gates. No source, limit or trust change. Suggestion:
+Vega should synchronize removals when staging raw assets, or document that asset
+removals require cleaning the generated staging namespace.</p>
+<h2 id="2026-10-21-vega-incremental-packaging-retained-replaced-media">2026-10-21: Vega incremental packaging retained replaced media</h2>
+<p>Task: package the approved Acadia replacement. Expected: five bundles and 63,317,768 prepared bytes. Actual: native staging retained the removed Acadia bundle/report alongside the new bundle, and the mandatory package budget gate rejected the archive. No installation occurred. Severity: build blocked. Workaround: move only the generated prepared namespace from app/build/private/vega/aarch64/Debug/assets/raw to the external evidence backup, then rebuild from the checked source assets. Suggestion: refresh the native staged asset tree when a bundle is removed.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/friction-records.md">docs/judging-package/evidence/friction-records.md</a></p><p>Source SHA-256: <code>89094f00a5f34d1ccf0ad855efcb1772d436ecbf90f09510c0108421f658aaa7</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

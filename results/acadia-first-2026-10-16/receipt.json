@@ -1,0 +1,120 @@
+{
+  "status": "source checked; not built or installed",
+  "branch": "codex/dark-cinema-2026-10-16",
+  "base_commit": "35bf9541a15093bfdfe0f149a36f4a8df9a9adcb",
+  "source_sha256": {
+    "app/src/screens/KidModeScreen.tsx": "5514cc869d59683fc8b8f7aecdb90fe259162ce59360d92effaae1b3d4656e1b",
+    "app/src/calmframes/PictureHoldIntroduction.tsx": "ad23c500f7c38aa873a4729cef7f3bf5b347442dc240c4d07b8b0ae2c2d1dc5c",
+    "app/test/calmframes/shelfFixtures.ts": "6f6ab139e8cd4fbfc3dcaa7809a7f212fe72d35367e472a6d4a75effaaee3374",
+    "app/test/calmframes/packagedLibrary.test.tsx": "b41c9463e8934b5ec6ad3d5fa502c1b19b434d89028739c0619069583c0b4408",
+    "app/test/screens/KidModeScreen.test.tsx": "7201878c158756f263a6a948e649d4c34950c6991ec8bfc9df4925c072564a91",
+    "app/test/screens/returnFocus.test.tsx": "2664585af3542fd44fc676dafc1c430d9556e9dfbcf29144b12c8bf4edf193a1"
+  },
+  "consumer_catalog": [
+    "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    "calm-frames-offline"
+  ],
+  "main_viewing_choices": [
+    "Acadia"
+  ],
+  "retained_artifacts": "Harbor signed catalogs, media, maps, reports, keys and test fixtures unchanged; fixture enumeration made explicit",
+  "checks": {
+    "red_before_fix": {
+      "tests_failed": 2,
+      "reason": [
+        "both Harbor entries remained in default catalog",
+        "Home featured Harbor instead of Acadia"
+      ]
+    },
+    "focused": {
+      "suites": 5,
+      "tests": 81,
+      "pass": true
+    },
+    "focus_regression": {
+      "tests": 15,
+      "pass": true
+    },
+    "final_jest": {
+      "passed_suites": 131,
+      "skipped_suites": 1,
+      "passed_tests": 1280,
+      "skipped_tests": 4,
+      "text_snapshots": 57,
+      "excluded_suites": [
+        "uiCapture",
+        "coastalExport",
+        "controlStudy",
+        "tenFoot"
+      ],
+      "command": "cd app && node_modules/.bin/jest --watchman=false --runInBand --ci --coverage=false --colors=false --testPathIgnorePatterns='uiCapture|coastalExport|controlStudy|tenFoot'"
+    },
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "source_warnings": 97,
+      "test_warnings": 4,
+      "changed_final_test_files": "pass"
+    },
+    "prepared_library": {
+      "prepared_library": "checked",
+      "titles": 1,
+      "bundles": 4,
+      "bytes": 28551507,
+      "catalogSha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+      "verification_reports": {
+        "required": 4,
+        "present": 4,
+        "missing": []
+      },
+      "approvedAcadiaBundle": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+    },
+    "style": "pass",
+    "published_numbers_checked": 659,
+    "git_diff_check": "pass"
+  },
+  "native": {
+    "build": false,
+    "install": false,
+    "launch_or_restart": false,
+    "navigation": false,
+    "screenshots_or_recording": false,
+    "current_demo": "left untouched; no current foreground or playback state asserted"
+  },
+  "detector_changes": false,
+  "remaining": [
+    "Parent go-ahead before replacing running build",
+    "After approval, single build/install and native Acadia route, visual and audio checks",
+    "Separate concurrent-area detector investigation remains incomplete"
+  ],
+  "logs": {
+    "acadia-first-red.log": {
+      "path": ".logs/acadia-first-red.log",
+      "sha256": "28d8bbf1e4a4d16e7e57189c0679a052ad517b9a9bfa5e7ecb216b5ed2b993a1"
+    },
+    "acadia-first-focused.log": {
+      "path": ".logs/acadia-first-focused.log",
+      "sha256": "51ccf0ea3a986e226583890bb66fcc65f01b02406b416da853779838e866ad63"
+    },
+    "acadia-first-focus.log": {
+      "path": ".logs/acadia-first-focus.log",
+      "sha256": "fac70e7f4917703c23242351c0a3f1e004653d63498d8de9bbe2bb608c55e0c5"
+    },
+    "acadia-first-suite.log": {
+      "path": ".logs/acadia-first-suite.log",
+      "sha256": "71291e7a1328c07810b110e72db28f5f911e15108649097c524c0e6e4ebb4cc2"
+    },
+    "acadia-first-typecheck.log": {
+      "path": ".logs/acadia-first-typecheck.log",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    "acadia-first-lint.log": {
+      "path": ".logs/acadia-first-lint.log",
+      "sha256": "f23a005c5320c36aa7918cb66dfd4ffb779f332684d18debadd3b21886a06010"
+    },
+    "acadia-first-library.log": {
+      "path": ".logs/acadia-first-library.log",
+      "sha256": "af9b0a23f011b7a144ec5e44c61d1672b89242afb68885d9a345939eefa7e256"
+    }
+  }
+}

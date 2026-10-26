@@ -1,0 +1,1425 @@
+{
+  "note": "Browser approximation of exported React Native host trees. Not a Vega capture.",
+  "states": {
+    "1080/01-kid-selected": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-rename-profile": {
+          "id": "parent-area-rename-profile",
+          "x": 1346,
+          "y": 540,
+          "width": 232.28125,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": null
+      }
+    },
+    "1080/02-editor-open": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 482,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 810,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 810,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 930,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 930,
+          "width": 179.25,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": -300,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 128,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 456,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 456,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 576,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 576,
+          "width": 179.25,
+          "height": 88
+        }
+      }
+    },
+    "1080/03-editor-typing": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 482,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 810,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 810,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 930,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 930,
+          "width": 179.25,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": -300,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 128,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 456,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 456,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 576,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 576,
+          "width": 179.25,
+          "height": 88
+        }
+      }
+    },
+    "1080/04-editor-refused": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 482,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-problem": {
+          "id": "parent-area-name-problem",
+          "x": 878.125,
+          "y": 527,
+          "width": 795.875,
+          "height": 42
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 810,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 810,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 930,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 930,
+          "width": 179.25,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": -300,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 128,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-problem": {
+          "id": "parent-area-name-problem",
+          "x": 878.125,
+          "y": 173,
+          "width": 795.875,
+          "height": 42
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 456,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 456,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 576,
+          "width": 244.59375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 478.59375,
+          "y": 576,
+          "width": 179.25,
+          "height": 88
+        }
+      }
+    },
+    "1080/05-editor-saving": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 482,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 810,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 810,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 930,
+          "width": 368.109375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 602.109375,
+          "y": 930,
+          "width": 179.25,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": -300,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 128,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 456,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 456,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 214,
+          "y": 576,
+          "width": 368.109375,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 602.109375,
+          "y": 576,
+          "width": 179.25,
+          "height": 88
+        }
+      }
+    },
+    "1080/06-editor-failed": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 482,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 610,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 810,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 810,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-failed": {
+          "id": "parent-area-name-failed",
+          "x": 214,
+          "y": 942,
+          "width": 1492,
+          "height": 298
+        },
+        "parent-area-name-retry": {
+          "id": "parent-area-name-retry",
+          "x": 254,
+          "y": 1108,
+          "width": 217.921875,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 491.921875,
+          "y": 1108,
+          "width": 179.25,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": false
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": -300,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 214,
+          "y": 128,
+          "width": 1492,
+          "height": 108
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 214,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 1294,
+          "y": 256,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 214,
+          "y": 456,
+          "width": 108,
+          "height": 88
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 1390,
+          "y": 456,
+          "width": 216,
+          "height": 88
+        },
+        "parent-area-name-failed": {
+          "id": "parent-area-name-failed",
+          "x": 214,
+          "y": 588,
+          "width": 1492,
+          "height": 298
+        },
+        "parent-area-name-retry": {
+          "id": "parent-area-name-retry",
+          "x": 254,
+          "y": 754,
+          "width": 217.921875,
+          "height": 88
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 491.921875,
+          "y": 754,
+          "width": 179.25,
+          "height": 88
+        }
+      }
+    },
+    "1080/07-renamed": {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 180,
+          "y": 54,
+          "width": 117.390625,
+          "height": 88
+        },
+        "parent-area-rename-profile": {
+          "id": "parent-area-rename-profile",
+          "x": 1346,
+          "y": 540,
+          "width": 232.28125,
+          "height": 88
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": null
+      }
+    },
+    "720/01-kid-selected": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-rename-profile": {
+          "id": "parent-area-rename-profile",
+          "x": 897.671875,
+          "y": 359.640625,
+          "width": 154.84375,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": null
+      }
+    },
+    "720/02-editor-open": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 320.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 539.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 539.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 619.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 619.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": -200,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 84.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 303.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 303.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 383.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 383.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      }
+    },
+    "720/03-editor-typing": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 320.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 539.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 539.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 619.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 619.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": -200,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 84.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 303.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 303.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 383.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 383.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      }
+    },
+    "720/04-editor-refused": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 320.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-problem": {
+          "id": "parent-area-name-problem",
+          "x": 585.84375,
+          "y": 350.625,
+          "width": 530.5,
+          "height": 28
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 539.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 539.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 619.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 619.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": -200,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 84.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-problem": {
+          "id": "parent-area-name-problem",
+          "x": 585.84375,
+          "y": 114.625,
+          "width": 530.5,
+          "height": 28
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 303.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 303.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 383.578125,
+          "width": 163.0625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 318.71875,
+          "y": 383.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      }
+    },
+    "720/05-editor-saving": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 320.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 539.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 539.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 619.578125,
+          "width": 245.40625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 401.0625,
+          "y": 619.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": true
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": -200,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 84.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 303.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 303.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-save": {
+          "id": "parent-area-name-save",
+          "x": 142.328125,
+          "y": 383.578125,
+          "width": 245.40625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 401.0625,
+          "y": 383.578125,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      }
+    },
+    "720/06-editor-failed": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 320.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 406.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 539.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 539.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-failed": {
+          "id": "parent-area-name-failed",
+          "x": 142.328125,
+          "y": 627.578125,
+          "width": 995.34375,
+          "height": 198.65625
+        },
+        "parent-area-name-retry": {
+          "id": "parent-area-name-retry",
+          "x": 168.65625,
+          "y": 738.234375,
+          "width": 145.265625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 327.25,
+          "y": 738.234375,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": false
+      },
+      "scrolled_to_editor": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": -200,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-name-field": {
+          "id": "parent-area-name-field",
+          "x": 142.328125,
+          "y": 84.96875,
+          "width": 995.34375,
+          "height": 71.984375
+        },
+        "parent-area-name-key-a": {
+          "id": "parent-area-name-key-a",
+          "x": 142.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-j": {
+          "id": "parent-area-name-key-j",
+          "x": 862.328125,
+          "y": 170.28125,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-u": {
+          "id": "parent-area-name-key-u",
+          "x": 142.328125,
+          "y": 303.59375,
+          "width": 72,
+          "height": 58.65625
+        },
+        "parent-area-name-key-delete": {
+          "id": "parent-area-name-key-delete",
+          "x": 926.328125,
+          "y": 303.59375,
+          "width": 144,
+          "height": 58.65625
+        },
+        "parent-area-name-failed": {
+          "id": "parent-area-name-failed",
+          "x": 142.328125,
+          "y": 391.578125,
+          "width": 995.34375,
+          "height": 198.65625
+        },
+        "parent-area-name-retry": {
+          "id": "parent-area-name-retry",
+          "x": 168.65625,
+          "y": 502.234375,
+          "width": 145.265625,
+          "height": 58.671875
+        },
+        "parent-area-name-cancel": {
+          "id": "parent-area-name-cancel",
+          "x": 327.25,
+          "y": 502.234375,
+          "width": 119.5,
+          "height": 58.671875
+        }
+      }
+    },
+    "720/07-renamed": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "first_viewport": {
+        "parent-area-back-top": {
+          "id": "parent-area-back-top",
+          "x": 120,
+          "y": 36,
+          "width": 78.234375,
+          "height": 58.65625
+        },
+        "parent-area-rename-profile": {
+          "id": "parent-area-rename-profile",
+          "x": 897.671875,
+          "y": 359.640625,
+          "width": 154.84375,
+          "height": 58.671875
+        }
+      },
+      "checks": {
+        "watched_controls_inside_horizontal_safe_area": true,
+        "save_or_retry_in_first_viewport": null
+      }
+    }
+  }
+}

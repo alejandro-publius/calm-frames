@@ -48,6 +48,9 @@ SCHEDULER_SOURCES = [
     # The map reader, for eval/fuzz_maps_test.py. tsc pulls canonicalJson, ed25519 and sha512
     # in behind it, so the fuzzer reaches the real signature check and the real parser.
     "src/calmframes/flashMap.ts",
+    # Scene holds are part of the signed map reader. An edit here must invalidate
+    # the cached compile too, rather than replaying the prior parser.
+    "src/calmframes/sceneHolds.ts",
 ]
 
 REQUIRED = os.environ.get("CALM_FRAMES_REQUIRE_NODE") == "1"

@@ -1,0 +1,50 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ TestOnlyACheckedTitleIsPublished.test_a_verified_title_is_published_and_written_to_the_catalog _
+pipeline/tests/test_infra_ingest.py:179: in test_a_verified_title_is_published_and_written_to_the_catalog
+    clients = aws_clients()
+              ^^^^^^^^^^^^^
+pipeline/tests/test_infra_ingest.py:84: in aws_clients
+    "s3": boto3.client("s3", region_name=REGION),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/boto3/__init__.py:93: in client
+    return _get_default_session().client(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/boto3/__init__.py:81: in _get_default_session
+    setup_default_session()
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/boto3/__init__.py:35: in setup_default_session
+    DEFAULT_SESSION = Session(**kwargs)
+                      ^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/boto3/session.py:106: in __init__
+    self._setup_loader()
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/boto3/session.py:147: in _setup_loader
+    self._loader = self._session.get_component('data_loader')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/session.py:816: in get_component
+    return self._components.get_component(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/session.py:1201: in get_component
+    self._components[name] = factory()
+                             ^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/session.py:201: in <lambda>
+    lambda: create_loader(self.get_config_variable('data_path')),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/session.py:325: in get_config_variable
+    return self.get_component('config_store').get_config_variable(
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/configprovider.py:532: in get_config_variable
+    return provider.provide()
+           ^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/configprovider.py:738: in provide
+    value = provider.provide()
+            ^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/configprovider.py:825: in provide
+    scoped_config = self._session.get_scoped_config()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/session.py:424: in get_scoped_config
+    raise ProfileNotFound(profile=profile_name)
+E   botocore.exceptions.ProfileNotFound: The config profile (__oai_no_aws_identity__) could not be found
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_infra_ingest.py::TestOnlyACheckedTitleIsPublished::test_a_verified_title_is_published_and_written_to_the_catalog
+1 failed in 0.42s
+AWS profile guard retained: True
+Environment restored: True

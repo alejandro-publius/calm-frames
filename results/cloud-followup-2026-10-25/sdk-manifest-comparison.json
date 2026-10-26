@@ -1,0 +1,12 @@
+{
+  "consumer": "@amazon-devices/kepler-module-manifest-builder buildManifest",
+  "old_toml": "3.0.0",
+  "new_toml": "5.0.1",
+  "unchanged_output": true,
+  "bytes": 25898,
+  "before_sha256": "943dc2a56086cfdb0b8ed57c61790dd9aa765b62ea28db22786d0dd1d8398d6d",
+  "after_sha256": "943dc2a56086cfdb0b8ed57c61790dd9aa765b62ea28db22786d0dd1d8398d6d",
+  "input_manifest_sha256": "6a2e53601fefbffca689dfde458fa776c7b98ba889b882a1e1a535cf061842d0",
+  "source": "09b3c55603ddff50bb068a585980aa188002479e",
+  "scope": "SDK manifest generation only, not native compilation or installation"
+}

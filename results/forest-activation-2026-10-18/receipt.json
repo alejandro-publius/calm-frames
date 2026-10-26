@@ -1,0 +1,253 @@
+{
+  "capture": false,
+  "pin_operations": false,
+  "rebuild": true,
+  "reinstall": true,
+  "audio_system_changes": false,
+  "owner_watched": "not asserted",
+  "status": "stopped",
+  "reason": "Expected event missing: CALM_TRACE focus kid-mode-home-learn",
+  "collector_stopped": true,
+  "events": [
+    {
+      "at": "2026-10-18T18:51:28.648598+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vlcm terminate-app --force --pkg-id io.github.alejandropublius.calmframes"
+      ],
+      "exit": 0,
+      "output": "Force stopping pkg: io.github.alejandropublius.calmframes\n"
+    },
+    {
+      "at": "2026-10-18T18:51:30.088260+00:00",
+      "command": [
+        "device",
+        "install-app",
+        "--device",
+        "VirtualDevice",
+        "--packagePath",
+        "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/release/forest-activation-2026-10-18/calm-frames-three-islands-aarch64-debug.vpkg",
+        "--buildType",
+        "Debug"
+      ],
+      "exit": 0,
+      "output": "Installing/Updating '/tmp/calm-frames-three-islands-aarch64-debug.vpkg' ...success\n"
+    },
+    {
+      "at": "2026-10-18T18:51:30.948893+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "sha256sum /tmp/calm-frames-three-islands-aarch64-debug.vpkg"
+      ],
+      "exit": 0,
+      "output": "8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511  /tmp/calm-frames-three-islands-aarch64-debug.vpkg\n"
+    },
+    {
+      "at": "2026-10-18T18:51:31.769869+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+      ],
+      "exit": 0,
+      "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+    },
+    {
+      "at": "2026-10-18T18:51:38.835624+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:40.902616+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:41.606712+00:00",
+      "event": "One install and launch; transferred hash matched. Home Watch focus confirmed by direction keys."
+    },
+    {
+      "at": "2026-10-18T18:51:42.588612+00:00",
+      "key": "KEY_UP",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:44.269505+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:44.973919+00:00",
+      "event": "Forest selected; entering Details and attribution route."
+    },
+    {
+      "at": "2026-10-18T18:51:45.958128+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:48.012990+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:49.700813+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:54.687365+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:56.754644+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:51:58.448260+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:52:00.634016+00:00",
+      "event": "Exact Forest rendition started; allowing the full 12-second clip to finish. Audio output is not observed."
+    },
+    {
+      "at": "2026-10-18T18:52:12.876352+00:00",
+      "event": "Forest naturally ended and returned to Details."
+    },
+    {
+      "at": "2026-10-18T18:52:14.014449+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:52:16.779948+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:52:18.478512+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:52:19.798993+00:00",
+      "event": "Sea Otters Details focus confirmed. Holding for 10 seconds."
+    },
+    {
+      "at": "2026-10-18T18:52:30.822500+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:52:32.634072+00:00",
+      "event": "Sea Otters playback started; allowing the entire approximately 20-second silent clip to finish."
+    },
+    {
+      "at": "2026-10-18T18:52:52.664433+00:00",
+      "event": "Sea Otters naturally ended and returned to Details."
+    },
+    {
+      "at": "2026-10-18T18:52:58.840471+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:53:01.027200+00:00",
+      "event": "Returned to coastal map. Holding for 6 seconds."
+    },
+    {
+      "at": "2026-10-18T18:53:08.015434+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:53:09.700224+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:53:14.567153+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:53:15.513776+00:00",
+      "event": "Acadia Details focus confirmed. Holding for 10 seconds."
+    },
+    {
+      "at": "2026-10-18T18:53:26.551606+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:53:28.247222+00:00",
+      "event": "Acadia playback started. Letting both ocean-replacement intervals play without skipping."
+    },
+    {
+      "at": "2026-10-18T18:53:34.538520+00:00",
+      "event": "First Acadia ocean-replacement interval requested."
+    },
+    {
+      "at": "2026-10-18T18:53:55.503521+00:00",
+      "event": "Second Acadia ocean-replacement interval requested."
+    },
+    {
+      "at": "2026-10-18T18:54:06.131789+00:00",
+      "event": "Acadia naturally ended and returned to Details."
+    },
+    {
+      "at": "2026-10-18T18:54:12.295788+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:18.581837+00:00",
+      "key": "KEY_DOWN",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:20.261779+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:21.946490+00:00",
+      "key": "KEY_UP",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:23.633198+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:25.303945+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:26.991764+00:00",
+      "key": "KEY_UP",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:54:42.045692+00:00",
+      "event": "Stopped: Expected event missing: CALM_TRACE focus kid-mode-home-learn"
+    }
+  ]
+}

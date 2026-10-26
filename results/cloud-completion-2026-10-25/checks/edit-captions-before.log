@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ test_edit_preserves_story_and_native_slots_and_fails_production_preflight ___
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-64/test_edit_preserves_story_and_0')
+
+    def test_edit_preserves_story_and_native_slots_and_fails_production_preflight(tmp_path):
+        before = {p.name: edit.sha(p) for p in edit.DEMO.iterdir() if p.is_file()}
+        receipt = edit.prepare(tmp_path / 'edit', 'a' * 40)
+        plan = json.loads((tmp_path / 'edit/assembly.draft.json').read_text())
+        assert plan['source_commit'] is None and plan['package_sha256'] is None
+        assert plan['narration_cues'] == json.loads((edit.DEMO / 'narration-cues.json').read_text())
+        vtt = (tmp_path / 'edit/narration.draft.vtt').read_text()
+>       assert all(cue['text'] in vtt for cue in plan['narration_cues'])
+E       assert False
+E        +  where False = all(<generator object test_edit_preserves_story_and_native_slots_and_fails_production_preflight.<locals>.<genexpr> at 0x7fd9dded8a00>)
+
+eval/tests/test_prepare_demo_edit.py:18: AssertionError
+=========================== short test summary info ============================
+FAILED eval/tests/test_prepare_demo_edit.py::test_edit_preserves_story_and_native_slots_and_fails_production_preflight
+1 failed, 5 deselected in 1.00s

@@ -1,3 +1,7 @@
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
+
 // jest.setup.js or setupTests.js
 
 import { configure } from '@testing-library/react-native';
@@ -140,6 +144,27 @@ jest.mock('@amazon-devices/react-native-kepler', () => {
     default: jest.fn(),
   };
 });
+// FocusArea wraps the same guide, so it is a plain view here for the same
+// reason; focusArea.test.tsx unmocks it.
+jest.mock('./src/calmframes/FocusArea', () => {
+  const ReactActual = jest.requireActual('react');
+  const { View } = jest.requireActual('react-native');
+  return {
+    __esModule: true,
+    default: ({ children, ...props }: { children?: unknown }) => ReactActual.createElement(View, props, children),
+  };
+});
+// FocusRow wraps the Kepler focus guide, which the mock above draws as
+// nothing. Screens that hold their controls in a row still need those
+// controls drawn, so the row is a plain view here; focusRow.test.tsx unmocks it.
+jest.mock('./src/calmframes/FocusRow', () => {
+  const ReactActual = jest.requireActual('react');
+  const { View } = jest.requireActual('react-native');
+  return {
+    __esModule: true,
+    default: ({ children, ...props }: { children?: unknown }) => ReactActual.createElement(View, props, children),
+  };
+});
 jest.mock('lodash', () => ({
   isEqual: jest.fn(() => true),
 }));
@@ -247,8 +272,14 @@ jest.mock('react-native-responsive-screen', () => ({
   widthPercentageToDP: jest.fn(),
 }));
 jest.mock('@amazon-devices/react-native-svg', () => ({
-  Path: jest.fn(),
-  Svg: jest.fn(),
+  G: 'G',
+  __esModule: true,
+  default: 'Svg',
+  Svg: 'Svg',
+  Path: 'Path',
+  Ellipse: 'Ellipse',
+  Circle: 'Circle',
+  Rect: 'Rect',
 }));
 
 // Add mocks of internal files here
@@ -314,4 +345,6 @@ jest.mock('./src/calmframes/harnessConfig', () => ({
 // test has no business opening a socket, and a fetch that outlives the test
 // that started it makes jest leave a worker behind.
 import { setBeaconEnabled } from './src/calmframes/timingLog';
+import { setTraceEnabled } from './src/calmframes/trace';
 setBeaconEnabled(false);
+setTraceEnabled(false);

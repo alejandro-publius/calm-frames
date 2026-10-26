@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "case": "pause-before",
+      "command": [
+        "npm",
+        "exec",
+        "--",
+        "jest",
+        "--runInBand",
+        "--coverage=false",
+        "test/calmframes/playbackUi.test.tsx"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 2.01
+    },
+    {
+      "case": "pause-negative-live-region",
+      "command": [
+        "npm",
+        "exec",
+        "--",
+        "jest",
+        "--runInBand",
+        "--coverage=false",
+        "test/calmframes/playbackUi.test.tsx"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 2.36
+    },
+    {
+      "case": "pause-negative-second-pause",
+      "command": [
+        "npm",
+        "exec",
+        "--",
+        "jest",
+        "--runInBand",
+        "--coverage=false",
+        "test/calmframes/playbackUi.test.tsx"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 2.34
+    }
+  ],
+  "production_source_restored_sha256": "d2334b73153c658625887e44b1d3a151572269966ea1fc742aff603953879e67"
+}

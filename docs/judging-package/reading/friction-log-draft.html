@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Curated friction log draft | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../FRICTION_LOG_DRAFT.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="curated-friction-log-draft">Curated friction log draft</h1>
+<p><strong>Draft for owner review, not submitted feedback.</strong> These are recorded development issues, not new reproductions. The canonical log remains <code>docs/FRICTION_LOG.md</code> at <code>13551e4</code>; this package does not edit it. <a href="friction-records.html">Local source excerpts</a> retain the relevant observations. The environment recorded for the October native work was Vega SDK 0.24.9914, CLI 1.3.4 and the Vega Virtual Device, with source checkpoints identified where the record provides them. Do not generalize these observations to physical hardware or current SDK versions without a new authorized check.</p>
+<p>Reproduction steps below are normalized descriptions for a future maintainer. They were not run in this cloud task. Use a benign, already approved local fixture and a developer device; no credentials, signer changes, hazardous playback or desktop capture is required by this draft.</p>
+<h2 id="f1-packaged-media-uri-differs-from-the-documented-form">F1. Packaged media URI differs from the documented form</h2>
+<ul>
+<li><strong>Task and steps:</strong> On the recorded virtual-device build, pass a bundled MP4 and WebVTT to the native player as <code>file:///pkg/...</code>. Compare with the same package-relative path beginning <code>/pkg/...</code>.</li>
+<li><strong>Expected:</strong> The package asset opens using the form described by the file-system documentation.</li>
+<li><strong>Actual recorded:</strong> The native player treated the URI as a literal filename and failed; the same bytes opened with <code>/pkg/...</code>.</li>
+<li><strong>Severity:</strong> High in that workflow: package playback was blocked.</li>
+<li><strong>Workaround:</strong> Normalize the prefix only at the native media boundary in <code>app/src/utils/VideoHandler.ts</code>; preserve catalog and signed identities.</li>
+<li><strong>Evidence/status:</strong> Canonical entry 36; implementation in the pinned code map. App workaround exists. No SDK-side resolution is established.</li>
+<li><strong>Suggestion:</strong> Publish one explicit package-URI contract across file-system and media APIs, or accept both supported forms. Include an MP4 plus caption sample.</li>
+<li><strong>Useful acceptance check:</strong> The sample opens using the documented URI, or unsupported input produces a documented JavaScript error with the accepted format.</li>
+</ul>
+<h2 id="f2-authenticated-data-uri-still-renders-black-natively">F2. Authenticated data-URI still renders black natively</h2>
+<ul>
+<li><strong>Task and steps:</strong> On the recorded Debug candidate, open the practice title from Details and correlate <code>CALM_TRACE still</code> with <code>LocalAssetImageLoader</code> around the scheduled hold.</li>
+<li><strong>Expected:</strong> The authenticated still renders as it did in the source tests and browser preview.</li>
+<li><strong>Actual recorded:</strong> The hold card appeared over black and the native log said it could not load the image from a non-local source. A browser render was not evidence of device support.</li>
+<li><strong>Severity:</strong> High: the intended hold image was absent.</li>
+<li><strong>Workaround:</strong> Bundle the exact practice stills and substitute only when the authenticated data URI matches. The recorded change is <code>52138fe</code>; the implementation is <code>app/src/calmframes/bundledStills.ts</code>. Do not generalize the workaround to arbitrary data or expand trust.</li>
+<li><strong>Evidence/status:</strong> Canonical entry 41 and the existing native acceptance context. App workaround exists; an SDK fix is not recorded.</li>
+<li><strong>Suggestion:</strong> Document the native <code>Image</code> source support matrix, and propagate refusal reasons through JavaScript <code>onError</code>. If data URIs are supported, test them in the native sample.</li>
+<li><strong>Useful acceptance check:</strong> A supported data URI loads, or a specific unsupported-source error reaches the application without requiring device-log inspection.</li>
+</ul>
+<h2 id="f3-decoded-frame-quality-counter-does-not-establish-readiness-on-the-vvd">F3. Decoded-frame quality counter does not establish readiness on the VVD</h2>
+<ul>
+<li><strong>Task and steps:</strong> Start a benign title on the recorded virtual-device candidate; poll <code>getVideoPlaybackQuality().totalVideoFrames</code> while comparing with media state and device trace lines.</li>
+<li><strong>Expected:</strong> The counter advances as frames decode, or the API explicitly reports that the capability is unavailable.</li>
+<li><strong>Actual recorded:</strong> The counter remained zero while picture and sound played. Native logs contained error code <code>50001</code>; the app&#39;s original opening logic eventually showed recovery over ongoing playback.</li>
+<li><strong>Severity:</strong> High in this implementation: normal playback was misclassified as an opening failure.</li>
+<li><strong>Workaround:</strong> The recorded <code>ac5a610</code> change in <code>useOpeningFrame.ts</code> uses readiness and advancing media time when the counter is silent, while giving a reporting counter precedence. This is a fallback, not proof that a frame was physically displayed.</li>
+<li><strong>Evidence/status:</strong> Canonical entry 42. App workaround is recorded; no platform fix or physical-stick reproduction is claimed.</li>
+<li><strong>Suggestion:</strong> Expose capability support and documented errors in JavaScript, and distinguish media-clock progress from decoded-frame and displayed-frame evidence.</li>
+<li><strong>Useful acceptance check:</strong> A VVD sample can distinguish supported statistics, unsupported statistics and actual decode failure without inferring capability from a silent zero.</li>
+</ul>
+<h2 id="f4-documented-remote-command-fails-with-a-success-exit-code">F4. Documented remote command fails with a success exit code</h2>
+<ul>
+<li><strong>Task and steps:</strong> The log records <code>vega exec inputd-cli --help</code>, then <code>vega device run-cmd --device Simulator --command &#39;inputd-cli --help&#39;</code>, then a device-side <code>button_press KEY_DOWN</code>.</li>
+<li><strong>Expected:</strong> The documented host form reaches the device utility; an unavailable executable produces a failure exit status.</li>
+<li><strong>Actual recorded:</strong> The host form reported a missing executable and exited successfully. Device-side <code>run-cmd</code> worked. The CLI behavior was rechecked on October 14 in the source record.</li>
+<li><strong>Severity:</strong> Medium: automation could mistake a failed input operation for success.</li>
+<li><strong>Workaround:</strong> Run the utility inside the selected device and confirm the expected app trace before sending another key.</li>
+<li><strong>Evidence/status:</strong> Canonical entry 43; <code>results/native-acceptance-2026-10-14/receipt.json</code>. No new command was sent here.</li>
+<li><strong>Suggestion:</strong> Correct the documentation or route the documented command to the device; return nonzero for missing tools and failed input dispatch.</li>
+<li><strong>Useful acceptance check:</strong> A shell script can reliably distinguish an input sent to the intended device from a missing command or disconnected target.</li>
+</ul>
+<h2 id="f5-disabling-the-focused-control-loses-native-focus">F5. Disabling the focused control loses native focus</h2>
+<ul>
+<li><strong>Task and steps:</strong> In the recorded parent-settings workflow, focus a setting and start a deferred save that disables that control.</li>
+<li><strong>Expected:</strong> Focus remains discoverable on that control or moves predictably to a neighbour.</li>
+<li><strong>Actual recorded:</strong> Native focus disappeared and the remote had no useful next target.</li>
+<li><strong>Severity:</strong> Medium in the log: a blocked remote interaction.</li>
+<li><strong>Workaround:</strong> Keep the control in focus order, expose its disabled accessibility state and block duplicate handlers. See <code>ParentAreaScreen.tsx</code>; the deferred-write regression was recorded as failing before the app fix.</li>
+<li><strong>Evidence/status:</strong> Canonical entry 40. No full screen-reader or physical-device acceptance follows from this fix.</li>
+<li><strong>Suggestion:</strong> Document focus semantics for disabled and removed controls, and provide a native sample showing asynchronous saves and predictable focus restoration.</li>
+<li><strong>Useful acceptance check:</strong> Keyboard/remote focus remains visible and the accessibility state remains accurate during and after an asynchronous save.</li>
+</ul>
+<h2 id="f6-incremental-package-staging-retains-removed-media">F6. Incremental package staging retains removed media</h2>
+<ul>
+<li><strong>Task and steps:</strong> In the recorded October 18 and October 21 workflows, remove or replace a prepared bundle in the source namespace, then run the native incremental package build and compare staged/package membership with source membership.</li>
+<li><strong>Expected:</strong> Removed source assets are absent from the generated package.</li>
+<li><strong>Actual recorded:</strong> Staging retained obsolete media. The existing strict package budget gate rejected the package. A successful compile was not a valid-package result.</li>
+<li><strong>Severity:</strong> Build-blocking in the recorded workflow. This is not a measured startup or analyzer-performance issue.</li>
+<li><strong>Workaround:</strong> Preserve the stale generated namespace as evidence, clear only that generated namespace and rebuild/repackage from checked sources, then rerun strict package gates. This describes historical authorized recovery, not an instruction to change the current package.</li>
+<li><strong>Evidence/status:</strong> Canonical dated staging entries. The application gate detected the mismatch; no SDK repair is established.</li>
+<li><strong>Suggestion:</strong> Reconcile deletions when staging assets, or document a supported narrowly scoped clean command and emit a source-versus-package membership report.</li>
+<li><strong>Useful acceptance check:</strong> Removing a source fixture removes it from the next incremental package, and package checks still reject any unexplained extra asset.</li>
+</ul>
+<h2 id="attribution-boundaries">Attribution boundaries</h2>
+<p>Locked Mac screenshots, ScreenCaptureKit/Stage Manager behavior, browser file-URL policy, sandboxed Watchman access and GitHub runner/account problems are not attributed to Amazon in this draft. A native capture API could be a feature request, but those host observations do not prove a Vega defect. Entry 44&#39;s noisy image-loader errors are a useful diagnostic observation, not proof of the logger&#39;s internal fallback order.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../FRICTION_LOG_DRAFT.md">docs/judging-package/FRICTION_LOG_DRAFT.md</a></p><p>Source SHA-256: <code>3db553596f5b3ad4a818e9abc667ec1fcf0998d8cd2b1af8a7560b4dca8bdcab</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

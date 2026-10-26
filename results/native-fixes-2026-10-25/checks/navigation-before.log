@@ -1,0 +1,40 @@
+FAIL test/navigation/AppStack.test.tsx
+  AppStack
+    ✓ does not fetch legacy search data during the Calm Frames launch (17 ms)
+    ✓ keeps route components stable when the stack is mounted again (5 ms)
+    ✓ renders correctly (3 ms)
+    ✓ renders the navigator with the correct screens (4 ms)
+    ✕ navigator has correct screen options (4 ms)
+    ✓ opens on Calm Frames (1 ms)
+    ✓ uses Suspense for lazy-loaded components (1 ms)
+
+  ● AppStack › navigator has correct screen options
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 0
+
+      Object {
+        "animationEnabled": false,
+    -   "cardStyle": Object {
+    -     "backgroundColor": "#F7EACF",
+    -   },
+        "headerShown": false,
+      }
+
+      103 |       .calls[0][0];
+      104 |
+    > 105 |     expect(navigatorProps.screenOptions).toEqual({
+          |                                          ^
+      106 |       headerShown: false,
+      107 |       animationEnabled: false,
+      108 |       cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
+
+      at Object.toEqual (test/navigation/AppStack.test.tsx:105:42)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 6 passed, 7 total
+Snapshots:   1 passed, 1 total
+Time:        1.048 s
+Ran all test suites matching /test\/navigation\/AppStack.test.tsx/i.

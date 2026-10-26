@@ -1,0 +1,27 @@
+{
+  "scope": "Source-access checks for this package. CONNECT failures do not verify origin content. No access-policy bypass attempted.",
+  "checks": [
+    {
+      "id": "rules",
+      "url": "https://amazonappdev2026.devpost.com/rules",
+      "status": "blocked",
+      "observation": "Earlier request in this task: curl CONNECT tunnel failed with proxy HTTP 403; origin response unavailable."
+    },
+    {
+      "id": "wcag",
+      "url": "https://www.w3.org/TR/WCAG22/#three-flashes-or-below-threshold",
+      "status": "unavailable",
+      "curl_exit": 56,
+      "http_status": "000",
+      "observation": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "id": "epilepsy-foundation",
+      "url": "https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity",
+      "status": "unavailable",
+      "curl_exit": 56,
+      "http_status": "000",
+      "observation": "curl: (56) CONNECT tunnel failed, response 403"
+    }
+  ]
+}

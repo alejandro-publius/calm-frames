@@ -1,0 +1,41 @@
+{
+  "consumer_titles": [
+    {
+      "bundle": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+      "title": "Acadia coastal scenery (National Park Service, public domain)",
+      "caption_count_by_preset": {
+        "broadcast": 0,
+        "extra-cautious": 0,
+        "wcag": 0
+      }
+    },
+    {
+      "bundle": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+      "title": "McWay Falls \u2014 Five Quiet Minutes",
+      "caption_count_by_preset": {
+        "broadcast": 0,
+        "extra-cautious": 0,
+        "wcag": 0
+      }
+    },
+    {
+      "bundle": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "title": "Forest creek at Redwood",
+      "caption_count_by_preset": {
+        "broadcast": 0,
+        "extra-cautious": 0,
+        "wcag": 0
+      }
+    },
+    {
+      "bundle": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "title": "Sea otters in Alaska",
+      "caption_count_by_preset": {
+        "broadcast": 0,
+        "extra-cautious": 0,
+        "wcag": 0
+      }
+    }
+  ],
+  "caption_restoration_applicability": "No selectable caption track in current consumer catalog; native restoration to another track is non-applicable. Shared implementation regression tests remain required."
+}

@@ -1,0 +1,1 @@
+aarch64 Debug build completed; prepared library exact-byte checks passed with all three original verification reports. Initial missing generated polyfills restored unchanged from existing worktree. Full local logs: /tmp/calm-integration-build.log and /tmp/calm-integration-build-retry.log. No install or publication.

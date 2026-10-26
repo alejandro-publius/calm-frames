@@ -1,0 +1,2204 @@
+{
+ "variant": "Debug",
+ "package_file": {
+  "bytes": 132667620,
+  "sha256": "3ce800cf493af7a54aeb0b6a16785f3bb6e9d3d778a9930b257458b2ec4f276d",
+  "sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf"
+ },
+ "packaged_bundle_sha256": "8e931bf12f075052e48a6b5c8613b2f9dd4ae9e30b991a901e1e060f2341c9e1",
+ "packaged_hermes_bundle_sha256": "2bb16aecd05c368c1d1da0b9be93fa442ea387c50c5f3122b01cf11917204187",
+ "packaged_hermes_equals_build_output": true,
+ "provenance": {
+  "source_map": "build/lib/rn-bundles/Debug/8e931bf12f075052e48a6b5c8613b2f9dd4ae9e30b991a901e1e060f2341c9e1.bundle.map",
+  "source_map_sha256": "3ccde03f6f41242ab9e37b59e692f53dce0ac992dc56352e03c6f13347f21a2d",
+  "map_named_after_packaged_bundle": true,
+  "map_bundle_id_equals_packaged_bundle": true,
+  "map_sources": 998,
+  "packaged_module_path_table_entries": 658,
+  "module_path_table_equals_map": false,
+  "map_only_paths": [
+   "node_modules/@amazon-devices/kepler-compatibility-metro-config/dist/src/keplerManifestPolyfill.js",
+   "node_modules/@react-native/js-polyfills/console.js",
+   "node_modules/@react-native/js-polyfills/error-guard.js"
+  ],
+  "map_only_paths_are_leading_polyfills": true,
+  "table_only_paths": []
+ },
+ "contents": [
+  {
+   "name": "assets/fonts/LICENSE-Fraunces",
+   "bytes": 4391,
+   "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+  },
+  {
+   "name": "assets/fonts/LICENSE-Inter",
+   "bytes": 4380,
+   "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+  },
+  {
+   "name": "assets/fonts/LICENSE-SourceSans3",
+   "bytes": 4486,
+   "sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328"
+  },
+  {
+   "name": "assets/kepler-sdk-version",
+   "bytes": 9,
+   "sha256": "1748fd2999d408afc5b9342bd8e113f9add1e721dc5bab82779e2b6e50102fff"
+  },
+  {
+   "name": "assets/raw/fonts/LICENSE-MaterialIcons",
+   "bytes": 1165,
+   "sha256": "ac755dd1c1ec0921aa64ddc5e4835c6f2670df40ac72c2a72f2fec83e4c1ff59"
+  },
+  {
+   "name": "meta-info/signature/digest",
+   "bytes": 22785,
+   "sha256": "f20854865673ed82667216337c26ff69583b515cb0fbe1ba70a3f44ed576e58f"
+  },
+  {
+   "name": "assets/asset-index.bin",
+   "bytes": 29896,
+   "sha256": "615912dcd4d2ac6c2b847e6d2a5eec54e5f2c23b8397fc4d0d71cd2a06c42aba"
+  },
+  {
+   "name": "bundle/index.bundle",
+   "bytes": 7460155,
+   "sha256": "8e931bf12f075052e48a6b5c8613b2f9dd4ae9e30b991a901e1e060f2341c9e1"
+  },
+  {
+   "name": "bundle/index.hermes.bundle",
+   "bytes": 4587437,
+   "sha256": "2bb16aecd05c368c1d1da0b9be93fa442ea387c50c5f3122b01cf11917204187"
+  },
+  {
+   "name": "assets/image/tv/forest-creek.jpg",
+   "bytes": 140753,
+   "sha256": "51487410aa086dd9639b52644166688d66e6b58cf182a945a7676960aad2d9de"
+  },
+  {
+   "name": "assets/image/tv/sea-otters-alaska.jpg",
+   "bytes": 70136,
+   "sha256": "bcebfa897f90d8f2f77e7ce228c551b53fe395fa2ca42916673db8dde780aeec"
+  },
+  {
+   "name": "assets/raw/benign-story/stills/still-6be7107b8edc4c79.jpg",
+   "bytes": 23149,
+   "sha256": "6be7107b8edc4c7941468ce93026c0a5d489cd6ca33f8578deea38057bc76677"
+  },
+  {
+   "name": "assets/raw/benign-story/stills/still-e746a8732bae6122.jpg",
+   "bytes": 22911,
+   "sha256": "e746a8732bae6122a74c9d798539b5a3a698347583a2510c745800be830105f1"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/forest-creek.jpg",
+   "bytes": 140753,
+   "sha256": "51487410aa086dd9639b52644166688d66e6b58cf182a945a7676960aad2d9de"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/sea-otters-alaska.jpg",
+   "bytes": 70136,
+   "sha256": "bcebfa897f90d8f2f77e7ce228c551b53fe395fa2ca42916673db8dde780aeec"
+  },
+  {
+   "name": "bundle/assets/assets/raw/benign-story/stills/still-6be7107b8edc4c79.jpg",
+   "bytes": 23149,
+   "sha256": "6be7107b8edc4c7941468ce93026c0a5d489cd6ca33f8578deea38057bc76677"
+  },
+  {
+   "name": "bundle/assets/assets/raw/benign-story/stills/still-e746a8732bae6122.jpg",
+   "bytes": 22911,
+   "sha256": "e746a8732bae6122a74c9d798539b5a3a698347583a2510c745800be830105f1"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile01.jpg",
+   "bytes": 87871,
+   "sha256": "8fe9b341ee10280f78b03f35725a2bc542f60bcb3c4a508922e2aa3103b15f31"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile02.jpg",
+   "bytes": 286760,
+   "sha256": "14446559203c610b0493d8416f8f61efda679d332da507d3181338d136893cea"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile03.jpg",
+   "bytes": 52487,
+   "sha256": "3a9bb6935763d443f2a79aedb890e63119ea3ed8976bf3ff15f6ec2b671b20c6"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile04.jpg",
+   "bytes": 56503,
+   "sha256": "ff6a9be21460d683c34fdd727b0385d86100e594f4a95905b0b026dfc5431e59"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile05.jpg",
+   "bytes": 58194,
+   "sha256": "328d00abccb5d4676a4804b3c5480a2f46f2eb7873cd273ec7f56c8383fd5032"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile06.jpg",
+   "bytes": 29383,
+   "sha256": "7943201ac729b743b3b2036069cb136c1e5a3704a722b456d235994e91390a21"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile07.jpg",
+   "bytes": 82617,
+   "sha256": "7be9375d57923558df443ed1239a610b7d2bc19ce40d48a5cd1626dbc9983552"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile08.jpg",
+   "bytes": 92814,
+   "sha256": "17cad71b74a9805b54660954993377717d1fd59498adfc14ce7886abc8e34948"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile09.jpg",
+   "bytes": 48588,
+   "sha256": "063881b5908b4a7d84313727bf4ad5190660878ac8cff597cb4c910adcb22b1d"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile10.jpg",
+   "bytes": 88507,
+   "sha256": "eb75c7c62fedaf6318303e2b81aaa048fdb040f47e814fcb145a251a8be37fa6"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile11.jpg",
+   "bytes": 109436,
+   "sha256": "d00c3b68394ba164e42fa0982a3e435fc61a9a01aa4fbe50d261155f15d38c74"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile12.jpg",
+   "bytes": 101453,
+   "sha256": "33c9e8cbc7219d8222a1bf3b61b4e696878c38ab97ad1c9aa21d710cb4b23421"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile13.jpg",
+   "bytes": 52720,
+   "sha256": "6e24ec5e1902e2a7b5aaa577f0f8b40375aa564f554132a9d66fbeb0f57a14c9"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile14.jpg",
+   "bytes": 60795,
+   "sha256": "5c7fbf79d404b83b81fc989365400fb1be57649e4f6355f1117f38c92dda006f"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile15.jpg",
+   "bytes": 36685,
+   "sha256": "fef1d58507caa048d8d095205a78a1979cbe7bb3191ca897a569e82f9fb2da2d"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile16.jpg",
+   "bytes": 153013,
+   "sha256": "38dbbd0a6ab735361ef28d243b107d5ddad86d897e7315b4e2d401970b977c23"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile17.jpg",
+   "bytes": 60251,
+   "sha256": "f67adeec273c30362bac2c26a87ad938aec88be6d8513c89689d21b8b3524ec7"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile18.jpg",
+   "bytes": 58663,
+   "sha256": "b550e69432e8d25db6502f3a6c50e2798aad043fb1c72e3c7e682d2073237647"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile19.jpg",
+   "bytes": 102903,
+   "sha256": "7610aef1983ef8f4b2396d99eb7182853937185bb98bcc2cbb040cbba920d099"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile20.jpg",
+   "bytes": 73788,
+   "sha256": "f9fe1094215d67f525f4531f4127d666521bc890b3280cc0e8e3db9ddaf518e2"
+  },
+  {
+   "name": "bundle/assets/src/assets/movie-content/tile21.jpg",
+   "bytes": 70451,
+   "sha256": "2fd008d8605eae362b143afea50971c2e3f7617b9e0de3d231acd5c5eadc3469"
+  },
+  {
+   "name": "assets/fonts/FONT_PROVENANCE.json",
+   "bytes": 1920,
+   "sha256": "f558c916e61f9581e2fae8abb207eaacf7da480b2e3274d4ad2fb750752e2386"
+  },
+  {
+   "name": "assets/image/tv/acadia-coast.provenance.json",
+   "bytes": 710,
+   "sha256": "1856bc00053682d26d3bf8d974486d45df88c8a007a288b4a0ca58c3e495c4ec"
+  },
+  {
+   "name": "assets/image/tv/coastal-zen.provenance.json",
+   "bytes": 698,
+   "sha256": "9c5e0cc927942681f2eab2ebff2bf5eff10fce803495a4db8d8c8fed47833bb8"
+  },
+  {
+   "name": "assets/image/tv/forest-creek.provenance.json",
+   "bytes": 580,
+   "sha256": "014dcad2ca45f6a9c8711d27d4fbbf5fa906fa83874ddbca0e8d195b71d88fe5"
+  },
+  {
+   "name": "assets/image/tv/sea-otters-alaska.provenance.json",
+   "bytes": 565,
+   "sha256": "4f70a6923dda140752352926a879ca591e6c31c523a777d367e84c302e10ad85"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.broadcast.json",
+   "bytes": 69875,
+   "sha256": "5e03d4e73700121478fa0612f4f575bb5520f81f15be6b29231f669e0cca2983"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.extra-cautious.json",
+   "bytes": 67137,
+   "sha256": "8c69bf78b462915275976c0b7c272b688ccece0a39b14b12e89e67f1477b7b14"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.wcag.json",
+   "bytes": 67137,
+   "sha256": "7bebdd670cf782b7fe1185cdb6d52e7376f2967a631fb61999c8afd0d1532428"
+  },
+  {
+   "name": "assets/raw/benign-story/measured-source.broadcast.json",
+   "bytes": 7713,
+   "sha256": "cdae9ac1ea67bc92df73122329d79e648e5bf67e9c9b6ef4e6ed91ae852ef92a"
+  },
+  {
+   "name": "assets/raw/benign-story/measured-source.extra-cautious.json",
+   "bytes": 4975,
+   "sha256": "42c06a97e82ee48e427057935e3c2d6690dedac3dcb553c2836528cff2f4d7a2"
+  },
+  {
+   "name": "assets/raw/benign-story/measured-source.wcag.json",
+   "bytes": 4975,
+   "sha256": "d76ae34848f28077bafa8ac8e0adb2920afacca1d6ae7664159bce784b1bce8b"
+  },
+  {
+   "name": "assets/raw/benign-story/verification.json",
+   "bytes": 25164,
+   "sha256": "3673491addb72b9bdbcdd9cd6c3b6abac4ee5f77225e0cc6364fed4f52d4fe45"
+  },
+  {
+   "name": "assets/raw/keplerscript-app-config.json",
+   "bytes": 5991,
+   "sha256": "2c47238c8bcd29762e6385255f7f99946cab7ce4164aae31ad67ee0654167bc2"
+  },
+  {
+   "name": "assets/raw/offline/calm_gradient.flashmap.json",
+   "bytes": 3527,
+   "sha256": "28dff7b168b97d7c31c010ffeb0bf7cbde9c66f0d7f5da7132dfb8fbe896bd4f"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/manifest.json",
+   "bytes": 26424,
+   "sha256": "458af619dcfd72d46b72e0b0ba7d59db0299cd3054c3a8d2cd6d47cfec682238"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json",
+   "bytes": 8747,
+   "sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json",
+   "bytes": 6029,
+   "sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json",
+   "bytes": 6029,
+   "sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/manifest.json",
+   "bytes": 23212,
+   "sha256": "0f7ca06a1bd80519c332d3ca4b19061407634e87b2b4d3aedf65e7fad5becdad"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/broadcast.json",
+   "bytes": 7100,
+   "sha256": "6c9d66ce91e6ac53f47791f964fafed6917ab19cfd29cdc348e22e4036f8b98f"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/extra-cautious.json",
+   "bytes": 5043,
+   "sha256": "7a1fc8c2d9cb7fd5d093f475bb24c566a3c126449efae0dd14f98fddb5e198ff"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.json",
+   "bytes": 4362,
+   "sha256": "e6fe26020cb8449a698070cba35d99549ce607d45a4f393c867eeab03ca687d9"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/manifest.json",
+   "bytes": 24517,
+   "sha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.json",
+   "bytes": 7726,
+   "sha256": "b8f642d9db63956343e7e7cc72ee8c6523a87a3fa52846977bd389ba36ef3d74"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.json",
+   "bytes": 4988,
+   "sha256": "8eb4bcb779d6586d9d5ef034aa87459e61362b3718dcff6860781d416e700e50"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.json",
+   "bytes": 4988,
+   "sha256": "554b61ecd48618fe091b55c6fac58d4f4894b7bbd220389ebecbd9f4386399be"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/manifest.json",
+   "bytes": 22919,
+   "sha256": "24d5cb114e3bcec0047158b7d2d3ac10bdb324cca0a51c61d78e70bd5256d732"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/broadcast.json",
+   "bytes": 7728,
+   "sha256": "867d353f2a047046d753771ecc10b4434370b8e47824b83c6929b153de6c0724"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/extra-cautious.json",
+   "bytes": 4990,
+   "sha256": "81e0ab880282189a7d1201fffa9b1aa0f243e491bd36fa24dc517829159da072"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.json",
+   "bytes": 4990,
+   "sha256": "66dce840677677712e9fef87e7e1f46a79287be6620b1ea31b3fca4305091e86"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/manifest.json",
+   "bytes": 22952,
+   "sha256": "a5b8fee6e16d0f7289e529ceb697f5e43dbc39d322ff67dd720f97d28e4b2e25"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/broadcast.json",
+   "bytes": 7733,
+   "sha256": "d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.json",
+   "bytes": 4995,
+   "sha256": "bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/wcag.json",
+   "bytes": 4995,
+   "sha256": "b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/manifest.json",
+   "bytes": 22942,
+   "sha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.json",
+   "bytes": 7730,
+   "sha256": "db93b33422ca5d94154d0155803bd31916b94854c93033ba5f103622a1e397e4"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.json",
+   "bytes": 4992,
+   "sha256": "4a901e6ded0962554f7fe2835b270f2b0b541185c4009cea367bc4de50538b03"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.json",
+   "bytes": 4992,
+   "sha256": "194f563555d4060b3e349d402a47bb387ce3930c0a69a2493d8d126d287effaf"
+  },
+  {
+   "name": "assets/raw/prepared-library/catalog.json",
+   "bytes": 24517,
+   "sha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9.json",
+   "bytes": 18143,
+   "sha256": "18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/4043445adbb836fc3dd2bd3feb222e81e7d8ad9c411be8b8ba0fe28e9f95f6fd.json",
+   "bytes": 85949,
+   "sha256": "4043445adbb836fc3dd2bd3feb222e81e7d8ad9c411be8b8ba0fe28e9f95f6fd"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/9daf7a6eb07e6c2ebd5254c05fab17f3c205fa0d36dd1dd95ed47768a89c7981.json",
+   "bytes": 18565,
+   "sha256": "9daf7a6eb07e6c2ebd5254c05fab17f3c205fa0d36dd1dd95ed47768a89c7981"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/be5f6ecc536bb267b7a844cd08e4d5babc9f4f4769d05178d9edde8fd4585178.json",
+   "bytes": 21264,
+   "sha256": "be5f6ecc536bb267b7a844cd08e4d5babc9f4f4769d05178d9edde8fd4585178"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb.json",
+   "bytes": 18492,
+   "sha256": "d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb"
+  },
+  {
+   "name": "assets/raw/prepared-library/reports/fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0.json",
+   "bytes": 18574,
+   "sha256": "fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0"
+  },
+  {
+   "name": "bundle/assets/app.json",
+   "bytes": 91,
+   "sha256": "80ad6ad61847d793269c7f022a11051d53baf2b503c73ba8d8abd10843bd3d55"
+  },
+  {
+   "name": "meta-info/build-info.json",
+   "bytes": 159,
+   "sha256": "da1d7035452e47a5899381422b70015c13ab8b771f34c1d704e835876208e952"
+  },
+  {
+   "name": "meta-info/signature/digest.json",
+   "bytes": 43631,
+   "sha256": "b842e21842a611ba02d94b11f1f165085f78e5306d35db3e4275a7482eace430"
+  },
+  {
+   "name": "assets/raw/benign-story/README.md",
+   "bytes": 1980,
+   "sha256": "cf4347c33401cec31d8f80190ffe238bf6da7d10c522e6980d3c690bd5ed54da"
+  },
+  {
+   "name": "assets/raw/sound/README.md",
+   "bytes": 2739,
+   "sha256": "e04e30a4f1d7c1fd4e0a09481393e394e360e97c3c562cf3a398a3edc66287b3"
+  },
+  {
+   "name": "assets/raw/sound/calm-chime.mp3",
+   "bytes": 16941,
+   "sha256": "d18605cf4864598c7d5e752cc801bc90557d3e3fba5d03d42e4216580b1b6b5e"
+  },
+  {
+   "name": "assets/raw/sound/menu-select.mp3",
+   "bytes": 2708,
+   "sha256": "38e2663df732562de2876fe40d3fd64f2fc9aa3ac52d745b956a88e5af2c7ab0"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.mp4",
+   "bytes": 4538880,
+   "sha256": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.precovered.mp4",
+   "bytes": 2116155,
+   "sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150"
+  },
+  {
+   "name": "assets/raw/offline/calm_gradient.mp4",
+   "bytes": 119567,
+   "sha256": "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4",
+   "bytes": 6004594,
+   "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
+   "bytes": 5834837,
+   "sha256": "8aa6b3566e325b2b89863b221ce2b428ed7ba1ff5abf4cdc41a80ec415121e63"
+  },
+  {
+   "name": "assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
+   "bytes": 6004594,
+   "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/broadcast.mp4",
+   "bytes": 216765,
+   "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/extra-cautious.mp4",
+   "bytes": 216765,
+   "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.mp4",
+   "bytes": 216765,
+   "sha256": "1fe09beff072927014fcf80c565b2132a4cc63d5d7a346c3a4d7aca2dd9aaafe"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.mp4",
+   "bytes": 2577605,
+   "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.mp4",
+   "bytes": 2577605,
+   "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.mp4",
+   "bytes": 2577605,
+   "sha256": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/broadcast.mp4",
+   "bytes": 2498811,
+   "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/extra-cautious.mp4",
+   "bytes": 2498811,
+   "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+  },
+  {
+   "name": "assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.mp4",
+   "bytes": 2498811,
+   "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/broadcast.mp4",
+   "bytes": 21959584,
+   "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4",
+   "bytes": 21959584,
+   "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2"
+  },
+  {
+   "name": "assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/wcag.mp4",
+   "bytes": 21959584,
+   "sha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.mp4",
+   "bytes": 9722393,
+   "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.mp4",
+   "bytes": 9722393,
+   "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+  },
+  {
+   "name": "assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.mp4",
+   "bytes": 9722393,
+   "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+  },
+  {
+   "name": "assets/raw/benign-story/demo.pub.pem",
+   "bytes": 113,
+   "sha256": "8e2cde9f818b629e7979b2a7624bf33313234637af1e17dc22e978c46380612a"
+  },
+  {
+   "name": "assets/image/CalmFrames.png",
+   "bytes": 38408,
+   "sha256": "30aeb811bcf454b0ce300421a0987d0e213450ec0563e6548b3b00dcd197a510"
+  },
+  {
+   "name": "assets/image/tv/acadia-coast.png",
+   "bytes": 798367,
+   "sha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b"
+  },
+  {
+   "name": "assets/image/tv/coastal-zen.png",
+   "bytes": 1957011,
+   "sha256": "d1712100edfe5d64aa79e4ab98a276c5864be40bd0f668a2c08621889fdf819e"
+  },
+  {
+   "name": "assets/image/tv/gradient.png",
+   "bytes": 110527,
+   "sha256": "e2e4cc24711bd3c0e4d51977850759aaa5eccb08e10b609f457f5247a2ef9db7"
+  },
+  {
+   "name": "assets/image/tv/harbor-cinematic.png",
+   "bytes": 1840636,
+   "sha256": "62cbb3b83a5112a414846b64df440b71b0c47a13a923e5c8c024265eb92d0b8c"
+  },
+  {
+   "name": "assets/image/tv/harbor-illustrated.png",
+   "bytes": 87534,
+   "sha256": "dd652bfa44be0626114dd1fafc0dbc0553da34b2cb0b54e942c3df38ec48319b"
+  },
+  {
+   "name": "assets/image/tv/harbor-water.png",
+   "bytes": 1813560,
+   "sha256": "3771f44bb89e52edd364db7be196c48b10671bebc4c29b75b55a559f47e9284f"
+  },
+  {
+   "name": "assets/image/tv/harbor.png",
+   "bytes": 1370342,
+   "sha256": "4396dc2277ed83586bed0cc79a3ac8df7e9d277bb7f371074049d662c51f8870"
+  },
+  {
+   "name": "assets/image/tv/mcway-final-frame.png",
+   "bytes": 959857,
+   "sha256": "feaef416d06e4b8d92359f6ef60d60694e341d921935480b42628113f840f1e4"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop000.png",
+   "bytes": 30355,
+   "sha256": "ead7e36860fb554464eb807cb59b81b2cb4ab09764b8b639339c2def0c422d92"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop001.png",
+   "bytes": 29790,
+   "sha256": "c59a0f035b23830b760a9e415c62e7800b069305082b385972ea2416c6038dae"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop002.png",
+   "bytes": 29909,
+   "sha256": "fc5a4c3f07fd148f5e453a54bebe8fd3aa437d2294ba829b9567272ecc0f76e2"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop003.png",
+   "bytes": 30047,
+   "sha256": "e8090d0115aac852b200e92b4789cb15c8195852da86b352ac3e2e997e11d275"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop004.png",
+   "bytes": 29937,
+   "sha256": "418527e7fa049debdb25d89e6e6e045754399a06225a82703b24ec575ee2c3a5"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop005.png",
+   "bytes": 30214,
+   "sha256": "aff86b3ef032f651efb7561d13a393b7550349f58a3dfc48f0c4d2e7af08d58f"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop006.png",
+   "bytes": 29972,
+   "sha256": "c809c9c1b588806f13039ab6378179720eb26d68dbf87df2402700be46557a81"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop007.png",
+   "bytes": 30292,
+   "sha256": "481e900de134a89317941f9b23ca8608e8a5e38832ea184e6b26a427090ce8b7"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop008.png",
+   "bytes": 30232,
+   "sha256": "39b14a055c77e277b5599566b2a36ef58927aa7b32b748f196f75aeb177f7ee4"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop009.png",
+   "bytes": 30367,
+   "sha256": "0bcec971e8056cea7e0d14171077216bb677e080bc485b7f7d3069a9be0dbc5e"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop010.png",
+   "bytes": 30518,
+   "sha256": "48efa0df3753fe4687070d909177ca377222880b85be62d8363a9df3fa562df4"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop011.png",
+   "bytes": 30473,
+   "sha256": "1e64760d9b351252955e854b38cdf74c09a7dca385398c691d9aa5b6795054e0"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop012.png",
+   "bytes": 30500,
+   "sha256": "b9e2a84755c5af1656f2680a4b67f21251427bd6256396bf45f9876a15b5436d"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop013.png",
+   "bytes": 30779,
+   "sha256": "855e9ef8e09f604c5b9f78b6fe7e91b797dea4c82a391631ec63c12788a4ad2f"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop014.png",
+   "bytes": 30518,
+   "sha256": "219adbc22655bdad935925566f3ecc05b6b01bfe96ba16a1a4f7493f2efa0eb2"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop015.png",
+   "bytes": 31226,
+   "sha256": "cce04e9a8a6ba05eb9d38c5c35a8cfa38e199e457cd85bd9d190535b5b536596"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop016.png",
+   "bytes": 30516,
+   "sha256": "508bc24b5213631d6394f3cdaf47e18798af147ae71a15c58d17c4b7e8bf2443"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop017.png",
+   "bytes": 30650,
+   "sha256": "dbd4c15010d118595a834f0ed43bf73b28dbb3f88f6790d2bbd4e4426bbdaffb"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop018.png",
+   "bytes": 30591,
+   "sha256": "557a35b49940667b0d1c8054f8544513c0e7444f360cf7cf469b267ba32aa7e7"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop019.png",
+   "bytes": 31457,
+   "sha256": "e46431997bec754f3079ca88b9d4abb32af8c3c61ce19228792399d9bdee838e"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop020.png",
+   "bytes": 30818,
+   "sha256": "7df9a2e5d5b4776a31e9fb048733682b3b7f9635dd5ab72d57d5a5d48ac8b68d"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop021.png",
+   "bytes": 26777,
+   "sha256": "abaf3adfbcea1d9bb90ddcde41a1fd325a6f7769bf36730eb7816fdca30bc778"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop022.png",
+   "bytes": 26977,
+   "sha256": "9c6faaf32b0af1931ba03b1087a0d378cea3242a201ac70f2e74124207adeee5"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop023.png",
+   "bytes": 27073,
+   "sha256": "b6dc62c7c263051c6fb507b3243a5fd6aede90c129d13b9724f85b2fa7cef1a8"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop024.png",
+   "bytes": 27365,
+   "sha256": "8c7319d274e70b1a9e64ea8c81521109b129f3e2aeaed47d71d569f69b9ef650"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop025.png",
+   "bytes": 27803,
+   "sha256": "ad718478509b97d48a26331dffb1dc254b178da23e83b28ee33e1664a16e9b4b"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop026.png",
+   "bytes": 27741,
+   "sha256": "d8f23774658d9d439c0b16c9affb9cdb7b02393a32e2e9c35dc557fdc6a00161"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop027.png",
+   "bytes": 27755,
+   "sha256": "6ec1aed99d05a4dfe00978a93cf6289c1017c0bf6269b7e9c105e7841737f4b4"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop028.png",
+   "bytes": 27770,
+   "sha256": "546936594dacd44e2909472968afdd2e7e63eb4ed20bbbc6a15a9c9782d5822f"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop029.png",
+   "bytes": 27941,
+   "sha256": "0aa3b01ec2787f1afea1acbd8a95ce5842a3041c0b6e7c23b9da2e4e622adcf6"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop030.png",
+   "bytes": 27864,
+   "sha256": "b8d6140b357c08cd025e940209a2d410845ac1dc4662cd0d8a4a67d4e627d011"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop031.png",
+   "bytes": 27794,
+   "sha256": "5be1c8c2599a2ab42f5118cad0103c62e9d405df16539409c4cf0c95f8c2a90a"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop032.png",
+   "bytes": 27801,
+   "sha256": "d7a7dedef5c27ba851dd0c6ceba6ee9cf0243e6980b9a544d1624a1e1c8b0cff"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop033.png",
+   "bytes": 27776,
+   "sha256": "8e471edf57c327d3ccc44e2f79ccf871b6cd1d91eab8815536e9682be77c4b4f"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop034.png",
+   "bytes": 27827,
+   "sha256": "ffcabb5e564e7ca931a9debd3cc64905a6dbac15780d142033287996dac4dd70"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop035.png",
+   "bytes": 28001,
+   "sha256": "db8b452b07f2308170ae0253a4ee86178b98f7fb9698b4fbfc7b2e4f120f638d"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop036.png",
+   "bytes": 27791,
+   "sha256": "a0e2eedc3c87eb5a7592197342c8fd9779c3a59f55e3ccc65da2a5252c269d55"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop037.png",
+   "bytes": 27783,
+   "sha256": "e7963565e363f4bcdd5c347a451d8d888fd1c5d0e9a2ca1f330b297b09b48e54"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop038.png",
+   "bytes": 27210,
+   "sha256": "10436315aac5fa5f469339e3fe4d32e148c81e67e20372a3fc715d306d066fc6"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop039.png",
+   "bytes": 26552,
+   "sha256": "909f67c60467feb91077401121f87c578260a490c776a41262c429c0fe9dc7a4"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop040.png",
+   "bytes": 25994,
+   "sha256": "ff3e5ce60650538e5e67c579fe5c7c412047040b5c189c1b623e38da1d09e695"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop041.png",
+   "bytes": 25589,
+   "sha256": "3410163f62ab9545daff015efd1dae28fd78064774764d148a1460ef63b76a96"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop042.png",
+   "bytes": 25554,
+   "sha256": "21fd4a0a934588cb8e1f5ad44ef26c36108615ce111006a17ab444344a41b574"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop043.png",
+   "bytes": 25281,
+   "sha256": "0eee4b4e3d15edd18ff32ce8e513592e9c0e34d19db4918bc757eed4a9694c32"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop044.png",
+   "bytes": 25230,
+   "sha256": "674b96083e343bf24f2569a318624dab4bb208c27d497c70ddeccef321bc8557"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/_loop/loop045.png",
+   "bytes": 24486,
+   "sha256": "8aede47f1864b468e863e2f0c2dba66552653309d364f6a2c9e8fd981bc91083"
+  },
+  {
+   "name": "bundle/assets/assets/image/CalmFrames.png",
+   "bytes": 38408,
+   "sha256": "30aeb811bcf454b0ce300421a0987d0e213450ec0563e6548b3b00dcd197a510"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/acadia-coast.png",
+   "bytes": 798367,
+   "sha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/gradient.png",
+   "bytes": 110527,
+   "sha256": "e2e4cc24711bd3c0e4d51977850759aaa5eccb08e10b609f457f5247a2ef9db7"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/harbor-cinematic.png",
+   "bytes": 1840636,
+   "sha256": "62cbb3b83a5112a414846b64df440b71b0c47a13a923e5c8c024265eb92d0b8c"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/harbor-illustrated.png",
+   "bytes": 87534,
+   "sha256": "dd652bfa44be0626114dd1fafc0dbc0553da34b2cb0b54e942c3df38ec48319b"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/harbor-water.png",
+   "bytes": 1813560,
+   "sha256": "3771f44bb89e52edd364db7be196c48b10671bebc4c29b75b55a559f47e9284f"
+  },
+  {
+   "name": "bundle/assets/assets/image/tv/mcway-final-frame.png",
+   "bytes": 959857,
+   "sha256": "feaef416d06e4b8d92359f6ef60d60694e341d921935480b42628113f840f1e4"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/back.png",
+   "bytes": 192,
+   "sha256": "26feb7e20f9775be666a79cf90379d06b14c91912c2950b7799d7ae6931f6712"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/cancel.png",
+   "bytes": 272,
+   "sha256": "876d85832ff246f200c65e962ef11b1626a584a60d151c096f328b18815e19c6"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/caret-down.png",
+   "bytes": 214,
+   "sha256": "4686814448a97ebd56f84eda6265bfda36c03e94c20cea1c552fb295c980b460"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/caret-up.png",
+   "bytes": 212,
+   "sha256": "a1517da1114c8534be7fd41acb2dff68029f3d34496c076c888ce09f72eb5239"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/check.png",
+   "bytes": 4539,
+   "sha256": "73bcb78c30eccd784ac6c6be21d2ae8b59bbc1dd5bdcee63bc41774fd325bf5b"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/error.png",
+   "bytes": 427,
+   "sha256": "fdad9271076c5da13a0b0e42197f50889d4d17a1a74251ccded350e5cb59b533"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/rating_empty.png",
+   "bytes": 608,
+   "sha256": "fefbc5c7651baf2bc5387c6d2ba23f0d9e9ce5e39e68945e6deaccd35065fd26"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/rating_full.png",
+   "bytes": 612,
+   "sha256": "fcc8b86a8ae4e50c9024efd85e2fa98fa2e5b775cd6eeb2376964ce999d2d31c"
+  },
+  {
+   "name": "bundle/assets/node_modules/@amazon-devices/kepler-ui-components/dist/src/assets/common/rating_half.png",
+   "bytes": 647,
+   "sha256": "9ed6afb9da47ecb60c349a4067476ec5aee0d565f9457e93cc7fb69a127ec803"
+  },
+  {
+   "name": "bundle/assets/src/assets/add_solid.png",
+   "bytes": 5823,
+   "sha256": "b830952c96b9430930eafc2a001920d44a400f7b157bc3eb9a24e579a3140bae"
+  },
+  {
+   "name": "bundle/assets/src/assets/delete_icon.png",
+   "bytes": 9496,
+   "sha256": "5006894a620a133752d54bbac6231b1ee193df1e3de0e4f46cc387fb78832406"
+  },
+  {
+   "name": "bundle/assets/src/assets/fast_forward.png",
+   "bytes": 611,
+   "sha256": "b87cce7ce976219b13a9e1032afe46cc39b26ed8be561cf62c82dcc6a38c791a"
+  },
+  {
+   "name": "bundle/assets/src/assets/hd_outline.png",
+   "bytes": 5802,
+   "sha256": "7c00c5e2bde2ce041cd4cd7ee89f10712d7d38abf146c6b0542b692020884045"
+  },
+  {
+   "name": "bundle/assets/src/assets/mini_details_left_gradient.png",
+   "bytes": 313804,
+   "sha256": "2a342158665493cd3f6886a736ea913dc489290cfe686f272022513a023a6fa3"
+  },
+  {
+   "name": "bundle/assets/src/assets/nav_drawer_background_gradient.png",
+   "bytes": 130993,
+   "sha256": "38e2ac40fe3c1680fa250fa824e08536f9b6115dd7d2b75835b2214589ce9afe"
+  },
+  {
+   "name": "bundle/assets/src/assets/play_solid.png",
+   "bytes": 4747,
+   "sha256": "96fbcee80a171fdeb37a24f03e4f5bfe04f388c8df94db69521dcc25833d419d"
+  },
+  {
+   "name": "bundle/assets/src/assets/rewind.png",
+   "bytes": 617,
+   "sha256": "cf6727452e7d071409e96032d53e2199070d2498eb31141cf0ed8b8e513dd128"
+  },
+  {
+   "name": "bundle/assets/src/assets/transaction_solid.png",
+   "bytes": 11516,
+   "sha256": "2a0656e6a1bf9ab3911a84d21174b3aeedd277a5327c7853f7f8d9d958096a63"
+  },
+  {
+   "name": "bundle/assets/src/assets/user_example_icon.png",
+   "bytes": 417657,
+   "sha256": "fda1b00a64cc8608dbb943ef1f454944538fd32a8f64318cd5e799fdc0e53535"
+  },
+  {
+   "name": "bundle/assets/src/blocks/assets/back_icon.png",
+   "bytes": 2754,
+   "sha256": "24008190479f509d3cfeaf779c1ab47838fd0a2409c74618574a7f6ff179b995"
+  },
+  {
+   "name": "bundle/assets/src/blocks/assets/primary_nav_expanded_gradient.png",
+   "bytes": 1186835,
+   "sha256": "0ce1bf19f6c86b384f2db1907695cebac2c43b38fa193153787eb12cbcaa950d"
+  },
+  {
+   "name": "meta-info/signature/digest.json.sig",
+   "bytes": 2605,
+   "sha256": "439709a66ab252b337b6986adee4af91104e46c58f3beb6e45d95a86af2d58e2"
+  },
+  {
+   "name": "meta-info/signature/digest.sig",
+   "bytes": 2604,
+   "sha256": "5b814c105fccef0c6765f637be6074b2c745a564a4c754f4c2fd90661d71b385"
+  },
+  {
+   "name": "lib/aarch64/com.amazon.keplerscript.carousel.so",
+   "bytes": 2597768,
+   "sha256": "7cac093be712550df7e5a306b3b6b389d9aae88e731ca57de6f49f6306ee4ce5"
+  },
+  {
+   "name": "assets/brand/calm-frames-mark-bust.svg",
+   "bytes": 1316,
+   "sha256": "774279e0bf009985fc8dc959aeefb439f44de6868a3eca57a5705f42a4910ac9"
+  },
+  {
+   "name": "assets/brand/calm-frames-mark-head.svg",
+   "bytes": 922,
+   "sha256": "a15e8bd41ee9631908656b33051833290f225194f3a11c0e25a58f4b7166cdec"
+  },
+  {
+   "name": "assets/brand/calm-frames-tile-1280x720.svg",
+   "bytes": 1405,
+   "sha256": "74f2fc7e8feb69646ba86e6e60fe5e7af56d84097f3d29c9cc9d764cbbdd1306"
+  },
+  {
+   "name": "assets/brand/tv/gradient.svg",
+   "bytes": 612,
+   "sha256": "68b4863d9f5bb697fbd21d355b8735b1ef2ca543cde3993ff6bd4e85368bf6fa"
+  },
+  {
+   "name": "assets/brand/tv/harbor.svg",
+   "bytes": 2070,
+   "sha256": "fad8a41c3e4866653b54dca14a6d6ea0ea908229d7c4e22fa73eb4a64cd1b6e6"
+  },
+  {
+   "name": "manifest.toml",
+   "bytes": 11954,
+   "sha256": "8e34fac80f05ed48d2a8fce272994a933026d11535935688ac8e4261f7489c00"
+  },
+  {
+   "name": "assets/raw/prepared-library/catalog.ts",
+   "bytes": 27782,
+   "sha256": "a6175eaa4e0d32dd8128279b0d3bd3de7d065b1d8ac8eb25c15ff3aa2f3ce4fd"
+  },
+  {
+   "name": "assets/fonts/CalmDisplaySemibold.ttf",
+   "bytes": 78628,
+   "sha256": "017e1080cb0228096244f31e87c4b9f8cfe5400ae4da2506422bae2dd53d0882"
+  },
+  {
+   "name": "assets/fonts/CalmSansRegular.ttf",
+   "bytes": 428864,
+   "sha256": "572616be3424c0dea835f7e427b70a54a6e93bef84548d400e5757ee185f1f61"
+  },
+  {
+   "name": "assets/fonts/CalmSansSemibold.ttf",
+   "bytes": 423476,
+   "sha256": "f526b0017ad2c0b0c9b7078c687c8364711968512b19ddc2b55c75261e9fe2c5"
+  },
+  {
+   "name": "assets/fonts/InterMedium.ttf",
+   "bytes": 342360,
+   "sha256": "40b97d81716a919262e708e915f9319dca1014d712ea52c9eb6661a1367c6437"
+  },
+  {
+   "name": "assets/fonts/InterRegular.ttf",
+   "bytes": 341988,
+   "sha256": "042a0371486c9ac72f17d718b3c1ca82da81457894860e0f091e33bbeef85817"
+  },
+  {
+   "name": "assets/fonts/InterSemiBold.ttf",
+   "bytes": 342976,
+   "sha256": "301021c260714f3dc70f752f7e819d5390aaea49da31bfb2ce5dbf1267cc9a5b"
+  },
+  {
+   "name": "assets/raw/fonts/MaterialIcons.ttf",
+   "bytes": 356840,
+   "sha256": "ef149f08bdd2ff09a4e2c8573476b7b0f3fbb15b623954ade59899e7175bedda"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages/desc.txt",
+   "bytes": 27,
+   "sha256": "f1ef6e3a8c1a2a57e9cb98f9245f4b4c805d0eea9c2e562fced92bd24997c457"
+  },
+  {
+   "name": "assets/raw/benign-story/harbor.vtt",
+   "bytes": 323,
+   "sha256": "a4f0acb9d117a58df7398be9b2752541b7568f1493c3b3a339a64efc5b92a21d"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/broadcast.vtt",
+   "bytes": 300,
+   "sha256": "48da03ea981d4f2ba1c05c8a478bc42c9191b3b7aabf8ea65314c25bfc0def2c"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/extra-cautious.vtt",
+   "bytes": 300,
+   "sha256": "48da03ea981d4f2ba1c05c8a478bc42c9191b3b7aabf8ea65314c25bfc0def2c"
+  },
+  {
+   "name": "assets/raw/prepared-library/4149d9ddb7173c43e63818ba160d431ff1f44eca1bf21db05c6ec0a542b9b0ee/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.vtt",
+   "bytes": 300,
+   "sha256": "48da03ea981d4f2ba1c05c8a478bc42c9191b3b7aabf8ea65314c25bfc0def2c"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.vtt",
+   "bytes": 293,
+   "sha256": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.vtt",
+   "bytes": 293,
+   "sha256": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30"
+  },
+  {
+   "name": "assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.vtt",
+   "bytes": 293,
+   "sha256": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30"
+  },
+  {
+   "name": "assets/raw/SplashScreenImages.zip",
+   "bytes": 841813,
+   "sha256": "69054603906f70c9381e56707ac1667527efbbdd12e88bcdcfc6b4a79b9cb893"
+  }
+ ],
+ "app_module_files": 336,
+ "sources_outside_the_app": [],
+ "node_module_files": 661,
+ "instances": [
+  {
+   "install_path": "node_modules/@amazon-devices/kepler-compatibility-metro-config",
+   "package": "@amazon-devices/kepler-compatibility-metro-config",
+   "module_files": 1,
+   "version": "0.0.7",
+   "lockfile_version": "0.0.7",
+   "installed_version": "0.0.7",
+   "lockfile_dev_flag_not_proof_of_shipment": true
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/kepler-media-types",
+   "package": "@amazon-devices/kepler-media-types",
+   "module_files": 2,
+   "version": "1.0.0",
+   "lockfile_version": "1.0.0",
+   "installed_version": "1.0.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/kepler-performance-api",
+   "package": "@amazon-devices/kepler-performance-api",
+   "module_files": 2,
+   "version": "0.1.4",
+   "lockfile_version": "0.1.4",
+   "installed_version": "0.1.4",
+   "lockfile_dev_flag_not_proof_of_shipment": true
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/kepler-ui-components",
+   "package": "@amazon-devices/kepler-ui-components",
+   "module_files": 168,
+   "version": "3.2.2",
+   "lockfile_version": "3.2.2",
+   "installed_version": "3.2.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/keplerscript-turbomodule-api",
+   "package": "@amazon-devices/keplerscript-turbomodule-api",
+   "module_files": 3,
+   "version": "1.2.5",
+   "lockfile_version": "1.2.5",
+   "installed_version": "1.2.5",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-native-kepler",
+   "package": "@amazon-devices/react-native-kepler",
+   "module_files": 1,
+   "version": "4.0.1",
+   "lockfile_version": "4.0.1",
+   "installed_version": "4.0.1+rn0.83.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-native-reanimated",
+   "package": "@amazon-devices/react-native-reanimated",
+   "module_files": 6,
+   "version": "4.0.1",
+   "lockfile_version": "4.0.1",
+   "installed_version": "4.0.1+4.1.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-native-reanimated/node_modules/semver",
+   "package": "semver",
+   "module_files": 20,
+   "version": "7.7.2",
+   "lockfile_version": "7.7.2",
+   "installed_version": "7.7.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-native-w3cmedia",
+   "package": "@amazon-devices/react-native-w3cmedia",
+   "module_files": 1,
+   "version": "2.3.2",
+   "lockfile_version": "2.3.2",
+   "installed_version": "2.3.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-native-worklets",
+   "package": "@amazon-devices/react-native-worklets",
+   "module_files": 2,
+   "version": "1.0.1",
+   "lockfile_version": "1.0.1",
+   "installed_version": "1.0.1+0.6.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/react-navigation__core",
+   "package": "@amazon-devices/react-navigation__core",
+   "module_files": 2,
+   "version": "8.0.9000000001",
+   "lockfile_version": "8.0.9000000001",
+   "installed_version": "8.0.9000000001+7.13.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@amazon-devices/vega-carousel",
+   "package": "@amazon-devices/vega-carousel",
+   "module_files": 27,
+   "version": "1.0.1",
+   "lockfile_version": "1.0.1",
+   "installed_version": "1.0.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@babel/runtime",
+   "package": "@babel/runtime",
+   "module_files": 47,
+   "version": "7.29.7",
+   "lockfile_version": "7.29.7",
+   "installed_version": "7.29.7",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@react-native/assets-registry",
+   "package": "@react-native/assets-registry",
+   "module_files": 2,
+   "version": "0.83.0",
+   "lockfile_version": "0.83.0",
+   "installed_version": "0.83.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@react-native/js-polyfills",
+   "package": "@react-native/js-polyfills",
+   "module_files": 2,
+   "version": "0.83.0",
+   "lockfile_version": "0.83.0",
+   "installed_version": "0.83.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@react-native/normalize-colors",
+   "package": "@react-native/normalize-colors",
+   "module_files": 1,
+   "version": "0.83.0",
+   "lockfile_version": "0.83.0",
+   "installed_version": "0.83.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@react-native/virtualized-lists",
+   "package": "@react-native/virtualized-lists",
+   "module_files": 15,
+   "version": "0.83.0",
+   "lockfile_version": "0.83.0",
+   "installed_version": "0.83.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@reduxjs/toolkit",
+   "package": "@reduxjs/toolkit",
+   "module_files": 1,
+   "version": "2.2.8",
+   "lockfile_version": "2.2.8",
+   "installed_version": "2.2.8",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/@shopify/flash-list",
+   "package": "@shopify/flash-list",
+   "module_files": 50,
+   "version": "2.1.0",
+   "lockfile_version": "2.1.0",
+   "installed_version": "2.1.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/abort-controller",
+   "package": "abort-controller",
+   "module_files": 1,
+   "version": "3.0.0",
+   "lockfile_version": "3.0.0",
+   "installed_version": "3.0.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/anser",
+   "package": "anser",
+   "module_files": 1,
+   "version": "1.4.10",
+   "lockfile_version": "1.4.10",
+   "installed_version": "1.4.10",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/ansi-colors",
+   "package": "ansi-colors",
+   "module_files": 2,
+   "version": "4.1.3",
+   "lockfile_version": "4.1.3",
+   "installed_version": "4.1.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/ansi-regex",
+   "package": "ansi-regex",
+   "module_files": 1,
+   "version": "5.0.1",
+   "lockfile_version": "5.0.1",
+   "installed_version": "5.0.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/base-64",
+   "package": "base-64",
+   "module_files": 1,
+   "version": "1.0.0",
+   "lockfile_version": "1.0.0",
+   "installed_version": "1.0.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/base64-js",
+   "package": "base64-js",
+   "module_files": 1,
+   "version": "1.5.1",
+   "lockfile_version": "1.5.1",
+   "installed_version": "1.5.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/buffer",
+   "package": "buffer",
+   "module_files": 1,
+   "version": "5.7.1",
+   "lockfile_version": "5.7.1",
+   "installed_version": "5.7.1",
+   "lockfile_dev_flag_not_proof_of_shipment": true
+  },
+  {
+   "install_path": "node_modules/color",
+   "package": "color",
+   "module_files": 1,
+   "version": "4.2.3",
+   "lockfile_version": "4.2.3",
+   "installed_version": "4.2.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/color-convert",
+   "package": "color-convert",
+   "module_files": 3,
+   "version": "2.0.1",
+   "lockfile_version": "2.0.1",
+   "installed_version": "2.0.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/color-name",
+   "package": "color-name",
+   "module_files": 1,
+   "version": "1.1.4",
+   "lockfile_version": "1.1.4",
+   "installed_version": "1.1.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/color-string",
+   "package": "color-string",
+   "module_files": 1,
+   "version": "1.9.1",
+   "lockfile_version": "1.9.1",
+   "installed_version": "1.9.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/decode-uri-component",
+   "package": "decode-uri-component",
+   "module_files": 1,
+   "version": "0.2.2",
+   "lockfile_version": "0.2.2",
+   "installed_version": "0.2.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/deepmerge",
+   "package": "deepmerge",
+   "module_files": 1,
+   "version": "4.3.1",
+   "lockfile_version": "4.3.1",
+   "installed_version": "4.3.1",
+   "lockfile_dev_flag_not_proof_of_shipment": true
+  },
+  {
+   "install_path": "node_modules/escape-string-regexp",
+   "package": "escape-string-regexp",
+   "module_files": 1,
+   "version": "4.0.0",
+   "lockfile_version": "4.0.0",
+   "installed_version": "4.0.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/event-target-shim",
+   "package": "event-target-shim",
+   "module_files": 1,
+   "version": "5.0.1",
+   "lockfile_version": "5.0.1",
+   "installed_version": "5.0.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/eventemitter3",
+   "package": "eventemitter3",
+   "module_files": 1,
+   "version": "4.0.7",
+   "lockfile_version": "4.0.7",
+   "installed_version": "4.0.7",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/fast-deep-equal",
+   "package": "fast-deep-equal",
+   "module_files": 1,
+   "version": "3.1.3",
+   "lockfile_version": "3.1.3",
+   "installed_version": "3.1.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/filter-obj",
+   "package": "filter-obj",
+   "module_files": 1,
+   "version": "1.1.0",
+   "lockfile_version": "1.1.0",
+   "installed_version": "1.1.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/formik",
+   "package": "formik",
+   "module_files": 3,
+   "version": "2.4.9",
+   "lockfile_version": "2.4.9",
+   "installed_version": "2.4.9",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/formik/node_modules/deepmerge",
+   "package": "deepmerge",
+   "module_files": 1,
+   "version": "2.2.1",
+   "lockfile_version": "2.2.1",
+   "installed_version": "2.2.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/hoist-non-react-statics",
+   "package": "hoist-non-react-statics",
+   "module_files": 1,
+   "version": "3.3.2",
+   "lockfile_version": "3.3.2",
+   "installed_version": "3.3.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/hoist-non-react-statics/node_modules/react-is",
+   "package": "react-is",
+   "module_files": 3,
+   "version": "16.13.1",
+   "lockfile_version": "16.13.1",
+   "installed_version": "16.13.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/ieee754",
+   "package": "ieee754",
+   "module_files": 1,
+   "version": "1.2.1",
+   "lockfile_version": "1.2.1",
+   "installed_version": "1.2.1",
+   "lockfile_dev_flag_not_proof_of_shipment": true
+  },
+  {
+   "install_path": "node_modules/immer",
+   "package": "immer",
+   "module_files": 1,
+   "version": "10.2.0",
+   "lockfile_version": "10.2.0",
+   "installed_version": "10.2.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/invariant",
+   "package": "invariant",
+   "module_files": 1,
+   "version": "2.2.4",
+   "lockfile_version": "2.2.4",
+   "installed_version": "2.2.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/lodash",
+   "package": "lodash",
+   "module_files": 153,
+   "version": "4.18.1",
+   "lockfile_version": "4.18.1",
+   "installed_version": "4.18.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/lodash.debounce",
+   "package": "lodash.debounce",
+   "module_files": 1,
+   "version": "4.0.8",
+   "lockfile_version": "4.0.8",
+   "installed_version": "4.0.8",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/memoize-one",
+   "package": "memoize-one",
+   "module_files": 1,
+   "version": "5.2.1",
+   "lockfile_version": "5.2.1",
+   "installed_version": "5.2.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/metro-runtime",
+   "package": "metro-runtime",
+   "module_files": 3,
+   "version": "0.83.8",
+   "lockfile_version": "0.83.8",
+   "installed_version": "0.83.8",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/nanoid",
+   "package": "nanoid",
+   "module_files": 1,
+   "version": "3.3.19",
+   "lockfile_version": "3.3.19",
+   "installed_version": "3.3.19",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/nullthrows",
+   "package": "nullthrows",
+   "module_files": 1,
+   "version": "1.1.1",
+   "lockfile_version": "1.1.1",
+   "installed_version": "1.1.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/object-assign",
+   "package": "object-assign",
+   "module_files": 1,
+   "version": "4.1.1",
+   "lockfile_version": "4.1.1",
+   "installed_version": "4.1.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/pretty-format",
+   "package": "pretty-format",
+   "module_files": 10,
+   "version": "29.7.0",
+   "lockfile_version": "29.7.0",
+   "installed_version": "29.7.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/pretty-format/node_modules/ansi-styles",
+   "package": "ansi-styles",
+   "module_files": 1,
+   "version": "5.2.0",
+   "lockfile_version": "5.2.0",
+   "installed_version": "5.2.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/pretty-format/node_modules/react-is",
+   "package": "react-is",
+   "module_files": 3,
+   "version": "18.3.1",
+   "lockfile_version": "18.3.1",
+   "installed_version": "18.3.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/promise",
+   "package": "promise",
+   "module_files": 4,
+   "version": "8.3.0",
+   "lockfile_version": "8.3.0",
+   "installed_version": "8.3.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/prop-types",
+   "package": "prop-types",
+   "module_files": 6,
+   "version": "15.8.1",
+   "lockfile_version": "15.8.1",
+   "installed_version": "15.8.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/prop-types/node_modules/react-is",
+   "package": "react-is",
+   "module_files": 3,
+   "version": "16.13.1",
+   "lockfile_version": "16.13.1",
+   "installed_version": "16.13.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/property-expr",
+   "package": "property-expr",
+   "module_files": 1,
+   "version": "2.0.6",
+   "lockfile_version": "2.0.6",
+   "installed_version": "2.0.6",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/query-string",
+   "package": "query-string",
+   "module_files": 1,
+   "version": "7.1.3",
+   "lockfile_version": "7.1.3",
+   "installed_version": "7.1.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-devtools-core",
+   "package": "react-devtools-core",
+   "module_files": 1,
+   "version": "6.1.5",
+   "lockfile_version": "6.1.5",
+   "installed_version": "6.1.5",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-fast-compare",
+   "package": "react-fast-compare",
+   "module_files": 1,
+   "version": "2.0.4",
+   "lockfile_version": "2.0.4",
+   "installed_version": "2.0.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-freeze",
+   "package": "react-freeze",
+   "module_files": 1,
+   "version": "1.0.4",
+   "lockfile_version": "1.0.4",
+   "installed_version": "1.0.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-is",
+   "package": "react-is",
+   "module_files": 3,
+   "version": "19.3.0",
+   "lockfile_version": "19.3.0",
+   "installed_version": "19.3.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-native-is-edge-to-edge",
+   "package": "react-native-is-edge-to-edge",
+   "module_files": 1,
+   "version": "1.3.1",
+   "lockfile_version": "1.3.1",
+   "installed_version": "1.3.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-native-uuid",
+   "package": "react-native-uuid",
+   "module_files": 16,
+   "version": "2.0.4",
+   "lockfile_version": "2.0.4",
+   "installed_version": "2.0.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-redux",
+   "package": "react-redux",
+   "module_files": 1,
+   "version": "9.1.2",
+   "lockfile_version": "9.1.2",
+   "installed_version": "9.1.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/react-refresh",
+   "package": "react-refresh",
+   "module_files": 3,
+   "version": "0.14.2",
+   "lockfile_version": "0.14.2",
+   "installed_version": "0.14.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/recyclerlistview",
+   "package": "recyclerlistview",
+   "module_files": 26,
+   "version": "4.2.3",
+   "lockfile_version": "4.2.3",
+   "installed_version": "4.2.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/redux",
+   "package": "redux",
+   "module_files": 1,
+   "version": "5.0.1",
+   "lockfile_version": "5.0.1",
+   "installed_version": "5.0.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/redux-thunk",
+   "package": "redux-thunk",
+   "module_files": 1,
+   "version": "3.1.0",
+   "lockfile_version": "3.1.0",
+   "installed_version": "3.1.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/regenerator-runtime",
+   "package": "regenerator-runtime",
+   "module_files": 1,
+   "version": "0.13.11",
+   "lockfile_version": "0.13.11",
+   "installed_version": "0.13.11",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/reselect",
+   "package": "reselect",
+   "module_files": 1,
+   "version": "5.3.0",
+   "lockfile_version": "5.3.0",
+   "installed_version": "5.3.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/scheduler",
+   "package": "scheduler",
+   "module_files": 3,
+   "version": "0.27.0",
+   "lockfile_version": "0.27.0",
+   "installed_version": "0.27.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/simple-swizzle",
+   "package": "simple-swizzle",
+   "module_files": 1,
+   "version": "0.2.4",
+   "lockfile_version": "0.2.4",
+   "installed_version": "0.2.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/simple-swizzle/node_modules/is-arrayish",
+   "package": "is-arrayish",
+   "module_files": 1,
+   "version": "0.3.4",
+   "lockfile_version": "0.3.4",
+   "installed_version": "0.3.4",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/split-on-first",
+   "package": "split-on-first",
+   "module_files": 1,
+   "version": "1.1.0",
+   "lockfile_version": "1.1.0",
+   "installed_version": "1.1.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/stacktrace-parser",
+   "package": "stacktrace-parser",
+   "module_files": 1,
+   "version": "0.1.11",
+   "lockfile_version": "0.1.11",
+   "installed_version": "0.1.11",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/strict-uri-encode",
+   "package": "strict-uri-encode",
+   "module_files": 1,
+   "version": "2.0.0",
+   "lockfile_version": "2.0.0",
+   "installed_version": "2.0.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/tiny-case",
+   "package": "tiny-case",
+   "module_files": 1,
+   "version": "1.0.3",
+   "lockfile_version": "1.0.3",
+   "installed_version": "1.0.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/tiny-warning",
+   "package": "tiny-warning",
+   "module_files": 1,
+   "version": "1.0.3",
+   "lockfile_version": "1.0.3",
+   "installed_version": "1.0.3",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/toposort",
+   "package": "toposort",
+   "module_files": 1,
+   "version": "2.0.2",
+   "lockfile_version": "2.0.2",
+   "installed_version": "2.0.2",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/ts-object-utils",
+   "package": "ts-object-utils",
+   "module_files": 3,
+   "version": "0.0.5",
+   "lockfile_version": "0.0.5",
+   "installed_version": "0.0.5",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/underscore",
+   "package": "underscore",
+   "module_files": 1,
+   "version": "1.13.8",
+   "lockfile_version": "1.13.8",
+   "installed_version": "1.13.8",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/use-latest-callback",
+   "package": "use-latest-callback",
+   "module_files": 2,
+   "version": "0.2.6",
+   "lockfile_version": "0.2.6",
+   "installed_version": "0.2.6",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/use-sync-external-store",
+   "package": "use-sync-external-store",
+   "module_files": 3,
+   "version": "1.7.0",
+   "lockfile_version": "1.7.0",
+   "installed_version": "1.7.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/warn-once",
+   "package": "warn-once",
+   "module_files": 1,
+   "version": "0.1.1",
+   "lockfile_version": "0.1.1",
+   "installed_version": "0.1.1",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/whatwg-fetch",
+   "package": "whatwg-fetch",
+   "module_files": 1,
+   "version": "3.6.20",
+   "lockfile_version": "3.6.20",
+   "installed_version": "3.6.20",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/xmldom",
+   "package": "xmldom",
+   "module_files": 6,
+   "version": "0.8.15",
+   "lockfile_version": "0.8.15",
+   "installed_version": "0.8.15",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  },
+  {
+   "install_path": "node_modules/yup",
+   "package": "yup",
+   "module_files": 1,
+   "version": "1.4.0",
+   "lockfile_version": "1.4.0",
+   "installed_version": "1.4.0",
+   "lockfile_dev_flag_not_proof_of_shipment": false
+  }
+ ],
+ "residual_advisories": [
+  {
+   "ghsa_id": "GHSA-grv7-fg5c-xmjg",
+   "package": "braces",
+   "severity": "high",
+   "affected_range": "<3.0.3",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/braces",
+     "locked_version": "2.3.2",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/sane/node_modules/braces",
+     "locked_version": "2.3.2",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-vcc3-ghjq-m6fr",
+   "package": "decode-uri-component",
+   "severity": "moderate",
+   "affected_range": "<=0.4.2",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/decode-uri-component",
+     "locked_version": "0.2.2",
+     "in_this_package": true
+    }
+   ],
+   "vulnerable_instance_shipped": true,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-952p-6rrq-rcjv",
+   "package": "micromatch",
+   "severity": "moderate",
+   "affected_range": "<4.0.8",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/micromatch",
+     "locked_version": "3.1.10",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/sane/node_modules/micromatch",
+     "locked_version": "3.1.10",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-5fw9-fq32-wv5p",
+   "package": "node-notifier",
+   "severity": "moderate",
+   "affected_range": "<8.0.1",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/node-notifier",
+     "locked_version": "5.4.5",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-rxrc-rgv4-jpvx",
+   "package": "react-devtools-core",
+   "severity": "moderate",
+   "affected_range": "<4.28.4",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+     "locked_version": "3.6.3",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": [
+    "node_modules/react-devtools-core@6.1.5"
+   ]
+  },
+  {
+   "ghsa_id": "GHSA-7f53-fmmv-mfjv",
+   "package": "react-native",
+   "severity": "high",
+   "affected_range": ">=0.59.0 <0.62.3",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+     "locked_version": "0.60.6",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-82x6-q7mm-w9cf",
+   "package": "toml",
+   "severity": "high",
+   "affected_range": "<4.2.0",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/toml",
+     "locked_version": "3.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-v5mp-jgw5-2x6j",
+   "package": "toml",
+   "severity": "high",
+   "affected_range": "<4.1.2",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/toml",
+     "locked_version": "3.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-4qx8-w7c3-pj3p",
+   "package": "toml",
+   "severity": "high",
+   "affected_range": "<=5.0.0",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/toml",
+     "locked_version": "3.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-9j65-hcg3-gc64",
+   "package": "toml",
+   "severity": "high",
+   "affected_range": "<=5.0.0",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/toml",
+     "locked_version": "3.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-9qmh-m7c6-f92p",
+   "package": "toml",
+   "severity": "high",
+   "affected_range": "<=5.0.0",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/toml",
+     "locked_version": "3.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-w5hq-g745-h8pq",
+   "package": "uuid",
+   "severity": "moderate",
+   "affected_range": "<11.1.1",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/uuid",
+     "locked_version": "3.4.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-3h5v-q93c-6h6q",
+   "package": "ws",
+   "severity": "high",
+   "affected_range": ">=2.1.0 <5.2.4",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/metro-inspector-proxy/node_modules/ws",
+     "locked_version": "1.1.5",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+     "locked_version": "3.3.3",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+     "locked_version": "1.1.5",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-96hv-2xvq-fx4p",
+   "package": "ws",
+   "severity": "high",
+   "affected_range": ">=1.1.0 <5.2.5",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/metro-inspector-proxy/node_modules/ws",
+     "locked_version": "1.1.5",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+     "locked_version": "3.3.3",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+     "locked_version": "1.1.5",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  },
+  {
+   "ghsa_id": "GHSA-p9pc-299p-vxgp",
+   "package": "yargs-parser",
+   "severity": "moderate",
+   "affected_range": ">=6.0.0 <13.1.2",
+   "vulnerable_nodes": [
+    {
+     "install_path": "node_modules/metro-inspector-proxy/node_modules/yargs-parser",
+     "locked_version": "7.0.0",
+     "in_this_package": false
+    },
+    {
+     "install_path": "node_modules/react-native-tscodegen-types/node_modules/metro/node_modules/yargs-parser",
+     "locked_version": "7.0.0",
+     "in_this_package": false
+    }
+   ],
+   "vulnerable_instance_shipped": false,
+   "other_instances_of_this_package_shipped": []
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+  "@amazon-devices/react-native-kepler": {
+    "version": "4.0.1+rn0.83.0",
+    "inspectedFiles": {
+      "Libraries/Components/View/ViewNativeComponent.js": "d9bb9bc67e591160c085b944c6ab6f9f41498d9332ea2cb34a8543c509b11a93",
+      "Libraries/Components/View/ReactNativeStyleAttributes.js": "1e1ec59e4712a700d4dfbd891c1973a8a33a7f0443b7040899559f03ade382e1",
+      "Libraries/StyleSheet/StyleSheetTypes.d.ts": "c93437e279cd4550138d8ec781ccdba926301a201fffd6dd18efa9bbbbd2e9a3"
+    }
+  },
+  "@amazon-devices/react-linear-gradient": {
+    "version": "2.0.9000000001+2.6.2",
+    "inspectedFiles": {
+      "README.kepler.md": "abef69a4798b2142017187082f72d4e2a569fa5c1d3aa35c21ec2b070cf844cd",
+      "index.kepler.tsx": "5a25535a9bde01db09c70703f661627b14707c03a5f3993a7723cf403e023edd",
+      "react-native.config.js": "392616c8b180e3ff1bd04df1456ec6bc3df85cf1f04326c739400c700a901c67"
+    }
+  }
+}

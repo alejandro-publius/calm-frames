@@ -45,12 +45,23 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 31 | Toolchain | Re-encoding moves the picture rectangle, which moves every area fraction | Medium |
 | 32 | Toolchain | A re-encode renumbers the first timestamp, so the rendition slides | Medium |
 | 33 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
+| 34 | Local automation | Sandbox blocks Jest's Watchman socket and Python HTTP listeners | Low |
+| 35 | GitHub automation | All Audit jobs fail before a runner or step starts | High |
+| 36 | Player | A packaged `file:///pkg/...` URI is not opened by the native player | High |
+| 37 | Captions | The native caption view cannot be stacked above an RN image by z-index | High |
+| 38 | Virtual device | Capture can return an older GPU frame; a static screen records few frames | Medium |
+| 39 | Build tooling | Custom fonts render as the fallback unless they sit in `assets/fonts` | Low |
+| 40 | React Native | Disabling a focused control drops native focus | Medium |
+| 41 | Device, React Native | `Image` refuses a data URI, so a signed still showed black on the device | High |
+| 42 | Player | `getVideoPlaybackQuality` fails below JavaScript on the virtual device, so no frame is ever counted | High |
+| 43 | CLI, docs | The documented `vega exec inputd-cli` looks for a host executable that is not there | Medium |
+| 44 | Device | The image loader logs an error for every packaged image, and then loads it | Low |
 
-**Thirty-three entries. Five High, thirteen Medium, fifteen Low.**
+**Forty-four entries. Ten High, sixteen Medium, eighteen Low.**
 
-**Entries 1 to 28 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 and 36 to 44 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing here blocked the build outright, because every one of them had a way around it. The five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26).
+Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found, and on Oct 14, 41 and 42 did the same: the hold still showed black and every playback ended on a recovery screen until theirs. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The Audit failures between then and Oct 11 were dependencies and bills of materials, not runner startup, and the Oct 11 push is green.
 
 Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
@@ -90,7 +101,7 @@ tr '\r' '\n' < vega_install.log | grep -v -E '\[[=-]+\]'
 
 **Expected.** A flag to skip rc edits, the way rustup has `--no-modify-path`, or an edit to only the current shell's file.
 
-**Actual.** `source "/Users/alexvintera/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
+**Actual.** `source "/Users/<user>/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
 
 **Severity.** Low.
 
@@ -248,7 +259,7 @@ The SDK error log shows `[DeviceManagerHandler]: [getDeviceList]: Error - TypeEr
 
 **Severity.** Medium. Automated UI checks and screen recordings both need this, and for an accessibility project the screen capture is not optional.
 
-**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots do not; see entry 14. This is an undocumented interface and it could change between SDK versions.
+**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots do not; see entry 14. This is an undocumented interface and it could change between SDK versions. Since Oct 9 the device's own `inputd-cli`, reached through `vega device run-cmd`, is the better route for keys; entry 43 has it and the documented spelling that fails.
 
 **Suggestion.** Add `vega device key` and `vega device screenshot`, and make the screenshot capture the composited output rather than the framebuffer the app does not draw into.
 
@@ -746,6 +757,297 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 **Suggestion.** None for Amazon. For anyone comparing detectors: check what your baseline does to a control clip before you report a difference.
 
+## 34. Restricted automation blocks Watchman and local HTTP listeners
+
+**October 9 follow-up.** In the restricted finishing session, `ps` was denied,
+Vega status could not write its SDK log, and `vega virtual-device start -t 30`
+failed while registering QEMU with the host. `claude auth status` returned
+`loggedIn: false`; one read-only CLI task returned `Not logged in`. This is
+not evidence that the user's normal terminal lacks subscription access.
+No credentials, billing method or permission controls were changed. The
+simulator and subscription check require the normal host session.
+
+`fnm env` also tried to write outside the workspace; using the already installed
+Node 22 binary directly worked. The Python collection step hit jsii's host
+cache timestamp write; `JSII_RUNTIME_PACKAGE_CACHE_ROOT` selects a writable
+build cache without changing tests. The pinned CycloneDX generators were
+already cached and could run directly: all three regenerated SBOM files matched
+the committed bytes. The app's aarch64 Debug build succeeded. These outcomes
+separate a build from the still-blocked simulator validation.
+
+**Task.** Run scene-hold and regression tests on Sep 29, 2026.
+
+**Steps.** From `app/`, ran Node 22 Jest through `fnm exec --using 22 npm test`
+with scene-hold, playback, guard, harness and map test paths. From the repo root,
+ran `.venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'`.
+
+**Expected.** The tests to start.
+
+**Actual.** Jest stopped before running any tests:
+
+```text
+unable to talk to your watchman on ~/.local/state/watchman/<user>-state/sock! (Operation not permitted)
+```
+
+The Python run executed its other checks, but the nine upload-server cases failed
+in fixture setup at `socket.bind` for `127.0.0.1`, with
+`PermissionError: [Errno 1] Operation not permitted`.
+
+**Severity.** Low. These are local sandbox constraints, not Vega failures.
+
+**Workaround.** Add `--watchman=false` to use Jest's file crawler. The broader app
+run kept coverage enabled and completed with Watchman disabled. Re-run Python
+without the two HTTP test classes to check the remaining suite, and record those
+server tests as unverified here rather than treating them as passes. They still
+need an unrestricted runner.
+
+During the pre-push hardening pass, `make sbom-check` also could not fetch
+`cyclonedx-bom` from PyPI because DNS access was restricted. The report-page
+Chrome process exited with code -6 before producing a screenshot; its cause is
+not established. A broad Jest rerun timed out in two existing registry tests
+while host load was excessive, and the native build, broad reruns and incomplete
+mutation run were stopped. Those interrupted or blocked checks are not passes.
+Focused runtime regressions, strict TypeScript and targeted lint then passed;
+complete final-source validation still needs a suitable runner.
+
+The later final-source sequential app and selected Python sweeps passed, as did
+native Debug packaging on all three configured architectures. The remaining
+HTTP, report-page, SBOM and full remote CI checks are still unverified, not
+silently counted as passes.
+
+A bounded read-only Docker check found a client but could not access the Colima
+daemon socket: `permission denied` on
+`~/.colima/default/docker.sock`. No containers, images, builds,
+network settings or shared services were changed. Docker is not an available
+alternative HTTP-test runner in this session.
+
+**Suggestion.** Document restricted-runner commands and retain the full suite in CI.
+
+---
+
+## 35. GitHub Actions fails before starting an Audit runner
+
+**Task.** Obtain complete pre-publication CI evidence for the scene-hold changes.
+
+**Steps.** On Sep 29, read the current main commit's workflow history through the
+connected GitHub API. Inspect the Sep 28 scheduled
+[Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36431466841),
+its jobs and timing, then retry its failed jobs once.
+
+**Expected.** A runner to check out the repository and execute each audit.
+
+**Actual.** Both attempts failed all four jobs within two to three
+seconds, with `runner_id: 0` and `steps: []`. No runner logs exist. The first
+attempt recorded zero runner milliseconds. The Sep 21 scheduled Audit on the
+same main commit passed. No dependency audit command ran in either failed
+attempt, so this is not evidence of a dependency finding.
+
+After publishing the exact locally tested tree as
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), both its
+[CI run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189829)
+and [Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189802)
+failed every job with no assigned runner and no executed steps. This reproduces
+the restriction on the proposed tree without supplying any test result.
+
+**Severity.** High for completing CI, not an Amazon or application failure.
+
+**Workaround.** None in the repository. The exact startup annotation is not
+available through this connector. Account quota or billing is possible, not
+confirmed. Resolve the Actions startup restriction in GitHub, then rerun the
+complete required checks. Local validation continues, and main stays unchanged.
+Do not widen audit exceptions, disable jobs or change repository visibility.
+
+**Suggestion.** Expose startup-failure annotations through the workflow-run API
+so automation can distinguish account or runner restrictions from code failures.
+
+---
+
+<a id="packaged-file-uri"></a>
+
+## 36. A packaged `file:///pkg/...` URI is not opened by the native player as written
+
+**Task.** Play the bundled Harbor title from the package on the Vega Virtual Device.
+
+**Steps.** Handed the player the packaged MP4 and WebVTT as `file:///pkg/...` URIs, the form the Kepler file system documentation gives for package assets.
+
+**Expected.** The native player opens a package asset by its documented URI.
+
+**Actual.** Native GStreamer treated `file:///pkg/...` as a literal file name and failed to open it. The same bytes opened as `/pkg/...`.
+
+**Severity.** High. Nothing played from the package until this was found.
+
+**Workaround.** Normalize the package prefix to `/pkg/...` at the native media boundary only, in `app/src/utils/VideoHandler.ts`, and keep the signed catalog identity unchanged. Both Harbor titles play.
+
+**Suggestion.** Document the URI form the native player accepts for package assets, or accept the `file://` form the file system documentation gives.
+
+## 37. The native caption view cannot be stacked above a React Native image by z-index
+
+**Task.** Keep captions visible above a scheduled scene image during a hold.
+
+**Steps.** Set a z-index directly on the native caption view, above the React Native image that draws the cover.
+
+**Expected.** The caption view sits above the cover like any other sibling.
+
+**Actual.** The native caption view stayed under the image; a z-index on it did nothing.
+
+**Severity.** High. Captions under the cover defeat the point of a hold that keeps the story going.
+
+**Workaround.** A retained, non-collapsible React Native host view carries the stacking style and the caption view lives inside it, in `app/src/screens/PlayerScreen.tsx`. Both observed holds keep captions on top.
+
+**Suggestion.** Document native surface composition with examples: which views are native layers, and what z-index does and does not reach.
+
+## 38. Simulator capture can return an older GPU frame, and a static screen records few frames
+
+**Task.** Capture the simulator window for the demo and for navigation checks.
+
+**Steps.** Captured with ScreenCaptureKit while Stage Manager had the simulator in the background, and recorded static screens.
+
+**Expected.** A capture shows the frame on screen now, and a recording has a steady frame rate.
+
+**Actual.** A capture could return an older GPU frame, which confused navigation validation. A static screen produced variable-rate video with few frames, so a presumed constant frame count was wrong.
+
+**Severity.** Medium. Test friction rather than a product defect.
+
+**Workaround.** Activate the simulator before every capture and review the recording's actual frames; read frame timestamps rather than assuming a frame count.
+
+**Suggestion.** A CLI command that captures the simulator's screen, which entry 9 also asks for.
+
+## 39. Custom fonts render as the fallback face unless they sit in `assets/fonts`
+
+**Task.** Ship the licensed Inter faces the approved design uses.
+
+**Steps.** Put the static TTFs under `assets/raw/fonts`, then under `assets/fonts`.
+
+**Expected.** A bundled font resolves wherever the package carries it, or the documentation says where it has to be.
+
+**Actual.** Under `assets/raw/fonts` every weight rendered as the fallback face. Under `assets/fonts` the intended weights appeared.
+
+**Severity.** Low. Found by looking at the screen.
+
+**Workaround.** The fonts live in `app/assets/fonts`.
+
+**Suggestion.** Document the fonts directory, and what a fallback render looks like so it is recognised.
+
+## 40. Disabling a focused control drops native focus
+
+**Task.** Block repeated presses on a parent setting while its save is pending.
+
+**Steps.** Disabled the focused preset, room and chime controls for the length of the save.
+
+**Expected.** Focus stays where it was, or moves somewhere predictable.
+
+**Actual.** Native focus vanished with the control, and the remote had nowhere to go.
+
+**Severity.** Medium. A ten foot interface with no focus is stuck.
+
+**Workaround.** Keep the control in the focus order, report the disabled accessibility state and block its handler instead, in `app/src/calmframes/ParentAreaScreen.tsx`. The deferred-write regression was seen failing before the fix.
+
+**Suggestion.** Document focus behaviour when a focused view becomes disabled, and move focus to a neighbour by default.
+
+## 41. The image loader refuses a data URI, so a signed still showed black on the device
+
+**Task.** Show the signed hold still during a practice hold. The flash map carries each still as an authenticated `data:image/jpeg;base64,...` URI, which the app rendered through `Image` with `{ uri }`, and which every unit test and browser preview had drawn.
+
+**Steps.**
+
+1. Installed the Debug candidate on the Vega Virtual Device and started the practice film from Details.
+2. Streamed the device log: `vega device start-log-stream --device Simulator`.
+3. At each hold, read the app's own `CALM_TRACE still` breadcrumb and the device lines beside it.
+
+**Expected.** The still from just before the hold, on top of the covered picture, as in every test and preview.
+
+**Actual.** The hold card appeared over black. At every hold the device logged, with the data URI after the colon:
+
+```
+ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+```
+
+Thirty-five such lines in the Oct 14 session. Nothing in the React Native for Vega pages read so far says a data URI is unsupported, and `Image` accepts the source without a type error, so the first the build heard of it was the device.
+
+**Severity.** High. The still is what a hold shows instead of black, so on the device the feature's picture was black until the workaround, and no test or preview could have shown it.
+
+**Workaround.** The two practice stills ship as package assets, generated by `eval/benign_story_stills.py`, and `app/src/calmframes/bundledStills.ts` swaps one in only when the authenticated data URI matches exactly, so the signed map still decides what is shown. Commit `52138fe`. A map for any other title shows black until its stills are bundled the same way.
+
+**Suggestion.** Load data URIs in `Image`, or document that only packaged and remote sources load, and report the refusal to JavaScript with its reason instead of only to the device log.
+
+---
+
+## 42. The player never reports a decoded frame on the virtual device
+
+**Task.** Keep the opening still on screen until the first real frame has decoded, then swap to the video, so a family never sees a black frame. The shell waited for `getVideoPlaybackQuality().totalVideoFrames` to move, which is what the API is for.
+
+**Steps.**
+
+1. Started any title on the Vega Virtual Device with the Debug candidate installed.
+2. Streamed the device log and read the `CALM_TIMING` events beside the player's own lines.
+
+**Expected.** `totalVideoFrames` climbs once playback starts.
+
+**Actual.** Every call failed below JavaScript and the counter stayed at zero while picture and sound played:
+
+```
+E W3CMEDIA:[MSE_EME] get_video_playback_quality: MPB Call failed with code: 50001.
+```
+
+263 such lines in one twenty-minute session. The shell waited out its 15 second allowance and then showed the recovery screen about fourteen seconds into every playback, over a film that was playing correctly.
+
+**Severity.** High. Every playback on the device ended on a recovery screen until the workaround, and nothing documents what code 50001 means or that the call cannot succeed on the virtual device.
+
+**Workaround.** `app/src/calmframes/useOpeningFrame.ts` readies the shell when the counter is silent but the element reports `readyState` of 2 or more, is not paused, and its clock has advanced a quarter of a second since the first poll; a counter that does report still wins. Commit `ac5a610`, with tests that failed first.
+
+**Suggestion.** Make `getVideoPlaybackQuality` work on the virtual device, or fail it in JavaScript with a documented error instead of silently in native code, and document code 50001.
+
+---
+
+## 43. The documented remote-button command looks for a host executable that is not there
+
+**Task.** Press remote buttons on the virtual device from a script. Amazon's 0.24 `inputd-cli` page (developer.amazon.com/docs/vega/0.24/inputdcli.html, read Oct 9, 2026) describes `inputd-cli`, built into Fire TV devices and the virtual device, and gives the host form `vega exec inputd-cli button_press KEY_BACK`.
+
+**Steps.**
+
+1. `vega exec inputd-cli --help`
+2. `vega device run-cmd --device Simulator --command 'inputd-cli --help'`
+3. `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'`, and the other keys, from the acceptance driver.
+
+**Expected.** Step 1 presses buttons as the page says.
+
+**Actual.** Step 1 prints `[Errno 2] No such file or directory: 'inputd-cli'` and exits 0, so a script cannot even tell that it failed. Rechecked Oct 14, 2026 on Vega CLI 1.3.4. Steps 2 and 3 work: the tool runs on the device and drove both Oct 14 acceptance sessions (`results/native-acceptance-2026-10-14/receipt.json`).
+
+**Severity.** Medium. Entry 9 was written when no route was known and the QMP socket was the only way in. The documented route exists, its documented spelling fails, and a zero exit status hides that.
+
+**Workaround.** `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_X'`, with `KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`, `KEY_ENTER`, `KEY_BACK` and `KEY_PLAYPAUSE` all seen to work.
+
+**Suggestion.** Make `vega exec inputd-cli` reach the device-side tool as the page says, or correct the page to the `run-cmd` form, and exit non-zero when the executable is missing.
+
+---
+
+## 44. The image loader logs an error for every packaged image, and then loads it
+
+**Task.** Read the device log for the reason a signed still showed black (entry 41), and then for anything wrong with the Home scene, which logged the same error at every mount while reporting that it loaded.
+
+**Steps.**
+
+1. Installed the Debug candidate and streamed the device log: `vega device start-log-stream --device Simulator`.
+2. Opened Home, Details, the opening shell and the practice film, and lined up every `LocalAssetImageLoader` line against the app's own `CALM_TRACE image` and `CALM_TRACE still` breadcrumbs.
+
+**Expected.** An error from the image loader means an image did not load.
+
+**Actual.** On Oct 14 every packaged image, loaded with `require(...)`, produced one line a few milliseconds before its own load event, and then loaded:
+
+```
+ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+```
+
+Twenty distinct lines in one twenty-minute session: the coastal scene at every mount of Home and Details, the two pictures of the opening shell, and each bundled still at the holds, each followed within ten milliseconds by `image scene loaded` or `still loaded`. The loader seems to try a non-local source for a packaged asset first and log the miss as an error. Nothing distinguishes that line from the one in entry 41, where the image never loaded, except the load event the app has to print itself.
+
+**Severity.** Low. No picture is affected. It cost an evening of chasing a gradient view that was never at fault, and it means a real image failure cannot be found in the log by its message alone.
+
+**Workaround.** Judge an image by the app's own `onLoad` and `onError` breadcrumbs (`CALM_TRACE image` and `CALM_TRACE still`), never by the loader's line.
+
+**Suggestion.** Log the miss at debug level, or not at all when a later source succeeds, and keep the error level for an image that did not load.
+
+---
+
 ## How to add one
 
 Write the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion. Real entries only, the way `CLAUDE.md` says. If it did not happen on this build, it does not go in, and if it is a platform rule we adopted rather than a failure we watched, say so in the entry itself. The log has three of those and each one is labelled.
@@ -754,7 +1056,7 @@ Give it the next number here, add its row to the summary table at the top, and u
 
 ## Where the log's later entries came from
 
-The first eleven were written here as they happened. The other twenty-two were not: the lanes hit them while working rather than while keeping notes, so each one was found again in a commit, a code comment, a results file or a decision entry. Here is where each came from, so nobody has to take the log on trust.
+The first eleven and the Sep 29 entries, 34 and 35, were written here as they happened. Entries 12 to 33 were not: the lanes hit them while working rather than while keeping notes, so each one was found again in a commit, a code comment, a results file or a decision entry. Here is where each came from, so nobody has to take the log on trust.
 
 | # in the log | Where the evidence is |
 |---|---|
@@ -780,3 +1082,208 @@ The first eleven were written here as they happened. The other twenty-two were n
 | 31 re-encode moves the rectangle | `flashmap/src/flashmap/analyze.py` `carried_picture`, `picture.py`, commit `d89b063` |
 | 32 re-encode renumbers the first timestamp | `pipeline/verify.py` `compare_rendition_to_source`, docs/SIDECAR_SPEC.md, commit `4436eda` |
 | 33 ffmpeg photosensitivity filter | `eval/baselines/run_all.py`, commit `daec5b7` |
+| 34 restricted sockets | Sep 29 scene-hold verification; commands and limitations recorded in docs/STATUS.md |
+| 35 Actions startup | Audit run 36431466841, attempts 1 and 2, inspected Sep 29; no runners or steps |
+| 36 packaged URIs | `app/src/utils/VideoHandler.ts`, the native media boundary; `results/native_validation_2026-10-10.json` |
+| 37 caption stacking | `app/src/screens/PlayerScreen.tsx`, the retained caption host; the Oct 10 native captures |
+| 38 simulator capture | docs/SHOT_MANIFEST.md and `results/redesign_demo_manifest_2026-10-10.json`, frame timestamps rather than counts |
+| 39 fonts directory | `app/assets/fonts/`, docs/brand/README.md |
+| 40 focus on a disabled control | `app/src/calmframes/ParentAreaScreen.tsx`, the deferred-write regression in the parent area tests |
+| 41 data URI refused | `app/src/calmframes/bundledStills.ts` header, docs/STATUS.md (Oct 14, night), commit `52138fe` |
+| 42 no decoded frame counted | `app/src/calmframes/useOpeningFrame.ts`, `app/test/calmframes/openingFrame.test.tsx`, commit `ac5a610` |
+| 43 `vega exec inputd-cli` | CLAUDE.md, the section on working with the virtual device; `results/native-acceptance-2026-10-14/receipt.json` |
+| 44 loader error before every load | `results/native-acceptance-4-2026-10-14/receipt.json` (`image_loader_errors_distinct`), FINAL_HANDOFF.md section 3 |
+
+### 2026-10-14: visible native checks interrupted active desktop work
+
+Repeated simulator foregrounding was distracting before a coherent UI change
+was ready. Severity: workflow disruption. Stopped native interaction at the
+user's request and moved to an isolated code integration plus headless host-tree
+previews. Next native check should be one consolidated session after handoff.
+Terminal control was separately denied by the computer-use tool for safety;
+user-pasted prompts remain the available Claude coordination route.
+
+### Oct 14: consolidated native preview blocked by locked Mac
+
+After the reviewed source and focused corrections were ready, the requested
+single native session could not begin. `cua.listApps()` reported that the Mac
+was locked and automatic unlock failed. No simulator install, relaunch or
+Terminal UI action followed. A manual Mac unlock is required. The independent
+source, package and artifact work continued and the prior build was preserved.
+
+### October 17: owner reports slow loading during design review
+
+Task: open and watch the newly installed build. Expected: responsive transitions.
+Actual: owner reported everything loads slowly and supplied an image of a scheduled
+cover. Severity: blocks comfortable review. Source fixes remove measured repeated
+verification and unnecessary startup/Back work; the image and retained logs do not
+prove a stalled clock. Workaround: preserve the current app while source regressions
+run, then use one coordinated native timing checkpoint. See the performance receipt.
+
+### October 17: rapid cover and Skip status changes feel robotic
+
+Owner task: watch the installed prepared video. Expected: readable steady feedback.
+Actual: owner reported that Flashing hidden to Skip/status transitions were too quick.
+Source showed changing countdown text, disappearing/reappearing Skip, completion
+cards and two announcement paths. Severity: usability issue during playback.
+Resolution in source: stable scene copy/action position and one speech path, without
+changing cover intervals or media actions. Native acceptance awaits approval.
+
+### October 17: concurrent package replacement interrupts native acceptance
+
+Task: install the approved stabilization build once and test without capture.
+Expected: the reviewed package remains installed during the check. Actual: a
+second install completed about 70 seconds later and the transferred package hash
+differed. App route breadcrumbs were absent. Severity: blocks attributable native
+acceptance. Workaround: stop before remote keys and preserve the open app.
+Suggestion: agree one simulator owner and compare the delivered hash before
+navigation. The other installer was not identified. Evidence:
+results/stabilization-native-2026-10-17/receipt.json.
+
+### October 17: low-progress native playback despite playing state
+
+Task: complete Pause, Skip and manual Back on the reviewed installed app. Expected:
+media resumes normal progress and Skip completes promptly. Actual: 17.426 s media
+progress in 122.089 s wall (including a 3.382 s deliberate pause); a fresh run
+without Pause also slows. Native audio-sink reports zero position advance, video
+queue reports buffering; JavaScript does not emit a new waiting event in run 1.
+Skip reaches its guarded target after about 7.26 s. Severity: blocks smooth-playback
+acceptance. Back remains usable. No source workaround applied without a proven
+cause. Evidence: results/remaining-controls-2026-10-17/.
+
+Follow-up, same day. Two isolation runs reproduced it: <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.media_span_ms -->6010<!--/n--> ms of video took
+<!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.wall_span_ms -->15560<!--/n--> ms on a fresh app, and <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.media_span_ms -->5886<!--/n--> ms took
+<!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.wall_span_ms -->26435<!--/n--> ms after a simulator restart
+(results/native-slowdown-isolation-2026-10-17/). A minimal SDK playback app, run
+outside this repository, showed the same pattern. Both later played at normal
+speed with no code change; a later run advanced <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.media_ms -->20894<!--/n--> ms of video in <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.wall_ms -->20899<!--/n--> ms.
+Cause unknown. Host activity is a candidate, not a finding. No fix is claimed.
+
+### October 17: centered scene message dominates playback
+
+Owner task: watch the prepared film. Actual: the large centered Flashing scenes
+and Skip panel interrupts the composition. Resolution: a fixed compact group
+in the lower-left safe corner, short truthful labels and one focus outline.
+Source checks and native control logs pass after the authorized single install.
+The app stays paused on the compact control for owner visual acceptance.
+The screenshot's teal linked orbs remain unidentified and were not changed.
+
+### October 17: playback state feedback and end return
+
+Observed native clocks could crawl without a new waiting event. Source also
+kept loading beside Pause and allowed any key to cancel the 2.3-second end
+return. The finish pass adds read-only slow-progress feedback, gives Pause
+sole status ownership, clears MP4 waiting only on progress, and routes end
+directly through existing teardown. Separate waiting episodes now each get
+one accessibility announcement. 217 focused tests pass. Native controls now
+pass on the verified package, with natural end returning Home Watch in 361 ms.
+Owner appearance/audio review remains separate. No slowdown cure is claimed.
+
+
+### October 17: Intentional cover looked like a playback failure
+
+Task: investigate owner-reported full-picture blackouts. Steps: inspect the supplied
+image, replay prepared Acadia with text logs, compare the signed schedule and
+numeric source/rendition black-frame analysis. Expected: an intentional, understandable
+cover. Actual: the no-signed-still branch paints black, while Scene hidden and Skip
+remain visible. Severity: confusing core playback presentation. Workaround/fix:
+fully opaque slate explanation during the same scheduled interval. Separate finding:
+the original and prepared clip both begin with about five near-black seconds.
+Suggestion: include scheduled-cover presentation and content-opening review in the
+owner's short demonstration check. No protection was removed.
+
+## October 18: removed prepared-media generations linger in Vega staging
+
+Task: build the approved three-island package after omitting two obsolete bundles.
+Steps: replace the source prepared-library namespace with the reviewed 66,492,442-byte
+copy, run npm run build:debug. Expected: package contains the same namespace. Actual:
+native compilation completed successfully, but the unchanged postbuild gate rejected
+the package budget. All three incremental staging directories still contained the
+omitted generations, totaling 71,988,311 bytes. Severity: blocks installation.
+Workaround: preserve stale staging for evidence, replace only the staged media
+namespace with the exact source copy, repackage compiled output with installed vpt,
+and rerun all strict package gates. No source, limit or trust change. Suggestion:
+Vega should synchronize removals when staging raw assets, or document that asset
+removals require cleaning the generated staging namespace.
+
+## 2026-10-21: local test runner requested Watchman state access
+
+Task: run the final UI source checks. Expected: workspace-only Jest run. Actual: Watchman tried to chmod its state outside the writable workspace and exited before tests. Severity: blocked that invocation only. Workaround: run Jest with --watchman=false using the existing Node 22; no permissions or software changed. Suggestion: use this flag for bounded local CI-style runs.
+
+## 2026-10-21: Vega incremental packaging retained replaced media
+
+Task: package the approved Acadia replacement. Expected: five bundles and 63,317,768 prepared bytes. Actual: native staging retained the removed Acadia bundle/report alongside the new bundle, and the mandatory package budget gate rejected the archive. No installation occurred. Severity: build blocked. Workaround: move only the generated prepared namespace from app/build/private/vega/aarch64/Debug/assets/raw to the external evidence backup, then rebuild from the checked source assets. Suggestion: refresh the native staged asset tree when a bundle is removed.
+
+## 2026-10-25: native focus and pause defects found after source tests passed
+
+These are app defects recorded on fbe53bf, not claims that Amazon caused them.
+The [received handoff](../START_HERE_CODEX.md) contains the exact native package,
+fictional-household screenshots and speech transcripts. The [local fix record](native-fixes-2026-10-25/README.md)
+separates new source regressions from pending native confirmation.
+
+| Issue / severity | Reproduction and expected behavior | Actual native behavior | Workaround and actionable correction |
+|---|---|---|---|
+| D1, high navigation disruption | Select each Home title, Down to Watch, Up. Expect the same selected card. | Spatial navigation moves to a nearer middle card and changes title; some card Down moves to Details. | Re-select the title before watching. Explicit native ref/handle routing now maps cards Down to Watch and action Up to the selected card; verify both sizes. |
+| D2, high focus/visibility disruption | In a fictional profile's Parents, save Reading comfort. Expect switch focus and its full saved state to remain visible. | Focus returns to top Back; enlarged content pushes the switch below the viewport. | Scroll back and inspect the saved state. Consume initial Back preference once and reveal the switch using layout events; test save failure and moving away during save as well. |
+| D3, high accessibility feedback defect | With VoiceView, open player, let playback start, pause, show/hide controls, resume and pause again. Expect one notice per actual pause, none on opening. | Opening gets a pause announcement; real pauses are silent with the recorded Dolby session. | Inspect visible pause state; do not treat it as speech acceptance. Keep a persistent polite live region and separate restored-pause guidance from a new pause event. Native listening still required. |
+
+The near-white transition is tracked separately in the [first-frame investigation](native-fixes-2026-10-25/FIRST_FRAME.md).
+The app's default route background was a concrete fixable gap. Recorder timing
+alone cannot identify decoder or compositor fault, so those layers and approved
+media remain unchanged. No permission bypass, Mac host fault attribution or
+unverified platform defect is included here.
+
+## 2026-10-25: one damaged local import blocked other caregiver reviews
+
+This is a project intake-store defect, not an Amazon or Mac platform finding.
+Reproduce with fictional local jobs: keep one intact review, truncate another
+job's metadata, then restart and request the job list. Expected: the intact
+review remains usable and the damaged record has a recoverable error. Actual:
+the old store raised while starting or listing every job. Severity: high for
+the affected local workflow. Workaround: preserve the damaged directory outside
+the intake root before restarting; never repair a review hash by guessing.
+
+The correction keeps a non-authorizing unreadable placeholder and permits only
+explicit local removal after an owned worker is stopped. The same real HTTP
+regression exposed a second issue: a saved review appeared ready just before
+its worker exited, so an immediate approval was refused. Severity: moderate
+transient workflow disruption. The corrected finishing state retains ownership
+until actual exit. The [tests and browser evidence](cloud-followup-2026-10-25/IMPORT_RECOVERY.md)
+cover both issues; no host fault or native acceptance is inferred.
+
+## October 25: security-manager codegen upgrade has no bounded clean path
+
+- Task: resolve the four residual advisories without weakening Audit.
+- Steps: read official package/sample metadata; inspect codegen 0.71.0; after
+  owner approval, resolve it at the security-manager boundary in an isolated tree.
+- Expected versus actual: a compatible corrected graph was sought; the graph
+  instead introduces two critical Hermes advisories and other findings. The
+  current vendor release and RN83 alpha still pin codegen 0.66.0.
+- Severity: high for dependency acceptance; this does not establish exploit
+  exposure in shipped bytes or a defect in the device runtime.
+- Workaround: preserve the canonical graph and failing Audit, reject the isolated
+  experiment before install. Exact evidence is in results/cloud-completion-2026-10-25.
+- Suggestion: publish an SDK-supported codegen dependency update with runtime/type
+  compatibility guidance and a tested debugger/inspector matrix.
+
+## October 25: source and rules retrieval blocked by the cloud network
+
+- Task: verify qualifying licensed long footage and current official rules.
+- Steps: request the official Devpost pages and alternative Pexels, Mixkit,
+  Internet Archive and aquarium source pages through the configured proxy.
+- Expected versus actual: readable source pages; all returned CONNECT 403.
+- Severity: blocking for acquisition and current-rule verification.
+- Workaround: preserve prior provenance, identify missing inputs and continue
+  independent import/editorial work. Do not bypass access restrictions.
+- Suggestion: provide a supported reviewed source-access route or exact source
+  files with their rights records. This is a cloud access-policy limitation, not
+  evidence of an Amazon SDK, Mac or browser defect. No organizer message was sent.
+
+## October 25: focused fixes do not fully reproduce native layout and speech
+
+- Task: fix receipt-proven pause speech and initial Reading comfort clipping.
+- Steps: targeted failing tests, bounded changes, Debug/Release builds, isolated native retests.
+- Expected versus actual: mocked regressions pass, but 1080p first comfort enable still clips and the second actual Release pause lacks a transcribed instruction.
+- Severity: acceptance blocking for those subcriteria.
+- Workaround: leave both open and retain exact native evidence; no claim of completion.
+- Suggestion: next authorized fix should reproduce native scroll geometry and VoiceView delivery competition before selecting another patch.

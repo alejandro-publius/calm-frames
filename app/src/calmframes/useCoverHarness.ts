@@ -21,15 +21,11 @@
  * outside an interval again.
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { CoverInterval, intervalAt, isCovered } from './coverSchedule';
 import {
-  CoverInterval,
-  intervalAt,
-  isCovered,
-} from './coverSchedule';
-import {
-  createMediaClock,
   driftMs as clockDrift,
+  createMediaClock,
   estimate,
   MediaClock,
   setPlaybackRate,
@@ -67,10 +63,16 @@ export interface CoverHarnessOptions {
    * on the virtual device.
    */
   ready?: boolean;
+  /** Presentation-only notification; it never changes the cover schedule. */
+  onUncertainty?: (mediaTimeMs: number) => void;
 }
 
 export interface CoverHarnessState {
   covered: boolean;
+  /** Presentation only: contextual stills are forbidden while time is uncertain. */
+  uncertain: boolean;
+  /** Monotonic even when uncertainty and resume events share one React batch. */
+  uncertaintyCount: number;
   /** Estimated media time, milliseconds. */
   mediaTimeMs: number;
   /** Largest difference seen between the estimate and a reported position. */
@@ -137,17 +139,22 @@ export function useCoverHarness(
     foreground = true,
     scheduleLabel = 'none',
     ready = true,
+    onUncertainty,
   } = options;
 
   const [state, setState] = useState<CoverHarnessState>({
     covered: false,
+    uncertain: false,
+    uncertaintyCount: 0,
     mediaTimeMs: 0,
     worstDriftMs: 0,
     worstTickGapMs: 0,
     reason: 'idle',
   });
 
-  const clockRef = useRef<MediaClock>(createMediaClock(0, Date.now(), 1, false));
+  const clockRef = useRef<MediaClock>(
+    createMediaClock(0, Date.now(), 1, false),
+  );
   const uncertainRef = useRef<boolean>(false);
   const coveredRef = useRef<boolean>(false);
   const worstDriftRef = useRef<number>(0);
@@ -163,6 +170,10 @@ export function useCoverHarness(
   const intervalsRef = useRef<CoverInterval[]>(intervals);
   intervalsRef.current = intervals;
   const startedAtRef = useRef<number | null>(null);
+  const onUncertaintyRef = useRef(onUncertainty);
+  useLayoutEffect(() => {
+    onUncertaintyRef.current = onUncertainty;
+  }, [onUncertainty]);
 
   const applyCover = useCallback(
     (nextCovered: boolean, reason: string, mediaTimeMs: number) => {
@@ -211,7 +222,9 @@ export function useCoverHarness(
     const handle = (kind: TimingEventKind) => () => {
       const wallClockMs = Date.now();
       const reportedMs =
-        typeof element.currentTime === 'number' ? element.currentTime * 1000 : null;
+        typeof element.currentTime === 'number'
+          ? element.currentTime * 1000
+          : null;
 
       if (reportedMs !== null) {
         const drift = clockDrift(clockRef.current, reportedMs, wallClockMs);
@@ -251,12 +264,27 @@ export function useCoverHarness(
 
       if (UNCERTAIN_EVENTS.has(kind)) {
         uncertainRef.current = true;
+        setState((previous) => ({
+          ...previous,
+          uncertain: true,
+          uncertaintyCount: previous.uncertaintyCount + 1,
+        }));
         if (mode === 'timing') {
           applyCover(true, kind, reportedMs ?? clockRef.current.anchorMediaMs);
+        }
+        try {
+          onUncertaintyRef.current?.(
+            reportedMs ?? clockRef.current.anchorMediaMs,
+          );
+        } catch {
+          // A presentation callback must never interrupt fail-closed coverage.
         }
       }
       if (kind === 'playing' || kind === 'seeked') {
         uncertainRef.current = false;
+        setState((previous) =>
+          previous.uncertain ? { ...previous, uncertain: false } : previous,
+        );
       }
 
       logTimingEvent({
@@ -265,7 +293,8 @@ export function useCoverHarness(
         mediaTimeMs: reportedMs,
         covered: coveredRef.current,
         playbackRate: clockRef.current.playbackRate,
-        quality: kind === 'timeupdate' ? readPlaybackQuality(element) : undefined,
+        quality:
+          kind === 'timeupdate' ? readPlaybackQuality(element) : undefined,
         extra: {
           worstDriftMs: Math.round(worstDriftRef.current),
           worstTickGapMs: Math.round(worstTickGapRef.current),
@@ -358,14 +387,17 @@ export function useCoverHarness(
         // Toggle on a wall clock, so the recording has a known cadence even if
         // the player never reports a position.
         const elapsed = wallClockMs - startedAt;
-        const shouldCover =
-          Math.floor(elapsed / toggleEveryMs) % 2 === 1;
+        const shouldCover = Math.floor(elapsed / toggleEveryMs) % 2 === 1;
         applyCover(shouldCover, 'layering-toggle', mediaTimeMs);
         return;
       }
 
       if (!foreground || uncertainRef.current) {
-        applyCover(true, uncertainRef.current ? 'uncertain' : 'background', mediaTimeMs);
+        applyCover(
+          true,
+          uncertainRef.current ? 'uncertain' : 'background',
+          mediaTimeMs,
+        );
         return;
       }
 

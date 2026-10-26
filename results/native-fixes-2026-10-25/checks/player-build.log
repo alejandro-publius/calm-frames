@@ -1,0 +1,166 @@
+
+> calm-frames-app@0.1.0 setup:player
+> cd shaka-setup && ./build.sh && ./copyOutputs.sh
+
+Starting Shaka Player v4.8.5-r1.2 integration for Vega TV platform
+Shaka Player repository already exists
+Resetting Shaka Player state
+Shaka Player state has been reset
+Entering Shaka Player directory
+Creating Amazon branch 'amz_4.8.5' from tag v4.8.5
+Switched to a new branch 'amz_4.8.5'
+Copying custom Shaka Player tarball with Vega TV patches
+Extracting custom patches, polyfills, and source files
+tar: Ignoring unknown extended header keyword 'SCHILY.fflags'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.FinderInfo'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'SCHILY.fflags'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.FinderInfo'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.metadata:kMDLabel_iyt6tws6deart3fan5j26k4wja'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.macl'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.lastuseddate#PS'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.TextEncoding'
+Applying custom patches for Vega TV platform compatibility
+Applying: Avoid using ReadableStream for HTTP fetch and request
+Applying: Add logs to facilitate Kepler W3C Media logging.
+Applying: Add Dolby support for W3C Media APIs [3/3]
+Applying: Use "video" as default mimetype
+Applying: Fix DASH playback.
+Applying: Fix in xml attribute parsing
+Applying: Manually Redirect on HTTP Response 302
+Applying: Modify findChildrenNS api
+Applying: Handle unavailability of startNumber
+Applying: Fix issues in shaka for Kepler W3C Media support
+Applying: Convert to ArrayBuffer when using TextDecoder.decode
+Applying: Performance optimization of createSegmentReference
+Applying: Performance optimization of parseSegments
+Applying: Convert to ArrayBuffer during source buffer append
+Applying: Supported All level logging
+Applying: Address PenTest and Manual code review
+Applying: fix resolveUris optimization to handle empty relativeUri
+Applying: package name change.
+Applying: fix(TTML): Fix timing parsing when using 1dp (#6830)
+Applying: feat: Export getMaxSegmentEndTime and getAvailabilityTimeOffset in PresentationTimeline (#6839)
+Applying: fix: Exclude future segments in notifyTimeRange calculations (#6970)
+Applying: Fix captions rendering
+Applying: Added custom event handling
+Applying: shaka: On parity with 4.3.6
+Applying: Avoid codec switch for synonymc codecs
+Applying: Detect eac3 and ac3 as known audio codecs
+Applying: Revert "fix resolveUris optimization to handle empty relativeUri"
+Applying: Revert "Performance optimization of parseSegments"
+Applying: fix dash EventStream parsing
+Applying: fix playback stall when switching from live to vod
+Applying: Add cloning decoding info logic
+Applying: Fix assignment of undefined value
+Applying: Revert "Performance optimization of createSegmentReference"
+Applying: fix(HLS): Fix variable substitution when using relative paths (#8350)
+Applying: Fix subtitles error handling
+Applying: Shaka Player optimizations
+Applying: Do not sort TextTrackCues
+Applying: Avoid mediasource reset for same Mimetype
+Applying: Fix infinite manifest update delay
+Applying: fix(HLS): Fix subtitle timing when no discontinuity but there is X-TIMESTAMP-MAP
+Applying: Fix cloning keySystemAccess (2/2)
+Applying: Revert "Do not sort TextTrackCues"
+Applying: fix(hls): Removing Possible encoding problem detected (#8253)
+Applying: fix: Fix internal network filter for HEAD requests
+Font imports disabled for network-restricted environments
+Building customized Shaka Player with Vega build system
+./build.sh: line 105: kepler: command not found
+Vega build failed, attempting direct build
+npm warn deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm warn deprecated core-js@2.6.12: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+npm warn deprecated request@2.88.0: request has been deprecated, see https://github.com/request/request/issues/3142
+npm warn deprecated popper.js@1.16.1: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+npm warn deprecated open-sans-fonts@1.6.2: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+npm warn deprecated har-validator@5.1.5: this library is no longer supported
+npm warn deprecated @babel/polyfill@7.12.1: 🚨 This package has been deprecated in favor of separate inclusion of a polyfill and regenerator-runtime (when needed). See the @babel/polyfill docs (https://babeljs.io/docs/en/babel-polyfill) for more information.
+[INFO] Generating Closure dependencies...
+[INFO] Linting JavaScript...
+[INFO] Linting CSS...
+[INFO] Linting HTML...
+
+   Config loaded: <checkout>/app/shaka-setup/shaka-player/.htmlhintrc
+
+   Config loaded: <checkout>/app/shaka-setup/shaka-player/.htmlhintrc
+
+   Config loaded: <checkout>/app/shaka-setup/shaka-player/.htmlhintrc
+
+Scanned 3 files, no errors found (14 ms).
+[INFO] Checking that the build files are complete...
+[INFO] Checking for common misspellings...
+[INFO] Checking correct usage of eslint-disable...
+[INFO] Checking the tests for type errors...
+[WARNING] No changes detected, skipping. Use --force to override.
+[INFO] Building the docs...
+[INFO] Compiling the library (ui, debug)...
+[WARNING] No changes detected, skipping. Use --force to override.
+[INFO] Compiling the library (compiled, debug)...
+[INFO] Compiling the demo app (debug)...
+[INFO] Compiling the receiver app (debug)...
+[INFO] Compiling the library (ui, release)...
+[WARNING] No changes detected, skipping. Use --force to override.
+[INFO] Compiling the library (compiled, release)...
+[INFO] Compiling the demo app (release)...
+[INFO] Compiling the receiver app (release)...
+Returning to shaka-setup directory
+Adding TypeScript no-check directives to prevent linting issues
+Added @ts-nocheck to: shaka-player/dist/shaka-player.ui.debug.d.ts
+Added @ts-nocheck to: shaka-player/dist/shaka-player.ui.d.ts
+Added @ts-nocheck to: shaka-player/dist/shaka-player.compiled.d.ts
+Added @ts-nocheck to: shaka-player/dist/shaka-player.compiled.debug.d.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/AppPreBuffering.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/._AppPreBuffering.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/AppNonAdaptive.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/AppPreBufferingPlaylist.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/AppNonAdaptiveVideo.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/._AppNonAdaptiveVideo.tsx
+@ts-nocheck already present in: shaka-player/shaka-rel/src/shakaplayer/ShakaPlayer.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/shakaplayer/._ShakaPlayer.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/AppPreBufferingAds.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/PlayerInterface.ts
+@ts-nocheck already present in: shaka-player/shaka-rel/src/polyfills/DOMParserPolyfill.ts
+@ts-nocheck already present in: shaka-player/shaka-rel/src/polyfills/TextDecoderPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/polyfills/._TextDecoderPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/polyfills/ElementPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/polyfills/DocumentPolyfill.ts
+@ts-nocheck already present in: shaka-player/shaka-rel/src/polyfills/MiscPolyfill.ts
+@ts-nocheck already present in: shaka-player/shaka-rel/src/polyfills/W3CMediaPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/polyfills/._MiscPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/polyfills/._W3CMediaPolyfill.ts
+Added @ts-nocheck to: shaka-player/shaka-rel/src/._AppNonAdaptive.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/._AppPreBufferingAds.tsx
+Added @ts-nocheck to: shaka-player/shaka-rel/src/._AppPreBufferingPlaylist.tsx
+Validating Shaka Player integration
+Shaka Player v4.8.5 integration completed
+Starting Shaka Player artifacts integration
+Removing default ShakaPlayer.ts (using custom version instead)
+Copying custom source files and polyfills to src/w3cmedia/
+Copying built Shaka Player distribution files
+Removing test/example files
+Cleaning up obsolete files
+Shaka Player integration completed.

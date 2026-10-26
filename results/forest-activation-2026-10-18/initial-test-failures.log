@@ -1,0 +1,1547 @@
+PASS app/test/calmframes/copy.test.ts
+FAIL app/test/calmframes/duskLantern.test.tsx
+  ● Home names the selected video and leads with Watch without adding a demo card
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Choose a video"
+    Received: "Choose an island"
+
+      26 |   const launch = jest.fn();
+      27 |   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
+    > 28 |   expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose a video');
+         |                                                               ^
+      29 |   expect(screen.getAllByText('Calm Frames')).toHaveLength(1);
+      30 |   expect(screen.queryByTestId('kid-home-meta')).toBeNull();
+      31 |   expect(screen.queryByText(/No picture holds/)).toBeNull();
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:28:63)
+
+  ● one teal action on Home: Watch is primary, Details and Help are quiet
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "#F0F2EF"
+    Received: "#F7B37A"
+
+      51 |   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
+      52 |   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
+    > 53 |   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
+         |                                 ^
+      54 |   for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
+      55 |     expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+      56 |   }
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:53:33)
+
+  ● the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 80
+    Received: 42
+
+      85 |   const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
+      86 |   // Both steps use the shared feature type token.
+    > 87 |   expect(homeTitle.fontSize).toBe(80);
+         |                              ^
+      88 |   expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 2);
+      89 |   home.unmount();
+      90 |   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:87:30)
+
+FAIL app/test/calmframes/forestActivation.test.tsx
+  ● the real signed wcag preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● the real signed broadcast preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● the real signed extra-cautious preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● uses the existing content rail without playing on focus or changing ambient registration
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      53 |   fireEvent(screen.getByTestId(`kid-home-poster-${title.id}`), 'focus');
+      54 |   expect(open).not.toHaveBeenCalled(); expect(play).not.toHaveBeenCalled();
+    > 55 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      56 |   expect(screen.getByTestId('kid-home-video-meta').props.children).toBe('12 seconds · Nature sounds · Plays once');
+      57 |   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea forests in Alaska');
+      58 |   expect(screen.getByTestId('coastal-world')).toBeTruthy();
+
+      at Object.toBe (test/calmframes/forestActivation.test.tsx:55:69)
+
+  ● retains the preview and a single watch return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● retains the preview and a single details return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● retains the preview and a single poster return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● shows duration, nature-audio/once wording and source attribution in the approved Details flow
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Watch: Sea forests in Alaska"
+    Received: "Watch: Forest creek at Redwood"
+
+      75 |   const screen = render(<TitleDetailsScreen entry={forest} onPlay={play} onBack={back} />);
+      76 |   expect(screen.getByTestId('title-details-meta').props.children).toBe('12 seconds · Nature sounds · Plays once');
+    > 77 |   expect(screen.getByTestId('title-details-play').props.accessibilityLabel).toBe('Watch: Sea forests in Alaska');
+         |                                                                             ^
+      78 |   fireEvent.press(screen.getByTestId('title-details-play')); expect(play).toHaveBeenCalledWith(forest);
+      79 |   fireEvent.press(screen.getByTestId('title-details-show-info'));
+      80 |   expect(screen.getByTestId('title-details-attribution').props.children).toContain('NPS: G Litten');
+
+      at Object.toBe (test/calmframes/forestActivation.test.tsx:77:77)
+
+FAIL app/test/calmframes/homeIntroduction.test.tsx
+  ● home carries no explanation and keeps parental controls tertiary until focused
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 2
+    + Received  + 2
+
+      Object {
+    -   "backgroundColor": "#2B3B47",
+    -   "borderColor": "#9CC1CB",
+    +   "backgroundColor": "#FFE1A9",
+    +   "borderColor": "#A44132",
+        "borderWidth": 6,
+        "minHeight": 88,
+      }
+
+      94 |   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
+      95 |   fireEvent(control, 'focus');
+    > 96 |   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING, minHeight: 88, borderWidth: 6 });
+         |                                                   ^
+      97 |   expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: CALM_COLORS.TEXT, textDecorationLine: 'underline' });
+      98 |   fireEvent.press(control);
+      99 |   expect(parent).toHaveBeenCalledTimes(1);
+
+      at Object.toMatchObject (test/calmframes/homeIntroduction.test.tsx:96:51)
+
+PASS app/test/calmframes/pickerFocusReturn.test.tsx
+FAIL app/test/screens/KidModeScreen.test.tsx (5.117 s)
+  ● the shelf a household lands on › features Acadia and approved sea otters as consumer videos while retaining the playback diagnostic
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+      Array [
+        "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+        "prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+    +   "prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+        "calm-frames-offline",
+      ]
+
+      321 |   it('features Acadia and approved sea otters as consumer videos while retaining the playback diagnostic', () => {
+      322 |     const titles = defaultCatalog();
+    > 323 |     expect(titles.map(title => title.id)).toEqual([
+          |                                           ^
+      324 |       `prepared-${ACADIA_SOURCE_SHA256}`, `prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6`, OFFLINE_TITLE_ID,
+      325 |     ]);
+      326 |     expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
+
+      at Object.toEqual (test/screens/KidModeScreen.test.tsx:323:43)
+
+  ● the shelf a household lands on › opens Acadia by default and keeps Harbor out of Home and its help flow
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 3
+    Received array:  [{"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}]
+
+      334 |     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
+      335 |     // Both approved destinations appear on the coastal map.
+    > 336 |     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
+          |                                                                                           ^
+      337 |     expect(screen.queryByText('Choose a video')).toBeNull();
+      338 |     expect(screen.queryByText(/Harbor/)).toBeNull();
+      339 |     expect(screen.queryByText('Playback test')).toBeNull();
+
+      at Object.toHaveLength (test/screens/KidModeScreen.test.tsx:336:91)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+PASS app/test/screens/returnFocus.test.tsx
+PASS app/test/calmframes/tenFoot.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+PASS app/test/calmframes/detailDiscovery.test.tsx
+PASS app/test/calmframes/screens.test.tsx
+PASS app/test/w3cmedia/mediacontrols/VideoPlayerUI.test.tsx
+PASS app/test/calmframes/homeComposition.test.tsx
+PASS app/test/calmframes/otterPreview.test.tsx
+PASS app/test/calmframes/cinematicComposition.test.tsx
+PASS app/test/calmframes/sceneBridgeFixture.test.tsx
+PASS app/test/calmframes/coastalIslands.test.tsx
+FAIL app/test/calmframes/cinemaSelection.test.tsx
+  ● the actual-video rail selects artwork and both actions without starting playback on focus
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 3
+    Received array:  [{"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}]
+
+      13 |   const play = jest.fn(); const open = jest.fn(); const launch = jest.fn();
+      14 |   const view = render(<KidHomeScreen titles={titles} onOpen={open} onPlay={play} onLaunchControl={launch} />);
+    > 15 |   expect(view.queryAllByTestId(/^kid-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
+         |                                                                                  ^
+      16 |   fireEvent(view.getByTestId(`kid-home-poster-${acadia.title.id}`), 'focus');
+      17 |   expect(play).not.toHaveBeenCalled();
+      18 |   expect(open).not.toHaveBeenCalled();
+
+      at Object.toHaveLength (test/calmframes/cinemaSelection.test.tsx:15:82)
+
+PASS app/test/calmframes/playbackUi.test.tsx
+PASS app/test/calmframes/playerOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:655:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:655:15)
+
+PASS app/test/screens/playerWiring.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: '',
+        textTrack: [
+          {
+            label: 'English captions',
+            language: 'en',
+            uri: 'file:///pkg/a.vtt',
+            mimeType: 'text/vtt'
+          }
+        ]
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.log
+      [PlayerScreen.tsx] - captions - on by default, track n-1
+
+      at log (src/screens/PlayerScreen.tsx:187:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:423:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:427:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+PASS app/test/calmframes/bufferingOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+PASS app/test/calmframes/packagedLibrary.test.tsx
+PASS app/test/calmframes/playbackCardSequence.test.tsx
+PASS app/test/calmframes/openingAlignment.test.tsx
+PASS app/test/w3cmedia/mediacontrols/captionPlumbing.test.tsx
+PASS app/test/calmframes/titleCoverPresentation.test.tsx
+PASS app/test/calmframes/bakedAmbient.test.ts
+PASS app/test/calmframes/playerSceneTimeline.test.tsx
+PASS app/test/calmframes/coverHarness.test.tsx
+PASS app/test/calmframes/sceneBridges.test.tsx
+PASS app/test/calmframes/coveredSections.test.ts
+PASS app/test/calmframes/controlSurface.test.tsx
+PASS app/test/navigation/playerRouteFallback.test.tsx
+PASS app/test/calmframes/coveredSectionsStrip.test.tsx
+PASS app/test/utils/VideoHandler.test.ts
+  ● Console
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: /pkg/assets/raw/benign-story/harbor.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:349:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:359:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: https://example.invalid/captions.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:349:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:359:17)
+
+    console.log
+      [VideoHandler.ts] - No video reference to destroy
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:647:15)
+
+    console.log
+      [VideoHandler.ts] - No video reference to destroy
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:647:15)
+
+    console.log
+      [VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: file:///pkg/assets/raw/benign-story/harbor.precovered.mp4
+
+      at VideoHandler.log [as loadStaticMediaPlayer] (src/utils/VideoHandler.ts:269:15)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:193:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:193:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:621:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:628:15)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - destroying player
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:595:17)
+
+    console.log
+      [VideoHandler.ts] - destroying Adaptive Media Player (shaka)
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:598:19)
+
+    console.log
+      [VideoHandler.ts] - player destroyed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:605:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:621:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:628:15)
+
+PASS app/test/calmframes/ambientPersonalCovers.test.ts
+PASS app/test/calmframes/openingFrame.test.tsx
+PASS app/test/calmframes/profilePicker.test.tsx
+
+Summary of all failing tests
+FAIL test/calmframes/duskLantern.test.tsx
+  ● Home names the selected video and leads with Watch without adding a demo card
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Choose a video"
+    Received: "Choose an island"
+
+      26 |   const launch = jest.fn();
+      27 |   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
+    > 28 |   expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose a video');
+         |                                                               ^
+      29 |   expect(screen.getAllByText('Calm Frames')).toHaveLength(1);
+      30 |   expect(screen.queryByTestId('kid-home-meta')).toBeNull();
+      31 |   expect(screen.queryByText(/No picture holds/)).toBeNull();
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:28:63)
+
+  ● one teal action on Home: Watch is primary, Details and Help are quiet
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "#F0F2EF"
+    Received: "#F7B37A"
+
+      51 |   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
+      52 |   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
+    > 53 |   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
+         |                                 ^
+      54 |   for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
+      55 |     expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+      56 |   }
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:53:33)
+
+  ● the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 80
+    Received: 42
+
+      85 |   const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
+      86 |   // Both steps use the shared feature type token.
+    > 87 |   expect(homeTitle.fontSize).toBe(80);
+         |                              ^
+      88 |   expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 2);
+      89 |   home.unmount();
+      90 |   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
+
+      at Object.toBe (test/calmframes/duskLantern.test.tsx:87:30)
+
+FAIL test/calmframes/forestActivation.test.tsx
+  ● the real signed wcag preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● the real signed broadcast preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● the real signed extra-cautious preview retains duration, identity and empty findings
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      29 |   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
+      30 |   expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(12000);
+    > 31 |   expect(item.sha256).toBe(FOREST_SOURCE_SHA256); expect(item.title).toBe('Sea forests in Alaska');
+         |                                                                      ^
+      32 |   expect(item.textTrack).toBeUndefined();
+      33 |   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
+      34 |   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
+
+      at toBe (test/calmframes/forestActivation.test.tsx:31:70)
+
+  ● uses the existing content rail without playing on focus or changing ambient registration
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      53 |   fireEvent(screen.getByTestId(`kid-home-poster-${title.id}`), 'focus');
+      54 |   expect(open).not.toHaveBeenCalled(); expect(play).not.toHaveBeenCalled();
+    > 55 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      56 |   expect(screen.getByTestId('kid-home-video-meta').props.children).toBe('12 seconds · Nature sounds · Plays once');
+      57 |   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea forests in Alaska');
+      58 |   expect(screen.getByTestId('coastal-world')).toBeTruthy();
+
+      at Object.toBe (test/calmframes/forestActivation.test.tsx:55:69)
+
+  ● retains the preview and a single watch return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● retains the preview and a single details return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● retains the preview and a single poster return focus
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Sea forests in Alaska"
+    Received: "Forest creek at Redwood"
+
+      67 |   const screen = render(<KidHomeScreen titles={[acadia, forest]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
+      68 |   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
+    > 69 |   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea forests in Alaska');
+         |                                                                     ^
+      70 |   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
+      71 |   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
+      72 | });
+
+      at toBe (test/calmframes/forestActivation.test.tsx:69:69)
+
+  ● shows duration, nature-audio/once wording and source attribution in the approved Details flow
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Watch: Sea forests in Alaska"
+    Received: "Watch: Forest creek at Redwood"
+
+      75 |   const screen = render(<TitleDetailsScreen entry={forest} onPlay={play} onBack={back} />);
+      76 |   expect(screen.getByTestId('title-details-meta').props.children).toBe('12 seconds · Nature sounds · Plays once');
+    > 77 |   expect(screen.getByTestId('title-details-play').props.accessibilityLabel).toBe('Watch: Sea forests in Alaska');
+         |                                                                             ^
+      78 |   fireEvent.press(screen.getByTestId('title-details-play')); expect(play).toHaveBeenCalledWith(forest);
+      79 |   fireEvent.press(screen.getByTestId('title-details-show-info'));
+      80 |   expect(screen.getByTestId('title-details-attribution').props.children).toContain('NPS: G Litten');
+
+      at Object.toBe (test/calmframes/forestActivation.test.tsx:77:77)
+
+FAIL test/calmframes/homeIntroduction.test.tsx
+  ● home carries no explanation and keeps parental controls tertiary until focused
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 2
+    + Received  + 2
+
+      Object {
+    -   "backgroundColor": "#2B3B47",
+    -   "borderColor": "#9CC1CB",
+    +   "backgroundColor": "#FFE1A9",
+    +   "borderColor": "#A44132",
+        "borderWidth": 6,
+        "minHeight": 88,
+      }
+
+      94 |   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
+      95 |   fireEvent(control, 'focus');
+    > 96 |   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING, minHeight: 88, borderWidth: 6 });
+         |                                                   ^
+      97 |   expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: CALM_COLORS.TEXT, textDecorationLine: 'underline' });
+      98 |   fireEvent.press(control);
+      99 |   expect(parent).toHaveBeenCalledTimes(1);
+
+      at Object.toMatchObject (test/calmframes/homeIntroduction.test.tsx:96:51)
+
+FAIL test/screens/KidModeScreen.test.tsx (5.117 s)
+  ● the shelf a household lands on › features Acadia and approved sea otters as consumer videos while retaining the playback diagnostic
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+      Array [
+        "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+        "prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+    +   "prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+        "calm-frames-offline",
+      ]
+
+      321 |   it('features Acadia and approved sea otters as consumer videos while retaining the playback diagnostic', () => {
+      322 |     const titles = defaultCatalog();
+    > 323 |     expect(titles.map(title => title.id)).toEqual([
+          |                                           ^
+      324 |       `prepared-${ACADIA_SOURCE_SHA256}`, `prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6`, OFFLINE_TITLE_ID,
+      325 |     ]);
+      326 |     expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
+
+      at Object.toEqual (test/screens/KidModeScreen.test.tsx:323:43)
+
+  ● the shelf a household lands on › opens Acadia by default and keeps Harbor out of Home and its help flow
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 3
+    Received array:  [{"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}]
+
+      334 |     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
+      335 |     // Both approved destinations appear on the coastal map.
+    > 336 |     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
+          |                                                                                           ^
+      337 |     expect(screen.queryByText('Choose a video')).toBeNull();
+      338 |     expect(screen.queryByText(/Harbor/)).toBeNull();
+      339 |     expect(screen.queryByText('Playback test')).toBeNull();
+
+      at Object.toHaveLength (test/screens/KidModeScreen.test.tsx:336:91)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+FAIL test/calmframes/cinemaSelection.test.tsx
+  ● the actual-video rail selects artwork and both actions without starting playback on focus
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 3
+    Received array:  [{"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}]
+
+      13 |   const play = jest.fn(); const open = jest.fn(); const launch = jest.fn();
+      14 |   const view = render(<KidHomeScreen titles={titles} onOpen={open} onPlay={play} onLaunchControl={launch} />);
+    > 15 |   expect(view.queryAllByTestId(/^kid-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
+         |                                                                                  ^
+      16 |   fireEvent(view.getByTestId(`kid-home-poster-${acadia.title.id}`), 'focus');
+      17 |   expect(play).not.toHaveBeenCalled();
+      18 |   expect(open).not.toHaveBeenCalled();
+
+      at Object.toHaveLength (test/calmframes/cinemaSelection.test.tsx:15:82)
+
+
+Test Suites: 5 failed, 33 passed, 38 total
+Tests:       15 failed, 480 passed, 495 total
+Snapshots:   1 passed, 1 total
+Time:        19.408 s
+Ran all test suites matching /app\/test\/calmframes\/ambientPersonalCovers.test.ts|app\/test\/calmframes\/bakedAmbient.test.ts|app\/test\/calmframes\/bufferingOpening.test.tsx|app\/test\/calmframes\/cinemaSelection.test.tsx|app\/test\/calmframes\/cinematicComposition.test.tsx|app\/test\/calmframes\/coastalIslands.test.tsx|app\/test\/calmframes\/controlSurface.test.tsx|app\/test\/calmframes\/copy.test.ts|app\/test\/calmframes\/coverHarness.test.tsx|app\/test\/calmframes\/coveredSections.test.ts|app\/test\/calmframes\/coveredSectionsStrip.test.tsx|app\/test\/calmframes\/detailDiscovery.test.tsx|app\/test\/calmframes\/duskLantern.test.tsx|app\/test\/calmframes\/forestActivation.test.tsx|app\/test\/calmframes\/homeComposition.test.tsx|app\/test\/calmframes\/homeIntroduction.test.tsx|app\/test\/calmframes\/openingAlignment.test.tsx|app\/test\/calmframes\/openingFrame.test.tsx|app\/test\/calmframes\/otterPreview.test.tsx|app\/test\/calmframes\/packagedLibrary.test.tsx|app\/test\/calmframes\/pickerFocusReturn.test.tsx|app\/test\/calmframes\/playbackCardSequence.test.tsx|app\/test\/calmframes\/playbackUi.test.tsx|app\/test\/calmframes\/playerOpening.test.tsx|app\/test\/calmframes\/playerSceneTimeline.test.tsx|app\/test\/calmframes\/profilePicker.test.tsx|app\/test\/calmframes\/sceneBridgeFixture.test.tsx|app\/test\/calmframes\/sceneBridges.test.tsx|app\/test\/calmframes\/screens.test.tsx|app\/test\/calmframes\/tenFoot.test.tsx|app\/test\/calmframes\/titleCoverPresentation.test.tsx|app\/test\/navigation\/playerRouteFallback.test.tsx|app\/test\/screens\/KidModeScreen.test.tsx|app\/test\/screens\/playerWiring.test.tsx|app\/test\/screens\/returnFocus.test.tsx|app\/test\/utils\/VideoHandler.test.ts|app\/test\/w3cmedia\/mediacontrols\/VideoPlayerUI.test.tsx|app\/test\/w3cmedia\/mediacontrols\/captionPlumbing.test.tsx/i.
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.

@@ -1,6 +1,7 @@
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { CALM_SPACE, scale } from '../../calmframes/calmStyles';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
 import CaptionButton from './CaptionButton';
 
@@ -42,6 +43,8 @@ export default React.memo(ControlBar, areControlBarPropsEqual);
 
 export const styles = StyleSheet.create({
   controlBar: {
+    marginHorizontal: scale(CALM_SPACE.SAFE_X),
+    marginBottom: scale(CALM_SPACE.SAFE_Y),
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',

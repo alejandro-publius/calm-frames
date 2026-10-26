@@ -1,0 +1,36 @@
+{
+  "checks": {
+    "bundle": true,
+    "source": true,
+    "rendition": true,
+    "report": true,
+    "checkedInputs": true,
+    "maps": true
+  },
+  "actual": {
+    "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+    "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+    "maps": [
+      {
+        "preset": "wcag",
+        "sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a"
+      },
+      {
+        "preset": "broadcast",
+        "sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1"
+      },
+      {
+        "preset": "extra-cautious",
+        "sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f"
+      }
+    ],
+    "outcome": "cover proven drawn",
+    "preset": "extra-cautious",
+    "renditionPath": "file:///pkg/assets/raw/prepared-library/4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
+    "renditionSha256": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59",
+    "renditionStartOffsetMs": 0,
+    "reportSha256": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019",
+    "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+  },
+  "note": "Identity equality only. The catalog outcome cover proven drawn is an offline preparation label, not a native pixel observation."
+}

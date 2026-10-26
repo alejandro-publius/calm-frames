@@ -1,0 +1,480 @@
+{
+ "what": "versioned module instances shipped in each package, from each package's own hash-bound source map; installed_version keeps semver build metadata",
+ "debug_package_sha384": "2b98119e38dd32128827c6e4241722b34aa0ab34101d5dd9526d8abd4b97a17984d9cc645451ddb06c9f692b94426bdf",
+ "release_package_sha384": "ace30351afc9ed7ea251b026bec789bd0f14eb2a871b85eae50ec17c032624ebc257bdfb35401248f74703785e5a2557",
+ "debug_instances": 89,
+ "release_instances": 76,
+ "debug_only": [
+  "node_modules/@amazon-devices/react-native-reanimated@4.0.1+4.1.3",
+  "node_modules/@amazon-devices/react-native-reanimated/node_modules/semver@7.7.2",
+  "node_modules/@amazon-devices/react-native-worklets@1.0.1+0.6.0",
+  "node_modules/@amazon-devices/react-navigation__core@8.0.9000000001+7.13.3",
+  "node_modules/anser@1.4.10",
+  "node_modules/ansi-regex@5.0.1",
+  "node_modules/object-assign@4.1.1",
+  "node_modules/pretty-format@29.7.0",
+  "node_modules/pretty-format/node_modules/ansi-styles@5.2.0",
+  "node_modules/pretty-format/node_modules/react-is@18.3.1",
+  "node_modules/prop-types/node_modules/react-is@16.13.1",
+  "node_modules/react-devtools-core@6.1.5",
+  "node_modules/react-refresh@0.14.2"
+ ],
+ "release_only": [],
+ "version_differs": [],
+ "nested_instances": [
+  "node_modules/@amazon-devices/react-native-reanimated/node_modules/semver@7.7.2",
+  "node_modules/formik/node_modules/deepmerge@2.2.1",
+  "node_modules/hoist-non-react-statics/node_modules/react-is@16.13.1",
+  "node_modules/pretty-format/node_modules/ansi-styles@5.2.0",
+  "node_modules/pretty-format/node_modules/react-is@18.3.1",
+  "node_modules/prop-types/node_modules/react-is@16.13.1",
+  "node_modules/simple-swizzle/node_modules/is-arrayish@0.3.4"
+ ],
+ "instances": {
+  "node_modules/@amazon-devices/kepler-compatibility-metro-config": {
+   "package": "@amazon-devices/kepler-compatibility-metro-config",
+   "debug": "0.0.7",
+   "release": "0.0.7"
+  },
+  "node_modules/@amazon-devices/kepler-media-types": {
+   "package": "@amazon-devices/kepler-media-types",
+   "debug": "1.0.0",
+   "release": "1.0.0"
+  },
+  "node_modules/@amazon-devices/kepler-performance-api": {
+   "package": "@amazon-devices/kepler-performance-api",
+   "debug": "0.1.4",
+   "release": "0.1.4"
+  },
+  "node_modules/@amazon-devices/kepler-ui-components": {
+   "package": "@amazon-devices/kepler-ui-components",
+   "debug": "3.2.2",
+   "release": "3.2.2"
+  },
+  "node_modules/@amazon-devices/keplerscript-turbomodule-api": {
+   "package": "@amazon-devices/keplerscript-turbomodule-api",
+   "debug": "1.2.5",
+   "release": "1.2.5"
+  },
+  "node_modules/@amazon-devices/react-native-kepler": {
+   "package": "@amazon-devices/react-native-kepler",
+   "debug": "4.0.1+rn0.83.0",
+   "release": "4.0.1+rn0.83.0"
+  },
+  "node_modules/@amazon-devices/react-native-reanimated": {
+   "package": "@amazon-devices/react-native-reanimated",
+   "debug": "4.0.1+4.1.3",
+   "release": null
+  },
+  "node_modules/@amazon-devices/react-native-reanimated/node_modules/semver": {
+   "package": "semver",
+   "debug": "7.7.2",
+   "release": null
+  },
+  "node_modules/@amazon-devices/react-native-w3cmedia": {
+   "package": "@amazon-devices/react-native-w3cmedia",
+   "debug": "2.3.2",
+   "release": "2.3.2"
+  },
+  "node_modules/@amazon-devices/react-native-worklets": {
+   "package": "@amazon-devices/react-native-worklets",
+   "debug": "1.0.1+0.6.0",
+   "release": null
+  },
+  "node_modules/@amazon-devices/react-navigation__core": {
+   "package": "@amazon-devices/react-navigation__core",
+   "debug": "8.0.9000000001+7.13.3",
+   "release": null
+  },
+  "node_modules/@amazon-devices/vega-carousel": {
+   "package": "@amazon-devices/vega-carousel",
+   "debug": "1.0.1",
+   "release": "1.0.1"
+  },
+  "node_modules/@babel/runtime": {
+   "package": "@babel/runtime",
+   "debug": "7.29.7",
+   "release": "7.29.7"
+  },
+  "node_modules/@react-native/assets-registry": {
+   "package": "@react-native/assets-registry",
+   "debug": "0.83.0",
+   "release": "0.83.0"
+  },
+  "node_modules/@react-native/js-polyfills": {
+   "package": "@react-native/js-polyfills",
+   "debug": "0.83.0",
+   "release": "0.83.0"
+  },
+  "node_modules/@react-native/normalize-colors": {
+   "package": "@react-native/normalize-colors",
+   "debug": "0.83.0",
+   "release": "0.83.0"
+  },
+  "node_modules/@react-native/virtualized-lists": {
+   "package": "@react-native/virtualized-lists",
+   "debug": "0.83.0",
+   "release": "0.83.0"
+  },
+  "node_modules/@reduxjs/toolkit": {
+   "package": "@reduxjs/toolkit",
+   "debug": "2.2.8",
+   "release": "2.2.8"
+  },
+  "node_modules/@shopify/flash-list": {
+   "package": "@shopify/flash-list",
+   "debug": "2.1.0",
+   "release": "2.1.0"
+  },
+  "node_modules/abort-controller": {
+   "package": "abort-controller",
+   "debug": "3.0.0",
+   "release": "3.0.0"
+  },
+  "node_modules/anser": {
+   "package": "anser",
+   "debug": "1.4.10",
+   "release": null
+  },
+  "node_modules/ansi-colors": {
+   "package": "ansi-colors",
+   "debug": "4.1.3",
+   "release": "4.1.3"
+  },
+  "node_modules/ansi-regex": {
+   "package": "ansi-regex",
+   "debug": "5.0.1",
+   "release": null
+  },
+  "node_modules/base-64": {
+   "package": "base-64",
+   "debug": "1.0.0",
+   "release": "1.0.0"
+  },
+  "node_modules/base64-js": {
+   "package": "base64-js",
+   "debug": "1.5.1",
+   "release": "1.5.1"
+  },
+  "node_modules/buffer": {
+   "package": "buffer",
+   "debug": "5.7.1",
+   "release": "5.7.1"
+  },
+  "node_modules/color": {
+   "package": "color",
+   "debug": "4.2.3",
+   "release": "4.2.3"
+  },
+  "node_modules/color-convert": {
+   "package": "color-convert",
+   "debug": "2.0.1",
+   "release": "2.0.1"
+  },
+  "node_modules/color-name": {
+   "package": "color-name",
+   "debug": "1.1.4",
+   "release": "1.1.4"
+  },
+  "node_modules/color-string": {
+   "package": "color-string",
+   "debug": "1.9.1",
+   "release": "1.9.1"
+  },
+  "node_modules/decode-uri-component": {
+   "package": "decode-uri-component",
+   "debug": "0.2.2",
+   "release": "0.2.2"
+  },
+  "node_modules/deepmerge": {
+   "package": "deepmerge",
+   "debug": "4.3.1",
+   "release": "4.3.1"
+  },
+  "node_modules/escape-string-regexp": {
+   "package": "escape-string-regexp",
+   "debug": "4.0.0",
+   "release": "4.0.0"
+  },
+  "node_modules/event-target-shim": {
+   "package": "event-target-shim",
+   "debug": "5.0.1",
+   "release": "5.0.1"
+  },
+  "node_modules/eventemitter3": {
+   "package": "eventemitter3",
+   "debug": "4.0.7",
+   "release": "4.0.7"
+  },
+  "node_modules/fast-deep-equal": {
+   "package": "fast-deep-equal",
+   "debug": "3.1.3",
+   "release": "3.1.3"
+  },
+  "node_modules/filter-obj": {
+   "package": "filter-obj",
+   "debug": "1.1.0",
+   "release": "1.1.0"
+  },
+  "node_modules/formik": {
+   "package": "formik",
+   "debug": "2.4.9",
+   "release": "2.4.9"
+  },
+  "node_modules/formik/node_modules/deepmerge": {
+   "package": "deepmerge",
+   "debug": "2.2.1",
+   "release": "2.2.1"
+  },
+  "node_modules/hoist-non-react-statics": {
+   "package": "hoist-non-react-statics",
+   "debug": "3.3.2",
+   "release": "3.3.2"
+  },
+  "node_modules/hoist-non-react-statics/node_modules/react-is": {
+   "package": "react-is",
+   "debug": "16.13.1",
+   "release": "16.13.1"
+  },
+  "node_modules/ieee754": {
+   "package": "ieee754",
+   "debug": "1.2.1",
+   "release": "1.2.1"
+  },
+  "node_modules/immer": {
+   "package": "immer",
+   "debug": "10.2.0",
+   "release": "10.2.0"
+  },
+  "node_modules/invariant": {
+   "package": "invariant",
+   "debug": "2.2.4",
+   "release": "2.2.4"
+  },
+  "node_modules/lodash": {
+   "package": "lodash",
+   "debug": "4.18.1",
+   "release": "4.18.1"
+  },
+  "node_modules/lodash.debounce": {
+   "package": "lodash.debounce",
+   "debug": "4.0.8",
+   "release": "4.0.8"
+  },
+  "node_modules/memoize-one": {
+   "package": "memoize-one",
+   "debug": "5.2.1",
+   "release": "5.2.1"
+  },
+  "node_modules/metro-runtime": {
+   "package": "metro-runtime",
+   "debug": "0.83.8",
+   "release": "0.83.8"
+  },
+  "node_modules/nanoid": {
+   "package": "nanoid",
+   "debug": "3.3.19",
+   "release": "3.3.19"
+  },
+  "node_modules/nullthrows": {
+   "package": "nullthrows",
+   "debug": "1.1.1",
+   "release": "1.1.1"
+  },
+  "node_modules/object-assign": {
+   "package": "object-assign",
+   "debug": "4.1.1",
+   "release": null
+  },
+  "node_modules/pretty-format": {
+   "package": "pretty-format",
+   "debug": "29.7.0",
+   "release": null
+  },
+  "node_modules/pretty-format/node_modules/ansi-styles": {
+   "package": "ansi-styles",
+   "debug": "5.2.0",
+   "release": null
+  },
+  "node_modules/pretty-format/node_modules/react-is": {
+   "package": "react-is",
+   "debug": "18.3.1",
+   "release": null
+  },
+  "node_modules/promise": {
+   "package": "promise",
+   "debug": "8.3.0",
+   "release": "8.3.0"
+  },
+  "node_modules/prop-types": {
+   "package": "prop-types",
+   "debug": "15.8.1",
+   "release": "15.8.1"
+  },
+  "node_modules/prop-types/node_modules/react-is": {
+   "package": "react-is",
+   "debug": "16.13.1",
+   "release": null
+  },
+  "node_modules/property-expr": {
+   "package": "property-expr",
+   "debug": "2.0.6",
+   "release": "2.0.6"
+  },
+  "node_modules/query-string": {
+   "package": "query-string",
+   "debug": "7.1.3",
+   "release": "7.1.3"
+  },
+  "node_modules/react-devtools-core": {
+   "package": "react-devtools-core",
+   "debug": "6.1.5",
+   "release": null
+  },
+  "node_modules/react-fast-compare": {
+   "package": "react-fast-compare",
+   "debug": "2.0.4",
+   "release": "2.0.4"
+  },
+  "node_modules/react-freeze": {
+   "package": "react-freeze",
+   "debug": "1.0.4",
+   "release": "1.0.4"
+  },
+  "node_modules/react-is": {
+   "package": "react-is",
+   "debug": "19.3.0",
+   "release": "19.3.0"
+  },
+  "node_modules/react-native-is-edge-to-edge": {
+   "package": "react-native-is-edge-to-edge",
+   "debug": "1.3.1",
+   "release": "1.3.1"
+  },
+  "node_modules/react-native-uuid": {
+   "package": "react-native-uuid",
+   "debug": "2.0.4",
+   "release": "2.0.4"
+  },
+  "node_modules/react-redux": {
+   "package": "react-redux",
+   "debug": "9.1.2",
+   "release": "9.1.2"
+  },
+  "node_modules/react-refresh": {
+   "package": "react-refresh",
+   "debug": "0.14.2",
+   "release": null
+  },
+  "node_modules/recyclerlistview": {
+   "package": "recyclerlistview",
+   "debug": "4.2.3",
+   "release": "4.2.3"
+  },
+  "node_modules/redux": {
+   "package": "redux",
+   "debug": "5.0.1",
+   "release": "5.0.1"
+  },
+  "node_modules/redux-thunk": {
+   "package": "redux-thunk",
+   "debug": "3.1.0",
+   "release": "3.1.0"
+  },
+  "node_modules/regenerator-runtime": {
+   "package": "regenerator-runtime",
+   "debug": "0.13.11",
+   "release": "0.13.11"
+  },
+  "node_modules/reselect": {
+   "package": "reselect",
+   "debug": "5.3.0",
+   "release": "5.3.0"
+  },
+  "node_modules/scheduler": {
+   "package": "scheduler",
+   "debug": "0.27.0",
+   "release": "0.27.0"
+  },
+  "node_modules/simple-swizzle": {
+   "package": "simple-swizzle",
+   "debug": "0.2.4",
+   "release": "0.2.4"
+  },
+  "node_modules/simple-swizzle/node_modules/is-arrayish": {
+   "package": "is-arrayish",
+   "debug": "0.3.4",
+   "release": "0.3.4"
+  },
+  "node_modules/split-on-first": {
+   "package": "split-on-first",
+   "debug": "1.1.0",
+   "release": "1.1.0"
+  },
+  "node_modules/stacktrace-parser": {
+   "package": "stacktrace-parser",
+   "debug": "0.1.11",
+   "release": "0.1.11"
+  },
+  "node_modules/strict-uri-encode": {
+   "package": "strict-uri-encode",
+   "debug": "2.0.0",
+   "release": "2.0.0"
+  },
+  "node_modules/tiny-case": {
+   "package": "tiny-case",
+   "debug": "1.0.3",
+   "release": "1.0.3"
+  },
+  "node_modules/tiny-warning": {
+   "package": "tiny-warning",
+   "debug": "1.0.3",
+   "release": "1.0.3"
+  },
+  "node_modules/toposort": {
+   "package": "toposort",
+   "debug": "2.0.2",
+   "release": "2.0.2"
+  },
+  "node_modules/ts-object-utils": {
+   "package": "ts-object-utils",
+   "debug": "0.0.5",
+   "release": "0.0.5"
+  },
+  "node_modules/underscore": {
+   "package": "underscore",
+   "debug": "1.13.8",
+   "release": "1.13.8"
+  },
+  "node_modules/use-latest-callback": {
+   "package": "use-latest-callback",
+   "debug": "0.2.6",
+   "release": "0.2.6"
+  },
+  "node_modules/use-sync-external-store": {
+   "package": "use-sync-external-store",
+   "debug": "1.7.0",
+   "release": "1.7.0"
+  },
+  "node_modules/warn-once": {
+   "package": "warn-once",
+   "debug": "0.1.1",
+   "release": "0.1.1"
+  },
+  "node_modules/whatwg-fetch": {
+   "package": "whatwg-fetch",
+   "debug": "3.6.20",
+   "release": "3.6.20"
+  },
+  "node_modules/xmldom": {
+   "package": "xmldom",
+   "debug": "0.8.15",
+   "release": "0.8.15"
+  },
+  "node_modules/yup": {
+   "package": "yup",
+   "debug": "1.4.0",
+   "release": "1.4.0"
+  }
+ }
+}

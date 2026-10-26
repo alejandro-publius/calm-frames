@@ -1,0 +1,72 @@
+{
+  "opening-title": {
+    "bounds": [
+      {
+        "text": "Calm Frames",
+        "x": 96,
+        "y": 833,
+        "width": 364.484375,
+        "height": 72
+      },
+      {
+        "text": "A place to return to",
+        "x": 96,
+        "y": 911,
+        "width": 379.546875,
+        "height": 54
+      },
+      {
+        "text": "Illustrated story; fictional character.",
+        "x": 96,
+        "y": 994,
+        "width": 503.578125,
+        "height": 39
+      }
+    ],
+    "font_loaded": true,
+    "size": [
+      1920,
+      1080
+    ],
+    "transparent_picture_area": true,
+    "animation_count": 0,
+    "sha256": "0353645956bffea8c9046f9ea61b8c4cd9bb80a46bb8b6321e30990a78041871",
+    "alpha_verified": true
+  },
+  "closing-credits": {
+    "bounds": [
+      {
+        "text": "Not a medical device.",
+        "x": 96,
+        "y": 857,
+        "width": 427.28125,
+        "height": 54
+      },
+      {
+        "text": "McWay: MoneySavingVideos, CC BY 3.0.",
+        "x": 96,
+        "y": 928,
+        "width": 704.84375,
+        "height": 46
+      },
+      {
+        "text": "Full credits and adaptation details in the description.",
+        "x": 96,
+        "y": 996,
+        "width": 701.5625,
+        "height": 36
+      }
+    ],
+    "font_loaded": true,
+    "size": [
+      1920,
+      1080
+    ],
+    "transparent_picture_area": true,
+    "animation_count": 0,
+    "sha256": "8e2393c371dce34f788520bdc4bc4cb0c945af965fa05fb6a5bc34c63c7d073c",
+    "alpha_verified": true
+  },
+  "external_requests": [],
+  "visually_inspected": true
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "kind": "production_input_plan_not_a_render_manifest",
+  "source_under_review": "09b3c55603ddff50bb068a585980aa188002479e",
+  "accepted_source": null,
+  "accepted_package_sha256": null,
+  "status": "parked until product accepted; no generation or capture performed",
+  "historical_timeline": "docs/cloud-integration-2026-10-23/demo/timeline.json",
+  "historical_timeline_source": "12125b2970342b5376b0bc7964383e547b407376",
+  "timeline_sha256": "315a18cbaa20aa4b16e9bc1c13ed4d6a5db75d359a6c5fc3ac0fd94ae42ca49e",
+  "storyboard_path": "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md",
+  "storyboard_sha256": "5f08a7a99017bb984a9301f085f6a74d115ed3c52d6203499ba834dfe7884724",
+  "narration_script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "narration_cues_unchanged": [
+    {
+      "id": "n01",
+      "start": 0,
+      "end": 12,
+      "text": "Some evenings, Rowan wants one quiet scene, and the choice to stay with it."
+    },
+    {
+      "id": "n02",
+      "start": 12,
+      "end": 22,
+      "text": "Calm Frames is a native Fire TV app for deliberate ambient viewing."
+    },
+    {
+      "id": "n03",
+      "start": 22,
+      "end": 34,
+      "text": "Choose McWay Falls, check the scene details, then choose Watch. Nothing starts just because you browse."
+    },
+    {
+      "id": "n04",
+      "start": 34,
+      "end": 45,
+      "text": "Now, a real, uninterrupted moment from the app."
+    },
+    {
+      "id": "n05",
+      "start": 115,
+      "end": 125,
+      "text": "Leaving should not erase a place. Returning should still be a choice."
+    },
+    {
+      "id": "n06",
+      "start": 125,
+      "end": 145,
+      "text": "Return to the same profile and edition to choose Resume or Start over. Saved progress does not restore weaker protection settings."
+    },
+    {
+      "id": "n07",
+      "start": 145,
+      "end": 155,
+      "text": "A shared screen can still hold a personal place. Each profile keeps its own progress."
+    },
+    {
+      "id": "n08",
+      "start": 155,
+      "end": 164,
+      "text": "Playback Proof explains the prepared file. It cannot authorize playback or remove a protective cover."
+    }
+  ],
+  "native_shots": [
+    {
+      "id": "native_home",
+      "minimum_raw_usable_seconds": 10,
+      "timeline_start": 12,
+      "duration": 10,
+      "natural_speed": true,
+      "real_app_audio_required": false,
+      "status": "missing accepted-build raw take",
+      "source_commit": null,
+      "package_sha256": null,
+      "raw_take_sha256": null,
+      "capture_receipt_sha256": null
+    },
+    {
+      "id": "native_details",
+      "minimum_raw_usable_seconds": 12,
+      "timeline_start": 22,
+      "duration": 12,
+      "natural_speed": true,
+      "real_app_audio_required": false,
+      "status": "missing accepted-build raw take",
+      "source_commit": null,
+      "package_sha256": null,
+      "raw_take_sha256": null,
+      "capture_receipt_sha256": null
+    },
+    {
+      "id": "native_ambient",
+      "minimum_raw_usable_seconds": 70,
+      "timeline_start": 45,
+      "duration": 70,
+      "natural_speed": true,
+      "real_app_audio_required": true,
+      "status": "missing accepted-build raw take",
+      "source_commit": null,
+      "package_sha256": null,
+      "raw_take_sha256": null,
+      "capture_receipt_sha256": null
+    },
+    {
+      "id": "native_return",
+      "minimum_raw_usable_seconds": 20,
+      "timeline_start": 125,
+      "duration": 20,
+      "natural_speed": true,
+      "real_app_audio_required": false,
+      "status": "missing accepted-build raw take",
+      "source_commit": null,
+      "package_sha256": null,
+      "raw_take_sha256": null,
+      "capture_receipt_sha256": null
+    },
+    {
+      "id": "native_proof",
+      "minimum_raw_usable_seconds": 9,
+      "timeline_start": 155,
+      "duration": 9,
+      "natural_speed": true,
+      "real_app_audio_required": false,
+      "status": "missing accepted-build raw take",
+      "source_commit": null,
+      "package_sha256": null,
+      "raw_take_sha256": null,
+      "capture_receipt_sha256": null
+    }
+  ],
+  "missing_illustrations": [
+    "manga_01",
+    "manga_02",
+    "manga_03",
+    "manga_04",
+    "manga_05"
+  ],
+  "missing_narration": [
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06",
+    "n07",
+    "n08"
+  ],
+  "credits_hold_seconds": 6,
+  "production_capture_scope": "app_window_and_app_audio_only",
+  "capture_receipt_required_fields": [
+    "source_commit",
+    "package_sha256",
+    "raw_take_sha256",
+    "capture_scope",
+    "production_capture"
+  ],
+  "human_full_video_acceptance": "pending",
+  "available_reference_only_source": "fbe53bf9e5ff432dbc28cd68cd8b89e3f5cac93f",
+  "limitations": [
+    "No eligible current-build raw takes",
+    "No new native package",
+    "No narration or manga generated",
+    "Historical timeline cannot be promoted unchanged to new build",
+    "No purchase, upload or submission edit"
+  ]
+}

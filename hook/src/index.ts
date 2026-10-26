@@ -87,8 +87,9 @@ export type {
   MapRejection,
   MapVerdict,
   VerifiedFlashMap,
-  VerifyMapOptions,
+    VerifyMapOptions,
 } from './engine/flashMap';
+export type { SceneHold } from './engine/sceneHolds';
 export {
   clampSettings,
   coverOptionsFor,

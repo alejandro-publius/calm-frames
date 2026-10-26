@@ -1,0 +1,166 @@
+TAP version 13
+# Subtest: a headless-only checkout gets actionable missing-runtime instructions
+ok 1 - a headless-only checkout gets actionable missing-runtime instructions
+  ---
+  duration_ms: 3.626208
+  type: 'test'
+  ...
+# Subtest: incomplete dependencies and unsupported Node are reported together
+ok 2 - incomplete dependencies and unsupported Node are reported together
+  ---
+  duration_ms: 0.777417
+  type: 'test'
+  ...
+# Subtest: runtime syntax is checked without executing it and a partial repair still fails
+ok 3 - runtime syntax is checked without executing it and a partial repair still fails
+  ---
+  duration_ms: 67.801166
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 4 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 109.23775
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 5 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 8.555084
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 6 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 4.68475
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 7 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 4.292208
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 8 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 4.332833
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 9 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 4.465708
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 10 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 4.372042
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 11 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 4.734916
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 12 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 4.616708
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 13 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 4.672875
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 14 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 4.420042
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 15 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 4.240334
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 16 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 25.967667
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 17 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 13.562042
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 18 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 0.922833
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 19 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 0.704583
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 20 - refuses changed prepared json bytes
+  ---
+  duration_ms: 0.591167
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 21 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.188958
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 22 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 43.987875
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 23 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 15.237667
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 24 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 0.601042
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 25 - refuses aliases to files outside the package
+  ---
+  duration_ms: 26.017958
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 26 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 438.060875
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 808.018

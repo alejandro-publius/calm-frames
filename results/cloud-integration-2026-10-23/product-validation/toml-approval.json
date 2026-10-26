@@ -1,0 +1,48 @@
+{
+  "observed_at_utc": "2026-10-23T18:41:43.175172+00:00",
+  "approval": "Owner replied approve to the exact narrow proposal in this thread",
+  "scope": "toml3.0.0 controlled build-host investigation only",
+  "review_by": "2026-10-30",
+  "advisories": [
+    {
+      "ghsa": "GHSA-82x6-q7mm-w9cf",
+      "npm_id": "1164824",
+      "severity": "high"
+    },
+    {
+      "ghsa": "GHSA-v5mp-jgw5-2x6j",
+      "npm_id": "1164825",
+      "severity": "high"
+    },
+    {
+      "ghsa": "GHSA-4qx8-w7c3-pj3p",
+      "npm_id": "1242862",
+      "severity": "high"
+    },
+    {
+      "ghsa": "GHSA-9j65-hcg3-gc64",
+      "npm_id": "1242863",
+      "severity": "high"
+    },
+    {
+      "ghsa": "GHSA-9qmh-m7c6-f92p",
+      "npm_id": "1242864",
+      "severity": "high"
+    }
+  ],
+  "manifest_sha256": "7e651ea0dd4f8ddcea842bae7616e7d9a49a8f59298e52ba888cf78ce9650c24",
+  "required_controls": [
+    "Reviewed and hashed trusted manifest inputs",
+    "Isolated bounded builds",
+    "No third-party manifests or parser service",
+    "Confirm Mac controls before build"
+  ],
+  "unchanged": [
+    "Other exception dates and acceptances",
+    "TOML dependency version",
+    "App/media/signing configuration"
+  ],
+  "native_inventory": "pending",
+  "mac_operator_availability": "unconfirmed; approve was not an availability response",
+  "release_accepted": false
+}

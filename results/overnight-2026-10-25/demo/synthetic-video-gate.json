@@ -1,0 +1,17 @@
+{
+  "duration_limit_s": 180,
+  "duration_s": 170.021029,
+  "duration_verdict": "pass",
+  "flashmap_exit": 0,
+  "flashmap_verdict": "pass",
+  "flashmap_version": "1.0.0",
+  "map": "/workspace/shared/calm-frames-overnight-demo/TEST_ONLY-smoke-1/synthetic-video-gate.map.json",
+  "profile": "wcag",
+  "recorded_utc": "2026-10-25T07:32:44+00:00",
+  "segments_over_threshold": 0,
+  "verdict": "pass",
+  "video": "TEST_ONLY-synthetic-render.mp4",
+  "video_bytes": 1838593,
+  "video_sha256": "754730fb2f6f9d14af3e794548d5757a4baa318f5d9c3ea3a174660a1818d395",
+  "what_this_is": "The gate on the demo video file: flashmap over the finished cut, plus its length. Written by eval/check_video.sh. A pass here is about this file and nothing else."
+}

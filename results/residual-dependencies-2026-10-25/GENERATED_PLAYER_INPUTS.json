@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "generated_player_inputs",
+  "source_commit": "365be0813a8416399ada1d469b0db326d45917d4",
+  "created_at": "2026-10-25T22:36:07.960590+00:00",
+  "status": "Input preflight passed; no native package, SDK compatibility, runtime or human acceptance claimed.",
+  "build": {
+    "command": "npm run setup:player",
+    "source_commit": "365be0813a8416399ada1d469b0db326d45917d4",
+    "execution_note": "Normal setup:player ran with the exact package/lock committed at this source. No upstream patch or app player source changed.",
+    "exit_code": 0,
+    "log_sha256": "f62fdfcc9ba397ac75291163247a336da4f9d0d15ad2ec0af4db8ea73daadd11"
+  },
+  "versions": {
+    "node": "v22.23.2",
+    "npm": "10.9.8",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)",
+    "python": "Python 3.12.14"
+  },
+  "build_inputs": {
+    "package.json": {
+      "bytes": 13319,
+      "sha256": "29f62e664f83d037dc902636e660ed1f27db5537daf71947768967ffcd7b40c9"
+    },
+    "package-lock.json": {
+      "bytes": 742893,
+      "sha256": "8aba497341474812b44ec555cfeaf0cece4b14fba105b5137abfe9988b2dbbee"
+    },
+    "shaka-setup/build.sh": {
+      "bytes": 4704,
+      "sha256": "23d7160a3970fc4448ad77031d0d96dbe3510170988e42f797c6a2dabe4da777"
+    },
+    "shaka-setup/copyOutputs.sh": {
+      "bytes": 1005,
+      "sha256": "1ba7570aa0ef391bc84336d7443aeb67c56b6f3f0e92409a1e450fa335d1ba38"
+    },
+    "shaka-setup/applyPatches.sh": {
+      "bytes": 388,
+      "sha256": "542922a495c010f3be1e95df452601f2a6850920b324d780896bc802649e3a16"
+    },
+    "shaka-setup/shaka-rel-v4.8.5-r1.2.tar.gz": {
+      "bytes": 71978,
+      "sha256": "f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e"
+    }
+  },
+  "upstream_shaka": {
+    "tag": "v4.8.5",
+    "tag_commit": "9ef114308b71e304327540f138de36f46f4a8f39",
+    "patched_commit": "760790f2b20f56f3fd7e707e3309f94f3efbdc01",
+    "normal_build_uncommitted_diff_sha256": "75d313265e1ab517cdb807a9da659655529505de950e9a18775854b2968f2161",
+    "package_lock_sha256": "faaeacf7d57312f884f4b747abda977caee7310d411a924fb1c1961df6168bd6",
+    "google-closure-compiler-java_version": "20221102.0.0"
+  },
+  "files": [
+    {
+      "path": "app/src/w3cmedia/PlayerInterface.ts",
+      "bytes": 731,
+      "sha256": "30d40c22fe09c1ecaa871f3f409750006642ffc62a7aa60359b1bd0e43295dec",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DOMParserPolyfill.ts",
+      "bytes": 2102,
+      "sha256": "0e17b83b5884a009b1cc35b10bca2e72ee29a1c7cdeec618b98a55837998252b",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DocumentPolyfill.ts",
+      "bytes": 1065,
+      "sha256": "bcb01bfe019c01fa0362f562e66d3e61964a5858ac5ee3ba8969870ae21f80e9",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/ElementPolyfill.ts",
+      "bytes": 862,
+      "sha256": "ee4b403435da1ed780678d0ce49fb7304cc5631af727555ddf80f087226cde4f",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/MiscPolyfill.ts",
+      "bytes": 1383,
+      "sha256": "655df68c912252cc003622e6db83a8019bfac64ae72394337f1647b13c8b1567",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/TextDecoderPolyfill.ts",
+      "bytes": 833,
+      "sha256": "ef8147831eafcce263f912740132c3f83fa92cea5e40caef82aaf8d0609e4391",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/W3CMediaPolyfill.ts",
+      "bytes": 1664,
+      "sha256": "78f8afbdaa7366ef24138461be6f1a3af2deb84c971860954775991a5d25d8c4",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.js",
+      "bytes": 604408,
+      "sha256": "84b75511c30f793784c7768b08b56be9e7cbc34490982f474a32871f8e0ddd1a",
+      "portable_input": true,
+      "metadata_only": false
+    }
+  ],
+  "protected_custom_player": {
+    "path": "app/src/w3cmedia/shakaplayer/ShakaPlayer.ts",
+    "sha256": "dfab51c125235a0ffc7c4dec9b1e0dd86fec52475f74bcb2bb9c2287dc80a574",
+    "included": false,
+    "unchanged": true
+  },
+  "preflight": {
+    "command": "npm run check:native-inputs",
+    "exit_code": 0,
+    "result": {
+      "nativeInputs": "ready",
+      "missing": [],
+      "problems": [],
+      "scope": "Input files only. SDK compatibility, native build and owner visual/audio acceptance remain separate checks."
+    },
+    "log": "results/residual-dependencies-2026-10-25/checks/final-gates.log"
+  },
+  "license_context": {
+    "repository_review": "docs/AMAZON_SAMPLE_LICENSE_REVIEW.md",
+    "review_sha256": "710a869021c136e1364f465348b4648d3f8829605336bae14706c7c3a24e6771",
+    "note": "Private generated dependency inputs from the existing tracked Amazon patch archive. Original file notices are retained; this package does not resolve the recorded sample-license notice discrepancy or authorize publication.",
+    "retained_source_licenses": {
+      "shaka": "https://github.com/shaka-project/shaka-player/blob/9ef114308b71e304327540f138de36f46f4a8f39/LICENSE",
+      "amazon_sample": "https://github.com/AmazonAppDev/vega-video-sample/blob/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272/LICENSE"
+    },
+    "original_notices": "Original polyfill and PlayerInterface file-specific notices remain. Sample MIT-0 and Shaka Apache-2.0 texts are copied unmodified into LICENSES; see the existing repository license review for the unresolved archive notice inconsistency."
+  },
+  "use": [
+    "Use only in a separate checkout of the declared source, with its own locked npm install and unchanged recorded patch/build-script hashes.",
+    "Inspect this manifest, verify ZIP and per-file SHA256 values, and restore only the listed app/ paths into that separate checkout. Do not overwrite tracked files, especially app/src/w3cmedia/shakaplayer/ShakaPlayer.ts, which is absent from this archive.",
+    "Run npm run check:native-inputs in app/. A ready result means input files only. Native compilation needs the matching licensed Vega SDK and separate validation."
+  ],
+  "excluded": "No dependencies, upstream cache, source maps, docs, AppleDouble metadata, package, household/PIN data, or signing keys.",
+  "licenses": [
+    {
+      "path": "LICENSES/Shaka-Player-Apache-2.0.txt",
+      "bytes": 16578,
+      "sha256": "fc864142db979a28a357eb25b5442a2b42f90118aa5fd9549d417559aa38b3f3"
+    },
+    {
+      "path": "LICENSES/Amazon-sample-MIT-0.txt",
+      "bytes": 951,
+      "sha256": "b536616d94ecb64a8b08ed9ef4def0693ff7665348255ef0dd672c3ff951d432"
+    }
+  ],
+  "native_boundary": "No Vega SDK in this cloud. Native package, system-bundle resolution and device behavior remain unverified for this source."
+}

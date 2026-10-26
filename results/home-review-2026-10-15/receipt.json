@@ -1,0 +1,83 @@
+{
+  "status": "layout-only checkpoint; superseded by plain-language-2026-10-15",
+  "source_commit": "69df28c8215920ae5a1cc8e82a3124d4a68d65b3",
+  "baseline_source": "b6b134c2402bd51e1048178e7e117744ff4ad4f3",
+  "branch": "codex/home-comparison-2026-10-15",
+  "selected_composition": "A - Left reading area",
+  "owner_delegated_implementation": true,
+  "preview_url": "http://127.0.0.1:4186/docs/design/home-comparison/",
+  "package": {
+    "path": "build/release/home-reading-a-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "a09eff79ad8466a1ae8d5da81383458b0bf70a6a176b84e98e6faa820500922a",
+    "bytes": 28734944,
+    "target": "aarch64 Debug",
+    "input_count": 736,
+    "preparation": "selected-preparation.json"
+  },
+  "checks": {
+    "node": "22.23.2",
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "existing_source_warnings": 97,
+      "existing_test_warnings": 4,
+      "total_warnings": 101
+    },
+    "jest": {
+      "passed_suites": 130,
+      "passed_tests": 1292,
+      "passed_snapshots": 57,
+      "skipped_tests": 4,
+      "excluded_suites": [
+        "uiCapture",
+        "coastalExport",
+        "controlStudy"
+      ]
+    },
+    "doc_links_and_line_links": 12,
+    "design_attribution_brand_measured_source_tests": 37,
+    "published_number_checks": 664,
+    "style": "pass",
+    "preview": "preview-checks.json"
+  },
+  "native": {
+    "receipt": "selected-native.json",
+    "event_log": "selected-events.log",
+    "observed_pass_journeys": 7,
+    "interpretation": "App-reported focus, routes, media events and still-load callbacks only. No pixels or sound inspected.",
+    "capture_performed": false,
+    "pin_entered": false,
+    "household_reset": false,
+    "simulator_restarted": false,
+    "final_app_left_running": true
+  },
+  "baseline_evidence": {
+    "native": "baseline-native.json",
+    "preparation": "baseline-preparation.json"
+  },
+  "remaining_owner_checks": [
+    "Appearance and reading distance",
+    "Visible remote focus",
+    "Sound continuity",
+    "Captions and caption menu contents",
+    "Existing PIN and parent settings interior",
+    "VoiceView if available",
+    "Sample notice scope and artwork permissions before distribution",
+    "Recording, reviewer access, release selection and submission remain separate"
+  ],
+  "not_reobserved_natively": [
+    "Pause/resume",
+    "Remote seek",
+    "Caption menu"
+  ],
+  "isolation": {
+    "independent_clone": true,
+    "original_candidate_clean": true,
+    "shared_sdk_app_link_preserved": true,
+    "public_publication": false,
+    "main_merge": false,
+    "release_tag": false,
+    "aws_or_credentials_changes": false
+  },
+  "access_blocks": "Initial sandbox network/device/server limits were handled through approved access; shared SDK write avoided through an isolated workspace. No approval denial bypassed."
+}

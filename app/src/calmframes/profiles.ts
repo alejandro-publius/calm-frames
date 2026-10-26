@@ -72,6 +72,8 @@ export interface Profile {
   name: string;
   /** This kid's preset and this kid's room. Never weaker than the floor. */
   settings: HouseholdSettings;
+  /** Optional help-text presentation only. Missing legacy values mean off. */
+  readingComfortEnabled?: boolean;
 }
 
 export interface Family {
@@ -94,6 +96,9 @@ export interface Family {
    * off changes nothing about what is hidden.
    */
   chimeEnabled: boolean;
+  /** Optional for old records; only an explicit true enables an interface effect. */
+  interfaceMotionEnabled?: boolean;
+  interfaceSoundsEnabled?: boolean;
 }
 
 /**
@@ -130,11 +135,15 @@ export function makeProfile(
     id,
     name: cleanName(name),
     settings: clampSettings({ ...DEFAULT_SETTINGS, ...settings }),
+    readingComfortEnabled: false,
   };
 }
 
 export function clampProfile(profile: Profile): Profile {
-  return makeProfile(profile.id, profile.name, profile.settings);
+  return {
+    ...makeProfile(profile.id, profile.name, profile.settings),
+    readingComfortEnabled: profile.readingComfortEnabled === true,
+  };
 }
 
 /** A household that has just finished the first run: one profile, one floor. */
@@ -148,6 +157,8 @@ export function newFamily(
     profiles: [first],
     activeProfileId: first.id,
     chimeEnabled: CHIME_ON_BY_DEFAULT,
+    interfaceMotionEnabled: false,
+    interfaceSoundsEnabled: false,
   };
 }
 
@@ -176,6 +187,8 @@ export function clampFamily(family: Partial<Family> | null | undefined): Family 
     profiles,
     activeProfileId: active,
     chimeEnabled: family?.chimeEnabled !== false,
+    interfaceMotionEnabled: family?.interfaceMotionEnabled === true,
+    interfaceSoundsEnabled: family?.interfaceSoundsEnabled === true,
   };
 }
 
@@ -239,6 +252,65 @@ export function renameProfile(family: Family, id: string, name: string): Family 
       profile.id === id ? { ...profile, name: cleanName(name) } : profile,
     ),
   };
+}
+
+/** A display preference, separate from protection settings and profile identity. */
+export function setProfileReadingComfort(family: Family, id: string, enabled: boolean): Family {
+  if (!findProfile(family, id)) return family;
+  return {
+    ...family,
+    profiles: family.profiles.map(profile => profile.id === id
+      ? { ...profile, readingComfortEnabled: enabled === true }
+      : profile),
+  };
+}
+
+/**
+ * Why a typed name cannot be saved, or null when it can.
+ *
+ * `renameProfile` repairs quietly: a blank becomes Kid and a long name is cut
+ * short. That is right for a record read back from storage and wrong for a
+ * parent's typing, so the editor asks here first, and nothing it saves is
+ * changed on the way in. Names are compared trimmed and without regard to
+ * case, because Robin and robin are two chips nobody can tell apart from a
+ * sofa. `reserved` is for words the picker already uses beside the kids'
+ * names, such as the household's own label.
+ */
+export type ProfileNameProblem = 'empty' | 'long' | 'taken';
+
+export function nameProblem(
+  draft: string,
+  taken: string[],
+  maxLength: number = MAX_PROFILE_NAME,
+): ProfileNameProblem | null {
+  const name = draft.trim();
+  if (name.length === 0) {
+    return 'empty';
+  }
+  if (name.length > maxLength) {
+    return 'long';
+  }
+  const lower = name.toLowerCase();
+  return taken.some((other) => other.trim().toLowerCase() === lower) ? 'taken' : null;
+}
+
+/** The names one kid's new name may not match: every other kid's, then the reserved words. */
+export function namesTakenFor(family: Family, id: string, reserved: string[] = []): string[] {
+  return [
+    ...family.profiles
+      .filter((profile) => profile.id !== id)
+      .map((profile) => profile.name),
+    ...reserved,
+  ];
+}
+
+export function profileNameProblem(
+  family: Family,
+  id: string,
+  draft: string,
+  reserved: string[] = [],
+): ProfileNameProblem | null {
+  return nameProblem(draft, namesTakenFor(family, id, reserved));
 }
 
 /** Change one kid's own preset or room. The floor still applies over it. */

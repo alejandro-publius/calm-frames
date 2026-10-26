@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-18T04:08:05Z",
+  "generated_utc": "2026-10-25T22:31:46Z",
   "python": {
     "ran": true,
     "sources": [
@@ -14,7 +14,14 @@
         "name": "cdk",
         "path": "pipeline/infra/requirements.txt",
         "ran": true,
-        "packages_audited": 13,
+        "packages_audited": 14,
+        "findings": []
+      },
+      {
+        "name": "development venv",
+        "path": "/workspace/shared/calm-frames-overnight-2026-10-25/python-freeze.txt",
+        "ran": true,
+        "packages_audited": 54,
         "findings": []
       }
     ]
@@ -23,48 +30,13 @@
     "ran": true,
     "totals": {
       "info": 0,
-      "low": 2,
-      "moderate": 26,
-      "high": 25,
-      "critical": 6,
-      "total": 59
+      "low": 0,
+      "moderate": 0,
+      "high": 9,
+      "critical": 0,
+      "total": 9
     },
     "findings": [
-      {
-        "package": "@amazon-devices/kepler-cli-platform",
-        "severity": "high",
-        "direct": true,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@amazon-devices/kepler-module-manifest-builder",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@amazon-devices/react-native-kepler",
-        "severity": "high",
-        "direct": true,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@amazon-devices/react-navigation__core",
-        "severity": "moderate",
-        "direct": true,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@amazon-devices/react-navigation__native",
-        "severity": "moderate",
-        "direct": true,
-        "ids": [],
-        "fix_available": false
-      },
       {
         "package": "@amazon-devices/security-manager-lib",
         "severity": "high",
@@ -73,218 +45,10 @@
         "fix_available": false
       },
       {
-        "package": "@jest/fake-timers",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@microsoft/api-extractor",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@microsoft/api-extractor-model",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@microsoft/tsdoc-config",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
         "package": "@react-native-community/cli",
-        "severity": "critical",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@react-native-community/cli-platform-android",
-        "severity": "critical",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@react-native-community/cli-platform-ios",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "@rushstack/node-core-library",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@rushstack/terminal",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "@rushstack/ts-command-line",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "ajv",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1113715"
-        ],
-        "fix_available": true
-      },
-      {
-        "package": "anymatch",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "braces",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1098094"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "cross-spawn",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1104663"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "decode-uri-component",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1147955"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "execa",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "external-editor",
-        "severity": "low",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "fbjs",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "fbjs-scripts",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "image-size",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1138808",
-          "1138809"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "inquirer",
-        "severity": "low",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "isomorphic-fetch",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "jest-haste-map",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "jest-message-util",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "jest-util",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "lodash",
-        "severity": "high",
-        "direct": true,
-        "ids": [
-          "1115806",
-          "1115810",
-          "1120370"
-        ],
-        "fix_available": true
-      },
-      {
-        "package": "logkitty",
-        "severity": "critical",
-        "direct": false,
-        "ids": [
-          "1093556"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "mem",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1085685"
-        ],
         "fix_available": false
       },
       {
@@ -295,13 +59,6 @@
         "fix_available": false
       },
       {
-        "package": "metro-cache",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
         "package": "metro-config",
         "severity": "high",
         "direct": false,
@@ -309,67 +66,8 @@
         "fix_available": false
       },
       {
-        "package": "metro-core",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
         "package": "metro-inspector-proxy",
         "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "micromatch",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1098681"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "minimatch",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1113459",
-          "1113538",
-          "1113546"
-        ],
-        "fix_available": true
-      },
-      {
-        "package": "node-fetch",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1095073"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "node-notifier",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1086436"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "os-locale",
-        "severity": "high",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "query-string",
-        "severity": "moderate",
         "direct": false,
         "ids": [],
         "fix_available": false
@@ -385,7 +83,7 @@
       },
       {
         "package": "react-native",
-        "severity": "critical",
+        "severity": "high",
         "direct": false,
         "ids": [
           "1089027"
@@ -400,59 +98,6 @@
         "fix_available": false
       },
       {
-        "package": "sane",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "shell-quote",
-        "severity": "critical",
-        "direct": false,
-        "ids": [
-          "1120422",
-          "1123944"
-        ],
-        "fix_available": true
-      },
-      {
-        "package": "source-map-resolve",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": true
-      },
-      {
-        "package": "tmp",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1109537",
-          "1120654"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "toml",
-        "severity": "high",
-        "direct": false,
-        "ids": [
-          "1164824",
-          "1164825"
-        ],
-        "fix_available": true
-      },
-      {
-        "package": "uuid",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1119441"
-        ],
-        "fix_available": false
-      },
-      {
         "package": "ws",
         "severity": "high",
         "direct": false,
@@ -461,65 +106,21 @@
           "1123262"
         ],
         "fix_available": false
-      },
-      {
-        "package": "xcode",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "xmldom",
-        "severity": "critical",
-        "direct": true,
-        "ids": [
-          "1091573",
-          "1096547",
-          "1117098",
-          "1117892",
-          "1117895",
-          "1117898",
-          "1117901",
-          "1158516",
-          "1193688",
-          "1193691",
-          "1193694",
-          "1193698",
-          "1193703",
-          "1193706",
-          "1193710",
-          "1193713"
-        ],
-        "fix_available": false
-      },
-      {
-        "package": "yargs",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [],
-        "fix_available": false
-      },
-      {
-        "package": "yargs-parser",
-        "severity": "moderate",
-        "direct": false,
-        "ids": [
-          "1088811"
-        ],
-        "fix_available": false
       }
     ]
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 59,
-    "npm_advisories_total": 45,
-    "npm_critical": 6,
-    "npm_high": 25,
+    "npm_packages_with_advisories": 9,
+    "npm_advisories_total": 4,
+    "npm_critical": 0,
+    "npm_high": 9,
     "exception_groups": 3,
     "exceptions_in_the_shipped_bundle": 1
   },
-  "statement": "pip-audit and npm audit, run over what this project installs. Every finding is either fixed or listed in scripts/audit_exceptions.toml with a reason and a review date. The npm findings come almost entirely from the Vega SDK sample's pinned toolchain.",
-  "problems": []
+  "statement": "pip-audit and npm audit over the scanned project dependencies. Findings, exception coverage and expired reviews are recorded below. Nonempty problems block audit acceptance; listing a finding does not waive it.",
+  "problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21"
+  ]
 }

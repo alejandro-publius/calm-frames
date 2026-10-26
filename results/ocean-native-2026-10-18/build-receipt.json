@@ -1,0 +1,13 @@
+{
+  "source_commit": "4c0d291643e8f1d589e12d738f1e2409c68138aa",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T04:46:32.307399+00:00",
+  "app_inputs": 801,
+  "command": "npm run build:debug",
+  "visual_audio_acceptance": false,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T04:47:30.354086+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/ocean-native-2026-10-18/calm-frames-ocean-aarch64-debug.vpkg",
+  "package_sha256": "7292f7b56807e395f8180a99c0205be270d09f3be5982dd9bdfea240ed6c3f0f"
+}

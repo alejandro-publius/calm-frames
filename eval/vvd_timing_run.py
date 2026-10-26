@@ -32,6 +32,7 @@ import shutil
 import statistics
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -337,8 +338,9 @@ def main() -> int:
         raise SystemExit(f"no package at {args.vpkg}. Build the debug package first.")
     schedule = json.loads(args.schedule.read_text())
 
-    serve_dir = Path("/private/tmp/claude-501/-Users-alexvintera/5165b902-cbea-4907-849e-e25cde1d46e9/scratchpad/serve")
-    serve_dir.mkdir(parents=True, exist_ok=True)
+    # A fresh directory each run. An earlier version baked one session's
+    # scratch path in here, which worked on exactly one machine.
+    serve_dir = Path(tempfile.mkdtemp(prefix="calm-frames-serve-"))
     shutil.copy2(args.clip, serve_dir / args.clip.name)
     if args.format == "HLS":
         media_name = package_hls(args.clip, serve_dir)

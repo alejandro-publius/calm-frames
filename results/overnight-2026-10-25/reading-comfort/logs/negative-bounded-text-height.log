@@ -1,0 +1,61 @@
+FAIL test/calmframes/readingComfort.test.tsx
+  Reading comfort persistence and isolation
+    ○ skipped defaults new and legacy profiles off without changing the household record
+    ○ skipped changes only the named kid and preserves protection through later edits
+    ○ skipped roundtrips a single enabled preference without changing PIN, floor or active profile
+    ○ skipped rejects a malformed stored preference: "true"
+    ○ skipped rejects a malformed stored preference: 1
+    ○ skipped rejects a malformed stored preference: null
+    ○ skipped rejects a malformed stored preference: {}
+  Reading comfort in Parents
+    ○ skipped is offered only behind the PIN, for a kid and with a result-aware save adapter
+    ○ skipped waits for the saved family, blocks duplicate presses and retains a single focus target
+    ○ skipped does not steal focus if the remote moved away during the save
+    ○ skipped keeps the old preference after false and allows retry
+    ○ skipped keeps the old preference after rejection and allows retry
+  bounded Reading comfort typography
+    ✕ keeps the enlarged reading stop within a 1080-high viewport under the conservative text ruler (443 ms)
+    ✕ keeps the enlarged reading stop within a 720-high viewport under the conservative text ruler (252 ms)
+    ○ skipped does not change the name editor when the edited kid has Reading comfort on
+    ○ skipped changes help and spacing while retaining Parents disclaimer and profile panel geometry
+    ○ skipped enlarges More info only, preserving Watch geometry, safety wording, reading stop and Back focus
+
+  ● bounded Reading comfort typography › keeps the enlarged reading stop within a 1080-high viewport under the conservative text ruler
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 972
+    Received:   1348
+
+      174 |     }, 0);
+      175 |     const designHeight = (textHeight + (paragraphs.length - 1) * box.gap + 2 * (box.padding + box.borderWidth)) / scale(1);
+    > 176 |     expect(designHeight * height / 1080).toBeLessThan(height * (1 - 2 * CALM_SPACE.SAFE_Y / 1080));
+          |                                          ^
+      177 |   });
+      178 |
+      179 |   it('does not change the name editor when the edited kid has Reading comfort on', () => {
+
+      at toBeLessThan (test/calmframes/readingComfort.test.tsx:176:42)
+
+  ● bounded Reading comfort typography › keeps the enlarged reading stop within a 720-high viewport under the conservative text ruler
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 648
+    Received:   898.6666666666666
+
+      174 |     }, 0);
+      175 |     const designHeight = (textHeight + (paragraphs.length - 1) * box.gap + 2 * (box.padding + box.borderWidth)) / scale(1);
+    > 176 |     expect(designHeight * height / 1080).toBeLessThan(height * (1 - 2 * CALM_SPACE.SAFE_Y / 1080));
+          |                                          ^
+      177 |   });
+      178 |
+      179 |   it('does not change the name editor when the edited kid has Reading comfort on', () => {
+
+      at toBeLessThan (test/calmframes/readingComfort.test.tsx:176:42)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 15 skipped, 17 total
+Snapshots:   0 total
+Time:        2.34 s, estimated 3 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx/i with tests matching "conservative text ruler".

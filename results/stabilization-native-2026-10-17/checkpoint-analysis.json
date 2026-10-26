@@ -1,0 +1,24 @@
+{
+  "clock": "device clock (Vega Virtual Device log timestamps); host and device times are not mixed",
+  "stopped": "timed out waiting for: Home ready (Watch focused)",
+  "install_tail": [
+    "Installing/Updating '/tmp/calm-frames-0.1.0-aarch64-debug.vpkg' ...success"
+  ],
+  "launch_tail": [
+    "Sending: pkg://io.github.alejandropublius.calmframes.main"
+  ],
+  "phases_ms": {
+    "first app log line to Home ready (Watch focused)": null,
+    "Details focused to Details screen (includes the KEY_ENTER command round trip)": null,
+    "Watch handled to player mounted": null,
+    "Watch handled to maps verified in the player": null,
+    "Watch handled to first picture shown": null,
+    "Back handled to teardown result": null,
+    "Back handled to player unmounted": null,
+    "Back handled to Home Watch focused": null
+  },
+  "teardown": null,
+  "cover_and_wait_lines": [],
+  "keys": [],
+  "unexpected_screens": []
+}

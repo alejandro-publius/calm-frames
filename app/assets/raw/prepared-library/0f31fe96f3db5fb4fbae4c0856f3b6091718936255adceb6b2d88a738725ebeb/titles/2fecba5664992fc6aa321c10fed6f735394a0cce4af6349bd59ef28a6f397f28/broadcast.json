@@ -1,0 +1,229 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt709",
+    "matrix_source": "stream-tag",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "stream-tag",
+    "transfer_tag": "1"
+  },
+  "created_utc": "2026-10-15T20:42:15Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 720,
+      "left": 0,
+      "top": 0,
+      "width": 1280
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "whole-picture",
+    "area_windows": [
+      {
+        "height_px": 108,
+        "name": "bt1702-screen",
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area",
+        "width_px": 192
+      },
+      {
+        "height_px": 22,
+        "name": "room-10deg",
+        "room": {
+          "display_aspect": "16:9",
+          "display_height_in": 41.672,
+          "display_width_in": 74.084,
+          "field_degrees": 10.0,
+          "field_inches": 8.399,
+          "seat_distance_in": 48.0,
+          "tv_diagonal_in": 85.0
+        },
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "width_px": 22
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 160.0,
+      "metric": "bt1886-nits",
+      "min_delta": 20.0,
+      "source": "ITU-R BT.1702-3 Annex 1 Guideline 1 (SPEC_SOURCES section 5)"
+    },
+    "name": "broadcast",
+    "pattern_rule": {
+      "changing_area_limit": 0.25,
+      "contrast_condition": "the same difference as a potentially harmful flash in Guideline 1, which is this profile's general_flash rule. No luminance number of its own.",
+      "exemption": "a pattern that obviously flows smoothly across, into or out of the screen in one direction. Applied only when the flow is unambiguous, and every application is listed in pattern_exemptions.",
+      "informative": true,
+      "is_a_wcag_requirement": false,
+      "more_than_pairs": 5,
+      "not_a_wcag_finding": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is never a WCAG finding and never changes a WCAG verdict.",
+      "source": "ITU-R BT.1702-3 Attachment 1 to Annex 1 (informative), which says these criteria are used by some administrations (SPEC_SOURCES section 8). The bar to bar difference is Guideline 1's flash difference, reused from general_flash.",
+      "stationary_area_limit": 0.4,
+      "tuning": {
+        "ambiguity_ratio": 0.9,
+        "contrast_reversal_correlation": -0.3,
+        "flow_direction_agreement": 0.9,
+        "flow_speed_spread": 0.5,
+        "min_autocorrelation_peak": 0.85,
+        "min_cycles_for_period": 3,
+        "min_flow_px": 0.75,
+        "min_match_peak": 0.3,
+        "min_motion_frames": 6,
+        "min_profile_samples": 8,
+        "motion_history_frames": 12,
+        "orientations": [
+          "rows",
+          "columns",
+          "diagonal",
+          "antidiagonal"
+        ],
+        "require_periodicity": true,
+        "segment_bridge_ms": 200.0,
+        "spacing_tolerance": 0.25,
+        "still_fraction_of_min_delta": 0.1,
+        "what_these_are": "detector tuning, not thresholds. BT.1702-3 gives no persistence time, no stripe width and no spatial frequency band, so none is used as a threshold. See flashmap/docs/SPEC_SOURCES.md implementation decision 9."
+      },
+      "uncertain_motion_rule": "an uncertain motion class takes the changing area limit, never the stationary one, and never the exemption"
+    },
+    "pattern_rule_source": "ITU-R BT.1702-3 Attachment 1 to Annex 1 (informative), which says these criteria are used by some administrations (SPEC_SOURCES section 8). The bar to bar difference is Guideline 1's flash difference, reused from general_flash.",
+    "peak_nits": 200.0,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "BT.1702-3 calls a transition to or from a saturated red harmful but gives no numbers, so the WCAG 2.2 and ISO 9241-391 working definition is reused (SPEC_SOURCES sections 4 and 5)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": {
+      "display_aspect": "16:9",
+      "display_height_in": 41.672,
+      "display_width_in": 74.084,
+      "field_degrees": 10.0,
+      "field_inches": 8.399,
+      "seat_distance_in": 48.0,
+      "tv_diagonal_in": 85.0
+    },
+    "rules_not_implemented": [
+      "the HDR branch, Michelson contrast 1/17 above 160 cd/m2",
+      "the 360 ms and 334 ms leading edge allowance, which could only excuse flashes",
+      "the overscan allowance in Note 4",
+      "any persistence time, stripe width or spatial frequency band for Guideline 2. BT.1702-3 gives none, so none is used as a threshold"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "ITU-R BT.1702-3 Annex 1 Guideline 1, standard dynamic range only",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [
+    {
+      "area_fraction": 0.400826,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 9906,
+      "flash_first_ms": 8383,
+      "flash_last_ms": 9885,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 8343,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.832645,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 11699,
+      "flash_first_ms": 9155,
+      "flash_last_ms": 11637,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 9135,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.400826,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 30593,
+      "flash_first_ms": 29133,
+      "flash_last_ms": 30572,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 29113,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+    "payload_sha256": "a02fd70b8e1f7462cb6ebc8585a0faad8ec40f59f9ea2c7d25490e985b877c30",
+    "public_key": "mSw6rXluFTx+gmF5ODt1pSTIYOkLkxurqGOrJHs2Xkg=",
+    "value": "fvdAmOQ10ABpBZdSp+YCOIneJoxlGHKlBKKvBC7ZNvykQQ+3QHb0N/0HEpo1CelVkz5oZW0PYJhn9y3AiXAPBA=="
+  },
+  "source": {
+    "coded_height": 720,
+    "coded_width": 1280,
+    "container_frame_rate": "7380000/153989",
+    "duration_ms": 37641.756,
+    "first_pts_ms": 0.0,
+    "frame_count": 1804,
+    "frame_interval_ms": {
+      "max": 20.856,
+      "median": 20.856,
+      "min": 20.844
+    },
+    "last_coded_pts_ms": 37600.056,
+    "last_pts_ms": 37600.056,
+    "path": "nps_acadia_coastal_broll_720p.mp4",
+    "sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    "size_bytes": 4049669,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": false,
+    "general_segment_count": 3,
+    "hidden_ms": 4836,
+    "pass": false,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": true,
+    "pattern_rule_source": "ITU-R BT.1702-3 Attachment 1 to Annex 1 (informative), which says these criteria are used by some administrations (SPEC_SOURCES section 8). The bar to bar difference is Guideline 1's flash difference, reused from general_flash.",
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 3
+  },
+  "version": 1
+}

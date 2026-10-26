@@ -1,0 +1,7 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+E   botocore.exceptions.ConfigNotFound: The specified config file (/tmp/pytest-of-agent/pytest-33/test_identity_file_and_provide0/nonexistent-config) could not be found.
+/workspace/calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/configloader.py:145: botocore.exceptions.ConfigNotFound: The specified config file (/tmp/pytest-of-agent/pytest-33/test_identity_file_and_provide0/nonexistent-config) could not be found.
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_identity_file_and_provider_fallbacks_fail_closed
+1 failed in 0.72s

@@ -1,0 +1,161 @@
+{
+  "recorded_utc": "2026-10-25T07:26:54.678328+00:00",
+  "base": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "checked_source": "6570662e4cbda2379ef537acb3cd75ac8847ab63",
+  "items": [
+    11
+  ],
+  "problem": "The paused notice was a polite live region remounted whenever player controls hid, causing repeated status speech during one pause.",
+  "change": "The existing announcement adapter is called on the semantic paused transition. The visible notice remains accessible but its live-region speech is disabled. A later new pause can repeat the useful message.",
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "lock_sha256": "e1ca817dbd2552002958002939760ac72e28837b12fe70ef25f0f1a45f032398",
+  "installation": {
+    "command": "npm --prefix app ci --ignore-scripts --no-audit --no-fund",
+    "exit_code": 0,
+    "clean_worktree_install": true,
+    "node_modules_symlink": false
+  },
+  "checks": {
+    "focused": {
+      "command": "npm exec -- jest --runInBand --coverage=false test/calmframes/playbackUi.test.tsx test/calmframes/playbackCardSequence.test.tsx test/calmframes/bufferingOpening.test.tsx test/calmframes/playbackTrace.test.tsx test/w3cmedia/mediacontrols/VideoPlayerUI.test.tsx",
+      "working_directory": "app",
+      "exit_code": 0
+    },
+    "typecheck": {
+      "command": "npm --prefix app run typecheck",
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "npm --prefix app run lint",
+      "exit_code": 0,
+      "source_warnings": 104,
+      "test_warnings": 4,
+      "changed_file_warnings": 0
+    },
+    "staged_secret_scan": {
+      "tool": "gitleaks 8.30.1",
+      "exit_code": 0
+    },
+    "restored_source": {
+      "command": "npm exec -- jest --runInBand --coverage=false test/calmframes/playbackUi.test.tsx",
+      "working_directory": "app",
+      "exit_code": 0,
+      "passed": 12
+    }
+  },
+  "tests": {
+    "passed": 52,
+    "suites_passed": 5,
+    "snapshots_passed": 1
+  },
+  "behavior_checked": [
+    "Exactly one generic pause announcement while controls hide/show repeatedly.",
+    "A subsequent Play then Pause announces again.",
+    "Visible paused label remains readable and manually accessible without a remount live-region announcement.",
+    "Cover/countdown cards retain sole status ownership.",
+    "Repeated controls do not seek or change paused state or protection cover.",
+    "Existing buffering, recovery overlay, captions and playback diagnostics regressions pass."
+  ],
+  "negative_controls": {
+    "cases": [
+      {
+        "case": "pause-before",
+        "command": [
+          "npm",
+          "exec",
+          "--",
+          "jest",
+          "--runInBand",
+          "--coverage=false",
+          "test/calmframes/playbackUi.test.tsx"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 2.01
+      },
+      {
+        "case": "pause-negative-live-region",
+        "command": [
+          "npm",
+          "exec",
+          "--",
+          "jest",
+          "--runInBand",
+          "--coverage=false",
+          "test/calmframes/playbackUi.test.tsx"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 2.36
+      },
+      {
+        "case": "pause-negative-second-pause",
+        "command": [
+          "npm",
+          "exec",
+          "--",
+          "jest",
+          "--runInBand",
+          "--coverage=false",
+          "test/calmframes/playbackUi.test.tsx"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 2.34
+      }
+    ],
+    "production_source_restored_sha256": "d2334b73153c658625887e44b1d3a151572269966ea1fc742aff603953879e67"
+  },
+  "logs": {
+    "clean-install.log": {
+      "sha256": "34c1b5865ef4a0c097e36cc2d3e928b182826e37f3b17941c99f3f13b0dc9b10",
+      "bytes": 5644
+    },
+    "pause-before.log": {
+      "sha256": "576c76ec68ef2731b7d3363f102339f25335f9f1ff19c0f6bb298832a353952c",
+      "bytes": 2105
+    },
+    "pause-after.log": {
+      "sha256": "f8d58e5b9638e673abac4b5061170752a115786a3c3e8cd188f80de77dc1762c",
+      "bytes": 939
+    },
+    "pause-negative-live-region.log": {
+      "sha256": "9a7626693bbf3a69778f79fc50028d8a136aebad481313785d20b2596fcfaa90",
+      "bytes": 2058
+    },
+    "pause-negative-second-pause.log": {
+      "sha256": "0f1e1e97f75f6219e382803f406f4bc1611f0f821c40ef6d871808b97666e5ff",
+      "bytes": 2065
+    },
+    "typecheck.log": {
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+      "bytes": 67
+    },
+    "lint.log": {
+      "sha256": "b7e9304c1f5b705d89d56d073ef6cce78ae0cae437e12daccd49980e759d4cdf",
+      "bytes": 8504
+    },
+    "restored-source-check.log": {
+      "sha256": "1884b7864ee3402f011c45076c8dfaf29ae5d2a8a22ac4e1dd2cbe7c35c2bff4",
+      "bytes": 1353
+    }
+  },
+  "unchanged_scopes": [
+    "Playback/seek/decoder/cover algorithms",
+    "PIN/household data and profile semantics",
+    "FirstRun and disclaimer layout",
+    "Dependency inputs",
+    "Native signing, approved media and catalog",
+    "Visual geometry and colors"
+  ],
+  "limitations": [
+    "These are source/runtime-tree regressions with native media and SDK widgets simulated; they are not new VoiceView listening or native rendering observations.",
+    "No native package, simulator, hosted CI or human comfort review was run in this lane.",
+    "Other item 11 upstream seekbar, resume-prompt entry and reduced-motion observation limits remain open."
+  ],
+  "reviewed_other_items": {
+    "1-4": "Reviewed startup/loading shell, household failure UI and current copy/focus paths. Existing safeguards retained; the pale first-frame observation has no demonstrated source cause, so timing/layout was not changed speculatively.",
+    "5-6": "Completed name-editor behavior and accepted onboarding navigation retained; human disclaimer-layout choice is outside this fix."
+  },
+  "evidence_sanitization": "Cloud checkout paths replaced with $REPO; terminal blank lines normalized. No device, household or private-input logs included."
+}

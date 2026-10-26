@@ -1,0 +1,22 @@
+KEY_RIGHT focus kid-mode-home-more-info
+KEY_ENTER focus kid-mode-details-play
+KEY_RIGHT focus kid-mode-details-show-info
+KEY_ENTER focus kid-mode-details-info-back
+KEY_BACK focus kid-mode-details-show-info
+KEY_BACK focus kid-mode-home-more-info
+PASS Home Details More info Back Back returns Home Details focus
+KEY_UP focus kid-mode-home-choose-profile
+KEY_RIGHT focus kid-mode-home-learn
+KEY_ENTER focus picture-hold-dismiss
+KEY_BACK focus kid-mode-home-learn
+PASS How it works Back returns its opener
+KEY_RIGHT focus kid-mode-home-parent-area
+KEY_ENTER focus kid-mode-parent-key-1
+KEY_BACK focus kid-mode-home-parent-area
+PASS Parents hardware Back cancelled without PIN entry; Parents focus restored
+KEY_ENTER focus kid-mode-parent-key-1
+KEY_UP focus kid-mode-parent-back
+KEY_ENTER focus kid-mode-home-parent-area
+PASS Parents on-screen Back cancelled without PIN entry; Parents focus restored
+KEY_DOWN focus kid-mode-home-more-info
+KEY_LEFT focus kid-mode-home-watch

@@ -1,0 +1,18 @@
+Release package sha384 ace30351afc9ed7ea251b026bec789bd0f14eb2a871b85eae50ec17c032624ebc257bdfb35401248f74703785e5a2557
+map 2ee4a5fc7891fb26 sources 922 node_modules files 585 instances 76 | module table 0 equals map: None map-only: 0 leading polyfills: None | contents 221 | hermes equals build: True
+  GHSA-grv7-fg5c-xmjg braces                 vulnerable instance shipped: False  other copies shipped: []
+  GHSA-vcc3-ghjq-m6fr decode-uri-component   vulnerable instance shipped: True   other copies shipped: []
+  GHSA-952p-6rrq-rcjv micromatch             vulnerable instance shipped: False  other copies shipped: []
+  GHSA-5fw9-fq32-wv5p node-notifier          vulnerable instance shipped: False  other copies shipped: []
+  GHSA-rxrc-rgv4-jpvx react-devtools-core    vulnerable instance shipped: False  other copies shipped: []
+  GHSA-7f53-fmmv-mfjv react-native           vulnerable instance shipped: False  other copies shipped: []
+  GHSA-82x6-q7mm-w9cf toml                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-v5mp-jgw5-2x6j toml                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-4qx8-w7c3-pj3p toml                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-9j65-hcg3-gc64 toml                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-9qmh-m7c6-f92p toml                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-w5hq-g745-h8pq uuid                   vulnerable instance shipped: False  other copies shipped: []
+  GHSA-3h5v-q93c-6h6q ws                     vulnerable instance shipped: False  other copies shipped: []
+  GHSA-96hv-2xvq-fx4p ws                     vulnerable instance shipped: False  other copies shipped: []
+  GHSA-p9pc-299p-vxgp yargs-parser           vulnerable instance shipped: False  other copies shipped: []
+exit 0

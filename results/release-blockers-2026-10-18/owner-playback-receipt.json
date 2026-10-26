@@ -1,0 +1,18 @@
+{
+  "capture_used": false,
+  "rebuilt": false,
+  "installed": false,
+  "household_data_changed": false,
+  "launch_requests": 1,
+  "remote_keys": [
+    "KEY_RIGHT",
+    "KEY_LEFT",
+    "KEY_ENTER"
+  ],
+  "observed_focus_before_normalization": "kid-mode-home-more-info",
+  "last_focus": "kid-mode-home-watch",
+  "home_watch_verified": true,
+  "playback_confirmed": true,
+  "collector_stopped": true,
+  "time_utc": "2026-10-18T03:57:44.433688+00:00"
+}

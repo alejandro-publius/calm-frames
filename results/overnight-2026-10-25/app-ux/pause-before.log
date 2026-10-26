@@ -1,0 +1,46 @@
+FAIL test/calmframes/playbackUi.test.tsx
+  ✓ seekbar yields initial and restored preferred focus to Skip during none (91 ms)
+  ✓ seekbar yields initial and restored preferred focus to Skip during countdown (23 ms)
+  ✓ initialized playback exposes named captions and a stationary contrasting focus ring (29 ms)
+  ✓ ambient Harbor starts Off, honors explicit On through playback updates, and can return Off (28 ms)
+  ✓ pause stays visible after controls hide in covering state and clears on Play (44 ms)
+  ✓ pause stays visible after controls hide in countdown state and clears on Play (19 ms)
+  ✓ pause stays visible after controls hide in none state and clears on Play (14 ms)
+  ✕ one pause announcement survives controls hiding and is spoken again only after another pause (21 ms)
+  ✓ the covering scene card owns its pause announcement without the generic notice (17 ms)
+  ✓ the countdown scene card owns its pause announcement without the generic notice (14 ms)
+  ✓ recovery paints above the retained cover and Back leaves once (18 ms)
+  ✓ choosing the active caption track closes its menu without changing media or the hold (30 ms)
+
+  ● one pause announcement survives controls hiding and is spoken again only after another pause
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 8
+    + Received  + 1
+
+    - Array [
+    -   Array [
+    -     "Paused. Press Play to continue.",
+    -     Object {
+    -       "queue": false,
+    -     },
+    -   ],
+    - ]
+    + Array []
+
+      106 |
+      107 |   act(() => mockMedia.pause());
+    > 108 |   expect(pauseCalls()).toEqual([[pausedMessage, { queue: false }]]);
+          |                        ^
+      109 |   expect(view.queryByTestId('player-paused')).toBeNull();
+      110 |
+      111 |   for (let i = 0; i < 3; i += 1) {
+
+      at Object.toEqual (test/calmframes/playbackUi.test.tsx:108:24)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 11 passed, 12 total
+Snapshots:   0 total
+Time:        1.095 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx/i.

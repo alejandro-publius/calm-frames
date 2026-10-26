@@ -1,0 +1,727 @@
+{
+ "what": "review copies of the cited fictional-household evidence; full-size originals and every other capture are in the sanitized receipt ZIP",
+ "zip": "calm-frames-native-validation-fbe53bf-results.zip",
+ "zip_sha256": "80ebdc08ba24a383265bc93bb3051a9af3a1172dc32e4187bea4e330ef3ce68b",
+ "excluded_by_rule": [
+  "private main-household captures and audio",
+  "PIN screens and keypads, even with nothing typed",
+  "videos and audio recordings",
+  "full-window captures"
+ ],
+ "files": [
+  {
+   "repository_file": "evidence/a01-1080-pause-once-frames.jpg",
+   "original_in_zip": "evidence/a01-1080-pause-once-frames.png",
+   "original_sha256": "c062b1e59c1a1674a60c4f209b602fe9503343a2ff6a6e1df2828f49071cecb0",
+   "repository_sha256": "5300abcf55a92b07f25304f311980c5ca5591c9d1f927dce529be7d4228d1d10",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/a01-1080-pause-once.transcript.json",
+   "original_in_zip": "evidence/a01-1080-pause-once.transcript.json",
+   "original_sha256": "6a63cb3e510989b69a84d730ece1625e26324ce6b25818785f3fb2230f90ba26",
+   "repository_sha256": "6a63cb3e510989b69a84d730ece1625e26324ce6b25818785f3fb2230f90ba26",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a01-1080-pause-once.transcript.txt",
+   "original_in_zip": "evidence/a01-1080-pause-once.transcript.txt",
+   "original_sha256": "7443d5184275408c06b8980c8fe24cb84d103eb2cddf12a96c64c04edd07e860",
+   "repository_sha256": "7443d5184275408c06b8980c8fe24cb84d103eb2cddf12a96c64c04edd07e860",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a02-1080-after-player.transcript.txt",
+   "original_in_zip": "evidence/a02-1080-after-player.transcript.txt",
+   "original_sha256": "893687de38e2c31fc54494c9b0666b3660890b85b0fde8fdef561f0c91a20af7",
+   "repository_sha256": "893687de38e2c31fc54494c9b0666b3660890b85b0fde8fdef561f0c91a20af7",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a03-1080-pause-repeat-frames.jpg",
+   "original_in_zip": "evidence/a03-1080-pause-repeat-frames.png",
+   "original_sha256": "5b2a2fd731f4eaeaa9cc20595327ca8f4b41532f8b7e51848b62beb73952450f",
+   "repository_sha256": "663472f77d73a1a69f02c20b16d2debad32c50afdf6275daca44262c4dd18e62",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/a03-1080-pause-repeat.transcript.json",
+   "original_in_zip": "evidence/a03-1080-pause-repeat.transcript.json",
+   "original_sha256": "5704eac9ea47dd2351310c97f169b68657aac79c9bd8d1e6631efe4e36212748",
+   "repository_sha256": "5704eac9ea47dd2351310c97f169b68657aac79c9bd8d1e6631efe4e36212748",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a03-1080-pause-repeat.transcript.txt",
+   "original_in_zip": "evidence/a03-1080-pause-repeat.transcript.txt",
+   "original_sha256": "e25b3a45f8a4c68e738c30723f30c6257a60f61ac7ad7e54b88223ef03900c45",
+   "repository_sha256": "e25b3a45f8a4c68e738c30723f30c6257a60f61ac7ad7e54b88223ef03900c45",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a04-1080-more-info-comfort.transcript.txt",
+   "original_in_zip": "evidence/a04-1080-more-info-comfort.transcript.txt",
+   "original_sha256": "03b504d76e79204ca92eafbca18a797e294bdd668f1f0783016909aaf69aeb34",
+   "repository_sha256": "03b504d76e79204ca92eafbca18a797e294bdd668f1f0783016909aaf69aeb34",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a05-1080-comfort-switch-kid.transcript.txt",
+   "original_in_zip": "evidence/a05-1080-comfort-switch-kid.transcript.txt",
+   "original_sha256": "29892983a04ea437e3789b2e5348a9cd1c32f015c9f91e4c0d154b75a33d4177",
+   "repository_sha256": "29892983a04ea437e3789b2e5348a9cd1c32f015c9f91e4c0d154b75a33d4177",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a07-1080-comfort-switch-kid2.transcript.txt",
+   "original_in_zip": "evidence/a07-1080-comfort-switch-kid2.transcript.txt",
+   "original_sha256": "c2da088fb61074df5ccad3a81adde35f42c9f7931987ef23e4bc0f931ecf13b6",
+   "repository_sha256": "c2da088fb61074df5ccad3a81adde35f42c9f7931987ef23e4bc0f931ecf13b6",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a10-720-comfort-toggle-on.transcript.txt",
+   "original_in_zip": "evidence/a10-720-comfort-toggle-on.transcript.txt",
+   "original_sha256": "d536657d79bf5c7794d3f8622eda9406e11683b55236408b4e37b12583039bc6",
+   "repository_sha256": "d536657d79bf5c7794d3f8622eda9406e11683b55236408b4e37b12583039bc6",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/a11-720-more-info-comfort.transcript.txt",
+   "original_in_zip": "evidence/a11-720-more-info-comfort.transcript.txt",
+   "original_sha256": "db0dd48c3624de1e8fa37d38500558a90ae600b981b38b3785e181836727b194",
+   "repository_sha256": "db0dd48c3624de1e8fa37d38500558a90ae600b981b38b3785e181836727b194",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/d07-1080-explainer-at-rest.jpg",
+   "original_in_zip": "evidence/d07-1080-explainer-at-rest.png",
+   "original_sha256": "e70f42d77900fcb78b46d02d5d71bce2280c6f9c9ee4af4e2a6fae37ab8a1343",
+   "repository_sha256": "3e99d2b362252daa1f6c133c95fd34aa38fdd302b7595a5709d18d2eb21064d1",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/d08-1080-explainer-one-up.jpg",
+   "original_in_zip": "evidence/d08-1080-explainer-one-up.png",
+   "original_sha256": "6d6512fb20638930e566b07011912ee5254706ed0b1e6592c97acc374b25ffd0",
+   "repository_sha256": "f84d65b30b0b9e1214e8a77dfac076562d33b4e139ae3616645b20289ce65c88",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/d09-1080-explainer-down.jpg",
+   "original_in_zip": "evidence/d09-1080-explainer-down.png",
+   "original_sha256": "28d1966c0f0028a9bf0f60913facd73aed3f03c400ed69fdd7019f7ee1873784",
+   "repository_sha256": "d23462d631424242b29d6abfb329757b7b1fdf1e46d113c596e058dfe06f457b",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/d10-1080-after-open-library.jpg",
+   "original_in_zip": "evidence/d10-1080-after-open-library.png",
+   "original_sha256": "2f57de735425a438692428ebde207d1152027a507a13c16cf156045d2141cda4",
+   "repository_sha256": "04a07a326c78b0339b2c73c2de7ef4de793a7f61b447c5fd39731ef64fc7363d",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/e02-720-home.jpg",
+   "original_in_zip": "evidence/e02-720-home.png",
+   "original_sha256": "31ba18f71f3a086dd3945c29399155a95d959ee5885e708bf4d9959ee5af7e30",
+   "repository_sha256": "a8396a518fa4c1732fe1ca866c34ed31630de8657501da4040dbf5c5faf3afa4",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e03-720-up-from-watch.jpg",
+   "original_in_zip": "evidence/e03-720-up-from-watch.png",
+   "original_sha256": "3f02b180db4df62658794f69fd1bace6aad703f5ba6422594d19eb1f14db4b73",
+   "repository_sha256": "6add2219620b4c25964edc98f8b3b8822c818c9b4e88dbb8a58a8220c8c79aee",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e05-720-kid2-mcway-details.jpg",
+   "original_in_zip": "evidence/e05-720-kid2-mcway-details.png",
+   "original_sha256": "44fc9903aaf321df31dcace870d135108571a03f73c7dcee11c2bed2447f1b94",
+   "repository_sha256": "e7d00a267aa2c2f0b103948b84188516887cfea27d374b3f0180949670ab1217",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e06-720-kid2-mcway-more-info.jpg",
+   "original_in_zip": "evidence/e06-720-kid2-mcway-more-info.png",
+   "original_sha256": "9a3e1e58cb556922a595761a13dde79cfeaced7504858fe75214e03224fc3632",
+   "repository_sha256": "404f3765e6d0f95311d6dda0a0e238ad70b9500b2d829398347674dfd9c89ebc",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e12-720-kid-more-info.jpg",
+   "original_in_zip": "evidence/e12-720-kid-more-info.png",
+   "original_sha256": "75ffc2095194f912869dd4492609e88f10c5b01f39f0b506f99739d2959dbf48",
+   "repository_sha256": "7ce74ca03b4864af747a6b7406d56dd59149b1c341708a17178982cbb4496471",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e15-720-kid-more-info-down3.jpg",
+   "original_in_zip": "evidence/e15-720-kid-more-info-down3.png",
+   "original_sha256": "a937f3d6778d2f0fb36e9b8a7d50093fd5a644274eef0c2cb0cfa8eb836bd10b",
+   "repository_sha256": "983521fa994107f6d3b7c022d7cc467eaefaa3358b79a06b767b2e4cf9b1f4c9",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e18-720-parents-kid.jpg",
+   "original_in_zip": "evidence/e18-720-parents-kid.png",
+   "original_sha256": "77628d3301d518a2c605f89855b01fcc049a0c7d2b8d43b47f43c5875fe2276a",
+   "repository_sha256": "455b764b678357030e42c733d6e78ccdc9c47b7ed5972cb4b2d8a5c2cf60c127",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e21-720-kid-walk-1.jpg",
+   "original_in_zip": "evidence/e21-720-kid-walk-1.png",
+   "original_sha256": "e245d37d9d44ead7af4dd7af4c7bbcdb1c468e10752529db0a9bfa34d27818eb",
+   "repository_sha256": "4170cec107d746df090ad7a6326d52ac35b19818e37cbb8ab19d68e226a2da83",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e24-720-kid-walk-4.jpg",
+   "original_in_zip": "evidence/e24-720-kid-walk-4.png",
+   "original_sha256": "58ad3e98d7685533bd16bc118432d6143fb85418d861fea4ba2e353c0a3d31cf",
+   "repository_sha256": "f6ecf3a5e3e4619f934f31f8599ac099131d4b65d121fc98e8052559e9428d63",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e25-720-kid-comfort-off.jpg",
+   "original_in_zip": "evidence/e25-720-kid-comfort-off.png",
+   "original_sha256": "71f170db752d6c93e43347bf9da6c018106d877e4a632ff454a7ade274b666a7",
+   "repository_sha256": "0dbb1d76ce70e1ba420ba75782c76e71d29c7926f21fdaa51f81cca3dd504695",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e26-720-after-off-down.jpg",
+   "original_in_zip": "evidence/e26-720-after-off-down.png",
+   "original_sha256": "b39a1611525cdd5dc0976e8b5923988d3a869e4896a2cf0dcc8fb139b911c68b",
+   "repository_sha256": "84c3472517e3b69fdd117f31560f13cbc8fc094811b7ed00b01c22df1e725087",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e28-720-after-vv-toggle.jpg",
+   "original_in_zip": "evidence/e28-720-after-vv-toggle.png",
+   "original_sha256": "f16e23ddc0e94c7f19f370a5bf240ed5c87d180c56b91258ae94a81677d2ee5a",
+   "repository_sha256": "a8dac303ab323cbf30635e28a055cd25eeda3e35aedf53dab07eddf82d6a968d",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/e44-720-more-info-vv-after.jpg",
+   "original_in_zip": "evidence/e44-720-more-info-vv-after.png",
+   "original_sha256": "5f6b6970172c16fcd8639369a4b507ea3483528a7dcafceec2a6600e8fa43960",
+   "repository_sha256": "24482278b4a4c9ae31f3076f12aa05995b8fb2a378e7744e9769522772dad32c",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/h01-1080-up-from-watch.jpg",
+   "original_in_zip": "evidence/h01-1080-up-from-watch.png",
+   "original_sha256": "6462caf5c3efe63d4efe7d20351739b499eb42203a43140e87c5bfd6361853ab",
+   "repository_sha256": "a125fc56229e5f1a23801d715c21e79947f9c925b6a235ac278c2353ff953106",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h02-1080-acadia.jpg",
+   "original_in_zip": "evidence/h02-1080-acadia.png",
+   "original_sha256": "9bf5e512e078432291b55ac8f37e4fa276ce61c52c757f75453157e60130d74a",
+   "repository_sha256": "5e00681dd878c346e6f5de80745c1d61356fcc33bd6de66c96b2d7e67947dcf1",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h03-1080-down-to-watch.jpg",
+   "original_in_zip": "evidence/h03-1080-down-to-watch.png",
+   "original_sha256": "0189244ab25d5029bda18ee3bfeec31f0689a8e8d6b7ea37e6c20291f0267f8a",
+   "repository_sha256": "80c4f255e16c6c1eebea457a3a4170d611e6f135470ea6c3e405de64de1ff75e",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h04-1080-up-again.jpg",
+   "original_in_zip": "evidence/h04-1080-up-again.png",
+   "original_sha256": "24925977a7fd2ec25568f0ce6e25653a445600f3857daab0dcc8325403565d13",
+   "repository_sha256": "d8490ac35ace81fb2b0db5fe266fe82b2689c5b894c23a8feee9ff688543aac3",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h05-1080-mcway-down-up.jpg",
+   "original_in_zip": "evidence/h05-1080-mcway-down-up.png",
+   "original_sha256": "ab743488a7c0b793f7494b8a12838f2fe9ea348fc240ad1d3d8f0ded09622214",
+   "repository_sha256": "82be1fc05dcc153cedf4115208d3d5e9ceda6f3bacedda185b1bd5b72cb5616f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h06-1080-forest.jpg",
+   "original_in_zip": "evidence/h06-1080-forest.png",
+   "original_sha256": "c182ab3677bcb9cdbf8f0c65ae523f7911d593e311e51b013f37ed90716aed57",
+   "repository_sha256": "ac8779f5816ee5010a5c990d087230713c9970a4e981c42216023ee908ccc17e",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h07-1080-forest-down-up.jpg",
+   "original_in_zip": "evidence/h07-1080-forest-down-up.png",
+   "original_sha256": "2892f31db0ca09fd7236697b6a8179622cca9eb13b0699271666bbcd521aadbd",
+   "repository_sha256": "3cd0a51c24a9d58f80d482726db527af751554974fa29bc65c3ac006cf8ee073",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h09-1080-acadia-details.jpg",
+   "original_in_zip": "evidence/h09-1080-acadia-details.png",
+   "original_sha256": "f4f9ce4e95ae3839d079e331aca3a14616d87115098490d73ed71c91663dcbc1",
+   "repository_sha256": "9f9c40c05ef472ab80ff6c81518ec44f19add15d758978f059bde77bc2426f19",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h10-1080-acadia-more-info.jpg",
+   "original_in_zip": "evidence/h10-1080-acadia-more-info.png",
+   "original_sha256": "194c5e4efc195915617f8568d2555c5c521b3fdc6cc21043e1dd0b332e91b8ec",
+   "repository_sha256": "c0a305e0995fb3efe343e228f2884f76630afedd4ad44651993af4818c1c7b6f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h13-1080-technical.jpg",
+   "original_in_zip": "evidence/h13-1080-technical.png",
+   "original_sha256": "7e5e4395a92ec3c1d2dcd0ec2b5d8bbf03d62fb48511d45ef4c34b340040955e",
+   "repository_sha256": "e634d8b5c96fcf260c13f6ce6a80bd2528336106e220d2d0031b6a545366384b",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h17-1080-technical-down10.jpg",
+   "original_in_zip": "evidence/h17-1080-technical-down10.png",
+   "original_sha256": "aa7fe7e6f79734caec88230e442b3d3bceeab74a0adee38ff515ca08fc4c193b",
+   "repository_sha256": "52597bb3fb716c9d860a269fb9042bd74636cd8b7c5d485c1a0ec23cb61f0d82",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h18-1080-back-to-more-info.jpg",
+   "original_in_zip": "evidence/h18-1080-back-to-more-info.png",
+   "original_sha256": "70f8850f518a962354eabbe3f0b52d7647378a5b4154e67401c6c8a3df0c18a3",
+   "repository_sha256": "7e112994062a8e7ac8b8431b605d215c5525ed6e48ba73263e7ff1aec1022bb2",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h19-1080-remote-back-details.jpg",
+   "original_in_zip": "evidence/h19-1080-remote-back-details.png",
+   "original_sha256": "e500e05b3f591cfbf0914b83953db05113119bb7ac941e753f343b5c43a54386",
+   "repository_sha256": "c7e8785b56b77164d11301169a41447ae760c61d4d46273a18576f279dbd7a33",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/h20-1080-remote-back-home.jpg",
+   "original_in_zip": "evidence/h20-1080-remote-back-home.png",
+   "original_sha256": "9351d2c0d88a80d7a1b932e7354c6b0067c4c9208dd730056d90cd19a9b4a177",
+   "repository_sha256": "8c07514b8ca1a4e838b06e4705af40977b8c2eae280cb610ed6701630f8ae4d3",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/k07-1080-kid2-more-info.jpg",
+   "original_in_zip": "evidence/k07-1080-kid2-more-info.png",
+   "original_sha256": "194c5e4efc195915617f8568d2555c5c521b3fdc6cc21043e1dd0b332e91b8ec",
+   "repository_sha256": "c0a305e0995fb3efe343e228f2884f76630afedd4ad44651993af4818c1c7b6f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/k08-1080-kid2-technical.jpg",
+   "original_in_zip": "evidence/k08-1080-kid2-technical.png",
+   "original_sha256": "949be1df6da709b98c1515ea1272dd29e0282770802ac1858fc584620a19355d",
+   "repository_sha256": "63b61631a6d1e42f41eb2288509c1068dd64bf834a4bd1a6b9abdfc384abfb27",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/k09-1080-kid2-covered.jpg",
+   "original_in_zip": "evidence/k09-1080-kid2-covered.png",
+   "original_sha256": "99bc94a189fa78f4ce45f09d8fea76d363d2da946dd369319da6f8592aa45922",
+   "repository_sha256": "7c442a4c7a43494db97d185b25ca227126568e8c172e560f41cdc8859ab1865f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/k10-1080-kid2-settings.jpg",
+   "original_in_zip": "evidence/k10-1080-kid2-settings.png",
+   "original_sha256": "85bdaf70d0bf76e41a581e6075bdf14071941e1c928fe803971e72c3595797f6",
+   "repository_sha256": "cc4d420df5313739489d8b5d46b8c717bc0b66bb57e0336e58f1031b1059ac3e",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/m03-1080-otters-still.jpg",
+   "original_in_zip": "evidence/m03-1080-otters-still.png",
+   "original_sha256": "aa6619f519abc16cacb8635d3646503b7c3aa8dccaa2987620988d00a6d22a99",
+   "repository_sha256": "8d1b4961bc3b5a7c67d400064951082a5cdfddb669b8490395eb23cf3ee4020f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/m04-1080-otters-preview-end.jpg",
+   "original_in_zip": "evidence/m04-1080-otters-preview-end.png",
+   "original_sha256": "3970a2d4a241aa8b5d16d4cf86dcebbab707897d6901ac9ef28a3bf7cb5b4291",
+   "repository_sha256": "37910071e4fd5a29161d4ac11537014576ef6e96d9759cc13d7e68b1a32f6471",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/m11-1080-forest-down.jpg",
+   "original_in_zip": "evidence/m11-1080-forest-down.png",
+   "original_sha256": "2f01713c7163f4341b4d6f952be957c12bb37a3bb35e04354bccaa3af2a6ba63",
+   "repository_sha256": "ce528f08c4c692eb42137b25f6b186cfdf8aa8da96e5390e27f92b1a6cafb2e0",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/m12-1080-forest-still.jpg",
+   "original_in_zip": "evidence/m12-1080-forest-still.png",
+   "original_sha256": "7142884ed3baafbf659001ff6aa0148514e29ce89864d8719d3d4d82d4d09bad",
+   "repository_sha256": "d253b8e69d8252b08efe7daf8a0987b0fa7556f75ed2d4bb727245ace740694b",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/m13-1080-forest-preview-end.jpg",
+   "original_in_zip": "evidence/m13-1080-forest-preview-end.png",
+   "original_sha256": "69ca9d011fbc5867e0e86c189d807d84d96bd5276d24804073fc729a3c860880",
+   "repository_sha256": "d9f314d02cf025c6ac267975f55520ef2bb9d3b06116c6d04e8a15d827188ed9",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p03-1080-parents-open.jpg",
+   "original_in_zip": "evidence/p03-1080-parents-open.png",
+   "original_sha256": "50264592a4cd199c9348ee533b7c9d38cf25fae23655469e8b33dc6773756429",
+   "repository_sha256": "0552c3997aa4597565fd12e9f4f7bfb267c7012c8f5fe5be78f273bda20e587b",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p09-1080-kid2-extra.jpg",
+   "original_in_zip": "evidence/p09-1080-kid2-extra.png",
+   "original_sha256": "6b6cd689961c76d2321ef5e36ed6beb99169eeabe080549b81bc4d387594d528",
+   "repository_sha256": "ca1844eaf732a3796f4c26535d7bebf47849aea54a550a9d2f18977d326ae653",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p15-1080-kid2-walk-5.jpg",
+   "original_in_zip": "evidence/p15-1080-kid2-walk-5.png",
+   "original_sha256": "7746fb58171385cfc6d6aee9f2f14cff8b50472337375b45d1a699fa8efabc3c",
+   "repository_sha256": "fbf61caddddbe9abbef21ba5b7a862c1d25d5acae7e2c0152ce276d10de61adb",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p18-1080-kid2-walk-8.jpg",
+   "original_in_zip": "evidence/p18-1080-kid2-walk-8.png",
+   "original_sha256": "ecf963f940c1272647debd42c0ae540fe9262a0ffa4449d50a2f88c73af82992",
+   "repository_sha256": "7fc29f657f190a14417be5c0ce080bfea73da9c1d89534b9671e96106c430332",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p23-1080-kid-comfort-focus.jpg",
+   "original_in_zip": "evidence/p23-1080-kid-comfort-focus.png",
+   "original_sha256": "08c0be5d6d73c1e982b32c0d7368df19bac096f435989aaa83604b5fe91e9270",
+   "repository_sha256": "8f53a7971e45f35976531fdfe9076cbde11e8b9e15203cf6480376272ff0adef",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p24-1080-kid-comfort-on.jpg",
+   "original_in_zip": "evidence/p24-1080-kid-comfort-on.png",
+   "original_sha256": "65d57c265bfcfa4139e00a98316cb1c2cc802d238560b9dfb3dd51354e6e45f1",
+   "repository_sha256": "76d5576113c47edae96ced4162bc80fa496c8245d5c40e06f5151331bae636af",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p25-1080-kid-comfort-on-still.jpg",
+   "original_in_zip": "evidence/p25-1080-kid-comfort-on-still.png",
+   "original_sha256": "65d57c265bfcfa4139e00a98316cb1c2cc802d238560b9dfb3dd51354e6e45f1",
+   "repository_sha256": "76d5576113c47edae96ced4162bc80fa496c8245d5c40e06f5151331bae636af",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p26-1080-comfort-up.jpg",
+   "original_in_zip": "evidence/p26-1080-comfort-up.png",
+   "original_sha256": "a8f8a3ecbe607660d293d8bbfa2aa9565b53dd658374bccc44912757584d2d8e",
+   "repository_sha256": "f195d82827988ea563d1aeceab57859a3ab6558f416bd2a81095bbeb6e18ece9",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p27-1080-comfort-down.jpg",
+   "original_in_zip": "evidence/p27-1080-comfort-down.png",
+   "original_sha256": "5a3065fbdafd822631bc7ea4944fe48dbdc5f7e3ba7656368911324a6ffe84be",
+   "repository_sha256": "159d88549187ba97d7518f06edad8b5be5671a45727ea750fe21f3309f95f50c",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p28-1080-kid-comfort-row-on.jpg",
+   "original_in_zip": "evidence/p28-1080-kid-comfort-row-on.png",
+   "original_sha256": "7ff0ed2206560e368d9aec0e3da78d9640e7d42944ea3bfa0467adaa0e4beeda",
+   "repository_sha256": "58c5d3cb874c54ee9621ee4759e351a65165182359f8d216cd9660f765ab91ff",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p29-1080-kid-comfort-off.jpg",
+   "original_in_zip": "evidence/p29-1080-kid-comfort-off.png",
+   "original_sha256": "a25a5ecf3342a493249eb7895ba7752dbba8d0725cc81f984c3c99c0f9129186",
+   "repository_sha256": "450dc8acb81d63c3e854894b1114462f33aa537b4c990061f03a69a64d8e6724",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p30-1080-after-toggle-down.jpg",
+   "original_in_zip": "evidence/p30-1080-after-toggle-down.png",
+   "original_sha256": "b3ce4cbecf5c71c3c2c557ff80bb7ab115f1e8271e5fb57f08b0bfdce35f5348",
+   "repository_sha256": "36ef5f29c428d6dde421749c58bbb602d3dfc800f44d68bcb729355998befb5a",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/p49-1080-kid-55-check.jpg",
+   "original_in_zip": "evidence/p49-1080-kid-55-check.png",
+   "original_sha256": "0cfdfb192676abd42226ae690ceb181e97eb2caa7a129e90446f99becd092bbd",
+   "repository_sha256": "8a4367cfde1fd1a7abb49be6e0d3ad50609369cb4ecce3b383dc3eb7c9f86bc8",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/q02-1080-kid2-mcway-details.jpg",
+   "original_in_zip": "evidence/q02-1080-kid2-mcway-details.png",
+   "original_sha256": "a0c367cde82f824d56410feae30b7c9c7fefaae84ffa36f627b70bf14d936571",
+   "repository_sha256": "a6477c7fdcdd5fb66d7a32f80d1c33f328a9aacee083efe7cc706e515e83ff67",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/q03-1080-kid2-mcway-playing.jpg",
+   "original_in_zip": "evidence/q03-1080-kid2-mcway-playing.png",
+   "original_sha256": "335b4d65cede1b4578655e2b7a37b222ee4b94ccded623ffe7422a790fc8cd29",
+   "repository_sha256": "603adee1a32ed7c3546cc259e298d37bc3d09a50354591bbd607d0e65d6bbeca",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/q05-1080-kid2-resumed.jpg",
+   "original_in_zip": "evidence/q05-1080-kid2-resumed.png",
+   "original_sha256": "cbb6f3c6eea7ffb7ff231e592c16dd3c44ce67dcb4b0f3a0af55a9c885bc6035",
+   "repository_sha256": "61da895cf8b639b27438a00530f14713379c38b5ab3c489647156a9f0c596df3",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/q07-1080-kid2-resumed-playing.jpg",
+   "original_in_zip": "evidence/q07-1080-kid2-resumed-playing.png",
+   "original_sha256": "5ea571496f1145c3e3986f93d0f3635e8dfe0d38a7108677eaa504930d4e6235",
+   "repository_sha256": "3488e85dd30e5697ef57a3cf283552cf8ebebbc2b144e54328ad3e0bbf340473",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/q12-1080-kid-resume-prompt.jpg",
+   "original_in_zip": "evidence/q12-1080-kid-resume-prompt.png",
+   "original_sha256": "0bf7722210656d147f369e7a3126ef8a7a96722deccbfc735142b8b9930da10a",
+   "repository_sha256": "fa66105f5d067ecdc1e68f38bcbee816ca0a52a1f688be1e194c681c4960e236",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/r03-1080-more-info-kid-comfort.jpg",
+   "original_in_zip": "evidence/r03-1080-more-info-kid-comfort.png",
+   "original_sha256": "79935dcb637df1660469c0d2bf1921154c01aaa333b7f21b6b428dcbcb11a5e5",
+   "repository_sha256": "a6b8e583e70b93cc44e7c04bb15b34abc72d856b8f104282c68058181668da99",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/r06-1080-more-info-kid-down3.jpg",
+   "original_in_zip": "evidence/r06-1080-more-info-kid-down3.png",
+   "original_sha256": "e974c9d6174c9e62e78e3584cdc29d22f66da6236b61253e4e6e54dd6bc64b4e",
+   "repository_sha256": "133839825956976a15aa37e2c8104121896f3670215c8a36c6bbdde4f5340f83",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/r11-1080-mcway-more-info-vv.jpg",
+   "original_in_zip": "evidence/r11-1080-mcway-more-info-vv.png",
+   "original_sha256": "96a97f1bb9f902a907cc53f3df6c8b4bfab324886dd8651ed17591d6a361c37c",
+   "repository_sha256": "b2309878479f1fc5087aef2c4836e03f55db93839c9a21e65e408f9696b34330",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/r20-720-release-home.jpg",
+   "original_in_zip": "evidence/r20-720-release-home.png",
+   "original_sha256": "5156522a4b965020b9a5b5006c21ca611c709f30285dc0f536082186d0d65202",
+   "repository_sha256": "e889b9a67d55d9efdc5b4420be32d616d47feb3bd6e9668a7a9ffe6f65c4adce",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r21-720-release-mcway-watch.jpg",
+   "original_in_zip": "evidence/r21-720-release-mcway-watch.png",
+   "original_sha256": "3c50e0d507810e64c8667bc592d90d534fbda5b627d78bc0e14e97083a57ff9b",
+   "repository_sha256": "b21954d11d071d0c2786f42dc5522d7aff7221b5cdaec4d388e2d8db64b55b0d",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r23-720-release-resume-prompt.jpg",
+   "original_in_zip": "evidence/r23-720-release-resume-prompt.png",
+   "original_sha256": "644a0f75f306e486cb9b223e3c31babdad5bbb2eec82b09b906d68d5ef58d99d",
+   "repository_sha256": "26b65e3f48fe9f519a30bdad212466266e5f99f35c308995bf82cbb2f3665187",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r24-720-release-playing.jpg",
+   "original_in_zip": "evidence/r24-720-release-playing.png",
+   "original_sha256": "b79bfdccf276e210f47b7a8590b6cef040865c8150290688d611894e66f77a04",
+   "repository_sha256": "11f1353f872af70827f75a807eefddef81a19bf0a581059d8e66e02b673affd6",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r25-720-release-back.jpg",
+   "original_in_zip": "evidence/r25-720-release-back.png",
+   "original_sha256": "0fc74e29264f5eeca60139ede80966a80025fee7ec61d85fde2c33c0a78ffc48",
+   "repository_sha256": "40e254b47e7b275f4f270a42cf12ec5ee46c7da6b3130463d62c961008511a56",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r26-720-release-relaunch-home.jpg",
+   "original_in_zip": "evidence/r26-720-release-relaunch-home.png",
+   "original_sha256": "883dd256fc45aa3bf098bef3610a7b63802cd4494ae0003c46ef494d12883b62",
+   "repository_sha256": "671212ff6c478a6b75b451ffe4317b6fdbace825f0cb422e3e12c673f7bb7b28",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r28-720-release-relaunch-prompt.jpg",
+   "original_in_zip": "evidence/r28-720-release-relaunch-prompt.png",
+   "original_sha256": "1bfd80a228f4f314412a16687abaf38781e36abeaa9d08cd31198cd73ff34ccb",
+   "repository_sha256": "def8e4d1c32a0683f5089bc649ec1e6e09aee76ff701fd5a44d366dfd8f596db",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/r30-720-release-more-info.jpg",
+   "original_in_zip": "evidence/r30-720-release-more-info.png",
+   "original_sha256": "75ffc2095194f912869dd4492609e88f10c5b01f39f0b506f99739d2959dbf48",
+   "repository_sha256": "7ce74ca03b4864af747a6b7406d56dd59149b1c341708a17178982cbb4496471",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/s02-1080-relaunch-kid-more-info.jpg",
+   "original_in_zip": "evidence/s02-1080-relaunch-kid-more-info.png",
+   "original_sha256": "79935dcb637df1660469c0d2bf1921154c01aaa333b7f21b6b428dcbcb11a5e5",
+   "repository_sha256": "a6b8e583e70b93cc44e7c04bb15b34abc72d856b8f104282c68058181668da99",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/s05-1080-relaunch-kid2-more-info.jpg",
+   "original_in_zip": "evidence/s05-1080-relaunch-kid2-more-info.png",
+   "original_sha256": "194c5e4efc195915617f8568d2555c5c521b3fdc6cc21043e1dd0b332e91b8ec",
+   "repository_sha256": "c0a305e0995fb3efe343e228f2884f76630afedd4ad44651993af4818c1c7b6f",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/t01-1080-open-library-sheet.jpg",
+   "original_in_zip": "evidence/t01-1080-open-library-sheet.png",
+   "original_sha256": "dec937e8d60dc3cef4a0a02fb42072b9037b49ce3bd76d624180fb8a701bfac6",
+   "repository_sha256": "c0b55b2a4cfa1441859b6411ff4639102dd6aefcf67021718d0b67459ade6cc8",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t02-1080-acadia-watch-sheet.jpg",
+   "original_in_zip": "evidence/t02-1080-acadia-watch-sheet.png",
+   "original_sha256": "5b220ece6767b4ba1dca237d72a9bffaf0556cb8da5681210ac9d9770c8faa27",
+   "repository_sha256": "f593d662f7c44bbeb7ab26742ce7a09c4f10247d137e4cfc0288f1fc5cfc2071",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t03-1080-mcway-watch-sheet.jpg",
+   "original_in_zip": "evidence/t03-1080-mcway-watch-sheet.png",
+   "original_sha256": "e1a77d3769e71a6e8614291ace9ca7c058afecbd1fb87002a50a25a04b3b8287",
+   "repository_sha256": "c30f0dfa9e8894ad3b24bde4d33741a6c4007e59a175e2b1af8c2071319275b5",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t04-1080-comfort-on-sheet.jpg",
+   "original_in_zip": "evidence/t04-1080-comfort-on-sheet.png",
+   "original_sha256": "2233eea36cc6889ce2218bea5645cf8bc524234f14c00a91da049be46834c76e",
+   "repository_sha256": "b3c06dc1ea9ceead085c19a346e8a501798adc84194f7ccbfc83680fae7807ce",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t05-1080-kid2-resume-luma.csv",
+   "original_in_zip": "evidence/t05-1080-kid2-resume-luma.csv",
+   "original_sha256": "31c2412b98e9b4f32df2b2db46d46807b82225160804cfc498ac6507f2549b7a",
+   "repository_sha256": "31c2412b98e9b4f32df2b2db46d46807b82225160804cfc498ac6507f2549b7a",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/t05-1080-kid2-resume-sheet.jpg",
+   "original_in_zip": "evidence/t05-1080-kid2-resume-sheet.png",
+   "original_sha256": "24025067343a54a742c22a0ace317cfe67c325fe75ccec4ead1ea1a40f9f4f77",
+   "repository_sha256": "af151c49fa86265f970d1122559ace3c0665fd196c66848cb7817f2af5ddba59",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t11-1080-otters-still-sheet.jpg",
+   "original_in_zip": "evidence/t11-1080-otters-still-sheet.png",
+   "original_sha256": "ae82e3368ab3335816f3565de759de2a20996f77feb3f3048ab094b3fc5154b0",
+   "repository_sha256": "defe3dc3670427d1ad1d029ffcb960a261574b4e23c948403ee8d7a029072ae7",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t12-1080-otters-preview-luma.csv",
+   "original_in_zip": "evidence/t12-1080-otters-preview-luma.csv",
+   "original_sha256": "763d8ac06aa06b6a0c6a08726273cd31052f9da653daf0fb6151e717195263db",
+   "repository_sha256": "763d8ac06aa06b6a0c6a08726273cd31052f9da653daf0fb6151e717195263db",
+   "copy": "byte for byte"
+  },
+  {
+   "repository_file": "evidence/t12-1080-otters-preview-sheet.jpg",
+   "original_in_zip": "evidence/t12-1080-otters-preview-sheet.png",
+   "original_sha256": "b834361da592b4a70aefbeb0964bce0db0c743b422dfe8a657bc71011a8d6620",
+   "repository_sha256": "1c573065762c8f7e56f7e09825591c450e67b10a9a48659b5388c4a638d0caa3",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t12-1080-otters-preview-start-frames.jpg",
+   "original_in_zip": "evidence/t12-1080-otters-preview-start-frames.png",
+   "original_sha256": "0b446691626f077c3dccf5e2b07171ecfac1a68f8d77f6afecdf4b47418813a2",
+   "repository_sha256": "144b0964c6427775499774f463386de083e9803c04fc0721dd467aa857a1e8e2",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t13-1080-forest-still-sheet.jpg",
+   "original_in_zip": "evidence/t13-1080-forest-still-sheet.png",
+   "original_sha256": "e99aa733e824147827fdd19bfbd26bb43c2caca12663c3b1f2c75caec6281527",
+   "repository_sha256": "d619916cabbf91bc135a77ef6875154b9332296fd21b082c770ec4cc7bd46ead",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t14-1080-forest-preview-sheet.jpg",
+   "original_in_zip": "evidence/t14-1080-forest-preview-sheet.png",
+   "original_sha256": "cb4129e368511eaa678b244f13d51a46cb939c6e99ccfc34ba0a9ea20400cd64",
+   "repository_sha256": "21174ffd7bdb9586a62a5b11b7ead37cb5db1182c6516c3835fc045dc5b9402a",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t14-1080-forest-preview-start-frames.jpg",
+   "original_in_zip": "evidence/t14-1080-forest-preview-start-frames.png",
+   "original_sha256": "3b1bbd9b56e3c7917279c4f8c3c5d93ebfa61cfa0d71da089c70cd133ff8a7ce",
+   "repository_sha256": "86f7bb5720a5e98210302a0017f56c3e96ab3165d7c0414fd2eb371e49c619d6",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t20-1080-cold-start-sheet.jpg",
+   "original_in_zip": "evidence/t20-1080-cold-start-sheet.png",
+   "original_sha256": "99e84160cbd21a441699c2f743077184da891f2f95a9c3277b8c10d7da686f34",
+   "repository_sha256": "c1d0335a162d56ed1aecd404a690dcdc3f66ff49856a7507e64625b5fb312da2",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/t30-720-cold-start-sheet.jpg",
+   "original_in_zip": "evidence/t30-720-cold-start-sheet.png",
+   "original_sha256": "18336b4262ae6ca3f961e284ea42259afeb9e3f0e22d07c384b1dfea88e59174",
+   "repository_sha256": "613db9c26754ba91d13e4ea79f8cf8e4d87598dee9c5851f57c129cc66be57ee",
+   "copy": "JPEG review copy, original size"
+  },
+  {
+   "repository_file": "evidence/w01-1080-acadia-playing.jpg",
+   "original_in_zip": "evidence/w01-1080-acadia-playing.png",
+   "original_sha256": "baff70752181ac10a3c5b6a95ae0ccd3b1fdaa1de0171f16d30faaf4b9e2b21e",
+   "repository_sha256": "54740b97960b0e7885891ffbf68fbf03ae059751d6cd22233e8bd614dc1c66da",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/w08-1080-mcway-controls.jpg",
+   "original_in_zip": "evidence/w08-1080-mcway-controls.png",
+   "original_sha256": "b79fa99d241f1f5984bf0008ee7f16382062c757d3491be8e6063643a3203c7c",
+   "repository_sha256": "15e76e0faa91efbbf28b5497421bf56149649283385f1545fb81d95bea6e2a85",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/w10-1080-mcway-paused-hidden.jpg",
+   "original_in_zip": "evidence/w10-1080-mcway-paused-hidden.png",
+   "original_sha256": "52f65d081d1454e1a2d2253680fc2fb6df525c72375c8b6d79c29559cfb31c7a",
+   "repository_sha256": "f4d4fdefbe3fd1235e5f6bf18969f530d5ab0b34b001ad294f0d77c33368510a",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  },
+  {
+   "repository_file": "evidence/w12-1080-home-after-mcway.jpg",
+   "original_in_zip": "evidence/w12-1080-home-after-mcway.png",
+   "original_sha256": "26425ea0534b443a666ad78fb71f1f39cb104a295c1310cf37e237b4e2a7232d",
+   "repository_sha256": "7da68ed943e76824f3dc8dd5fa179d4bd5d939218de36be68ef626cf6a6b8b83",
+   "copy": "JPEG review copy, scaled to 1280 wide"
+  }
+ ]
+}

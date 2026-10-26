@@ -1,0 +1,29 @@
+test_ambient_audio_cannot_be_silenced_or_attenuated (__main__.PreflightTests.test_ambient_audio_cannot_be_silenced_or_attenuated) ... ok
+test_breathing_room_and_sub_three_minute_limit_are_enforced (__main__.PreflightTests.test_breathing_room_and_sub_three_minute_limit_are_enforced) ... ok
+test_changed_bytes_are_rejected (__main__.PreflightTests.test_changed_bytes_are_rejected) ... ok
+test_changed_capture_receipt_after_preflight_refuses (__main__.PreflightTests.test_changed_capture_receipt_after_preflight_refuses) ... ok
+test_changed_input_after_preflight_refuses_before_encoding (__main__.PreflightTests.test_changed_input_after_preflight_refuses_before_encoding) ... ok
+test_changed_manifest_after_preflight_refuses (__main__.PreflightTests.test_changed_manifest_after_preflight_refuses) ... ok
+test_closing_credit_hold_cannot_be_cut_short (__main__.PreflightTests.test_closing_credit_hold_cannot_be_cut_short) ... ok
+test_complete_metadata_reaches_input_validation (__main__.PreflightTests.test_complete_metadata_reaches_input_validation) ... ok
+test_exact_tick_coverage_and_zero_origin_are_supported (__main__.PreflightTests.test_exact_tick_coverage_and_zero_origin_are_supported) ... ok
+test_harness_or_unreviewed_capture_is_rejected (__main__.PreflightTests.test_harness_or_unreviewed_capture_is_rejected) ... ok
+test_long_container_and_second_audio_do_not_cover_short_first_audio (__main__.PreflightTests.test_long_container_and_second_audio_do_not_cover_short_first_audio) ... ok
+test_long_container_and_second_video_do_not_cover_short_first_video (__main__.PreflightTests.test_long_container_and_second_video_do_not_cover_short_first_video) ... ok
+test_missing_real_inputs_refuse_before_output_is_created (__main__.PreflightTests.test_missing_real_inputs_refuse_before_output_is_created) ... ok
+test_nonzero_or_unknown_stream_origins_are_rejected (__main__.PreflightTests.test_nonzero_or_unknown_stream_origins_are_rejected) ... ok
+test_selected_interval_must_fit_both_mapped_streams (__main__.PreflightTests.test_selected_interval_must_fit_both_mapped_streams) ... ok
+test_short_take_and_long_narration_are_rejected (__main__.PreflightTests.test_short_take_and_long_narration_are_rejected) ... ok
+test_shorter_reported_duration_is_the_coverage_limit (__main__.PreflightTests.test_shorter_reported_duration_is_the_coverage_limit) ... ok
+test_snapshot_refuses_bytes_changed_during_copy (__main__.PreflightTests.test_snapshot_refuses_bytes_changed_during_copy) ... ok
+test_snapshot_retains_checked_bytes_when_original_changes (__main__.PreflightTests.test_snapshot_retains_checked_bytes_when_original_changes) ... ok
+test_stale_source_and_illustration_in_native_slot_are_rejected (__main__.PreflightTests.test_stale_source_and_illustration_in_native_slot_are_rejected) ... ok
+test_synthetic_fixture_cannot_be_accepted_as_production_input (__main__.PreflightTests.test_synthetic_fixture_cannot_be_accepted_as_production_input) ... ok
+test_unapproved_text_or_voice_is_rejected (__main__.PreflightTests.test_unapproved_text_or_voice_is_rejected) ... ok
+test_unknown_or_nonfinite_stream_coverage_is_rejected (__main__.PreflightTests.test_unknown_or_nonfinite_stream_coverage_is_rejected) ... ok
+test_wrong_installed_package_or_changed_receipt_is_rejected (__main__.PreflightTests.test_wrong_installed_package_or_changed_receipt_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.276s
+
+OK

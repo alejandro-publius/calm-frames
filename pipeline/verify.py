@@ -41,9 +41,10 @@ import sys
 import time
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Sequence
 
-from . import PipelineError
+from . import PipelineError, ffmpegtool
 from .catalog import (
     STATUS_FAILED,
     STATUS_PENDING,
@@ -53,20 +54,27 @@ from .catalog import (
     update_index,
     write_entry,
 )
-from .flashmap_adapter import FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
+from .durable import atomic_write_text
+from .flashmap_adapter import PATTERN, FlashmapAdapter, FlashMapDoc, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import (
+    APP_PLAYBACK_MAPS,
+    APP_PLAYBACK_RECIPE,
     DEFAULT_CALM_MARGIN_MS,
     DEFAULT_GUARD_BAND_MS,
+    CoverInterval,
     HidePlan,
+    build_app_playback_plan,
     build_cover_intervals,
     is_calm,
     may_be_sampled,
+    union_intervals,
 )
 from .layout import TitleLayout
 from .posters import STILL_FROM_NEUTRAL_CARD, STILL_FROM_SOURCE
 from .probe import VideoProbe
-from .render import cover_psnr, render_cover_model, still_is_flat
+from .render import cover_psnr, make_neutral_still, render_cover_model, still_is_flat
+from .sceneholds import SceneHold, verify_scene_assets
 
 # A covered span must match the cover still at least this closely, in dB.
 # Identical frames give inf. A span that still shows the film scores far lower.
@@ -260,8 +268,9 @@ def _geometry(doc: FlashMapDoc) -> dict:
     rect = None
     if isinstance(coded, dict):
         values = [coded.get(key) for key in ("left", "top", "width", "height")]
-        if all(isinstance(value, (int, float)) for value in values):
-            rect = tuple(int(value) for value in values)
+        numbers = [value for value in values if isinstance(value, (int, float))]
+        if len(numbers) == len(values):
+            rect = tuple(int(value) for value in numbers)
 
     def number(value):
         return float(value) if isinstance(value, (int, float)) else None
@@ -390,6 +399,90 @@ def _load_plan(layout: TitleLayout, preset: str) -> HidePlan:
     return HidePlan.from_dict(json.loads(path.read_text()))
 
 
+COVER_SAMPLES_PER_INTERVAL = 3
+
+
+def _cover_sample_times(interval: CoverInterval, probe: VideoProbe) -> list[float]:
+    """Where a covered span is measured: its first frame, its middle, its last frame.
+
+    One midpoint used to be the whole proof. A cover that is drawn at the
+    middle of a span and gone before its end, or late to its start, passed it.
+    The first and last samples sit one frame inside the span, because the
+    boundary frame itself belongs to whichever side the encoder's timestamps
+    put it on, and the span's edges are what the analyzer's own entry and exit
+    checks cover. A span shorter than three frames is measured at its middle.
+    """
+    start_s = interval.start_ms / 1000.0
+    end_s = interval.end_ms / 1000.0
+    middle_s = (start_s + end_s) / 2.0
+    frame_s = probe.frame_interval_median_s or (
+        1.0 / probe.avg_frame_rate if probe.avg_frame_rate else 1.0 / 30.0
+    )
+    if end_s - start_s < 3 * frame_s:
+        return [middle_s]
+    return [start_s + frame_s, middle_s, end_s - frame_s]
+
+
+def _scene_cover_proof(
+    video: Path, plan: HidePlan, images: Sequence[SceneHold], probe: VideoProbe
+) -> list[float]:
+    """Measure every described asset and a bounded sample of black fallbacks.
+
+    Full-output analysis separately checks all entry and exit transitions.
+    This proof makes a missing or wrong image visible even on calm source
+    footage where the analyzer would report no violations either way. Each
+    span is measured at its first frame, its middle and its last frame.
+    """
+    by_interval = {(h.start_ms, h.end_ms): h for h in images}
+    scores = []
+    fallbacks = 0
+    with TemporaryDirectory(prefix="scene_cover_proof_") as scratch:
+        black = Path(scratch) / "black.png"
+        for interval in plan.intervals:
+            image = by_interval.get((interval.start_ms, interval.end_ms))
+            if image is not None:
+                still = image.path
+            else:
+                if fallbacks >= COVER_SAMPLE_LIMIT:
+                    continue
+                fallbacks += 1
+                if not black.exists():
+                    make_neutral_still(black, width=probe.width, height=probe.height, rgb=(0, 0, 0))
+                still = black
+            for time_s in _cover_sample_times(interval, probe):
+                scores.append(cover_psnr(video, still, time_s=time_s))
+    return scores
+
+
+def _scene_output_pattern_check(
+    layout: TitleLayout, *, preset: str, kind: str, video: Path,
+    plan: HidePlan, adapter: FlashmapAdapter,
+) -> tuple[bool, int]:
+    """Check images as presented after scaling and encoding, not just JPEGs.
+
+    This additional check is about patterns introduced or held by a new cover.
+    It does not turn a WCAG source verdict into a broadcast source verdict.
+    Findings outside covered intervals stay outside this added check.
+    """
+    checked = adapter.analyze(
+        video, profile="broadcast",
+        out_path=layout.verify_map_path(preset, f"scene_patterns_{kind}"),
+        picture_from=layout.map_path(preset),
+    )
+    # MPEG-TS changes the time origin. Cover intervals are on the MP4 player's
+    # timeline, so normalize those transport pattern timestamps to that origin.
+    shift = 0.0
+    if kind == "hls":
+        master = load_map(layout.verify_map_path(preset, "safe"))
+        shift = _geometry(checked)["first_pts_ms"] - _geometry(master)["first_pts_ms"]
+    patterns = [
+        segment for segment in checked.segments if segment.reason == PATTERN
+        and any(segment.start_ms - shift < interval.end_ms
+                and segment.end_ms - shift > interval.start_ms for interval in plan.intervals)
+    ]
+    return not patterns, len(patterns)
+
+
 def verify_title(
     layout: TitleLayout,
     *,
@@ -401,6 +494,7 @@ def verify_title(
     distance_ft: float | None = None,
     calm_margin_ms: float = DEFAULT_CALM_MARGIN_MS,
     rerender_cover_model: bool = True,
+    playback_compatible: bool | None = None,
 ) -> VerifyReport:
     source = Path(source)
     report = VerifyReport(
@@ -426,6 +520,20 @@ def verify_title(
 
     probe_data = json.loads(layout.probe_path.read_text())
     probe = VideoProbe.from_dict(probe_data)
+    entry = read_entry(layout.entry_path) if layout.entry_path.exists() else None
+    recorded_recipe = entry.notes.get("playback_recipe") if entry is not None else None
+    if playback_compatible is None:
+        playback_compatible = recorded_recipe == APP_PLAYBACK_RECIPE
+    if recorded_recipe not in (None, APP_PLAYBACK_RECIPE):
+        report.add("playback_recipe", False, "the preparation names an unknown playback recipe")
+    if playback_compatible:
+        required = {name for preset in presets for name in APP_PLAYBACK_MAPS.get(preset, ())}
+        report.add("playback_recipe_profiles", required.issubset(presets),
+                   "every map used by the app recipe must receive independent signature and source checks")
+        if entry is not None:
+            room = entry.notes.get("analysis_room", {})
+            diag_in = diag_in if diag_in is not None else room.get("diag_in")
+            distance_ft = distance_ft if distance_ft is not None else room.get("distance_ft")
 
     # No preset means no map was looked at, and a report that reached the end without
     # looking at one would otherwise pass on the two checks that do not need a preset.
@@ -435,6 +543,17 @@ def verify_title(
             False,
             "no preset was given, so no map, plan or cover was checked",
         )
+
+    # An image must be calm under every requested preset, even when this
+    # preset alone would permit the preceding frame.
+    all_plans = []
+    union_error = None
+    for name in presets:
+        try:
+            all_plans.append(_load_plan(layout, name))
+        except (PipelineError, ValueError, KeyError, TypeError) as exc:
+            union_error = str(exc)
+    all_intervals = union_intervals(all_plans)
 
     for preset in presets:
         prefix = f"[{preset}] "
@@ -482,22 +601,59 @@ def verify_title(
         except PipelineError as exc:
             report.add(f"plan_present:{preset}", False, f"{prefix}{exc}")
             continue
-        expected = build_cover_intervals(
-            source_map.segments,
-            guard_band_ms=plan.guard_band_ms,
-            min_cover_ms=plan.min_cover_ms,
-            duration_ms=plan.duration_ms,
-        )
+        try:
+            if playback_compatible:
+                canonical = build_app_playback_plan(
+                    {name: load_map(layout.map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
+                    source_sha256=layout.sha256, duration_ms=probe.duration_ms, preset=preset,
+                )
+                expected = canonical.intervals
+                recipe_matches = (
+                    plan.recipe == APP_PLAYBACK_RECIPE and plan.profile == preset
+                    and plan.source_sha256 == layout.sha256
+                    and plan.duration_ms == canonical.duration_ms
+                    and plan.guard_band_ms == canonical.guard_band_ms
+                    and plan.min_cover_ms == canonical.min_cover_ms
+                    and plan.allow_dim is False
+                )
+            else:
+                expected = build_cover_intervals(
+                    source_map.segments, guard_band_ms=plan.guard_band_ms,
+                    min_cover_ms=plan.min_cover_ms, duration_ms=plan.duration_ms,
+                )
+                recipe_matches = plan.recipe is None
+        except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
+            report.add(f"plan_matches_map:{preset}", False, f"{prefix}{exc}")
+            continue
         expected_pairs = [(i.start_ms, i.end_ms, i.reason) for i in expected]
         stored_pairs = [(i.start_ms, i.end_ms, i.reason) for i in plan.intervals]
         report.add(
             f"plan_matches_map:{preset}",
-            expected_pairs == stored_pairs,
+            recipe_matches and expected_pairs == stored_pairs,
             f"{prefix}hide plan has {len(stored_pairs)} intervals, the map "
             f"produces {len(expected_pairs)}",
             stored=len(stored_pairs),
             expected=len(expected_pairs),
+            recipe=plan.recipe,
         )
+
+        scene_images: list[SceneHold] | None = None
+        if "scene_holds" in source_map.raw:
+            try:
+                if union_error:
+                    raise PipelineError(f"another preset's plan cannot be read: {union_error}")
+                scene_images = verify_scene_assets(
+                    layout, preset=preset, source_document=source_map.raw,
+                    source=source, intervals=plan.intervals, union=all_intervals,
+                    probe=probe, margin_ms=calm_margin_ms, adapter=adapter,
+                )
+                report.add(f"scene_assets:{preset}", True,
+                           f"{prefix}{len(scene_images)} signed images match checked local assets and provenance")
+            except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
+                report.add(f"scene_assets:{preset}", False, f"{prefix}{exc}")
+                # Invalid image data is not a legacy plan. Never quietly model
+                # it with the old global still or a dim cover instead.
+                scene_images = []
 
         # Red segments are never dimmed.
         red_dimmed = [
@@ -565,22 +721,39 @@ def verify_title(
             # 6b. The rendition really shows the still across covered spans.
             sampled = plan.intervals[:COVER_SAMPLE_LIMIT]
             still = layout.still_path
-            if sampled and still.exists():
+            if scene_images is not None and plan.intervals:
+                try:
+                    scores = _scene_cover_proof(safe_master, plan, scene_images, probe)
+                    report.add(
+                        f"cover_actually_drawn:{preset}",
+                        bool(scores) and min(scores) >= COVER_PSNR_MIN_DB,
+                        f"{prefix}each described scene hold and sampled black fallback match the "
+                        "rendition at the first frame, the middle and the last frame of the span",
+                        samples=len(scores), worst_db=min(scores) if min(scores) != float("inf") else None,
+                        samples_per_interval=COVER_SAMPLES_PER_INTERVAL,
+                        ffmpeg=ffmpegtool.ffmpeg_version(),
+                    )
+                except (PipelineError, OSError) as exc:
+                    report.add(f"cover_actually_drawn:{preset}", False, f"{prefix}{exc}")
+            elif sampled and still.exists():
                 worst = None
                 worst_at = None
                 for interval in sampled:
-                    midpoint_s = (interval.start_ms + interval.end_ms) / 2000.0
-                    score = cover_psnr(safe_master, still, time_s=midpoint_s)
-                    if worst is None or score < worst:
-                        worst = score
-                        worst_at = midpoint_s
+                    for time_s in _cover_sample_times(interval, probe):
+                        score = cover_psnr(safe_master, still, time_s=time_s)
+                        if worst is None or score < worst:
+                            worst = score
+                            worst_at = time_s
                 report.add(
                     f"cover_actually_drawn:{preset}",
                     worst is not None and worst >= COVER_PSNR_MIN_DB,
-                    f"{prefix}worst covered span matched the cover still at "
-                    f"{worst} dB (need {COVER_PSNR_MIN_DB}) at {worst_at} s",
+                    f"{prefix}worst sample across the first frame, middle and last frame of "
+                    f"each covered span matched the cover still at {worst} dB "
+                    f"(need {COVER_PSNR_MIN_DB}) at {worst_at} s",
                     worst_db=None if worst == float("inf") else worst,
                     worst_at_s=worst_at,
+                    samples_per_interval=COVER_SAMPLES_PER_INTERVAL,
+                    ffmpeg=ffmpegtool.ffmpeg_version(),
                 )
 
         # 6c. Either there was nothing to cover, or the cover was proven drawn.
@@ -631,7 +804,8 @@ def verify_title(
         try:
             if rerender_cover_model or not cover_model.exists():
                 render_cover_model(
-                    source, plan=plan, out_path=cover_model, probe=probe
+                    source, plan=plan, out_path=cover_model, probe=probe,
+                    scene_holds=scene_images,
                 )
             out_map = layout.verify_map_path(preset, "cover_model")
             model_map = adapter.analyze(
@@ -643,7 +817,7 @@ def verify_title(
                 picture_from=layout.map_path(preset),
             )
             hint = ""
-            if not model_map.is_clean and plan.allow_dim and plan.dim_intervals():
+            if scene_images is None and not model_map.is_clean and plan.allow_dim and plan.dim_intervals():
                 # A dim cover keeps a tenth of the light, so a flash that ran
                 # the whole luminance range still changes by 0.1, which is
                 # exactly the WCAG general flash threshold. Content like that
@@ -658,14 +832,72 @@ def verify_title(
                 f"{prefix}the cover schedule over the original video left "
                 f"{model_map.violation_count} violation(s){hint}",
                 violations=model_map.violation_count,
-                dim_intervals=len(plan.dim_intervals()),
+                dim_intervals=len(plan.dim_intervals()) if scene_images is None else 0,
             )
+            if scene_images is not None:
+                scores = _scene_cover_proof(cover_model, plan, scene_images, probe)
+                report.add(f"scene_model_drawn:{preset}",
+                           not plan.intervals or bool(scores) and min(scores) >= COVER_PSNR_MIN_DB,
+                           f"{prefix}the live opaque cover model uses the same interval images and black fallback")
         except PipelineError as exc:
             report.add(
                 f"cover_model_clean:{preset}",
                 False,
                 f"{prefix}could not model the on-device cover: {exc}",
             )
+
+        if scene_images is not None or playback_compatible:
+            # The transport files are the delivered output. Analyze them too,
+            # rather than assuming a clean intermediate MP4 proves delivery.
+            try:
+                hls_map = adapter.analyze(
+                    layout.master_playlist(preset), profile=preset,
+                    out_path=layout.verify_map_path(preset, "hls"),
+                    diag_in=diag_in, distance_ft=distance_ft,
+                    picture_from=layout.map_path(preset),
+                )
+                report.add(f"hls_rendition_clean:{preset}", hls_map.is_clean,
+                           f"{prefix}the complete HLS output has {hls_map.violation_count} violations including boundaries")
+                master_map = load_map(layout.verify_map_path(preset, "safe"))
+                master_geometry, hls_geometry = _geometry(master_map), _geometry(hls_map)
+                # MPEG-TS changes the PTS origin; its relative picture timeline
+                # must still match the checked MP4, frame for frame in length.
+                relative_hls = dict(hls_map.raw)
+                relative_hls["source"] = dict(relative_hls.get("source", {}))
+                shift = hls_geometry["first_pts_ms"] - master_geometry["first_pts_ms"]
+                for field in ("first_pts_ms", "last_pts_ms"):
+                    relative_hls["source"][field] -= shift
+                normalized = FlashMapDoc(
+                    hls_map.version, hls_map.source_sha256, hls_map.profile,
+                    hls_map.segments, raw=relative_hls,
+                )
+                matched, problems, data = compare_rendition_to_source(
+                    master_map, normalized, guard_band_ms=plan.guard_band_ms
+                )
+                report.add(f"hls_timing_matches_master:{preset}", matched,
+                           f"{prefix}HLS relative frame timing matches the checked MP4" if matched else "; ".join(problems),
+                           transport_pts_shift_ms=shift, **data)
+                if plan.intervals and scene_images is not None:
+                    scores = _scene_cover_proof(layout.master_playlist(preset), plan, scene_images, probe)
+                    report.add(f"scene_hls_drawn:{preset}", bool(scores) and min(scores) >= COVER_PSNR_MIN_DB,
+                               f"{prefix}the delivered HLS uses the checked interval images")
+            except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
+                report.add(f"hls_rendition_clean:{preset}", False, f"{prefix}could not verify delivered HLS: {exc}")
+
+        if scene_images is not None:
+            for kind, output in (("safe", safe_master), ("model", cover_model),
+                                 ("hls", layout.master_playlist(preset))):
+                try:
+                    clean, count = _scene_output_pattern_check(
+                        layout, preset=preset, kind=kind, video=output,
+                        plan=plan, adapter=adapter,
+                    )
+                    report.add(f"scene_output_patterns:{kind}:{preset}", clean,
+                               f"{prefix}{count} full-size pattern finding(s) intersect a covered interval in {kind}",
+                               intersecting_patterns=count)
+                except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
+                    report.add(f"scene_output_patterns:{kind}:{preset}", False,
+                               f"{prefix}could not check the presented image patterns: {exc}")
 
         # 5. Trickplay frames and posters come from calm moments.
         bif_manifest = layout.bif_manifest(preset)
@@ -762,9 +994,9 @@ def verify_title(
         # the film is never one colour, so this is what stops a neutral card being a way to
         # smuggle a flagged frame through.
         try:
-            flat, detail = still_is_flat(layout.still_path)
+            flat, flat_detail = still_is_flat(layout.still_path)
         except PipelineError as exc:
-            flat, detail = False, {"error": str(exc)}
+            flat, flat_detail = False, {"error": str(exc)}
         report.add(
             "cover_still_calm",
             flat,
@@ -773,10 +1005,10 @@ def verify_title(
             + (
                 ", and it measures as one flat colour"
                 if flat
-                else f", but it is not one flat colour: {detail}"
+                else f", but it is not one flat colour: {flat_detail}"
             ),
             still_from=still_from,
-            **detail,
+            **flat_detail,
         )
     elif still_info and still_info.get("time_ms") is None:
         # A still that says it came out of the film has to say when. Without that there is no
@@ -816,11 +1048,11 @@ def verify_title(
 
 
 def write_report(layout: TitleLayout, report: VerifyReport) -> Path:
-    layout.verify_dir.mkdir(parents=True, exist_ok=True)
-    layout.verify_report_path.write_text(
-        json.dumps(report.to_dict(), indent=2, sort_keys=True)
+    # Atomic, so a run killed while writing it leaves the previous report or none,
+    # never half of one for the ledger or a receipt to be compared against.
+    return atomic_write_text(
+        layout.verify_report_path, json.dumps(report.to_dict(), indent=2, sort_keys=True)
     )
-    return layout.verify_report_path
 
 
 def apply_to_catalog(layout: TitleLayout, report: VerifyReport) -> None:

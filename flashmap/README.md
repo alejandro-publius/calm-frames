@@ -43,11 +43,8 @@ The map format is [`docs/SIDECAR_SPEC.md`](../docs/SIDECAR_SPEC.md), version 1.
 
 ## Install
 
-```sh
-python -m pip install flashmap
-```
-
-From this checkout, with the tests:
+flashmap is not on PyPI yet, and publishing it is part of the judged release. From a checkout of
+this repository, with the tests:
 
 ```sh
 python -m pip install -e 'flashmap[dev]'
@@ -102,12 +99,17 @@ gets checked, and the job summary says which file broke which rule and where the
 measured.
 
 ```yaml
-- uses: calm-frames/calm-frames/flashmap@v1
+- uses: alejandro-publius/calm-frames/flashmap@1b088d17c53343025b2ca37cf7615e809709ba8b
   with:
     profile: wcag
 ```
 
-The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
+The pin is a commit on this repository, because no release tag and no PyPI release exist
+yet; it moves to the judged tag once that is cut. With no `flashmap-version` the action
+installs flashmap from the checkout it came from. A file flashmap cannot measure, such as an
+HDR master or a file that does not decode, fails the job by default, because nobody has shown
+it to be under the thresholds; set `fail-on-error: "false"` to skip such files instead. The
+`failed-count` output counts the files over the thresholds. The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
 every tracked file instead, which is the right thing on a scheduled run.
 
 ## Safety while working on this
@@ -141,7 +143,9 @@ otherwise be hidden by a cached `.pyc`.
 ## What it does not do
 
 - **No HDR.** HLG and PQ tagged files are refused rather than measured with the SDR curve.
-- **No pattern rule.** BT.1702-3 Guideline 2, regular patterns, is not implemented.
+- **The pattern rule is informative only.** The broadcast profile applies BT.1702-3
+  Guideline 2, regular patterns, from its informative attachment. A pattern finding is
+  never a WCAG finding, and it is not clinical validation.
 - **No fine balanced pattern exception.** WCAG would excuse white noise and small
   checkerboards. flashmap reports them, which is the strict direction.
 - **No risk score.** Neither spec defines one, so flashmap does not invent one.

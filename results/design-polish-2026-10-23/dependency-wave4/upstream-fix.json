@@ -1,0 +1,11 @@
+{
+  "sha": "ef2f673e25c629544dd3de6429999318447dd6bf",
+  "html_url": "https://github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf",
+  "files": [
+    {
+      "filename": "src/android/adb.ts",
+      "status": "modified",
+      "patch": "@@ -1,4 +1,4 @@\n-import { spawn, execSync, ChildProcess } from 'child_process';\n+import { spawn, execFileSync, ChildProcess } from 'child_process';\n import path from 'path';\n import {\n   CodeError,\n@@ -25,7 +25,7 @@ export function getAdbPath(customPath?: string): string {\n \n export function spawnLogcatProcess(adbPath: string): ChildProcess {\n   try {\n-    execSync(`${adbPath} logcat -c`);\n+    execFileSync(adbPath, ['logcat', '-c']);\n   } catch (error) {\n     throw new CodeError(\n       ERR_ANDROID_CANNOT_CLEAN_LOGCAT_BUFFER,\n@@ -49,11 +49,14 @@ export function getApplicationPid(\n   applicationId: string,\n   adbPath?: string\n ): number {\n-  let output: Buffer | undefined;\n+  let output: Buffer | String | undefined;\n   try {\n-    output = execSync(\n-      `'${getAdbPath(adbPath)}' shell pidof -s ${applicationId}`\n-    );\n+    output = execFileSync(getAdbPath(adbPath), [\n+      'shell',\n+      'pidof',\n+      '-s',\n+      applicationId,\n+    ]);\n   } catch (error) {\n     throw new CodeError(\n       ERR_ANDROID_CANNOT_GET_APP_PID,"
+    }
+  ]
+}

@@ -10,7 +10,7 @@ file checked back to the same SHA-256. Nineteen mutations, on Sep 17, 2026. Eigh
 | no flashmap import | added `import flashmap` to eval/meter.py | `meter.py imports flashmap: ['line 62: import flashmap']`, and the subprocess check printed `True` where it wanted `False` |
 | nothing opens a player | added `PREVIEW_COMMAND = ["ffplay", "-autoexit"]` to meter.py | `["meter.py line 89 reaches for a player: 'ffplay'"]` |
 | hazard clips are deleted | replaced the body of the `finally` in `run_trial` with `pass` | `assert [PosixPath('/..._camera.mp4')] == []`, on both the clean path and the one where the meter raises |
-| the scratch directory is outside the repo | pointed the default at `media/_mutation` | `/Users/alexvintera/calm-frames/media/_mutation is inside the repository` |
+| the scratch directory is outside the repo | pointed the default at `media/_mutation` | `/Users/<user>/calm-frames/media/_mutation is inside the repository` |
 | an uncalibrated run is not publishable | made `publishable` unconditionally True | `assert True is False`, on the uncalibrated report and on the clipped one |
 | a clipped run is not publishable | dropped the clipped term from `publishable` | `assert True is False` |
 | the area rule | changed `> area_fraction_limit` to `>= 0.0` | `assert 240 == 1`: a 1 Hz strobe read as 240 flashes a second, and 21 tests fell over |

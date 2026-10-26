@@ -1,0 +1,111 @@
+PASS test/calmframes/nativePlaybackRecovery.test.tsx (8.621 s)
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:743:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:743:15)
+
+PASS test/calmframes/playbackUi.test.tsx
+PASS test/screens/HomeScreen.test.tsx (5.756 s)
+  ● Console
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+
+Test Suites: 3 passed, 3 total
+Tests:       45 passed, 45 total
+Snapshots:   2 passed, 2 total
+Time:        16.432 s
+Ran all test suites matching /test\/calmframes\/nativePlaybackRecovery.test.tsx|test\/calmframes\/playbackUi.test.tsx|test\/screens\/HomeScreen.test.tsx/i.
+PASS test/w3cmedia/mediacontrols/VideoPlayerUI.test.tsx
+  useMediaControls.....
+    ✓ useMediaControls with correct values (4 ms)
+  VideoPlayerUI Test Cases
+    ✓ renders correctly (88 ms)
+    ✓ View main is present in component (9 ms)
+    ✓ SubView is present in component (7 ms)
+    ✓ PlaybackControls is present in component (6 ms)
+    ✓ ControlBar is present in component (12 ms)
+    ✓ ControlBarMenu is present in component (7 ms)
+  PlayerScreen hooks
+    ✓ useTVEventHandler called with TV and DPADEventType.PLAYPAUSE with pause (8 ms)
+    ✓ useTVEventHandler called with TV and DPADEventType.PLAYPAUSE without pause (6 ms)
+    ✓ useTVEventHandler called with TV and DPADEventType.PLAY (1 ms)
+    ✓ useTVEventHandler called with TV and DPADEventType.PAUSE (1 ms)
+    ✓ useTVEventHandler called with TV and DPADEventType.SKIPFORWARD (1 ms)
+    ✓ useTVEventHandler called with TV and DPADEventType.SKIPBACKWARD
+    ✓ useTVEventHandler called with TV and DPADEventType.BACK (11 ms)
+    ✓ useTVEventHandler called with TV and error (1 ms)
+    ✓ useTVEventHandler called with any TV Event (1 ms)
+  React.memo behavior for VideoPlayerUI
+    ✓ does not re-render when VideoPlayer is unchanged (13 ms)
+    ✓ re-render when VideoPlayer is changed (5 ms)
+
+ › 1 snapshot updated.
+Snapshot Summary
+ › 1 snapshot updated from 1 test suite.
+
+Test Suites: 1 passed, 1 total
+Tests:       18 passed, 18 total
+Snapshots:   1 updated, 1 total
+Time:        2.638 s
+Ran all test suites matching /test\/w3cmedia\/mediacontrols\/VideoPlayerUI.test.tsx/i.

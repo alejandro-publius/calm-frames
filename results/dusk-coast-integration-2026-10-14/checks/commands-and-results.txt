@@ -1,0 +1,44 @@
+Workspace: /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-controls
+Runtime source: e05216284b2e3e85e8a73275432568c512c7317c
+PATH uses /Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin
+
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern='(controlSurface|controlStudy|wholeFlowDesign|homeIntroduction|parentNavigation|playbackUi|KidModeScreen|tenFoot|uiCapture|firstRun|harborOpening|unavailableDetails|BufferingWindow).test'
+Initial: 176 passed, 2 stale palette expectations failed, 13 suites, one snapshot passed.
+Corrected homeIntroduction's old literal colors and the uiFrames duplicate ink/background inventory.
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern='(uiCapture|homeIntroduction).test'
+Final affected subset: 25 passed. All 178 unique tests passed across the focused run and repair rerun.
+
+/Users/alexvintera/calm-frames/.venv/bin/python eval/preview/export_flow.py
+12 fixture exports passed (1080p and 720p).
+/Users/alexvintera/calm-frames/.venv/bin/python eval/preview/export_palette_study.py
+8 tests passed, including endpoint/status contrast assertions.
+npm --prefix app run typecheck
+Passed; repeated after final app changes.
+git diff --name-only 95f7411 -- app/src app/test | xargs app/node_modules/.bin/eslint
+Zero errors; one existing no-void warning at HarborOpening.tsx:84.
+app/node_modules/.bin/eslint app/test/calmframes/homeIntroduction.test.tsx app/src/calmframes/uiFrames.ts
+Passed.
+/Users/alexvintera/calm-frames/.venv/bin/python -m pytest eval/tests/test_design_page.py -q
+21 passed after synchronizing design documentation, font/token mirror and explicit original-logo preservation.
+PY=/Users/alexvintera/calm-frames/.venv/bin/python node app/tools/ui_flashmap.mjs
+36 modeled solid-color screens/transitions passed WCAG and broadcast checks; not native pixel evidence.
+
+/tmp/calm-home-preview-venv/bin/python eval/preview/render_flow.py --browser /Users/alexvintera/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell --height 1080 --output results/dusk-coast-integration-2026-10-14
+Same command with --height 720.
+48 states / 95 captures at each resolution; safe bounds and hold/menu/cue layering assertions passed.
+/tmp/calm-home-preview-venv/bin/python eval/preview/compose_final_palette.py
+Final matched representative sheets and shared-state sheet rendered and inspected. Composition-only text stacking corrected after package build; app inputs unchanged.
+
+source /Users/alexvintera/vega/env
+export PATH="$PWD/.logs/integration/build-bin:/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin:$PATH"
+export JAVA_HOME=/opt/homebrew/opt/openjdk@21
+RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag dusk-coast-integrated-2026-10-14
+Passed. Exact packaged media/catalog and all three original verification reports passed.
+Package hash: d31ddafca960363ee76afaa4f2cf6eb28563cb144ea6aa0a6a9145e4fd365f2a
+Package bytes: 21881599
+Build log: /tmp/calm-dusk-integrated-build.log
+
+git diff --name-only 95f7411 -- app/assets app/src/calmframes/coverSchedule.ts app/src/calmframes/CoverLayer.tsx app/src/calmframes/household.ts
+Empty: assets, cover logic and household model preserved.
+Search for prior UI hex colors and nonfocus gold text in active app UI paths: no remaining matches; artwork/ripples retain original colors.
+Native install/launch: not attempted. Existing Computer Use permission blocker remains; no native pass claimed.

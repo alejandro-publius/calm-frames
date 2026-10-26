@@ -1,0 +1,6 @@
+{
+  "nativeInputs": "ready",
+  "missing": [],
+  "problems": [],
+  "scope": "Input files only. SDK compatibility, native build and owner visual/audio acceptance remain separate checks."
+}

@@ -1,0 +1,8 @@
+
+/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/app/src/calmframes/CoverLayer.tsx
+   81:6   warning  Unexpected control character(s) in regular expression: \x00, \x1f  no-control-regex
+  123:11  warning  Inline style: { left: 0, top: 0 }                                  react-native/no-inline-styles
+  136:11  warning  Inline style: { left: 0 }                                          react-native/no-inline-styles
+  149:11  warning  Inline style: { left: 0 }                                          react-native/no-inline-styles
+
+✖ 4 problems (0 errors, 4 warnings)

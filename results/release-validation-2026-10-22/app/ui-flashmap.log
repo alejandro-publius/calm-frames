@@ -1,0 +1,41 @@
+
+> calm-frames-app@0.1.0 ui:flashmap
+> npm run ui:capture && node tools/ui_flashmap.mjs
+
+
+> calm-frames-app@0.1.0 ui:capture
+> jest --ci --coverage=false test/calmframes/uiCapture.test.tsx
+
+PASS test/calmframes/uiCapture.test.tsx
+  what the app paints
+    ✓ measures the static buffering plate without dimming the scene (48 ms)
+    ✓ measures household storage loading and errors from the rendered screen (16 ms)
+    ✓ reads the colours off a rendered tree, background first (78 ms)
+    ✓ matches what the kid home reports, unfocused and focused (22 ms)
+    ✓ measures the simplified Harbor home at rest, Watch focus and details focus (159 ms)
+    ✓ matches what the shelf reports when every poster has a picture (14 ms)
+    ✓ matches what the shelf with a family on it reports, in each of its states (35 ms)
+    ✓ matches what the parent area reports with a family in it (57 ms)
+    ✓ lists every frame the app can show, so the flash run covers them all
+    ✓ matches what the empty and unreachable shelves report (6 ms)
+    ✓ matches what the details page reports, ready and not ready (5 ms)
+    ✓ matches what each step of the first run reports (126 ms)
+    ✓ paints the same picture for a wrong PIN as for the keypad itself (12 ms)
+    ✓ matches what the parent area reports, locked and open (16 ms)
+    ✓ matches what the player layer reports, covered and clear (4 ms)
+  the capture path
+    ✓ records a frame only when it changes
+    ✓ records nothing when it is not recording
+    ✓ records every screen and transition the app can show, and writes them out (313 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        1.404 s, estimated 3 s
+Ran all test suites matching /test\/calmframes\/uiCapture.test.tsx/i.
+PASS app/build/ui-capture/ui-screens.mp4: below the wcag thresholds
+
+the same screens under the broadcast profile, which carries the regular pattern rule:
+PASS app/build/ui-capture/ui-screens.mp4: below the broadcast thresholds
+
+flashmap: no segment broke the thresholds across 79 screens and transitions, under the wcag profile and under the broadcast profile with the regular pattern rule.

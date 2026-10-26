@@ -1,0 +1,9 @@
+PASS test/calmframes/imageSizeLegacy.test.ts
+PASS test/navigation/DrawerContent.test.tsx
+PASS test/components/miniDetails/Preview.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       29 passed, 29 total
+Snapshots:   3 passed, 3 total
+Time:        4.028 s
+Ran all test suites matching /test\/calmframes\/imageSizeLegacy.test.ts|test\/navigation\/DrawerContent.test.tsx|test\/components\/miniDetails\/Preview.test.tsx/i.

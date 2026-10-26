@@ -88,6 +88,27 @@ def _run(cmd: Sequence[str], timeout_s: float | None) -> ToolResult:
     )
 
 
+_VERSION: str | None = None
+
+
+def ffmpeg_version() -> str | None:
+    """The first line of ``ffmpeg -version``, or None when it cannot be read.
+
+    A verify report carries this beside every measurement that decodes a
+    frame, so a number that moved between two machines can be read against
+    the encoder and decoder that produced it.
+    """
+    global _VERSION
+    if _VERSION is None:
+        try:
+            result = _run([ffmpeg_binary(), "-version"], timeout_s=30)
+            first = (result.stdout or "").splitlines()
+            _VERSION = first[0].strip() if first and result.returncode == 0 else ""
+        except (OSError, ValueError):
+            _VERSION = ""
+    return _VERSION or None
+
+
 def run_ffmpeg(args: Sequence[str], *, timeout_s: float | None = None) -> ToolResult:
     """Run ffmpeg with the flags every call in this pipeline wants.
 

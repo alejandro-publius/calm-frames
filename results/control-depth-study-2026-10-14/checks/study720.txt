@@ -1,0 +1,11 @@
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=controlStudy.test
+
+ PASS  test/calmframes/controlStudy.test.tsx
+  ✓ export four states through real shared controls, home and an in-memory settings group (526 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.846 s, estimated 1 s
+Ran all test suites matching /controlStudy.test/i.

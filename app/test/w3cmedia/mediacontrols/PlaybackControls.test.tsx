@@ -5,9 +5,9 @@ import { describe } from '@jest/globals';
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
+import { CALM_COLORS, CALM_CONTROL } from '../../../src/calmframes/calmStyles';
 import { consoleInfoSpy } from '../../../jest.setup';
 import { areComponentPropsEqual } from '../../../src/utils/lodashHelper';
-import { PLAYER_BUTTON_SIZE } from '../../../src/utils/videoPlayerValues';
 import PlaybackControls, {
   PlaybackControlsProps,
   seek,
@@ -147,11 +147,11 @@ describe('Check if functions called properly', () => {
 
     fireEvent(component, 'focus');
     expect(component?.props.style).toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.FOCUS_RING }),
     );
     fireEvent(component, 'blur');
-    expect(component?.props.style).not.toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+    expect(component?.props.style).toEqual(
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.SURFACE }),
     );
   });
 
@@ -161,11 +161,11 @@ describe('Check if functions called properly', () => {
 
     fireEvent(component, 'focus');
     expect(component?.props.style).toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.FOCUS_RING }),
     );
     fireEvent(component, 'blur');
-    expect(component?.props.style).not.toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+    expect(component?.props.style).toEqual(
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.SURFACE }),
     );
   });
 
@@ -175,11 +175,11 @@ describe('Check if functions called properly', () => {
 
     fireEvent(component, 'focus');
     expect(component?.props.style).toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.FOCUS_RING }),
     );
     fireEvent(component, 'blur');
-    expect(component?.props.style).not.toEqual(
-      expect.objectContaining({ borderRadius: PLAYER_BUTTON_SIZE }),
+    expect(component?.props.style).toEqual(
+      expect.objectContaining({ borderRadius: CALM_CONTROL.RADIUS, borderColor: CALM_COLORS.SURFACE }),
     );
   });
 });

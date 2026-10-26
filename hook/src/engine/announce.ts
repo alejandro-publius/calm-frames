@@ -5,15 +5,11 @@
 /**
  * Saying things out loud, for VoiceView.
  *
- * Two halves, and both are needed:
- *
- * - the card itself carries accessibilityLiveRegion="polite" and the web
- *   aria-live="polite" attribute, so a screen reader that watches the tree
- *   reads the card when it appears;
- * - AccessibilityInfo.announceForAccessibilityWithOptions with { queue: true }
- *   pushes the same words, queued rather than interrupting, so an announcement
- *   already in progress finishes first. A child hearing "flashing part coming
- *   up" cut off halfway is worse than hearing it a beat later.
+ * The consumer player announces its final visible copy explicitly and disables
+ * live announcements on its card, so countdown ticks and duplicate speech do
+ * not compete. Other callers retain the live-region fallback. Explicit callers
+ * can request current status without queueing it behind superseded messages;
+ * the default queue behavior remains available for other announcements.
  *
  * The app declares com.amazon.devconf.privilege.accessibility in
  * app/manifest.toml under [wants], and test/calmframes/manifest.test.ts fails
@@ -28,6 +24,8 @@ import { AccessibilityInfo } from 'react-native';
 interface AnnounceOptions {
   /** Repeat the same words even if they were the last thing said. */
   force?: boolean;
+  /** False for current player status so superseded messages do not queue. */
+  queue?: boolean;
 }
 
 let lastSpoken = '';
@@ -59,7 +57,7 @@ export function announceForAccessibility(
       announceForAccessibility?: (announcement: string) => void;
     };
     if (typeof api.announceForAccessibilityWithOptions === 'function') {
-      api.announceForAccessibilityWithOptions(message, { queue: true });
+      api.announceForAccessibilityWithOptions(message, { queue: options.queue ?? true });
       return true;
     }
     if (typeof api.announceForAccessibility === 'function') {

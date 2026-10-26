@@ -1,0 +1,97 @@
+{
+  "buildSourceCommit": "fcef3bb48a3dc2381b3b321f05864c8344581a3a",
+  "latestAppChangeCommit": "9afdbe5bf72170787deb5cc0d82e3aa565a87812",
+  "packagePath": "build/release/watch-back-repair-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+  "packageSha256": "fb77e4ca69c8d29543a336dd58e17b7b6775d617399ad9c20edb664c26f7ba8c",
+  "appInputsCommitted": true,
+  "appInputCount": 747,
+  "appInputsStillMatch": true,
+  "repairBuilds": 1,
+  "repairInstalls": 1,
+  "totalBuildsForWatchFirstCorrection": 2,
+  "totalInstallsForWatchFirstCorrection": 2,
+  "authorization": "Parent clarified the initial one-build wording was efficiency guidance and authorized the additional repair build/install.",
+  "tests": {
+    "appSuites": 131,
+    "appPassed": 1314,
+    "appSkipped": 4,
+    "snapshots": 57,
+    "typecheck": "passed",
+    "lintErrors": 0,
+    "lintWarnings": 101,
+    "captureSuitesExcluded": [
+      "uiCapture",
+      "coastalExport",
+      "controlStudy"
+    ],
+    "regression": "Nested hardware Back failed before repair and passed after it."
+  },
+  "native": {
+    "observedPasses": 8,
+    "observations": [
+      {
+        "journey": "Launch Watch focus",
+        "verdict": "observed-pass",
+        "evidence": "kid-mode-home-watch"
+      },
+      {
+        "journey": "Harbor Watch and playback Back",
+        "verdict": "observed-pass",
+        "evidence": "playing event; return Home Watch"
+      },
+      {
+        "journey": "Simulated demo playback Back",
+        "verdict": "observed-pass",
+        "evidence": "playing event; return demo Details Watch"
+      },
+      {
+        "journey": "Demo Back to More info",
+        "verdict": "observed-pass",
+        "evidence": "More info demo control focused"
+      },
+      {
+        "journey": "More info Back to Details",
+        "verdict": "observed-pass",
+        "evidence": "More info control focused; Home not reached"
+      },
+      {
+        "journey": "Details Back to Home",
+        "verdict": "observed-pass",
+        "evidence": "Home Details focused"
+      },
+      {
+        "journey": "Technical details nested Back",
+        "verdict": "observed-pass",
+        "evidence": "technical -> More info -> Details -> Home; matching controls restored"
+      },
+      {
+        "journey": "Left running at Home",
+        "verdict": "observed-pass",
+        "evidence": "Watch focused; no autoplay"
+      }
+    ],
+    "blocked": [],
+    "inconclusive": [],
+    "finalFocus": "kid-mode-home-watch",
+    "leftRunning": true,
+    "touchInjectionEvents": 0
+  },
+  "scope": "Only assign Details its own nested Back stack. No additional cosmetic, media, catalog, trust, detector, cover-schedule, player, credential, household-setting, PIN, volume or other-session change.",
+  "limits": [
+    "Text logs establish emitted focus/media events, not pixels, visible rings, audio, captions, VoiceView or compositor ordering.",
+    "This is targeted navigation and brief approved Harbor/demo playback, not a new complete detector/cover/seek acceptance. Acadia, Help and Parents checks from the preceding Watch-first package remain dated to that package.",
+    "No screenshots, recordings, capture scripts, publication, main merge, release tag or AWS changes."
+  ],
+  "evidence": {
+    "preparation.json": "241ba8f2aa4e3bbee034b5f3682d36810dd09f7b97d0f8672eb6b42ac793759b",
+    "native-events.log": "f9117d3b8cffce8927010a575b3f969f5bac85b045d7d34fb4496ebccefbf624",
+    "native-results.json": "b87e196eedfc1d2e39a6c9254e3a4b808ac4593dea164a5870ee61be72bc7f2d",
+    "native-progress.txt": "b76952e78f10f0117de984202bbbeda0bc943fa8e4f8566be2efdca4aa68d748"
+  },
+  "logs": {
+    ".logs/watch-first/repair-build.log": "b90bc22489a2faceafb3a6712861183150f308739d097a37a4f78caaf15d476f",
+    ".logs/consumer-tests-repaired.log": "4d0110b1dac1c5d5fbcba4cbed33322bd6f21bc7d9dab09cd9d68d0d67cbd5d0",
+    ".logs/consumer-typecheck-repaired.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/consumer-lint-repaired.log": "f23a005c5320c36aa7918cb66dfd4ffb779f332684d18debadd3b21886a06010"
+  }
+}

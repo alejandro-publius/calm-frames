@@ -1,0 +1,112 @@
+{
+  "recorded_on": "2026-10-15",
+  "scope": "Offline infrastructure, ingest publisher and AWS guard checks in the saved Linux cloud coding environment. No AWS account was contacted.",
+  "source_commit": "85dedefd85daea0bb8d774dd189dcf5af5490b83",
+  "application_ancestor": "a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd",
+  "environment": {
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "project_node_major": "22",
+    "node_limit": "Tests used the provided Node 24 runtime, not the project Node 22 major. No project runtime pins were changed.",
+    "packages": {
+      "aws-cdk-lib": "2.270.0",
+      "constructs": "10.8.1",
+      "aws-cdk.cloud-assembly-schema": "54.24.0",
+      "jsii": "1.140.0",
+      "aws-cdk.asset-node-proxy-agent-v6": "2.1.3",
+      "aws-cdk.asset-awscli-v1": "2.2.292",
+      "pytest": "9.1.1",
+      "moto": "5.2.3",
+      "boto3": "1.43.97",
+      "botocore": "1.43.114",
+      "cryptography": "50.0.2"
+    },
+    "docker_server": "28.4.0",
+    "vega_cli_present": false
+  },
+  "dependency_setup": {
+    "command": "python3 -m venv /tmp/calm-aws-venv && /tmp/calm-aws-venv/bin/python -m pip install -r pipeline/infra/requirements.txt pytest==9.1.1 moto==5.2.3 boto3==1.43.97",
+    "exit_code": 0,
+    "tracked_dependency_files_changed": false
+  },
+  "initial_attempts": [
+    {
+      "operation": "offline pytest trio",
+      "exit_code": 2,
+      "result": "Collection error before tests ran: jsii could not create /home/agent/.cache/aws/jsii/package-cache."
+    },
+    {
+      "operation": "offline app.py synth",
+      "exit_code": 1,
+      "result": "Same jsii cache-path error before synthesis."
+    }
+  ],
+  "cache_resolution": "Set the supported JSII_RUNTIME_PACKAGE_CACHE_ROOT=/tmp/calm-aws-jsii-cache. No permission escalation, credentials, account changes or source edits.",
+  "offline_test": {
+    "command": "env JSII_RUNTIME_PACKAGE_CACHE_ROOT=/tmp/calm-aws-jsii-cache AWS_CONFIG_FILE=/dev/null AWS_SHARED_CREDENTIALS_FILE=/dev/null AWS_EC2_METADATA_DISABLED=true /tmp/calm-aws-venv/bin/python -m pytest pipeline/tests/test_infra.py pipeline/tests/test_infra_ingest.py pipeline/tests/test_aws_guard.py -q -ra --junitxml=/tmp/calm-aws-tests.xml",
+    "cwd": "repository root",
+    "exit_code": 0,
+    "passed": 100,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 27.1,
+    "passed_by_file": {
+      "pipeline/tests/test_infra.py": 27,
+      "pipeline/tests/test_infra_ingest.py": 31,
+      "pipeline/tests/test_aws_guard.py": 42
+    },
+    "limits": "Infrastructure assertions synthesize templates; ingest tests use moto with a controlled pipeline stub. They do not execute real AWS, production video preparation, billing or vulnerability scanning."
+  },
+  "offline_synth": {
+    "command": "env JSII_RUNTIME_PACKAGE_CACHE_ROOT=/tmp/calm-aws-jsii-cache AWS_CONFIG_FILE=/dev/null AWS_SHARED_CREDENTIALS_FILE=/dev/null AWS_EC2_METADATA_DISABLED=true CDK_DEFAULT_ACCOUNT=000000000000 CDK_DEFAULT_REGION=us-east-1 CDK_OUTDIR=/tmp/calm-aws-cdk-out /tmp/calm-aws-venv/bin/python app.py",
+    "cwd": "pipeline/infra",
+    "exit_code": 0,
+    "configuration": "Default context; synthetic account; no signing key parameter, budget email or GitHub OIDC context.",
+    "template_sha256": "c3130c74ad8d7bcf1ad8b971488a730dfb1b0e0459a03c255b166fe8109f86f8",
+    "resources": 41,
+    "nat_gateways": 0,
+    "elastic_ips": 0,
+    "budgets": 1,
+    "task_definitions": 1,
+    "task_image_tag": "latest",
+    "limits": "Local template differs from the historical configured deployment. No claim of live stack equality."
+  },
+  "image_context": {
+    "command": "python3 scripts/build_context.py --quiet",
+    "exit_code": 0,
+    "files": 59,
+    "bytes": 740162,
+    "reported_kb": 723,
+    "forbidden_directory_counts": {
+      "media/": 0,
+      "results/": 0,
+      "app/": 0,
+      ".venv/": 0,
+      "docs/": 0
+    },
+    "limits": "Repository matcher and static Dockerfile tests only; no container build, push, deployed digest lookup or vulnerability scan was performed."
+  },
+  "live_aws": {
+    "status": "blocked",
+    "reason": "No AWS CLI on PATH, no AWS_/CDK_ environment variables, empty /workspace/.aws, and no home .aws directory. No preexisting authorized AWS session was available. No credential setup or alternative account route attempted.",
+    "aws_calls": 0,
+    "current_costs": "unverified",
+    "project_cost_tag_status": "unverified",
+    "credit_application": "unverified",
+    "deployed_image_digest": "unverified",
+    "current_image_findings": "unverified"
+  },
+  "historical_receipt": {
+    "path": "results/aws_deploy_2026-10-09.json",
+    "project_cost_tag_active": false,
+    "budget_actual_usd": 0.0,
+    "budget_limit": "The inactive tag meant this zero-dollar reading did not establish zero spend.",
+    "critical_image_findings": 8,
+    "high_image_findings": 56,
+    "scan_resolution": "unverified",
+    "tv_cloud_delivery": "Not established: the TV uses a packaged library and does not trust the cloud demo signer."
+  },
+  "owner_checklist": "docs/research/cloud-aws-check-2026-10-15.md",
+  "native_limits": "No Mac access, Vega package rebuild, native run, screenshot, screen recording, pixel or sound observation was performed. Package 5 remains historical evidence."
+}

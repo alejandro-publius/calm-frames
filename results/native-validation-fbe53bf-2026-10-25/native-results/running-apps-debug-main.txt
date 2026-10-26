@@ -1,0 +1,2 @@
+com.amazon.keplerlauncherapp.main
+io.github.alejandropublius.calmframes.main

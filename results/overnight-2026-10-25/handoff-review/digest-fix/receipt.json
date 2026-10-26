@@ -1,0 +1,83 @@
+{
+  "recorded_utc": "2026-10-25T07:37:07.792096+00:00",
+  "source_before_fix": "f5565fd1aff6981fc88bb3a7b6339624222f3b98",
+  "underlying_app_source": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "problem": "Known source-file digest test failed after the privacy fix legitimately changed PinKeypad bytes; precise allowlist still named only the older digest.",
+  "source_path": "app/src/calmframes/PinKeypad.tsx",
+  "current_source_sha256": "2789c54d87572b71c4183aaf18413371104233eef58b749d89acd21ab32fd004",
+  "same_source_digest_at": "07db296137ec3ba50afff15097053061709fda27",
+  "verified_historical_source": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "historical_source_sha256": "b6b58425b89ee8211b2822761fcff077db63dfa9223e953a8882d7180f726b0e",
+  "historical_receipt_files_requiring_old_literal": 25,
+  "change": "Add one anchored exact filename-and-literal-SHA256 pattern. Preserve the old verified pattern for historical receipts. No new directory exception, wildcard digest rule, suppressed finding or altered test.",
+  "before": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/tests/test_secret_scan_manifest.py"
+    ],
+    "gitleaks": "8.30.1",
+    "exit_code": 1,
+    "elapsed_seconds": 1.84,
+    "scope": "Inherited source before exact current PinKeypad digest was added; values are synthetic test bait or verified file hashes."
+  },
+  "after": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/tests/test_secret_scan_manifest.py"
+    ],
+    "gitleaks": "8.30.1",
+    "exit_code": 0,
+    "elapsed_seconds": 2.81,
+    "scope": "Current verified digest accepted; synthetic wrong-digest and credential-field cases retained unchanged."
+  },
+  "boundary_cases": [
+    {
+      "case": "historical_source_digest",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "current_source_digest",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "passed": true
+    },
+    {
+      "case": "current_digest_in_credential_field",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true
+    },
+    {
+      "case": "synthetic_bait_in_source_field",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true
+    }
+  ],
+  "logs": [
+    {
+      "file": "before.log",
+      "bytes": 2362,
+      "sha256": "0a1a54ebb01e6f1be74d293911b01ab63ef68025072eddc7b1baec263d7e9a48",
+      "raw_capture_sha256": "543ab305422d0e96268be7d8ad9b5af76826a6e9fbd38658c2cbfdf9337f3964",
+      "normalization": "Trailing whitespace removed from captured pytest traceback; source values and results unchanged."
+    },
+    {
+      "file": "after.log",
+      "bytes": 98,
+      "sha256": "e34e0d435988de1867d73667a277df45472829c5819afa4fafcf6421a6d48cc3"
+    }
+  ],
+  "limits": [
+    "No app source, dependency input, household data or native binary changed.",
+    "A future legitimate source edit changes the hash and correctly fails this reviewed-value guard until independently verified."
+  ]
+}

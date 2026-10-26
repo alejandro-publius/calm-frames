@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { IComponentInstance } from '@amazon-devices/react-native-kepler';
 import {
   KeplerMediaControlHandler,
   VideoPlayer,
 } from '@amazon-devices/react-native-w3cmedia';
-import React, { useCallback } from 'react';
+import React from 'react';
+import { nativeDecoderRelease } from '../calmframes/nativeDecoderRelease';
 import { Platform } from 'react-native';
 import { VideoFileTypes } from '../data/videos';
 import { TitleData } from '../types/TitleData';
@@ -37,6 +37,9 @@ type MediaPlayerDeInitStatus = 'success' | 'timedout' | 'invalid';
  * using the Shaka Player for adaptive content.
  */
 export class VideoHandler {
+  private initializationGeneration = 0;
+  private lastProgressSeconds: number | undefined;
+
   // Core video player references
   /** Reference to the main video player instance */
   public videoRef: React.MutableRefObject<VideoPlayer | null>;
@@ -133,9 +136,16 @@ export class VideoHandler {
    *
    * @param componentInstance - Optional Kepler component for media control integration
    */
-  preBufferVideo = useCallback(
-    async (componentInstance?: IComponentInstance) => {
-      await this.destroyVideoElements();
+  preBufferVideo = async (componentInstance?: IComponentInstance) => {
+      const destroyed = this.destroyVideoElements();
+      const generation = this.initializationGeneration;
+      await destroyed;
+      if (generation !== this.initializationGeneration) return;
+      if (!await nativeDecoderRelease.wait()) {
+        if (generation === this.initializationGeneration) this.setIsVideoError(true);
+        return;
+      }
+      if (generation !== this.initializationGeneration) return;
       console.info(
         '[VideoHandler.ts] - preBufferVideo - Attempt to prebuffer Video Player - ComponentInstance',
         componentInstance,
@@ -146,7 +156,8 @@ export class VideoHandler {
         );
         this.videoRef.current = new VideoPlayer();
       }
-      (global as any).gmedia = this.videoRef.current;
+      const media = this.videoRef.current;
+      (global as any).gmedia = media;
 
       // KMC (Kepler Media Controls) integration
       try {
@@ -155,7 +166,7 @@ export class VideoHandler {
             '[VideoHandler.ts] - preBufferVideo - KMC :  set Media Control Focus',
           );
 
-          await this.videoRef.current.setMediaControlFocus(
+          await media.setMediaControlFocus(
             componentInstance,
             this.mediaControlHandler ??
               new AppOverrideMediaControlHandler(
@@ -172,26 +183,37 @@ export class VideoHandler {
         console.error('Error during KMC execution', error);
       }
 
-      // Initialize the video player and set up content loading
-      this.videoRef.current
+      // Leaving or replacing the player while native setup is pending cancels
+      // this initialization; never attach listeners to a later media instance.
+      if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
+        return;
+      }
+      media
         .initialize()
         .then(() => {
+          if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
+            return;
+          }
           console.log(
             '[VideoHandler.ts] - preBufferVideo - Video Player Initialized',
           );
           this.setupEventListeners();
-          this.videoRef!!.current!!.autoplay = false;
+          media.autoplay = false;
           this.loadVideoElements();
         })
         .catch((error) => {
+          // A known setup/load failure can recover immediately. Ignore late
+          // failures from a player that Back or replacement already released.
+          if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
+            return;
+          }
+          this.setIsVideoError(true);
           console.error(
             '[VideoHandler.ts] - preBufferVideo - Failed to initialize Video',
           );
           console.error(error);
         });
-    },
-    [],
-  );
+    };
 
   /**
    * Loads video content and configures player settings
@@ -203,7 +225,7 @@ export class VideoHandler {
    *    - Static player for MP4 files
    *    - Adaptive player (Shaka) for streaming formats (HLS, DASH)
    */
-  loadVideoElements = useCallback(() => {
+  loadVideoElements = () => {
     if (this.videoRef !== null && this.videoRef.current !== null) {
       try {
         this.loadSubtitles();
@@ -223,7 +245,7 @@ export class VideoHandler {
         this.loadAdaptiveMediaPlayer();
       }
     }
-  }, []);
+  };
 
   /**
    * Loads static media content (MP4 files)
@@ -233,22 +255,23 @@ export class VideoHandler {
    *
    * @param video - Video player instance with basic playback controls
    */
-  loadStaticMediaPlayer = useCallback(
-    (video: {
+  loadStaticMediaPlayer = (video: {
       src: string;
       autoplay: boolean;
       pause: () => void;
       load: () => void;
     }) => {
-      video.src = this.data.uri;
+      // Vega's native filesrc accepts a path, not a file:// URL. Keep the
+      // catalog URI unchanged for identity/signature checks and diagnostics.
+      video.src = this.data.uri.startsWith('file:///pkg/')
+        ? this.data.uri.slice('file://'.length)
+        : this.data.uri;
       video.pause();
       console.log(
-        `[VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: ${video.src}`,
+        `[VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: ${this.data.uri}`,
       );
       video.load();
-    },
-    [],
-  );
+    };
 
   /**
    * Loads adaptive streaming content (HLS, DASH, etc.) using Shaka Player
@@ -261,7 +284,7 @@ export class VideoHandler {
    *
    * Used for streaming formats that support adaptive bitrate streaming.
    */
-  loadAdaptiveMediaPlayer = useCallback(() => {
+  loadAdaptiveMediaPlayer = () => {
     if (this.videoRef?.current) {
       try {
         // Configure Shaka Player settings
@@ -301,7 +324,7 @@ export class VideoHandler {
       console.error('[VideoHandler.ts] - Video reference is not initialized');
       this.setIsVideoError(true);
     }
-  }, []);
+  };
 
   /**
    * Loads subtitle tracks for the video
@@ -310,18 +333,26 @@ export class VideoHandler {
    * to the video player. Each subtitle track includes language, label, URI,
    * and MIME type information.
    */
-  loadSubtitles = useCallback(() => {
+  loadSubtitles = () => {
     const source = this.data;
     if (source?.textTrack && source.textTrack.length > 0) {
       for (let i: number = 0; i < source.textTrack.length; i++) {
+        const track = source.textTrack[i];
+        // Vega's native filesrc takes a local path for external captions too.
+        // Passing file:///pkg/... here aborts the whole player.
+        // Translate only our package-local files; route verification continues
+        // to compare the original catalog URI and exact caption digest.
+        const nativeCaptionSource = track.uri.startsWith('file:///pkg/')
+          ? track.uri.slice('file://'.length)
+          : track.uri;
         console.log(
-          `[VideoHandler.ts] - loadSubtitles - Loading subtitles from: ${source.uri} [${source.textTrack[i].language}]`,
+          `[VideoHandler.ts] - loadSubtitles - Loading subtitles from: ${nativeCaptionSource} [${track.language}]`,
         );
         this.videoRef.current?.addTextTrack(
           'subtitles',
           source.textTrack[i].label,
           source.textTrack[i].language,
-          source.textTrack[i].uri,
+          nativeCaptionSource,
           source.textTrack[i].mimeType,
         );
         console.log(
@@ -331,7 +362,7 @@ export class VideoHandler {
         );
       }
     }
-  }, []);
+  };
 
   // === VIDEO EVENT HANDLERS ===
   // These methods handle various video player events and update component state accordingly
@@ -426,8 +457,14 @@ export class VideoHandler {
 
     // For static media (MP4), use timeupdate to hide buffering
     // since seeked/playing events may not fire reliably
-    if (this.isStaticMediaContent()) {
-      this.setShowBuffering(false);
+    const media = this.videoRef.current;
+    const position = media?.currentTime;
+    if (position !== undefined && Number.isFinite(position)) {
+      const advanced = position > (this.lastProgressSeconds ?? 0);
+      this.lastProgressSeconds = position;
+      if (this.isStaticMediaContent() && advanced && !media?.paused && !media?.seeking) {
+        this.setShowBuffering(false);
+      }
     }
   };
 
@@ -444,6 +481,7 @@ export class VideoHandler {
    * Fired when playback stops due to lack of data
    */
   onWaiting = () => {
+    this.lastProgressSeconds = this.videoRef.current?.currentTime;
     this.setShowBuffering(true);
   };
 
@@ -452,6 +490,7 @@ export class VideoHandler {
    * Fired when user starts seeking to a new position
    */
   onSeeking = () => {
+    this.lastProgressSeconds = this.videoRef.current?.currentTime;
     this.setShowBuffering(true);
   };
 
@@ -486,7 +525,7 @@ export class VideoHandler {
    * - seeked: Seek operation completed
    * - playing: Playback resumed
    */
-  setupEventListeners = useCallback(() => {
+  setupEventListeners = () => {
     this.videoRef.current?.addEventListener(
       'loadedmetadata',
       this.onLoadeMetaData,
@@ -498,7 +537,7 @@ export class VideoHandler {
     this.videoRef.current?.addEventListener('seeking', this.onSeeking);
     this.videoRef.current?.addEventListener('seeked', this.onSeeked);
     this.videoRef.current?.addEventListener('playing', this.onPlaying);
-  }, []);
+  };
 
   /**
    * Removes all video event listeners
@@ -506,7 +545,7 @@ export class VideoHandler {
    * Cleans up event listeners to prevent memory leaks when the video
    * player is destroyed or when switching to new content.
    */
-  removeEventListeners = useCallback(() => {
+  removeEventListeners = () => {
     this.videoRef.current?.removeEventListener(
       'loadedmetadata',
       this.onLoadeMetaData,
@@ -518,7 +557,7 @@ export class VideoHandler {
     this.videoRef.current?.removeEventListener('seeking', this.onSeeking);
     this.videoRef.current?.removeEventListener('seeked', this.onSeeked);
     this.videoRef.current?.removeEventListener('playing', this.onPlaying);
-  }, []);
+  };
 
   // === CLEANUP AND DESTRUCTION ===
 
@@ -601,12 +640,40 @@ export class VideoHandler {
    *
    * @returns true if destruction was successful or no video to destroy, false on error
    */
+  /** Retry waits for the SDK's actual asynchronous completion, never its sync timeout. */
+  destroyVideoElementsConfirmed = (): Promise<boolean> => {
+    this.initializationGeneration += 1;
+    const media = this.videoRef.current;
+    if (!media) return Promise.resolve(true);
+    return nativeDecoderRelease.release(media, async () => {
+      // Cleanup failures still attempt native destruction, but cannot certify release.
+      let cleanupFailed = false;
+      const attempt = (operation: () => void) => {try {operation();} catch {cleanupFailed = true;}};
+      attempt(() => media.pause());
+      attempt(() => media.clearSurfaceHandle(''));
+      attempt(() => media.clearCaptionViewHandle(''));
+      attempt(() => this.removeEventListeners());
+      const adaptive = this.player.current;
+      if (adaptive && this.selectedFileType !== VideoFileTypes.MP4) {
+        try {await adaptive.unload();} catch {cleanupFailed = true;}
+      }
+      await media.deinitialize();
+      if (cleanupFailed) throw new Error('Native cleanup was not fully confirmed');
+      if (this.videoRef.current === media) this.videoRef.current = null;
+      if (this.player.current === adaptive) this.player.current = null;
+      if ((global as any).gmedia === media) (global as any).gmedia = null;
+    });
+  };
+
   destroyVideoElements = (): boolean => {
+    this.initializationGeneration += 1;
     if (!this.videoRef.current) {
       console.log('[VideoHandler.ts] - No video reference to destroy');
       return false;
     }
 
+    const pending = nativeDecoderRelease.state(this.videoRef.current);
+    if (pending) return pending.done;
     console.log(
       '[VideoHandler.ts] - Triggering synchronous video elements destruction',
     );

@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-15",
+  "applicationSource": "21f0ea60332b83efe960eb7cf799139ec2d82ae9",
+  "sourceMediaPresent": 35,
+  "positiveSourceHashesMatched": 7,
+  "freshKnownPositiveCases": 1,
+  "newAppBundles": 0,
+  "newTrustKeys": 0,
+  "downloadedMedia": 0,
+  "preparedArtifactsRegenerated": false,
+  "claudeTestsIntegrated": false,
+  "evidence": {
+    "irminger-current-wcag.json": "7f1fcf8b6039f82969404bf2e90a6e6226a12e16ba0fdbfbd5196d132a452b13",
+    "source-check.txt": "5fc66b4994bc011a5314ea5332371cc9f6de0726adfa3c13281871eb81bf057d",
+    "recheck.json": "476b2b913160d3d895db43679887c6ab622edaf26335caac047eb7862d4c617c",
+    "inventory.json": "55b1cf3328ecf8c0b04fd13a0f548aad589a781faa53a59308d724b78d9dda0e",
+    "claude-review-assessment.json": "d7829295ff421a0997f2492814457be2a9aeb0863447d305130d7b7dcd834719"
+  },
+  "scriptSha256": "1978a8315b2c27deccc31fecb7dcd9851e3f572f5279928f032e3d8fe1a5e62f"
+}

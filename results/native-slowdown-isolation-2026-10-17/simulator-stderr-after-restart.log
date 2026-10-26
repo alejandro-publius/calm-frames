@@ -1,0 +1,59 @@
+WARNING | Please update the emulator to one that supports the feature(s): AllowSnapshotMigration, AsyncComposeSupport, CarRotary, CarVHalTable, CarVhalReplay, DynamicMediaProfile, FastSnapshotV1, ForceANGLE, ForceSwiftshader, GLPipeChecksum, GenericSnapshotsUI, GuestUsesAngle, HAXM, HVF, HYPERV, HasSharedSlotsHostMemoryAllocator, IpDisconnectOnLoad, KVM, LocationUiV2, NetsimCliUi, NetsimWebUi, NoDelayCloseColorBuffer, NoDeviceFrame, OnDemandSnapshotLoad, QuickbootFileBacked, ScreenRecording, SnapshotAdb, TvRemote, VideoPlayback, VirtioGpuFenceContexts, VirtioGpuNativeSync, VirtualScene, Vulkan, VulkanAstcLdrEmulation, VulkanShaderFloat16Int8, VulkanSnapshots, VulkanYcbcrEmulation, WiFiPacketStream, WindowsHypervisorPlatform, WindowsOnDemandSnapshotLoad
+WARNING | FeatureControl is requesting a non existing feature.
+WARNING | encryption is off
+WARNING | Could not setup modem simulator config files, modem simulator disabled.
+WARNING | FeatureControl is requesting a non existing feature.
+WARNING | FeatureControl is requesting a non existing feature.
+WARNING | cannot add library /Users/alexvintera/vega/sdk/vega-sdk/main/0.24.9914/vvd/images/tv/vmtools/agent/qemu/darwin-aarch64/lib64/vulkan/libvulkan.dylib: failed
+WARNING: Image format was not specified for '/Users/alexvintera/vega/sdk/vega-sdk/main/0.24.9914/vvd/instances/83b9f356-6768-4217-919e-db0ff6099a44/idme.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for '/Users/alexvintera/vega/sdk/vega-sdk/main/0.24.9914/vvd/instances/83b9f356-6768-4217-919e-db0ff6099a44/keys.ext4' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for '/Users/alexvintera/vega/sdk/vega-sdk/main/0.24.9914/vvd/instances/83b9f356-6768-4217-919e-db0ff6099a44/misc.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+virtio_gpu_set_features: virtio gpu has eventidx
+gl_version 30 - es profile enabled
+WARNING: running without ARB/KHR robustness in place may crash
+sPrepareTexImage2D:3614 failed validation
+sPrepareTexImage2D:3614 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3614 failed validation
+sPrepareTexImage2D:3614 failed validation
+sPrepareTexImage2D:3614 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3616 failed validation
+sPrepareTexImage2D:3628 failed validation
+sPrepareTexImage2D:3628 failed validation
+sPrepareTexImage2D:3613 failed validation
+sPrepareTexImage2D:3613 failed validation
+GLSL feature level 130

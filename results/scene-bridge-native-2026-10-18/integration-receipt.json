@@ -1,0 +1,13 @@
+{
+  "time_utc": "2026-10-18T02:37:00.275503+00:00",
+  "working_checkout": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16",
+  "branch": "claude/tv-experience-2026-10-16",
+  "previous_head": "072153a2c07539c2627c9a2c005c447fb4ab6304",
+  "integrated_head": "f02a2990d98a46e591f323f539c37b7e3eb1b153",
+  "installed_app_source": "50bc01fcfcfd82f4138b0cd0268beab60da286ee",
+  "installed_inputs_matched_both_checkouts": 781,
+  "main_and_remote_refs_unchanged": true,
+  "intake_restarted": false,
+  "push_performed": false,
+  "both_checkouts_clean": true
+}

@@ -1,0 +1,12 @@
+{
+  "source_commit": "999f69cd917e51444502d157a3e1bfb069d85235",
+  "package_sha256": "d8217c60e2857dcd09b1a807fb0a96b1ed68da69eff08675ef4ebe112f787cdd",
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/cinematic-review-2026-10-18/calm-frames-cinematic-aarch64-debug.vpkg",
+  "install_count": 1,
+  "inputs_matched": 815,
+  "started_utc": "2026-10-18T05:31:02.352933+00:00",
+  "install_output": "Installing/Updating '/tmp/calm-frames-cinematic-aarch64-debug.vpkg' ...success\n",
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true,
+  "completed_utc": "2026-10-18T05:31:09.641518+00:00"
+}

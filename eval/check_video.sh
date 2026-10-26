@@ -55,7 +55,7 @@ Check the final demo video before it is uploaded.
 Options:
   --out FILE          where to write the record. Default results/video_check.json
   --profile NAME      which flashmap profile to measure against. Default wcag
-  --max-seconds N     length limit in seconds. Default 180, which is 3:00
+  --max-seconds N     exclusive length limit in seconds. Default 180 (under 3:00)
   --skip-duration     do not check the length, and record that it was skipped
   --selftest          prove this script fails on a flashing file and passes on
                       a calm one. Builds both, measures both, deletes both
@@ -162,13 +162,13 @@ check_one() {
         return 2
         ;;
     esac
-    if awk -v d="$duration" -v m="$MAX_SECONDS" 'BEGIN { exit !(d > 0 && d <= m) }'; then
+    if awk -v d="$duration" -v m="$MAX_SECONDS" 'BEGIN { exit !(d > 0 && d < m) }'; then
       duration_verdict="pass"
       printf 'length:  %.2f s, under the %s s limit\n' "$duration" "$MAX_SECONDS"
     else
       duration_verdict="fail"
       status=1
-      printf 'length:  %.2f s, OVER the %s s limit\n' "$duration" "$MAX_SECONDS"
+      printf 'length:  %.2f s, AT OR OVER the %s s limit\n' "$duration" "$MAX_SECONDS"
     fi
   fi
   echo
@@ -205,7 +205,7 @@ else:
   local verdict="pass"
   [ "$status" -ne 0 ] && verdict="fail"
 
-  "$PYTHON" - "$out" <<PY
+  if ! "$PYTHON" - "$out" <<PY
 import datetime, json, os, subprocess, sys
 
 out = sys.argv[1]
@@ -240,6 +240,10 @@ with open(out, "w", encoding="utf-8") as handle:
     handle.write("\n")
 print(f"record written to {out}")
 PY
+  then
+    echo "UNVERIFIED. Could not write verification record: $out. Do not upload this cut." >&2
+    return 2
+  fi
 
   if [ "$status" -eq 0 ]; then
     echo
@@ -306,7 +310,7 @@ selftest() {
     -vf "geq=lum='110+24*sin(2*PI*N/300)':cb='128':cr='128'" \
     -c:v libx264 -preset ultrafast -pix_fmt yuv420p -an "$calm" || return 2
 
-  local failures=0
+  local failures=0 hazard_status
 
   echo "--- 1 of 2: the strobe. This has to be blocked. ---"
   echo
@@ -315,6 +319,11 @@ selftest() {
     echo "SELF TEST FAILED: the strobe was passed. The check is not checking." >&2
     failures=$((failures + 1))
   else
+    hazard_status=$?
+    if [ "$hazard_status" -ne 1 ]; then
+      echo "SELF TEST UNVERIFIED: the strobe check did not complete (exit $hazard_status)." >&2
+      return 2
+    fi
     echo
     echo "as expected: the strobe was blocked"
   fi

@@ -1,0 +1,167 @@
+{
+  "status": "native_acceptance_blocked",
+  "date_utc": "2026-10-23",
+  "source_commit": "cfa6610ace207ae6a39fa58be769bfb3e51ad203",
+  "imported_candidate": "eff3ca4fa88712f6426ccb8398b782f63ba422c2",
+  "branch": "review/combined-validation-eff3ca4",
+  "installed_package": {
+    "source_commit": "cfa6610ace207ae6a39fa58be769bfb3e51ad203",
+    "package_path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-combined-review/build/release/native-retry-cfa6610/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "package_bytes": 132596446,
+    "sha256": "a367f4c785ff64c20e7f4d3a466bf7b216be8d800fc03844246cd6f8df45cfe6",
+    "sha384": "8db3bd2f23b8149bd432d742663eb381a6af125f40d2f248af8e44e85b540fd401db5fcba5cea3196fc60becfc3e1fb2",
+    "installed_sha384_match": true
+  },
+  "local_fixes": [
+    "e47810e: exact packaged stills verified against pinned Harbor maps; no allowance for arbitrary extra assets",
+    "f237a73: remote Play/Pause uses actual paused state after recovery",
+    "cfa6610: visible Retry owns preferred focus and OK instead of seekbar"
+  ],
+  "checks": {
+    "preflight_python_tests": 103,
+    "transport_focused_jest_tests": 91,
+    "retry_focused_jest_tests": 67,
+    "counts_overlap": true,
+    "typescript": "passed",
+    "scoped_eslint": "passed",
+    "build": "aarch64 Debug passed",
+    "approved_namespace_bytes": 129255687,
+    "namespace_limit_bytes": 134217728,
+    "signed_media_changed": false
+  },
+  "observed": [
+    {
+      "source": "eff3ca4",
+      "result": "Five-minute natural playback reached stationary final-frame hold; Back returned Details; completed history cleared."
+    },
+    {
+      "source": "f237a73",
+      "result": "Paused saved-position recovery confirmed native seek, stayed paused, and resumed on the first remote Play press."
+    },
+    {
+      "source": "f237a73",
+      "result": "42.595542 second window/audio recording completed; sampled frames showed coastal opening through seek and picture after recovery. Not exhaustive frame-level compositor certification."
+    },
+    {
+      "source": "cfa6610",
+      "result": "Slow playback focused Retry; explicit OK entered covered error when decoder teardown timed out. Back remained usable."
+    },
+    {
+      "source": "cfa6610",
+      "result": "Start over opened the approved scene, but slow progress recurred. Therefore slowness is not established to be recovery-only."
+    },
+    {
+      "source": "cfa6610",
+      "result": "Returned Home and restored McWay card focus; final scoped screenshot verified static coastal Home."
+    }
+  ],
+  "blockers": [
+    {
+      "action": "Native playback/retry acceptance",
+      "state": "failed_runtime",
+      "evidence": "f237 measured 7.24 media seconds in 197.847 wall seconds at reported rate 1.0. cfa6610 also became slow after Start over. Cause not established."
+    },
+    {
+      "action": "Explicit Retry decoder replacement",
+      "state": "failed_closed",
+      "evidence": "App-scoped live logs show deinitializeSync at 01:22:36.189 UTC; timedout at 01:22:37.698; native deinitializeAsync callback at 01:22:39.754. No replacement decoder started after unconfirmed teardown."
+    },
+    {
+      "action": "Native background cancellation",
+      "state": "unverified",
+      "evidence": "KEY_HOME injected but no expected background/player-left event; no launcher capture performed."
+    },
+    {
+      "action": "Native profile switching and caption restoration",
+      "state": "unverified",
+      "evidence": "Current household Extra cautious only; no PIN bypass. McWay has no caption track to restore."
+    },
+    {
+      "action": "Human listening, palette and full replacement-demo acceptance",
+      "state": "pending",
+      "evidence": "App audio signal recorded and measured; no subjective acceptance inferred."
+    },
+    {
+      "action": "Hosted CI",
+      "state": "pending_environment_approval",
+      "evidence": "Prior Astra report: api.github.com absent from environment allowlist. No settings changed or alternate dispatch attempted."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".logs/native-acceptance-eff3ca4/observations.json",
+      "bytes": 2918,
+      "sha256": "f3ba69d386721ad8c94706d16034459d7e8c8c7f8eb2afdd4c06cd872f358adb",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-eff3ca4/playing-audio-12s.mp4",
+      "bytes": 10584002,
+      "sha256": "0d718ffc06ced4104c76403ba96c2933de739004d2f5b52d0869b1cf1d5574a0",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-eff3ca4/screens/11-final-frame-hold.png",
+      "bytes": 1755373,
+      "sha256": "8681fc4c49ffd5118059b26c23db218a8d44c9510961660eb0aa08312c454c79",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-f237a73/paused-recovery-retest.json",
+      "bytes": 699,
+      "sha256": "0d158dcc8213fcf269d9390ffa88ee413674ed9e5a27332d72db5bd539734028",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-f237a73/paused-recovery-retest.mp4",
+      "bytes": 8395928,
+      "sha256": "1091c5ad9c1684a9abb1d1ba88ab4d543db10970eab013deccc146a7882e8033",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-f237a73/slow-progress.json",
+      "bytes": 769,
+      "sha256": "fd43e34fde650b1272928a5c01478f57ee03bc2cd734ab749f9245dd01c43665",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-cfa6610/retry-live-diagnostics.log",
+      "bytes": 622517,
+      "sha256": "3721becaccb6c8a98a5bb22cd318e643f371320ef2e1fd38f0f73517acd4081e",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-cfa6610/actions.jsonl",
+      "bytes": 930,
+      "sha256": "9c9a8520123e1bcb6e9ed167be8912cd7e8207b3ccadf7b37f01298e469884b1",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-cfa6610/calm-trace.log",
+      "bytes": 133842,
+      "sha256": "e6736024ebe4b83864d92289aa0c8208edab3b293caed1e139b9b5d059dc8ac5",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-cfa6610/screens/02-home-final.png",
+      "bytes": 540178,
+      "sha256": "96283b034ccf107e723446980a83d12b92301627d5252ccfc16113c1859faac1",
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-acceptance-f237a73/retry-regressions.log",
+      "bytes": 20276,
+      "sha256": "c37c48f71ed258260f184ac675cf0b4cbb02cfd65aab0d354c74103be494aaf2",
+      "local_only": true
+    }
+  ],
+  "end_state": {
+    "app": "static Calm Frames Home, McWay card focused",
+    "capture": "stopped",
+    "package_log_collectors": "stopped",
+    "simulator_owner_session": 12233
+  },
+  "published": false,
+  "merged": false,
+  "submitted_fallback_unchanged": true
+}

@@ -1,0 +1,125 @@
+TAP version 13
+# negative control: the wcag profile refused the flashing sequence, the broadcast profile refused the grating, and the wcag profile passed the grating, as it must.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# ffmpeg failed to encode a negative control
+# Subtest: an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+ok 1 - an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+  ---
+  duration_ms: 288.939958
+  type: 'test'
+  ...
+# Subtest: measured controls pass and remove only their HAZARD_ scratch files
+ok 2 - measured controls pass and remove only their HAZARD_ scratch files
+  ---
+  duration_ms: 20.4725
+  type: 'test'
+  ...
+# Subtest: analyzer error exit cannot count as a measured hazard and is cleaned up
+ok 3 - analyzer error exit cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.498958
+  type: 'test'
+  ...
+# Subtest: analyzer spawn error cannot count as a measured hazard and is cleaned up
+ok 4 - analyzer spawn error cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.009667
+  type: 'test'
+  ...
+# Subtest: analyzer signal cannot count as a measured hazard and is cleaned up
+ok 5 - analyzer signal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 14.977083
+  type: 'test'
+  ...
+# Subtest: analyzer missing report cannot count as a measured hazard and is cleaned up
+ok 6 - analyzer missing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 14.378958
+  type: 'test'
+  ...
+# Subtest: analyzer malformed report cannot count as a measured hazard and is cleaned up
+ok 7 - analyzer malformed report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 14.170625
+  type: 'test'
+  ...
+# Subtest: analyzer wrong source cannot count as a measured hazard and is cleaned up
+ok 8 - analyzer wrong source cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.806
+  type: 'test'
+  ...
+# Subtest: analyzer wrong profile cannot count as a measured hazard and is cleaned up
+ok 9 - analyzer wrong profile cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.320667
+  type: 'test'
+  ...
+# Subtest: analyzer wrong reason cannot count as a measured hazard and is cleaned up
+ok 10 - analyzer wrong reason cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.475791
+  type: 'test'
+  ...
+# Subtest: analyzer no finding cannot count as a measured hazard and is cleaned up
+ok 11 - analyzer no finding cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 22.521125
+  type: 'test'
+  ...
+# Subtest: analyzer passing report cannot count as a measured hazard and is cleaned up
+ok 12 - analyzer passing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 14.506333
+  type: 'test'
+  ...
+# Subtest: analyzer missing refusal cannot count as a measured hazard and is cleaned up
+ok 13 - analyzer missing refusal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 14.294583
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder exit
+ok 14 - partial fixtures are deleted after encoder exit
+  ---
+  duration_ms: 13.445209
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder throw
+ok 15 - partial fixtures are deleted after encoder throw
+  ---
+  duration_ms: 13.660792
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after analyzer throw
+ok 16 - partial fixtures are deleted after analyzer throw
+  ---
+  duration_ms: 13.191208
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after report write
+ok 17 - partial fixtures are deleted after report write
+  ---
+  duration_ms: 14.53025
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 590.420875

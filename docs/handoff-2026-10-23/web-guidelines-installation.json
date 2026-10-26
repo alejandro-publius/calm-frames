@@ -1,0 +1,30 @@
+{
+  "name": "web-design-guidelines",
+  "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
+  "guidelines_revision": "434b7f91364665f2f733b310ec54809bf8f37937",
+  "destination": "/Users/alexvintera/.codex/skills/web-design-guidelines",
+  "installed": true,
+  "files": [
+    {
+      "path": "LOCAL_INSTALL.md",
+      "sha256": "7813e86178412cdc5bf8b7d81aab059389b61f937dd97ed92e15b9c5cf8f6612"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a5f8b5270d24e9e3b8a35df579eef66413cd80c3c6adfced84626d6dc36c4d35"
+    },
+    {
+      "path": "UPSTREAM_README.md",
+      "sha256": "7c02f64b08fc6c4eef03c01d64f3e2ed478193ccfcbd14edba379abe23304651"
+    },
+    {
+      "path": "references/GUIDELINES_LICENSE",
+      "sha256": "6cd1609c9c12233507cdd2ce0d32e9a721e3c27494951be06b90090deeeb7af2"
+    },
+    {
+      "path": "references/web-interface-guidelines.md",
+      "sha256": "d246b026f4f29b5823a9cc857f9edf3d2507002e055e32040cadeaf3b38e0234"
+    }
+  ],
+  "licensing_hold_resolved_by": "Publisher README explicitly states MIT and instructs installation"
+}

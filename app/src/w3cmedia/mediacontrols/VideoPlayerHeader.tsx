@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import BackButton from '../../components/BackButton';
-import { COLORS } from '../../styles/Colors';
+import { CALM_COLORS, CALM_SURFACE, CALM_TEXT } from '../../calmframes/calmStyles';
 import { scaleUxToDp } from '../../utils/pixelUtils';
 
 interface Header {
@@ -12,10 +12,10 @@ interface Header {
 const Header = React.memo(({ title, navigateBack }: Header) => {
   return (
     <View style={styles.header}>
-      <BackButton onPress={navigateBack} hasTVPreferredFocus={false} />
       <Text numberOfLines={1} style={styles.title} testID="video-player-header">
         {title}
       </Text>
+      <BackButton onPress={navigateBack} hasTVPreferredFocus={false} />
     </View>
   );
 });
@@ -26,18 +26,21 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    opacity: 0.8,
+    justifyContent: 'flex-end',
+    gap: scaleUxToDp(20),
     width: '100%',
-    paddingVertical: scaleUxToDp(10),
-    paddingRight: scaleUxToDp(40),
-    paddingLeft: scaleUxToDp(20),
+    paddingTop: scaleUxToDp(54),
+    paddingRight: scaleUxToDp(96),
+    paddingLeft: scaleUxToDp(480),
   },
   title: {
-    color: COLORS.WHITE,
-    fontWeight: '500',
-    fontSize: scaleUxToDp(70),
+    ...CALM_TEXT.section,
+    color: CALM_COLORS.TEXT,
     textAlign: 'right',
-    width: '90%',
+    flexShrink: 1,
+    backgroundColor: CALM_COLORS.SURFACE,
+    borderRadius: scaleUxToDp(CALM_SURFACE.STATUS_RADIUS),
+    paddingHorizontal: scaleUxToDp(24),
+    paddingVertical: scaleUxToDp(12),
   },
 });

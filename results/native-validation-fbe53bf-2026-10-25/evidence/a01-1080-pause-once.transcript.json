@@ -1,0 +1,121 @@
+{
+ "name": "a01-1080-pause-once",
+ "seconds": 100,
+ "keys": [
+  {
+   "t": 1.31,
+   "key": "KEY_ENTER"
+  },
+  {
+   "t": 8.31,
+   "key": "wait6"
+  },
+  {
+   "t": 9.45,
+   "key": "KEY_ENTER"
+  },
+  {
+   "t": 18.45,
+   "key": "wait8"
+  },
+  {
+   "t": 19.58,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 30.59,
+   "key": "wait10"
+  },
+  {
+   "t": 31.83,
+   "key": "KEY_DOWN"
+  },
+  {
+   "t": 42.83,
+   "key": "wait10"
+  },
+  {
+   "t": 43.87,
+   "key": "KEY_UP"
+  },
+  {
+   "t": 54.87,
+   "key": "wait10"
+  },
+  {
+   "t": 55.96,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 64.97,
+   "key": "wait8"
+  },
+  {
+   "t": 65.94,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 76.95,
+   "key": "wait10"
+  },
+  {
+   "t": 78.01,
+   "key": "KEY_DOWN"
+  },
+  {
+   "t": 89.02,
+   "key": "wait10"
+  }
+ ],
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 1.0,
+   "text": "!"
+  },
+  {
+   "start": 1.0,
+   "end": 4.0,
+   "text": " MQUE FALLS"
+  },
+  {
+   "start": 4.0,
+   "end": 7.0,
+   "text": " RESUME AT 118, BUTTON"
+  },
+  {
+   "start": 7.0,
+   "end": 13.8,
+   "text": " BACK, BUTTON, POSSED."
+  },
+  {
+   "start": 13.8,
+   "end": 15.64,
+   "text": " POSS PLAY TO CONTINUE."
+  },
+  {
+   "start": 15.64,
+   "end": 18.72,
+   "text": " CURRENT PROGRESS IS, 27%."
+  },
+  {
+   "start": 18.72,
+   "end": 21.16,
+   "text": " CURRENT PROGRESS IS, 28%."
+  },
+  {
+   "start": 30.0,
+   "end": 32.06,
+   "text": " you"
+  },
+  {
+   "start": 90.0,
+   "end": 92.06,
+   "text": " you"
+  }
+ ],
+ "text": "! MQUE FALLS RESUME AT 118, BUTTON BACK, BUTTON, POSSED. POSS PLAY TO CONTINUE. CURRENT PROGRESS IS, 27%. CURRENT PROGRESS IS, 28%. you you",
+ "model": "mlx-community/whisper-base.en-mlx",
+ "recording_sha256": "163f2812be887398f130e6d12ff2c6fbcd9e7a1d972d1e51dea14b89677b0f48",
+ "note": "recording kept private, not exported"
+}

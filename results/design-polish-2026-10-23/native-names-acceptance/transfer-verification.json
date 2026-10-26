@@ -1,0 +1,141 @@
+{
+  "recorded_utc": "2026-10-23T23:24:18.188501+00:00",
+  "attachment": {
+    "file_name": "calm-frames-names-acceptance-6a87937-evidence.zip",
+    "file_id": "file_00000000538c81fba0ec2855c08229fc",
+    "bytes": 1849633,
+    "sha256": "7398282249be7ac2d87fdacfa9494185dc41ae5fd2f738b205db5010d7e6a463",
+    "readable": true
+  },
+  "archive_checks": {
+    "crc_passed": true,
+    "safe_member_paths": true,
+    "symlinks": false,
+    "all_received_files_covered_except_checksum_index": true,
+    "listed_sha256_checks_passed": 15
+  },
+  "members": {
+    "EVIDENCE_MANIFEST.json": {
+      "bytes": 81884,
+      "sha256": "7017502926c8d252be74bc7c3d74d4b0d32a2b671a951c700f1914867477ee7d"
+    },
+    "EVIDENCE_NOTES.md": {
+      "bytes": 3421,
+      "sha256": "9e1445f274e7eddbc4ad36251d3dd4530fa0d023d682667af0b2aebd4c9633bd"
+    },
+    "README.md": {
+      "bytes": 1288,
+      "sha256": "68cbc593cab6c34b72e7366990cc0ee1f1fb52783dc3aa1c1246a0656fbf7886"
+    },
+    "SHA256SUMS": {
+      "bytes": 1242,
+      "sha256": "5b1b1974885136d8c81185de17bbddeb1e78274a9d1e63d7c0dc8232a6a67642"
+    },
+    "build.sh": {
+      "bytes": 629,
+      "sha256": "592dbfc853906c5e24617b63114daca05312dad60cf07be3af79e6146be5bbce"
+    },
+    "drive.py": {
+      "bytes": 3560,
+      "sha256": "58d0b8bffa109292e9da843ad5c74cfac3cda603c01f0c2f72633cb12488a879"
+    },
+    "logs/build.log": {
+      "bytes": 32614,
+      "sha256": "3fa8c915965d51e1823a624d5564abc813fbb4684b79ab2d7ce519889a9c1b6c"
+    },
+    "logs/device-log.redacted.txt": {
+      "bytes": 19908814,
+      "sha256": "503089f182c5869ecd28ebee9eb8e2e424d3117955b0df3bc0f84c9cb1d9696e"
+    },
+    "logs/install.log": {
+      "bytes": 75,
+      "sha256": "57aff92755e9e1858f6621225a5055fb06315ae347c632e9838b91353bacff0c"
+    },
+    "logs/installed-after.txt": {
+      "bytes": 4665,
+      "sha256": "a1402b8403c3994a353d5701e1f0e877f172838f2df69c68e0fc15a9eea9bd78"
+    },
+    "logs/installed-before.txt": {
+      "bytes": 4702,
+      "sha256": "7024a5488fbe8a99886fa20089db8fe4641f6cbe54e232ad089274e2a18b5c8d"
+    },
+    "logs/vvd-start.log": {
+      "bytes": 202,
+      "sha256": "ab75dee3f442495a6d0f8d0865fb93b7be5ca5386c4131f19f8f4cc32d17da55"
+    },
+    "plan.json": {
+      "bytes": 3440,
+      "sha256": "12a16daf02a78df90a8c28fab4b16b4e7ec38f56cd610e3a9d258d5edb6d8577"
+    },
+    "receipt.json": {
+      "bytes": 40893,
+      "sha256": "ca78cd883cf06fc348680c80b718f91ea3365077800eba7d2e82959805a31ad8"
+    },
+    "steps.jsonl": {
+      "bytes": 64612,
+      "sha256": "2a8e864c96593589a11face2e1b4fdb1b671fc9d75be26480de7e517be58c509"
+    },
+    "write_receipt.py": {
+      "bytes": 9594,
+      "sha256": "48d203f82cb48ec91eeb4080ab7d8b36998cf9c7f60cbc8accc75814f92de36c"
+    }
+  },
+  "manifest": {
+    "included_original_files_verified": 13,
+    "omitted_png_records": 128,
+    "screenshot_bytes_received": false,
+    "original_archive_identity_reported": {
+      "file": "calm-frames-names-acceptance-6a87937-receipt.zip",
+      "bytes": 47372955,
+      "sha256": "669e1e3e466052ce0a5f2de8cab5758b3049a52d769cc13a24f32e9a65eb98b1"
+    },
+    "original_archive_identity_rehashed_here": false
+  },
+  "source": {
+    "head": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+    "checked_code_source": "0102622c1985ef0f7927d7fc434a15a9d2c2e278",
+    "required_base": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+    "required_ancestry_verified": true,
+    "app_inputs_identical_between_checked_code_and_head": true,
+    "source_export_sha256_verified": "20d0fbc1b4f9a3ecd7d11e70c902bf39e6d7f30cf91eca45b90d4868a55d7e79",
+    "source_export_bytes_verified": 4427662,
+    "source_lock_sha256_verified": "2d91f6b1700ea813aac633cbc83df85891be8a22d4662070917c95e456ba482b"
+  },
+  "native_package": {
+    "bytes": 132661830,
+    "sha256": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d",
+    "sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458"
+  },
+  "native_package_hashes_recomputed_here": false,
+  "native_install": {
+    "installed_after_log_sha256": "a1402b8403c3994a353d5701e1f0e877f172838f2df69c68e0fc15a9eea9bd78",
+    "installed_after_sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458",
+    "matches_recorded_native_package_sha384": true,
+    "install_log_reports_success": true,
+    "package_bytes_not_in_evidence_zip": true
+  },
+  "rollback_record": {
+    "source": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "sha256": "e3458d5a59e6d68cd96b50e1ebe4784c1bdfbcbcadca3b1a8b6ba4c3f7b9b3c5",
+    "bytes": 132651237,
+    "mac_operator_reported_readable_and_hashed": true,
+    "bytes_rehashed_here": false,
+    "restoration_exercised": false
+  },
+  "privacy": {
+    "committed_raw_device_log": false,
+    "committed_household_values": false,
+    "original_log_disclosure": "EVIDENCE_NOTES and the manifest disclose PIN-key focus traces in the original archive. This supersedes the earlier broad statement that no PIN digits were recorded.",
+    "redacted_log_sha256_verified": "503089f182c5869ecd28ebee9eb8e2e424d3117955b0df3bc0f84c9cb1d9696e",
+    "pin_focus_pattern_matches_in_received_log": 0,
+    "removed_lines_reported": 56,
+    "original_bytes_not_available_to_verify_redaction_invariant": true,
+    "letter_key_focus_traces_remain_in_received_log": true,
+    "cloud_fix": "07db296137ec3ba50afff15097053061709fda27"
+  },
+  "limits": [
+    "Checksums establish consistency of the received files, not a new native run or a cryptographic attestation of the operator.",
+    "Native binary and images were not supplied; their hashes remain recorded evidence rather than hashes recomputed from local bytes.",
+    "Included scripts were read as evidence and were not executed. No native build, simulator, publication or media generation occurred."
+  ]
+}

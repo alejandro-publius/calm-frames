@@ -1,0 +1,25 @@
+{
+  "status": "blocked",
+  "errors": [
+    "The selected installed package SHA256 is required",
+    "Authorized narration voice is missing",
+    "manga_01: actual absolute local file is missing",
+    "manga_02: actual absolute local file is missing",
+    "manga_03: actual absolute local file is missing",
+    "manga_04: actual absolute local file is missing",
+    "manga_05: actual absolute local file is missing",
+    "n01: actual absolute local file is missing",
+    "n02: actual absolute local file is missing",
+    "n03: actual absolute local file is missing",
+    "n04: actual absolute local file is missing",
+    "n05: actual absolute local file is missing",
+    "n06: actual absolute local file is missing",
+    "n07: actual absolute local file is missing",
+    "n08: actual absolute local file is missing",
+    "native_ambient: actual absolute local file is missing",
+    "native_details: actual absolute local file is missing",
+    "native_home: actual absolute local file is missing",
+    "native_proof: actual absolute local file is missing",
+    "native_return: actual absolute local file is missing"
+  ]
+}

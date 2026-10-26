@@ -1,0 +1,47 @@
+{
+  "approval_label": null,
+  "approval_request": {
+    "bundleId": "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101",
+    "catalogSha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "publicKeyFingerprint": "a3240e9daf33984511014cd7434803ab05a6e8816081f3f0ccfd94995208186b"
+  },
+  "approval_required": true,
+  "blockers": [
+    "Exact bundle and catalog membership are not approved.",
+    "This public signer is not approved by the current registry."
+  ],
+  "bundle_id": "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101",
+  "can_watch": false,
+  "catalog_sha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+  "files": {
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/manifest.json": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.json": "b8f642d9db63956343e7e7cc72ee8c6523a87a3fa52846977bd389ba36ef3d74",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.mp4": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/broadcast.vtt": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.json": "8eb4bcb779d6586d9d5ef034aa87459e61362b3718dcff6860781d416e700e50",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.mp4": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.vtt": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.json": "554b61ecd48618fe091b55c6fac58d4f4894b7bbd220389ebecbd9f4386399be",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.mp4": "0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78",
+    "51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.vtt": "967a99bb74ac6b319eda647aa55db80ddf764116da2c4667c7473b9426cc8e30",
+    "catalog.json": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "catalog.ts": "a6175eaa4e0d32dd8128279b0d3bd3de7d065b1d8ac8eb25c15ff3aa2f3ce4fd",
+    "reports/18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9.json": "18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9"
+  },
+  "installed_by_staging": false,
+  "inventory_sha256": "616fc20e1978d9d17fabb91613c11fe3bf82f8f1d8bcca7976aa949c4bf770db",
+  "message": "Delivery review canceled. Exported files and app library are unchanged.",
+  "package_directory": "/Users/alexvintera/Documents/Codex/2026-10-15/task/creator-editions-evidence/harbor-candidate/package",
+  "public_key_fingerprint": "a3240e9daf33984511014cd7434803ab05a6e8816081f3f0ccfd94995208186b",
+  "source_sha256": "de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+  "staged_at": 1792288073.2659578,
+  "state": "canceled",
+  "ticket_id": "9c46a713993e492592db5cd3168dd56e",
+  "title": "Harbor story (prepared locally)",
+  "verification": {
+    "checkedInputsSha256": "ab301e661033b619e3c25a129fbb85160c9739b5114b92c50a95fa7a1b0fda86",
+    "outcome": "no flagged segments",
+    "reportSha256": "18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9"
+  },
+  "version": 1
+}

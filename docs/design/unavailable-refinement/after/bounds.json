@@ -1,0 +1,1454 @@
+{
+  "1080/bad-signature": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/generic": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 320,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe picture stays hidden.",
+      "x": 440,
+      "y": 444,
+      "width": 1040,
+      "height": 178
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe picture stays hidden.",
+      "x": 480,
+      "y": 476,
+      "width": 968,
+      "height": 114
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 476,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The picture stays hidden.",
+      "x": 480,
+      "y": 542,
+      "width": 968,
+      "height": 48
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 662,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 688,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/long-title": [
+    {
+      "id": "title-details",
+      "text": "A quiet journey along the coast at sunset\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "A quiet journey along the coast at sunset",
+      "x": 440,
+      "y": 254,
+      "width": 1040,
+      "height": 168
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 440,
+      "y": 462,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 494,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 494,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 560,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 728,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 754,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/missing": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nNot ready to watch\nThis title is still being prepared. The picture stays hidden for now.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is still being prepared. The picture stays hidden for now.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/stale": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title needs an update\nThe picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 320,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title needs an update\nThe picture stays hidden.",
+      "x": 440,
+      "y": 444,
+      "width": 1040,
+      "height": 178
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title needs an update\nThe picture stays hidden.",
+      "x": 480,
+      "y": 476,
+      "width": 968,
+      "height": 114
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title needs an update",
+      "x": 480,
+      "y": 476,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The picture stays hidden.",
+      "x": 480,
+      "y": 542,
+      "width": 968,
+      "height": 48
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 662,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 688,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unknown-key": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title comes from an unsupported source. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unparseable": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information could not be opened. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information could not be opened. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unsigned": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title is missing playback information. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is missing playback information. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/viewing-settings": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nNot ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/wrong-file": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/wrong-version": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 296,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 440,
+      "y": 420,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 452,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 480,
+      "y": 518,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 801.65625,
+      "y": 686,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 712,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "720/bad-signature": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/generic": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 213.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe picture stays hidden.",
+      "x": 293.5,
+      "y": 296.5,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe picture stays hidden.",
+      "x": 319.5,
+      "y": 317.5,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 317.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The picture stays hidden.",
+      "x": 319.5,
+      "y": 361.5,
+      "width": 646,
+      "height": 32
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 441.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 458.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/long-title": [
+    {
+      "id": "title-details",
+      "text": "A quiet journey along the coast at sunset\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "A quiet journey along the coast at sunset",
+      "x": 293.5,
+      "y": 169.5,
+      "width": 693,
+      "height": 112
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 293.5,
+      "y": 308.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 329.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 329.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 373.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 485.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 502.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/missing": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nNot ready to watch\nThis title is still being prepared. The picture stays hidden for now.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is still being prepared. The picture stays hidden for now.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/stale": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title needs an update\nThe picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 213.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title needs an update\nThe picture stays hidden.",
+      "x": 293.5,
+      "y": 296.5,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title needs an update\nThe picture stays hidden.",
+      "x": 319.5,
+      "y": 317.5,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title needs an update",
+      "x": 319.5,
+      "y": 317.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The picture stays hidden.",
+      "x": 319.5,
+      "y": 361.5,
+      "width": 646,
+      "height": 32
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 441.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 458.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unknown-key": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title comes from an unsupported source. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unparseable": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information could not be opened. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information could not be opened. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unsigned": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title is missing playback information. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is missing playback information. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/viewing-settings": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nNot ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/wrong-file": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/wrong-version": [
+    {
+      "id": "title-details",
+      "text": "Harbor\nThis title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 197.5,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 293.5,
+      "y": 280.5,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 301.5,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 319.5,
+      "y": 345.5,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 534.765625,
+      "y": 457.5,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 474.5,
+      "width": 160.453125,
+      "height": 31
+    }
+  ]
+}

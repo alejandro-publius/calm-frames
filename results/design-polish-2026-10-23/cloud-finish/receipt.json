@@ -1,0 +1,241 @@
+{
+  "observed_at": "2026-10-23T20:12:17.017122+00:00",
+  "checked_source": "f5ea4fb88600da55ce88a79a44086c91fbb5009a",
+  "branch": "codex/design-polish-2026-10-23",
+  "frozen_integration_source": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+  "code_commits": {
+    "python_lint": "acf064ce03dfe9cbe950909dd7cfd92aa4d26fa3",
+    "dependency_fix": "f5ea4fb88600da55ce88a79a44086c91fbb5009a"
+  },
+  "change": {
+    "shell_quote": "All locked copies resolve to 1.11.0; old legacy 1.6.1 removed. SDK and TOML pins unchanged.",
+    "ci": "Normal Ruff failure repaired; original lint configuration retained. Existing workflow now runs actual legacy editor/parser regressions.",
+    "presentation": "Unpublished documentation-only follow-up restores purpose, evidence scope and original checklist numbering."
+  },
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "ruff": "0.17.0",
+    "cyclonedx-py": "7.4.0",
+    "cyclonedx-python-lib": "11.12.0",
+    "cyclonedx-npm": "6.0.1",
+    "cyclonedx-library": "10.3.0"
+  },
+  "clean_install": {
+    "command": "npm --prefix app ci --ignore-scripts --no-audit --no-fund",
+    "exit_code": 0,
+    "node_modules_is_symlink": false,
+    "log_sha256": "f8d9ca6fc166093b4d6f6ba82c534b88df9d7c3c9db5ff1c573d336bc379acff",
+    "scope": "Real final locked tree. Matches cloud CI lifecycle; no Shaka/native build performed."
+  },
+  "checks": {
+    "shell-quote-fixed": {
+      "name": "shell-quote-fixed",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_shell_quote.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.41
+    },
+    "typecheck": {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 12.21
+    },
+    "lint": {
+      "name": "lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 18.71
+    },
+    "app-tests": {
+      "name": "app-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "test",
+        "--",
+        "--runInBand",
+        "--ci"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 104.87
+    },
+    "audit-policy-tests": {
+      "name": "audit-policy-tests",
+      "command": [
+        "/workspace/calm-frames/.venv/bin/python",
+        "-m",
+        "pytest",
+        "eval/tests/test_dep_audit.py",
+        "eval/tests/test_ci_python_lanes.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.55
+    },
+    "ruff": {
+      "name": "ruff",
+      "command": [
+        "/tmp/calm-frames-quality-tools/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.09
+    },
+    "sbom-write": {
+      "name": "sbom-write",
+      "command": [
+        "python",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.41
+    },
+    "sbom-check": {
+      "name": "sbom-check",
+      "command": [
+        "python",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "/tmp/calm-cloud-finish-sbom"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 15.77
+    }
+  },
+  "app_test_result": {
+    "passed": 1806,
+    "skipped": 4,
+    "passed_suites": 171,
+    "skipped_suites": 1,
+    "snapshots_passed": 57,
+    "scope": "Normal test command with its existing coverage thresholds."
+  },
+  "lint_result": {
+    "errors": 0,
+    "source_warnings": 104,
+    "test_warnings": 4,
+    "existing_warnings_retained": true
+  },
+  "preflight": {
+    "command": "python docs/cloud-integration-2026-10-23/demo/test_render_preflight.py",
+    "exit_code": 0,
+    "passed": 16,
+    "media_generated": false
+  },
+  "dependency_audit_delta": {
+    "before": {
+      "info": 0,
+      "low": 2,
+      "moderate": 26,
+      "high": 24,
+      "critical": 5,
+      "total": 57
+    },
+    "after": {
+      "info": 0,
+      "low": 2,
+      "moderate": 26,
+      "high": 24,
+      "critical": 4,
+      "total": 56
+    },
+    "removed_advisories": [
+      "GHSA-395f-4hp3-45gv",
+      "GHSA-w7jw-789q-3m8p"
+    ],
+    "added_advisories": [],
+    "shell_quote_remains": false
+  },
+  "audit_acceptance": "Blocked: other advisories remain and two older exception groups are expired. Python dependencies were not rescanned for this npm-only change. No policy renewal or owner acceptance written.",
+  "negative_controls": {
+    "old_parser": "Before override: quote-token rejection and literal round-trip tests fail; the actual legacy launcher compatibility case passes. New locked parser passes all cases.",
+    "ruff_before": 6,
+    "transcript_normalization": "Before transcript replaces the absolute checkout prefix with relative paths and trims trailing whitespace; outcome and diagnostic text retained.",
+    "raw_transcript_sha256": "b028315e04696c371f77b3d96352b00cbe475e7f4583551b956ea2049b349b9f"
+  },
+  "preserved": {
+    "fable_owned_sources": [
+      "app/src/calmframes/ParentAreaScreen.tsx",
+      "app/src/calmframes/copy.ts",
+      "app/src/calmframes/profiles.ts",
+      "app/src/screens/KidModeScreen.tsx",
+      "app/src/calmframes/uiFrames.ts"
+    ],
+    "fable_sources_unchanged_from": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+    "approved_storyboard_sha256": "5f08a7a99017bb984a9301f085f6a74d115ed3c52d6203499ba834dfe7884724",
+    "storyboard_unchanged_from": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "exception_policy_unchanged": true,
+    "judging_package_tree": "e549872bd4365665ba476503ec9ae319bafb5932"
+  },
+  "files": {
+    ".github/workflows/ci.yml": {
+      "bytes": 16169,
+      "sha256": "8af67f87f60788bb5787df46fa2e29d643d9d3a0632f0a48f49e2c5e172a2bb5"
+    },
+    "app/package.json": {
+      "bytes": 12361,
+      "sha256": "87cd81488dfac77729b06a3e61cf188920a0d17515cb959a77e6d1f660ab4b52"
+    },
+    "app/package-lock.json": {
+      "bytes": 808453,
+      "sha256": "721962014af8fa743a93f33e6e1828c9e43877d0f867d91a8a9b0d178f3ed3bb"
+    },
+    "app/tools/legacy_shell_quote.test.mjs": {
+      "bytes": 3498,
+      "sha256": "2be8ff71092ed2e6f835415527425000405fe23c63bcd8574e913e907e388aa2"
+    },
+    "app/test/calmframes/imageSizeLegacy.test.ts": {
+      "bytes": 10116,
+      "sha256": "6f2355e6d652f838d5c30e885a35e655b5267168e853f777d4b627176474a2e7"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2262189,
+      "sha256": "db763a2af2f70af9a5acea690d7b1dd0270a2f7d3e8854b1b51202088eb2b97c"
+    },
+    "docs/SECURITY.md": {
+      "bytes": 39927,
+      "sha256": "e70cf2540928b49ae032a967cbbbf0ac2797fce82ea533bf0a849f5fc21df869"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "7de580796084a1748db72ce8b584c27f390f206f2faf2f6c6255306c89654ddd"
+    },
+    "docs/cloud-integration-2026-10-23/demo/render_demo.py": {
+      "bytes": 17890,
+      "sha256": "4ca95da5c3b764141381fd86a5700c66a7addcffc145448ad2533bafd3ed54a2"
+    },
+    "docs/cloud-integration-2026-10-23/demo/test_render_preflight.py": {
+      "bytes": 9953,
+      "sha256": "a72087acd93152897402be411bc6914796547ed0b5d407394ad76db10bd179fb"
+    }
+  },
+  "limits": [
+    "No hosted checks for this unpublished review head.",
+    "No new native build, installation, capture, VoiceView or human audiovisual acceptance.",
+    "No generated manga, ElevenLabs narration or replacement demo.",
+    "No push, merge, publication or live submission change.",
+    "The first policy-test command named a nonexistent SBOM test file and collected no tests; the corrected existing audit/CI tests passed."
+  ]
+}

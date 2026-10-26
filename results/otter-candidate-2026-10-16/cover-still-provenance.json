@@ -1,0 +1,11 @@
+{
+  "calm_margin_ms": 1000.0,
+  "from": "neutral-card",
+  "neutral_rgb": [
+    40,
+    40,
+    40
+  ],
+  "time_ms": null,
+  "why": "every moment in this title is inside a flagged span, so there is no frame of it that may be shown. The cover is a flat neutral card that came from nothing in the title."
+}

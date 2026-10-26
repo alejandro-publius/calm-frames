@@ -1,0 +1,8 @@
+---------------------------------------------------|---------|----------|---------|---------|---------------------------------------------------------------------------------------------------------
+
+Test Suites: 1 skipped, 171 passed, 171 of 172 total
+Tests:       4 skipped, 1796 passed, 1800 total
+Snapshots:   57 passed, 57 total
+Time:        55.114 s
+Ran all test suites.
+TypeScript and scoped ESLint exited0. Native package build and install succeeded.

@@ -1,0 +1,85 @@
+{
+  "scope": "Correction to preparation recovery test process-state detection only; no pipeline production change",
+  "base_commit": "32abb504bf20e1990c669426fbf395286562390a",
+  "source_commit": "e575879d1147b101b802666dc70d0040aef409eb",
+  "source_file": "pipeline/tests/test_preparation_recovery.py",
+  "source_sha256": "378ccf64db59a3ea260ea8bde60b26793e32ab8a12aa10b35e946f122bfeb9c4",
+  "environment": {
+    "os": "Linux",
+    "python": "3.12.14",
+    "pytest": "9.1.1",
+    "ruff": "0.17.0"
+  },
+  "diagnosis": {
+    "reproduced_failures": 2,
+    "before_summary": "2 failed in 30.13s",
+    "failure_location": "_kill_when_blocked waiting for killpg(pgid, 0) to raise ProcessLookupError",
+    "observed_group_states": "Each owned killed group retained one Z-state process with PPID 1; no live member observed",
+    "process_evidence": "process-states.json",
+    "raw_before_log_preserved_outside_git": true,
+    "committed_before_log": "before.log",
+    "sanitization": "Temporary test-root paths and repository Python executable path were replaced; trailing whitespace was removed. No assertion or result was changed."
+  },
+  "tests": {
+    "passed": 15,
+    "failed": 0,
+    "deselected": 75,
+    "command": "PYTHONPATH=flashmap/src:. python -m pytest pipeline/tests/test_preparation_recovery.py -q -k \"stopped_process_group or sigkill\"",
+    "summary": "15 passed, 75 deselected in 15.39s"
+  },
+  "negative_controls": {
+    "old_semantics": "New actual dead-child test failed against the original signal-0-only semantics; live-child control passed",
+    "bypassed_inspection": "Actual live-child control failed when helper was deliberately changed to accept every observed group",
+    "restored": "13 helper controls passed after source restoration",
+    "additional_guards": [
+      "Mixed Z/live states refused",
+      "Unknown state refused",
+      "Missing process snapshot refused",
+      "Empty snapshot refused while killpg still reports group exists",
+      "Malformed stat refused",
+      "Unreadable stat refused"
+    ]
+  },
+  "preserved": [
+    "Real SIGKILL and expected process return code",
+    "Original preparation marker, communication and process-wait timeouts",
+    "Failed receipt and empty catalog assertions before resume",
+    "Step timestamp checks and ledger reuse assertions",
+    "Artifact SHA-256 and snapshot identity assertions after resume",
+    "No other process signaled"
+  ],
+  "checks": {
+    "ruff": "passed",
+    "repository_style": "passed",
+    "git_diff_check": "passed",
+    "gitleaks_staged": "passed"
+  },
+  "limits": [
+    "Only Linux /proc all-Z evidence can supplement the existing ESRCH check",
+    "Unknown process metadata is never accepted as stopped",
+    "Other platforms keep the previous ESRCH-only completion rule",
+    "No native, human audiovisual, publication or hosted-CI assertion"
+  ],
+  "artifacts": {
+    "after.log": {
+      "bytes": 115,
+      "sha256": "cefd190a8a23ce307115e19109e26ff1c800603fe6bb484d8c5cfa1736651499"
+    },
+    "before.log": {
+      "bytes": 6810,
+      "sha256": "93127d841ea2a39b99f3279d4eba2373b9efe7bcfb17b501fbc8135ed469afe5"
+    },
+    "helper-before.log": {
+      "bytes": 1599,
+      "sha256": "821e5e3b548cd21bda50baf278ff10b507668d408dd2ef2ce0be727edef5035c"
+    },
+    "live-negative-control.log": {
+      "bytes": 1063,
+      "sha256": "e6f72749d7800fdf4b8eb223a0635bdf60280316e82b8ec63b1532d277f7278d"
+    },
+    "process-states.json": {
+      "bytes": 296,
+      "sha256": "3ed93b28193ba120d1b771cdec7652b4b97ea918b6e10949a73be4e081bad2a0"
+    }
+  }
+}

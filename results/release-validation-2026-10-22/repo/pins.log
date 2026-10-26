@@ -1,0 +1,5 @@
+negative control: a tag, a branch, a short commit and a stale exception are refused
+
+NOTE   app/package.json: 72 ranged versions, pinned in practice by package-lock.json and npm ci
+
+51 pinned, 1 note(s), 0 loose.

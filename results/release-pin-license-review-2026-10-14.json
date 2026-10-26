@@ -1,0 +1,56 @@
+{
+  "scope": "Release-helper PIN omission and read-only Amazon notice inspection; no publication, capture or native execution",
+  "base_commit": "31697a1",
+  "release_fix": {
+    "file": "scripts/release.sh",
+    "finding": "The helper inserted a supplied --pin or DEMO_PIN into generated NOTES.md.",
+    "change": "Removed interpolation and DEMO_PIN lookup. Retained --pin as a deprecated, validated compatibility option whose value is unused. Fresh owner setup and configured-household instructions are unchanged.",
+    "test": "eval/tests/test_release.py::test_reviewer_documents_never_include_supplied_pin",
+    "evidence": "Both fake-sentinel cases failed before the change and pass after it. Tests inspect NOTES.md, PREPARATION.json, SHA256SUMS, stdout and stderr. Real credentials and household data were not read.",
+    "checks": [
+      "39 passed: /Users/alexvintera/calm-frames/.venv/bin/python -m pytest eval/tests/test_release.py -q",
+      "Passed: /Library/Frameworks/Python.framework/Versions/3.9/bin/ruff check eval/tests/test_release.py",
+      "Passed: bash -n scripts/release.sh",
+      "Passed: git diff --check"
+    ],
+    "local_logs": ["/tmp/calm-release-pin-red.log", "/tmp/calm-release-pin-tests.log"],
+    "limitations": "Only fixture packages in pytest temporary directories were assembled. No real package or existing generated reviewer document was opened, modified or rebuilt. Historical generated artifacts are outside this fix."
+  },
+  "license_inspection": {
+    "classification": "Unresolved scope of permission due to contradictory notices. Not merely an attribution omission, and not evidence proving a license incompatibility or a redistribution prohibition.",
+    "root_grant": "app/LICENSE: MIT No Attribution, with permission to use, copy, modify, publish, distribute and sublicense. Calm Frames LICENSE is Apache-2.0; that does not itself resolve the Amazon file-specific notices.",
+    "wrapper": "app/src/w3cmedia/shakaplayer/ShakaPlayer.ts:4-7 says AMAZON PROPRIETARY/CONFIDENTIAL and refers to terms in an accompanying LICENSE.TXT.",
+    "archive": "app/shaka-setup/shaka-rel-v4.8.5-r1.2.tar.gz",
+    "archive_sha256": "f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e",
+    "archive_eight_LICENSE_TXT_references": [
+      "shaka-rel/src/PlayerInterface.ts",
+      "shaka-rel/src/polyfills/DocumentPolyfill.ts",
+      "shaka-rel/src/polyfills/ElementPolyfill.ts",
+      "shaka-rel/src/polyfills/TextDecoderPolyfill.ts",
+      "shaka-rel/src/polyfills/DOMParserPolyfill.ts",
+      "shaka-rel/src/polyfills/MiscPolyfill.ts",
+      "shaka-rel/src/polyfills/W3CMediaPolyfill.ts",
+      "shaka-rel/src/shakaplayer/ShakaPlayer.ts"
+    ],
+    "archive_five_example_notices": {
+      "text": "PROPRIETARY/CONFIDENTIAL. USE IS SUBJECT TO LICENSE TERMS.",
+      "paths": [
+        "shaka-rel/src/AppPreBuffering.tsx",
+        "shaka-rel/src/AppNonAdaptive.tsx",
+        "shaka-rel/src/AppPreBufferingAds.tsx",
+        "shaka-rel/src/AppNonAdaptiveVideo.tsx",
+        "shaka-rel/src/AppPreBufferingPlaylist.tsx"
+      ]
+    },
+    "archive_license_notice_members": [],
+    "runtime_relevance": "app/shaka-setup/copyOutputs.sh copies generated integration sources/polyfills and removes five examples. The tracked wrapper imports and installs the six polyfills; VideoHandler imports the wrapper at module scope, so MP4-only playback does not establish that the integration is absent.",
+    "existing_documentation": "NOTICE:28-36 and docs/AMAZON_SAMPLE_LICENSE_REVIEW.md describe the conflict. The count of 13 proprietary notices is correct; only eight use the exact AMAZON prefix and LICENSE.TXT wording. No documentation or notice was changed.",
+    "upstream_recheck": [
+      "https://raw.githubusercontent.com/AmazonAppDev/vega-video-sample/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272/LICENSE",
+      "https://raw.githubusercontent.com/AmazonAppDev/vega-video-sample/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272/src/w3cmedia/shakaplayer/ShakaPlayer.ts"
+    ],
+    "missing_terms_limit": "The existing review records a 404 at the pinned root LICENSE.TXT URL. This pass's web tool returned an internal error for that URL, so no new HTTP-status claim is made. No license/notice file is present inside the inspected archive; this does not exclude terms elsewhere.",
+    "resolution": "Amazon clarification or corrected notices identifying the terms governing these exact integration files and source/compiled redistribution. No request sent, notices removed, permission inferred or legal determination made."
+  },
+  "preserved": "Root README, docs/submission, all other docs, runtime source after aa0494f, dependency inputs, packages, candidate checkout and household data unchanged by this follow-up."
+}

@@ -1,0 +1,60 @@
+FAIL test/calmframes/readingComfort.test.tsx
+  Reading comfort persistence and isolation
+    ✕ roundtrips a single enabled preference without changing PIN, floor or active profile (12 ms)
+    ○ skipped defaults new and legacy profiles off without changing the household record
+    ○ skipped changes only the named kid and preserves protection through later edits
+    ○ skipped rejects a malformed stored preference: "true"
+    ○ skipped rejects a malformed stored preference: 1
+    ○ skipped rejects a malformed stored preference: null
+    ○ skipped rejects a malformed stored preference: {}
+  Reading comfort in Parents
+    ○ skipped is offered only behind the PIN, for a kid and with a result-aware save adapter
+    ○ skipped waits for the saved family, blocks duplicate presses and retains a single focus target
+    ○ skipped does not steal focus if the remote moved away during the save
+    ○ skipped keeps the old preference after false and allows retry
+    ○ skipped keeps the old preference after rejection and allows retry
+  bounded Reading comfort typography
+    ○ skipped keeps the enlarged reading stop within a 1080-high viewport under the conservative text ruler
+    ○ skipped keeps the enlarged reading stop within a 720-high viewport under the conservative text ruler
+    ○ skipped does not change the name editor when the edited kid has Reading comfort on
+    ○ skipped changes help and spacing while retaining Parents disclaimer and profile panel geometry
+    ○ skipped enlarges More info only, preserving Watch geometry, safety wording, reading stop and Back focus
+
+  ● Reading comfort persistence and isolation › roundtrips a single enabled preference without changing PIN, floor or active profile
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -21,11 +21,11 @@
+              },
+            },
+            Object {
+              "id": "profile-2",
+              "name": "Sam",
+    -         "readingComfortEnabled": true,
+    +         "readingComfortEnabled": false,
+              "settings": Object {
+                "preset": "wcag",
+                "seatDistanceIn": 96,
+                "tvDiagonalIn": 55,
+              },
+
+      67 |     const enabled = { ...record, family: { ...family, profiles: [family.profiles[0], { ...family.profiles[1], readingComfortEnabled: true }] } };
+      68 |     await saveHousehold(storage, enabled);
+    > 69 |     expect(await loadHousehold(storage)).toEqual(enabled);
+         |                                          ^
+      70 |     await saveHousehold(storage, record);
+      71 |     expect(await loadHousehold(storage)).toEqual(record);
+      72 |   });
+
+      at Object.toEqual (test/calmframes/readingComfort.test.tsx:69:42)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 16 skipped, 17 total
+Snapshots:   0 total
+Time:        1.685 s, estimated 5 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx/i with tests matching "roundtrips a single enabled preference".

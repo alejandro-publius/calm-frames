@@ -1,0 +1,328 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 1.341731
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 452.396517
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 86.653484
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 10.856891
+  type: 'test'
+  ...
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 5 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 19.329467
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 6 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 37.109023
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 7 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 6.037924
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 8 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 57.769327
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 9 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 871.754333
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 10 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 3.040791
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 11 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 25.988834
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 12 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 1.148946
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 13 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 34.844292
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 14 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 36.025613
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 15 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 31.075889
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 16 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 31.682344
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 17 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 38.324521
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 18 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 4.068694
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 19 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 90.883704
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 20 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.286341
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 21 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.453784
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 22 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 353.716124
+  type: 'test'
+  ...
+# Subtest: the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+ok 23 - the unchanged isomorphic and FBJS consumers reuse the existing fixed CommonJS fetch
+  ---
+  duration_ms: 19.755681
+  type: 'test'
+  ...
+# Subtest: the actual fallback strips sensitive headers on a redirect to a different loopback host
+ok 24 - the actual fallback strips sensitive headers on a redirect to a different loopback host
+  ---
+  duration_ms: 48.258474
+  type: 'test'
+  ...
+# Subtest: same-host redirects retain headers and convert POST to GET without retaining its body
+ok 25 - same-host redirects retain headers and convert POST to GET without retaining its body
+  ---
+  duration_ms: 12.979183
+  type: 'test'
+  ...
+# Subtest: the installed polyfill exports retain Headers, Request and cloned Response contracts
+ok 26 - the installed polyfill exports retain Headers, Request and cloned Response contracts
+  ---
+  duration_ms: 11.395886
+  type: 'test'
+  ...
+# Subtest: the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+ok 27 - the actual FBJS retry wrapper preserves successful responses and its failed-response contract
+  ---
+  duration_ms: 12.370546
+  type: 'test'
+  ...
+# Subtest: FBJS still prefers an existing native fetch implementation
+ok 28 - FBJS still prefers an existing native fetch implementation
+  ---
+  duration_ms: 2.974607
+  type: 'test'
+  ...
+# Subtest: the unchanged old locale consumer receives only the reviewed CommonJS cache line
+ok 29 - the unchanged old locale consumer receives only the reviewed CommonJS cache line
+  ---
+  duration_ms: 1.783606
+  type: 'test'
+  ...
+# Subtest: expired entries are removed from the supplied cache without rereading each key
+ok 30 - expired entries are removed from the supplied cache without rereading each key
+  ---
+  duration_ms: 102.32836
+  type: 'test'
+  ...
+# Subtest: the actual locale module retains environment priority, normalization and explicit cache clearing
+ok 31 - the actual locale module retains environment priority, normalization and explicit cache clearing
+  ---
+  duration_ms: 7.59122
+  type: 'test'
+  ...
+# Subtest: the actual locale module keeps command parsing and memoization for sync and async callers
+ok 32 - the actual locale module keeps command parsing and memoization for sync and async callers
+  ---
+  duration_ms: 4.170822
+  type: 'test'
+  ...
+# Subtest: the actual locale module retains its default for disabled spawning and failed commands
+ok 33 - the actual locale module retains its default for disabled spawning and failed commands
+  ---
+  duration_ms: 3.580924
+  type: 'test'
+  ...
+# Subtest: the legacy CLI resolves the fixed logger without upgrading the CLI
+ok 34 - the legacy CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 15.200812
+  type: 'test'
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+ok 35 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 3.753961
+  type: 'test'
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+ok 36 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 1.648149
+  type: 'test'
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+ok 37 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 5.132997
+  type: 'test'
+  ...
+# Subtest: the actual legacy CLI retains React Native tag filtering and formatted events
+ok 38 - the actual legacy CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 18.443232
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 39 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 18.926884
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 40 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 3.567144
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 41 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 3.913274
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 42 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 15.505869
+  type: 'test'
+  ...
+# Subtest: only legacy spawn consumers use the existing fixed 6.x version
+ok 43 - only legacy spawn consumers use the existing fixed 6.x version
+  ---
+  duration_ms: 6.037726
+  type: 'test'
+  ...
+# Subtest: the Windows argument escaper handles long literal backslashes in bounded child processes
+ok 44 - the Windows argument escaper handles long literal backslashes in bounded child processes
+  ---
+  duration_ms: 124.502646
+  type: 'test'
+  ...
+# Subtest: the old locale dependency keeps async/sync arguments, environment and failure results
+ok 45 - the old locale dependency keeps async/sync arguments, environment and failure results
+  ---
+  duration_ms: 161.652331
+  type: 'test'
+  ...
+# Subtest: the actual FBJS dependency checker retains child streams and the requested directory
+ok 46 - the actual FBJS dependency checker retains child streams and the requested directory
+  ---
+  duration_ms: 94.850153
+  type: 'test'
+  ...
+# Subtest: only the unchanged legacy editor receives the fixed temporary-file dependency
+ok 47 - only the unchanged legacy editor receives the fixed temporary-file dependency
+  ---
+  duration_ms: 2.474483
+  type: 'test'
+  ...
+# Subtest: temporary names reject a symlink outside their configured base
+ok 48 - temporary names reject a symlink outside their configured base
+  ---
+  duration_ms: 3.700856
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in prefix
+ok 49 - temporary names reject traversal in prefix
+  ---
+  duration_ms: 1.340504
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in prefix
+ok 50 - temporary names reject a non-string traversal bypass in prefix
+  ---
+  duration_ms: 1.150225
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in postfix
+ok 51 - temporary names reject traversal in postfix
+  ---
+  duration_ms: 7.63486
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in postfix
+ok 52 - temporary names reject a non-string traversal bypass in postfix
+  ---
+  duration_ms: 4.513436
+  type: 'test'
+  ...
+# Subtest: temporary-file mode, cleanup and the actual editor text round trip are retained
+ok 53 - temporary-file mode, cleanup and the actual editor text round trip are retained
+  ---
+  duration_ms: 30.749331
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3033.804672

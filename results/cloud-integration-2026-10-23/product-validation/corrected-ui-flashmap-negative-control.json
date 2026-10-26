@@ -1,0 +1,15 @@
+{
+  "held_ms": 100,
+  "flashing_frames": 20,
+  "grating_frames": 10,
+  "grating_pairs": 16,
+  "verdicts": {
+    "flashing_sequence_refused_by_wcag": true,
+    "grating_refused_by_broadcast": true,
+    "grating_passed_by_wcag_which_has_no_pattern_rule": true
+  },
+  "flash_wcag_exit": 1,
+  "pattern_broadcast_exit": 1,
+  "pattern_wcag_exit": 0,
+  "note": "The same painter, hold and encoder as the real screens. A control the check cannot refuse would mean the real run proves nothing."
+}

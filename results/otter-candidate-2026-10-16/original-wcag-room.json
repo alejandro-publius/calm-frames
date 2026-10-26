@@ -1,0 +1,288 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt709",
+    "matrix_source": "inferred-hd-bt709",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "stream-tag",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-10-16T06:16:11Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 1080,
+      "left": 0,
+      "top": 0,
+      "width": 1920
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      },
+      {
+        "height_px": 22,
+        "name": "room-10deg",
+        "room": {
+          "display_aspect": "16:9",
+          "display_height_in": 41.672,
+          "display_width_in": 74.084,
+          "field_degrees": 10.0,
+          "field_inches": 8.399,
+          "seat_distance_in": 48.0,
+          "tv_diagonal_in": 85.0
+        },
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "width_px": 22
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "pattern_rule": null,
+    "pattern_rule_source": null,
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": {
+      "display_aspect": "16:9",
+      "display_height_in": 41.672,
+      "display_width_in": 74.084,
+      "field_degrees": 10.0,
+      "field_inches": 8.399,
+      "seat_distance_in": 48.0,
+      "tv_diagonal_in": 85.0
+    },
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule",
+      "any regular pattern rule, because WCAG 2.2 has none. See the broadcast profile"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [
+    {
+      "area_fraction": 1.0,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 14581,
+      "flash_first_ms": 100,
+      "flash_last_ms": 14581,
+      "max_flashes_in_window": 11,
+      "reason": "general",
+      "start_ms": 0,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.254132,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 15015,
+      "flash_first_ms": 14047,
+      "flash_last_ms": 15015,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 14015,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.452479,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 16116,
+      "flash_first_ms": 14114,
+      "flash_last_ms": 16116,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 14082,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.913223,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 27394,
+      "flash_first_ms": 16550,
+      "flash_last_ms": 27394,
+      "max_flashes_in_window": 11,
+      "reason": "general",
+      "start_ms": 16518,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.433884,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 30163,
+      "flash_first_ms": 26793,
+      "flash_last_ms": 30163,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 26761,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.260331,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 30230,
+      "flash_first_ms": 29263,
+      "flash_last_ms": 30230,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 29230,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.373967,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 32065,
+      "flash_first_ms": 29329,
+      "flash_last_ms": 32065,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 29297,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.285124,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 33467,
+      "flash_first_ms": 32199,
+      "flash_last_ms": 33467,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 32166,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.262397,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 33600,
+      "flash_first_ms": 32599,
+      "flash_last_ms": 33600,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 32567,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.92562,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 48949,
+      "flash_first_ms": 33100,
+      "flash_last_ms": 48949,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 33067,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    }
+  ],
+  "source": {
+    "coded_height": 1080,
+    "coded_width": 1920,
+    "container_frame_rate": "30000/1001",
+    "duration_ms": null,
+    "first_pts_ms": 33.0,
+    "frame_count": 1467,
+    "frame_interval_ms": {
+      "max": 34.0,
+      "median": 33.0,
+      "min": 33.0
+    },
+    "last_coded_pts_ms": 48949.0,
+    "last_pts_ms": 48949.0,
+    "path": "UNREVIEWED_usfws_otters.webm",
+    "sha256": "c30e6d6b403d3849f2e5be6f1d1ec21d50940fc11369504305b4a11c337200de",
+    "size_bytes": 65359357,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": true
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": false,
+    "general_segment_count": 10,
+    "hidden_ms": 48446,
+    "pass": false,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": false,
+    "pattern_rule_source": null,
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 10
+  },
+  "version": 1
+}

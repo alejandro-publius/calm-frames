@@ -1,0 +1,5 @@
+..................................                                       [100%]
+34 passed in 8.18s
+AWS profile guard retained: True
+Environment retained: True
+Global boto3 session retained: True

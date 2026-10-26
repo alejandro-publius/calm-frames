@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calm Frames creator scene bridge editor</title>
+<style>
+body{font:18px system-ui,sans-serif;background:#f5f1e8;color:#263c3a;max-width:760px;margin:40px auto;padding:0 24px}label{display:block;margin:18px 0 6px}input,textarea,button{font:inherit;box-sizing:border-box}input:not([type=checkbox]),textarea{width:100%;padding:10px;border:1px solid #637773;border-radius:5px}button{padding:12px 18px;background:#184e4a;color:white;border:0;border-radius:5px;margin:20px 0}small{display:block;margin:8px 0}#status{white-space:pre-wrap}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;padding:20px}.preview{background:#22303b;color:#fff;text-align:center;padding:30px;border-radius:8px}.preview p{max-width:580px;margin:15px auto}h1{font-size:28px}input[type=checkbox]{width:22px;height:22px;vertical-align:middle}
+</style>
+<h1>Creator scene bridge editor</h1>
+<p>Write essential visual information for an existing covered scene. This editor reads no video and changes no cover times. Keep the soundtrack and player controls unchanged.</p>
+<p>Copy exact hashes, duration and an existing base cover from the verified preparation report. Times use the prepared rendition timeline. The player rejects stale identities or intervals. Exporting a draft does not approve or install it.</p>
+<form id="editor">
+<label for="title-id">Exact prepared title ID</label><input id="title-id" pattern="[a-zA-Z0-9][a-zA-Z0-9._:-]{0,159}" required>
+<label for="offset">Rendition start offset (exact milliseconds)</label><input id="offset" type="number" step="any" required value="0">
+<label for="source">Original source SHA-256</label><input id="source" pattern="[a-f0-9]{64}" required autocomplete="off">
+<label for="rendition">Prepared rendition SHA-256</label><input id="rendition" pattern="[a-f0-9]{64}" required autocomplete="off">
+<label for="duration">Prepared duration (exact milliseconds)</label><input id="duration" type="number" min="1" step="any" required>
+<label for="start">Existing base cover start (exact milliseconds)</label><input id="start" type="number" min="0" step="any" required>
+<label for="end">Existing base cover end (exact milliseconds)</label><input id="end" type="number" min="6000" step="any" required>
+<label for="text">Essential visual information</label><textarea id="text" rows="3" maxlength="120" required aria-describedby="limits"></textarea>
+<small id="limits">One line, at most 120 characters and 20 words. Minimum six seconds; allow two seconds to settle, then half a second per word. Use only information you can verify. Do not infer events, emotions or diagnoses.</small>
+<label><input id="fixture" type="checkbox" checked> Clearly labelled test fixture; not a description of a real title</label>
+<label><input id="confirmed" type="checkbox" required> I wrote and checked this text. A real title's text states only verified visual information.</label>
+<button type="submit">Validate and export draft</button>
+</form>
+<div class="preview" aria-label="Static text preview"><strong id="preview-label">Scene bridge test</strong><p id="preview-text">Your text will appear here.</p><small>You can wait or choose Skip.</small></div>
+<p id="status" role="status"></p><pre id="output" hidden></pre>
+<script>
+'use strict';
+const field=id=>document.getElementById(id);
+const preview=()=>{field('preview-text').textContent=field('text').value||'Your text will appear here.';field('preview-label').textContent=field('fixture').checked?'Scene bridge test':'Creator note';};
+field('text').addEventListener('input',preview);field('fixture').addEventListener('change',preview);
+field('editor').addEventListener('submit',event=>{
+ event.preventDefault();field('output').hidden=true;
+ const renditionStartOffsetMs=Number(field('offset').value),durationMs=Number(field('duration').value),startMs=Number(field('start').value),endMs=Number(field('end').value),text=field('text').value;
+ let error='';const words=text.split(/\s+/u);
+ if(!/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,159}$/.test(field('title-id').value)||![field('source').value,field('rendition').value].every(value=>/^[a-f0-9]{64}$/.test(value))||!field('confirmed').checked){field('status').textContent='Supply the exact identity and confirm authorship before exporting.';return;}
+ if(![renditionStartOffsetMs,durationMs,startMs,endMs].every(Number.isFinite)||Math.abs(renditionStartOffsetMs)>durationMs||durationMs<=0||durationMs>86400000||startMs<0||endMs>durationMs||endMs-startMs<6000)error='Use a complete existing base cover of at least six seconds inside this rendition.';
+ else if(!text||text!==text.trim()||text.length>120||/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f<>]/u.test(text))error='Use at most 120 characters of plain text on one line.';
+ else if(words.length>20||words.some(word=>word.length>24)||words.length>Math.floor((endMs-startMs-2000)/500))error='Shorten the text so there is enough time to read it.';
+ if(error){field('status').textContent=error;return;}
+ const draft={version:1,titleId:field('title-id').value,renditionStartOffsetMs,sourceSha256:field('source').value,renditionSha256:field('rendition').value,durationMs,authorConfirmed:true,testFixture:field('fixture').checked,entries:[{startMs,endMs,text}]};
+ const raw=JSON.stringify(draft,null,2)+'\n';field('output').textContent=raw;field('output').hidden=false;
+ const url=URL.createObjectURL(new Blob([raw],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='scene-bridges.draft.json';link.click();URL.revokeObjectURL(url);
+ field('status').textContent='Draft exported for review. Exact base-cover matching and compiled checksum approval are still required. No TV catalog or media changed.';
+});
+</script></html>

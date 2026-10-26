@@ -119,6 +119,14 @@ def load_private_key(path: str | Path) -> Ed25519PrivateKey:
     return key
 
 
+def signer_key_id(private_key_path: str | Path) -> str:
+    """The public identity of a signing key, the same ``key_id`` its signatures carry.
+
+    Lets a cache key name which key signed a map without holding any private bytes.
+    """
+    return _key_id(load_private_key(private_key_path).public_key())
+
+
 def _decode_base64(value: Any, what: str, *, length: int | None = None) -> bytes:
     if not isinstance(value, str):
         raise RegistryError(f"{what} is not a string")

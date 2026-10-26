@@ -1,0 +1,136 @@
+{
+  "source_commit": "29173032a71e7a052b6dc71575e4a160df88563a",
+  "audit_utc": "2026-10-25T20:49:05Z",
+  "status": "Blocked. No exception renewed or accepted.",
+  "unique_advisories": 5,
+  "unique_severities": {
+    "moderate": 2,
+    "high": 3
+  },
+  "npm_package_entries": {
+    "info": 0,
+    "low": 0,
+    "moderate": 1,
+    "high": 9,
+    "critical": 0,
+    "total": 10
+  },
+  "policy_problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21"
+  ],
+  "historical_native_inventory": "results/native-validation-fbe53bf-2026-10-25/native-results/",
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-5fw9-fq32-wv5p",
+      "scanner_id": 1086436,
+      "package": "node-notifier",
+      "title": "OS Command Injection in node-notifier",
+      "severity": "moderate",
+      "affected_range": "<8.0.1",
+      "source": "https://github.com/advisories/GHSA-5fw9-fq32-wv5p",
+      "locked_nodes": [
+        {
+          "path": "node_modules/node-notifier",
+          "version": "5.4.5"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "Fixed major 8 is outside the installed major-5 consumer range. Review the old Jest/sane notification path and supported migration; cloud checks do not run watch notifications.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories."
+    },
+    {
+      "ghsa_id": "GHSA-rxrc-rgv4-jpvx",
+      "scanner_id": 1099563,
+      "package": "react-devtools-core",
+      "title": "React Developer Tools extension Improper Authorization vulnerability",
+      "severity": "moderate",
+      "affected_range": "<4.28.4",
+      "source": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+      "locked_nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core",
+          "version": "3.6.3"
+        }
+      ],
+      "historical_exception_group": "in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "The old React Native subtree retains an older DevTools backend. A current native inventory and SDK-supported Debug tooling migration remain needed.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories."
+    },
+    {
+      "ghsa_id": "GHSA-7f53-fmmv-mfjv",
+      "scanner_id": 1089027,
+      "package": "react-native",
+      "title": "Regular expression denial of service in react-native",
+      "severity": "high",
+      "affected_range": ">=0.59.0 <0.62.3",
+      "source": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+      "locked_nodes": [
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-native",
+          "version": "0.60.6"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "This finding belongs to the nested 0.60.6 tooling tree, not permission to replace the app 0.83.0 runtime or Vega SDK. Review vendor-supported code generation/tooling migration.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories."
+    },
+    {
+      "ghsa_id": "GHSA-3h5v-q93c-6h6q",
+      "scanner_id": 1118731,
+      "package": "ws",
+      "title": "ws affected by a DoS when handling a request with many HTTP headers",
+      "severity": "high",
+      "affected_range": ">=2.1.0 <5.2.4",
+      "source": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+      "locked_nodes": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "version": "1.1.5"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "The old inspector must accept the separate request argument and retest device/debugger handshakes. A direct leaf upgrade leaves its existing property dereference invalid. Changing the legacy SDK graph was outside this batch.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories."
+    },
+    {
+      "ghsa_id": "GHSA-96hv-2xvq-fx4p",
+      "scanner_id": 1123262,
+      "package": "ws",
+      "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "severity": "high",
+      "affected_range": ">=1.1.0 <5.2.5",
+      "source": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+      "locked_nodes": [
+        {
+          "path": "node_modules/metro-inspector-proxy/node_modules/ws",
+          "version": "1.1.5"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+          "version": "3.3.3"
+        },
+        {
+          "path": "node_modules/react-native-tscodegen-types/node_modules/ws",
+          "version": "1.1.5"
+        }
+      ],
+      "historical_exception_group": "not-in-the-device-bundle",
+      "existing_review_date": "2026-10-21",
+      "next_action": "The old inspector must accept the separate request argument and retest device/debugger handshakes. A direct leaf upgrade leaves its existing property dereference invalid. Changing the legacy SDK graph was outside this batch.",
+      "exposure_limit": "The vulnerable installed copy was absent from both fbe53bf native package inventories. This remains a build-host dependency risk. The new source has no native package inventory; device system bundles are outside the received app inventories."
+    }
+  ]
+}

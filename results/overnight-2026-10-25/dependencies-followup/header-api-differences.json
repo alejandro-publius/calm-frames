@@ -1,0 +1,20 @@
+{
+  "1.7.3": {
+    "get": "first",
+    "raw": {
+      "x-fixture": [
+        "first",
+        "second"
+      ]
+    }
+  },
+  "2.7.0": {
+    "get": "first, second",
+    "raw": {
+      "X-Fixture": [
+        "first",
+        "second"
+      ]
+    }
+  }
+}

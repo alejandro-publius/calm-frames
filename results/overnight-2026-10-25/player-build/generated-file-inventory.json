@@ -1,0 +1,369 @@
+{
+  "source_commit": "596418e64e83f724c5c9e4a5b34122746aec11e4",
+  "files": [
+    {
+      "path": "app/src/w3cmedia/.DS_Store",
+      "bytes": 6148,
+      "sha256": "c094666530e81dc4020eee28a52b9e263d659d5c4c4ae5b498e4627b594f721b",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._.DS_Store",
+      "bytes": 120,
+      "sha256": "2f380f4a3d05a8d90c2106f50da75064e9ce57a598599dc5404f8f69a0223aa9",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._AppNonAdaptive.tsx",
+      "bytes": 447,
+      "sha256": "54a2147442fe77f4b774ffcc3e20039e9d657df56f29bacf0bc107db2d626214",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._AppNonAdaptiveVideo.tsx",
+      "bytes": 447,
+      "sha256": "f3884aead766236421be4ef1dfd405e0de8f5103b4a9b1725849263bc27c11d5",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._AppPreBuffering.tsx",
+      "bytes": 447,
+      "sha256": "39d2ee367242714254199601bd690655919dca541eb8a650eede6b4df2206fec",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._AppPreBufferingAds.tsx",
+      "bytes": 447,
+      "sha256": "e481a74d4bbad85135cf7e059e9f5721c90aa636047a26f96f0d238d605a0141",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/._AppPreBufferingPlaylist.tsx",
+      "bytes": 447,
+      "sha256": "aa5d46b82eac8ca38b2e2fa016349fc3b97c3ce3911f32ed1ccc90256b3d992f",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/PlayerInterface.ts",
+      "bytes": 731,
+      "sha256": "30d40c22fe09c1ecaa871f3f409750006642ffc62a7aa60359b1bd0e43295dec",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/._MiscPolyfill.ts",
+      "bytes": 447,
+      "sha256": "ccbc976906c137b2e42816fb943d1c3e2e9d7ea09d6db9f80ff1342ccc9ae9ef",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/._TextDecoderPolyfill.ts",
+      "bytes": 447,
+      "sha256": "703edeb2d53bb8e152c7c0cc4f5d75b5c255e44fff5e22d9a6ba930e2e571956",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/._W3CMediaPolyfill.ts",
+      "bytes": 447,
+      "sha256": "f77218264f5ef3f7ce854bdcc11276f304d887fc46f95a16d9193e31ac0261e3",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DOMParserPolyfill.ts",
+      "bytes": 2102,
+      "sha256": "0e17b83b5884a009b1cc35b10bca2e72ee29a1c7cdeec618b98a55837998252b",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DocumentPolyfill.ts",
+      "bytes": 1065,
+      "sha256": "bcb01bfe019c01fa0362f562e66d3e61964a5858ac5ee3ba8969870ae21f80e9",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/ElementPolyfill.ts",
+      "bytes": 862,
+      "sha256": "ee4b403435da1ed780678d0ce49fb7304cc5631af727555ddf80f087226cde4f",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/MiscPolyfill.ts",
+      "bytes": 1383,
+      "sha256": "655df68c912252cc003622e6db83a8019bfac64ae72394337f1647b13c8b1567",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/TextDecoderPolyfill.ts",
+      "bytes": 833,
+      "sha256": "ef8147831eafcce263f912740132c3f83fa92cea5e40caef82aaf8d0609e4391",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/W3CMediaPolyfill.ts",
+      "bytes": 1664,
+      "sha256": "78f8afbdaa7366ef24138461be6f1a3af2deb84c971860954775991a5d25d8c4",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/._ShakaPlayer.ts",
+      "bytes": 547,
+      "sha256": "d9de6503a8d260423840006efffe37e55fc0e43c84ae8df4e35854f28199fe16",
+      "portable_input": false,
+      "metadata_only": true
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/.csslintstamp",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/.htmllintstamp",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/.lintstamp",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/.testcheckstamp",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/controls.css",
+      "bytes": 17094,
+      "sha256": "2bef26361ba139d7c564a0479c8242cd2f7d6d3a69f9b94c670fba5e21d38911",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/controls.css.map",
+      "bytes": 6431,
+      "sha256": "d37c5ca5dd40479736c8276a34d5c006f3937565b58bfbc952f4f656b40e8629",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.compiled.debug.js",
+      "bytes": 188384,
+      "sha256": "c42a0bce601b5fc072b462ae98ccf524833c088a70d50a5ef4ba631a33799661",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.compiled.debug.map",
+      "bytes": 262392,
+      "sha256": "759a8b0dec288f0a671d430f3ab42c186e7fbc67d211703241910b1fba890fa9",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.compiled.js",
+      "bytes": 188378,
+      "sha256": "7d8fe6e44233f45cb2374c28f3f9de8b97045b7ea52a57d391c45a7b732bc177",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.compiled.map",
+      "bytes": 262386,
+      "sha256": "c44d19f9c75f2700243af2eb08fd2816d1f87b73b6ac9fb807210d033b7a276e",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.css",
+      "bytes": 170144,
+      "sha256": "bcefa98dd9368b1ae1b3797b926eab1c9227bc263d712226fa87913769396b5c",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/demo.css.map",
+      "bytes": 60571,
+      "sha256": "3bde1dfb7690aa9b36e413f39edb9dd9908d2885da7bcbe9a96301f06930a2ae",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/deps.js",
+      "bytes": 63807,
+      "sha256": "aeac35f39ef3f4ce62872efcba100a90f1527bae75d112c6b22744c264a705c1",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/locales.js",
+      "bytes": 30784,
+      "sha256": "c9e619fef487399740aa861097d921a74d0ea4e2cd83768b09df4e56abb71fce",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/receiver.compiled.debug.js",
+      "bytes": 101670,
+      "sha256": "f5c292efee9f45c4824255d284b8af79734457c4b1a9963158e6a5b05544bf65",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/receiver.compiled.debug.map",
+      "bytes": 120757,
+      "sha256": "2b561387516c5fdffbc83d71d8a445f0d30a902cdecad4d3f449e9cc8d38b3cc",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/receiver.compiled.js",
+      "bytes": 101664,
+      "sha256": "1a33e894eefca9ca877be1911217b751cf779d3813a6502cb296be2141f21855",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/receiver.compiled.map",
+      "bytes": 120751,
+      "sha256": "a4caa2a4de61245de401adaad326c4adce9382304f2bf8fb976f20423cb0cf81",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.d.ts",
+      "bytes": 264340,
+      "sha256": "07c3e6cb7da79d7c8f836bcdd9e719b57192a9a66e308e28c201007740557a2f",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.debug.d.ts",
+      "bytes": 265240,
+      "sha256": "be48b24aea8cc52a9ab0f3e8d185c8e6caa5ff4f6e0ae2b5e9c9d1422b5010c3",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.debug.externs.js",
+      "bytes": 165758,
+      "sha256": "f129b7655bc4bc1f1cbb87542654e82fb22dbc9e1e4f858786f8c13ec2943522",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.debug.js",
+      "bytes": 1256673,
+      "sha256": "85f5c48ec9ab1b3eb089bd188d2798216b88ef4f179f9f2d30d46b2a575e70c9",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.debug.map",
+      "bytes": 2298961,
+      "sha256": "9e3c51456e0ce7a645fd44591002d102df6619914670ad740bcefa1a56925753",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.externs.js",
+      "bytes": 165758,
+      "sha256": "f129b7655bc4bc1f1cbb87542654e82fb22dbc9e1e4f858786f8c13ec2943522",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.js",
+      "bytes": 604408,
+      "sha256": "a8ac54d37d246c6a34c2ed0b52978a30627b1366126f3b51f4b7c734b8249e7e",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.map",
+      "bytes": 1749651,
+      "sha256": "88399b52abcd08a58b35571724f703b1fbbac1d02af86591333c19bf7a2df59f",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.d.ts",
+      "bytes": 295174,
+      "sha256": "167dd24ae02c9ee6fe0b1fb3a0ec054ab0a49bdb37e77c41b09587b93c46b366",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.debug.d.ts",
+      "bytes": 296320,
+      "sha256": "7bf98e1b5f2134dfe3bb6216b96418c4ab29eacbc184f65d1bfc51af38c19f26",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.debug.externs.js",
+      "bytes": 186303,
+      "sha256": "d2a76ddedc92e2f8b3193b3550f11c4d3f14305f79edb41435d08c7582814371",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.debug.js",
+      "bytes": 1480437,
+      "sha256": "359bd142b24397168f83a86d755b9ab33bd186d5c305f8871c3404af5efef76a",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.debug.map",
+      "bytes": 2640143,
+      "sha256": "76d47711834948a65e3838697e23cb63db7eac093986c7fd0d0ee92ae071bce6",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.externs.js",
+      "bytes": 186303,
+      "sha256": "d2a76ddedc92e2f8b3193b3550f11c4d3f14305f79edb41435d08c7582814371",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.js",
+      "bytes": 744221,
+      "sha256": "5546e590881d00a20cefaf289efba60924c54df12d4effd750413ea7ca3c0fbb",
+      "portable_input": false,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.ui.map",
+      "bytes": 2037654,
+      "sha256": "dab2f8617f790959fb01bc3a7205ee2a01f1a5493267d4928372b90f0d54da81",
+      "portable_input": false,
+      "metadata_only": false
+    }
+  ]
+}

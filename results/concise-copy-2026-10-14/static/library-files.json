@@ -1,0 +1,23 @@
+[
+  {
+    "name": "home",
+    "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-home-static.png",
+    "library_file_id": "libfile_8cbf65dc0f1c8191b08052f623d30239",
+    "file_id": "file_000000009bf481f7ac98971d6e0cf8b8",
+    "native_capture": false
+  },
+  {
+    "name": "details",
+    "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-details-static.png",
+    "library_file_id": "libfile_865095ba92608191aa690587bfb6a28d",
+    "file_id": "file_00000000b1bc8243ae454bbed0dccd0b",
+    "native_capture": false
+  },
+  {
+    "name": "comparison",
+    "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-comparison-static.png",
+    "library_file_id": "libfile_b01cafc2c250819180baeae369755617",
+    "file_id": "file_00000000265081fd90654b521f8491bc",
+    "native_capture": false
+  }
+]

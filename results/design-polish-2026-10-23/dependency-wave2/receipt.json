@@ -1,0 +1,364 @@
+{
+  "observed_at": "2026-10-23T20:34:36.554223+00:00",
+  "item": 12,
+  "item_status": "Partially completed; this compatible remediation batch is complete.",
+  "checked_source": "5bf123409d8d863e2dbefd73bc3b2046e264d89e",
+  "parent_source": "cc1590c6d3309ca1dee00c933badfa7a31c2ffd4",
+  "branch": "codex/design-polish-2026-10-23",
+  "frozen_integration_source": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+  "change": {
+    "lodash": "Old nested 4.17.21 and 4.17.23 deduplicated onto existing direct 4.18.1.",
+    "minimatch": "Only 3.x overridden to 3.1.5; modern 10.2.6 retained.",
+    "consumers": "SDK CLI 0.22.14 and API Extractor 7.47.0 unchanged.",
+    "ci": "Installed-consumer regressions added to the existing Node test command."
+  },
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "cyclonedx-py": "7.4.0",
+    "cyclonedx-python-lib": "11.12.0",
+    "cyclonedx-npm": "6.0.1",
+    "cyclonedx-library": "10.3.0",
+    "gitleaks": "8.30.1"
+  },
+  "clean_install": {
+    "command": [
+      "npm",
+      "--prefix",
+      "app",
+      "ci",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund"
+    ],
+    "exit_code": 0,
+    "node_modules_is_symlink": false,
+    "scope": "Real locked installation; lifecycle scripts disabled as in cloud CI. No Shaka/native build."
+  },
+  "checks": {
+    "clean-install": {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 28.42
+    },
+    "compatibility": {
+      "name": "compatibility",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/build_dependency_compat.test.mjs",
+        "app/tools/legacy_shell_quote.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.04
+    },
+    "typecheck": {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 18.69
+    },
+    "lint": {
+      "name": "lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 19.38
+    },
+    "app-tests": {
+      "name": "app-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "test",
+        "--",
+        "--runInBand",
+        "--ci"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 106.69
+    },
+    "prepared-guards": {
+      "name": "prepared-guards",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/playback_proof.test.mjs",
+        "app/tools/check_prepared_library.test.mjs",
+        "app/tools/approved_prepared_libraries.test.mjs",
+        "app/tools/check_native_inputs.test.mjs",
+        "app/tools/catalog_resolution.test.cjs",
+        "app/tools/seek_lint_guard.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.89
+    },
+    "audit-policy-tests": {
+      "name": "audit-policy-tests",
+      "command": [
+        "/workspace/calm-frames/.venv/bin/python",
+        "-m",
+        "pytest",
+        "eval/tests/test_dep_audit.py",
+        "eval/tests/test_ci_python_lanes.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.94
+    },
+    "sbom-write": {
+      "name": "sbom-write",
+      "command": [
+        "python",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.12
+    },
+    "sbom-check": {
+      "name": "sbom-check",
+      "command": [
+        "python",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "/workspace/shared/calm-frames-dependency-wave2/sbom-reproduction"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.75
+    },
+    "published-numbers": {
+      "name": "published-numbers",
+      "command": [
+        "python",
+        "eval/readme_sync.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.25
+    },
+    "secrets-code": {
+      "name": "secrets-code",
+      "command": [
+        "bash",
+        "scripts/gitleaks_scan.sh",
+        "staged"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.92
+    }
+  },
+  "app_result": {
+    "passed": 1806,
+    "skipped": 4,
+    "passed_suites": 171,
+    "skipped_suites": 1,
+    "snapshots_passed": 57,
+    "coverage_thresholds": "Existing normal test command, unchanged."
+  },
+  "lint_result": {
+    "errors": 0,
+    "source_warnings": 104,
+    "test_warnings": 4,
+    "existing_warnings_retained": true
+  },
+  "regression_scope": {
+    "before": "Final baseline fixture: three compatibility cases pass; four version/security assertions fail against old installed leaves. The lockfile guard was later restricted to package nodes to exclude @types/lodash.",
+    "after": "Seven build dependency cases plus four existing shell-quote cases pass. Existing prepared-media/playback gates pass.",
+    "real_consumers": [
+      "SDK ConfigLoader module with only its logger dependency intercepted",
+      "API Extractor loadFile with inherited config and cycle detection",
+      "API Extractor bundled-package glob resolution"
+    ],
+    "limits": "No denial-of-service timing benchmark, SDK compile, native package or native acceptance. No injected template is invoked; prototype sentinels are private to each test."
+  },
+  "audit_delta": {
+    "before": {
+      "info": 0,
+      "low": 2,
+      "moderate": 26,
+      "high": 24,
+      "critical": 4,
+      "total": 56
+    },
+    "after": {
+      "info": 0,
+      "low": 2,
+      "moderate": 28,
+      "high": 20,
+      "critical": 4,
+      "total": 54
+    },
+    "unique_advisories_before": 28,
+    "unique_advisories_after": 22,
+    "removed_advisories": [
+      "GHSA-23c5-xmqv-rm74",
+      "GHSA-3ppc-4f35-3m26",
+      "GHSA-7r86-cg39-jmmj",
+      "GHSA-f23m-r3pf-42rh",
+      "GHSA-r5fr-rjxr-66jc",
+      "GHSA-xxjr-mmjv-4gpg"
+    ],
+    "added_advisories": [],
+    "note": "Package totals include propagated findings. They are not independent vulnerabilities or runtime exposure measurements.",
+    "lock_changes": {
+      "node_modules/@amazon-devices/kepler-cli-platform/node_modules/lodash": {
+        "before": "4.17.21",
+        "after": null
+      },
+      "node_modules/@eslint/eslintrc/node_modules/minimatch": {
+        "before": "3.1.5",
+        "after": null
+      },
+      "node_modules/@microsoft/api-extractor/node_modules/lodash": {
+        "before": "4.17.23",
+        "after": null
+      },
+      "node_modules/eslint-plugin-react/node_modules/minimatch": {
+        "before": "3.1.5",
+        "after": null
+      },
+      "node_modules/eslint/node_modules/minimatch": {
+        "before": "3.1.5",
+        "after": null
+      },
+      "node_modules/glob/node_modules/minimatch": {
+        "before": "3.1.5",
+        "after": null
+      },
+      "node_modules/minimatch": {
+        "before": "3.0.8",
+        "after": "3.1.5"
+      }
+    }
+  },
+  "audit_acceptance": "Blocked: 22 advisory IDs remain, two exception groups expired. Python dependencies not rescanned in this npm-only change. No exception or owner acceptance edited.",
+  "sbom": {
+    "reproduced": true,
+    "existing_tree_warnings_unchanged": true,
+    "tree_warnings": [
+      "npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react",
+      "npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin",
+      "npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser",
+      "npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier",
+      "npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch",
+      "npm error invalid: react@19.2.0 ./app/node_modules/react",
+      "npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0"
+    ]
+  },
+  "preserved": {
+    "compared_to": "cc1590c6d3309ca1dee00c933badfa7a31c2ffd4",
+    "unchanged_paths": [
+      "app/src",
+      "app/test",
+      "pipeline",
+      "app/manifest.toml",
+      "scripts/audit_exceptions.toml",
+      "docs/judging-package",
+      "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md"
+    ],
+    "fable": "User reports active implementation/testing of item 5. Finished commit not received; owned app code and tests left untouched.",
+    "submitted_fallback": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "no_push_merge_or_publication": true,
+    "no_narration_or_media_generation": true
+  },
+  "input_files": {
+    ".github/workflows/ci.yml": {
+      "bytes": 16208,
+      "sha256": "6722f70e0e38373a615761668e807cb01b4b0fb3e6506ca64fcb9a25fbbd73d9"
+    },
+    "app/package-lock.json": {
+      "bytes": 806015,
+      "sha256": "2d91f6b1700ea813aac633cbc83df85891be8a22d4662070917c95e456ba482b"
+    },
+    "app/package.json": {
+      "bytes": 12419,
+      "sha256": "b64c4ce0e6e593ef1fbf5e3915d6ca138c48bbbd123633253a97bc12ce64e81b"
+    },
+    "app/tools/build_dependency_compat.test.mjs": {
+      "bytes": 6848,
+      "sha256": "442f76469fe5e08924a104f564a2e5a27628cc355bbe25a372f70c90d0dc8fad"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2253532,
+      "sha256": "2bd6eef395999641648f75d0559cd2b4e8e11ad527ff8713fc4b396129ffc91d"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "6e0f1f34ce14f0a12672cac7808349e346f83a514bdc9d3cc1a47982ee124d9e"
+    }
+  },
+  "logs": {
+    "clean-install": {
+      "raw_sha256": "e16d0e7dfb7c7c407f683b3de926f3c2ef67964ac4275fcde8e7561da4ccd5f4",
+      "normalized_sha256": "e16d0e7dfb7c7c407f683b3de926f3c2ef67964ac4275fcde8e7561da4ccd5f4"
+    },
+    "compatibility-before": {
+      "raw_sha256": "f8d5b292350dcb4b5f968adb88a41820d65468b567bb86553c189a441a177a5a",
+      "normalized_sha256": "15629ae0815d86041494ec9b5b1267f0074e54b756e5ca09d2a3dcd41d68248c"
+    },
+    "compatibility": {
+      "raw_sha256": "8d734c8ad7e7e1ced0f8036c2746564c0191ed6d7eb890d7051d59be50b0e267",
+      "normalized_sha256": "8d734c8ad7e7e1ced0f8036c2746564c0191ed6d7eb890d7051d59be50b0e267"
+    },
+    "typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    },
+    "lint": {
+      "raw_sha256": "8d89a719dcad3296ec60789e648c4f4b6023582a53338ce28561df3ab2b13e48",
+      "normalized_sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714"
+    },
+    "app-tests": {
+      "raw_sha256": "cd728804716ee1e25ee8d57cdea46adf550eb33526885101ae2a5e993faf960e",
+      "normalized_sha256": "83de834dbe68610d444d46d45d00bce4f35de0b39ea292c127d46102993b2e9f"
+    },
+    "prepared-guards": {
+      "raw_sha256": "d3bd423f420630cd2a0fad6b066b7f063e56c41f369a635b0fc56a189936294a",
+      "normalized_sha256": "d3bd423f420630cd2a0fad6b066b7f063e56c41f369a635b0fc56a189936294a"
+    },
+    "audit-policy-tests": {
+      "raw_sha256": "91711cbac88ceda398938ee2c5ee00d6c01a12a031d254006994475219bbb20f",
+      "normalized_sha256": "91711cbac88ceda398938ee2c5ee00d6c01a12a031d254006994475219bbb20f"
+    },
+    "sbom-write": {
+      "raw_sha256": "876bb043357fa87355af1b0ac9f964ddd45df035cb3a8cb858046b4a6669662e",
+      "normalized_sha256": "32bd25e6980505f8011010f39a79f8a28aa20c375d5b644dacc77a42bdd791ee"
+    },
+    "sbom-check": {
+      "raw_sha256": "e7baafbe442039aa2c51650d74153a151436a8037523b5675bb0c974b932a344",
+      "normalized_sha256": "50bf2d7df658458549284a8bedf2bea5e210a375d514d786772c928689fe18b8"
+    },
+    "published-numbers": {
+      "raw_sha256": "4b5ab1119fe7fbcbe8e50bd6f333daf2c5bb3bda700eb1980b8a9b213d7518c0",
+      "normalized_sha256": "4b5ab1119fe7fbcbe8e50bd6f333daf2c5bb3bda700eb1980b8a9b213d7518c0"
+    },
+    "secrets-code": {
+      "raw_sha256": "7d556a845aac21f2dd3349d23838f1d38aff94a7059dca991118694546e43bc0",
+      "normalized_sha256": "7d556a845aac21f2dd3349d23838f1d38aff94a7059dca991118694546e43bc0"
+    }
+  },
+  "log_normalization": "ANSI color, absolute checkout prefix and trailing whitespace removed; diagnostics and outcomes retained.",
+  "hosted": "No run for this unpublished source. Previous frozen-source results remain in ../cloud-finish/hosted.json."
+}

@@ -1,0 +1,22 @@
+{
+  "base": "cb96e21ed8db8719ce066bd7f7cdff4f583d6ca0",
+  "source": "365be0813a8416399ada1d469b0db326d45917d4",
+  "retained_version_changes": [
+    {
+      "path": "node_modules/node-notifier",
+      "before": "5.4.5",
+      "after": "8.0.2"
+    }
+  ],
+  "added_package_nodes": [],
+  "removed_package_nodes": [
+    "node_modules/node-notifier/node_modules/is-wsl",
+    "node_modules/node-notifier/node_modules/semver",
+    "node_modules/node-notifier/node_modules/which"
+  ],
+  "uuid_resolves_to_existing": {
+    "path": "node_modules/uuid",
+    "version": "11.1.1"
+  },
+  "note": "The notifier new UUID request uses the existing fixed 11.1.1 node. The first stale 8.3.2 lock resolution was rejected by the consumer test."
+}

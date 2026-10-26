@@ -3,12 +3,15 @@
 One work directory holds every title, each under its source SHA-256:
 
     <workdir>/catalog.json                 the index kid mode reads
+    <workdir>/.catalog.json.lock           serializes updates to that index
     <workdir>/titles/<sha256>/
+        .ingest.lock                       one preparation of this title at a time
         state.json                         the ledger
         probe.json                         frame timestamps, colour tags, size
         luma.json                          luminance over time
         still.png                          the cover still, from a calm moment
-        maps/<preset>.json                 the signed map from flashmap
+        work/analysis/<preset>.json        the analyzer's own map, before scene holds
+        maps/<preset>.json                 the signed map that ships
         plans/<preset>.json                the hide plan
         safe/<preset>/safe.mp4             the kid safe master
         safe/<preset>/hls/master.m3u8      the rendition the player streams
@@ -38,7 +41,15 @@ class TitleLayout:
     def index_path(self) -> Path:
         return self.workdir / "catalog.json"
 
+    @property
+    def index_lock_path(self) -> Path:
+        return self.workdir / ".catalog.json.lock"
+
     # Title level
+    @property
+    def ingest_lock_path(self) -> Path:
+        return self.root / ".ingest.lock"
+
     @property
     def probe_path(self) -> Path:
         return self.root / "probe.json"
@@ -75,6 +86,11 @@ class TitleLayout:
     def map_path(self, preset: str) -> Path:
         return self.root / "maps" / f"{preset}.json"
 
+    def analysis_map_path(self, preset: str) -> Path:
+        # Kept apart from the published map, so each file has exactly one step that
+        # writes it and a cached hash of the analysis is never overwritten in place.
+        return self.root / "work" / "analysis" / f"{preset}.json"
+
     def plan_path(self, preset: str) -> Path:
         return self.root / "plans" / f"{preset}.json"
 
@@ -107,6 +123,12 @@ class TitleLayout:
 
     def cover_model_path(self, preset: str) -> Path:
         return self.verify_dir / f"cover_model_{preset}.mp4"
+
+    def scene_manifest(self, preset: str) -> Path:
+        return self.root / "scene_holds" / preset / "manifest.json"
+
+    def scene_image(self, preset: str, index: int) -> Path:
+        return self.root / "scene_holds" / preset / f"hold_{index:03d}.jpg"
 
     def verify_map_path(self, preset: str, kind: str) -> Path:
         return self.verify_dir / f"{kind}_{preset}.json"

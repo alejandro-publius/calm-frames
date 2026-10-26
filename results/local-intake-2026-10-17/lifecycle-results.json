@@ -1,0 +1,39 @@
+[
+  {
+    "check": "Malformed file fails closed",
+    "passed": true,
+    "detail": "Choose a standard MP4 container; renamed or unsupported files are refused."
+  },
+  {
+    "check": "Worker exits after server death",
+    "passed": true,
+    "detail": {
+      "owned_worker_pid": 17116
+    }
+  },
+  {
+    "check": "Restart invalidates incomplete run",
+    "passed": true,
+    "detail": "interrupted"
+  },
+  {
+    "check": "Retry has a new run identity",
+    "passed": true,
+    "detail": "2d6f78e654ef4eaba1b7f43fa11727d1"
+  },
+  {
+    "check": "Cancellation stops owned worker and revokes review",
+    "passed": true,
+    "detail": "canceled"
+  },
+  {
+    "check": "No stale completion after cancel",
+    "passed": true,
+    "detail": "canceled"
+  },
+  {
+    "check": "Remove only deletes owned copied job",
+    "passed": true,
+    "detail": "fac118d509b34599a0007a90c0df06ca"
+  }
+]

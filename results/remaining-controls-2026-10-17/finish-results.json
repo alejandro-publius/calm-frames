@@ -1,0 +1,5 @@
+{
+  "checks": [],
+  "result": "stopped",
+  "reason": "No log match: CALM_TRACE playback cover on media=2[8-9]\\d{3}"
+}

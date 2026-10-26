@@ -1,0 +1,189 @@
+{
+ "what": "local integration candidate: base 6a87937, cloud follow-up 226d317, item 6 fix dd1ec6c, item 11",
+ "branch": "claude/integration-2026-10-24",
+ "integration_source": "d7ff886854746d3a07b1a705eca0eefa53854eca",
+ "inputs": {
+  "base": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "cloud_followup": {
+   "head": "226d317a2a9eb22c2b16770ec0db15de5be4952e",
+   "zip_sha256": "bb152edf8a81c1fec7a4a6b933584569acbbc2be73b683a71d164cdc547b7e04",
+   "zip_bytes": 237073,
+   "bundle_sha256": "f7c4d9e76cbf632adc16ac067a3a4480c51c66492bdc29f073d515c928e582d7",
+   "patch_sha256": "fbe8a4b78825bfb0bc21bd99ff6809f9fe1552828a7492f2cacdd38c7256d16d",
+   "tree": "c1f2a9b18e634cce67e5ff9d840733ecdbbffc03",
+   "imported_as": "codex/mac-followup-226d317"
+  },
+  "item_6_fix": {
+   "commit": "dd1ec6c37f5d5ed86138bc38867d0b16b245a9b8",
+   "integrated_as": "161c2f5875dd95c6e518d1f382deeb286092bcba",
+   "how": "cherry-pick -x, alone"
+  },
+  "item_11": {
+   "head": "a800fb4f64ba321d706685a1647d311e1f64d1e6",
+   "merged_as": "a0c881607e0cf106057700420330cc8c3f7ef2d1",
+   "production": [
+    "4d4152c816666cd78df8668417c4d6478f07f7e6",
+    "3ede1fad2afc134682449b4a39a465f847f0e3e9",
+    "88c171666e9ab32d6993338c7ab77173d2f3e088",
+    "eeaaf16f4c655fb44ebdb0aa3c17fc2c869ad9a9",
+    "3b0174b6c7dd8a4e31a84b3ddb8d479ddb759d27"
+   ]
+  }
+ },
+ "integration_commits": {
+  "161c2f5875dd95c6e518d1f382deeb286092bcba": "item 6 fix",
+  "a0c881607e0cf106057700420330cc8c3f7ef2d1": "merge of item 11",
+  "738381d": "name editor regression",
+  "d7ff886854746d3a07b1a705eca0eefa53854eca": "hook mirror sync"
+ },
+ "never_merged": [
+  "5e48655",
+  "4553ee3",
+  "6f5aa66",
+  "444ca91",
+  "c812685",
+  "78e8a2c",
+  "b9cd627",
+  "claude/integration-harness-a11y-2026-10-24-never-merge",
+  "claude/integration-harness-onboarding-2026-10-24-never-merge"
+ ],
+ "checks": {
+  "lock_sha256": "e1ca817dbd2552002958002939760ac72e28837b12fe70ef25f0f1a45f032398",
+  "typecheck": "pass",
+  "lint": "0 errors, 104 warnings, none in a changed file",
+  "style": "pass",
+  "ci_tooling_node_tests": "87 passed",
+  "jest_full": "177 suites passed, 1 skipped; 1875 tests passed, 4 skipped",
+  "test_hook_package": "pass",
+  "pins": "0 loose",
+  "sbom_check": "pass",
+  "audit": {
+   "python_advisories": 0,
+   "npm_advisories": 21,
+   "npm_critical": 0,
+   "npm_high_packages": 23,
+   "new_since_cloud_scan": [
+    "1243074 body-parser high, no exception"
+   ],
+   "expired_exception_groups": [
+    "in-the-device-bundle",
+    "not-in-the-device-bundle"
+   ],
+   "audit_check": "fails on those three; not re-dated"
+  },
+  "name_editor_mutations": "4 of 4 red at an assertion"
+ },
+ "packages": {
+  "candidate_d7ff886": {
+   "bytes": 132679215,
+   "sha256": "e21eaf5f561f36573cf22d65930dd63bf1cdf7de4160f1397dd0a009bd6408f5",
+   "sha384": "0dee4edc173a7733549ad52c01f6924591f0a82fc6ad300058630bbc45dcbc802f3e738ef90bc9063644cbcbace49f66"
+  },
+  "harness_a_937c27e_never_merge": {
+   "bytes": 130748953,
+   "sha256": "f24d7149ea9e6ef5bc59e5f3f4971f879b43f194e7f76b606d60e4d56dd3602d",
+   "sha384": "41ac7436fa7e7b291b183ad69b93cabe8edbb666eae9480e13d9b6469662a22a2d0addbe6460818901501b9fb2820e87"
+  },
+  "harness_b_ec68707_never_merge": {
+   "bytes": 130706023,
+   "sha256": "237a61b96576e37ea165e22a2fdfeab4f4af0d9763e69a0059c5786179f699b7",
+   "sha384": "437b3aed33a040c0bbae10e302ded8393d8df3fc329b6104f3fb1fe6528189ec7e7efcc86136efd017de1203dd37c7c5"
+  },
+  "rollback_6a87937": {
+   "bytes": 132661830,
+   "sha256": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d",
+   "sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458"
+  }
+ },
+ "native": {
+  "screen": "1920 x 1080",
+  "candidate_home_voiceview": "observed",
+  "private_trace_pin_and_name_keys": "observed: 0 key focus traces, ordinary controls traced, made-up data",
+  "merged_name_editor_voiceview": "observed with a made-up name",
+  "item_6_fixture_recheck": "observed at 1920 x 1080 on the integrated code",
+  "restored": "rollback b268be99, Home, VoiceView off"
+ },
+ "unobserved": [
+  "item 6 production first run on a fresh household",
+  "item 6 and the integrated build at 1280 x 720",
+  "item 11 open items listed in the notes",
+  "physical Fire TV",
+  "owner listening and comfort"
+ ],
+ "acceptance_pass": {
+  "note": "after d7ff886, items 5, 6, 11 and 12; the unobserved list above is for d7ff886 and this pass observed its first two entries",
+  "candidate": "a672f57d333dc0e3fada51b3175ca1711d1f9397",
+  "commits_after_d7ff886": {
+   "917e78f5949f1a879e3219f7512827bdd678d305": "item 6: one Down reaches Next; the explainer's lines in a reading stop",
+   "4de7bd03be2d654ea3e6c071b52c3b807df24f2e": "item 6: FocusArea, so Up reaches that stop",
+   "a672f57d333dc0e3fada51b3175ca1711d1f9397": "item 6: the explainer's content ends where the stop's ring does"
+  },
+  "checks": {
+   "typecheck": "pass",
+   "lint": "0 errors, 108 warnings",
+   "jest_full": "178 suites passed, 1 skipped; 1878 tests passed, 4 skipped",
+   "item_6_mutations": "each new guard seen to fail when broken on purpose"
+  },
+  "packages": {
+   "candidate_a672f57": {
+    "bytes": 132683992,
+    "sha256": "8cc0ffd52fc61df17d8b69b40c31964c5ed0749c578ec1de67e1aedf78173dd8",
+    "sha384": "480fd42d96096bb5a2b2c1a471fb0f498ab284118facd0561bdef19750e56506bded03dd3ec3e00204efced90ef30d59"
+   },
+   "harness_a3_19ba55d_never_merge": {
+    "bytes": 130748986,
+    "sha256": "10bc4fba7a0dbb5ba45ab2ee9fa2f72f3f7a274f2d760d677f2b900822f9ac17",
+    "sha384": "2c5d375ccc94f8b996dca88ac58fd12979f36cabb0cedbab12b74946de1ff43b72ae11a9c331ea5e03f237ff383ba642"
+   },
+   "harness_b3_089ec6f_never_merge": {
+    "bytes": 130707765,
+    "sha256": "1b465aac12aa894bc83d18e280ed8f027e5b178e6f0edb5df1b72f539f497ac6",
+    "sha384": "be92c007619e589ccaf60de428274833efd38c15af9a199cf764c34417f1b4241fcf41c25399cdc8128ca835c3187fb6"
+   },
+   "harness_b2_50b5231_never_merge": {
+    "bytes": 130709072,
+    "sha256": "121c10e027dc23903fd3ce5130360c5aebdb94de06bf219c5981e40ff25e4325",
+    "sha384": "dd5cb831beb88803231c428d8af86c1bf739ce57116cf4b9f053244049085a051b024e9b219cd37bb19bea51f5577955"
+   },
+   "harness_a2_0f182f9_never_merge_never_installed": {
+    "bytes": 130749297,
+    "sha256": "d40000503b0b6dd1e92895123d2e05da97eff397f8aaf6abe6315a21556a1752",
+    "sha384": "2cd5dbca64f57bd797844345311160de635efe04665d41f9c4e58d4dcd82d0b57d36d91d376b6bba586c85b7742479c0"
+   }
+  },
+  "native": {
+   "item_5": "1280 x 720, VoiceView, made-up household: a sibling's name refused; a controlled failed save keeps the draft and the old name; Try again saves it",
+   "item_6": "production first run on fresh made-up households at 1920 x 1080 and 1280 x 720 on a disposable device: one Down reaches Next, the explainer's stop is reached and left in one press, Open library reaches Home",
+   "item_6_idle": "device behavior: display off at 20 minutes, every app closed including the launcher, crash history empty, clean relaunch",
+   "item_11": "1280 x 720: Parents explainer to footer, profile chooser and player controls",
+   "item_12": "native inventory of a672f57: 31 required and 2 optional modules, 1 native library, 83 npm packages; 42 of 45 flagged packages match their groups"
+  },
+  "main_device_after": {
+   "installed": "a672f57, package scoped over 4de7bd0, household kept",
+   "installed_sha384_matches_package": true,
+   "screen": "default size",
+   "voiceview": "off, checked by a recording",
+   "rollback_kept_read_only": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d"
+  },
+  "disposable_device": "its own instance, deleted after use",
+  "open": [
+   "item 6: the approved sentence starts below the explainer's edge at rest; the owner's layout decision",
+   "item 11 open items listed in the notes",
+   "item 12: hosted CI, residual Audit findings and exception decisions"
+  ],
+  "unobserved": [
+   "idle during playback longer than 20 minutes",
+   "physical Fire TV",
+   "owner listening and comfort"
+  ]
+ },
+ "owner_pin_entered": false,
+ "saved_progress_changed": false,
+ "published": false,
+ "not_signed_off": [
+  "medical safety",
+  "human comfort",
+  "owner listening",
+  "all 20 items"
+ ]
+}

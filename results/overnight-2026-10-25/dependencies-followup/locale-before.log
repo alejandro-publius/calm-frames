@@ -1,0 +1,74 @@
+TAP version 13
+# Subtest: the unchanged old locale consumer receives only the reviewed CommonJS cache line
+not ok 1 - the unchanged old locale consumer receives only the reviewed CommonJS cache line
+  ---
+  duration_ms: 2.745527
+  type: 'test'
+  location: './app/tools/legacy_locale_dependency.test.mjs:41:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '1.1.0' !== '4.3.0'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '4.3.0'
+  actual: '1.1.0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_locale_dependency.test.mjs:43:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: expired entries are removed from the supplied cache without rereading each key
+not ok 2 - expired entries are removed from the supplied cache without rereading each key
+  ---
+  duration_ms: 101.110471
+  type: 'test'
+  location: './app/tools/legacy_locale_dependency.test.mjs:48:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    16 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 16
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_locale_dependency.test.mjs:54:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: the actual locale module retains environment priority, normalization and explicit cache clearing
+ok 3 - the actual locale module retains environment priority, normalization and explicit cache clearing
+  ---
+  duration_ms: 6.993013
+  type: 'test'
+  ...
+# Subtest: the actual locale module keeps command parsing and memoization for sync and async callers
+ok 4 - the actual locale module keeps command parsing and memoization for sync and async callers
+  ---
+  duration_ms: 3.600055
+  type: 'test'
+  ...
+# Subtest: the actual locale module retains its default for disabled spawning and failed commands
+ok 5 - the actual locale module retains its default for disabled spawning and failed commands
+  ---
+  duration_ms: 2.501049
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 3
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 495.732783

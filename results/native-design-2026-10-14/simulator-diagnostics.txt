@@ -1,0 +1,12 @@
+Initial: simulator stopped; no other active Calm Frames worker reported by task inventory.
+Three starts attempted; retained final launcher session also failed.
+CLI reported Virtual device ready, but vega device list always returned No devices found.
+Final vega virtual-device status: {"running":false,"process_ids":{"qemu":-1}}
+Relevant emulator stderr (no key material or device data copied):
+sPrepareTexImage2D:3613 failed validation
+GLSL feature level 130
+ERROR | detected a hanging thread QEMU2 main loop. No response for 15011 ms
+ERROR | detected hanging QEMU2 CPU0/CPU1/CPU2/CPU3 threads.
+Existing ScreenCaptureKit recorder exited 7: no Vega window.
+CUA getApp for Vega name and executable: Invalid app.
+CUA getApp com.apple.Terminal: Computer Use is not allowed to use the app com.apple.Terminal for safety reasons. Denied; not retried.

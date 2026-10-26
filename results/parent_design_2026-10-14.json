@@ -1,0 +1,621 @@
+{
+  "date": "2026-10-14",
+  "branch": "codex/design-details-2026-10-13",
+  "baseline_commit": "113de2ea6e3b7e2615af3c0936238d9a7eaf3554",
+  "scope": "Parent/settings UI/UX: centered unlocked content, header Back, profile management beside selection, wrapping full-household note.",
+  "source_sha256": {
+    "app/src/calmframes/ParentAreaScreen.tsx": "9c367d0a5967c8528d2d8beef37fac147c5f18484dbbb44c8ffadf3f76a02fb3",
+    "app/test/calmframes/parentNavigation.test.tsx": "4a3141e556eb80d3a4128997a1bda1bd73735d44c78aca0d937a8bdd9d694979",
+    "eval/preview/parent.fixture.tsx": "f408b50b139bfcffcaf346593ce1a5c80a78fb98a8d4788e8f9998f8e522be20",
+    "eval/preview/render_parent.py": "c8235efc9aa88e0f216357c14244bf941d48b4307999766236261a85543e3fa6"
+  },
+  "preview_sha256": {
+    "docs/design/parent-refinement/after/1080/child-bottom.png": "dbbd840eb5b4d8b436df5e82396d0b04164f5c6b822f016a948dbcaa77f86c8e",
+    "docs/design/parent-refinement/after/1080/child-history.png": "4c3e3f7208ee6d34fca03ccf350f684134c8f76a1877415fb077eb1ef42dcb16",
+    "docs/design/parent-refinement/after/1080/child-interface.png": "5df9abc76433df6de56f9f61549cd501baad48aa5e310971195b538ac7ce256f",
+    "docs/design/parent-refinement/after/1080/child-room.png": "3ce6fef8b95fdf513a676c0d1f9020d39e8198c3cb7e5bde691c51844e908c91",
+    "docs/design/parent-refinement/after/1080/child.png": "f0b77ac5778588c949f82ef4b8c9de03353cac139e2449a3e271ffe0d18b07d8",
+    "docs/design/parent-refinement/after/1080/full-household.png": "f18bf67700f23e18c63d2fbc16c6c4f4c1bd9f386b9dac32fa37091c51e4a466",
+    "docs/design/parent-refinement/after/1080/household-bottom.png": "dbbd840eb5b4d8b436df5e82396d0b04164f5c6b822f016a948dbcaa77f86c8e",
+    "docs/design/parent-refinement/after/1080/household-history.png": "a66c755800e336ccf6265206c8aa65548ae84f2e89f948ede38f0f80dd3ea898",
+    "docs/design/parent-refinement/after/1080/household-interface.png": "5df9abc76433df6de56f9f61549cd501baad48aa5e310971195b538ac7ce256f",
+    "docs/design/parent-refinement/after/1080/household-room.png": "417195ce8952173b4b6d1601c3597d8baf9eb4526bdc08e96d07e0ff3e375efe",
+    "docs/design/parent-refinement/after/1080/household.png": "f2574760698bcbf87c52418d2cced1d7c90909f05f2daef3f14251befe2404c0",
+    "docs/design/parent-refinement/after/1080/locked.png": "c00903685eb7dc3e9e6bd9435f6ef8cd0207bc6e8c98b54ee2329b30666d1a45",
+    "docs/design/parent-refinement/after/1080/no-pin.png": "aba32918381a19fdc9c6b635b5d50bf622d94c41a40d6b8c43c5bc9cbd459623",
+    "docs/design/parent-refinement/after/1080/no-profiles-bottom.png": "dbbd840eb5b4d8b436df5e82396d0b04164f5c6b822f016a948dbcaa77f86c8e",
+    "docs/design/parent-refinement/after/1080/no-profiles-history.png": "82eaf193b1c15d0ba9e5371ceb7880aa2ebb47a30d5ca6d13f3aeba26aa9ec51",
+    "docs/design/parent-refinement/after/1080/no-profiles-room.png": "dbd0438d959bb42ad5728708d33bca1206e3f59e75ee87792bb262b763958e70",
+    "docs/design/parent-refinement/after/1080/no-profiles.png": "7099ca56397c9159cbeb5f28b961bebdef3bb06ced64e988084adbe8a17792f3",
+    "docs/design/parent-refinement/after/1080/remove-confirm-question.png": "802fbc2fc2335d7b7e9fac499f6c040d326416029384e365ea6cc502da5f9df7",
+    "docs/design/parent-refinement/after/1080/remove-confirm.png": "2c27f897145ddd7bb253d1abcee92ad0d112ec8ba6cc2a13805a88914d715f4f",
+    "docs/design/parent-refinement/after/1080/saving.png": "382ed4efd374b098238030666ed86624405cd9b82a5a0523698090397ddb345d",
+    "docs/design/parent-refinement/after/1080/wrong-pin.png": "1188054ac279bd069dd07e26018456a9e26bd2a53813bb265e918320e9e41116",
+    "docs/design/parent-refinement/after/720/child-bottom.png": "7ea1209c332fbb1122baeb129d4ab45994e9ead2f34d6e2f8d54efb9bf384400",
+    "docs/design/parent-refinement/after/720/child-history.png": "3758e2ce8daeeddf146b0386ac7da2575c68c973f2bca0dbb22783fad97f2136",
+    "docs/design/parent-refinement/after/720/child-interface.png": "34358da710e297147eaaf8601d17184b4fec63253f996eb476803d98f827ac5c",
+    "docs/design/parent-refinement/after/720/child-room.png": "1a437bc6a2a8f64a8a7fe0ee721712d0aee7d1eca997cc4d776cf91b7f8424b4",
+    "docs/design/parent-refinement/after/720/child.png": "52fb83b97bca3859190b89e8ffc2c2f52e18185a2721af414981ba98783a3971",
+    "docs/design/parent-refinement/after/720/full-household.png": "9fcf5840a255a3c298689254d17d9bfc49efff173e2ee484833066e7618b71d7",
+    "docs/design/parent-refinement/after/720/household-bottom.png": "7ea1209c332fbb1122baeb129d4ab45994e9ead2f34d6e2f8d54efb9bf384400",
+    "docs/design/parent-refinement/after/720/household-history.png": "a5d057b405650fc26afa41bfd91bb876794482f75d11f64100cc213c15731924",
+    "docs/design/parent-refinement/after/720/household-interface.png": "34358da710e297147eaaf8601d17184b4fec63253f996eb476803d98f827ac5c",
+    "docs/design/parent-refinement/after/720/household-room.png": "3e4d957aae1beb76f0e89474da06bf16871e767008381d2f6e3d166abf5b1efb",
+    "docs/design/parent-refinement/after/720/household.png": "88abf2a154374f369d785b4553acaaba6dcc4ba639754fdc0a6078ebcc252d7d",
+    "docs/design/parent-refinement/after/720/locked.png": "e6a288c89c5d5a07551dfffaef9fcb8647e1d3cf92c8d9ffedc8f408e8f4b23e",
+    "docs/design/parent-refinement/after/720/no-pin.png": "e2eb43eb18de5ccb986531c34691363fb4cf59ebf9f7ec61380d76a43689e661",
+    "docs/design/parent-refinement/after/720/no-profiles-bottom.png": "95b69e60298bf2daf6e489d17776a043de20dfefc54157339cb2020aadb46960",
+    "docs/design/parent-refinement/after/720/no-profiles-history.png": "9b0d9d08f83337f0f26de387f4a20d0cab28ce5367e759844a632ba34181dd11",
+    "docs/design/parent-refinement/after/720/no-profiles-room.png": "ad3604b376dd743dd642d0fa4629ec966d9e64c62e8fd64127b42be6aa61a9f0",
+    "docs/design/parent-refinement/after/720/no-profiles.png": "dbca060ede69cb9577c0efdc5f572856b3b7ef896df84e29c5529e08fa613151",
+    "docs/design/parent-refinement/after/720/remove-confirm-question.png": "49b97258b3c17623ad596f17d4972fe35a382fcbe2ab46a4b503a569f47b32e6",
+    "docs/design/parent-refinement/after/720/remove-confirm.png": "9137a44ebce66267eabd290733c9654233efaf8d8931ffffc823e2e95972b2dd",
+    "docs/design/parent-refinement/after/720/saving.png": "31a84852069c302178cdc107736fa38d3dfa8917f192a6896e6a795c18fb6af6",
+    "docs/design/parent-refinement/after/720/wrong-pin.png": "e238dd370adb9ab58c5783f3e2caaded55b2934eb97711ae148986680c8ecdce",
+    "docs/design/parent-refinement/after/bounds.json": "1034779d3762bd44ffd88a8f8f101b512ba23d6df34c804151984346fd4c7610",
+    "docs/design/parent-refinement/before/1080/child-bottom.png": "865b50934cd188d40f23e4151158f344995ffeec0270c806a200390189d40a15",
+    "docs/design/parent-refinement/before/1080/child-history.png": "e449a86dbf0777101336b469e0acaeada7da2961fb441de765868ca1e08c9ead",
+    "docs/design/parent-refinement/before/1080/child-interface.png": "fe2c69b3dc47ca53fbc384d11f3b54274d8ec2eb1b60e081f4c87d3e1004c014",
+    "docs/design/parent-refinement/before/1080/child-room.png": "f140070df822751c37b7948ada2270ee58a15ed78f001ab87bb9697e047314b9",
+    "docs/design/parent-refinement/before/1080/child.png": "dc08fa0994d991f684d6b80947f973ed51dd99b9a4d39a4c48c3fafd91b1869a",
+    "docs/design/parent-refinement/before/1080/full-household.png": "0d228fb1fd4acafc6036d0ecaec923847c3c0ea4534ec34722c0e5f664b8587c",
+    "docs/design/parent-refinement/before/1080/household-bottom.png": "865b50934cd188d40f23e4151158f344995ffeec0270c806a200390189d40a15",
+    "docs/design/parent-refinement/before/1080/household-history.png": "95e19fd570df3ce2d6a3e57d71db96e5d5a4d51fa598128dfa1679e30bdb4c1c",
+    "docs/design/parent-refinement/before/1080/household-interface.png": "fe2c69b3dc47ca53fbc384d11f3b54274d8ec2eb1b60e081f4c87d3e1004c014",
+    "docs/design/parent-refinement/before/1080/household-room.png": "7f712743f6d4606b5675430ca229c242323167b794a1d7dbe3f9141c82e481c7",
+    "docs/design/parent-refinement/before/1080/household.png": "a06c7f851b8ccea7ba44246ac1181a94cce674001b59ddd00d944ab2ec3ca2fe",
+    "docs/design/parent-refinement/before/1080/locked.png": "c00903685eb7dc3e9e6bd9435f6ef8cd0207bc6e8c98b54ee2329b30666d1a45",
+    "docs/design/parent-refinement/before/1080/no-pin.png": "aba32918381a19fdc9c6b635b5d50bf622d94c41a40d6b8c43c5bc9cbd459623",
+    "docs/design/parent-refinement/before/1080/no-profiles-bottom.png": "cdc9a06179de01d5ec8655505680ebf84666d0f929e31cd9ea6cc5326c0cc4e9",
+    "docs/design/parent-refinement/before/1080/no-profiles-history.png": "3698ebcaa47bd9251dfb39f8dc2283be9e3c1557e6c069ab31a8aba606481b4f",
+    "docs/design/parent-refinement/before/1080/no-profiles-room.png": "a3643bc23292f1bb6fab5487fca1264312f842490c63d661dae20c7dc8e42907",
+    "docs/design/parent-refinement/before/1080/no-profiles.png": "5b76cf6a9fae8e877e343c48c039de29fcd964ce26a1c571d06110b49a23e419",
+    "docs/design/parent-refinement/before/1080/remove-confirm-question.png": "8f42e2ad8ca38254fd04149fb5cfe5353ab7d8d2de61e5afdabc03c0f9c2f8ea",
+    "docs/design/parent-refinement/before/1080/remove-confirm.png": "8d0dfaa249573b6a4f3f0997e131e2f3802ffe3449f89b9b02273e3644634bf3",
+    "docs/design/parent-refinement/before/1080/saving.png": "8fa41a3e74191e32fa220e2653ca77008691e549408c7c8fdc9d2a263faf0402",
+    "docs/design/parent-refinement/before/1080/wrong-pin.png": "1188054ac279bd069dd07e26018456a9e26bd2a53813bb265e918320e9e41116",
+    "docs/design/parent-refinement/before/720/child-bottom.png": "8477329e02ecc5689c77feaf8ec73601e41de4a2516ac15f141b1c03c41f813f",
+    "docs/design/parent-refinement/before/720/child-history.png": "47fc8caf0047b4107226db6186db090f0ee0ebd555c4912c42901c01a0858f45",
+    "docs/design/parent-refinement/before/720/child-interface.png": "19122afd3f55120ce4e2071ac61bb76368a1ccb9fcb5ddeb7275f46dbe75871c",
+    "docs/design/parent-refinement/before/720/child-room.png": "f4a999c76b278e6fe93cf66836f4508d25074871e8426c799f934a9dc4a9729d",
+    "docs/design/parent-refinement/before/720/child.png": "7674472db2b01bd8976aac604848a3893db78bc6556c7fdfc2dfeb19aff68d48",
+    "docs/design/parent-refinement/before/720/full-household.png": "99fa811a7cbfedf86f80f6f16e82989aa32a23773e4820dfb61ed03195ea8acd",
+    "docs/design/parent-refinement/before/720/household-bottom.png": "8477329e02ecc5689c77feaf8ec73601e41de4a2516ac15f141b1c03c41f813f",
+    "docs/design/parent-refinement/before/720/household-history.png": "a3c8dfdcf83b1c77f6a7ad85f4b2de6b3402bd7fe424cd8a8d0652bb9a4c4d42",
+    "docs/design/parent-refinement/before/720/household-interface.png": "19122afd3f55120ce4e2071ac61bb76368a1ccb9fcb5ddeb7275f46dbe75871c",
+    "docs/design/parent-refinement/before/720/household-room.png": "af74c4c5c553ae9854b80c077d21fe08bd58c6501edc8363b22f5214855fbe24",
+    "docs/design/parent-refinement/before/720/household.png": "616088cdad92dca607c7a16b052a4041ff6d5f20219bb624f2ca92aba87ace8b",
+    "docs/design/parent-refinement/before/720/locked.png": "e6a288c89c5d5a07551dfffaef9fcb8647e1d3cf92c8d9ffedc8f408e8f4b23e",
+    "docs/design/parent-refinement/before/720/no-pin.png": "e2eb43eb18de5ccb986531c34691363fb4cf59ebf9f7ec61380d76a43689e661",
+    "docs/design/parent-refinement/before/720/no-profiles-bottom.png": "fc690885a70ee52dee91ffd35ad42bc518e0916d07d4084af449eeefe299734c",
+    "docs/design/parent-refinement/before/720/no-profiles-history.png": "b3cb2804df672ffc169a1e31aa354107b236957356d59295f38e64311745078e",
+    "docs/design/parent-refinement/before/720/no-profiles-room.png": "ccb566790d24ceef14b9eea06acdbe4ec050686359e6024a03cafeb85799e92b",
+    "docs/design/parent-refinement/before/720/no-profiles.png": "fb94840c3633066b34c4cb53f3b2314e350a30358a720817f8afd2bee3a21b3d",
+    "docs/design/parent-refinement/before/720/remove-confirm-question.png": "2abb4461e147f783ccd2544176468994a1e0a1c5cfd739fd5a7d989fddaccdbd",
+    "docs/design/parent-refinement/before/720/remove-confirm.png": "f083a0657a418c4ed7817c3827bf972a80067fe564f461653c8b22cfc03c08e3",
+    "docs/design/parent-refinement/before/720/saving.png": "a4ac7be3175144a3525f1053101257ac34a3b57b88dd21be377b81a652c9acb7",
+    "docs/design/parent-refinement/before/720/wrong-pin.png": "e238dd370adb9ab58c5783f3e2caaded55b2934eb97711ae148986680c8ecdce",
+    "docs/design/parent-refinement/before/bounds.json": "809a990a8c219ed205d988149d157b744a87e10f894833d43cb8a4bda72adf37"
+  },
+  "rendering": {
+    "kind": "Browser approximation of actual React Native host trees",
+    "sizes": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "state_count": 9,
+    "mock_household_only": true,
+    "native_capture": false,
+    "viewing_preset_y_1080p_before": 878,
+    "viewing_preset_y_1080p_after": 696,
+    "centered_column_x_1080p": 260,
+    "first_two_presets_within_safe_area_in_household_child_saving_no_profiles": true,
+    "full_household_note_within_safe_area": true
+  },
+  "measurements": {
+    "before": {
+      "1080/child": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 96,
+          "y": 878,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 96,
+          "y": 1050,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/full-household": [
+        {
+          "id": "parent-area-profiles-full",
+          "x": 96,
+          "y": 650,
+          "width": 838.8125,
+          "height": 42
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 96,
+          "y": 822,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 96,
+          "y": 994,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/household": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 96,
+          "y": 878,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 96,
+          "y": 1050,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/no-profiles": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 96,
+          "y": 328,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 96,
+          "y": 500,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/saving": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 96,
+          "y": 878,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 96,
+          "y": 1050,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "720/child": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 64,
+          "y": 583,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 64,
+          "y": 698,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/full-household": [
+        {
+          "id": "parent-area-profiles-full",
+          "x": 64,
+          "y": 432,
+          "width": 550.484375,
+          "height": 28
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 64,
+          "y": 546,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 64,
+          "y": 661,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/household": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 64,
+          "y": 583,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 64,
+          "y": 698,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/no-profiles": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 64,
+          "y": 218,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 64,
+          "y": 333,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/saving": [
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 64,
+          "y": 583,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 64,
+          "y": 698,
+          "width": 933,
+          "height": 104
+        }
+      ]
+    },
+    "after": {
+      "1080/child": [
+        {
+          "id": "parent-area-back-top",
+          "x": 1367.328125,
+          "y": 54,
+          "width": 292.671875,
+          "height": 82
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 260,
+          "y": 696,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 260,
+          "y": 868,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/full-household": [
+        {
+          "id": "parent-area-back-top",
+          "x": 1367.328125,
+          "y": 54,
+          "width": 292.671875,
+          "height": 82
+        },
+        {
+          "id": "parent-area-profiles-full",
+          "x": 1300,
+          "y": 298,
+          "width": 360,
+          "height": 126
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 260,
+          "y": 696,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 260,
+          "y": 868,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/household": [
+        {
+          "id": "parent-area-back-top",
+          "x": 1367.328125,
+          "y": 54,
+          "width": 292.671875,
+          "height": 82
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 260,
+          "y": 696,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 260,
+          "y": 868,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/no-profiles": [
+        {
+          "id": "parent-area-back-top",
+          "x": 1367.328125,
+          "y": 54,
+          "width": 292.671875,
+          "height": 82
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 260,
+          "y": 328,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 260,
+          "y": 500,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "1080/saving": [
+        {
+          "id": "parent-area-back-top",
+          "x": 1367.328125,
+          "y": 54,
+          "width": 292.671875,
+          "height": 82
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 260,
+          "y": 696,
+          "width": 1400,
+          "height": 156
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 260,
+          "y": 868,
+          "width": 1400,
+          "height": 156
+        }
+      ],
+      "720/child": [
+        {
+          "id": "parent-area-back-top",
+          "x": 912.046875,
+          "y": 36,
+          "width": 194.453125,
+          "height": 55
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 173.5,
+          "y": 463,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 173.5,
+          "y": 578,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/full-household": [
+        {
+          "id": "parent-area-back-top",
+          "x": 912.046875,
+          "y": 36,
+          "width": 194.453125,
+          "height": 55
+        },
+        {
+          "id": "parent-area-profiles-full",
+          "x": 866.5,
+          "y": 198,
+          "width": 240,
+          "height": 84
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 173.5,
+          "y": 463,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 173.5,
+          "y": 578,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/household": [
+        {
+          "id": "parent-area-back-top",
+          "x": 912.046875,
+          "y": 36,
+          "width": 194.453125,
+          "height": 55
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 173.5,
+          "y": 463,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 173.5,
+          "y": 578,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/no-profiles": [
+        {
+          "id": "parent-area-back-top",
+          "x": 912.046875,
+          "y": 36,
+          "width": 194.453125,
+          "height": 55
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 173.5,
+          "y": 218,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 173.5,
+          "y": 333,
+          "width": 933,
+          "height": 104
+        }
+      ],
+      "720/saving": [
+        {
+          "id": "parent-area-back-top",
+          "x": 912.046875,
+          "y": 36,
+          "width": 194.453125,
+          "height": 55
+        },
+        {
+          "id": "parent-area-preset-wcag",
+          "x": 173.5,
+          "y": 463,
+          "width": 933,
+          "height": 104
+        },
+        {
+          "id": "parent-area-preset-broadcast",
+          "x": 173.5,
+          "y": 578,
+          "width": 933,
+          "height": 104
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "locked_wrong_pin_no_pin_identical_image_sha256": {
+      "1080/locked": "c00903685eb7dc3e9e6bd9435f6ef8cd0207bc6e8c98b54ee2329b30666d1a45",
+      "1080/wrong-pin": "1188054ac279bd069dd07e26018456a9e26bd2a53813bb265e918320e9e41116",
+      "1080/no-pin": "aba32918381a19fdc9c6b635b5d50bf622d94c41a40d6b8c43c5bc9cbd459623",
+      "720/locked": "e6a288c89c5d5a07551dfffaef9fcb8647e1d3cf92c8d9ffedc8f408e8f4b23e",
+      "720/wrong-pin": "e238dd370adb9ab58c5783f3e2caaded55b2934eb97711ae148986680c8ecdce",
+      "720/no-pin": "e2eb43eb18de5ccb986531c34691363fb4cf59ebf9f7ec61380d76a43689e661"
+    },
+    "text_and_existing_accessibility_states_sha256": {
+      "1080/full-household": "32affe188a4af586ec8fe508b3537394fd72fc88354b5feb7013a7095f5bbe4f",
+      "1080/remove-confirm": "0a05631b0e35a3bf1090004d63a97a7ed7985a589bf894fb78d49ea420947491",
+      "1080/locked": "39d456bba5b3ea76ba41b9f8677237339c3256d83aabd8f4364ed54d6ebf1a05",
+      "1080/child": "25dd5f0d1fe6951991103f80e2c63707b6c4b850d9fc0d1f43de47a7baf67965",
+      "1080/household": "477cec157a833a8e704d82b8505f9a06bb95bab1e6c00e4523bd8a05758d1c11",
+      "1080/wrong-pin": "177915bf2d0cb11036f328c2805fb9f72e9c5d08eb476a5f2d979bc2cfd2c413",
+      "1080/no-profiles": "e83f44f78eb7e42764ba5f7cf7c17c3abd823e92de015a316d6786ae2851cf4e",
+      "1080/no-pin": "1719625f6bcc1ccb04f476de0ef8a0357d6da05e1de42c0a29feb296972f4710",
+      "1080/saving": "825cd0d237f1925f089d1c4eff22d71382f3564648a419d4605b7a200b8fb71a",
+      "720/full-household": "32affe188a4af586ec8fe508b3537394fd72fc88354b5feb7013a7095f5bbe4f",
+      "720/remove-confirm": "0a05631b0e35a3bf1090004d63a97a7ed7985a589bf894fb78d49ea420947491",
+      "720/locked": "39d456bba5b3ea76ba41b9f8677237339c3256d83aabd8f4364ed54d6ebf1a05",
+      "720/child": "25dd5f0d1fe6951991103f80e2c63707b6c4b850d9fc0d1f43de47a7baf67965",
+      "720/household": "477cec157a833a8e704d82b8505f9a06bb95bab1e6c00e4523bd8a05758d1c11",
+      "720/wrong-pin": "177915bf2d0cb11036f328c2805fb9f72e9c5d08eb476a5f2d979bc2cfd2c413",
+      "720/no-profiles": "e83f44f78eb7e42764ba5f7cf7c17c3abd823e92de015a316d6786ae2851cf4e",
+      "720/no-pin": "1719625f6bcc1ccb04f476de0ef8a0357d6da05e1de42c0a29feb296972f4710",
+      "720/saving": "825cd0d237f1925f089d1c4eff22d71382f3564648a419d4605b7a200b8fb71a"
+    },
+    "comparison_exclusion": "Only the newly added parent-area-back-top subtree is excluded from text and existing accessible-control comparison.",
+    "settings_semantics_changed": false,
+    "defaults_changed": false,
+    "persistence_changed": false,
+    "pin_logic_changed": false,
+    "real_household_accessed": false,
+    "media_changed": false,
+    "accepted_details_changed": false
+  },
+  "validation": {
+    "focused_jest": {
+      "passed": 122,
+      "suites": 4,
+      "files": [
+        "parentNavigation",
+        "screens",
+        "tenFoot",
+        "uiCapture"
+      ],
+      "coverage": false
+    },
+    "negative_control": {
+      "baseline": "113de2e",
+      "expected_failures": 2,
+      "test": "parentNavigation.test.tsx",
+      "reason": "Header Back is absent on the baseline."
+    },
+    "typecheck": {
+      "passed": true,
+      "arguments": "-p tsconfig.json --noEmit --preserveSymlinks",
+      "note": "Shared dependency directory in isolated worktree."
+    },
+    "targeted_eslint": true,
+    "preview_ruff": true,
+    "design_page_pytest": {
+      "passed": 21
+    }
+  },
+  "remaining_native_checks": [
+    "D-pad initial focus after unlocking and navigation between profile and management columns",
+    "Native scrolling, Back navigation and VoiceView reading order"
+  ],
+  "limitations": [
+    "Browser layout approximates Yoga. Component events do not verify native focus or VoiceView.",
+    "The preview household uses synthetic test data only; it does not establish access to the validation household.",
+    "No new native build, full CI, release or submission claim."
+  ]
+}

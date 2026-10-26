@@ -1,0 +1,14 @@
+{
+  "asset": "acadia-coast.png",
+  "role": "Decorative menu background and title thumbnail; not a runtime safety hold image.",
+  "copied_utc": "2026-10-16",
+  "source": "Existing local prepared-video still.png, copied byte for byte; no new frame extraction or capture.",
+  "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "asset_sha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b",
+  "source_url": "https://npgallery.nps.gov/AssetDetail/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e",
+  "credit": "National Park Service, Acadia National Park. Public domain per existing source record. No NPS endorsement implied.",
+  "dimensions": [
+    1280,
+    720
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "analysis_pixels": [
+    192,
+    108
+  ],
+  "wcag_reference_window": [
+    64,
+    36
+  ],
+  "strict_room_window": [
+    22,
+    22
+  ],
+  "strict_room": {
+    "diagonal_inches": 85,
+    "distance_feet": 4
+  },
+  "threshold_qualifying_pixels": {
+    "reference_more_than": 576,
+    "room_more_than": 121
+  },
+  "original": {
+    "duration_ms": 48982,
+    "wcag_reference_flagged_union_ms": 39936,
+    "wcag_with_room_flagged_union_ms": 48446,
+    "normal_prepared_cover_ms": 48982
+  },
+  "candidate": {
+    "duration_ms": 12012,
+    "wcag_reference_flagged_union_ms": 7774,
+    "wcag_with_room_flagged_union_ms": 11577,
+    "normal_prepared_cover_ms": 12012
+  },
+  "interpretation": "Strict-room window amplifies local temporal changes, but substantial reference-window findings remain. Therefore the almost-continuous result is not explained solely by the smaller room window. GeneralFlashTracker counts qualifying opposing luminance changes per fixed pixel; moving texture can contribute. These maps do not localize findings to water or independently establish hazardous footage.",
+  "bug_assessment": "No specific analysis bug established by this bounded inspection; area/room/general-flash tests: 34 passed. No production analyzer changes. No independent or clinical validation."
+}

@@ -1,0 +1,26 @@
+{
+  "1080": {
+    "error_message_visible": true,
+    "error_back_visible": true,
+    "paused_hold_identified": true,
+    "paused_story_identified": true,
+    "controls_within_safe_area": true,
+    "seekbar_above_caption_button": true,
+    "menu_above_caption_band": true,
+    "controls-back_gold_focus_ring": true,
+    "controls-captions_gold_focus_ring": true,
+    "caption-menu_gold_focus_ring": true
+  },
+  "720": {
+    "error_message_visible": true,
+    "error_back_visible": true,
+    "paused_hold_identified": true,
+    "paused_story_identified": true,
+    "controls_within_safe_area": true,
+    "seekbar_above_caption_button": true,
+    "menu_above_caption_band": true,
+    "controls-back_gold_focus_ring": true,
+    "controls-captions_gold_focus_ring": true,
+    "caption-menu_gold_focus_ring": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "consumer": "query-string 7.1.3",
+  "installed_decode": "0.2.2",
+  "proposed_decode": "0.5.1",
+  "ordinary_parse_before": "passed",
+  "proposed_override": "rejected",
+  "error": "decodeComponent is not a function",
+  "scope": "Actual consumer in an isolated VM; no installed dependency changed or external request made."
+}

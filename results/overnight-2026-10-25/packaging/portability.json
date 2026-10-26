@@ -1,0 +1,29 @@
+{
+  "base": "a162602ace78d8f60e05ebef34809d6ea7441b8b",
+  "scope": "Asset-root path portability; no media or native build changes",
+  "checked_source_sha256": {
+    "app/tools/check_prepared_library.mjs": "16140f1a3f4b3016161560f1a960673960b8e34734275b5cd258af024c02ddc4",
+    "app/tools/check_prepared_library.test.mjs": "7d41dcdd7d4c622e46c7e251bb4fb2e6e348cc4772fad806667962b42ad08618"
+  },
+  "node_version": "22.23.2",
+  "red_before": {
+    "command": "node --test --test-name-pattern='runtime assets (remain valid|reject a directly)' app/tools/check_prepared_library.test.mjs",
+    "passed": 1,
+    "failed": 1,
+    "failure": "Ordinary assets root under linked parent rejected as a symlink"
+  },
+  "after": {
+    "command": "node --test app/tools/check_prepared_library.test.mjs",
+    "passed": 29,
+    "failed": 0
+  },
+  "symlinked_tmpdir": {
+    "command": "TMPDIR=<owned symlink to a real temporary directory> node --test app/tools/check_prepared_library.test.mjs",
+    "passed": 29,
+    "failed": 0
+  },
+  "direct_root_link_with_trailing_separator": "rejected",
+  "child_link": "rejected",
+  "required_report_gate": "passed",
+  "native_build": "not run"
+}

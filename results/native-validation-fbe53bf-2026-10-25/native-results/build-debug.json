@@ -1,0 +1,12 @@
+{
+  "command": [
+    "npm",
+    "--prefix",
+    "app",
+    "run",
+    "build:debug"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 78.07
+}

@@ -1,0 +1,67 @@
+FAIL test/calmframes/playbackUi.test.tsx
+  ✓ seekbar yields initial and restored preferred focus to Skip during none (232 ms)
+  ✓ seekbar yields initial and restored preferred focus to Skip during countdown (41 ms)
+  ✓ initialized playback exposes named captions and a stationary contrasting focus ring (31 ms)
+  ✓ ambient Harbor starts Off, honors explicit On through playback updates, and can return Off (52 ms)
+  ✓ pause stays visible after controls hide in covering state and clears on Play (50 ms)
+  ✓ pause stays visible after controls hide in countdown state and clears on Play (35 ms)
+  ✓ pause stays visible after controls hide in none state and clears on Play (20 ms)
+  ✕ one retained polite pause message survives controls toggling and resets only on play (14 ms)
+  ✕ opening in a paused state is silent until actual playback and a later pause (9 ms)
+  ✓ the covering scene card owns its pause announcement without the generic notice (19 ms)
+  ✓ the countdown scene card owns its pause announcement without the generic notice (23 ms)
+  ✓ recovery paints above the retained cover and Back leaves once (22 ms)
+  ✓ choosing the active caption track closes its menu without changing media or the hold (34 ms)
+
+  ● one retained polite pause message survives controls toggling and resets only on play
+
+    Unable to find an element with testID: player-pause-announcement
+
+      106 |   const position = mockMedia.currentTime;
+      107 |   const message = 'Paused. Press Play to continue.';
+    > 108 |   const region = view.getByTestId('player-pause-announcement');
+          |                       ^
+      109 |   expect(region.props.accessibilityLabel).toBe('');
+      110 |   act(() => mockMedia.pause());
+      111 |   // Let the existing controls settle; no immediate speech into active media.
+
+      at Object.getByTestId (test/calmframes/playbackUi.test.tsx:108:23)
+
+  ● one retained polite pause message survives controls toggling and resets only on play
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● opening in a paused state is silent until actual playback and a later pause
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      141 |   const view = render(<VideoPlayerUI {...props} paused />);
+      142 |   act(() => jest.advanceTimersByTime(6000));
+    > 143 |   expect(speak.mock.calls.some(([text]) => text === 'Paused. Press Play to continue.')).toBe(false);
+          |                                                                                         ^
+      144 |   expect(view.getByTestId('player-pause-announcement').props.accessibilityLabel).toBe('');
+      145 |   media.paused = false;
+      146 |   view.rerender(<VideoPlayerUI {...props} paused={false} />);
+
+      at Object.toBe (test/calmframes/playbackUi.test.tsx:143:89)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 11 passed, 13 total
+Snapshots:   0 total
+Time:        3.699 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx/i.

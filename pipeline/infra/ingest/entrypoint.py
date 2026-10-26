@@ -270,8 +270,8 @@ def run(settings: Settings, clients: dict[str, Any], ingest_main) -> int:
     the test can drive the whole path against moto and a pipeline that writes a
     known title.
     """
-    from pipeline.layout import TitleLayout  # noqa: PLC0415
     from pipeline.hashing import sha256_file  # noqa: PLC0415
+    from pipeline.layout import TitleLayout  # noqa: PLC0415
 
     name = local_name_for(settings.source_key)
     incoming = settings.workdir / "incoming"

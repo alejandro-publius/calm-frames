@@ -1,0 +1,25 @@
+PASS test/calmframes/playbackUi.test.tsx
+PASS test/w3cmedia/mediacontrols/VideoPlayerUI.test.tsx
+PASS test/calmframes/playbackCardSequence.test.tsx
+PASS test/calmframes/bufferingOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+PASS test/calmframes/playbackTrace.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:740:15)
+
+
+Test Suites: 5 passed, 5 total
+Tests:       52 passed, 52 total
+Snapshots:   1 passed, 1 total
+Time:        3.946 s, estimated 5 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/playbackCardSequence.test.tsx|test\/calmframes\/bufferingOpening.test.tsx|test\/calmframes\/playbackTrace.test.tsx|test\/w3cmedia\/mediacontrols\/VideoPlayerUI.test.tsx/i.

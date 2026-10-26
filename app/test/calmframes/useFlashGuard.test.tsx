@@ -18,6 +18,7 @@ import { resetAnnouncements } from '../../src/calmframes/announce';
 import { DEFAULT_SETTINGS, HouseholdSettings } from '../../src/calmframes/household';
 import { HideLogEntry } from '../../src/calmframes/hideLog';
 import { MediaElementLike } from '../../src/calmframes/useCoverHarness';
+import { PersonalCover } from '../../src/calmframes/personalCovers';
 import { useFlashGuard } from '../../src/calmframes/useFlashGuard';
 
 const burstsMapText = fs.readFileSync(
@@ -52,6 +53,9 @@ function makeMediaElement(): MediaElementLike & {
 }
 
 interface GuardedProps {
+  additionalCovers?: PersonalCover[];
+  personalCoversStatus?: 'loading' | 'ready' | 'blocked';
+  announceCards?: boolean;
   renditionStartOffsetMs?: number;
   media: MediaElementLike;
   mapText?: string | null;
@@ -63,6 +67,9 @@ interface GuardedProps {
 }
 
 const Guarded = ({
+  additionalCovers,
+  personalCoversStatus,
+  announceCards,
   media,
   mapText = burstsMapText,
   mapUrl,
@@ -74,6 +81,9 @@ const Guarded = ({
 }: GuardedProps) => {
   const ref = React.useRef<MediaElementLike | null>(media);
   const guard = useFlashGuard({
+    additionalCovers,
+    personalCoversStatus,
+    announceCards,
     mediaRef: ref,
     mapTexts: mapUrl ? undefined : { wcag: mapText },
     mapUrls: mapUrl ? { wcag: mapUrl } : undefined,
@@ -90,6 +100,9 @@ const Guarded = ({
   });
   return (
     <>
+      <Text testID="seek-extra" onPress={() => guard.requestSeek('dpad-fast-forward', 1000)}>Seek</Text>
+      <Text testID="base">{JSON.stringify(guard.baseIntervals)}</Text>
+      <Text testID="effective">{JSON.stringify(guard.intervals)}</Text>
       <Text testID="status">{guard.status}</Text>
       <Text testID="covered">{guard.covered ? 'covered' : 'clear'}</Text>
       <Text testID="card-kind">{guard.card.kind}</Text>
@@ -126,6 +139,53 @@ describe('useFlashGuard', () => {
     jest.useRealTimers();
   });
 
+  it('keeps personal loading, failed and invalid preferences opaque', async () => {
+    const media = makeMediaElement();
+    const view = render(<Guarded media={media} personalCoversStatus="loading" />);
+    await settle();
+    expect(read('status')).toBe('loading');
+    expect(read('covered')).toBe('covered');
+    view.rerender(<Guarded media={media} personalCoversStatus="blocked" />);
+    await settle();
+    expect(read('status')).toBe('blocked');
+    expect(read('covered')).toBe('covered');
+    view.rerender(<Guarded media={media} additionalCovers={[{ startMs: 0, endMs: 40000 }]} />);
+    await settle();
+    expect(read('status')).toBe('blocked');
+    expect(read('covered')).toBe('covered');
+  });
+
+  it('uses additional covers through seek, pause, buffering and end while retaining the base', async () => {
+    const media = makeMediaElement();
+    const additions = [{ startMs: 1000, endMs: 2000 }];
+    const view = render(<Guarded media={media} additionalCovers={additions} />);
+    await settle();
+    const base = read('base');
+    expect(JSON.parse(read('effective'))[0]).toMatchObject({ startMs: 500, endMs: 2500 });
+    media.currentTime = 1;
+    await act(async () => { media.fire('playing'); jest.advanceTimersByTime(100); });
+    expect(read('covered')).toBe('covered');
+    for (const event of ['pause', 'waiting', 'seeking', 'seeked', 'playing', 'ended']) {
+      await act(async () => { media.fire(event); jest.advanceTimersByTime(100); });
+      expect(read('covered')).toBe('covered');
+    }
+    await act(async () => { fireEvent.press(screen.getByTestId('seek-extra')); });
+    expect(media.currentTime).toBe(1);
+    expect(read('covered')).toBe('covered');
+    expect(read('base')).toBe(base);
+    view.rerender(<Guarded media={media} additionalCovers={[]} />);
+    await settle();
+    expect(read('effective')).toBe(base);
+  });
+
+  it('can delegate card speech to the player without changing verification or protection', async () => {
+    const media = makeMediaElement();
+    render(<Guarded media={media} announceCards={false} />);
+    await settle();
+    expect(read('status')).toBe('verified');
+    expect(announce).not.toHaveBeenCalled();
+  });
+
   it('starts with the picture hidden, before any map has been checked', async () => {
     const media = makeMediaElement();
     // A map that is still being fetched. Nothing about the title is known yet,
@@ -141,7 +201,39 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('loading');
     expect(read('covered')).toBe('covered');
     expect(screen.queryByTestId('calm-frames-cover')).toBeTruthy();
-    expect(read('card-kind')).toBe('unverified');
+    // Still checking is not the same as refused, so it gets its own card
+    // rather than the "Not checked yet" one a failed map gets.
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Preparing your video',
+    );
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
+  });
+
+  it('shows the checking card for a replacement map, not the last refusal', async () => {
+    const media = makeMediaElement();
+    const { rerender } = render(<Guarded media={media} mapText={null} />);
+    await settle();
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'This video is unavailable',
+    );
+
+    // A new map arrives and is still being fetched. The refusal belonged to
+    // the old one, so it must not be what the card says now.
+    rerender(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/replacement.json"
+        fetchText={() => new Promise<string | null>(() => {})}
+      />,
+    );
+    await settle();
+    expect(read('status')).toBe('loading');
+    expect(read('covered')).toBe('covered');
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Preparing your video',
+    );
   });
 
   it('keeps the picture hidden when the map cannot be fetched', async () => {
@@ -156,6 +248,26 @@ describe('useFlashGuard', () => {
     await settle();
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
+  });
+
+  it('never shows an unchecked picture after playing confirms with a missing map', async () => {
+    const media = makeMediaElement();
+    render(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/map.json"
+        fetchText={async () => null}
+      />,
+    );
+    await settle();
+    await act(async () => {
+      media.fire('playing');
+      jest.advanceTimersByTime(100);
+    });
+    // Assert the picture itself, not just the rejection category. Treating a
+    // missing map as an empty verified one would otherwise leave it exposed.
+    expect(read('covered')).toBe('covered');
+    expect(read('status')).toBe('blocked');
   });
 
   it('uncovers only once a signed map has verified', async () => {
@@ -180,7 +292,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('unverified');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This video is unavailable',
     );
   });
 
@@ -219,7 +331,7 @@ describe('useFlashGuard', () => {
     expect(read('card-kind')).toBe('countdown');
     expect(read('covered')).toBe('clear');
     expect(announce).toHaveBeenCalledWith(
-      expect.stringContaining('Flashing part coming up'),
+      expect.stringContaining('Flashing coming up'),
       { queue: true },
     );
 
@@ -232,7 +344,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('covering');
     expect(announce).toHaveBeenCalledWith(
-      'Hiding a flashing part. Sound and captions keep playing.',
+      'Flashing hidden. Sound continues while this scene is hidden.',
       { queue: true },
     );
 
@@ -245,7 +357,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('clear');
     expect(read('card-kind')).toBe('after');
     expect(screen.getByTestId('calm-card-title').props.children).toMatch(
-      /^Hid \d+ seconds of flashing$/,
+      /^Scene hidden for \d+ seconds$/,
     );
 
     // And the parent area has a line for it.
@@ -292,7 +404,7 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
     expect(screen.getByTestId('calm-card-detail').props.children).toMatch(
-      /stricter than the check/,
+      /current viewing settings/,
     );
   });
 

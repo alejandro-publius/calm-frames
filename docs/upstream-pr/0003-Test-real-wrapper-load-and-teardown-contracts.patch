@@ -1,0 +1,185 @@
+diff --git a/test/utils/VideoHandler.test.ts b/test/utils/VideoHandler.test.ts
+index 90ffb69..59aaa1a 100644
+--- a/test/utils/VideoHandler.test.ts
++++ b/test/utils/VideoHandler.test.ts
+@@ -182,25 +182,33 @@ describe('VideoHandler', () => {
+     it('stays quiet when the player was torn down while the load was in flight', async () => {
+       const { mockVideoRef, mockPlayer, mockSetIsVideoError, videoHandler } =
+         createVideoHandler();
+-      mockVideoRef.current = {} as unknown as VideoPlayer;
+-
+-      const mockLoad = jest
+-        .fn()
+-        .mockRejectedValue(new Error('LOAD_INTERRUPTED'));
++      videoHandler.selectedFileType = 'HLS';
++      mockVideoRef.current = {
++        pause: jest.fn(),
++        deinitializeSync: jest.fn().mockReturnValue('success'),
++      } as unknown as VideoPlayer;
++      videoHandler.removeEventListeners = jest.fn();
++      let rejectLoad!: (error: Error) => void;
++      const pending = new Promise<void>((_resolve, reject) => {
++        rejectLoad = reject;
++      });
++      const mockLoad = jest.fn(() => pending);
++      const mockUnload = jest.fn(() =>
++        rejectLoad(new Error('LOAD_INTERRUPTED')),
++      );
+       (ShakaPlayer as unknown as jest.Mock).mockImplementation(() => ({
+         load: mockLoad,
+-        unload: jest.fn(),
++        unload: mockUnload,
+       }));
+
+       videoHandler.loadAdaptiveMediaPlayer();
+-      // Backing out of the player mid-load calls destroyMediaPlayerSync, which
+-      // unloads Shaka and nulls this ref before the rejection lands. An
+-      // aborted load is not a playback error and must not flash the error
+-      // screen on the way out.
+-      mockPlayer.current = null;
++      expect(videoHandler.destroyMediaPlayerSync()).toBe(true);
+       await new Promise(process.nextTick);
+
+       expect(mockLoad).toHaveBeenCalledTimes(1);
++      expect(mockUnload).toHaveBeenCalledTimes(1);
++      expect(mockPlayer.current).toBeNull();
++      expect(mockVideoRef.current).toBeNull();
+       expect(mockSetIsVideoError).not.toHaveBeenCalled();
+     });
+
+diff --git a/test/w3cmedia/ShakaPlayer.test.ts b/test/w3cmedia/ShakaPlayer.test.ts
+new file mode 100644
+index 0000000..610284f
+--- /dev/null
++++ b/test/w3cmedia/ShakaPlayer.test.ts
+@@ -0,0 +1,130 @@
++// SPDX-License-Identifier: MIT-0
++
++// The setup file mocks the wrapper. Exercise its real load/internalLoad pair,
++// replacing only the generated engine and import-time native polyfills.
++jest.mock(
++  '../../src/w3cmedia/polyfills/DocumentPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/polyfills/ElementPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/polyfills/TextDecoderPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/polyfills/W3CMediaPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/polyfills/MiscPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/polyfills/DOMParserPolyfill',
++  () => ({
++    install: jest.fn(),
++  }),
++  { virtual: true },
++);
++jest.mock(
++  '../../src/w3cmedia/shakaplayer/dist/shaka-player.compiled',
++  () => ({
++    polyfill: { installAll: jest.fn() },
++    net: {
++      NetworkingEngine: {
++        unregisterScheme: jest.fn(),
++        registerScheme: jest.fn(),
++        PluginPriority: { APPLICATION: 1 },
++      },
++      HttpFetchPlugin: { isSupported: () => true, parse: jest.fn() },
++    },
++    config: { AutoShowText: { ALWAYS: 1 } },
++    Player: jest.fn(),
++  }),
++  { virtual: true },
++);
++
++const { ShakaPlayer } = jest.requireActual(
++  '../../src/w3cmedia/shakaplayer/ShakaPlayer',
++);
++const engine = jest.requireMock(
++  '../../src/w3cmedia/shakaplayer/dist/shaka-player.compiled',
++);
++
++function pendingLoad() {
++  let resolve!: () => void;
++  let reject!: (error: Error) => void;
++  const pending = new Promise<void>((yes, no) => {
++    resolve = yes;
++    reject = no;
++  });
++  const player = {
++    getNetworkingEngine: () => ({
++      clearAllRequestFilters: jest.fn(),
++      clearAllResponseFilters: jest.fn(),
++      registerRequestFilter: jest.fn(),
++      registerResponseFilter: jest.fn(),
++    }),
++    configure: jest.fn(),
++    load: jest.fn(() => pending),
++    setTextTrackVisibility: jest.fn(),
++  };
++  engine.Player.mockImplementation(() => player);
++  const wrapper = new ShakaPlayer(null, { secure: false, abrEnabled: true });
++  const content = {
++    uri: 'https://example.invalid/manifest.m3u8',
++    vcodec: 'avc1',
++    acodec: 'mp4a',
++    drm_scheme: '',
++  };
++  return { wrapper, content, player, resolve, reject };
++}
++
++describe('real Shaka wrapper load promise', () => {
++  it('returns a promise that fulfills after engine load and text visibility', async () => {
++    const { wrapper, content, player, resolve } = pendingLoad();
++    const result = wrapper.load(content, false);
++    expect(player.load).toHaveBeenCalledWith(content.uri);
++    expect(player.setTextTrackVisibility).not.toHaveBeenCalled();
++    // Resolve even under the dropped-return mutation, leaving no pending work.
++    resolve();
++    expect(result).toEqual(
++      expect.objectContaining({ then: expect.any(Function) }),
++    );
++    await result;
++    expect(player.setTextTrackVisibility).toHaveBeenCalledTimes(1);
++    expect(player.setTextTrackVisibility).toHaveBeenCalledWith(true);
++  });
++
++  it('returns the engine rejection without enabling text tracks', async () => {
++    const { wrapper, content, player, reject } = pendingLoad();
++    const error = new Error('manifest unavailable');
++    const result = wrapper.load(content, false);
++    expect(result).toEqual(
++      expect.objectContaining({ then: expect.any(Function) }),
++    );
++    const rejected = result.catch((reason: Error) => reason);
++    reject(error);
++    await expect(rejected).resolves.toBe(error);
++    expect(player.load).toHaveBeenCalledWith(content.uri);
++    expect(player.setTextTrackVisibility).not.toHaveBeenCalled();
++  });
++});

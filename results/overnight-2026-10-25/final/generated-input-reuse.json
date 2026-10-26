@@ -1,0 +1,66 @@
+{
+  "candidate_commit": "639bae1389ca88e5333d56261ae30d73a18f18a5",
+  "generated_at_source": "596418e64e83f724c5c9e4a5b34122746aec11e4",
+  "build_input_hashes_match": true,
+  "archive_sha256": "127409f759cfa58a1d6424c02418321dfac1e11863d3cc56cb3069b2fd0d2133",
+  "restored_files": [
+    {
+      "path": "app/src/w3cmedia/PlayerInterface.ts",
+      "bytes": 731,
+      "sha256": "30d40c22fe09c1ecaa871f3f409750006642ffc62a7aa60359b1bd0e43295dec",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DOMParserPolyfill.ts",
+      "bytes": 2102,
+      "sha256": "0e17b83b5884a009b1cc35b10bca2e72ee29a1c7cdeec618b98a55837998252b",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/DocumentPolyfill.ts",
+      "bytes": 1065,
+      "sha256": "bcb01bfe019c01fa0362f562e66d3e61964a5858ac5ee3ba8969870ae21f80e9",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/ElementPolyfill.ts",
+      "bytes": 862,
+      "sha256": "ee4b403435da1ed780678d0ce49fb7304cc5631af727555ddf80f087226cde4f",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/MiscPolyfill.ts",
+      "bytes": 1383,
+      "sha256": "655df68c912252cc003622e6db83a8019bfac64ae72394337f1647b13c8b1567",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/TextDecoderPolyfill.ts",
+      "bytes": 833,
+      "sha256": "ef8147831eafcce263f912740132c3f83fa92cea5e40caef82aaf8d0609e4391",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/polyfills/W3CMediaPolyfill.ts",
+      "bytes": 1664,
+      "sha256": "78f8afbdaa7366ef24138461be6f1a3af2deb84c971860954775991a5d25d8c4",
+      "portable_input": true,
+      "metadata_only": false
+    },
+    {
+      "path": "app/src/w3cmedia/shakaplayer/dist/shaka-player.compiled.js",
+      "bytes": 604408,
+      "sha256": "a8ac54d37d246c6a34c2ed0b52978a30627b1366126f3b51f4b7c734b8249e7e",
+      "portable_input": true,
+      "metadata_only": false
+    }
+  ],
+  "tracked_files_overwritten": false,
+  "native_package_built": false
+}

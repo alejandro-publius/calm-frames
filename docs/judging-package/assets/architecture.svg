@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="870" viewBox="0 0 1280 870" role="img" aria-labelledby="title desc">
+<title id="title">Calm Frames: from licensed source to deliberate playback</title>
+<desc id="desc">Offline analysis, signed maps, rendering and verification produce an approved packaged library. The native app matches the catalog route, verifies the map, then drives guarded playback. The exact McWay edition ends on its final still until Back. Verification failure keeps the picture covered.</desc>
+<rect x="0" y="0" width="1280" height="870" rx="0" fill="#f7f2e6" stroke="#f7f2e6" stroke-width="2"/>
+<text x="48" y="65.97999999999999" font-family="Georgia,serif" font-size="39" font-weight="600" fill="#244f4b">From source to a scene that stays</text>
+<text x="48" y="106.03999999999999" font-family="Arial,sans-serif" font-size="22" font-weight="400" fill="#53645b">Calm Frames  /  preparation, trust and playback</text>
+<text x="48" y="165.94" font-family="Arial,sans-serif" font-size="17" font-weight="600" fill="#244f4b">OFFLINE PREPARATION</text>
+<rect x="48" y="187" width="366" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="70" y="219.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">01 / PROVENANCE</text>
+<text x="70" y="258.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Licensed source</text>
+<text x="70" y="294.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Credit + source hash + timing</text>
+<text x="70" y="320.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">No automatic playback</text>
+<rect x="457" y="187" width="366" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="479" y="219.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">02 / ANALYSIS</text>
+<text x="479" y="258.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Analyze + sign</text>
+<text x="479" y="294.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">flashmap findings and maps</text>
+<text x="479" y="320.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">WCAG / broadcast profiles</text>
+<rect x="866" y="187" width="366" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="888" y="219.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">03 / PREPARATION</text>
+<text x="888" y="258.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Render + verify</text>
+<text x="888" y="294.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Preset outputs + exact reports</text>
+<text x="888" y="320.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Authenticated library export</text>
+<polyline points="414,269 457,269" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="457,269 449,264 449,274" fill="#244f4b"/>
+<polyline points="823,269 866,269" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="866,269 858,264 858,274" fill="#244f4b"/>
+<polyline points="1049,351 1049,385 183,385 183,450" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="183,450 178,442 188,442" fill="#244f4b"/>
+<text x="48" y="430.94" font-family="Arial,sans-serif" font-size="17" font-weight="600" fill="#244f4b">NATIVE VEGA APP</text>
+<rect x="48" y="450" width="270" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="70" y="482.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">04 / BUILD BOUNDARY</text>
+<text x="70" y="521.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Approved library</text>
+<text x="70" y="557.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Compiled catalog + hashes</text>
+<text x="70" y="583.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Reports + budget checks</text>
+<rect x="353" y="450" width="270" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="375" y="482.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">05 / WATCH</text>
+<text x="375" y="521.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Route + map checks</text>
+<text x="375" y="557.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Exact title and edition</text>
+<text x="375" y="583.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Ed25519 verification</text>
+<rect x="658" y="450" width="270" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="680" y="482.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">06 / PLAYBACK</text>
+<text x="680" y="521.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Guarded player</text>
+<text x="680" y="557.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Cover before seek</text>
+<text x="680" y="583.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Pause / resume / Back</text>
+<rect x="963" y="450" width="270" height="164" rx="15" fill="#fffaf0" stroke="#b9c8b6" stroke-width="2"/>
+<text x="985" y="482.12" font-family="Arial,sans-serif" font-size="16" font-weight="600" fill="#53645b">07 / MCWAY END</text>
+<text x="985" y="521.14" font-family="Arial,sans-serif" font-size="27" font-weight="600" fill="#244f4b">Final frame holds</text>
+<text x="985" y="557.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">Exact edition and still</text>
+<text x="985" y="583.4" font-family="Arial,sans-serif" font-size="20" font-weight="400" fill="#53645b">No repeat or auto-exit</text>
+<polyline points="318,532 353,532" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="353,532 345,527 345,537" fill="#244f4b"/>
+<polyline points="623,532 658,532" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="658,532 650,527 650,537" fill="#244f4b"/>
+<polyline points="928,532 963,532" fill="none" stroke="#244f4b" stroke-width="2"/>
+<polygon points="963,532 955,527 955,537" fill="#244f4b"/>
+<rect x="48" y="659" width="1184" height="73" rx="13" fill="#dce9df" stroke="#dce9df" stroke-width="2"/>
+<text x="70" y="699.68" font-family="Arial,sans-serif" font-size="24" font-weight="600" fill="#244f4b">Unresolved verification keeps the picture covered. New media cannot grant itself trust.</text>
+<text x="48" y="786.04" font-family="Arial,sans-serif" font-size="22" font-weight="400" fill="#53645b">Prepared catalog only. No interception of other apps or streaming services.</text>
+<text x="48" y="819.22" font-family="Arial,sans-serif" font-size="21" font-weight="400" fill="#53645b">Analyzer findings and signatures are technical evidence, not medical or comfort guarantees.</text>
+</svg>

@@ -1,0 +1,26 @@
+FAIL test/calmframes/homeFocusRouting.test.tsx (5.049 s)
+  ✕ each selected card has an explicit round trip through Watch at either layout size (1611 ms)
+
+  ● each selected card has an explicit round trip through Watch at either layout size
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: undefined
+
+      22 |     const watch = view.getByTestId('kid-home-watch');
+      23 |     const details = view.getByTestId('kid-home-more-info');
+    > 24 |     expect(view.getByTestId(id).props.nextFocusDown).toBe(tag('kid-home-watch'));
+         |                                                      ^
+      25 |     expect(watch.props.nextFocusUp).toBe(tag(id));
+      26 |     expect(details.props.nextFocusUp).toBe(tag(id));
+      27 |     // Follow the native target supplied to Watch instead of choosing by distance.
+
+      at toBe (test/calmframes/homeFocusRouting.test.tsx:24:54)
+      at Object._loop (test/calmframes/homeFocusRouting.test.tsx:19:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        5.512 s
+Ran all test suites matching /test\/calmframes\/homeFocusRouting.test.tsx/i.

@@ -1,0 +1,59 @@
+test_synthetic_fixture_cannot_be_accepted_as_production_input (test_render_preflight.PreflightTests.test_synthetic_fixture_cannot_be_accepted_as_production_input) ... FAIL
+
+======================================================================
+FAIL: test_synthetic_fixture_cannot_be_accepted_as_production_input (test_render_preflight.PreflightTests.test_synthetic_fixture_cannot_be_accepted_as_production_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/calm-frames-overnight-demo-2026-10-25/docs/cloud-integration-2026-10-23/demo/test_render_preflight.py", line 220, in test_synthetic_fixture_cannot_be_accepted_as_production_input
+    self.assertTrue(any("Synthetic fixtures cannot" in e for e in self.errors()))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)
+test_changed_capture_receipt_after_preflight_refuses (test_render_preflight.PreflightTests.test_changed_capture_receipt_after_preflight_refuses) ... FAIL
+
+======================================================================
+FAIL: test_changed_capture_receipt_after_preflight_refuses (test_render_preflight.PreflightTests.test_changed_capture_receipt_after_preflight_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/calm-frames-overnight-demo-2026-10-25/docs/cloud-integration-2026-10-23/demo/test_render_preflight.py", line 228, in test_changed_capture_receipt_after_preflight_refuses
+    with self.assertRaisesRegex(ValueError, "capture receipt changed since preflight"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (failures=1)
+test_changed_manifest_after_preflight_refuses (test_render_preflight.PreflightTests.test_changed_manifest_after_preflight_refuses) ... FAIL
+
+======================================================================
+FAIL: test_changed_manifest_after_preflight_refuses (test_render_preflight.PreflightTests.test_changed_manifest_after_preflight_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/calm-frames-overnight-demo-2026-10-25/docs/cloud-integration-2026-10-23/demo/test_render_preflight.py", line 236, in test_changed_manifest_after_preflight_refuses
+    with self.assertRaisesRegex(ValueError, "Manifest changed since preflight"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (failures=1)
+test_snapshot_refuses_bytes_changed_during_copy (test_render_preflight.PreflightTests.test_snapshot_refuses_bytes_changed_during_copy) ... FAIL
+
+======================================================================
+FAIL: test_snapshot_refuses_bytes_changed_during_copy (test_render_preflight.PreflightTests.test_snapshot_refuses_bytes_changed_during_copy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/calm-frames-overnight-demo-2026-10-25/docs/cloud-integration-2026-10-23/demo/test_render_preflight.py", line 255, in test_snapshot_refuses_bytes_changed_during_copy
+    with self.assertRaisesRegex(ValueError, "changed while making the render snapshot"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (failures=1)

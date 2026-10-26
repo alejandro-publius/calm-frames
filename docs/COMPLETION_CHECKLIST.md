@@ -1,0 +1,336 @@
+# Calm Frames completion checklist
+
+**Superseded for the submission.** The canonical checklist is
+[submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md),
+updated on October 17, 2026 for installed source `9cc57ca`, and the canonical
+demo script is [submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md).
+The dated notes below describe earlier candidates and are kept as a record.
+Nothing here authorizes recording, publication, a main merge, credentials or
+AWS changes.
+
+**Superseded on Oct 14, 2026.** The live owner list is [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md)
+section 5 and the packet under [`docs/submission/`](submission/README.md); the rows
+below are the Oct 13 plan, kept as a record. Do not rebuild the centered layout
+they describe.
+
+Updated October 13, 2026. Solo entry, identity-verified Amazon Developer account.
+Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
+
+## Finish line
+
+This is the single completion checklist. Alex subsequently selected a cinematic
+storybook visual pass, now combined with Claude's pushed improvements.
+The current presentation source is pushed; finish the matching native build and
+final demo next.
+The detailed evidence and outstanding decisions remain below.
+
+- [x] Built the earlier Oct 13 source at `06190c7` and prepared its package with
+  both original verification reports attached. The strict release gate
+  (`check --require-reports`) passes. Package built from `06190c7` for aarch64
+  Debug, SHA-256 `29774e27bdea4fea98bb2a684f7da12b8c2c3bf56f64b2e8ed401dd809f016d8`.
+- [ ] Rebuild the current centered layout, water opening and cinematic film on
+  the Mac. The `06190c7` package above predates these changes. All three prepared
+  generations now include their original reports and pass strict delivery checks.
+- [~] Completed the reachable native journeys for the earlier `06190c7` package in [MAC_FINISH.md](MAC_FINISH.md) on
+  the Vega Virtual Device: library/hero, D-pad focus, details, PIN gate and wrong
+  entry, practice holds with cover and captions, and prepared Harbor playback.
+  Fixed one observed issue (library shelf labels clipped under the footer).
+  Observations and hashes: `results/polish_native_validation.json`. Still blocked
+  on the validation household PIN: the parent-area interior (settings, preset/room/
+  chime/motion/sound rows, persistence across restart, exposure history) and
+  VoiceView. The gate/keypad code is unchanged from the Oct 10 on-device receipt
+  and the parent-screen changes are covered by the app suite.
+- [ ] Produce the matching native demo, capture manifest, package hashes and
+  review bundle. Check the final recording, including animated frames and audio.
+- [ ] Resolve publication licence questions, review remaining security findings,
+  confirm entrant details and prepare the contribution and reviewer-access links.
+  Present the finished materials for the required publication/submission approval.
+- [ ] Merge PR #1 into main before the repository goes public, since a public
+  repository shows main by default, and cut the judged tag from main.
+- [ ] At the Oct 21 final checks, move both audit exception review dates in
+  `scripts/audit_exceptions.toml` past Dec 3 and move the sample Action's pin in
+  `flashmap/examples/flash-check.yml` to the judged tag. Before the visibility
+  change, turn on private vulnerability reporting (Settings, Security) so the
+  route `docs/SECURITY.md` and `CODE_OF_CONDUCT.md` point at exists, and read
+  the code of conduct's promises once to confirm they are ones you will keep.
+  Open the Epilepsy Foundation photosensitivity page and the two Apple pages the
+  README quotes in a browser, confirm every quoted sentence still reads as
+  quoted, and update the "re-read on" date beside them in the README.
+- [ ] After approval, publish the reviewed artifacts, verify the live links and
+  submit the Devpost entry. Save the actual submitted confirmation privately if
+  it contains personal data; source/package IDs can go in a public receipt.
+
+A local bundle, draft release or completed Devpost draft does not close the last
+item. No physical device, extra architecture, package-registry publication or
+new AWS deployment is needed to finish the simulator entry.
+
+## Current design polish
+
+The latest layout centers the Harbor artwork, title, short description and actions.
+Both playable titles contain the new 20 second water/harbor film, with story
+captions and water ambience. Current browser previews and the film are linked
+from [the design page](design/README.md). The new film passed all 68 production
+checks; its native build and recording remain open.
+
+The earlier cinematic library and title-details source includes Claude's work through
+`49f3a18` and the later removal of decorative text panels on base `b882d39`.
+Current browser previews and source hashes are linked from
+[the design page](design/README.md) and recorded in
+[`open_layout_design.json`](../results/open_layout_design.json).
+The current film animates the presentation artwork. Playback stills are
+extracted and signed through the production pipeline; artwork is never
+substituted directly for a hold still. These previews do not replace the Mac build below.
+
+The motion and sound implementation and cloud checks are recorded in
+[`interface_finish_2026-10-10_pacific.json`](../results/interface_finish_2026-10-10_pacific.json).
+This closes the current feature pass, while the native acceptance below remains
+open. Entrant form details can wait until the matching app and demo are ready.
+
+The latest cloud work refines the library, title artwork, secondary navigation,
+setup, parental controls and viewing settings. It changes app inputs beyond the
+native package below. The current source has not been built, installed or
+verified on the Vega Virtual Device in this cloud session.
+
+Review: [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md).
+Cloud evidence: [`design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json).
+Native validation and refreshed demo assets remain open below.
+
+Latest refinement: [design/SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md), with
+browser layout proofs and check scope in
+[`seamless_design_2026-10-11.json`](../results/seamless_design_2026-10-11.json).
+This pass shortens browsing copy, keeps saving feedback stable and makes
+setup choices revisable before completion.
+
+The latest interaction pass keeps profile choices in the remote focus order
+while saving, separates notice actions from spoken announcements and includes
+all displayed licence conditions in spoken credits. These changes preserve the
+approved visual design; they still need native focus and screen-reader checks.
+
+The final interaction acceptance also covers optional, persisted interface motion
+and interface sounds, both Off for new and existing households unless enabled.
+Motion is limited to one short artwork entrance on library/details entry; text,
+focus and safety covers remain static. Quiet menu confirmation sounds are separate
+from the warning chime. These are acceptance requirements for the current pass,
+not claims that the native behavior has been observed.
+
+## Earlier native tested build
+
+The earlier approved native design was implemented, reviewed and installed.
+Its simulator demo and review assets are preserved as evidence of that build;
+they do not contain the current cloud polish.
+App source: `73fbbeddf6c259b3cb4286f770ff6c2a55a63564`.
+Branch: `codex/signed-scene-holds-2026-09-29`.
+Installed package: `app/build/aarch64-debug/calm-frames-app_aarch64.vpkg`,
+aarch64 Debug for this Apple Silicon Mac. SHA-256:
+`9dbffc3addeb023d2d14893a85a065d67ddef658485a375182e7a2f79f98e726`.
+Receipt: `results/redesign_validation_2026-10-10.json`.
+Documentation and audit work through `8271b38` preserved these app inputs.
+The subsequent design polish changes them and requires a new native receipt.
+
+## Completed implementation and checks for the earlier build
+
+- [x] Preserved Claude's Harbor work, original recordings and separate AWS worktree.
+- [x] Applied approved IMPLEMENTATION_BRIEF.md and COPY_GUIDE.md from Documents.
+  Teal, cream, saffron, peaceful monk/open halo and "A calmer way to watch";
+  licensed native Inter, title art, library, details, onboarding and parental controls.
+- [x] Reviewed all user-visible "Parental controls" wording. Pending titles say
+  "Needs check" without implying analysis is running.
+- [x] Fixed native focus disappearing during settings saves. Deferred-write
+  regression failed before the fix and passed after it. Focus uses both outline
+  and underline; save handlers block repeated writes without removing focus.
+- [x] Resolved prior load/caption URI, catalog, PIN correction, stale error-card
+  and exit cleanup findings. Reviewed final diffs and affected native reruns.
+- [x] App suite: <!--n results/redesign_validation_2026-10-10.json:checks.app_tests_passed -->1066<!--/n-->
+  passed, <!--n results/redesign_validation_2026-10-10.json:checks.snapshots_passed -->57<!--/n-->
+  snapshots; four existing skips. TypeScript passes; scoped lint has zero errors,
+  89 warnings. The full suite used cba1a29; the final one-sentence copy fix
+  passed 85 affected tests and TypeScript. No verification or specification
+  thresholds were weakened.
+- [x] Full Python suite: <!--n results/redesign_validation_2026-10-10.json:checks.python_passed -->1584<!--/n-->
+  passed, two slow cases deselected. All nine formerly localhost-blocked tests pass.
+- [x] All 36 UI screens/transitions and nine brand/title images pass WCAG and
+  broadcast checks. Production icons are 512 and 114 pixels; listing tile is
+  1280 x 720. Actual small icon and native layouts inspected.
+- [x] Claude subscription authentication and one small task verified before work.
+  Actual model `claude-fable-5-1`, firstParty Max subscription. Explicit
+  `--effort max` accepted; provider telemetry does not independently echo effort.
+  Ultracode noninteractive review completed with a per-call wait ceiling.
+  No API keys, billing switch or permission bypass. See
+  `results/claude_redesign_2026-10-10.json`.
+- [x] Prior local SBOM/CDK fixes reproduce; 100 relevant infra tests pass.
+  Dependency advisories are still open and have not been waived.
+
+## Earlier native journey and evidence scope
+
+| Journey | Observation |
+|---|---|
+| Cold launch | Final package launches the saved Kid library |
+| Onboarding | Combined redesign build: mismatch rejected, Delete corrected a partial entry, PIN/preset/room setup completed; later changes only focus/copy |
+| PIN | Remote keypad, incorrect entry, Delete and correct unlock exercised; Credits Back relocks |
+| Presets/catalog | Standard offers all three titles; Broadcast and Extra cautious exclude incompatible gradient. All three titles played under Standard; prepared Harbor also played under stricter presets |
+| Restart | Kid, Extra cautious household floor, 55-inch TV, 10-foot household distance and chime Off survive relaunch. Kid's effective distance remains its stricter 8 feet |
+| Harbor practice | Both scheduled synthetic holds, changing English captions and recorded audio; examples are explicitly not detected flashing |
+| Transport | Forward/back, pause/resume, countdown Skip and interrupted-hold opaque fallback observed; no physical timing measurement |
+| History | Empty history after practice is correct. Positive real-cover attribution is integration-tested only; history is not durable across restart |
+| Recovery | Back during loading returns to focused Watch demo, then replay succeeds. Earlier native load-error evidence retained; final fault handling also regression-tested, not newly fault-injected |
+| Remote | Profile disclosure, PIN/Delete, preset/room/chime rows, full details plan, Credits and return focus exercised |
+
+## Run the earlier simulator demo
+
+```sh
+source ~/vega/env
+vega virtual-device start
+vega device is-connected --device Simulator
+vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main
+```
+
+If Vega is already running, omit the start command. Existing household data is
+preserved. Fresh installs choose their own PIN. The synthetic local validation
+household uses a PIN that is not in the repository; there is no built-in package PIN.
+Choose the first shelf card, Harbor: Scene hold demo, and select Watch demo.
+The hero Watch now action plays the separately prepared Harbor title.
+Use the visible remote or:
+
+```sh
+vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'
+```
+
+Do not infer native composition from the CLI smoke log alone. The observed
+captures and native receipt provide that evidence.
+
+## Earlier submission preparation
+
+- [x] Refreshed English demo: `build/submission-redesign/Calm-Frames-demo-English.mp4`,
+  companion SRT, exact script and shot manifest. Actual cba1a29 app captures;
+  final copy-only build relationship is explicit in `docs/SHOT_MANIFEST.md`.
+- [x] Finished video passes WCAG and broadcast at
+  <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds.
+  Audio peak is below clipping. Checks: `results/redesign_video_check*.json`.
+- [x] Review archive: `build/calm-frames-redesign-review-2026-10-10.zip`.
+  ZIP CRC and payload hashes verified; source, package, video, branding, docs
+  and selected native evidence included. Bundle receipt:
+  `results/redesign_review_bundle_2026-10-10.json`.
+- [x] Pushed the completed implementation to the existing GitHub branch and
+  uploaded all nine review assets as a private draft release. GitHub asset
+  digests match local hashes. See `results/github_push_2026-10-10.json` and
+  [the draft release](https://github.com/alejandro-publius/calm-frames/releases/tag/untagged-5e898f46d87868df8dd6).
+- [x] Devpost draft: `docs/SUBMISSION.md`; product feedback: `docs/FEEDBACK.md`;
+  friction: `docs/FRICTION_LOG.md`; brand assets: `docs/brand/`.
+- [x] Qualifying Open Source candidate patches and instructions prepared in
+  `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`; six focused tests pass.
+- [x] Saved AWS evidence inspected: `results/aws_deploy_2026-10-09.json`.
+  Signed cloud publication worked in that record. The app uses its compiled
+  local catalog and does not consume the cloud output. No new cloud costs.
+
+## Cloud continuation
+
+The cloud checkout received the finished `d451a90` source and reran the current
+app and Python checks. Environment-specific failures passed after scoped child
+process permission, refreshed Python pins and isolated Moto configuration.
+New dependency-scanner regression tests also pass. Exact full-run and rerun
+counts are separate in `results/cloud_continuation_2026-10-10.json`.
+
+That handoff preserved the approved native package inputs through `8271b38`.
+The later design polish requires a fresh Mac build and native checks. Direct
+cloud verification of the earlier private release assets was recovered on
+October 13: the review ZIP download matches GitHub's SHA-256. Neither missing
+original verification report was found in that archive or its nested source ZIP.
+
+## Current release-preparation tools
+
+- [x] The current demo assembler preserves the complete native picture above
+  short Inter subtitles, keeps native audio at its captured level and limits
+  the mixed audio peak. Encoder checks use benign synthetic fixtures only.
+  [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) is the fresh recording plan;
+  [SUBMISSION_COPY.md](SUBMISSION_COPY.md) is the copy-ready project story.
+- [x] The checked [submission packet](submission/README.md) is saved on the
+  shared branch with labelled browser previews, brand assets, copy and the next
+  capture plan. It contains no new native package or finished video.
+- [x] Synced the shared source through `9afacc0` and pushed the simulator-focused
+  preparation tools as `52ecf14`; the GitHub branch hash matched.
+- [x] App and Python suites, final preparation guards, TypeScript, SBOM comparison,
+  style and staged secret checks pass. Exact runs and limits are in
+  [`finish_preparation_2026-10-11.json`](../results/finish_preparation_2026-10-11.json).
+- [x] Prepared [MAC_FINISH.md](MAC_FINISH.md) with current build, native verification,
+  recording and evidence-bundle commands. The commands still require a Mac run.
+- [x] Added exact original report attachments under the prepared library's
+  `reports/` directory. Future exports carry them automatically; existing exports
+  accept matching originals without changing catalog, maps, captions or video.
+  Release preparation requires reports for every retained generation.
+- [x] Combined the interaction/report work with the concurrent shared update
+  and pushed `e39c10c`; the remote hash matched. Full app and Python suites pass,
+  and the updated UI analyzer passes its normal and rejection controls. Exact
+  check scope is in
+  [`interaction_evidence_2026-10-11.json`](../results/interaction_evidence_2026-10-11.json).
+
+## Still open
+
+- [ ] Review the current cinematic library and open text layouts on Vega,
+  including quiet secondary actions, stable parent saving feedback and setup
+  Back controls. The latest previews and source receipt are on
+  [the design page](design/README.md); the earlier interaction changes are in
+  [SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md).
+- [ ] Complete the motion and sound acceptance in [MAC_FINISH.md](MAC_FINISH.md):
+  Off defaults, On/Off persistence, reduced-motion and foreground behavior,
+  prompt menu audio without queued cues or playback interruption, VoiceView and
+  the separate warning chime on benign footage. Static UI snapshots do not
+  validate animated frames or audible playback.
+- [x] The still-drop finding from the other Linux environment was closed on
+  Oct 11 without Mac work: the rendition was right to the last frame of each
+  span, and the proof's own measurement raced. `cover_psnr` now compares exactly
+  one frame, verify samples the first frame, the middle and the last frame of
+  every covered span and records the ffmpeg that measured it, and the mutation
+  gate carries the new proof. STATUS section 5 has the account.
+- [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
+  Device. Check D-pad focus and return navigation, full-page scrolling, PIN
+  setup and correction, saved settings, title playback, holds, audio and captions.
+  The Oct 11 tree also changes two runtime dependencies (`xmldom` is an alias
+  of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1) and the Harbor shelf copy, so
+  the same rebuild covers them; if the Vega build or playback rejects the
+  parser alias, the one line in `app/package.json` reverts.
+- [ ] Re-render the narration before any upload: the new recording plan uses
+  live remote interaction earlier and shorter subtitle cues. Follow
+  [MAC_FINISH.md](MAC_FINISH.md) to supply the assembler with fresh
+  capture and package hashes, then run both finished-video checks before
+  preparing replacement assets.
+- [ ] Capture the polished native screens and playback, refresh the English
+  demo and its source manifest, and rerun the finished video checks. Rebuild
+  the review bundle and package hashes before replacing draft release assets.
+- [x] Dependency Audit was repaired on Oct 11: `xmldom` replaced, `lodash`
+  moved, and every remaining finding sorted into two groups by whether the
+  package is in the device bundle (`results/bundle_packages_2026-10-11.json`).
+  The hosted Audit run on the Oct 11 push is green in all four jobs and CI in
+  all six (`results/github_push_2026-10-11.json`). Both groups are due for
+  review on Oct 21, when the dates move past judging. Saved AWS evidence also has inactive Project cost tagging
+  and container security findings.
+- [ ] Recheck AWS billing from the account that owns the deployed stack. Inspect
+  each active credit's applicable products, start/expiry dates and actual credit
+  application in Bills. The supplied Credits page shows balances, not proof that
+  every stack service is covered. Confirm the `Project` cost allocation tag is
+  active and the project budget sees costs; its last saved state was inactive.
+  Read-only verification does not require a redeploy or increased spending.
+- [x] Prepare the cinematic Harbor library with its own original report. The
+  October 13 fresh export passes both strict delivery checks with one required
+  report present. Earlier geometric generations are retired from the package
+  and retained in Git history; their missing reports were not fabricated.
+  The matching native build and recording remain pending.
+- [ ] Send the Amazon sample licence clarification in
+  [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md) by Oct 13.
+  NOTICE and the README now carry the caveat either way.
+- [ ] Resolve the conflicting Amazon license notices in the tracked Shaka player
+  wrapper and source files inside its integration archive before public source
+  release. See [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md)
+  for verified upstream evidence and an unsent clarification request.
+- [x] Public entrant name and country confirmed: Alex Velazquez, United States
+  (USA). Recorded in the submission draft.
+- [ ] Eligibility and contact email need the entrant's confirmation. Upstream
+  patch metadata still needs the chosen public author identity.
+- [ ] Public video/release/reviewer-access links and upstream PR URL remain
+  unpublished. Code and private draft artifacts are on GitHub. No merge,
+  visibility change, final release publication or Devpost submission performed.
+
+Simulator, recording and Claude authentication worked in the earlier Mac session.
+The current polish still needs its own Mac build and simulator validation;
+cloud checks cannot supply that evidence. Publication and unresolved security
+items also remain open. No physical device or hardware timing work is required.

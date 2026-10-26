@@ -1,0 +1,26 @@
+{
+  "branch": "claude/buffering-presentation-2026-10-14",
+  "commit": "fa766f324085b8dbf18a3f99ecbe0def8d241205",
+  "remote_head_verified": true,
+  "worktree_clean": true,
+  "reviewed": [
+    "app/src/components/BufferingWindow.tsx",
+    "app/test/components/BufferingWindow.test.tsx",
+    "results/buffering_presentation_2026-10-14/player-overlay-integration.patch",
+    "results/buffering_presentation_2026-10-14/bufferingOverlayPatch.test.tsx.txt",
+    "results/buffering_presentation_2026-10-14/receipt.json"
+  ],
+  "decision": "Not integrated. The component removes the spinner and the proposed patch avoids dimming, but the patch predates the combined opening shell and needs adaptation.",
+  "concrete_integration_issue": "When verification completes before first native frame readiness, showOpeningShell stays true while card.kind can be none. The proposed patch only suppresses checking cards, so its explicit accessibility announcement can say Loading behind the opaque opening shell after one second. Suppress status and pending reveal during opening/returning, and suppress immediately on error.",
+  "additional_proof_needed": [
+    "Focused combined-shell test: verified guard, frame count zero, buffering true beyond reveal delay; no hidden loading status or accessibility announcement.",
+    "Add loading surface to the UI inventory if integrated. Native visual and VoiceView behavior remain unobserved."
+  ],
+  "reported_claude_validation_not_rerun_here": {
+    "focused_tests": 39,
+    "full_app_passed": 1234,
+    "skipped": 4,
+    "typecheck": "passed"
+  },
+  "preserved": "No writes to Claude worktree; no cherry-pick or merge; disabled picture-break branch untouched."
+}

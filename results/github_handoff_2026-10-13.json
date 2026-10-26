@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-13",
+  "source_commit": "7444d21a7d554f36f369396f12cc6f06a95bd70c",
+  "source_commit_verified_on_remote": true,
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "packet": {
+    "path": "docs/submission/calm-frames-submission-draft-2026-10-13.zip",
+    "sha256": "2dfe87af26085358a15b154cd8aee8bdb5fdbebc6046fddb3afb9c5ade1cac21",
+    "bytes": 2253860,
+    "entries": 20,
+    "source_commit": "7444d21a7d554f36f369396f12cc6f06a95bd70c",
+    "checks": "ZIP CRC and every payload SHA-256 match the manifest.",
+    "contains_current_native_package": false,
+    "contains_final_native_video": false,
+    "secret_scan": "passed on the extracted packet before copying to the repository"
+  },
+  "release_upload": {
+    "published": false,
+    "uploaded": false,
+    "existing_release_id": 409221460,
+    "existing_release_is_draft": true,
+    "repository_is_private": true,
+    "error": "The managed environment returned Forbidden for uploads.github.com.",
+    "fallback": "The identical checked ZIP is included in this source commit and shared through the existing authorized Git branch."
+  },
+  "hosted_checks_observed": [
+    {
+      "commit": "41c34fcf25c8a488b46a6bf09ea14289479eb211",
+      "workflow": "Audit",
+      "run_id": 38410755248,
+      "conclusion": "success"
+    },
+    {
+      "commit": "41c34fcf25c8a488b46a6bf09ea14289479eb211",
+      "workflow": "CI",
+      "run_id": 38410755308,
+      "conclusion": "cancelled",
+      "note": "The next shared push superseded this run after the UI, app, secret, Python and published-number jobs passed; the mutation job was still running."
+    },
+    {
+      "commit": "7444d21a7d554f36f369396f12cc6f06a95bd70c",
+      "workflow": "Audit",
+      "run_id": 38414297071,
+      "status_at_receipt": "in_progress"
+    },
+    {
+      "commit": "7444d21a7d554f36f369396f12cc6f06a95bd70c",
+      "workflow": "CI",
+      "run_id": 38414296842,
+      "status_at_receipt": "in_progress"
+    }
+  ],
+  "native_scope": "The matching Mac build and Vega observations remain outstanding. Existing October 10 artifacts are historical and were not replaced.",
+  "submitted": false
+}

@@ -1,0 +1,589 @@
+{
+  "tool": "release validation batch (commands listed per check)",
+  "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+  "branch": "codex/recovery-proof-integration-2026-10-22",
+  "bases": {
+    "submitted_candidate": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "preparation_recovery": "ce6f6a3",
+    "playback_proof": "318a3fe",
+    "integration_start": "1c6bea95c67423e071722c14f16abb3f8e3a0ebf"
+  },
+  "python": {
+    "full": {
+      "label": "full-d96c088",
+      "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+      "uncommitted_paths": 0,
+      "python": "~/calm-frames/.venv/bin/python",
+      "versions": "3.12.13 pytest 9.1.1 coverage 7.16.2 pytest-cov 7.0.0",
+      "optional_test_dependencies": "{'boto3': True, 'moto': True, 'aws_cdk': True}",
+      "command": "python -m pytest -q -m \"not slow\" flashmap pipeline eval -rsfE --cov --cov-config=.coveragerc --cov-report=term --cov-report=json:<file> --junitxml=<file>",
+      "started_utc": "2026-10-22T05:53:04Z",
+      "finished_utc": "2026-10-22T06:01:43Z",
+      "seconds": 519,
+      "exit": 0,
+      "tests": 2049,
+      "passed": 2049,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "deselected_slow": 2,
+      "skip_reasons": {},
+      "failures": [],
+      "coverage": {
+        "percent": 90.46,
+        "covered_statements": 6711,
+        "statements": 7419,
+        "floor_percent": 90,
+        "floor_met": true,
+        "floor_source": ".coveragerc [report] fail_under"
+      }
+    },
+    "ci_equivalent": {
+      "label": "ci-d96c088",
+      "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+      "uncommitted_paths": 0,
+      "python": "~/Documents/Codex/2026-10-20/task/calm-frames-preparation-recovery/.venv/bin/python",
+      "versions": "3.12.13 pytest 9.1.1 coverage 7.16.2 pytest-cov 7.0.0",
+      "optional_test_dependencies": "{'boto3': False, 'moto': False, 'aws_cdk': False}",
+      "command": "python -m pytest -q -m \"not slow\" flashmap pipeline eval -rsfE --cov --cov-config=.coveragerc --cov-report=term --cov-report=json:<file> --junitxml=<file>",
+      "started_utc": "2026-10-22T06:01:44Z",
+      "finished_utc": "2026-10-22T06:09:24Z",
+      "seconds": 460,
+      "exit": 0,
+      "tests": 1993,
+      "passed": 1987,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 6,
+      "deselected_slow": 2,
+      "skip_reasons": {
+        "collection skipped": 2,
+        "aws-cdk-lib is needed for this check": 1,
+        "aws-cdk.cloud-assembly-schema is not installed; aws-cdk-lib is needed for this check": 1,
+        "jsii is not installed; aws-cdk-lib is needed for this check": 1,
+        "aws-cdk.asset-node-proxy-agent-v6 is not installed; aws-cdk-lib is needed for this check": 1
+      },
+      "failures": [],
+      "coverage": {
+        "percent": 90.46,
+        "covered_statements": 6711,
+        "statements": 7419,
+        "floor_percent": 90,
+        "floor_met": true,
+        "floor_source": ".coveragerc [report] fail_under"
+      }
+    },
+    "same_coverage_in_both": true
+  },
+  "python_lint_and_types": {
+    "ruff": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "mypy-flashmap": {
+      "exit": 0,
+      "seconds": 1
+    },
+    "mypy-pipeline": {
+      "exit": 0,
+      "seconds": 0
+    }
+  },
+  "numbers_style_pins_and_archives": {
+    "readme-sync": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "style": {
+      "exit": 0,
+      "seconds": 1
+    },
+    "pins": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "gate1-archive": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "integration-diff": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "baseline-versions": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "pattern-text-precision": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "conformance-rebuild": {
+      "exit": 0,
+      "seconds": 2
+    }
+  },
+  "published_numbers_matched": 550,
+  "secret_scan": {
+    "exit": 0,
+    "seconds": 16,
+    "result": "no leaks found"
+  },
+  "property_tests": {
+    "properties-runner": {
+      "exit": 0,
+      "seconds": 0
+    },
+    "properties-pytest": {
+      "exit": 0,
+      "seconds": 4
+    }
+  },
+  "app": {
+    "checks": {
+      "app-typecheck": {
+        "exit": 0,
+        "seconds": 6
+      },
+      "app-prepared-library": {
+        "exit": 0,
+        "seconds": 0
+      },
+      "app-playback-proof-check": {
+        "exit": 0,
+        "seconds": 0
+      },
+      "app-node-tool-tests": {
+        "exit": 0,
+        "seconds": 2
+      },
+      "app-lint": {
+        "exit": 0,
+        "seconds": 5
+      },
+      "app-jest": {
+        "exit": 0,
+        "seconds": 18
+      },
+      "hook-package-tests": {
+        "exit": 0,
+        "seconds": 1
+      },
+      "hook-offline-consumer": {
+        "exit": 0,
+        "seconds": 2
+      },
+      "ui-flashmap": {
+        "exit": 0,
+        "seconds": 6
+      },
+      "ui-flashmap-tool-tests": {
+        "exit": 0,
+        "seconds": 1
+      },
+      "ui-flashmap-negative-control": {
+        "exit": 0,
+        "seconds": 1
+      },
+      "brand-assets": {
+        "exit": 0,
+        "seconds": 4
+      },
+      "report-page": {
+        "exit": 0,
+        "seconds": 66
+      }
+    },
+    "jest": {
+      "suites_passed": 167,
+      "suites_skipped": 1,
+      "tests_passed": 1729,
+      "tests_skipped": 4,
+      "tests_failed": 0,
+      "snapshots_passed": 57,
+      "coverage_percent": {
+        "statements": 83.22,
+        "branches": 82.62,
+        "functions": 78.29,
+        "lines": 82.94
+      },
+      "coverage_floor_percent": {
+        "branches": 74,
+        "functions": 71,
+        "lines": 77,
+        "statements": 77
+      }
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 108
+    },
+    "node_tool_tests": {
+      "passed": 60,
+      "failed": 0
+    },
+    "hook_package_tests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "ui_flash_tool_tests": {
+      "passed": 17,
+      "failed": 0
+    },
+    "ui_flash_screens_and_transitions": 79,
+    "ui_flash_negative_control_refused": true,
+    "brand_images_checked": 17,
+    "prepared_library": {
+      "prepared_library": "checked",
+      "titles": 1,
+      "bundles": 6,
+      "bytes": 129255687,
+      "catalogSha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+      "verification_reports": {
+        "required": 6,
+        "present": 6,
+        "missing": []
+      },
+      "approvedBundles": [
+        "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+        "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+        "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+        "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3"
+      ]
+    }
+  },
+  "recovery": {
+    "command": "python -m eval.preparation_recovery --out results/preparation-recovery-2026-10-22/evidence.json --mutations",
+    "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+    "uncommitted_changes": false,
+    "scenarios": {
+      "scenarios": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "guard_mutations": {
+      "mutations": 24,
+      "killed": 24,
+      "survived": 0
+    },
+    "seconds": 627.9,
+    "evidence": "results/preparation-recovery-2026-10-22/evidence.json"
+  },
+  "mutation_gate": {
+    "command": "python eval/mutate_gate.py --check --out <file>",
+    "totals": {
+      "mutations": 70,
+      "killed": 68,
+      "survived": 2,
+      "survived_and_not_equivalent": 0,
+      "kill_rate": 0.9714,
+      "kill_rate_percent": 97.14,
+      "as_a_fraction": "68/70"
+    },
+    "survivors": [
+      {
+        "id": "background-hides-at-once",
+        "equivalent": true
+      },
+      {
+        "id": "fail-closed-unsigned",
+        "equivalent": true
+      }
+    ],
+    "negative_control_all_green": true,
+    "check_against_previous_report_exit": 0,
+    "regenerated_report": "results/mutation.json"
+  },
+  "native": {
+    "device": "Vega Virtual Device (aarch64 simulator), SDK 0.24.9914, Vega CLI 1.3.4",
+    "method": "One remote key at a time with inputd-cli button_press, each judged by the app's own CALM_TRACE focus, screen and playback lines from vega device start-log-stream (Debug build). Pictures are app-window-only ScreenCaptureKit screenshots of the Vega Virtual Device window: no desktop, no other window, no microphone. Audio was not listened to.",
+    "fallback": {
+      "installed_before": {
+        "update time": "Wed Oct 21 20:29:47 2026 GMT",
+        "sha384": "fab2815e643726bb918a9da92093729ed25fb1fb2acb8b45be1f325e6994b0699ae8ad46bd7a7deac26d8c216f92f7d8"
+      },
+      "package_sha256": "207898aa14d8659760348a716b825fabab83afd8e3b9431f9387202cc10e7163",
+      "source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855 (app and hook trees identical to submitted bf2f615)",
+      "rollback_copy": "mac-readiness-2026-10-21/release-validation-2026-10-22/rollback/calm-frames-60c3bbb-aarch64-debug.vpkg"
+    },
+    "first_integration_build": {
+      "source": "5f5899b",
+      "package_sha256": "0e4e4409407c14b7bb794872c67f74449fe4174e311f03b8d08c5b7b38c09ac1",
+      "installed": {
+        "update time": "Thu Oct 22 05:21:53 2026 GMT",
+        "sha384": "56b90a3a1081fd67a3b41473221696910fed08a29100f681c589f8e4506b37cbbb7974c7f4b3137a0a76450d488496b3"
+      },
+      "finding": "On Acadia's Playback proof & details page one Down from the stage buttons moved focus to the closing Back and one Up moved it back, so the analysis record between them was never on screen. Fixed in d96c088.",
+      "evidence": [
+        {
+          "name": "08-proof-scrolled-down.png",
+          "sha256": "d1bc065c24e1057058b985b426f000f8957ae84fb61b11906d63009acbea35d3",
+          "captured_utc": "2026-10-22T05:24:34.529+00:00"
+        },
+        {
+          "name": "09-proof-up-from-bottom.png",
+          "sha256": "c8215f2fbba390de19b16e424b99dc4823fb57bcf45801b0e21cc471918cb1ea",
+          "captured_utc": "2026-10-22T05:25:10.162+00:00"
+        }
+      ]
+    },
+    "final_build": {
+      "source": "d96c0886227f7dcfc5ae6584132a86b193359215",
+      "package_sha256": "6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090",
+      "package_bytes": 132592040,
+      "installed": {
+        "update time": "Thu Oct 22 05:35:19 2026 GMT",
+        "sha384": "4b815f37537e69a2949b55a0d44ff57d0a7b198fdbcba63fc24475a80b28879db94c6ead3f20fad4d25d94f455d59f2c"
+      }
+    },
+    "displayed": {
+      "acadia": {
+        "preset": "extra-cautious",
+        "seconds": 37.6,
+        "outcome": "cover proven drawn",
+        "frames": 1804,
+        "prepared_file": "8aa6b3566e32",
+        "report": "4043445adbb8",
+        "source_findings": {
+          "wcag": 3,
+          "broadcast": 3
+        },
+        "output_analyzer_recorded": true
+      },
+      "mcway": {
+        "preset": "extra-cautious",
+        "seconds": 300.0,
+        "outcome": "no flagged segments",
+        "frames": 8991,
+        "prepared_file": "795927874818",
+        "report": "d39321373a7d",
+        "source_findings": {
+          "wcag": 0,
+          "broadcast": 0
+        },
+        "output_analyzer_recorded": false
+      }
+    },
+    "mcway_playback": {
+      "picture_shown_media_ms": 299,
+      "seconds_from_picture_to_end": 300.8,
+      "waits_after_start": 0
+    },
+    "failed_captures": 4,
+    "key_presses": {
+      "total": 70,
+      "final_build": 57,
+      "with_expected_trace": 64,
+      "expected_trace_seen": 64,
+      "stage_selections_without_trace": 6,
+      "refused": 0
+    },
+    "checks": [
+      {
+        "check": "installed package is the built package",
+        "result": "pass",
+        "observed": "vpm info sha384 equals the SHA-384 of the built package, for both installs"
+      },
+      {
+        "check": "Acadia: Details, More info and Playback proof & details reached by remote",
+        "result": "pass",
+        "traces": [
+          "focus kid-mode-home-more-info",
+          "focus kid-mode-details-play",
+          "focus kid-mode-details-show-info",
+          "focus kid-mode-details-technical",
+          "focus kid-mode-details-info-back"
+        ],
+        "pictures": [
+          {
+            "name": "f02-proof-source.png",
+            "sha256": "be104afd5158fd8fdbb40cbba979733da4b32dca847da14b0c880b055f73e257",
+            "captured_utc": "2026-10-22T05:35:59.828+00:00"
+          }
+        ]
+      },
+      {
+        "check": "three evidence stages change by remote and show the approved record",
+        "result": "pass",
+        "observed": "Extra cautious, 37.6 seconds; Source: 2 flagged periods, WCAG and broadcast maps 3 findings each, flashmap 1.0.0; Prepared: 0 output findings for both profiles, 2 covered periods, 8.8 seconds, cover proven drawn, 1804 frames; Selection: prepared file 8aa6b3566e32, report 4043445adbb8",
+        "pictures": [
+          {
+            "name": "f03-proof-prepared.png",
+            "sha256": "9b35e069e7745e1776f563969cd007cf159574fa6c73cfe40eb61e76e50083c6",
+            "captured_utc": "2026-10-22T05:36:20.838+00:00"
+          },
+          {
+            "name": "f04-proof-selection.png",
+            "sha256": "3ae4bc35aef5999292fdb6ed15833629363f8fb543451e4e9fc6813b5804055c",
+            "captured_utc": "2026-10-22T05:36:26.971+00:00"
+          }
+        ]
+      },
+      {
+        "check": "every section of the record below the proof is reachable by remote (final build)",
+        "result": "pass",
+        "traces": [
+          "focus kid-mode-details-record-reading-intro",
+          "focus kid-mode-details-record-reading-findings",
+          "focus kid-mode-details-record-reading-wcag",
+          "focus kid-mode-details-record-reading-broadcast",
+          "focus kid-mode-details-record-reading-files",
+          "focus kid-mode-details-back-bottom"
+        ],
+        "pictures": [
+          {
+            "name": "f05-reading-intro.png",
+            "sha256": "05252e33a098c741132053895a6fda49e128bf8f6721f6dcd3f716c2f01d375c",
+            "captured_utc": "2026-10-22T05:36:31.270+00:00"
+          },
+          {
+            "name": "f06-reading-findings.png",
+            "sha256": "e49d157ce7ed99c583625ff5da87da8ff35e3d82fe2cdbb15b897c3a58c090de",
+            "captured_utc": "2026-10-22T05:36:35.572+00:00"
+          },
+          {
+            "name": "f07-reading-wcag.png",
+            "sha256": "72fe97b237e3574d047ef594b3b61c9aa89da45b7591e9ff3c0d4a6eb350cd6d",
+            "captured_utc": "2026-10-22T05:36:40.069+00:00"
+          },
+          {
+            "name": "f08-reading-broadcast",
+            "failed": "capture timed out while the Mac screen was locked"
+          },
+          {
+            "name": "f09-reading-files",
+            "failed": "capture timed out while the Mac screen was locked"
+          },
+          {
+            "name": "f10-bottom-back",
+            "failed": "capture timed out while the Mac screen was locked"
+          }
+        ]
+      },
+      {
+        "check": "remote Back restores each opener",
+        "result": "pass",
+        "observed": "proof page to Playback proof & details, More info to More info, Details to Home Details, playback to Watch",
+        "traces": [
+          "focus kid-mode-details-technical",
+          "focus kid-mode-details-show-info",
+          "focus kid-mode-home-more-info"
+        ]
+      },
+      {
+        "check": "unknown values stay unknown (McWay)",
+        "result": "pass",
+        "observed": "Extra cautious output analyzer: version not recorded in this report; Nothing was flagged, so this result does not demonstrate a cover working; 8991 frames",
+        "pictures": [
+          {
+            "name": "f12-mcway-proof-prepared.png",
+            "sha256": "555f0e7feef384682ccca0ed35ca12746fef56e99a171ad3c7d2f43709fdb7de",
+            "captured_utc": "2026-10-22T05:51:17.969+00:00"
+          }
+        ]
+      },
+      {
+        "check": "McWay record sections reachable, file record matches",
+        "result": "pass",
+        "observed": "Source c9d5d21786c1, Playing 795927874818, Preparation report d39321373a7d, no flagged segments",
+        "pictures": [
+          {
+            "name": "f13-mcway-reading-files.png",
+            "sha256": "5697c77b286a046560d9e5ee33c0aa001c17259e403de2b252dd5dc77fd49bd2",
+            "captured_utc": "2026-10-22T05:51:27.704+00:00"
+          },
+          {
+            "name": "f14-mcway-bottom-back.png",
+            "sha256": "b35077e4d7e0c8c98e36e624e7d8dc60012d1f44b789d6b4933d9f741b6a856d",
+            "captured_utc": "2026-10-22T05:51:31.810+00:00"
+          }
+        ]
+      },
+      {
+        "check": "normal ambient playback (McWay, five minutes, uninterrupted)",
+        "result": "pass",
+        "observed": "prepared-playback names bundle 96af7d22, source c9d5d217, rendition 79592787, the approved extra cautious record. Picture shown at media 299 ms (05:40:58.98Z); playback ended 300.8 s later (05:45:59.73Z) with focus on the ending still's Back. The only wait was the initial one at media 0. No surface-lost, teardown fallback or error line arrived, but the device can drop console lines under load, so their absence is not proof. Back tore playback down (teardown ok) and focus returned to Watch.",
+        "traces": [
+          "playback picture-shown",
+          "playback playing",
+          "playback ended",
+          "focus continuous-ended-still-back",
+          "playback teardown ok"
+        ],
+        "pictures": [
+          {
+            "name": "f15-mcway-playing.png",
+            "sha256": "aadd474bf0293f31cc52b47b936873e55d667d0d402ca0926e040289aeb1d0f3",
+            "captured_utc": "2026-10-22T05:52:21.993+00:00"
+          }
+        ]
+      }
+    ],
+    "not_established": [
+      "Audio was not listened to; no audio quality or level claim.",
+      "Owner review of the new light menu palette and of the reading-stop focus look is still open.",
+      "Four captures failed while the Mac screen was locked; those steps rest on traces only.",
+      "Sea Otters, Forest and Acadia were not played in this session; their identities were checked on the proof pages and at build time.",
+      "No physical Fire TV, VoiceView or Home-key check."
+    ],
+    "committed_crops": [
+      {
+        "file": "native/f04-proof-selection.png",
+        "shows": "Acadia, extra cautious: Selection stage with the prepared file and report identities",
+        "source": "f04-proof-selection.png",
+        "source_sha256": "3ae4bc35aef5999292fdb6ed15833629363f8fb543451e4e9fc6813b5804055c",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "215730ed906ce18245b55cacf0cc47c320ba3425b8779b12920781cee0152684",
+        "bytes": 242482
+      },
+      {
+        "file": "native/f07-reading-wcag.png",
+        "shows": "Final build: remote focus on the WCAG analysis section below the proof",
+        "source": "f07-reading-wcag.png",
+        "source_sha256": "72fe97b237e3574d047ef594b3b61c9aa89da45b7591e9ff3c0d4a6eb350cd6d",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "209409a386001aec3771c4acbe476442e7326819ca948926922cc1029c3a313b",
+        "bytes": 264209
+      },
+      {
+        "file": "native/f12-mcway-proof-prepared.png",
+        "shows": "McWay: an output analyzer version the report does not record is stated as not recorded",
+        "source": "f12-mcway-proof-prepared.png",
+        "source_sha256": "555f0e7feef384682ccca0ed35ca12746fef56e99a171ad3c7d2f43709fdb7de",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "3ae156b3ec67e1a82c4bee3a04059aec9cb554bace6c1f6c9baf64ab61d28540",
+        "bytes": 245851
+      },
+      {
+        "file": "native/f15-mcway-playing.png",
+        "shows": "McWay ambient playback on the final build, controls hidden",
+        "source": "f15-mcway-playing.png",
+        "source_sha256": "aadd474bf0293f31cc52b47b936873e55d667d0d402ca0926e040289aeb1d0f3",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "a6afff4055da425988cce9a6045a38827c5de63489b476ac4f4118420ccae895",
+        "bytes": 1395535
+      }
+    ],
+    "trace_lines": 226
+  }
+}

@@ -41,9 +41,9 @@ import os
 import re
 import shutil
 import socketserver
+import subprocess
 import sys
 import tempfile
-import subprocess
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path

@@ -1,0 +1,1188 @@
+{
+  "observed_at": "2026-10-23T19:50:38.560436+00:00",
+  "review_source": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+  "review_branch": "codex/design-polish-2026-10-23",
+  "review_hosted_validation": "not run; local branch not pushed",
+  "results": {
+    "frozen_ci": {
+      "id": 40007368463,
+      "name": "CI",
+      "head_sha": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+      "head_branch": "codex/integration-owner-2026-10-23",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463",
+      "created_at": "2026-10-23T18:56:06Z",
+      "updated_at": "2026-10-23T19:23:06Z",
+      "jobs": [
+        {
+          "id": 120599198835,
+          "name": "The app's own UI passes flashmap",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599198835",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:29Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:29Z",
+              "completed_at": "2026-10-23T18:57:40Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:40Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Install ffmpeg",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:58:01Z"
+            },
+            {
+              "name": "Install flashmap",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:58:01Z",
+              "completed_at": "2026-10-23T18:58:09Z"
+            },
+            {
+              "name": "Install app dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:58:09Z",
+              "completed_at": "2026-10-23T18:58:43Z"
+            },
+            {
+              "name": "Render every screen and check it for flashing",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T18:58:43Z",
+              "completed_at": "2026-10-23T18:59:01Z"
+            },
+            {
+              "name": "The check is seen to refuse what it must refuse",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-23T18:59:01Z",
+              "completed_at": "2026-10-23T18:59:04Z"
+            },
+            {
+              "name": "Check every image the app and the listing ship",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-23T18:59:04Z",
+              "completed_at": "2026-10-23T18:59:11Z"
+            },
+            {
+              "name": "Check the report page as a reader sees it",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-23T18:59:11Z",
+              "completed_at": "2026-10-23T19:01:13Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20,
+              "started_at": "2026-10-23T19:01:13Z",
+              "completed_at": "2026-10-23T19:01:13Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21,
+              "started_at": "2026-10-23T19:01:13Z",
+              "completed_at": "2026-10-23T19:01:13Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22,
+              "started_at": "2026-10-23T19:01:13Z",
+              "completed_at": "2026-10-23T19:01:14Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23,
+              "started_at": "2026-10-23T19:01:14Z",
+              "completed_at": "2026-10-23T19:01:14Z"
+            }
+          ]
+        },
+        {
+          "id": 120599199388,
+          "name": "Secret scan",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599199388",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:28Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:38Z"
+            },
+            {
+              "name": "gitleaks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:38Z",
+              "completed_at": "2026-10-23T18:57:46Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:57:46Z",
+              "completed_at": "2026-10-23T18:57:46Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:57:46Z",
+              "completed_at": "2026-10-23T18:57:46Z"
+            }
+          ]
+        },
+        {
+          "id": 120599199416,
+          "name": "Mutation gate, property tests and the map fuzz corpus",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599199416",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:29Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:29Z",
+              "completed_at": "2026-10-23T18:57:40Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:40Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Install ffmpeg",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:58:02Z"
+            },
+            {
+              "name": "Install the Python packages",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:58:02Z",
+              "completed_at": "2026-10-23T18:58:20Z"
+            },
+            {
+              "name": "Install the app's dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:58:20Z",
+              "completed_at": "2026-10-23T18:58:53Z"
+            },
+            {
+              "name": "Property tests and the map fuzz corpus",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T18:58:53Z",
+              "completed_at": "2026-10-23T18:59:04Z"
+            },
+            {
+              "name": "The mutation gate",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-23T18:59:04Z",
+              "completed_at": "2026-10-23T19:23:01Z"
+            },
+            {
+              "name": "Retain the actual mutation measurement, including a failed drift check",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-23T19:23:01Z",
+              "completed_at": "2026-10-23T19:23:02Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18,
+              "started_at": "2026-10-23T19:23:02Z",
+              "completed_at": "2026-10-23T19:23:02Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19,
+              "started_at": "2026-10-23T19:23:02Z",
+              "completed_at": "2026-10-23T19:23:02Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20,
+              "started_at": "2026-10-23T19:23:02Z",
+              "completed_at": "2026-10-23T19:23:03Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21,
+              "started_at": "2026-10-23T19:23:03Z",
+              "completed_at": "2026-10-23T19:23:03Z"
+            }
+          ]
+        },
+        {
+          "id": 120599199470,
+          "name": "Python packages",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599199470",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:29Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:29Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Install ffmpeg",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:58:09Z"
+            },
+            {
+              "name": "Install packages that exist",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:58:09Z",
+              "completed_at": "2026-10-23T18:58:30Z"
+            },
+            {
+              "name": "Test",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:58:30Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Python coverage on the run page",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Lint Python",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 9,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Typecheck flashmap",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 10,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Typecheck the pipeline",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 11,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Rebuild the complete conformance report from its own rows",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 22,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 23,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 24,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25,
+              "started_at": "2026-10-23T19:08:52Z",
+              "completed_at": "2026-10-23T19:08:52Z"
+            }
+          ]
+        },
+        {
+          "id": 120599199485,
+          "name": "Vega app",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599199485",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:29Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:29Z",
+              "completed_at": "2026-10-23T18:57:39Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:39Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Install dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:58:13Z"
+            },
+            {
+              "name": "Typecheck",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:58:13Z",
+              "completed_at": "2026-10-23T18:58:25Z"
+            },
+            {
+              "name": "Check prepared package assets and tamper controls",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:58:25Z",
+              "completed_at": "2026-10-23T18:58:35Z"
+            },
+            {
+              "name": "Lint",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:58:35Z",
+              "completed_at": "2026-10-23T18:58:46Z"
+            },
+            {
+              "name": "Test",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T18:58:46Z",
+              "completed_at": "2026-10-23T19:00:55Z"
+            },
+            {
+              "name": "Coverage totals on the run page",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-23T19:00:55Z",
+              "completed_at": "2026-10-23T19:00:55Z"
+            },
+            {
+              "name": "Hook package guard tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-23T19:00:55Z",
+              "completed_at": "2026-10-23T19:00:56Z"
+            },
+            {
+              "name": "Check the installed offline hook consumer",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-23T19:00:56Z",
+              "completed_at": "2026-10-23T19:01:02Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21,
+              "started_at": "2026-10-23T19:01:02Z",
+              "completed_at": "2026-10-23T19:01:02Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22,
+              "started_at": "2026-10-23T19:01:02Z",
+              "completed_at": "2026-10-23T19:01:02Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23,
+              "started_at": "2026-10-23T19:01:02Z",
+              "completed_at": "2026-10-23T19:01:02Z"
+            }
+          ]
+        },
+        {
+          "id": 120599199537,
+          "name": "Published numbers match results",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463/job/120599199537",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:57:28Z",
+              "completed_at": "2026-10-23T18:57:29Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:57:29Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "Check every published number against results/",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:41Z"
+            },
+            {
+              "name": "No dashes and none of the three words in what we wrote",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:57:41Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Every action is pinned to a commit, and every install to a version",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Rebuild the lead time summary from its own events",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Recount the integration diff the README quotes",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "One baseline directory, one tool version",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Re-score the pattern rule's text and UI report from its own rows",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:42Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19,
+              "started_at": "2026-10-23T18:57:42Z",
+              "completed_at": "2026-10-23T18:57:43Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20,
+              "started_at": "2026-10-23T18:57:43Z",
+              "completed_at": "2026-10-23T18:57:43Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21,
+              "started_at": "2026-10-23T18:57:43Z",
+              "completed_at": "2026-10-23T18:57:43Z"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/alejandro-publius/calm-frames/blob/2cf54e0d168e58daedfde3f15407833d23af4e93/.github",
+          "start_line": 2,
+          "start_column": null,
+          "end_line": 2,
+          "end_column": null,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/alejandro-publius/calm-frames/blob/2cf54e0d168e58daedfde3f15407833d23af4e93/.github",
+          "start_line": 119,
+          "start_column": null,
+          "end_line": 119,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "Process completed with exit code 1.",
+          "raw_details": ""
+        }
+      ]
+    },
+    "frozen_audit": {
+      "id": 40007372605,
+      "name": "Audit",
+      "head_sha": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+      "head_branch": "codex/integration-owner-2026-10-23",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605",
+      "created_at": "2026-10-23T18:56:07Z",
+      "updated_at": "2026-10-23T19:00:39Z",
+      "jobs": [
+        {
+          "id": 120598607258,
+          "name": "The stack and the container rules",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605/job/120598607258",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:56:11Z",
+              "completed_at": "2026-10-23T18:56:13Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:56:13Z",
+              "completed_at": "2026-10-23T18:56:23Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:56:23Z",
+              "completed_at": "2026-10-23T18:56:23Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:56:23Z",
+              "completed_at": "2026-10-23T18:56:24Z"
+            },
+            {
+              "name": "Install the CDK and the test doubles",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:56:24Z",
+              "completed_at": "2026-10-23T18:56:51Z"
+            },
+            {
+              "name": "Which CDK packages this fresh install took",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:56:51Z",
+              "completed_at": "2026-10-23T18:56:51Z"
+            },
+            {
+              "name": "Synthesize the template, with no credentials and no account",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:56:51Z",
+              "completed_at": "2026-10-23T18:56:57Z"
+            },
+            {
+              "name": "There are no NAT gateways in it",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T18:56:57Z",
+              "completed_at": "2026-10-23T18:56:57Z"
+            },
+            {
+              "name": "The infra tests, which must run rather than skip",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-23T18:56:57Z",
+              "completed_at": "2026-10-23T18:57:04Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-23T18:57:04Z",
+              "completed_at": "2026-10-23T18:57:04Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-23T18:57:04Z",
+              "completed_at": "2026-10-23T18:57:04Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18,
+              "started_at": "2026-10-23T18:57:04Z",
+              "completed_at": "2026-10-23T18:57:04Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19,
+              "started_at": "2026-10-23T18:57:04Z",
+              "completed_at": "2026-10-23T18:57:04Z"
+            }
+          ]
+        },
+        {
+          "id": 120598607574,
+          "name": "The ingest image builds for ARM64",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605/job/120598607574",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:56:11Z",
+              "completed_at": "2026-10-23T18:56:14Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:56:14Z",
+              "completed_at": "2026-10-23T18:56:25Z"
+            },
+            {
+              "name": "Run docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:56:25Z",
+              "completed_at": "2026-10-23T18:56:40Z"
+            },
+            {
+              "name": "Run docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:56:40Z",
+              "completed_at": "2026-10-23T18:56:47Z"
+            },
+            {
+              "name": "What the build context would send",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:56:47Z",
+              "completed_at": "2026-10-23T18:56:47Z"
+            },
+            {
+              "name": "Build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:56:47Z",
+              "completed_at": "2026-10-23T19:00:30Z"
+            },
+            {
+              "name": "It refuses to start with nothing configured",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T19:00:30Z",
+              "completed_at": "2026-10-23T19:00:32Z"
+            },
+            {
+              "name": "It is an ARM64 image and it is not root",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-23T19:00:32Z",
+              "completed_at": "2026-10-23T19:00:32Z"
+            },
+            {
+              "name": "Post Build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-10-23T19:00:32Z",
+              "completed_at": "2026-10-23T19:00:33Z"
+            },
+            {
+              "name": "Post Run docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-23T19:00:33Z",
+              "completed_at": "2026-10-23T19:00:36Z"
+            },
+            {
+              "name": "Post Run docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-23T19:00:36Z",
+              "completed_at": "2026-10-23T19:00:36Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-23T19:00:36Z",
+              "completed_at": "2026-10-23T19:00:37Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-23T19:00:37Z",
+              "completed_at": "2026-10-23T19:00:37Z"
+            }
+          ]
+        },
+        {
+          "id": 120598607642,
+          "name": "The bills of materials are current",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605/job/120598607642",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:56:13Z",
+              "completed_at": "2026-10-23T18:56:14Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:56:14Z",
+              "completed_at": "2026-10-23T18:56:40Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:56:40Z",
+              "completed_at": "2026-10-23T18:56:47Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:56:47Z",
+              "completed_at": "2026-10-23T18:56:47Z"
+            },
+            {
+              "name": "Install the SBOM tool and the library it writes through",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:56:47Z",
+              "completed_at": "2026-10-23T18:56:54Z"
+            },
+            {
+              "name": "Which generators are about to run",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:56:54Z",
+              "completed_at": "2026-10-23T18:56:54Z"
+            },
+            {
+              "name": "Regenerate and compare",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-23T18:56:54Z",
+              "completed_at": "2026-10-23T18:57:11Z"
+            },
+            {
+              "name": "Keep the fresh bills and the report when the compare fails",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 8,
+              "started_at": "2026-10-23T18:57:11Z",
+              "completed_at": "2026-10-23T18:57:11Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-23T18:57:11Z",
+              "completed_at": "2026-10-23T18:57:11Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-23T18:57:11Z",
+              "completed_at": "2026-10-23T18:57:12Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-23T18:57:12Z",
+              "completed_at": "2026-10-23T18:57:12Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-23T18:57:12Z",
+              "completed_at": "2026-10-23T18:57:12Z"
+            }
+          ]
+        },
+        {
+          "id": 120598607696,
+          "name": "pip-audit and npm audit",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605/job/120598607696",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-23T18:56:12Z",
+              "completed_at": "2026-10-23T18:56:15Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-23T18:56:15Z",
+              "completed_at": "2026-10-23T18:56:28Z"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-23T18:56:28Z",
+              "completed_at": "2026-10-23T18:56:29Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-23T18:56:29Z",
+              "completed_at": "2026-10-23T18:56:29Z"
+            },
+            {
+              "name": "Install the audit tools",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-23T18:56:29Z",
+              "completed_at": "2026-10-23T18:56:38Z"
+            },
+            {
+              "name": "Install app dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-23T18:56:38Z",
+              "completed_at": "2026-10-23T18:57:05Z"
+            },
+            {
+              "name": "Audit, and fail on anything without a written exception",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 7,
+              "started_at": "2026-10-23T18:57:05Z",
+              "completed_at": "2026-10-23T18:57:27Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 12,
+              "started_at": "2026-10-23T18:57:27Z",
+              "completed_at": "2026-10-23T18:57:27Z"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 13,
+              "started_at": "2026-10-23T18:57:27Z",
+              "completed_at": "2026-10-23T18:57:27Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-23T18:57:27Z",
+              "completed_at": "2026-10-23T18:57:27Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-23T18:57:27Z",
+              "completed_at": "2026-10-23T18:57:27Z"
+            }
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/alejandro-publius/calm-frames/blob/2cf54e0d168e58daedfde3f15407833d23af4e93/.github",
+          "start_line": 2,
+          "start_column": null,
+          "end_line": 2,
+          "end_column": null,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/alejandro-publius/calm-frames/blob/2cf54e0d168e58daedfde3f15407833d23af4e93/.github",
+          "start_line": 22,
+          "start_column": null,
+          "end_line": 22,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "Process completed with exit code 1.",
+          "raw_details": ""
+        }
+      ]
+    },
+    "canonical_remote": {
+      "branch": "codex/integration-owner-2026-10-23",
+      "sha": "2cf54e0d168e58daedfde3f15407833d23af4e93"
+    }
+  }
+}

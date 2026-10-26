@@ -1,0 +1,32 @@
+{
+  "fetched_utc": "2026-10-23T21:43:37.392585+00:00",
+  "url": "https://api.github.com/advisories/GHSA-v8v8-6859-qxm4",
+  "record": {
+    "ghsa_id": "GHSA-v8v8-6859-qxm4",
+    "cve_id": "CVE-2020-8149",
+    "html_url": "https://github.com/advisories/GHSA-v8v8-6859-qxm4",
+    "summary": "Arbitrary shell command execution in logkitty",
+    "description": "Lack of output sanitization allowed an attack to execute arbitrary shell commands via the logkitty npm package before version 0.7.1.",
+    "severity": "critical",
+    "published_at": "2020-06-05T14:47:02Z",
+    "updated_at": "2023-09-08T20:47:29Z",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "logkitty"
+        },
+        "vulnerable_version_range": "< 0.7.1",
+        "first_patched_version": "0.7.1",
+        "vulnerable_functions": []
+      }
+    ],
+    "references": [
+      "https://nvd.nist.gov/vuln/detail/CVE-2020-8149",
+      "https://github.com/zamotany/logkitty/pull/18",
+      "https://github.com/zamotany/logkitty/commit/ef2f673e25c629544dd3de6429999318447dd6bf",
+      "https://hackerone.com/reports/825729",
+      "https://github.com/advisories/GHSA-v8v8-6859-qxm4"
+    ]
+  }
+}

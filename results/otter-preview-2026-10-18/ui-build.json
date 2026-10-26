@@ -1,0 +1,26 @@
+{
+  "build": "production Babel component compilation",
+  "passed": true,
+  "files": [
+    {
+      "source": "src/calmframes/TitleArtwork.tsx",
+      "inputSha256": "9286def13f7898a410fa58912b9cc1f26fc9d0b66c476e8d651107ba68f3bd66",
+      "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/otter-preview-2026-10-18/compiled-ui/TitleArtwork.js",
+      "outputSha256": "512179e9ba97e39856ed6dac82e56f29074151e55a2d15114fb74a53fe1286bf"
+    },
+    {
+      "source": "src/calmframes/KidHomeScreen.tsx",
+      "inputSha256": "ec8c029de8d05d41bc786a987548414c4e460a5aa255a8460ee693321f77fc87",
+      "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/otter-preview-2026-10-18/compiled-ui/KidHomeScreen.js",
+      "outputSha256": "b48db2619c846711456d2758f0f00281bc29a47a0561efcdd5bdeedebdf57677"
+    },
+    {
+      "source": "src/calmframes/TitleDetailsScreen.tsx",
+      "inputSha256": "ce562f3c9b46d3f44d48c06937d1addea088da468b1e14356d6c97d57b5e2e0b",
+      "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/otter-preview-2026-10-18/compiled-ui/TitleDetailsScreen.js",
+      "outputSha256": "ce8f37bbef49730e33cc159cc51c653103e505736f026e299d341a68d324b592"
+    }
+  ],
+  "nativeBuild": false,
+  "installed": false
+}

@@ -1,0 +1,8 @@
+PASS test/calmframes/playerSceneTimeline.test.tsx
+PASS test/calmframes/cinematicComposition.test.tsx
+
+Test Suites: 2 passed, 2 total
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        1.794 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playerSceneTimeline.test.tsx|test\/calmframes\/cinematicComposition.test.tsx/i.

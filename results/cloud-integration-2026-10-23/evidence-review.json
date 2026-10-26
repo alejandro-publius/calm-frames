@@ -1,0 +1,176 @@
+{
+  "checked_at_utc": "2026-10-23T18:03:17.131809+00:00",
+  "reviewed_source": "6360417814d684d41c94789a9e406fc27de53c66",
+  "code_source": "12125b2970342b5376b0bc7964383e547b407376",
+  "review_method": "Source inspection, Git tree/ancestry comparisons and existing receipt/file consistency. No test suite, native session or media operation run.",
+  "changed_paths_after_code_source": [
+    "README.md",
+    "START_HERE_CLAUDE.md",
+    "docs/DECISIONS.md",
+    "docs/STATUS.md",
+    "docs/handoff-2026-10-23/INTEGRATION_STATUS.md",
+    "docs/handoff-2026-10-23/MAC_ACCEPTANCE_CHECKLIST.md",
+    "results/integration-2026-10-23/receipt.json"
+  ],
+  "source_trees": {
+    "app": {
+      "code": "e118ceab474ed72ca0524ee714fdf9c30ecbe971",
+      "reviewed": "e118ceab474ed72ca0524ee714fdf9c30ecbe971"
+    },
+    "hook": {
+      "code": "809b94b300e3eed811e0409041718b73ae6d03dd",
+      "reviewed": "809b94b300e3eed811e0409041718b73ae6d03dd"
+    },
+    "pipeline": {
+      "code": "15cc0cca6fa8c3ec5bcb45a9adb3cfb87e70a253",
+      "reviewed": "15cc0cca6fa8c3ec5bcb45a9adb3cfb87e70a253"
+    },
+    "flashmap": {
+      "code": "673f43188c9a35960506b4e52d55923e17f99cd0",
+      "reviewed": "673f43188c9a35960506b4e52d55923e17f99cd0"
+    }
+  },
+  "source_trees_match": true,
+  "excluded_from_ancestry": [
+    "84faeed7dee851c713f75faaff2f8522a961d609",
+    "76223f99cf8543ffe1e75d54c9873b56a0c23318"
+  ],
+  "verified_evidence_files": [
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/11-profile-choice.png",
+      "bytes": 266515,
+      "sha256": "50d04fc97a2fd4d981335e7374e0cdcc54b5df048640ef1d784f45550f2de4c6",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/17-kid2-resume.png",
+      "bytes": 259457,
+      "sha256": "7234d03696329e033ec090abe76aaa63cfbcee94090835e64dd9ef040b33350d",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/22-kid-isolated.png",
+      "bytes": 259455,
+      "sha256": "0908a2bd2694ce22d076eb45559b97c16ba783c25c4dd2f4b13c2f3ba78e15c6",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/30-probe-focused.png",
+      "bytes": 1640424,
+      "sha256": "a324a85a7aa148bec7c4c41b8707e3a2d75da9679f69b8c4b903fe4f992f255f",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/31-probe-error.png",
+      "bytes": 142691,
+      "sha256": "dd2d5fae2cf0b56fb75761dc7d75344a1b32cd3f7cfc258a2f488c7a559f8705",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/33-retry-ready.png",
+      "bytes": 144262,
+      "sha256": "057e86636588efd5e174ea0b868dcc7beac8c388fedb74adfb24f9bf85128fb1",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/35-retry-playing.png",
+      "bytes": 1677501,
+      "sha256": "928122153a88ac7374971305afd6dd104d27b78c2391d2f8586ff5ff3a4602e3",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/37-polish-picker.png",
+      "bytes": 256366,
+      "sha256": "39356b75d9a33034894ace30b4634f27f0e2756407d5a7812d1ec35aa8e69d2f",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/38-polish-selected.png",
+      "bytes": 535449,
+      "sha256": "f227ae747d44691ae0e04cd11de51db268386edacb555e35a7c81835d76321b4",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/40-polish-details.png",
+      "bytes": 476776,
+      "sha256": "f85b31d3f142d15149bccf07b07bbc20991f76ed829cb95f117e2bfa11baba5f",
+      "matches_receipt": "results/native-profiles-retry-polish-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/earlier-events.log",
+      "bytes": 36113,
+      "sha256": "60674d3df3afe2121cece6b074fc66f37fd67708ae9fab9ef6ff685b1ca6a1f1",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-ended-hold.png",
+      "bytes": 1756833,
+      "sha256": "f600a351a413d9c10a00f2e55de4127c170cba4605997063f75cf57ceefc0ffa",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-events.log",
+      "bytes": 48350,
+      "sha256": "defcbabb46f2282344e73f3c0d2a03c9e27d4fa6f22a50501de56a3a710d9ea9",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-paused-frame.png",
+      "bytes": 65805,
+      "sha256": "0073577489d6966226a5c017c5d986e5be77b6a9b74d48e273ed1292a8533063",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-resting-home.png",
+      "bytes": 541112,
+      "sha256": "f79815f5a19c53378a84f56651f1401c70c18cf7814e1c383448e9b582b377c5",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    },
+    {
+      "path": "results/native-async-retest-2026-10-23/final-timing.jsonl",
+      "bytes": 350111,
+      "sha256": "0714858b582707cf225a975738c041d51b484d35a1a3ed9044e85311a2d08170",
+      "matches_receipt": "results/native-async-retest-2026-10-23/receipt.json"
+    }
+  ],
+  "verified_file_count": 16,
+  "verified_screenshot_count": 13,
+  "native_sources": {
+    "production_polish": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+    "profile_position_isolation": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+    "full_mcway_run_and_skip": "3bc658f0491b02b92fa22bc454a40887ecbf23ae",
+    "test_only_retry_harness": "84faeed7dee851c713f75faaff2f8522a961d609"
+  },
+  "native_current_candidate_observed": false,
+  "caption_catalog": {
+    "source": "results/native-acceptance-gaps-2026-10-23/catalog-caption-inventory.json",
+    "all_recorded_consumer_titles_have_zero_caption_tracks": true,
+    "native_caption_restoration": "non-applicable to recorded consumer catalog; simulated-native regression exists"
+  },
+  "personal_import": {
+    "native_arbitrary_file_import": false,
+    "local_analysis_and_review_utility": true,
+    "package_export_implies_tv_playback": false,
+    "native_new_personal_file_observed_here": false
+  },
+  "deferred": [
+    "Analyzer-version cache invalidation with approved-workdir migration",
+    "Reading comfort mode after core acceptance"
+  ],
+  "native_or_human_remaining": [
+    "Current-source profile picker save/focus behavior and text wrapping",
+    "Differential stricter profile protection across Resume",
+    "Onboarding footer using an authorized isolated first-run fixture",
+    "Full VoiceView, remote focus and reduced-motion acceptance",
+    "Exact compositor/decoder ordering evidence within platform limits",
+    "Owner audio, palette, pacing and full-video acceptance"
+  ],
+  "external_artifacts_received": {
+    "native_packages": false,
+    "raw_native_videos": false,
+    "replacement_demo_mp4": false,
+    "mac_dependency_risk_report": false
+  },
+  "tests_rerun": [],
+  "publication_actions": []
+}

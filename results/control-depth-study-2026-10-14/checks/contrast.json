@@ -1,0 +1,28 @@
+{
+  "cream": {
+    "minimumTextContrast": 9.131998684430565,
+    "whiteBackdropForAlpha": true
+  },
+  "creamPressed": {
+    "minimumTextContrast": 7.449696033884116,
+    "whiteBackdropForAlpha": true
+  },
+  "teal": {
+    "minimumTextContrast": 4.561977916422179,
+    "whiteBackdropForAlpha": true
+  },
+  "tealPressed": {
+    "minimumTextContrast": 6.412651650882935,
+    "whiteBackdropForAlpha": true
+  },
+  "selected": {
+    "minimumTextContrast": 4.910689559239022,
+    "whiteBackdropForAlpha": true
+  },
+  "disabled": {
+    "minimumTextContrast": 7.064518018377862,
+    "whiteBackdropForAlpha": true
+  },
+  "focusRingOnDarkSeparator": 6.532684898615051,
+  "focusRingOnPage": 6.831688758499836
+}

@@ -1,0 +1,13 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=(harborOpening|uiCapture|wholeFlowDesign).test
+
+ PASS  test/calmframes/uiCapture.test.tsx
+ PASS  test/calmframes/harborOpening.test.tsx
+ PASS  test/calmframes/wholeFlowDesign.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       39 passed, 39 total
+Snapshots:   0 total
+Time:        1.701 s, estimated 2 s
+Ran all test suites matching /(harborOpening|uiCapture|wholeFlowDesign).test/i.

@@ -4,6 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import AppStack from '../../src/components/navigation/AppStack';
+import { CALM_WORLD } from '../../src/calmframes/calmStyles';
 import { Screens } from '../../src/components/navigation/types';
 
 jest.mock('../../src/screens/DetailsScreen', () => 'DetailsScreen');
@@ -48,6 +49,20 @@ describe('AppStack', () => {
     return render(<AppStack />);
   };
 
+  it('does not fetch legacy search data during the Calm Frames launch', () => {
+    setup();
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
+
+  it('keeps route components stable when the stack is mounted again', () => {
+    const first = setup();
+    const Screen = createStackNavigator().Screen as jest.Mock;
+    const before = Screen.mock.calls.slice(-6).map(([props]) => props.component);
+    first.unmount();
+    setup();
+    expect(Screen.mock.calls.slice(-6).map(([props]) => props.component)).toEqual(before);
+  });
+
   it('renders correctly', () => {
     const { toJSON } = setup();
     expect(toJSON()).toMatchSnapshot();
@@ -89,7 +104,8 @@ describe('AppStack', () => {
 
     expect(navigatorProps.screenOptions).toEqual({
       headerShown: false,
-      animationEnabled: false,
+      animation: 'none',
+      cardStyle: { backgroundColor: CALM_WORLD.BACKGROUND },
     });
   });
 

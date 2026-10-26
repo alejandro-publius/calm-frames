@@ -1,0 +1,11 @@
+{
+  "titles": 1,
+  "bundles": 1,
+  "bytes": 40796812,
+  "catalogSha256": "0b15abf5a74e2b540cd9e73e0d2b34fdb3671243d5df6eaa7d9ec8eaa777a5be",
+  "verification_reports": {
+    "required": 1,
+    "present": 1,
+    "missing": []
+  }
+}

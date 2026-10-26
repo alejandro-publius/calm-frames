@@ -1,0 +1,12 @@
+PASS test/calmframes/useFlashGuard.test.tsx
+PASS test/calmframes/sceneBridges.test.tsx
+PASS test/calmframes/parentNavigation.test.tsx
+PASS test/calmframes/personalCovers.test.ts
+PASS test/calmframes/PersonalCoversScreen.test.tsx
+PASS test/calmframes/personalCoverStorage.test.tsx
+
+Test Suites: 6 passed, 6 total
+Tests:       68 passed, 68 total
+Snapshots:   0 total
+Time:        4.476 s
+Ran all test suites matching /test\/calmframes\/personalCovers.test.ts|test\/calmframes\/personalCoverStorage.test.tsx|test\/calmframes\/PersonalCoversScreen.test.tsx|test\/calmframes\/sceneBridges.test.tsx|test\/calmframes\/useFlashGuard.test.tsx|test\/calmframes\/parentNavigation.test.tsx|test\/calmframes\/PlayerScreen.test.tsx/i.

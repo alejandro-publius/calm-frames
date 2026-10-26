@@ -1,0 +1,526 @@
+TAP version 13
+# Subtest: accepts distinct synthetic ambient report and rejects duplicate JSON
+ok 1 - accepts distinct synthetic ambient report and rejects duplicate JSON
+  ---
+  duration_ms: 8.706458
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionSha256
+ok 2 - rejects rebound metadata renditionSha256
+  ---
+  duration_ms: 1.271417
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata durationMs
+ok 3 - rejects rebound metadata durationMs
+  ---
+  duration_ms: 0.587708
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionStartOffsetMs
+ok 4 - rejects rebound metadata renditionStartOffsetMs
+  ---
+  duration_ms: 3.996208
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata preset
+ok 5 - rejects rebound metadata preset
+  ---
+  duration_ms: 2.054292
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata audioPreserved
+ok 6 - rejects rebound metadata audioPreserved
+  ---
+  duration_ms: 1.481917
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata frameTimingPreserved
+ok 7 - rejects rebound metadata frameTimingPreserved
+  ---
+  duration_ms: 3.431042
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata ambientSha256
+ok 8 - rejects rebound metadata ambientSha256
+  ---
+  duration_ms: 1.018834
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata intervals
+ok 9 - rejects rebound metadata intervals
+  ---
+  duration_ms: 1.311875
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata version
+ok 10 - rejects rebound metadata version
+  ---
+  duration_ms: 1.401875
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis source
+ok 11 - rejects rebound analysis source
+  ---
+  duration_ms: 1.130542
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis flags
+ok 12 - rejects rebound analysis flags
+  ---
+  duration_ms: 0.800417
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis thresholds
+ok 13 - rejects rebound analysis thresholds
+  ---
+  duration_ms: 1.2755
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis profile
+ok 14 - rejects rebound analysis profile
+  ---
+  duration_ms: 3.657917
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis failed
+ok 15 - rejects rebound analysis failed
+  ---
+  duration_ms: 1.918625
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof sourceEqualsOutput
+ok 16 - rejects missing timing/audio proof sourceEqualsOutput
+  ---
+  duration_ms: 1.214667
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameCount
+ok 17 - rejects missing timing/audio proof frameCount
+  ---
+  duration_ms: 1.18425
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof audioPacketCount
+ok 18 - rejects missing timing/audio proof audioPacketCount
+  ---
+  duration_ms: 0.766333
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof videoDurationRational
+ok 19 - rejects missing timing/audio proof videoDurationRational
+  ---
+  duration_ms: 0.300625
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameTimesSha256
+ok 20 - rejects missing timing/audio proof frameTimesSha256
+  ---
+  duration_ms: 0.857125
+  type: 'test'
+  ...
+# Subtest: an exact simulated approval produces three per-preset bindings without writing the app
+ok 21 - an exact simulated approval produces three per-preset bindings without writing the app
+  ---
+  duration_ms: 61.533333
+  type: 'test'
+  ...
+# Subtest: removing simulated catalog approval also removes all ambient registrations
+ok 22 - removing simulated catalog approval also removes all ambient registrations
+  ---
+  duration_ms: 11.904
+  type: 'test'
+  ...
+# Subtest: refuses report before generation
+ok 23 - refuses report before generation
+  ---
+  duration_ms: 20.633958
+  type: 'test'
+  ...
+# Subtest: refuses catalog before generation
+ok 24 - refuses catalog before generation
+  ---
+  duration_ms: 8.942334
+  type: 'test'
+  ...
+# Subtest: refuses key before generation
+ok 25 - refuses key before generation
+  ---
+  duration_ms: 10.418792
+  type: 'test'
+  ...
+# Subtest: refuses missing-report before generation
+ok 26 - refuses missing-report before generation
+  ---
+  duration_ms: 7.829166
+  type: 'test'
+  ...
+# Subtest: existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+ok 27 - existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+  ---
+  duration_ms: 71.052959
+  type: 'test'
+  ...
+# Subtest: rejects catalog substitution without changing approval
+ok 28 - rejects catalog substitution without changing approval
+  ---
+  duration_ms: 23.199083
+  type: 'test'
+  ...
+# Subtest: rejects key substitution without changing approval
+ok 29 - rejects key substitution without changing approval
+  ---
+  duration_ms: 18.486625
+  type: 'test'
+  ...
+# Subtest: rejects bundle substitution without changing approval
+ok 30 - rejects bundle substitution without changing approval
+  ---
+  duration_ms: 8.639042
+  type: 'test'
+  ...
+# Subtest: rejects duplicate substitution without changing approval
+ok 31 - rejects duplicate substitution without changing approval
+  ---
+  duration_ms: 11.969667
+  type: 'test'
+  ...
+# Subtest: rejects generated substitution without changing approval
+ok 32 - rejects generated substitution without changing approval
+  ---
+  duration_ms: 13.599583
+  type: 'test'
+  ...
+# Subtest: rejects missing-generated substitution without changing approval
+ok 33 - rejects missing-generated substitution without changing approval
+  ---
+  duration_ms: 11.495042
+  type: 'test'
+  ...
+# Subtest: rejects symlink substitution without changing approval
+ok 34 - rejects symlink substitution without changing approval
+  ---
+  duration_ms: 9.239459
+  type: 'test'
+  ...
+# Subtest: consumer membership is generated from reviewed data rather than title-specific code
+ok 35 - consumer membership is generated from reviewed data rather than title-specific code
+  ---
+  duration_ms: 15.999291
+  type: 'test'
+  ...
+# Subtest: the compiled catalog import resolves to its TypeScript module in Metro
+ok 36 - the compiled catalog import resolves to its TypeScript module in Metro
+  ---
+  duration_ms: 6.161167
+  type: 'test'
+  ...
+# Subtest: a headless-only checkout gets actionable missing-runtime instructions
+ok 37 - a headless-only checkout gets actionable missing-runtime instructions
+  ---
+  duration_ms: 27.445959
+  type: 'test'
+  ...
+# Subtest: incomplete dependencies and unsupported Node are reported together
+ok 38 - incomplete dependencies and unsupported Node are reported together
+  ---
+  duration_ms: 3.998917
+  type: 'test'
+  ...
+# Subtest: runtime syntax is checked without executing it and a partial repair still fails
+ok 39 - runtime syntax is checked without executing it and a partial repair still fails
+  ---
+  duration_ms: 163.0665
+  type: 'test'
+  ...
+# Subtest: native builds require Node 22 even when all generated inputs are present
+ok 40 - native builds require Node 22 even when all generated inputs are present
+  ---
+  duration_ms: 343.613834
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 41 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 637.120708
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 42 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 10.635625
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 43 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 5.606625
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 44 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 5.820917
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 45 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 5.467167
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 46 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 6.468125
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 47 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 5.850542
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 48 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 5.702
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 49 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 6.284333
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 50 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 6.09
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 51 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 5.382542
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 52 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 7.189083
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 53 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 32.704333
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 54 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 20.440792
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 55 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 6.138291
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 56 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 11.810125
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 57 - refuses changed prepared json bytes
+  ---
+  duration_ms: 0.972041
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 58 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.552917
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 59 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 242.269875
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 60 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 84.125917
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 61 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 1.179125
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 62 - refuses aliases to files outside the package
+  ---
+  duration_ms: 122.81625
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 63 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 1377.91425
+  type: 'test'
+  ...
+# Subtest: the checked-in summary reproduces exactly without timestamps or machine paths
+ok 64 - the checked-in summary reproduces exactly without timestamps or machine paths
+  ---
+  duration_ms: 395.687584
+  type: 'test'
+  ...
+# Subtest: Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof
+ok 65 - Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof
+  ---
+  duration_ms: 17.728041
+  type: 'test'
+  ...
+# Subtest: absent measurements stay unknown, never zero or timing success
+ok 66 - absent measurements stay unknown, never zero or timing success
+  ---
+  duration_ms: 1.056834
+  type: 'test'
+  ...
+# Subtest: refuses a substituted sourceSha256 before summarizing
+ok 67 - refuses a substituted sourceSha256 before summarizing
+  ---
+  duration_ms: 1.516125
+  type: 'test'
+  ...
+# Subtest: refuses a substituted renditionSha256 before summarizing
+ok 68 - refuses a substituted renditionSha256 before summarizing
+  ---
+  duration_ms: 1.684708
+  type: 'test'
+  ...
+# Subtest: refuses a substituted reportSha256 before summarizing
+ok 69 - refuses a substituted reportSha256 before summarizing
+  ---
+  duration_ms: 1.00675
+  type: 'test'
+  ...
+# Subtest: refuses a substituted preset before summarizing
+ok 70 - refuses a substituted preset before summarizing
+  ---
+  duration_ms: 0.44325
+  type: 'test'
+  ...
+# Subtest: normal report and rendition substitution cannot bypass exact catalog approval
+ok 71 - normal report and rendition substitution cannot bypass exact catalog approval
+  ---
+  duration_ms: 10.967625
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime = 1;
+ok 72 - refuses an unguarded seek: player.currentTime = 1;
+  ---
+  duration_ms: 1653.414208
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] = 1;
+ok 73 - refuses an unguarded seek: player['currentTime'] = 1;
+  ---
+  duration_ms: 11.886625
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime += 1;
+ok 74 - refuses an unguarded seek: player.currentTime += 1;
+  ---
+  duration_ms: 5.506583
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] -= 1;
+ok 75 - refuses an unguarded seek: player['currentTime'] -= 1;
+  ---
+  duration_ms: 4.647833
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime++;
+ok 76 - refuses an unguarded seek: player.currentTime++;
+  ---
+  duration_ms: 5.499667
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: --player.currentTime;
+ok 77 - refuses an unguarded seek: --player.currentTime;
+  ---
+  duration_ms: 3.774667
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: ++player['currentTime'];
+ok 78 - refuses an unguarded seek: ++player['currentTime'];
+  ---
+  duration_ms: 6.888
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime']--;
+ok 79 - refuses an unguarded seek: player['currentTime']--;
+  ---
+  duration_ms: 5.763375
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.fastSeek(1);
+ok 80 - refuses an unguarded seek: player.fastSeek(1);
+  ---
+  duration_ms: 10.6335
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['fastSeek'](1);
+ok 81 - refuses an unguarded seek: player['fastSeek'](1);
+  ---
+  duration_ms: 6.3
+  type: 'test'
+  ...
+# Subtest: the guarded seek implementation retains its named exemption
+ok 82 - the guarded seek implementation retains its named exemption
+  ---
+  duration_ms: 13.448375
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+ok 83 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+  ---
+  duration_ms: 4.751625
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+ok 84 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 6.605042
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+ok 85 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+  ---
+  duration_ms: 4.62425
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+ok 86 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 3.02675
+  type: 'test'
+  ...
+1..86
+# tests 86
+# suites 0
+# pass 86
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2867.857625

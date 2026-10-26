@@ -1,0 +1,8 @@
+PASS test/screens/readingComfortSave.test.tsx
+PASS test/calmframes/readingComfort.test.tsx
+
+Test Suites: 2 passed, 2 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        5.303 s, estimated 12 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx|test\/screens\/readingComfortSave.test.tsx/i.

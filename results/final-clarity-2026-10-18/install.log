@@ -1,0 +1,18 @@
+Force stopping pkg: io.github.alejandropublius.calmframes
+
+Installing/Updating '/tmp/calm-frames-clarity-aarch64-debug.vpkg' ...success
+
+8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd  /tmp/calm-frames-clarity-aarch64-debug.vpkg
+
+Sending: pkg://io.github.alejandropublius.calmframes.main
+
+com.amazon.kcp.component.service
+com.amazon.otad.main
+com.amazon.map.async.service.main
+com.amazon.dev.shell.service
+com.amazon.aplext.alert.10.service.main
+com.amazon.kepler.keyvault.service.main
+com.amazon.rdm.service.main
+com.amazon.keplerlauncherapp.main
+io.github.alejandropublius.calmframes.main
+

@@ -1,0 +1,97 @@
+{
+  "source_commit": "e4e7d8618cfeded9d21830111c0bc734e911484c",
+  "native_process_pid": 18508,
+  "checks": [
+    {
+      "check": "Pause/resume during first cover",
+      "evidence": "pause then playing and first cover-off events; inspect timing samples for exact pause duration"
+    },
+    {
+      "check": "Activate Skip during second cover",
+      "evidence": "Skip focused; Enter caused guarded playhead-write, seeked and cover-off"
+    },
+    {
+      "check": "Manual Back during playback",
+      "evidence": "Back key followed by leavePlayer and Home Watch focus, before video ended"
+    },
+    {
+      "check": "Owner review state",
+      "evidence": "App remains open, paused in first covered scene with Skip focused"
+    }
+  ],
+  "pause": {
+    "kind": "pause",
+    "wallClockMs": 1792221268442,
+    "mediaTimeMs": 8304,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": 84,
+      "worstTickGapMs": 167
+    }
+  },
+  "resume": {
+    "kind": "playing",
+    "wallClockMs": 1792221271331,
+    "mediaTimeMs": 8402,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  "pause_to_resume_wall_ms": 2889,
+  "pause_to_resume_media_ms": 98,
+  "clock_segments": [
+    {
+      "segment": "before-pause",
+      "media_ms": 8265,
+      "wall_ms": 8358
+    },
+    {
+      "segment": "after-resume-before-seek",
+      "media_ms": 20894,
+      "wall_ms": 20899
+    }
+  ],
+  "seeked": {
+    "kind": "seeked",
+    "wallClockMs": 1792221292690,
+    "mediaTimeMs": 32081.000000000004,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  "guarded_skip": {
+    "target_ms": 31693,
+    "cover_requested_before_write": true,
+    "seeked_while_covered": true,
+    "cover_released_after_seeked": true
+  },
+  "back_to_teardown_ms": 363,
+  "back_to_home_watch_ms": 404,
+  "owner_review_state": {
+    "pause": {
+      "kind": "pause",
+      "wallClockMs": 1792221305822,
+      "mediaTimeMs": 8016,
+      "covered": true,
+      "playbackRate": 1,
+      "extra": {
+        "worstDriftMs": 79,
+        "worstTickGapMs": 68
+      }
+    },
+    "focus": "calm-card-skip",
+    "collector_stopped": true
+  },
+  "limits": [
+    "Text logs establish events, focus, media clock and guarded seek ordering, not native pixels or audio quality.",
+    "Parents cancellation and practice were not repeated on this build; existing evidence remains historical.",
+    "Earlier playback recovery preceded this change; no performance repair or root cause is claimed."
+  ]
+}

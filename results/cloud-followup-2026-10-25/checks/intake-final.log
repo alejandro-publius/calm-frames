@@ -1,0 +1,45 @@
+........................................................................ [ 62%]
+......F....................................                              [100%]
+=================================== FAILURES ===================================
+__________ test_real_file_to_durable_caregiver_review_without_signer ___________
+
+server = <pipeline.tests.test_local_intake_http.LocalServer object at 0x7f03f0cc2de0>
+media = PosixPath('/tmp/pytest-of-agent/pytest-49/test_real_file_to_durable_care0/steady-color.mp4')
+
+    def test_real_file_to_durable_caregiver_review_without_signer(server, media):
+        data = media.read_bytes()
+        assert server.upload(data, permission=False)[0] == 400
+        assert server.request("GET", "/jobs")[1]["jobs"] == []
+        assert not list(server.root.glob("*/original.mp4"))
+        assert server.upload(data, Origin="https://unrelated.invalid")[0] == 403
+
+        status, created, _ = server.upload(data)
+        assert status == 200
+        job = server.settled(created["id"])
+        assert job["status"] == "review", job.get("error")
+        assert job["review"]["analysis_complete"] is True
+        assert job["review"]["frame_count"] == 12
+        assert job["review"]["duration_ms"] == 1000
+        assert job["playable"] is False
+        review_path = f'/jobs/{job["id"]}/review'
+        status, report, headers = server.request("GET", review_path)
+        assert status == 200
+        assert headers["Content-Disposition"].startswith("attachment;")
+        assert headers["Cache-Control"] == "no-store"
+        assert report["source"]["sha256"] == hashlib.sha256(data).hexdigest()
+        assert report["tv_playback_authorized"] is False
+        assert str(server.root) not in json.dumps(report)
+        assert server.request("GET", f'/jobs/{job["id"]}/original.mp4')[0] == 404
+
+        original = server.root / job["id"] / "original.mp4"
+        original.write_bytes(b"changed fixture only")
+        assert server.request("GET", review_path)[0] == 400
+        original.write_bytes(data)
+>       assert server.request("POST", f'/jobs/{job["id"]}/approve')[1]["status"] == "signing_blocked"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'status'
+
+pipeline/tests/test_local_intake_http.py:145: KeyError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_local_intake_http.py::test_real_file_to_durable_caregiver_review_without_signer
+1 failed, 114 passed in 36.09s

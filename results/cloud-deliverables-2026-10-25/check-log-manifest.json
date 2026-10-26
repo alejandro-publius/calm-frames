@@ -1,0 +1,92 @@
+[
+  {
+    "file": "checks/review-before.log",
+    "original_sha256": "b1cd3e6fedd2df69e997de1a82e55776ef7d94e38adde3aea83e758aed1c695a",
+    "retained_sha256": "5654b844f623f78f3fad5f483f6e9780ac2cb88df106315388beaf5a87f8360c",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/review-after.log",
+    "original_sha256": "2eaa990adfe86d92e5e2e05417130d8c6e9a8193dbcebf157302628949980bab",
+    "retained_sha256": "2eaa990adfe86d92e5e2e05417130d8c6e9a8193dbcebf157302628949980bab",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/intake-delivery-http.log",
+    "original_sha256": "1f1dfd3941085b9a7edbc375fff0522f21ccc2836dbdfafab8870ec5b7e26b00",
+    "retained_sha256": "94702c240bfa4953727b0a64d76337a340c5a51bc46a53c6ef1b33100794385f",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/delivery-fixture-final.log",
+    "original_sha256": "30c6f4da0da06125e21dd3c4b57c2c530d5e306ac843d9185434a447521c0a16",
+    "retained_sha256": "30c6f4da0da06125e21dd3c4b57c2c530d5e306ac843d9185434a447521c0a16",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/nonempty-plan.log",
+    "original_sha256": "6ea0d82103269dd6df283cfed23564d634bd3928b49624f327857c42c465ea8a",
+    "retained_sha256": "6ea0d82103269dd6df283cfed23564d634bd3928b49624f327857c42c465ea8a",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/python-types.log",
+    "original_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "retained_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/capture.log",
+    "original_sha256": "188661dc3e1c43d1fb9a84a0e3eda6c1d81dc62468dcd3cbc38fc6e5dd55b77b",
+    "retained_sha256": "3acf8b410722fe0f34545ebaeefc278389e9a74b2e50f9ddf137b7e9d0cf674d",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/capture-current.log",
+    "original_sha256": "060de27123334fa79ea22844d4da702a10b9281fb9fe31ebfb8c2bebc8c7aebf",
+    "retained_sha256": "dbf2fe0de57d3e5d7f1359c6b7c562e89f2e1052bdfeef031fa2af000d755746",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "checks/video-gate-current.log",
+    "original_sha256": "1e75f58da5a81d13643e6b4f5b5a2d104fde60e8085aac8e3adb5c256669007e",
+    "retained_sha256": "ada9a6140857688161eb68eb4d7fa570266318532a030f1336b76fc81c405265",
+    "sanitization": "ANSI/trailing whitespace removed; cloud/test paths substituted. Result lines retained."
+  },
+  {
+    "file": "demo/capture-receipt.json",
+    "original_sha256": "146ab6eb1cc5e0acb6ec6a440a5c1ec196d2d8d93bf8e63845b50ff3fc9d0a91",
+    "retained_sha256": "146ab6eb1cc5e0acb6ec6a440a5c1ec196d2d8d93bf8e63845b50ff3fc9d0a91",
+    "sanitization": "Only the external capture directory prefix removed from file references."
+  },
+  {
+    "file": "demo/video-gate.json",
+    "original_sha256": "263942c9652ca788908b124af7269269c2c4c8684d6f45f5da0fc5aba28ef011",
+    "retained_sha256": "d1359e2a35c2f54cd224378812f86c9f17dacb131212982c3de5634a685039fb",
+    "sanitization": "Only the external capture directory prefix removed from file references."
+  },
+  {
+    "file": "demo/video-gate.map.json",
+    "original_sha256": "1fb462704e1f9d293631b43ec55f0838d77cef4b6ddd72b11be9107fb8373d39",
+    "retained_sha256": "1fb462704e1f9d293631b43ec55f0838d77cef4b6ddd72b11be9107fb8373d39",
+    "sanitization": "Only the external capture directory prefix removed from file references."
+  },
+  {
+    "file": "checks/run-identity-before.log",
+    "original_sha256": "19f367ecc56f9df04554e9864ce0e67569aa79385b41b3b86984962ef2d80062",
+    "retained_sha256": "cdf325843c9b052c8a6de2ab253213fa8df78530ededb96fb2b875bc05b4f344",
+    "sanitization": "ANSI/trailing whitespace removed and cloud/test paths substituted; result lines retained."
+  },
+  {
+    "file": "checks/run-identity-after.log",
+    "original_sha256": "763f9e863b37cb6c6244e5f27c07324e9a3a7ae1f024c3f4579e29e1d89d95ae",
+    "retained_sha256": "763f9e863b37cb6c6244e5f27c07324e9a3a7ae1f024c3f4579e29e1d89d95ae",
+    "sanitization": "ANSI/trailing whitespace removed and cloud/test paths substituted; result lines retained."
+  },
+  {
+    "file": "checks/python-types-final.log",
+    "original_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "retained_sha256": "44323f12010ebbb5daa4cefef4cc4308006fe3b26ad3ced614a993eb79a8b535",
+    "sanitization": "ANSI/trailing whitespace removed and cloud/test paths substituted; result lines retained."
+  }
+]

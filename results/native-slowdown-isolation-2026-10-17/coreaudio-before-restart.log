@@ -1,0 +1,42 @@
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not resume ��V
+coreaudio: Reason: kAudioHardwareBadDeviceError
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not resume ��V
+coreaudio: Reason: kAudioHardwareBadDeviceError
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not resume ��V
+coreaudio: Reason: kAudioHardwareBadDeviceError
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not resume ��V
+coreaudio: Reason: kAudioHardwareBadDeviceError
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not remove IOProc
+coreaudio: Reason: kAudioHardwareBadDeviceError
+coreaudio: Could not initialize record
+coreaudio: Could not set audio format change listener
+coreaudio: Reason: kAudioHardwareIllegalOperationError
+coreaudio: Could not initialize record
+coreaudio: Could not set audio format change listener
+coreaudio: Reason: kAudioHardwareIllegalOperationError
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not determine whether Device is playing
+coreaudio: Reason: status code 560947818
+coreaudio: Could not resume ��V
+coreaudio: Reason: kAudioHardwareBadDeviceError

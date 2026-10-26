@@ -1,0 +1,32 @@
+{
+  "authentication": "Existing Max subscription, previously verified small task; no API key or billing change",
+  "model_requested": "claude-fable-5-1[1m]",
+  "effort_requested": "max",
+  "effort_verified": "CLI accepted max; provider telemetry does not independently echo effort",
+  "implementation": {
+    "session": "9ec92339-46d7-42f8-abc5-15c043dccc86",
+    "actual_model": "claude-fable-5-1",
+    "provider": "firstParty",
+    "completed": true,
+    "files": "Parent/onboarding/PIN/profile/storage/credits/copy; root reviewed diffs and tested"
+  },
+  "ultracode": {
+    "session": "6954600e-5930-46f7-913c-4a1df5d4a448",
+    "actual_model": "claude-fable-5-1",
+    "provider": "firstParty",
+    "workflow": "wf_f34fc112-201",
+    "completed": true,
+    "permission_denials": [],
+    "scope": "Six read-only inputs; library/details native captures and production icons",
+    "noninteractive_background_wait_ceiling_ms": 1800000,
+    "report": "Review completed. The harness task record shows the reviewer ran as claude-fable-5-1 and finished on its first attempt. Effort was requested as max; the harness logs the model but not the effort, so that part rests on the dispatch options. The reviewer made six Reads, one per named input, plus one structured output. No shell, network, edits, delegation or telemetry were used, and global configuration was not touched.\n\nReviewer's report, unchanged:\n\nBoth captures and both icons follow the brief's palette, labels, margins and safety wording; the details screen needs its duplicated hold lines merged and its viewing plan on screen, and focus needs a second cue.\n\n## Blockers (factual)\n\n- redesign-second-details.png: \"2 scheduled holds will be hidden, 8 seconds in all. Sound and captions keep playing.\" and the strip caption \"2 scheduled covers, 8 seconds in all, spread through about 1 minute.\" repeat the count, duration and sound-and-captions point, and switch from \"holds\" to \"covers\", a term used nowhere else. The copy guide bars duplicated labels and unexplained terms. Keep one line, such as \"2 scheduled holds hide the picture for 8 seconds in all, spread through about 1 minute.\"\n- redesign-second-details.png: the \"Your viewing plan\" card is cut off at the bottom edge with only its heading visible, so the plan, caption and hold group the brief asks for is off screen. If the page scrolls this is below the fold, which the capture cannot show; merging the lines above recovers space.\n- Both captures: focused \"Watch now\" and \"Watch demo\" show only a saffron outline, estimated 5 to 6 units; the brief requires a second non-color cue, and none is visible at this scale.\n\n## Preferences\n\n- redesign-third-library.png: \"1 more title is unavailable. Open Parental controls to see why.\" gives the next step but not the reason the copy guide pattern asks for; the brief allows that detail in the parent area.\n- redesign-third-library.png: hero and both shelf cards share one illustration, and the wide thumbnail crop leaves a sail tip and a sliver of sun; keep both in the crop or mark the demo card so a child can tell the titles apart.\n- redesign-second-details.png: the hold explanation runs the full content width, an estimated 95 characters a line; the brief asks for short lines. Use the description column.\n- redesign-second-details.png: the artwork appears to sit inside a slightly wider, lighter frame, leaving thin bands at both sides, and its top sits a little above the eyebrow; the library hero fills its frame, so match that.\n- firetv-app-icon-1280x720.png: the mark and wordmark group sits left of center, estimated 175 px left margin against 348 px right; center it. The tagline is small and may not read at home-row sizes.\n- appstore-icon-114.png: halo and face strokes are about 2 px by estimate and delicate at this size; a heavier small-size variant would hold up.\n\n## Not verified\n\n- Whether the details screen scrolls so the viewing plan card is reachable.\n- Font family and weights: glyphs look like Inter with distinct regular and semibold; nothing measured.\n- Contrast ratios are estimates from the brief's hex values (cream about 11.6:1, secondary 8.8:1, saffron 6.8:1 on teal), not pixel measurements.\n- That 2 holds, 8 seconds and about 1 minute come from the signed map, and that the synopsis is the confirmed one.\n- The resting look of the primary action when focus is elsewhere.\n- Screen-reader labels and Amazon's icon safe-zone rules; not among the inputs.\n- Parent area and onboarding, out of scope."
+  },
+  "resolution": {
+    "duplicate_copy": "Removed repeated visible strip caption; retained accessible schedule description and data-derived summary. Removed repeated continuity sentence for the demo.",
+    "focus": "Added text underline on focused controls, separate from six-unit outline and fill, without geometry changes.",
+    "scroll": "Native D-pad verified full viewing plan and bottom Back action reachable.",
+    "duration": "Corrected earlier: twenty-second title no longer rounds to about one minute.",
+    "art": "Latest native crop already fills its frame; demo qualifier is visible on the shelf.",
+    "brand_preferences": "Kept approved asymmetric tile composition and inspected actual 114px icon. No claim that reviewer estimated contrast is a measured result."
+  }
+}

@@ -1,0 +1,110 @@
+{
+ "name": "a03-1080-pause-repeat",
+ "seconds": 80,
+ "keys": [
+  {
+   "t": 1.28,
+   "key": "KEY_ENTER"
+  },
+  {
+   "t": 8.29,
+   "key": "wait6"
+  },
+  {
+   "t": 9.23,
+   "key": "KEY_ENTER"
+  },
+  {
+   "t": 20.25,
+   "key": "wait10"
+  },
+  {
+   "t": 21.51,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 36.52,
+   "key": "wait14"
+  },
+  {
+   "t": 37.74,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 46.75,
+   "key": "wait8"
+  },
+  {
+   "t": 47.73,
+   "key": "KEY_PLAYPAUSE"
+  },
+  {
+   "t": 62.74,
+   "key": "wait14"
+  },
+  {
+   "t": 64.05,
+   "key": "KEY_BACK"
+  },
+  {
+   "t": 71.06,
+   "key": "wait6"
+  }
+ ],
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 1.0,
+   "text": "!"
+  },
+  {
+   "start": 1.0,
+   "end": 4.52,
+   "text": " Muey Falls."
+  },
+  {
+   "start": 4.52,
+   "end": 11.08,
+   "text": " Resume at 142 button."
+  },
+  {
+   "start": 11.08,
+   "end": 12.84,
+   "text": " Back button."
+  },
+  {
+   "start": 12.84,
+   "end": 22.0,
+   "text": " Current progress is 34%."
+  },
+  {
+   "start": 22.0,
+   "end": 24.0,
+   "text": " You"
+  },
+  {
+   "start": 52.0,
+   "end": 59.0,
+   "text": " Try again, play back slow."
+  },
+  {
+   "start": 59.0,
+   "end": 67.0,
+   "text": " Ocean."
+  },
+  {
+   "start": 67.0,
+   "end": 68.0,
+   "text": " Forest."
+  },
+  {
+   "start": 68.0,
+   "end": 71.0,
+   "text": " Watch Quay Falls, Button."
+  }
+ ],
+ "text": "! Muey Falls. Resume at 142 button. Back button. Current progress is 34%. You Try again, play back slow. Ocean. Forest. Watch Quay Falls, Button.",
+ "model": "mlx-community/whisper-base.en-mlx",
+ "recording_sha256": "ab36dc2b2a796840e87364eb1ae3d6d335c3b17913580d6472b5894f12f014fe",
+ "note": "recording kept private, not exported"
+}

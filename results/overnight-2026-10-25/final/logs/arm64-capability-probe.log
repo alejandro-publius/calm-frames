@@ -1,0 +1,22 @@
+Unable to find image 'python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2' locally
+docker.io/library/python@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2: Pulling from library/python
+0f5d7465a5bb: Pulling fs layer
+ae5ebbeec710: Pulling fs layer
+bbe9f07ace1b: Pulling fs layer
+36f9fc6fa467: Pulling fs layer
+36f9fc6fa467: Waiting
+ae5ebbeec710: Verifying Checksum
+ae5ebbeec710: Download complete
+bbe9f07ace1b: Verifying Checksum
+bbe9f07ace1b: Download complete
+36f9fc6fa467: Verifying Checksum
+36f9fc6fa467: Download complete
+0f5d7465a5bb: Verifying Checksum
+0f5d7465a5bb: Download complete
+0f5d7465a5bb: Pull complete
+ae5ebbeec710: Pull complete
+bbe9f07ace1b: Pull complete
+36f9fc6fa467: Pull complete
+Digest: sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
+Status: Downloaded newer image for python@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
+exec /usr/local/bin/python: exec format error

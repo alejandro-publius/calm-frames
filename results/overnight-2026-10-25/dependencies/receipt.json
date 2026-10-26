@@ -1,0 +1,273 @@
+{
+  "item": 12,
+  "status": "Compatible leaf remediation verified locally; overall Audit and native acceptance remain open.",
+  "base": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "checked_code_source": "7c35dadf924c32275a6898f6cf32e965191bd8cc",
+  "branch": "codex/overnight-deps-2026-10-25",
+  "code_commits_in_order": [
+    "4e97359fcb587fb392ec334d0d773f6556cfe316",
+    "cd6245ec3784689c81dc3312748db3376b3a6735",
+    "2206e129f3b9f7f58ebbf776c49a9bed5bb147f9",
+    "7c35dadf924c32275a6898f6cf32e965191bd8cc"
+  ],
+  "runtime": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "checks": [
+    {
+      "name": "install-final",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 21.12
+    },
+    {
+      "name": "compatibility",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_shell_quote.test.mjs",
+        "app/tools/build_dependency_compat.test.mjs",
+        "app/tools/legacy_logkitty.test.mjs",
+        "app/tools/body_parser_dependency.test.mjs",
+        "app/tools/legacy_spawn_dependency.test.mjs",
+        "app/tools/legacy_tmp_dependency.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.99
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.53
+    },
+    {
+      "name": "audit-after",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "audit",
+        "--package-lock-only",
+        "--json"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 1.6
+    },
+    {
+      "name": "sbom-write",
+      "command": [
+        "python3",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.53
+    },
+    {
+      "name": "sbom-check",
+      "command": [
+        "python3",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "<evidence-output>/sbom-reproduction"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.7
+    }
+  ],
+  "compatibility_tests": {
+    "passed": 42,
+    "failed": 0,
+    "behavior": "Actual CLI compressed requests and follow-up liveness; legacy execa/FBJS arguments, streams and error shapes; bounded Windows escaping function; temporary path containment and actual editor file round trip. No editor/device launched."
+  },
+  "negative_controls": {
+    "body_parser_2_3_0": "Actual CLI child crashed with unhandled Z_DATA_ERROR after trailing compressed bytes; version and liveness assertions failed.",
+    "cross_spawn_5_1_0": "The real Windows argument-escape function exceeded the bounded child deadline. Both old consumers were observed separately across the before and partial-override logs.",
+    "tmp_0_0_33": "Symlink, prefix and postfix path-only requests were accepted outside the configured base; no escaped file was written.",
+    "tmp_0_2_6": "Array/duck-typed prefix and postfix bypassed string containment; regression failed before selecting 0.2.7."
+  },
+  "audit_delta": {
+    "before": {
+      "info": 0,
+      "low": 2,
+      "moderate": 20,
+      "high": 23,
+      "critical": 0,
+      "total": 45
+    },
+    "after": {
+      "info": 0,
+      "low": 0,
+      "moderate": 21,
+      "high": 17,
+      "critical": 0,
+      "total": 38
+    },
+    "unique_advisories_before": 21,
+    "unique_advisories_after": 17,
+    "removed_advisories": [
+      "GHSA-27r3-jxmh-p828",
+      "GHSA-3xgq-45jj-v275",
+      "GHSA-52f5-9888-hmc6",
+      "GHSA-ph9p-34f9-6g65"
+    ],
+    "added_advisories": [],
+    "intermediate_rejected_advisory": "GHSA-7c78-jf6q-g5cm",
+    "note": "Matching npm 10.9.8 lockfile scans. Package totals include propagated findings. The intermediate tmp 0.2.6 scan is retained and is not the accepted final lock."
+  },
+  "audit_acceptance": "Not passed. Expired groups remain expired. Python audit/full app suite/hosted and native checks are outside this lane.",
+  "sbom": {
+    "reproduced": true,
+    "known_peer_tree_warnings_retained": true,
+    "warnings": [
+      "npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react",
+      "npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin",
+      "npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser",
+      "npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier",
+      "npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch",
+      "npm error invalid: react@19.2.0 ./app/node_modules/react",
+      "npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0"
+    ]
+  },
+  "preserved": {
+    "unchanged_paths": [
+      "app/src",
+      "app/test",
+      "pipeline",
+      "app/manifest.toml",
+      "scripts/audit_exceptions.toml",
+      "docs/judging-package",
+      "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md"
+    ],
+    "amazon_locked_nodes_unchanged": true,
+    "submitted_fallback": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "no_push_merge_publication": true
+  },
+  "input_files": {
+    "app/package.json": {
+      "bytes": 12747,
+      "sha256": "9a5d1c34f5719b5eedf1bdcdbc1314d56ed00c43a9301b3e75d717599f922b2a"
+    },
+    "app/package-lock.json": {
+      "bytes": 797352,
+      "sha256": "85bbec3c9d9546639d0018e0ad2809400ae53f13af752d20ae599c775a9770e0"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 16353,
+      "sha256": "492c13541b4d1024f16deb616fb1bccc5fd2c3bb3d9ceeef341834ccb910b5af"
+    },
+    "app/tools/body_parser_dependency.test.mjs": {
+      "bytes": 6765,
+      "sha256": "9b22e6214b2d75617d6c0f97703408fa7eaf28118ec35c0b400ff0caf10324dd"
+    },
+    "app/tools/legacy_spawn_dependency.test.mjs": {
+      "bytes": 4944,
+      "sha256": "0ecd6b79acfb0cbdd727cd3f65ca1ffdc326a5f3250a519986d2c6111e0713f5"
+    },
+    "app/tools/legacy_tmp_dependency.test.mjs": {
+      "bytes": 3274,
+      "sha256": "0f20f47f42920b506b6e868af298459e0442df3747711498575da83a85259666"
+    },
+    "scripts/audit_exceptions.toml": {
+      "bytes": 16736,
+      "sha256": "0f1c478bc96af9834bade4c4d7832f8c19c684087adc12f024914309ab941a80"
+    },
+    "app/manifest.toml": {
+      "bytes": 11860,
+      "sha256": "7e651ea0dd4f8ddcea842bae7616e7d9a49a8f59298e52ba888cf78ce9650c24"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2223977,
+      "sha256": "f5608468b628d73986346c94276cc7d24188eb6c74f3404cc32e576ca94bd46a"
+    },
+    "docs/SBOM.ingest.cdx.json": {
+      "bytes": 67870,
+      "sha256": "23b797bd26eaad76db8e2de18e162bb0c95db305d9560efd409e70ac26a43980"
+    },
+    "docs/SBOM.cdk.cdx.json": {
+      "bytes": 6111,
+      "sha256": "50f9dfc198c9add372faf08d494813e37ced8e8ed48caf7d41642ef59eb76ebf"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "598f7eb4dfe303701dfa3510f62bc86377c05c57a14ed8bda1563afbb69336fc"
+    }
+  },
+  "logs": {
+    "body-parser-before": {
+      "raw_sha256": "90af35ea053cea496365cd069d1a14820796ac74b2462a1aefa6983edf73eb03",
+      "normalized_sha256": "95a94f129e67bdc2e35d726513f508ad2e81c30c911e755ed0de325eff70b2fa"
+    },
+    "body-parser-after": {
+      "raw_sha256": "99d358e2b771aa5500388e7da217a5fb7c9f5618f8e46b46e7095a85489da71e",
+      "normalized_sha256": "99d358e2b771aa5500388e7da217a5fb7c9f5618f8e46b46e7095a85489da71e"
+    },
+    "spawn-before": {
+      "raw_sha256": "5f66c9f189815d270ba6a155fdde9443fee05b411ed6461fc515d76c954a35f7",
+      "normalized_sha256": "9518ded460c3fcda52fe58a0f70ee3e1ba8b46de432bd73f5d194502daa2f249"
+    },
+    "spawn-after": {
+      "raw_sha256": "f9bc9129a2ee74f9ae6ab894660dd3d6969979502fe245f0474801024f24074e",
+      "normalized_sha256": "cb9e8723c9156183cc129c112872c5868c1dd353aa6234304629fc28a14b323e"
+    },
+    "spawn-scoped-after": {
+      "raw_sha256": "3f23d98b3b6a1e00cd358d0040a105fceb8b4cbaf4cf2e3a410b68a8a5dab193",
+      "normalized_sha256": "3f23d98b3b6a1e00cd358d0040a105fceb8b4cbaf4cf2e3a410b68a8a5dab193"
+    },
+    "tmp-before": {
+      "raw_sha256": "cb5a66598bd597248eff4659b4654dececa33111f709bc7268fdf47a0745ff36",
+      "normalized_sha256": "b0f356ce404dcc5c77999bef97ace6fc3c4cc90426227532c3d516025766fc4d"
+    },
+    "tmp-after": {
+      "raw_sha256": "535405fabd611da07e078457393592321b1c61863c47e417836ee5cb88366496",
+      "normalized_sha256": "535405fabd611da07e078457393592321b1c61863c47e417836ee5cb88366496"
+    },
+    "tmp-type-before": {
+      "raw_sha256": "b4a1a9c8c02d8e1bb2b7838430dd7d41cffb8915610e539214cc8859e058acf5",
+      "normalized_sha256": "0e419f950db4ec876f47c3e85b05a9bcac37fc26a574630f119c039bdceba4ff"
+    },
+    "install-final": {
+      "raw_sha256": "a75562c42ccb8a00287c41b0dbb348df5d292b4c88e8f4c122f21d436ad6d7d6",
+      "normalized_sha256": "a75562c42ccb8a00287c41b0dbb348df5d292b4c88e8f4c122f21d436ad6d7d6"
+    },
+    "compatibility": {
+      "raw_sha256": "ae5a429c32b19ebd5fe2d065e3b194b0cee97a715c6ec96b706ac071a0fec111",
+      "normalized_sha256": "ae5a429c32b19ebd5fe2d065e3b194b0cee97a715c6ec96b706ac071a0fec111"
+    },
+    "typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    },
+    "sbom-write": {
+      "raw_sha256": "d2260ec1a6f86fbd765a869b51fba1e61e8d26bec172694f4cd4daab87ec2c08",
+      "normalized_sha256": "2a621e1c25ecc2a3d39bab83a0d69ecccad93e31217ef2144c7075b61fd41ff7"
+    },
+    "sbom-check": {
+      "raw_sha256": "f4ad796629ed047a8bd7fd61285a3d3d19ab8c4bfa18a848da34c5566580a06a",
+      "normalized_sha256": "6b01eeb4bcb41ade419eed193358120cc8782d5632de1d29e0c661ab6541a166"
+    }
+  },
+  "log_normalization": "Checkout/tool/cache prefixes, ANSI color and trailing whitespace normalized; diagnostics retained.",
+  "limits": [
+    "The Windows escaping function was tested on Linux; no Windows process launch was certified.",
+    "Native package inventory and household/device/human acceptance were not performed.",
+    "The old editor uses default temporary-name options; these upstream containment fixes do not certify all editor filesystem race behavior.",
+    "Remaining peer warnings are recorded, not waived; SBOM reproduction is not a clean dependency audit."
+  ]
+}

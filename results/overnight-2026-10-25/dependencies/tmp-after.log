@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: only the unchanged legacy editor receives the fixed temporary-file dependency
+ok 1 - only the unchanged legacy editor receives the fixed temporary-file dependency
+  ---
+  duration_ms: 1.713439
+  type: 'test'
+  ...
+# Subtest: temporary names reject a symlink outside their configured base
+ok 2 - temporary names reject a symlink outside their configured base
+  ---
+  duration_ms: 2.09368
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in prefix
+ok 3 - temporary names reject traversal in prefix
+  ---
+  duration_ms: 0.557014
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in postfix
+ok 4 - temporary names reject traversal in postfix
+  ---
+  duration_ms: 0.688664
+  type: 'test'
+  ...
+# Subtest: temporary-file mode, cleanup and the actual editor text round trip are retained
+ok 5 - temporary-file mode, cleanup and the actual editor text round trip are retained
+  ---
+  duration_ms: 14.905658
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 82.356965

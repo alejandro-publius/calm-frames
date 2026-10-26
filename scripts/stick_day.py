@@ -850,4 +850,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print()
         print("stopped by hand. Nothing was left half installed: rerun when ready.")
-        raise SystemExit(130)
+        raise SystemExit(130) from None

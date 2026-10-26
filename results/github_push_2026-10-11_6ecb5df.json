@@ -1,0 +1,42 @@
+{
+  "statement": "The hosted runs on the Oct 11 push 6ecb5df, the first head on which CI's Python job tests flashmap and the pipeline as well as eval, with source coverage, ruff, mypy, commit-pinned actions and hooks, read only tokens and every job on ubuntu-24.04. Read through the GitHub Actions API on Oct 11 after both runs finished.",
+  "commit": "6ecb5df60c10318cdb287b57dc0878fd64dbb4c2",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "pull_request": 1,
+  "read_utc": "2026-10-11T20:16:00Z",
+  "runner": "ubuntu-24.04",
+  "runs": {
+    "audit": {
+      "id": 38169193629,
+      "conclusion": "success",
+      "jobs_green": 4,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38169193629"
+    },
+    "ci": {
+      "id": 38169193623,
+      "conclusion": "success",
+      "jobs_green": 6,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38169193623",
+      "python_job": {
+        "lanes": ["flashmap", "pipeline", "eval"],
+        "passed": 1633,
+        "skipped": 96,
+        "deselected": 2,
+        "failed": 0,
+        "source_coverage_percent": 91.22,
+        "coverage_floor_percent": 90,
+        "skipped_why": "tests that need the gitignored media files or a local tool the runner does not have; on the same commit before the lane fix, eval alone had 90 skips"
+      },
+      "before_the_lane_fix": "on ca64dcc the same job reported 'testing: eval' and 850 passed, 90 skipped: flashmap and pipeline were not run"
+    }
+  },
+  "note": "The pushes between 9bb14c6 and 6ecb5df were checked one by one; those whose CI run was cancelled by the next push under cancel-in-progress are listed by the Actions page and not here.",
+  "published": {
+    "audit_conclusion": "success",
+    "ci_conclusion": "success",
+    "audit_jobs_green": 4,
+    "ci_jobs_green": 6,
+    "python_tests_passed_on_the_runner": 1633,
+    "python_tests_skipped_on_the_runner": 96
+  }
+}

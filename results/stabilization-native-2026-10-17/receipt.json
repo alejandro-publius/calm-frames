@@ -1,0 +1,88 @@
+{
+  "recorded_utc": "2026-10-17T04:43:52.296824+00:00",
+  "source_commit": "c2b56d258979b9d7e968944c0780dc7fb1721f9f",
+  "branch": "claude/tv-experience-2026-10-16",
+  "package": {
+    "path": "build/release/stabilization-native-2026-10-17/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "62f4307ce172edaa71510b478e41e6129938e27ca92b4e7416213e55e0d001cf"
+  },
+  "build": "passed",
+  "strict_prepared_media_gate": "passed: 4 required reports present; unchanged approved Acadia bundle",
+  "app_inputs_checked": 764,
+  "app_input_mismatches": [],
+  "this_worker_install_commands": 1,
+  "install_command_result": "success",
+  "this_worker_launch_commands": 1,
+  "launch_command_result": "Sending: pkg://io.github.alejandropublius.calmframes.main",
+  "running_state_observed": true,
+  "native_functional_verification": "blocked before remote navigation: concurrent package replacement and missing route breadcrumbs",
+  "device_transferred_package_sha256": "081369b932daf3786b54ad46aaa18e2a5dadcb74ef4865914d9c868a09f9cef1",
+  "device_package_hash_matches_reviewed_build": false,
+  "device_events_utc": {
+    "our_install_complete": "2026-10-17T04:40:06.851156Z",
+    "additional_install_complete": "2026-10-17T04:41:16.395714Z",
+    "additional_launch": "2026-10-17T04:41:17.337038Z",
+    "our_explicit_launch": "2026-10-17T04:41:52.808545Z"
+  },
+  "installed_runtime_identity": "unverified after additional installation; transferred-file hash alone does not identify every installed file",
+  "remote_navigation_keys_sent": 0,
+  "calm_trace_lines_observed": 0,
+  "calm_timing_lines_observed": 0,
+  "unverified": [
+    "Home readiness and focus",
+    "Home -> Details -> Back",
+    "Watch -> first visible picture",
+    "both Acadia covers and audible playback",
+    "Pause/resume during cover",
+    "stable visible Skip focus and guarded Skip",
+    "player Back and teardown",
+    "Parents -> cancel focus",
+    "native loading speed"
+  ],
+  "constraints": {
+    "screenshots": false,
+    "screen_or_audio_recording": false,
+    "computer_use": false,
+    "push_or_publication": false,
+    "detector_media_trust_changes": false
+  },
+  "left_open": true,
+  "own_log_worker_stopped": true,
+  "source_tests_prior_saved_run": {
+    "suites_passed": 144,
+    "suites_skipped": 1,
+    "tests_passed": 1424,
+    "tests_skipped": 4,
+    "snapshots_passed": 57,
+    "rerun_this_native_checkpoint": false
+  },
+  "limitations": [
+    "A running process is not Home readiness or visible playback.",
+    "picture-shown is the readiness gate, not proof of the first displayed frame.",
+    "Absent waiting-off logs do not establish a stalled native clock.",
+    "The additional installer and package source were not identified."
+  ],
+  "sdk_install_path_review": "SDK 0.24.9914 InstallAppWithBuildType pushes the supplied package once and invokes vpm install once; no repack or launch in that path.",
+  "followup_investigation": {
+    "recorded_utc": "2026-10-17T04:47:05.637995+00:00",
+    "device_package_hash_stable_across_three_reads": true,
+    "matching_local_package": "build/release/stabilization-2026-10-17/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "second_build_log_source": "c2b56d258979b9d7e968944c0780dc7fb1721f9f",
+    "second_build_exit": 0,
+    "second_driver_status": "timed out waiting for Home ready (Watch focused); no keys sent",
+    "active_installer_found": false,
+    "other_sdk_collector": {
+      "root_pid": 11597,
+      "node_pid": 11602,
+      "cwd": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16",
+      "output": ".logs/checkpoint-device.log"
+    },
+    "other_session_identity": "not proved; an active Claude process exists, but no parent linkage attributes the orphaned checkpoint collector to it",
+    "current_app_inputs_still_match_reviewed_receipt": 764,
+    "second_build_per_input_receipt": "not present; app/build receipt names our original 62f4307c package while that output path was overwritten with 081369b9",
+    "exclusive_use_established": false,
+    "recovery_install_performed": false,
+    "own_collector_cleanup": "Initial SIGTERM left shell descendants. Follow-up terminated only verified own process group 5876; process recheck confirmed every member exited.",
+    "minimum_owner_action": "Pause the separate checkpoint session that writes .logs/checkpoint-device.log and confirm no other session will build/install/launch/send keys during the recovery check. Keep simulator open."
+  }
+}

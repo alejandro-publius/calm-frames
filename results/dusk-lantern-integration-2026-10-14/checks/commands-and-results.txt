@@ -1,0 +1,30 @@
+Working tree: calm-frames-dusk-final; source 6a6212c7fc3b0327a1491554e7a9a7f1067e2066.
+Reused Node 22.23.2, JDK 21, Vega toolchain, APFS-cloned local dependencies and generated Shaka/polyfills; no installation of tools or dependencies.
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern='(duskLantern|homeIntroduction|shelf|screens|returnFocus|appStackPlayerFallback|playerRouteFallback|firstRun|householdRestart|benignStory|packagedLibrary|wholeFlowDesign)\.test'
+187 passed, 12 suites. Focused checks; not a full-suite claim.
+npm --prefix app run typecheck
+Passed.
+Targeted eslint on Home, Details, PlayerOpening, route fallback/stack, WithSuspense, KidModeScreen and their changed tests
+Passed, no output.
+/Users/alexvintera/calm-frames/.venv/bin/python -m pytest eval/tests/test_design_page.py -q
+21 passed.
+python3 eval/preview/export_composition.py
+Two actual-component export fixtures passed, 1080p and 720p.
+/tmp/calm-home-preview-venv/bin/python: run committed render_dusk_lantern.py with OUT redirected to results/dusk-lantern-integration-2026-10-14/static
+Safe-area, lighthouse-clearance and background contrast assertions passed; only static browser evidence.
+source /Users/alexvintera/vega/env
+PATH begins with local .logs/integration/build-bin watchman shim and existing Node 22 installation; JAVA_HOME=/opt/homebrew/opt/openjdk@21
+RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag dusk-lantern-integration-2026-10-14
+Passed, package identity/runtime and exact prepared-library bytes/reports checked. No install, launch, publication or native verification.
+
+Integrated f698049 and 8ef8a0e as d6a032d and 437f5cf on the isolated candidate.
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern=hookMirror.test
+5 passed.
+npm --prefix hook run test:package
+10 passed.
+npm_config_cache="$PWD/.logs/hook-npm-cache" npm --prefix hook run check:package
+Passed: 29 files, 90 exports; offline consumer install, actual existing peer types, TypeScript 5.8.3, Metro resolution and React Native transform. Initial attempt could not write the default npm cache; the retry used an isolated writable cache. No ownership/permission changes or registry dependency downloads.
+python3 eval/style_check.py
+Passed over the tracked repository.
+RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --skip-build --receipt app/build/aarch64-debug/release-build-receipt.json --arch aarch64 --build-type Debug --tag dusk-lantern-final-2026-10-14
+Passed at source 437f5cf7fb5c2e10dfc5043f170550a122bbd1ce. Complete app input inventory and package hash match the fresh build. No app files changed in either repair commit. Native validation remains false.

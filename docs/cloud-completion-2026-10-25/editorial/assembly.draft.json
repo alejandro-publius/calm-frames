@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "duration_seconds": 170,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "source_commit": null,
+  "narration_script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "narration_cues": [
+    {
+      "id": "n01",
+      "start": 0,
+      "end": 12,
+      "text": "Some evenings, Rowan wants one quiet scene, and the choice to stay with it."
+    },
+    {
+      "id": "n02",
+      "start": 12,
+      "end": 22,
+      "text": "Calm Frames is a native Fire TV app for deliberate ambient viewing."
+    },
+    {
+      "id": "n03",
+      "start": 22,
+      "end": 34,
+      "text": "Choose McWay Falls, check the scene details, then choose Watch. Nothing starts just because you browse."
+    },
+    {
+      "id": "n04",
+      "start": 34,
+      "end": 45,
+      "text": "Now, a real, uninterrupted moment from the app."
+    },
+    {
+      "id": "n05",
+      "start": 115,
+      "end": 125,
+      "text": "Leaving should not erase a place. Returning should still be a choice."
+    },
+    {
+      "id": "n06",
+      "start": 125,
+      "end": 145,
+      "text": "Return to the same profile and edition to choose Resume or Start over. Saved progress does not restore weaker protection settings."
+    },
+    {
+      "id": "n07",
+      "start": 145,
+      "end": 155,
+      "text": "A shared screen can still hold a personal place. Each profile keeps its own progress."
+    },
+    {
+      "id": "n08",
+      "start": 155,
+      "end": 164,
+      "text": "Playback Proof explains the prepared file. It cannot authorize playback or remove a protective cover."
+    }
+  ],
+  "approvals": {
+    "script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+    "authorized_voice_id": null,
+    "human_video_acceptance": "pending",
+    "voice_selection_authorization": "Owner authorized choosing a calm built-in voice; exact voice not selected yet",
+    "budget_authorization": "Owner explicitly authorized unlimited budget; restrict planned job to eight cues with no automatic retries"
+  },
+  "assets": {
+    "manga_01": {
+      "kind": "illustration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": null,
+      "production_capture": null,
+      "raw_take": null
+    },
+    "n01": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "native_home": {
+      "kind": "native_video",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": "app_window_and_app_audio_only",
+      "production_capture": false,
+      "raw_take": true,
+      "package_sha256": null,
+      "capture_receipt_path": null,
+      "capture_receipt_sha256": null
+    },
+    "n02": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "native_details": {
+      "kind": "native_video",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": "app_window_and_app_audio_only",
+      "production_capture": false,
+      "raw_take": true,
+      "package_sha256": null,
+      "capture_receipt_path": null,
+      "capture_receipt_sha256": null
+    },
+    "n03": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "manga_02": {
+      "kind": "illustration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": null,
+      "production_capture": null,
+      "raw_take": null
+    },
+    "n04": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "native_ambient": {
+      "kind": "native_video",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": "app_window_and_app_audio_only",
+      "production_capture": false,
+      "raw_take": true,
+      "package_sha256": null,
+      "capture_receipt_path": null,
+      "capture_receipt_sha256": null
+    },
+    "manga_03": {
+      "kind": "illustration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": null,
+      "production_capture": null,
+      "raw_take": null
+    },
+    "n05": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "native_return": {
+      "kind": "native_video",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": "app_window_and_app_audio_only",
+      "production_capture": false,
+      "raw_take": true,
+      "package_sha256": null,
+      "capture_receipt_path": null,
+      "capture_receipt_sha256": null
+    },
+    "n06": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "manga_04": {
+      "kind": "illustration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": null,
+      "production_capture": null,
+      "raw_take": null
+    },
+    "n07": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "native_proof": {
+      "kind": "native_video",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": "app_window_and_app_audio_only",
+      "production_capture": false,
+      "raw_take": true,
+      "package_sha256": null,
+      "capture_receipt_path": null,
+      "capture_receipt_sha256": null
+    },
+    "n08": {
+      "kind": "narration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "authorized_voice_id": null
+    },
+    "manga_05": {
+      "kind": "illustration",
+      "path": null,
+      "sha256": null,
+      "provenance_reviewed": false,
+      "source_commit": null,
+      "capture_scope": null,
+      "production_capture": null,
+      "raw_take": null
+    }
+  },
+  "segments": [
+    {
+      "asset": "manga_01",
+      "start": 0,
+      "duration": 12,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_home",
+      "start": 12,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_details",
+      "start": 22,
+      "duration": 12,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_02",
+      "start": 34,
+      "duration": 11,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_ambient",
+      "start": 45,
+      "duration": 70,
+      "source_start": 0,
+      "native_audio_gain": 1.0
+    },
+    {
+      "asset": "manga_03",
+      "start": 115,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_return",
+      "start": 125,
+      "duration": 20,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_04",
+      "start": 145,
+      "duration": 10,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "native_proof",
+      "start": 155,
+      "duration": 9,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    },
+    {
+      "asset": "manga_05",
+      "start": 164,
+      "duration": 6,
+      "source_start": 0,
+      "native_audio_gain": 0.35
+    }
+  ],
+  "package_sha256": null,
+  "production_stage": "Unfilled assembly. Product/native acceptance and real production inputs remain pending.",
+  "artifact_role": "assembly_draft_missing_production_inputs",
+  "candidate_source_commit": "fc83982220bf1b87774b75377e3b779043550cea"
+}

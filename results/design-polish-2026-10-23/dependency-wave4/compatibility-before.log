@@ -1,0 +1,192 @@
+TAP version 13
+# Subtest: the legacy CLI resolves the fixed logger without upgrading the CLI
+not ok 1 - the legacy CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 4.690801
+  type: 'test'
+  location: './app/tools/legacy_logkitty.test.mjs:37:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '0.6.1' !== '0.7.1'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '0.7.1'
+  actual: '0.6.1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_logkitty.test.mjs:39:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+not ok 2 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 4.768955
+  type: 'test'
+  location: './app/tools/legacy_logkitty.test.mjs:46:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+          args: [
+    +       '/tmp/fixture SDK; literal/platform-tools/adb logcat -c'
+    -       '/tmp/fixture SDK; literal/platform-tools/adb',
+    -       [
+    -         'logcat',
+    -         '-c'
+    -       ]
+          ],
+    +     name: 'execSync'
+    -     name: 'execFileSync'
+        },
+        {
+          args: [
+            '/tmp/fixture SDK; literal/platform-tools/adb',
+            [
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      name: 'execFileSync'
+      args:
+        0: '/tmp/fixture SDK; literal/platform-tools/adb'
+        1:
+          0: 'logcat'
+          1: '-c'
+    1:
+      name: 'spawn'
+      args:
+        0: '/tmp/fixture SDK; literal/platform-tools/adb'
+        1:
+          0: 'logcat'
+          1: '-v'
+          2: 'time'
+          3: 'process'
+          4: 'tag'
+        2:
+          stdio: 'pipe'
+  actual:
+    0:
+      name: 'execSync'
+      args:
+        0: '/tmp/fixture SDK; literal/platform-tools/adb logcat -c'
+    1:
+      name: 'spawn'
+      args:
+        0: '/tmp/fixture SDK; literal/platform-tools/adb'
+        1:
+          0: 'logcat'
+          1: '-v'
+          2: 'time'
+          3: 'process'
+          4: 'tag'
+        2:
+          stdio: 'pipe'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_logkitty.test.mjs:50:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+not ok 3 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 1.902334
+  type: 'test'
+  location: './app/tools/legacy_logkitty.test.mjs:56:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+          args: [
+    +       "'/tmp/fixture SDK/platform-tools/adb' shell pidof -s io.example.fixture; literal"
+    -       '/tmp/fixture SDK/platform-tools/adb',
+    -       [
+    -         'shell',
+    -         'pidof',
+    -         '-s',
+    -         'io.example.fixture; literal'
+    -       ]
+          ],
+    +     name: 'execSync'
+    -     name: 'execFileSync'
+        }
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      name: 'execFileSync'
+      args:
+        0: '/tmp/fixture SDK/platform-tools/adb'
+        1:
+          0: 'shell'
+          1: 'pidof'
+          2: '-s'
+          3: 'io.example.fixture; literal'
+  actual:
+    0:
+      name: 'execSync'
+      args:
+        0: "'/tmp/fixture SDK/platform-tools/adb' shell pidof -s io.example.fixture; literal"
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_logkitty.test.mjs:61:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+not ok 4 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 1.671124
+  type: 'test'
+  location: './app/tools/legacy_logkitty.test.mjs:64:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_logkitty.test.mjs:67:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: the actual legacy CLI retains React Native tag filtering and formatted events
+ok 5 - the actual legacy CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 20.523492
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 100.851288

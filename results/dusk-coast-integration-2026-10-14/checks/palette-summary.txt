@@ -1,0 +1,5 @@
+Test Suites: 4 passed, 4 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        2.086 s, estimated 4 s
+Ran all test suites matching /duskPaletteExport|controlSurface.test/i.

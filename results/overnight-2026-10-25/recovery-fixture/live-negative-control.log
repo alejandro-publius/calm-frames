@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_stopped_process_group_never_accepts_a_live_child _____________
+
+    def test_stopped_process_group_never_accepts_a_live_child():
+        process = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(30)"],
+                                   start_new_session=True)
+        try:
+            assert process.poll() is None
+>           assert not _process_group_stopped(process.pid)
+E           AssertionError: assert not True
+E            +  where True = _process_group_stopped(473983)
+E            +    where 473983 = <Popen: returncode: None args: ['/workspace/calm-frames-overnight-2026-10-25...>.pid
+
+pipeline/tests/test_preparation_recovery.py:882: AssertionError
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_preparation_recovery.py::test_stopped_process_group_never_accepts_a_live_child
+1 failed in 0.31s

@@ -1,0 +1,32 @@
+{
+  "native": false,
+  "scope": "Local caregiver page using a generated steady-color fixture; no media playback.",
+  "views": [
+    {
+      "width": 1100,
+      "height": 1000,
+      "image": "desktop.png",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "image": "narrow.png",
+      "horizontal_overflow": false
+    }
+  ],
+  "keyboard_download": true,
+  "visible_focus": true,
+  "reduced_motion_requested": true,
+  "active_animations": 0,
+  "contrast": {
+    "body": 11.578122434410034,
+    "review_button": 12.003151521081532,
+    "focus_ring": 7.016908470688808
+  },
+  "connection_loss_and_recovery": true,
+  "downloadable_review_verified": true,
+  "permission_required": true,
+  "external_requests": [],
+  "page_errors": []
+}

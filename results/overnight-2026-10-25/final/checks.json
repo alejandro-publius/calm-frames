@@ -1,0 +1,334 @@
+[
+  {
+    "name": "final-locked-install",
+    "command": [
+      "npm",
+      "--prefix",
+      "app",
+      "ci",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 24.93,
+    "log": "logs/final-locked-install.log",
+    "raw_log_sha256": "dee0f828f4f2c5308c7da71d180ec460a9a1b32377501aba703169bf3b4252ee",
+    "sanitized_log_sha256": "dee0f828f4f2c5308c7da71d180ec460a9a1b32377501aba703169bf3b4252ee",
+    "status": "passed"
+  },
+  {
+    "name": "final-app-suite",
+    "command": [
+      "npm",
+      "--prefix",
+      "app",
+      "run",
+      "test",
+      "--",
+      "--ci",
+      "--runInBand",
+      "--colors=false"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 162.01,
+    "log": "logs/final-app-suite.log",
+    "raw_log_sha256": "82f13d1ad879fb0c0bf149c0ad9506eb4093727164b650f71005231f43f1fff5",
+    "sanitized_log_sha256": "24a4d945d993018a327c793da02e8fd4b0e981f582a2d5bc4f1c3d29ca22a3e8",
+    "status": "passed"
+  },
+  {
+    "name": "final-app-static",
+    "command": [
+      "bash",
+      "-c",
+      "npm --prefix app run typecheck && npm --prefix app run lint"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 24.97,
+    "log": "logs/final-app-static.log",
+    "raw_log_sha256": "d324012fbae32e7a7268c4d47676b0bd45523ab45e1cc6a29f74f8e1178989d8",
+    "sanitized_log_sha256": "2ba3223caf83914949c1d5f6fe7d535ae2202e84ec546fc190fc3ece8a19c916",
+    "status": "passed"
+  },
+  {
+    "name": "final-python-suite",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-m",
+      "not slow",
+      "flashmap",
+      "pipeline",
+      "eval",
+      "--cov",
+      "--cov-config=.coveragerc",
+      "--cov-report=term",
+      "--cov-report=json:<EVIDENCE>/final-python-coverage.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 976.19,
+    "log": "logs/final-python-suite.log",
+    "raw_log_sha256": "747b67531862f350d428c5367c7b4c913720a70d5e208b52f447b1fd81982010",
+    "sanitized_log_sha256": "3df918a0c4ae2ed87fff230b4226f24681c9b7b176892cfdf15ef8ad22a8de0b",
+    "status": "passed"
+  },
+  {
+    "name": "final-python-static",
+    "command": [
+      "make",
+      "lint-py",
+      "typecheck-py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 2.57,
+    "log": "logs/final-python-static.log",
+    "raw_log_sha256": "248679b61cf0f4eebc3d84f33a9f27863910b5ff1f4a74eba024b616587e5fd8",
+    "sanitized_log_sha256": "4b8942c3102691121b2283252221dc40229acc96154b6fd0353ccd233f4e3b3a",
+    "status": "passed"
+  },
+  {
+    "name": "final-aws-fixture",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "pipeline/tests/test_infra_ingest.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 13.43,
+    "log": "logs/final-aws-fixture.log",
+    "raw_log_sha256": "395da7f595447de163771475b0965d97dec62137acb8a415fe13c7266c6168c4",
+    "sanitized_log_sha256": "395da7f595447de163771475b0965d97dec62137acb8a415fe13c7266c6168c4",
+    "status": "passed"
+  },
+  {
+    "name": "final-node-gates",
+    "command": [
+      "bash",
+      "-c",
+      "cd app && node tools/check_prepared_library.mjs --require-reports && node tools/approved_baked_ambient.mjs --check && node tools/playback_proof.mjs --check && node --test tools/playback_proof.test.mjs tools/check_prepared_library.test.mjs tools/approved_prepared_libraries.test.mjs tools/check_native_inputs.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs tools/legacy_shell_quote.test.mjs tools/build_dependency_compat.test.mjs tools/legacy_logkitty.test.mjs tools/body_parser_dependency.test.mjs tools/legacy_spawn_dependency.test.mjs tools/legacy_tmp_dependency.test.mjs tools/legacy_fetch_dependency.test.mjs tools/legacy_locale_dependency.test.mjs"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 13.39,
+    "log": "logs/final-node-gates.log",
+    "raw_log_sha256": "99065ff19c7267750f28f5e9df5edc6c0ce15d3761e4d7aa215340670142a942",
+    "sanitized_log_sha256": "99065ff19c7267750f28f5e9df5edc6c0ce15d3761e4d7aa215340670142a942",
+    "status": "passed"
+  },
+  {
+    "name": "final-hook-package",
+    "command": [
+      "make",
+      "test-hook-package"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 12.11,
+    "log": "logs/final-hook-package.log",
+    "raw_log_sha256": "2578214455c7c12c0abc2d3177ae75b050eaad48290f1555a385830d1e2da190",
+    "sanitized_log_sha256": "3af1e007f13e2cc7b5e265752324d0b3dc1df3e8a62413aafcb9e6b98b1d1e44",
+    "status": "passed"
+  },
+  {
+    "name": "final-sbom-reproduction",
+    "command": [
+      "make",
+      "sbom-check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 18.94,
+    "log": "logs/final-sbom-reproduction.log",
+    "raw_log_sha256": "d9222e3be3e44eb0e498aa8e377aec5d57b7e12efcf7e8209479965ecd6c442e",
+    "sanitized_log_sha256": "fcfa878f8025d7b4aa1c62613a378e004a0a5e0f50808b1b8992ccbd48e35fb1",
+    "status": "passed"
+  },
+  {
+    "name": "final-static-pins",
+    "command": [
+      ".venv/bin/python",
+      "scripts/check_pins.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.09,
+    "log": "logs/final-static-pins.log",
+    "raw_log_sha256": "efab145c069f52e3b3ced24885c1e54c6c453f98f6b695d2e174f23b3edf7193",
+    "sanitized_log_sha256": "efab145c069f52e3b3ced24885c1e54c6c453f98f6b695d2e174f23b3edf7193",
+    "status": "passed"
+  },
+  {
+    "name": "final-build-context",
+    "command": [
+      ".venv/bin/python",
+      "scripts/build_context.py",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.08,
+    "log": "logs/final-build-context.log",
+    "raw_log_sha256": "e2ef7542f72cd9ec6aad0c1a94ecace8d426a90a0cac84c551d2c46cd65cebee",
+    "sanitized_log_sha256": "e2ef7542f72cd9ec6aad0c1a94ecace8d426a90a0cac84c551d2c46cd65cebee",
+    "status": "passed"
+  },
+  {
+    "name": "integrated-demo-preflight",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "docs/cloud-integration-2026-10-23/demo/test_render_preflight.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.61,
+    "log": "logs/integrated-demo-preflight.log",
+    "raw_log_sha256": "ede2cf39183e591c4ffa66f2cd38a0d47ff74539357e50a11c4a43adb4f4aacf",
+    "sanitized_log_sha256": "ede2cf39183e591c4ffa66f2cd38a0d47ff74539357e50a11c4a43adb4f4aacf",
+    "status": "passed"
+  },
+  {
+    "name": "final-generated-input-checks",
+    "command": [
+      "bash",
+      "-c",
+      "npm --prefix app run check:native-inputs && npm --prefix app run typecheck && npm --prefix app run lint"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 26.01,
+    "log": "logs/final-generated-input-checks.log",
+    "raw_log_sha256": "5c4687166be503e071e9d6922522afd6b4b188c90f4314769d64d51e92c6fd55",
+    "sanitized_log_sha256": "59066c1757dfc410ab9af7efa0ab6651d6baf2f48a886e529ca15d326221c204",
+    "status": "passed"
+  },
+  {
+    "name": "final-audit-policy",
+    "command": [
+      "make",
+      "audit-check",
+      "AUDIT_ARGS=--freeze <EVIDENCE>/python-freeze.txt"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 42.19,
+    "log": "logs/final-audit-policy.log",
+    "raw_log_sha256": "5b48104e305fb85f4f4b6e86cb9de609e209dbd814a9b017f8ea5989857daddd",
+    "sanitized_log_sha256": "5b48104e305fb85f4f4b6e86cb9de609e209dbd814a9b017f8ea5989857daddd",
+    "status": "blocked"
+  },
+  {
+    "name": "arm64-capability-probe",
+    "command": [
+      "timeout",
+      "60",
+      "env",
+      "-u",
+      "DOCKER_HOST",
+      "-u",
+      "DOCKER_CONTEXT",
+      "-u",
+      "DOCKER_TLS",
+      "-u",
+      "DOCKER_TLS_VERIFY",
+      "-u",
+      "DOCKER_CERT_PATH",
+      "docker",
+      "--host=unix:///var/run/docker.sock",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/arm64",
+      "python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2",
+      "python",
+      "--version"
+    ],
+    "exit_code": 255,
+    "elapsed_seconds": 9.42,
+    "log": "logs/arm64-capability-probe.log",
+    "raw_log_sha256": "4f9dfefead140876eefdcaa0d8f28254e65a5141857ca3b879949b8c13ac02d7",
+    "sanitized_log_sha256": "4f9dfefead140876eefdcaa0d8f28254e65a5141857ca3b879949b8c13ac02d7",
+    "status": "blocked"
+  },
+  {
+    "name": "final-documentation",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "eval/tests/test_doc_links.py",
+      "eval/tests/test_doc_line_links.py",
+      "eval/tests/test_readme_sync.py",
+      "eval/tests/test_style_check.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.28,
+    "log": "logs/final-documentation.log",
+    "raw_log_sha256": "1118f3cd90464a9ad4fb27685d1f6c1942aead556d702709d1ebe00e08d52bdf",
+    "sanitized_log_sha256": "1118f3cd90464a9ad4fb27685d1f6c1942aead556d702709d1ebe00e08d52bdf",
+    "status": "passed"
+  },
+  {
+    "name": "final-number-sync",
+    "command": [
+      ".venv/bin/python",
+      "eval/readme_sync.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.19,
+    "log": "logs/final-number-sync.log",
+    "raw_log_sha256": "c486429d8345c0367c9c960cd2319be4e3a040b6114c1cc3f53025f92a9bd481",
+    "sanitized_log_sha256": "c486429d8345c0367c9c960cd2319be4e3a040b6114c1cc3f53025f92a9bd481",
+    "status": "passed"
+  },
+  {
+    "name": "final-style",
+    "command": [
+      ".venv/bin/python",
+      "eval/style_check.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.94,
+    "log": "logs/final-style.log",
+    "raw_log_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+    "sanitized_log_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+    "status": "passed"
+  },
+  {
+    "name": "final-helper-lint",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "ruff",
+      "check",
+      "docs/overnight-2026-10-25/restore_generated_player.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.06,
+    "log": "logs/final-helper-lint.log",
+    "raw_log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "sanitized_log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "status": "passed"
+  },
+  {
+    "name": "final-staged-secrets",
+    "command": [
+      "<TOOLS>/gitleaks",
+      "protect",
+      "--staged",
+      "--redact",
+      "--no-banner",
+      "--report-format",
+      "json",
+      "--report-path",
+      "<EVIDENCE>/final-staged-secrets-report.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.64,
+    "log": "logs/final-staged-secrets.log",
+    "raw_log_sha256": "925fbd3745d3f76fab58359933c081de45e7e087ddde93d64de14cb0029ed319",
+    "sanitized_log_sha256": "925fbd3745d3f76fab58359933c081de45e7e087ddde93d64de14cb0029ed319",
+    "status": "passed"
+  }
+]

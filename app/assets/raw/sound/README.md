@@ -20,3 +20,33 @@ dark, not to startle one.
 is separate from the `VideoPlayer` the title plays through. That separation is
 read from the package's own README and typings, and nothing here has played a
 sound on the virtual device or on a stick.
+
+## Menu selection
+
+`menu-select.mp3` is an original Calm Frames interface sound, created on October
+10, 2026. It is generated entirely from sine waves by `generate_menu_select.py`;
+there are no recordings, samples, or external sound libraries. It is ours,
+dedicated to the public domain under CC0-1.0 like the chime, and needs no
+third-party attribution.
+
+Regenerate it from the repository root with:
+
+    python3 app/tools/sound/generate_menu_select.py
+
+The generator stays outside the packaged asset tree. It writes the same
+`app/assets/raw/sound/menu-select.mp3` path regardless of the working directory.
+
+The source is a short, softly attacked 560 Hz tone with a quiet octave partial.
+It confirms an accepted menu selection only when Selection sounds is enabled. It is
+distinct from the two-tone warning before a picture hold, and never replaces that
+warning. The native controller uses the installed SDK's sonification content and
+notification usage categories, then releases its audio player after each cue.
+
+The committed MP3 was encoded using ffmpeg 7.1.5 and libmp3lame. Its SHA-256 is
+`38e2663df732562de2876fe40d3fd64f2fc9aa3ac52d745b956a88e5af2c7ab0`.
+Encoder versions can change the resulting MP3 bytes.
+
+Menu sound is off by default. Unknown or active screen-reader state, app blur,
+backgrounding, and title playback keep it silent. Unit tests exercise the SDK
+calls and cancellation rules; audible volume, timing, and native audio focus
+still need a Vega Virtual Device check.

@@ -1,0 +1,9 @@
+[  0.00-  6.00] Flagged scenes are replaced with moving ocean from this video.
+[  6.00-  9.00] Original audio is kept when the video has sound.
+[  9.00- 15.00] Calm frames works only with prepared videos in this app, not other apps or live TV.
+[ 15.00- 18.00] Detection can miss flashing.
+[ 18.00- 21.00] This prototype has not been medically validated.
+[ 21.00- 28.00] Calm frames reduces exposure to flashing above published limits in the videos it plays not a medical device.
+[ 30.00- 41.00] Playback Proof and Details button
+[ 41.00- 50.00] back button
+[ 50.00- 55.00] playback proof and details button

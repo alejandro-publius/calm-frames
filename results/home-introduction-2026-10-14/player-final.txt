@@ -1,0 +1,20 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/playerOpening.test.tsx test/calmframes/playbackUi.test.tsx test/calmframes/seekbarFocusTransition.test.tsx
+
+ PASS  test/calmframes/playbackUi.test.tsx
+ PASS  test/calmframes/playerOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:574:15)
+
+ PASS  test/calmframes/seekbarFocusTransition.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       11 passed, 11 total
+Snapshots:   0 total
+Time:        1.035 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playerOpening.test.tsx|test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/seekbarFocusTransition.test.tsx/i.

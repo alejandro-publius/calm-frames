@@ -1,0 +1,21 @@
+{
+  "recorded_utc": "2026-10-25T07:28:54.709508+00:00",
+  "remote": "https://github.com/alejandro-publius/calm-frames",
+  "remote_branch": "codex/final-handoff-2026-10-25",
+  "expected_head": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "fetched_head": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "independent_ls_remote_head": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "working_branch": "codex/overnight-completion-2026-10-25",
+  "attached_handoff": {
+    "file": "START_HERE_CODEX.md",
+    "bytes": 9903,
+    "sha256": "c8fe094f23fd5bca7c29ab0eb582084e85cda8b24f1c68f7dc31765fe6641f14"
+  },
+  "candidate_code": "a672f57d333dc0e3fada51b3175ca1711d1f9397",
+  "app_hook_pipeline_scripts_identical_to_candidate": true,
+  "native_binary_received": false,
+  "native_evidence_zips_received": false,
+  "hosted_ci_started": false,
+  "overnight_push_authorized": false,
+  "no_push_text_in_attachment": "Historical, superseded by owner instruction and verified remote ref."
+}

@@ -1,5 +1,11 @@
 # Plan
 
+**Dated banner, Oct 11, 2026.** The phase table and the gate list below stop at
+Sep 19. The scope changed on Oct 9: a solo entry, the Vega Virtual Device only,
+physical sticks and camera timing out of the completion criteria, and the stack
+deployed once on Oct 9. The live lists are docs/COMPLETION_CHECKLIST.md and
+docs/STATUS.md section 2; what follows is kept as the plan it was.
+
 The full plan is docs/BUILD_PROMPT.md. This is the short version with where
 each phase actually stands, so a fresh session does not have to read the long
 one to know what to pick up. Live state is docs/STATUS.md and docs/GATES.md.

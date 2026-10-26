@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Native app gallery and current evidence | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/capture-history.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><blockquote>
+<p>Historical source excerpt copied from <code>docs/presentation/README.md</code> at <code>13551e4</code>. Local references now point to immutable source or bundled assets. Publication wording describes its original checkpoint, not current status.</p>
+</blockquote>
+<h1 id="native-app-gallery-and-current-evidence">Native app gallery and current evidence</h1>
+<p>These are existing Calm Frames app-only captures from the Vega Virtual Device on October 21, 2026. The source is the installed local ending-bounds fix, <code>60c3bbb701081c37dbd87a6b1f5b66d51a74b855</code>. They are not browser mockups or generated UI.</p>
+<table>
+<thead>
+<tr>
+<th>Home</th>
+<th>Title details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="../assets/home.png" alt="Coastal Home, McWay selected"></td>
+<td><img src="../assets/details.png" alt="McWay duration, behavior and Watch"></td>
+</tr>
+<tr>
+<td>Ocean and Forest remain visible; Watch is the primary action.</td>
+<td>The title states its duration and ending before playback starts.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Native playback</th>
+<th>Corrected final-frame hold</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="../assets/playback.png" alt="McWay Falls in native playback"></td>
+<td><img src="../assets/ending.png" alt="Same scene framing, held until Back"></td>
+</tr>
+<tr>
+<td>A frame from the actual native recording, not a separately substituted source frame.</td>
+<td>The final picture keeps its bounds; the message and Back button remain visible.</td>
+</tr>
+</tbody></table>
+<h2 id="what-the-images-establish">What the images establish</h2>
+<p>The images show the real native layout and selected states, including the corrected final-frame bounds. The earlier session also observed full-duration playback, pause/resume and Back. A still image cannot establish motion cadence, complete audio quality, precise protective-cover timing, or individual comfort. No physical-TV or full VoiceView acceptance is asserted.</p>
+<p>The capture system missed some static UI changes in its continuous recordings. The Details and ending images here are independent app-only screenshots taken after those states rendered. They are not presented as frames from one uninterrupted walkthrough. The playback image was extracted from an existing native recording before this presentation task; this task did not open, change or encode any MP4.</p>
+<p>The only image transformation is an exact rectangular crop: remove the simulator titlebar, right-hand remote and unused black area. There is no resizing, retouching, color adjustment, UI replacement or compositing. The original image hashes, crop rectangles and resulting hashes are in <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/capture-provenance.json">capture-provenance.json</a>. Pixel comparison against the original captures confirms every crop.</p>
+<h2 id="build-and-publication-status">Build and publication status</h2>
+<p>This table records the installed build and the pre-publication checkpoint. The ending fix is an ancestor of this presentation revision. The current remote branch head must be checked in GitHub or with <code>git ls-remote</code>; the historical remote value below is not a live status badge.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status at this presentation checkpoint</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Installed source</td>
+<td>Local commit <code>60c3bbb701081c37dbd87a6b1f5b66d51a74b855</code></td>
+</tr>
+<tr>
+<td>Remote candidate before this publication pass</td>
+<td><code>677e53935e140204c404ae80502361040b5e09bd</code> on private branch <code>claude/ocean-layout-fix-2026-10-19</code></td>
+</tr>
+<tr>
+<td>Current package</td>
+<td>aarch64 Debug, 132,557,605 bytes; identity/architecture and strict packaged-media validation passed</td>
+</tr>
+<tr>
+<td>Package SHA-256</td>
+<td><code>207898aa14d8659760348a716b825fabab83afd8e3b9431f9387202cc10e7163</code></td>
+</tr>
+<tr>
+<td>Ending-fix checks</td>
+<td>Two targeted suites, ten tests passed; TypeScript and focused lint passed</td>
+</tr>
+<tr>
+<td>Earlier full source baseline</td>
+<td>The <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/results/mcway-activation-2026-10-21/verification.json">McWay activation receipt</a> records the full-suite baseline and exact media verification. It predates the ending-bounds fix and contains historical installation status.</td>
+</tr>
+<tr>
+<td>Native observations</td>
+<td>Installed app, full scene duration, pause/resume, Back and corrected ending picture observed in the prior session</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td>Native capture contains app audio; final subjective audio and edited-demo acceptance remain open</td>
+</tr>
+<tr>
+<td>Public video</td>
+<td>No confirmed published URL; local cut is under separate review</td>
+</tr>
+<tr>
+<td>Devpost</td>
+<td>No confirmed submission receipt</td>
+</tr>
+<tr>
+<td>This presentation pass</td>
+<td>README/docs/assets only; prepared for publication to the existing private candidate branch</td>
+</tr>
+</tbody></table>
+<p>Copied local evidence (the TypeScript log has trailing blank lines removed): <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/evidence/ending-fix-package.json">package identity</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/evidence/ending-fix-tests.log">targeted tests</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/evidence/ending-fix-typecheck.log">TypeScript</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/evidence/ending-fix-lint.log">focused lint</a>. The empty focused-lint output is normal for a successful silent command; it is not a full lint-suite report.</p>
+<p>The source baseline and native checks were already completed before this documentation task. No test counts here are new measurements from this presentation pass. No green hosted CI status is implied for the local ending fix or the new presentation.</p>
+<h2 id="media-credits">Media credits</h2>
+<p>McWay Falls footage and extracted still: <strong>MoneySavingVideos</strong>, <em>♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset</em>.</p>
+<ul>
+<li>Source: <a href="https://commons.wikimedia.org/wiki/File:%E2%99%A5%E2%99%A5_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm">Wikimedia Commons description and provenance</a>.</li>
+<li>License: <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported</a>, rechecked on the source page for this presentation.</li>
+<li>Changes to the prepared edition: first five-minute excerpt, downsampled to 720p, H.264/AAC encoding, three-second fade of source audio at the end, extracted final-frame still.</li>
+<li>Changes to these native screenshots: crop to the app picture area only. The UI is part of the captured app. No creator endorsement implied.</li>
+</ul>
+<p>Other visible title art: <strong>NPS Video, Acadia National Park</strong>; <strong>NOAA Fisheries</strong>; <strong>NPS: G Litten</strong> for Prairie Creek and Redwood. Their source URLs and individual terms are preserved in <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/media/LICENSES.csv">media/LICENSES.csv</a> and <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/NOTICE">NOTICE</a>. No agency endorsement implied.</p>
+<p>The architecture illustration is original project documentation and follows the code license. Its layout, colors and fonts match the existing Calm Frames interface. The overall README organization follows the user&#39;s <a href="https://github.com/alejandro-publius/tideline">Tideline reference</a>, without copying Tideline screenshots or product claims.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/capture-history.md">docs/judging-package/evidence/capture-history.md</a></p><p>Source SHA-256: <code>5df834932f520b7acc1558d08c3c6164127005da5034b14a7eca997ec487aac1</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

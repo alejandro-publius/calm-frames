@@ -42,7 +42,7 @@ def reports(root: Path) -> dict[Path, dict[str, list[str]]]:
         try:
             doc = json.loads(path.read_text())
         except (OSError, json.JSONDecodeError) as exc:
-            raise SystemExit(f"{path}: cannot be read as JSON: {exc}")
+            raise SystemExit(f"{path}: cannot be read as JSON: {exc}") from exc
         if not isinstance(doc, dict):
             continue
         version = doc.get("tool_version")

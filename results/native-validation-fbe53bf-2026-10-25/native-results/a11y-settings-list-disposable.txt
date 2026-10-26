@@ -1,0 +1,2 @@
+error obtaining user profile object
+exit=0

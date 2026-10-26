@@ -9,19 +9,19 @@
     },
     "SBOM.cdk.cdx.json": {
       "spec_version": "1.6",
-      "components": 2,
-      "bytes": 4545
+      "components": 5,
+      "bytes": 6111
     },
     "SBOM.app.cdx.json": {
       "spec_version": "1.6",
-      "components": 1109,
-      "bytes": 2260066
+      "components": 1054,
+      "bytes": 2057674
     }
   },
   "published": {
     "ingest_components": 12,
-    "cdk_components": 2,
-    "app_components": 1109,
+    "cdk_components": 5,
+    "app_components": 1054,
     "base_image_digest": "sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2"
   }
 }

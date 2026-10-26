@@ -1,0 +1,191 @@
+{
+  "recorded_utc": "2026-10-23T23:03:48.341584+00:00",
+  "items": [
+    5,
+    11,
+    18
+  ],
+  "checked_code_source": "07db296137ec3ba50afff15097053061709fda27",
+  "prior_head": "c5040475ef81f3e4d49880c8aedf946d179767e9",
+  "branch": "codex/dependency-followup-2026-10-23",
+  "mac_snapshot_preserved": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "trigger": "User pasted Fable terminal recap reporting native name-editor acceptance on 6a87937 and letter-key identifiers in debug focus traces.",
+  "demonstrated_issue": "With debug tracing enabled, name-letter keys and PIN digit keys were written to CALM_TRACE focus through the shared touch wrapper. Focus order can disclose private input; it is not a complete keystroke recording in every case.",
+  "change": "Private name and PIN keys set traceFocus=false. The wrapper consumes this property while retaining focus/blur callbacks, visible focus, press handling and accessibility labels. Ordinary navigation traces remain enabled.",
+  "release_boundary": "trace() already returns when __DEV__ is false. Babel retains console.warn, so console stripping is not the correct explanation for Release silence. No Release binary was built or inspected here.",
+  "checks": {
+    "privacy-before": {
+      "name": "privacy-before",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "test",
+        "--",
+        "--runInBand",
+        "--ci",
+        "--coverage=false",
+        "--runTestsByPath",
+        "test/calmframes/privateInputTrace.test.tsx"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 4.08
+    },
+    "privacy-after": {
+      "name": "privacy-after",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "test",
+        "--",
+        "--runInBand",
+        "--ci",
+        "--coverage=false",
+        "--runTestsByPath",
+        "test/calmframes/privateInputTrace.test.tsx",
+        "test/calmframes/profileNames.test.tsx",
+        "test/screens/profileNameSave.test.tsx",
+        "test/calmframes/controlSurface.test.tsx",
+        "test/calmframes/playbackTrace.test.tsx"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 21.11
+    },
+    "typecheck": {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.12
+    },
+    "lint": {
+      "name": "lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 15.8
+    },
+    "style": {
+      "name": "style",
+      "command": [
+        "python",
+        "eval/style_check.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.48
+    },
+    "published-numbers": {
+      "name": "published-numbers",
+      "command": [
+        "python",
+        "eval/readme_sync.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.13
+    },
+    "secrets-code": {
+      "name": "secrets-code",
+      "command": [
+        "bash",
+        "scripts/gitleaks_scan.sh",
+        "staged"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.85
+    }
+  },
+  "regressions": {
+    "before": "Three privacy regressions failed: first-run PIN, parent PIN and name-grid focus leaked key identifiers. Ordinary navigation tracing passed.",
+    "after": "Five selected suites passed, including five privacy tests and existing rename persistence, control-surface and playback-trace regressions.",
+    "passed": 39,
+    "suites": 5,
+    "snapshots": 0,
+    "coverage": "Focused run used --coverage=false; it does not claim the full-suite coverage gate passed on this source.",
+    "data": "All test names, keys and profiles are fictional fixtures. No household data or real PIN was read."
+  },
+  "dependency_inputs": {
+    "unchanged_files": [
+      "app/package.json",
+      "app/package-lock.json",
+      "docs/SBOM.app.cdx.json",
+      "results/sbom.json"
+    ],
+    "matches": "../dependency-wave4/receipt.json",
+    "installation": "Reuses the actual clean locked installation recorded in that receipt. No symlink, lock change, SBOM regeneration or TypeScript flag adjustment."
+  },
+  "scope": {
+    "layout_changed": false,
+    "focus_actions_and_labels_preserved": true,
+    "player_media_signing_changed": false,
+    "native_run": false,
+    "hosted_run": false,
+    "mac_receipt_zip_received": false,
+    "human_comfort_acceptance": false,
+    "push_merge_publication": false
+  },
+  "input_files": {
+    "app/src/calmframes/CalmTouchable.tsx": {
+      "bytes": 2806,
+      "sha256": "eb35bc7b512df2d1a08740d7428c952bb3a6d58ceb8c56308e94e3c9490eb605"
+    },
+    "app/src/calmframes/PinKeypad.tsx": {
+      "bytes": 6417,
+      "sha256": "2789c54d87572b71c4183aaf18413371104233eef58b749d89acd21ab32fd004"
+    },
+    "app/src/calmframes/ProfileNameEditor.tsx": {
+      "bytes": 13422,
+      "sha256": "2867ec837c7dd52eba9eb24eea609576416a029f74dd011db5bf9d2c6512309f"
+    },
+    "app/src/calmframes/trace.ts": {
+      "bytes": 992,
+      "sha256": "e058bcd4c55cad797fcdfe8d9d1336e7f31e54c5c55c1f74316f628bb70a9788"
+    },
+    "app/test/calmframes/privateInputTrace.test.tsx": {
+      "bytes": 4554,
+      "sha256": "18fb4fb7dcb13415d198f9197b450a39f14d5bc1d74bf5a3ad6f6b3aa1785044"
+    }
+  },
+  "logs": {
+    "privacy-before": {
+      "raw_sha256": "2be872eff5cf5b662aa8ebec59d5e236160eb2093dd8a5c1926f778a0e7b84e4",
+      "normalized_sha256": "f6a6df0c9da7cd630b3b69f4de819be2b162ff23bd090f0718f235d9d579ec30"
+    },
+    "privacy-after": {
+      "raw_sha256": "a03af7959c78f00707bb6d1d712b0c0e43487500257c59e60178964b8911fbc7",
+      "normalized_sha256": "22aa92ba752d61470c1b4fca39ed25c462599ba17e07f2600fe3dbfde285afd0"
+    },
+    "typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    },
+    "lint": {
+      "raw_sha256": "975a3e4e37b3ed4466d960294a3f6dc0f7a659e0f1b0e57887fb42f675b15d54",
+      "normalized_sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714"
+    },
+    "style": {
+      "raw_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "normalized_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca"
+    },
+    "published-numbers": {
+      "raw_sha256": "720ff59fa33a8b6909b484c6252402673bbc787dac0f05c5180af93fd8ea1684",
+      "normalized_sha256": "720ff59fa33a8b6909b484c6252402673bbc787dac0f05c5180af93fd8ea1684"
+    },
+    "secrets-code": {
+      "raw_sha256": "6c2c9ebd8b03447e8ebdae92585dfee77fd8b614ad1c4a80313c94d1da38a72e",
+      "normalized_sha256": "6c2c9ebd8b03447e8ebdae92585dfee77fd8b614ad1c4a80313c94d1da38a72e"
+    }
+  },
+  "normalization": "ANSI color, absolute checkout prefix and trailing whitespace removed; outcomes retained."
+}

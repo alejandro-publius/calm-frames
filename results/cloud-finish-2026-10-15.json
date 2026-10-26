@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-15",
+  "branch": "codex/cloud-finish-2026-10-15",
+  "application_source": "0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19",
+  "candidate_ancestor": "a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd",
+  "documentation_reconciliation": "85dedefd85daea0bb8d774dd189dcf5af5490b83",
+  "starting_local_branch": "work",
+  "starting_commit": "7110893e7892e650b5c54e4a08eed1d8f3a86ffc",
+  "starting_worktree": "clean",
+  "AGENTS_md": "none found",
+  "reconciliation": "Fetched all origin branches, confirmed final candidate unchanged, created new branch from it and fast-forwarded 13 documentation files; main and research source not substituted.",
+  "environment": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "jest": "29.7.0",
+    "project_node_major": "22",
+    "vega_cli": "absent",
+    "mac_access": false
+  },
+  "dependencies": {
+    "command": "npm ci --cache /tmp/calm-npm-cache --ignore-scripts --no-audit --no-fund",
+    "exit_code": 0,
+    "packages_added": 1638,
+    "initial_failure": "npm default cache /home/agent/.npm/_cacache unwritable; temporary cache resolved it without registry/account changes."
+  },
+  "focus_fix": "Parents is remembered as the initiating control; cancel through button or remote Back restores only Parents. Later Help/Details supersedes it. No household data, PIN handling, artwork or layout changed.",
+  "focus_red": {
+    "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/screens/returnFocus.test.tsx -t 'Parents PIN'",
+    "exit_code": 1,
+    "failed": 2,
+    "filtered": 10,
+    "failure": "Both expected Parents, received Details. Earlier harness iteration needed an isTV getter spy before remote Back was exercised."
+  },
+  "focused_regression": {
+    "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/screens/returnFocus.test.tsx test/calmframes/hardwareBack.test.tsx test/calmframes/parentNavigation.test.tsx test/screens/KidModeScreen.test.tsx",
+    "exit_code": 0,
+    "suites_passed": 4,
+    "tests_passed": 33,
+    "initial_result": "Two older KidMode assertions expected stale title focus after Parents. Updated to initiating Parents and asserted old target is not preferred."
+  },
+  "final_focus": {
+    "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/screens/returnFocus.test.tsx",
+    "exit_code": 0,
+    "tests_passed": 12,
+    "note": "Includes subsequent Help and Details navigation."
+  },
+  "integration": {
+    "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false --testPathIgnorePatterns='test/calmframes/(uiCapture|coastalExport|controlStudy)\\.test\\.tsx'",
+    "exit_code": 0,
+    "suites_passed": 130,
+    "suites_skipped": 1,
+    "tests_passed": 1292,
+    "tests_skipped": 4,
+    "snapshots_passed": 57,
+    "seconds": 154.864,
+    "excluded_suites": [
+      "uiCapture",
+      "coastalExport",
+      "controlStudy"
+    ],
+    "exclusion_reason": "Honor no capture/export permission; no pixels or screenshots generated."
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit_code": 0
+  },
+  "lint": {
+    "command": "npm run lint",
+    "exit_code": 0,
+    "final_changed_files_command": "./node_modules/.bin/eslint src/calmframes/KidHomeScreen.tsx src/screens/KidModeScreen.tsx test/screens/KidModeScreen.test.tsx test/screens/returnFocus.test.tsx",
+    "final_changed_files_exit_code": 0
+  },
+  "independent_review": "Second worker reviewed four app diffs and third upstream test patch read-only; no blocking defects found.",
+  "secret_scan_application": {
+    "tool": "gitleaks 8.30.1",
+    "command": "gitleaks git --pre-commit --staged --config .gitleaks.toml --no-banner --redact",
+    "exit_code": 0,
+    "findings": 0
+  },
+  "upstream_evidence": "results/upstream-contract-check-2026-10-15.json",
+  "aws_evidence": "results/cloud-aws-check-2026-10-15.json",
+  "native": {
+    "status": "blocked",
+    "reason": "Vega CLI/SDK unavailable in cloud; Mac offline and not accessed. No native build/run or capture attempted.",
+    "package5_source": "4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58",
+    "package5_sha256": "a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13",
+    "package5_bytes": 28733262,
+    "package5_inputs": 736,
+    "package5_arch_build": "aarch64 Debug",
+    "limit": "Historical app-log evidence only. New focus fix is not in package 5. Pixels, sound, parent-settings interior, VoiceView and caption-menu contents remain unobserved."
+  },
+  "remaining_blockers": [
+    "Upstream duplicate API Forbidden; no alternate route attempted",
+    "Live AWS costs/tags/credits/deployed digest/findings: no authorized AWS session",
+    "Native rebuild and owner acceptance; project Node22 verification",
+    "Owner decisions for public contribution, licensing, judged release, reviewer access and submission remain separate"
+  ],
+  "documentation_checks": {
+    "commands": [
+      "python3 eval/style_check.py",
+      "python3 eval/readme_sync.py --check",
+      "/tmp/calm-aws-venv/bin/python -m pytest eval/tests/test_doc_links.py eval/tests/test_doc_line_links.py eval/tests/test_measured_sources_unchanged.py -q",
+      "git diff --check"
+    ],
+    "exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "doc_tests_passed": 15,
+    "published_numbers_matched": 664
+  },
+  "final_review": {
+    "exact_paths_reviewed": true,
+    "new_binaries": 0,
+    "secrets_findings": 0,
+    "reconciled_history_scan": {
+      "command": "gitleaks git --log-opts='a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd..HEAD' --config .gitleaks.toml --no-banner --redact",
+      "commits": 14,
+      "exit_code": 0
+    },
+    "staged_evidence_scan": {
+      "command": "gitleaks git --pre-commit --staged --config .gitleaks.toml --no-banner --redact",
+      "exit_code": 0
+    },
+    "tracked_docs_recheck": "15 tests pass after staging the new documents; 664 numbers match; style clean",
+    "publication_limit": "Only normal push to new branch in existing private project authorized; no upstream or public publication."
+  }
+}

@@ -1,0 +1,6 @@
+cd <CHECKOUT> && <CHECKOUT>/.venv/bin/python -m ruff check .
+All checks passed!
+cd <CHECKOUT> && <CHECKOUT>/.venv/bin/python -m mypy --config-file flashmap/pyproject.toml
+Success: no issues found in 17 source files
+cd <CHECKOUT> && <CHECKOUT>/.venv/bin/python -m mypy --config-file pipeline/mypy.ini
+Success: no issues found in 28 source files

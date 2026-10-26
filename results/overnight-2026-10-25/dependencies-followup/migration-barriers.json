@@ -1,0 +1,42 @@
+{
+  "decode-uri-component": {
+    "consumer": "query-string 7.1.3",
+    "installed": "0.2.2",
+    "fixed_candidate": "0.5.1",
+    "demonstrated_failure": {
+      "consumer": "query-string 7.1.3",
+      "installed_decode": "0.2.2",
+      "proposed_decode": "0.5.1",
+      "ordinary_parse_before": "passed",
+      "proposed_override": "rejected",
+      "error": "decodeComponent is not a function",
+      "scope": "Actual consumer in an isolated VM; no installed dependency changed or external request made."
+    },
+    "cause": "The actual CommonJS consumer calls require(decode-uri-component) as a function. Fixed 0.5.1 declares type: module and a default export; Node 22 require returns a namespace object.",
+    "next_action": "An explicit consumer/adapter migration is required; it must preserve malformed-URL handling and navigation behavior. Do not add a leaf override that throws on ordinary query parsing.",
+    "inspected_files": {
+      "package.json": "8822236f8ec0fc7c8f540812dda32b81797bec92e51bd567fbb196fda04a7f13",
+      "index.js": "6a86ac891edf15c5efa0841ebb31935e3669d58b98318b57d7b08a4530317cb0"
+    },
+    "registry_archive_sha256": "68747a955bbb6a700d758155cf5ff15595c0dfa38504d385abdb249c688bfb15"
+  },
+  "ws": {
+    "consumer": "metro-inspector-proxy 0.54.1",
+    "installed": [
+      "1.1.5",
+      "3.3.3"
+    ],
+    "fixed_candidate_inspected": "5.2.7",
+    "old_consumer_source": "node_modules/metro-inspector-proxy/src/InspectorProxy.js:232,280",
+    "old_consumer_expression": "url.parse(socket.upgradeReq.url || \"\", true).query || {}",
+    "fixed_source": "ws 5.2.7 lib/websocket-server.js:85 emits connection(ws, req); no upgradeReq property exists in its websocket or server source.",
+    "next_action": "The old inspector must accept the separate request argument and retest device/debugger handshakes. A direct leaf upgrade leaves its existing property dereference invalid. Changing the legacy SDK graph was outside this batch.",
+    "inspected_files": {
+      "package.json": "771940e1bc65b5ae85dbf1fde9612f9b28337edb3467a65d6d293aec7e570be0",
+      "lib/websocket-server.js": "e9213c1cdd51afc9ab381ec09ef13016a587d916525778364f1ace13d6b2a0db",
+      "lib/websocket.js": "55ec168cf9a33c466f2366ae6011625161438b0307700a8dc2cc052a731a5af7"
+    },
+    "registry_archive_sha256": "a45c5ce2deb8e4970cd128096879927d574634488fbc929ab6651981d79e1bca"
+  },
+  "other_remaining": "Braces/micromatch, notifier, DevTools, nested React Native, uuid and yargs-parser remain on historical SDK/tooling lines. No compatibility proof or API-break reproduction for those other migrations is claimed by this bounded batch. The TOML-only controlled-build deferral is unchanged."
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "journey": "Launch Watch focus",
+    "verdict": "observed-pass",
+    "evidence": "kid-mode-home-watch"
+  },
+  {
+    "journey": "Harbor Watch and playback Back",
+    "verdict": "observed-pass",
+    "evidence": "playing event; return Home Watch"
+  },
+  {
+    "journey": "Simulated demo playback Back",
+    "verdict": "observed-pass",
+    "evidence": "playing event; return demo Details Watch"
+  },
+  {
+    "journey": "Demo Back to More info",
+    "verdict": "observed-pass",
+    "evidence": "More info demo control focused"
+  },
+  {
+    "journey": "More info Back to Details",
+    "verdict": "observed-pass",
+    "evidence": "More info control focused; Home not reached"
+  },
+  {
+    "journey": "Details Back to Home",
+    "verdict": "observed-pass",
+    "evidence": "Home Details focused"
+  },
+  {
+    "journey": "Technical details nested Back",
+    "verdict": "observed-pass",
+    "evidence": "technical -> More info -> Details -> Home; matching controls restored"
+  },
+  {
+    "journey": "Left running at Home",
+    "verdict": "observed-pass",
+    "evidence": "Watch focused; no autoplay"
+  }
+]

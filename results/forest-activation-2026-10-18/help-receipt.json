@@ -1,0 +1,35 @@
+{
+  "capture": false,
+  "pin_operations": false,
+  "reinstall": false,
+  "relaunch": false,
+  "status": "completed",
+  "final_focus": "kid-mode-home-learn",
+  "final_selection": "Sea Otters",
+  "collector_stopped": true,
+  "events": [
+    {
+      "at": "2026-10-18T18:55:12.673301+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:55:15.628876+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:55:16.591588+00:00",
+      "event": "How it works opened with Back focused; compiled copy checked separately."
+    },
+    {
+      "at": "2026-10-18T18:55:22.565253+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:55:24.547143+00:00",
+      "event": "How it works Back restores its opener; Sea Otters remains selected."
+    }
+  ]
+}

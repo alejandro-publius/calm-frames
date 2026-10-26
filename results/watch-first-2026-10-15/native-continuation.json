@@ -1,0 +1,37 @@
+[
+  {
+    "journey": "Observed nested Back defect",
+    "verdict": "observed-pass",
+    "evidence": "kid-mode-home-more-info; regression also reproduced in source test; fixed source not yet rebuilt"
+  },
+  {
+    "journey": "Parents hardware cancel",
+    "verdict": "observed-pass",
+    "evidence": "return Parents; PIN untouched"
+  },
+  {
+    "journey": "Parents button cancel",
+    "verdict": "observed-pass",
+    "evidence": "return Parents; PIN untouched"
+  },
+  {
+    "journey": "Acadia Watch and Back",
+    "verdict": "observed-pass",
+    "evidence": "playing; exact source identity; return Details Watch"
+  },
+  {
+    "journey": "Acadia More info and Home",
+    "verdict": "observed-pass",
+    "evidence": "focus returned to Acadia card"
+  },
+  {
+    "journey": "Help Back",
+    "verdict": "observed-pass",
+    "evidence": "return How it works"
+  },
+  {
+    "journey": "Left at Home",
+    "verdict": "observed-pass",
+    "evidence": "Watch focus; no autoplay"
+  }
+]

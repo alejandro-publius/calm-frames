@@ -88,7 +88,7 @@ def analyze(video: Path, args) -> dict:
     rows = per_frame_luma(video, args.timeout)
     flagged: list[float] = []
     max_delta = 0.0
-    for (t_prev, y_prev), (t, y) in zip(rows, rows[1:]):
+    for (_t_prev, y_prev), (t, y) in zip(rows, rows[1:]):
         delta = abs(y - y_prev)
         max_delta = max(max_delta, delta)
         if delta >= args.threshold:

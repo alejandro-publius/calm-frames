@@ -18,7 +18,7 @@
  */
 import { render, screen } from '@testing-library/react-native';
 import React from 'react';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { CREDIT_ENTRIES } from '../../src/calmframes/credits';
 import {
@@ -102,6 +102,17 @@ describe('the credits list', () => {
     }
   });
 
+  it('includes every visible credit and licence condition in its spoken label', () => {
+    render(<CreditsScreen />);
+    for (const entry of CREDIT_ENTRIES) {
+      const row = screen.getByTestId(`credits-entry-${entry.title}`);
+      for (const words of [entry.title, entry.collection, entry.license, entry.credit, ...entry.obligations]) {
+        expect(row.props.accessibilityLabel).toContain(words);
+        expect(row.props['aria-label']).toContain(words);
+      }
+    }
+  });
+
   it('keeps the Tears of Steel credit scroll condition', () => {
     const tears = CREDIT_ENTRIES.find(entry => entry.title === 'Tears of Steel');
     expect(tears).toBeDefined();
@@ -160,6 +171,6 @@ describe('what the credits screen paints', () => {
     const frame = frameFromTree('credits', toJSON() as unknown as RenderedNode);
     unmount();
     expect(frame).toEqual(CREDITS_FRAME);
-    expect(frame.background).toBe(CALM_COLORS.BACKGROUND);
+    expect(frame.background).toBe(COASTAL_COLORS.BACKGROUND);
   });
 });

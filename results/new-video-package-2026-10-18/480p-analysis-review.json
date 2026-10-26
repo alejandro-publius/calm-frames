@@ -1,0 +1,151 @@
+{
+  "bytes": 16898753,
+  "created_at": 1792282647.277654,
+  "error": null,
+  "id": "9a5fc47a866b4c60b548a9d88ac612b4",
+  "playable": false,
+  "review": {
+    "analysis_complete": true,
+    "analysis_run": "593baa82e85d4cf790b398f315ae822a",
+    "analysis_width": 192,
+    "duration_ms": 50500.0,
+    "flagged_intervals": {
+      "broadcast": [
+        {
+          "end_ms": 17367.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26533.0,
+          "reason": "general",
+          "start_ms": 16467.0
+        },
+        {
+          "end_ms": 26700.0,
+          "reason": "general",
+          "start_ms": 25600.0
+        },
+        {
+          "end_ms": 26767.0,
+          "reason": "general",
+          "start_ms": 25767.0
+        },
+        {
+          "end_ms": 28533.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 27600.0
+        },
+        {
+          "end_ms": 45600.0,
+          "reason": "general",
+          "start_ms": 33867.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        }
+      ],
+      "wcag": [
+        {
+          "end_ms": 26533.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26633.0,
+          "reason": "general",
+          "start_ms": 25600.0
+        },
+        {
+          "end_ms": 28533.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33100.0,
+          "reason": "general",
+          "start_ms": 27600.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 32167.0
+        },
+        {
+          "end_ms": 45467.0,
+          "reason": "general",
+          "start_ms": 33933.0
+        },
+        {
+          "end_ms": 45567.0,
+          "reason": "general",
+          "start_ms": 44533.0
+        },
+        {
+          "end_ms": 47300.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46367.0
+        }
+      ]
+    },
+    "frame_count": 1515,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 32600.0,
+        "intervals": [
+          {
+            "end_ms": 48467.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      },
+      "extra-cautious": {
+        "covered_ms": 33600.0,
+        "intervals": [
+          {
+            "end_ms": 48967.0,
+            "reason": "general",
+            "start_ms": 15367.0
+          }
+        ]
+      },
+      "wcag": {
+        "covered_ms": 32600.0,
+        "intervals": [
+          {
+            "end_ms": 48467.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "5d4e83e7c613ef320b4bfd0ac9b3aa79a18b2fbdda449e9bff650031f902d010",
+      "wcag": "036063c36b68b0886460126843cefcb467bafb1f4d4704054e7c94bf06d7a761"
+    },
+    "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494"
+  },
+  "review_digest": "14ae8d1d4e60786aded79bab39348d66420ce3f3a6eaf0f1cfbcf91230bc81ec",
+  "run_id": "593baa82e85d4cf790b398f315ae822a",
+  "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494",
+  "stage": "Review the planned interruptions",
+  "status": "review",
+  "title": "Prairie Creek and Redwood (480p)",
+  "updated_at": 1792282681.792973
+}

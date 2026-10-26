@@ -1,0 +1,66 @@
+FAIL app/test/calmframes/coastalIslands.test.tsx
+  ✓ shows Forest only as noninteractive scenery and retains exactly the two verified film destinations (8 ms)
+  ✓ carries the selected destination motif into Details and static loading for Acadia coastal scenery (National Park Service, public domain) (14 ms)
+  ✓ carries the selected destination motif into Details and static loading for Sea otters in Alaska (8 ms)
+  boat selection and accessibility
+    ✓ never adds focus targets or movement with the existing motion preference off (28 ms)
+    ✓ moves instantly for reduced motion information (5 ms)
+    ✓ moves instantly for reader motion information (2 ms)
+    ✓ moves instantly for unknown motion information (2 ms)
+    ✓ moves instantly for failed motion information (3 ms)
+    ✓ cancels rapid moves and instantly settles when reduction or backgrounding begins (3 ms)
+    ✕ stays still after a partial accessibility subscription failure and later foreground event (3 ms)
+    ✕ ignores a late preference result after the screen becomes inactive (3 ms)
+    ✓ changes selection and Watch immediately while decorative movement remains unfinished (294 ms)
+
+  ● boat selection and accessibility › stays still after a partial accessibility subscription failure and later foreground event
+
+    expect(jest.fn()).not.toHaveBeenCalled()
+
+    Expected number of calls: 0
+    Received number of calls: 3
+
+    1: {"x": 1364, "y": 732}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 1364, "y": 732}, "useNativeDriver": true}
+    2: {"x": 1364, "y": 732}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 479, "y": 714}, "useNativeDriver": true}
+    3: {"x": 479, "y": 714}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 1364, "y": 732}, "useNativeDriver": true}
+
+      63 |     act(() => lifecycle('active')); await flush();
+      64 |     view.rerender(<CoastalBoat destination="sea-otters" enabled />);
+    > 65 |     expect(timing).not.toHaveBeenCalled();
+         |                        ^
+      66 |   });
+      67 |   it('ignores a late preference result after the screen becomes inactive', async () => {
+      68 |     let resolve!: (value: boolean) => void;
+
+      at Object.toHaveBeenCalled (test/calmframes/coastalIslands.test.tsx:65:24)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+  ● boat selection and accessibility › ignores a late preference result after the screen becomes inactive
+
+    expect(jest.fn()).not.toHaveBeenCalled()
+
+    Expected number of calls: 0
+    Received number of calls: 3
+
+    1: {"x": 1364, "y": 732}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 1364, "y": 732}, "useNativeDriver": true}
+    2: {"x": 1364, "y": 732}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 479, "y": 714}, "useNativeDriver": true}
+    3: {"x": 1364, "y": 732}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 1364, "y": 732}, "useNativeDriver": true}
+
+      71 |     view.rerender(<CoastalBoat destination="sea-otters" enabled active={false} />);
+      72 |     await act(async () => resolve(false));
+    > 73 |     expect(timing).not.toHaveBeenCalled();
+         |                        ^
+      74 |   });
+      75 |   it('changes selection and Watch immediately while decorative movement remains unfinished', async () => {
+      76 |     const play = jest.fn(), open = jest.fn();
+
+      at Object.toHaveBeenCalled (test/calmframes/coastalIslands.test.tsx:73:24)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 10 passed, 12 total
+Snapshots:   0 total
+Time:        1.41 s
+Ran all test suites matching /app\/test\/calmframes\/coastalIslands.test.tsx/i.

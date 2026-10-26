@@ -1,0 +1,218 @@
+{
+  "base_commit": "5771bdeae9c58c257b2e785f64f2fd06c08089ff",
+  "scope": "Controlled input-integrity challenge of existing licensed prepared renditions; not hazard accuracy or native validation.",
+  "method": "Fix frozen before held-out evaluation. Truncate once at video packet index floor(2*N/3), no re-encoding. Compare CLI and real pipeline adapter. No thresholds tuned.",
+  "results": [
+    {
+      "title": "forest",
+      "role": "discovery",
+      "licensed_original_sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+      "prepared_rendition": "app/assets/raw/prepared-library/77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.mp4",
+      "declared_frames": 360,
+      "cut_byte": 1756851,
+      "variants": {
+        "intact": {
+          "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+          "bytes": 2498811,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 360,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 12000.0,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 360,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 12000.0,
+            "planned_covered_ms": 0
+          },
+          "maps_identical_except_creation_time": true
+        },
+        "packet_boundary_truncation": {
+          "sha256": "3e270ba84e6307d73ae198e2c792d6103d8e2e86112d3ee9f3c654b8d3952951",
+          "bytes": 1756851,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 240,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 12000.0,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 2,
+            "map_written": false,
+            "error": "flashmap cannot measure /tmp/calm-media-challenge/comparison/forest-packet-boundary.mp4: /tmp/calm-media-challenge/comparison/forest-packet-boundary.mp4 decoded only 240 of 360 declared video frames; the video evidence is incomplete, so flashmap cannot measure the whole file."
+          },
+          "pipeline_adapter_rejects": true
+        }
+      }
+    },
+    {
+      "title": "otters",
+      "role": "held-out",
+      "licensed_original_sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+      "prepared_rendition": "app/assets/raw/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.mp4",
+      "declared_frames": 599,
+      "cut_byte": 6536825,
+      "variants": {
+        "intact": {
+          "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+          "bytes": 9722393,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 599,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 19986.633,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 599,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 19986.633,
+            "planned_covered_ms": 0
+          },
+          "maps_identical_except_creation_time": true
+        },
+        "packet_boundary_truncation": {
+          "sha256": "91aff4f80b72b04f0866aa383679880f6768023912b54e327ea682aedea98449",
+          "bytes": 6536825,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 399,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 19986.633,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 2,
+            "map_written": false,
+            "error": "flashmap cannot measure /tmp/calm-media-challenge/comparison/otters-packet-boundary.mp4: /tmp/calm-media-challenge/comparison/otters-packet-boundary.mp4 decoded only 399 of 599 declared video frames; the video evidence is incomplete, so flashmap cannot measure the whole file."
+          },
+          "pipeline_adapter_rejects": true
+        }
+      }
+    },
+    {
+      "title": "acadia",
+      "role": "held-out",
+      "licensed_original_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "prepared_rendition": "app/assets/raw/prepared-library/0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
+      "declared_frames": 1804,
+      "cut_byte": 4619218,
+      "variants": {
+        "intact": {
+          "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
+          "bytes": 6004594,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 1804,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 37641.756,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 1804,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 37641.756,
+            "planned_covered_ms": 0
+          },
+          "maps_identical_except_creation_time": true
+        },
+        "packet_boundary_truncation": {
+          "sha256": "a3b683e65872c0c22e942abccd6415f92e930ab6197bdb80b366421b47c7f10e",
+          "bytes": 4619218,
+          "before": {
+            "exit_code": 0,
+            "map_written": true,
+            "analyzed_frames": 1202,
+            "segment_count": 0,
+            "pass_verdict": true,
+            "duration_ms": 37641.756,
+            "planned_covered_ms": 0
+          },
+          "after": {
+            "exit_code": 2,
+            "map_written": false,
+            "error": "flashmap cannot measure /tmp/calm-media-challenge/comparison/acadia-packet-boundary.mp4: /tmp/calm-media-challenge/comparison/acadia-packet-boundary.mp4 decoded only 1202 of 1804 declared video frames; the video evidence is incomplete, so flashmap cannot measure the whole file."
+          },
+          "pipeline_adapter_rejects": true
+        }
+      }
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "pyav": "18.1.0",
+    "numpy": "2.5.3",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "source_sha256": {
+    "flashmap/src/flashmap/decode.py": "c8fa62d86a533a140ffb25bf375c994aa90c4dc15bc00b1f6df90020ea66d52a",
+    "pipeline/ingest.py": "1fda0d93900174930dd6fcea0138d34f831d5efe262a328a07213e4b812f95d6"
+  },
+  "coverage_context": {
+    "existing_results": [
+      "results/detector-review/integration.json",
+      "results/preparation-benchmark-2026-10-22/benchmark.json",
+      "results/realclips_status.json"
+    ],
+    "licenses": "media/LICENSES.csv",
+    "annotations": {
+      "labeller_a_rows": 340,
+      "labeller_b_rows": 340,
+      "nonempty_labels_each": 0
+    },
+    "hazard_miss_rate": null,
+    "hazard_overcoverage_rate": null,
+    "note": "Current annotations are blank. Historical realclips_status window totals are stale. Prepared renditions are integrity controls, not independent hazard ground truth."
+  },
+  "other_discovery_probes": [
+    {
+      "title": "forest",
+      "method": "Overwrite 256 bytes of one video packet payload",
+      "result": "Decoder returned all 360 frames, no corrupt flags, CLI pass. No known hazard label; not a demonstrated hazard miss or covered by this fix."
+    },
+    {
+      "title": "forest",
+      "method": "Retain first 75 percent of file bytes",
+      "result": "Original CLI returned zero and a passing map despite incomplete decode; main comparison uses reproducible packet-boundary truncation."
+    }
+  ],
+  "focused_checks": {
+    "pytest": "27 passed: decode completeness, Theora duplicate-frame handling, color handling, analysis cache invalidation",
+    "red_before_fix": "2 completeness regressions failed before decoder guard; 1 cache regression failed before fingerprint revision",
+    "ruff": "Passed on all four changed Python files",
+    "compileall": "Passed on all four changed Python files",
+    "independent_review": "No blocking decoder or cache-invalidation defect found; no native or clinical claim."
+  },
+  "limits": [
+    "Known declared frame counts only; zero/unknown counts remain unchecked by this guard.",
+    "A too-high inaccurate declared count or skipped out-of-order timestamps can conservatively reject usable media. No false-rejection rate estimated from three clips.",
+    "Unflagged corruption and inaccurate low declared counts remain outside this check.",
+    "CLI failure prevents a new map; it does not delete an older caller-selected output. The pipeline checks non-success and withdraws prior publication before reanalysis.",
+    "Use updated bundled flashmap with updated pipeline. An externally configured older analyzer is not upgraded by the pipeline fingerprint.",
+    "Analysis and downstream steps cached before this revision rerun on next preparation; shipped assets and signatures were not regenerated.",
+    "No detector threshold, schema, native app, audio analysis, signing, media asset or protected branch was changed.",
+    "No full preparation render, native acceptance, hosted CI or hazard-accuracy benchmark was run. Historical broad conformance results describe their recorded source bytes, not validation of this new source revision."
+  ]
+}

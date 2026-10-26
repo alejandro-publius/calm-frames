@@ -1,0 +1,6 @@
+PASS /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/build/ui-capture/ui-screens.mp4: below the wcag thresholds
+
+the same screens under the broadcast profile, which carries the regular pattern rule:
+PASS /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/build/ui-capture/ui-screens.mp4: below the broadcast thresholds
+
+flashmap: no segment broke the thresholds across 36 screens and transitions, under the wcag profile and under the broadcast profile with the regular pattern rule.

@@ -44,3 +44,16 @@ app/buildinfo.json
 
 # Local run logs, never committed
 .logs/
+
+# The prepared-library exporter's 0-byte flock file, recreated on every export
+app/assets/raw/prepared-library/.local-library.lock
+
+# CDK writes availability-zone lookups here on a real deploy; it holds the account id
+pipeline/infra/cdk.context.json
+
+# Agent worktrees made by the session tooling; never part of the repository.
+.claude/worktrees/
+
+# Coverage data from local pytest-cov runs.
+.coverage
+.coverage.*

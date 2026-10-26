@@ -1,0 +1,41 @@
+FAIL app/test/calmframes/coastalIslands.test.tsx
+  ○ skipped shows Forest only as noninteractive scenery and retains exactly the two verified film destinations
+  ○ skipped carries the selected destination motif into Details and static loading for Acadia coastal scenery (National Park Service, public domain)
+  ○ skipped carries the selected destination motif into Details and static loading for Sea otters in Alaska
+  boat selection and accessibility
+    ✕ stays still after a partial accessibility subscription failure and later foreground event (26 ms)
+    ○ skipped never adds focus targets or movement with the existing motion preference off
+    ○ skipped moves instantly for reduced motion information
+    ○ skipped moves instantly for reader motion information
+    ○ skipped moves instantly for unknown motion information
+    ○ skipped moves instantly for failed motion information
+    ○ skipped cancels rapid moves and instantly settles when reduction or backgrounding begins
+    ○ skipped ignores a late preference result after the screen becomes inactive
+    ○ skipped changes selection and Watch immediately while decorative movement remains unfinished
+
+  ● boat selection and accessibility › stays still after a partial accessibility subscription failure and later foreground event
+
+    expect(jest.fn()).not.toHaveBeenCalled()
+
+    Expected number of calls: 0
+    Received number of calls: 1
+
+    1: {"x": 479, "y": 714}, {"duration": 560, "easing": [Function anonymous], "isInteraction": false, "toValue": {"x": 1364, "y": 732}, "useNativeDriver": true}
+
+      64 |     act(() => lifecycle('active')); await flush();
+      65 |     view.rerender(<CoastalBoat destination="sea-otters" enabled />);
+    > 66 |     expect(timing).not.toHaveBeenCalled();
+         |                        ^
+      67 |   });
+      68 |   it('ignores a late preference result after the screen becomes inactive', async () => {
+      69 |     let resolve!: (value: boolean) => void;
+
+      at Object.toHaveBeenCalled (test/calmframes/coastalIslands.test.tsx:66:24)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 11 skipped, 12 total
+Snapshots:   0 total
+Time:        0.889 s, estimated 1 s
+Ran all test suites matching /app\/test\/calmframes\/coastalIslands.test.tsx/i with tests matching "partial accessibility subscription failure".

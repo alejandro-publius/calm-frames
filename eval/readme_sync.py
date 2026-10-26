@@ -47,7 +47,7 @@ ANY_MARKER_OPENING = re.compile(r"<!--n\b.*?-->", re.DOTALL)
 
 # "eval" covers the evaluation lane's own write-ups, including eval/harness_runs/README.md,
 # so every number in them is checked by the same CI step as the README.
-DEFAULT_TARGETS = ["README.md", "docs", "eval"]
+DEFAULT_TARGETS = ["README.md", "WRITEUP.md", "CHANGELOG.md", "CONTRIBUTING.md", "hook/README.md", "flashmap/README.md", "docs", "eval"]
 
 
 def resolve(data: object, dotted: str) -> object:
@@ -125,7 +125,7 @@ def main() -> int:
             source = match.group("source")
             dotted = match.group("path")
             shown = match.group("value")
-            relative = file.relative_to(REPO)
+            relative = file.relative_to(REPO)  # noqa: B023 - MARKER.sub calls this in the same pass
 
             if source not in cache:
                 source_path = REPO / source

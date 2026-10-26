@@ -1,0 +1,29 @@
+{
+  "before": {
+    "info": 0,
+    "low": 2,
+    "moderate": 28,
+    "high": 21,
+    "critical": 4,
+    "total": 55
+  },
+  "after": {
+    "info": 0,
+    "low": 2,
+    "moderate": 20,
+    "high": 20,
+    "critical": 4,
+    "total": 46
+  },
+  "unique_advisories_before": 23,
+  "unique_advisories_after": 21,
+  "removed_advisories": [
+    "GHSA-2g4f-4pwh-qvx6",
+    "GHSA-mrhx-c7xc-m3w5"
+  ],
+  "added_advisories": [],
+  "new_since_previous_recorded_scan": [
+    "GHSA-mrhx-c7xc-m3w5"
+  ],
+  "note": "Fresh matching scans. Previous checkpoint had 22 unique advisories; this fresh baseline includes a Zod advisory absent from that scan. Propagated package counts are not independent exploits."
+}

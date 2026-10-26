@@ -1,0 +1,3 @@
+ 132667620 ~/calm-frames-native-fbe53bf/app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+ 132101221 ~/calm-frames-native-fbe53bf/app/build/aarch64-release/calm-frames-app_aarch64.vpkg
+ 264768841 total

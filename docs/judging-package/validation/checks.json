@@ -1,0 +1,174 @@
+{
+  "status": "passed",
+  "scope": "Judging-package browser guide only. No app build, native test, benchmark or external-source verification.",
+  "base_commit": "13551e45bd853c392489dbecce7158a04036f615",
+  "reused_page_commit": "3db0505f02441300020a8d6f023c94994be2ae88",
+  "browser": "154.0.8037.57",
+  "keyboard_stops": 5,
+  "no_javascript_stops": 5,
+  "visible_focus": {
+    "style": "solid",
+    "width": "3px",
+    "color": "rgb(146, 62, 40)"
+  },
+  "contrast": {
+    "visible_text_nodes": 154,
+    "minimum_ratio": 4.56,
+    "failures": [],
+    "focus_ring_on_paper": 6.44,
+    "scope": "Computed CSS text and focus colors; native screenshot pixels are historical evidence, not guide text."
+  },
+  "reduced_motion": {
+    "preference": true,
+    "animations": 0,
+    "smooth": false
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 768,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 320,
+      "horizontal_overflow": false
+    }
+  ],
+  "html_documents": 23,
+  "local_references": 398,
+  "decoded_images": 18,
+  "verified_assets": 16,
+  "remote_requests": [],
+  "browser_errors": [],
+  "render_kind": "Web-guide screenshots, not native app captures.",
+  "file_opening": "Managed browser file-URL policy blocks direct navigation. Served the package alone on loopback for checks; no network-dependent runtime, fetch or module loading.",
+  "limitations": [
+    "Not a full WCAG audit or native accessibility acceptance.",
+    "Historical screenshot text is not audited as the authored guide interface.",
+    "Optional external source links were not verified by these local-link checks."
+  ],
+  "document_contrast": [
+    {
+      "file": "index.html",
+      "visible_text_nodes": 154,
+      "minimum_ratio": 4.56
+    },
+    {
+      "file": "reading/architecture-source.html",
+      "visible_text_nodes": 72,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/architecture.html",
+      "visible_text_nodes": 70,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/capture-history.html",
+      "visible_text_nodes": 104,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/claims-ledger.html",
+      "visible_text_nodes": 293,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/code-excerpts.html",
+      "visible_text_nodes": 46,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/demo-evidence-brief.html",
+      "visible_text_nodes": 39,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/friction-log-draft.html",
+      "visible_text_nodes": 164,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/friction-records.html",
+      "visible_text_nodes": 222,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/guide.html",
+      "visible_text_nodes": 125,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/handoff.html",
+      "visible_text_nodes": 73,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/impact-and-differentiation.html",
+      "visible_text_nodes": 49,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/outreach-status.html",
+      "visible_text_nodes": 97,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/package-notes.html",
+      "visible_text_nodes": 66,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/preparation-recovery.html",
+      "visible_text_nodes": 206,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/presentation-drafts.html",
+      "visible_text_nodes": 78,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/primary-sources.html",
+      "visible_text_nodes": 50,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/product-feedback-draft.html",
+      "visible_text_nodes": 102,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/recorded-rules.html",
+      "visible_text_nodes": 301,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/release-readiness.html",
+      "visible_text_nodes": 231,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/rubric-matrix.html",
+      "visible_text_nodes": 86,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/spec-sources.html",
+      "visible_text_nodes": 502,
+      "minimum_ratio": 5.35
+    },
+    {
+      "file": "reading/validation.html",
+      "visible_text_nodes": 71,
+      "minimum_ratio": 5.35
+    }
+  ]
+}

@@ -194,7 +194,7 @@
         "red": 0
       },
       "flagged_seconds": 0.0,
-      "analysed_seconds": 0.0,
+      "analysed_seconds": 12.0,
       "max_flashes_in_window": 0,
       "max_area_fraction": 0.0,
       "titles": [
@@ -203,7 +203,7 @@
         "markers_packed.mp4"
       ],
       "titles_with_a_red_segment": [],
-      "flagged_share_of_analysed_time": null
+      "flagged_share_of_analysed_time": 0.0
     }
   },
   "per_file": [

@@ -1,0 +1,31 @@
+{
+  "observed_at_utc": "2026-10-23T18:17:51.179792+00:00",
+  "shared_base": "6360417814d684d41c94789a9e406fc27de53c66",
+  "local_ui_commit": "ae30cc7fc70a3b68e07684912cd8a497fb04df70",
+  "checks": {
+    "new_directory_local_link_targets": 95,
+    "broken_links": 0,
+    "json_files_parsed": 18,
+    "python_sources_parsed": 2,
+    "source_and_historical_asset_hashes": "match",
+    "owned_file_style": "passed",
+    "secret_pattern_scan": "no matches",
+    "readme_sync": "723 published numbers match; no measurement changed"
+  },
+  "ui_evidence": "ui-contrast.json",
+  "native_evidence": "evidence-review.json",
+  "hosted_results": "hosted/current-ci.json and hosted/current-audit.json; belong to shared base, not local proposal",
+  "independent_review": {
+    "ui": "no blocking findings",
+    "demo": "short mapped-stream coverage gap found and fixed; focused fixture regression verifies refusal"
+  },
+  "limits": [
+    "No native build/capture or new device acceptance",
+    "No clean locked install; dependencies reused through ignored symlink as detailed in ui-contrast.json",
+    "No paid audio generation, image generation, MP4 output or human audiovisual acceptance",
+    "Media production deferred by owner until accepted product and story reconciliation",
+    "No dependency exception approval or renewal",
+    "No push, merge, release or submission change"
+  ],
+  "recommendation": "Preserve submitted fallback; newer candidate lacks full security/native/human acceptance. This is not a vulnerability-free or medical-safety claim."
+}

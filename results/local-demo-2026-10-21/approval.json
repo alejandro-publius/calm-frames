@@ -1,0 +1,13 @@
+{
+  "approved": true,
+  "bundleId": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+  "catalogSha256": "458af619dcfd72d46b72e0b0ba7d59db0299cd3054c3a8d2cd6d47cfec682238",
+  "reportSha256": "4043445adbb836fc3dd2bd3feb222e81e7d8ad9c411be8b8ba0fe28e9f95f6fd",
+  "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+  "namespaceBytes": 63317768,
+  "scope": "Exact local demo replacement, UI integration, build/install/native verification and app-only screenshots. No recording, publication, push, credentials or signer trust expansion.",
+  "sourceThread": "01a156b2-766b-722d-a376-56854ea450e0",
+  "userMessage": "Sentinel_f75ef744fd58819181cfd5d7230ab92a",
+  "userText": "do everything you can",
+  "priorProposal": "Replace current Acadia media with the exact verified bundle in the local demo and rebuild; separate explicit request for screenshots of just the Calm Frames simulator."
+}

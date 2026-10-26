@@ -1,0 +1,639 @@
+{
+  "checks": [
+    {
+      "data": {
+        "actual": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+        "expected": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171"
+      },
+      "detail": "source hashes to 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171, title is filed under 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+      "name": "source_hash",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "every map used by the app recipe must receive independent signature and source checks",
+      "name": "playback_recipe_profiles",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] map parsed",
+      "name": "map_readable:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171"
+      },
+      "detail": "[wcag] map says source 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171, title is 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+      "name": "map_hash:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[wcag] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/work/titles/1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171/maps/wcag.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otters-alaska-40s.mp4",
+      "name": "map_signature:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 4,
+        "recipe": "app-v1",
+        "stored": 4
+      },
+      "detail": "[wcag] hide plan has 4 intervals, the map produces 4",
+      "name": "plan_matches_map:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[wcag] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 0
+      },
+      "detail": "[wcag] flashmap found 0 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 500.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39973.267,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
+      },
+      "detail": "[wcag] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples_per_interval": 3,
+        "worst_at_s": 17.0175,
+        "worst_db": 41.02582
+      },
+      "detail": "[wcag] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 41.02582 dB (need 30.0) at 17.0175 s",
+      "name": "cover_actually_drawn:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 4,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[wcag] 4 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 1
+      },
+      "detail": "[wcag] the cover schedule over the original video left 1 violation(s)",
+      "name": "cover_model_clean:wcag",
+      "passed": false
+    },
+    {
+      "data": {},
+      "detail": "[wcag] the complete HLS output has 0 violations including boundaries",
+      "name": "hls_rendition_clean:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 500.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
+      },
+      "detail": "[wcag] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[wcag] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[wcag] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[wcag] 0 of 3 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] map parsed",
+      "name": "map_readable:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171"
+      },
+      "detail": "[broadcast] map says source 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171, title is 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+      "name": "map_hash:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[broadcast] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/work/titles/1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171/maps/broadcast.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otters-alaska-40s.mp4",
+      "name": "map_signature:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 4,
+        "recipe": "app-v1",
+        "stored": 4
+      },
+      "detail": "[broadcast] hide plan has 4 intervals, the map produces 4",
+      "name": "plan_matches_map:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[broadcast] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 1
+      },
+      "detail": "[broadcast] flashmap found 1 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:broadcast",
+      "passed": false
+    },
+    {
+      "data": {
+        "guard_band_ms": 500.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39973.267,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
+      },
+      "detail": "[broadcast] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples_per_interval": 3,
+        "worst_at_s": 16.2165,
+        "worst_db": 41.02582
+      },
+      "detail": "[broadcast] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 41.02582 dB (need 30.0) at 16.2165 s",
+      "name": "cover_actually_drawn:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 4,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[broadcast] 4 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 1
+      },
+      "detail": "[broadcast] the cover schedule over the original video left 1 violation(s)",
+      "name": "cover_model_clean:broadcast",
+      "passed": false
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] the complete HLS output has 1 violations including boundaries",
+      "name": "hls_rendition_clean:broadcast",
+      "passed": false
+    },
+    {
+      "data": {
+        "guard_band_ms": 500.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
+      },
+      "detail": "[broadcast] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[broadcast] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[broadcast] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[broadcast] 0 of 3 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] map parsed",
+      "name": "map_readable:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "map_sha": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171"
+      },
+      "detail": "[extra-cautious] map says source 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171, title is 1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+      "name": "map_hash:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "returncode": 0
+      },
+      "detail": "[extra-cautious] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/work/titles/1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171/maps/extra-cautious.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otters-alaska-40s.mp4",
+      "name": "map_signature:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "expected": 3,
+        "recipe": "app-v1",
+        "stored": 3
+      },
+      "detail": "[extra-cautious] hide plan has 3 intervals, the map produces 3",
+      "name": "plan_matches_map:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "red_dimmed": []
+      },
+      "detail": "[extra-cautious] 0 red interval(s) were marked dim",
+      "name": "red_always_opaque:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "violations": 0
+      },
+      "detail": "[extra-cautious] flashmap found 0 violation(s) in the kid safe rendition",
+      "name": "safe_rendition_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39973.267,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "detected"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
+      },
+      "detail": "[extra-cautious] the rendition has the source's picture rectangle and frame timing",
+      "name": "rendition_matches_source:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+        "samples_per_interval": 3,
+        "worst_at_s": 16.2165,
+        "worst_db": 41.02582
+      },
+      "detail": "[extra-cautious] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 41.02582 dB (need 30.0) at 16.2165 s",
+      "name": "cover_actually_drawn:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intervals": 3,
+        "proof_passed": true,
+        "proof_ran": true
+      },
+      "detail": "[extra-cautious] 3 interval(s) to cover, and the cover was measured on the rendition",
+      "name": "cover_proof:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "dim_intervals": 0,
+        "violations": 0
+      },
+      "detail": "[extra-cautious] the cover schedule over the original video left 0 violation(s)",
+      "name": "cover_model_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] the complete HLS output has 0 violations including boundaries",
+      "name": "hls_rendition_clean:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "guard_band_ms": 1000.0,
+        "rendition": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "source": {
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 0.0,
+          "frame_count": 1198.0,
+          "last_pts_ms": 39939.9,
+          "median_interval_ms": 33.367,
+          "picture_coded": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "picture_source": "carried"
+        },
+        "start_offset_limit_ms": 150.0,
+        "start_offset_ms": 0.0,
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
+      },
+      "detail": "[extra-cautious] HLS relative frame timing matches the checked MP4",
+      "name": "hls_timing_matches_master:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "built_with": 1000.0,
+        "required": 1000.0
+      },
+      "detail": "[extra-cautious] trickplay was built with a 1000 ms calm margin, publishing needs at least 1000 ms",
+      "name": "calm_margin_policy:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "frame_count": 4
+      },
+      "detail": "[extra-cautious] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "name": "bif_calm:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] trickplay manifest says the frames came from 'safe_rendition'",
+      "name": "bif_from_safe_rendition:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_times": [],
+        "missing": []
+      },
+      "detail": "[extra-cautious] 0 of 3 poster(s) came from a moment that is neither calm nor under the cover, 0 missing on disk",
+      "name": "posters_calm:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "bad_presets": [],
+        "still_ms": 5056.5
+      },
+      "detail": "the cover still at 5056 ms is inside a flagged span for no preset",
+      "name": "cover_still_calm",
+      "passed": true
+    }
+  ],
+  "finished_at": 1792302895.464905,
+  "outcome": "failed",
+  "passed": false,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "sha256": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+  "source_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otters-alaska-40s.mp4",
+  "started_at": 1792302688.610023
+}

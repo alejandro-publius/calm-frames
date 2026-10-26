@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+E   AssertionError: Network sockets are forbidden in offline tests
+
+During handling of the above exception, another exception occurred:
+E   botocore.exceptions.HTTPClientError: An HTTP Client raised an unhandled exception: Network sockets are forbidden in offline tests
+/workspace/calm-frames-overnight-2026-10-25/.venv/lib/python3.12/site-packages/botocore/httpsession.py:558: botocore.exceptions.HTTPClientError: An HTTP Client raised an unhandled exception: Network sockets are forbidden in offline tests
+=========================== short test summary info ============================
+FAILED pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_requests_that_escape_moto_are_refused_before_transport
+1 failed in 1.39s

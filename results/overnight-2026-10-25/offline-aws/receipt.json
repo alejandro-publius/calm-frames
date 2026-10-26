@@ -1,0 +1,77 @@
+{
+  "code_commit": "78b6de1808dbd43a1cc20dafecc91cc36013d086",
+  "supporting_fixture_refinement": "UnexpectedProvider declares the normal METHOD interface so its mutation reaches the intentional refusal rather than an unrelated attribute error.",
+  "checked_test_path": "pipeline/tests/test_infra_ingest.py",
+  "checked_test_sha256": "22dcea1ac176605d63df793ad4564b83b41dbc12564b376cd7e94d9881be0063",
+  "production_source_changed": false,
+  "versions": {
+    "python": "3.12.14",
+    "pytest": "9.1.1",
+    "boto3": "1.43.97",
+    "botocore": "1.43.118",
+    "moto": "5.2.3",
+    "ruff": "0.17.0"
+  },
+  "node_version": "22.23.2",
+  "baseline": {
+    "test": "TestOnlyACheckedTitleIsPublished::test_a_verified_title_is_published_and_written_to_the_catalog",
+    "result": "failed",
+    "reason": "ProfileNotFound from ambient AWS_PROFILE before mocked client creation",
+    "http_transport_blocked": true
+  },
+  "focused": {
+    "command": "python -m pytest pipeline/tests/test_infra_ingest.py -q --tb=line",
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  "mutations": [
+    {
+      "mutation": "session-config-fallback",
+      "test": "pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_a_missing_ambient_profile_cannot_affect_mocked_services",
+      "exit_code": 1,
+      "result": "caught"
+    },
+    {
+      "mutation": "http-transport-fallback",
+      "test": "pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_requests_that_escape_moto_are_refused_before_transport",
+      "exit_code": 1,
+      "result": "caught"
+    },
+    {
+      "mutation": "identity-file-fallback",
+      "test": "pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_identity_file_and_provider_fallbacks_fail_closed",
+      "exit_code": 1,
+      "result": "caught"
+    },
+    {
+      "mutation": "credential-provider-fallback",
+      "test": "pipeline/tests/test_infra_ingest.py::TestOfflineAwsIsolation::test_identity_file_and_provider_fallbacks_fail_closed",
+      "exit_code": 1,
+      "result": "caught"
+    }
+  ],
+  "boundary": {
+    "moto_backends": [
+      "s3",
+      "ssm",
+      "dynamodb"
+    ],
+    "credentials": "Moto dummy values held in memory only",
+    "profile": "in-memory offline-ingest-tests",
+    "cloud_profile_unchanged": true,
+    "environment_unchanged": true,
+    "global_boto3_session_unchanged": true,
+    "moto_environment_patching": false,
+    "moto_default_session_patching": false,
+    "real_aws_calls": "not made",
+    "aws_config_or_credential_files": "not read or changed",
+    "network_fallback": "HTTP transport plus DNS/socket guards refuse outside Moto"
+  },
+  "lint": "Ruff passed",
+  "limits": [
+    "Offline contract and container/template tests only",
+    "No AWS deployment, account authentication or hosted CI evidence",
+    "No native device or playback evidence"
+  ]
+}

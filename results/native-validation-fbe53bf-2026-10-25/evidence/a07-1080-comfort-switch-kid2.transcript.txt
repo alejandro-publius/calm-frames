@@ -1,0 +1,5 @@
+[  0.00-  8.68] TV and seating for Kid 2, checked.
+[  8.68- 17.24] Standard, radio button, not broadcast, radio button, extra cautious, chosen, viewing distance.
+[ 17.24- 23.96] 5.85 inch television, 4 feet away, radio button, reading for Kid 2.
+[ 23.96- 30.26] No scenes hidden for Kid 2 yet, reading comfort, off, switch, not selected.
+[ 30.26- 34.72] Larger health text and more space in this kid's parents' settings and more info.

@@ -8,7 +8,7 @@
  *     then seek, and keep the cover until playback is confirmed outside the
  *     interval.
  *
- * Five things can move it, and all five call `requestSeek`:
+ * All playhead moves call `requestSeek`, including explicit recovery:
  *
  *   seek-bar          the focused seek bar (Vega does not let an app override
  *                     D-pad focus movement, so the bar takes focus and the
@@ -43,7 +43,8 @@ export type SeekSource =
   | 'dpad-fast-forward'
   | 'dpad-rewind'
   | 'trickplay'
-  | 'media-control';
+  | 'media-control'
+  | 'recovery';
 
 export const SEEK_SOURCES: SeekSource[] = [
   'seek-bar',
@@ -51,6 +52,7 @@ export const SEEK_SOURCES: SeekSource[] = [
   'dpad-rewind',
   'trickplay',
   'media-control',
+  'recovery',
 ];
 
 /** A typical closed group of pictures is about two seconds. */
