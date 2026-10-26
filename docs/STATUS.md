@@ -1814,3 +1814,5 @@ Test-only harness 9c28e93 remains separate and uninstalled.
 Three bounded repairs implemented in an isolated branch; focused native retest pending. Baseline ledger remains 7 complete, 11 partial, 2 blocked. Unobserved cases and human acceptance remain open. Claude #7 stays independent.
 
 Bounded native retest finished: pale openings pass in recorded cases; pause speech and initial Reading comfort clipping still fail. Black safety cover preserved. Debug/Release built, Release installed hash matched. No full numbered closures; 7 complete, 11 partial, 2 blocked. No push.
+
+Reading comfort continuation: initial/repeated toggle clipping resolved on 3512344; isolated Debug 720p and 1080p visibility/focus checks pass. 26 focused tests and typecheck pass. Speech and other prior open checks unchanged; no whole numbered closure or push.

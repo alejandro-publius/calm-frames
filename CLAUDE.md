@@ -1,3 +1,5 @@
+**Reading comfort continuation completed:** 3512344 corrects padded viewport measurement. Isolated Debug first/repeated toggles, visibility and focus pass at 720p and 1080p. Pause speech remains unresolved and was untouched. Stop after this scoped pass.
+
 **Targeted native retest outcome:** pale-opening cases pass; pause speech and comfort clipping still fail. No promotion. Exact product source and limits are in `docs/native-receipt-fixes-773334a.md`.
 
 **October 25 targeted native receipt fixes.** Owner authorized this isolated `codex/native-receipt-fixes-773334a` branch from frozen 773334a for only pale openings, missing pause speech and initial Reading comfort clipping. Diagnose black pauses without weakening protection. Preserve #4 focus, main device, rollback and independent Claude #7 media work. No dependency migration, push or publication. See `docs/native-receipt-fixes-773334a.md` for causes and bounded retest evidence.
