@@ -2,17 +2,11 @@
   "checks": [
     {
       "data": {
-        "actual": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-        "expected": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c"
+        "actual": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+        "expected": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f"
       },
-      "detail": "source hashes to 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c, title is filed under 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+      "detail": "source hashes to 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f, title is filed under 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
       "name": "source_hash",
-      "passed": true
-    },
-    {
-      "data": {},
-      "detail": "every map used by the app recipe must receive independent signature and source checks",
-      "name": "playback_recipe_profiles",
       "passed": true
     },
     {
@@ -23,9 +17,9 @@
     },
     {
       "data": {
-        "map_sha": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c"
+        "map_sha": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f"
       },
-      "detail": "[wcag] map says source 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c, title is 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+      "detail": "[wcag] map says source 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f, title is 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
       "name": "map_hash:wcag",
       "passed": true
     },
@@ -33,18 +27,24 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[wcag] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/work/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/wcag.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/source/HAZARD_forest-creek-12s.mp4",
+      "detail": "[wcag] flashmap verified the signature and exact source hash",
       "name": "map_signature:wcag",
       "passed": true
     },
     {
       "data": {
         "expected": 0,
-        "recipe": "app-v1",
+        "recipe": null,
         "stored": 0
       },
       "detail": "[wcag] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[wcag] 0 signed images match checked local assets and provenance",
+      "name": "scene_assets:wcag",
       "passed": true
     },
     {
@@ -67,38 +67,38 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665
+        "tolerance_ms": 41.6665
       },
       "detail": "[wcag] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:wcag",
@@ -125,6 +125,12 @@
     },
     {
       "data": {},
+      "detail": "[wcag] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:wcag",
+      "passed": true
+    },
+    {
+      "data": {},
       "detail": "[wcag] the complete HLS output has 0 violations including boundaries",
       "name": "hls_rendition_clean:wcag",
       "passed": true
@@ -133,42 +139,66 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.666000000001,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.665999999997,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665,
-        "transport_pts_shift_ms": 1466.667
+        "tolerance_ms": 41.6665,
+        "transport_pts_shift_ms": 1566.667
       },
       "detail": "[wcag] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:wcag",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[wcag] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:wcag",
       "passed": true
     },
     {
@@ -212,9 +242,9 @@
     },
     {
       "data": {
-        "map_sha": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c"
+        "map_sha": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f"
       },
-      "detail": "[broadcast] map says source 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c, title is 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+      "detail": "[broadcast] map says source 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f, title is 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
       "name": "map_hash:broadcast",
       "passed": true
     },
@@ -222,18 +252,24 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[broadcast] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/work/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/broadcast.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/source/HAZARD_forest-creek-12s.mp4",
+      "detail": "[broadcast] flashmap verified the signature and exact source hash",
       "name": "map_signature:broadcast",
       "passed": true
     },
     {
       "data": {
         "expected": 0,
-        "recipe": "app-v1",
+        "recipe": null,
         "stored": 0
       },
       "detail": "[broadcast] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[broadcast] 0 signed images match checked local assets and provenance",
+      "name": "scene_assets:broadcast",
       "passed": true
     },
     {
@@ -256,38 +292,38 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665
+        "tolerance_ms": 41.6665
       },
       "detail": "[broadcast] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:broadcast",
@@ -314,6 +350,12 @@
     },
     {
       "data": {},
+      "detail": "[broadcast] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:broadcast",
+      "passed": true
+    },
+    {
+      "data": {},
       "detail": "[broadcast] the complete HLS output has 0 violations including boundaries",
       "name": "hls_rendition_clean:broadcast",
       "passed": true
@@ -322,42 +364,66 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.666000000001,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.665999999997,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665,
-        "transport_pts_shift_ms": 1466.667
+        "tolerance_ms": 41.6665,
+        "transport_pts_shift_ms": 1566.667
       },
       "detail": "[broadcast] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:broadcast",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[broadcast] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:broadcast",
       "passed": true
     },
     {
@@ -401,9 +467,9 @@
     },
     {
       "data": {
-        "map_sha": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c"
+        "map_sha": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f"
       },
-      "detail": "[extra-cautious] map says source 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c, title is 63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+      "detail": "[extra-cautious] map says source 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f, title is 4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
       "name": "map_hash:extra-cautious",
       "passed": true
     },
@@ -411,18 +477,24 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[extra-cautious] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/work/titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/extra-cautious.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/source/HAZARD_forest-creek-12s.mp4",
+      "detail": "[extra-cautious] flashmap verified the signature and exact source hash",
       "name": "map_signature:extra-cautious",
       "passed": true
     },
     {
       "data": {
         "expected": 0,
-        "recipe": "app-v1",
+        "recipe": null,
         "stored": 0
       },
       "detail": "[extra-cautious] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
+      "detail": "[extra-cautious] 0 signed images match checked local assets and provenance",
+      "name": "scene_assets:extra-cautious",
       "passed": true
     },
     {
@@ -443,40 +515,40 @@
     },
     {
       "data": {
-        "guard_band_ms": 1000.0,
+        "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665
+        "tolerance_ms": 41.6665
       },
       "detail": "[extra-cautious] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:extra-cautious",
@@ -503,50 +575,80 @@
     },
     {
       "data": {},
+      "detail": "[extra-cautious] the live opaque cover model uses the same interval images and black fallback",
+      "name": "scene_model_drawn:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {},
       "detail": "[extra-cautious] the complete HLS output has 0 violations including boundaries",
       "name": "hls_rendition_clean:extra-cautious",
       "passed": true
     },
     {
       "data": {
-        "guard_band_ms": 1000.0,
+        "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.666000000001,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.665999999997,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 480.0,
-          "coded_width": 854.0,
+          "coded_height": 360.0,
+          "coded_width": 640.0,
           "first_pts_ms": 0.0,
-          "frame_count": 360.0,
-          "last_pts_ms": 11966.667,
-          "median_interval_ms": 33.333,
+          "frame_count": 240.0,
+          "last_pts_ms": 19916.667,
+          "median_interval_ms": 83.333,
           "picture_coded": [
             0,
             0,
-            854,
-            480
+            640,
+            360
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 16.6665,
-        "transport_pts_shift_ms": 1466.667
+        "tolerance_ms": 41.6665,
+        "transport_pts_shift_ms": 1566.667
       },
       "detail": "[extra-cautious] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in safe",
+      "name": "scene_output_patterns:safe:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in model",
+      "name": "scene_output_patterns:model:extra-cautious",
+      "passed": true
+    },
+    {
+      "data": {
+        "intersecting_patterns": 0
+      },
+      "detail": "[extra-cautious] 0 full-size pattern finding(s) intersect a covered interval in hls",
+      "name": "scene_output_patterns:hls:extra-cautious",
       "passed": true
     },
     {
@@ -585,14 +687,14 @@
     {
       "data": {
         "bad_presets": [],
-        "still_ms": 7000.0
+        "still_ms": 13750.0
       },
-      "detail": "the cover still at 7000 ms is inside a flagged span for no preset",
+      "detail": "the cover still at 13750 ms is inside a flagged span for no preset",
       "name": "cover_still_calm",
       "passed": true
     }
   ],
-  "finished_at": 1792347768.83583,
+  "finished_at": 1793067697.5058162,
   "outcome": "no flagged segments",
   "passed": true,
   "presets": [
@@ -600,7 +702,7 @@
     "broadcast",
     "extra-cautious"
   ],
-  "sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-  "source_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/source/HAZARD_forest-creek-12s.mp4",
-  "started_at": 1792347733.692894
+  "sha256": "4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+  "source_path": "sha256:4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+  "started_at": 1793067696.884113
 }

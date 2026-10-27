@@ -278,7 +278,7 @@ test('rejects alternate archive paths and link members before reading any prepar
   const entries = [...fixture.entries()].map(([name, bytes]) => ({ name: 'assets/raw/prepared-library/' + name, bytes }));
   try {
     fs.writeFileSync(archive, tar(entries));
-    assert.throws(() => checkPreparedPackage(archive, check(fixture).catalogSha256), /local filesystem path/);
+    assert.deepEqual(checkPreparedPackage(archive, check(fixture).catalogSha256), check(fixture));
     for (const name of ['/assets/raw/prepared-library/catalog.json', 'assets/raw/./prepared-library/catalog.json']) {
       fs.writeFileSync(archive, tar([...entries, { name, bytes: Buffer.from('{}') }]));
       assert.throws(() => checkPreparedPackage(archive), /Noncanonical/);
@@ -326,9 +326,12 @@ test('media identifier cannot disagree with the source hash', () => {
     { requireReports: true }), /media identifier/);
 });
 
-test('historical reports retain integrity but block native prebuild until regenerated', () => {
-  assert.doesNotThrow(() => check(fixture));
-  assert.throws(() => checkPreparedNamespace([...fixture.keys()], name => fixture.get(name), undefined,
+test('historical path-bearing reports block prebuild independently of refreshed real evidence', () => {
+  assert.doesNotThrow(() => checkPreparedNamespace([...fixture.keys()], name => fixture.get(name), undefined,
+    { requireReports: true }));
+  const legacy = reportFixture(report => { report.source_path = '/Users/fictional/legacy-clip.mp4'; });
+  assert.doesNotThrow(() => check(legacy));
+  assert.throws(() => checkPreparedNamespace([...legacy.keys()], name => legacy.get(name), undefined,
     { requireReports: true }), /local filesystem path/);
 });
 

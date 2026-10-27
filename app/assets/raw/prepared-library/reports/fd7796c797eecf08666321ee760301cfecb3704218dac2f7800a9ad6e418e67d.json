@@ -33,7 +33,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[wcag] flashmap verify exited 0: OK /workspace/calm-frames/build/cinematic-library-proof/work/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/maps/wcag.json verifies against /workspace/calm-frames/build/cinematic-library-proof/owned-harbor-import.mp4",
+      "detail": "[wcag] flashmap verified the signature and exact source hash",
       "name": "map_signature:wcag",
       "passed": true
     },
@@ -222,7 +222,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[broadcast] flashmap verify exited 0: OK /workspace/calm-frames/build/cinematic-library-proof/work/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/maps/broadcast.json verifies against /workspace/calm-frames/build/cinematic-library-proof/owned-harbor-import.mp4",
+      "detail": "[broadcast] flashmap verified the signature and exact source hash",
       "name": "map_signature:broadcast",
       "passed": true
     },
@@ -411,7 +411,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[extra-cautious] flashmap verify exited 0: OK /workspace/calm-frames/build/cinematic-library-proof/work/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/maps/extra-cautious.json verifies against /workspace/calm-frames/build/cinematic-library-proof/owned-harbor-import.mp4",
+      "detail": "[extra-cautious] flashmap verified the signature and exact source hash",
       "name": "map_signature:extra-cautious",
       "passed": true
     },
@@ -592,7 +592,7 @@
       "passed": true
     }
   ],
-  "finished_at": 1791926429.5793154,
+  "finished_at": 1793068183.4065683,
   "outcome": "no flagged segments",
   "passed": true,
   "presets": [
@@ -601,6 +601,6 @@
     "extra-cautious"
   ],
   "sha256": "de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
-  "source_path": "/workspace/calm-frames/build/cinematic-library-proof/owned-harbor-import.mp4",
-  "started_at": 1791926320.987822
+  "source_path": "sha256:de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+  "started_at": 1793068080.8338218
 }
