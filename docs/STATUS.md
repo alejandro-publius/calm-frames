@@ -1,3 +1,13 @@
+**October 27 dependency closure:** original item 12 is complete and merged in
+[PR 21](https://github.com/alejandro-publius/calm-frames/pull/21).
+Exact-lock Debug and Release builds, shipped inventories and actual read-only
+native SecurityManager integration pass; exact Release Watch/Back/explicit
+Resume is observed on the fictional disposable. All hosted checks, including
+Audit and mutation, pass. Current totals are **13 complete, 6 partial, 1 blocked**.
+[Exact packages, evidence and limits](../results/checklist12-native-2026-10-27.json).
+Debug stays private; licensing and general release acceptance remain separate.
+Older dated status below remains historical.
+
 **October 27 dependency candidate:** [Checklist 12 host dependency work](checklist12-dependencies-2026-10-27.md)
 removes the obsolete RN 0.60 toolchain with no retained version changes.
 Fresh scans have zero findings and no exceptions remain. This separate source

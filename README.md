@@ -162,8 +162,11 @@ within recorded cases. Reading comfort visibility and focus passed at both reque
 Release 720p VoiceView save speech/focus also passed, with the recorded
 [owner acceptance scope](results/owner-acceptance-2026-10-26.json). No new 1080p
 VoiceView save recording is claimed. Pause announcements remain unreliable
-in the recorded Release retest. Dependency Audit remains blocked; consolidation
-does not renew exceptions or certify release acceptance.
+in the recorded Release retest. [Dependency closure](docs/checklist12-dependencies-2026-10-27.md)
+removed the obsolete host toolchain; Audit passes with no exceptions. Exact-lock
+Debug/Release builds, shipped inventories and bounded native SDK/Release checks
+pass in the [current receipt](results/checklist12-native-2026-10-27.json).
+This does not certify general release acceptance or vendor redistribution rights.
 
 Lee Point Australian woodland has been acquired and prepared separately, but is
 unaccepted and unintegrated. Its temporary signatures are not trusted by the app.

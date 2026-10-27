@@ -1,0 +1,185 @@
+{
+  "date_utc": "2026-10-27",
+  "source_commit": "23d754ab0716700062047d87319e8035914dd79c",
+  "merged_main": "df445eea2f64a3540e0952e82685befe695d5ca9",
+  "pull_request": "https://github.com/alejandro-publius/calm-frames/pull/21",
+  "scope": "Original item 12 dependency closure and exact-package bounded native compatibility; not general release acceptance.",
+  "packages": {
+    "debug": {
+      "build": "passed",
+      "package_gates": "passed",
+      "source_commit": "23d754ab0716700062047d87319e8035914dd79c",
+      "bytes": 132676598,
+      "sha256": "c644b2f583fa18c49ab19ce3cd14ab20f2321ccddac590c4bb5b2e244a3ba773",
+      "sha384": "6d60461e6b4d24649eaf46865814883084d89ff01b4ef09f1854d5a75fcfaa166f6f4d28ac0aa4ac9e8a92a74106de19",
+      "package_relative_to_repository": "build/release/local-23d754a-debug/calm-frames-0.1.0-aarch64-debug.vpkg",
+      "app_input_count": 856,
+      "app_input_inventory_sha256": "f9b21d32273c9b3f5e10b5fc65a4133b33fc18ebc8d75bcb13445b7dc4c54e32",
+      "raw_build_receipt_sha256": "95fb1f4fe79c95408b941ceb6eb9a167ec23d2886a3c314ede8aba074188f8be",
+      "source_map": {
+        "source_map": "build/lib/rn-bundles/Debug/c102afd2e904ca33b9cbbd059e615866c3fc749b3458e2929a502c92c7d43c93.bundle.map",
+        "source_map_sha256": "fa063dfdfedf0085ffe42db8f357c4bf4881b834638ca57453b37c0194b749aa",
+        "map_named_after_packaged_bundle": true,
+        "map_bundle_id_equals_packaged_bundle": true,
+        "map_sources": 1001,
+        "packaged_module_path_table_entries": 658,
+        "module_path_table_equals_map": false,
+        "map_only_paths": [
+          "node_modules/@amazon-devices/kepler-compatibility-metro-config/dist/src/keplerManifestPolyfill.js",
+          "node_modules/@react-native/js-polyfills/console.js",
+          "node_modules/@react-native/js-polyfills/error-guard.js"
+        ],
+        "map_only_paths_are_leading_polyfills": true,
+        "table_only_paths": []
+      },
+      "npm_instances": 89,
+      "known_vulnerable_instances_shipped": [],
+      "reports": 6,
+      "report_privacy_passed": true,
+      "personal_build_path_occurrences": 10,
+      "private_key_blocks": [],
+      "installed_on_disposable": true
+    },
+    "release": {
+      "build": "passed",
+      "package_gates": "passed",
+      "source_commit": "23d754ab0716700062047d87319e8035914dd79c",
+      "bytes": 131790424,
+      "sha256": "e161f8cc99e24bd9c93c05ff34719da95304c9780f31698c37c9538a57b25d9d",
+      "sha384": "c79125ae614e0052f1f02d7e3ac0c6c2a536f51613f95b7c49a0639e455cc2515628935be2a44da44d0425a74dd3a744",
+      "package_relative_to_repository": "build/release/local-23d754a-release/calm-frames-0.1.0-aarch64.vpkg",
+      "app_input_count": 856,
+      "app_input_inventory_sha256": "f9b21d32273c9b3f5e10b5fc65a4133b33fc18ebc8d75bcb13445b7dc4c54e32",
+      "raw_build_receipt_sha256": "0a5cf56f56fad5a797255097ea2ea5c97382d56343ad6721f03330df2dca3dad",
+      "source_map": {
+        "source_map": "build/lib/rn-bundles/Release/211f57952e94558e3289363862fc7c6e01f97b4e59366c7eeaad9251d0ea453f.bundle.map",
+        "source_map_sha256": "660b5a1b355dcfb0f6817ac93152fae624d2438f4e2b4e39ef36d00b130867d5",
+        "map_named_after_packaged_bundle": true,
+        "map_bundle_id_equals_packaged_bundle": true,
+        "map_sources": 925,
+        "packaged_module_path_table_entries": 0,
+        "module_path_table_equals_map": null,
+        "map_only_paths": [],
+        "map_only_paths_are_leading_polyfills": null,
+        "table_only_paths": []
+      },
+      "npm_instances": 76,
+      "known_vulnerable_instances_shipped": [],
+      "reports": 6,
+      "report_privacy_passed": true,
+      "personal_build_path_occurrences": 0,
+      "private_key_blocks": [],
+      "installed_on_disposable": true
+    }
+  },
+  "native": {
+    "device": "Isolated existing fictional Vega Virtual Device, aarch64, OS 1.2 TV Ship/101520710, 1280x720",
+    "debug": {
+      "startup_observed": true,
+      "security_manager": {
+        "api": "SecurityManager.getPrivilegeState",
+        "state": "DENY",
+        "knownState": true,
+        "permissionRequested": false,
+        "permissionChanged": false
+      },
+      "method": "Documented read-only SDK API through installed system module in the official app debugger; SDK Promise completion read explicitly. No household values or credentials inspected."
+    },
+    "release": {
+      "startup_observed": true,
+      "approved_catalog": "McWay Falls compiled approved edition",
+      "watch_back_resume": "Actual picture/position, Back, saved Resume choice and subsequent explicit activation observed. Playback did not automatically resume on reentry.",
+      "recordings": [
+        {
+          "sha256": "044a030057550e63072447749539a05899b567610699fdb5cea634dd2b8be6e0",
+          "scope": "Watch, Back, return to explicit Resume choice"
+        },
+        {
+          "sha256": "37fac17f8c57672d3da4bfd5d35b8954e46ed43ea197a0c4848111d51ac64b09",
+          "scope": "Explicit Resume, native picture/position advance, Back"
+        }
+      ]
+    },
+    "permission_request_or_change": false,
+    "main_device_touched": false,
+    "pin_captured": false
+  },
+  "independent_review": {
+    "result": "No remaining item 12 native dependency evidence gap",
+    "findings": "Both package hashes and 856 input records per build, source-map bindings, all six reports, unchanged native/autolink assets and all 27 recorded security-manager files verified read-only.",
+    "repeated_tests_or_builds": false
+  },
+  "hosted_ci": {
+    "source_commit": "23d754ab0716700062047d87319e8035914dd79c",
+    "all_jobs": "passed",
+    "ci": "https://github.com/alejandro-publius/calm-frames/actions/runs/40460421700",
+    "audit": "https://github.com/alejandro-publius/calm-frames/actions/runs/40460421763",
+    "audit_findings": 0,
+    "audit_exceptions": 0
+  },
+  "limitations": [
+    "Debug retains developer paths and stays private. Release retains generic SDK build-path strings in unchanged native binaries.",
+    "Actual packaged JavaScript inventories are bound to source maps and installed versions; this is not an exhaustive OS/native platform audit.",
+    "Native read DENY is not an observed permission request, grant or refusal dialog. Refusal/allow/error behavior remains covered by retained consumer tests.",
+    "Caregiver native selection awaits private owner unlock; new personal-edition approval/activation is not inferred from compiled catalog playback.",
+    "Current consumer editions have no caption tracks; caption restoration and combined flagged-interval recovery remain open.",
+    "Pause speech remains unresolved; the separate semantic candidate failed native acceptance and was reverted.",
+    "Vendor redistribution terms and exact-package distribution approval remain unresolved; no binary or tag published."
+  ],
+  "checklist": {
+    "newly_complete": [
+      12
+    ],
+    "complete": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      12,
+      14,
+      15,
+      18,
+      20
+    ],
+    "partial": [
+      7,
+      10,
+      11,
+      13,
+      16,
+      19
+    ],
+    "blocked": [
+      17
+    ],
+    "complete_total": 13,
+    "partial_total": 6,
+    "blocked_total": 1
+  },
+  "native_pause_trial": {
+    "source": "Separate uncommitted semantic live-region trial over the accepted Debug source; not included in the final packages.",
+    "changes": "Replaced the timed explicit announcement with a persistent aria-live polite region; retained playback history and focus.",
+    "source_checks": "33 focused tests, typecheck and lint passed; the only snapshot change is the live-region property.",
+    "screen_reader_enabled": true,
+    "actual_native_events": "Opening and two real remote pauses, separated by actual resume. Label updates visibly; native speech acceptance remains unestablished. Local machine transcription contains progress percentages and omits the pause instruction.",
+    "recording_sha256": "4653730ef6b20a97c989e0fb68da13fb1fa934f6c2bc0844bd87939a87bd4243",
+    "result": "Failed acceptance; all four source/test changes reverted. No fix merged. Do not repeat timing adjustments.",
+    "limit": "Supported SDK announcement APIs do not expose delivery/cancellation acknowledgement. A native delivery diagnosis or supported vendor remedy remains needed."
+  },
+  "cleanup": {
+    "failed_trial_reverted": true,
+    "final_accepted_release_restored": true,
+    "disposable_powered_off": true,
+    "temporary_metro_stopped": true,
+    "temporary_forwarding_removed": true,
+    "temporary_debugger_globals_removed": true,
+    "sdk_link_restored": true,
+    "test_driver_in_product": false,
+    "owned_local_job_remaining": false,
+    "main_household_touched": false
+  }
+}

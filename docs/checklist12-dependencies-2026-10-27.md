@@ -3,8 +3,7 @@
 Base: `b51c51000f74cbbe6998070cbd3879c8aca3f206`.
 Branch: `codex/checklist12-host-dependencies-2026-10-27`.
 Scope: dependency and CI closure only. Native UI, player, media, catalogs and
-local acceptance work are unchanged. Item 12 remains partial until the native
-checks below pass. This candidate must not be merged before that evidence.
+local acceptance work are unchanged. Item 12 is complete after the exact native checks recorded below; PR 21 is merged.
 
 ## What changed and why
 
@@ -89,21 +88,19 @@ Exact results and log hashes are in the
 The prior b51c510 native builds and nine functional CI jobs remain evidence for
 the unchanged product source, not for this new dependency resolution.
 
-## Remaining dependency for original-item closure
+## Native closure
 
-On the Mac, use this exact candidate lockfile for one clean installation,
-Debug and Release builds, and source-map/package inventories. Confirm that the
-old RN/DevTools/ws instances remain absent and native module/autolink inputs
-match the baseline. Verify startup and the retained security-manager permission
-consumer through its existing native API; preserve refusal behavior and do not
-change household settings, real permissions or acceptance scope to run a test.
-The local acceptance owner must coordinate any device interaction.
+[Exact native receipt](../results/checklist12-native-2026-10-27.json) records the
+clean Mac installation, Debug/Release builds, ABI and package gates, source-bound
+inventories and unchanged native/autolink/SDK assets. The actual SDK privilege
+state API returned DENY in the fictional disposable Debug runtime, without a
+permission request or change. Exact Release startup, approved McWay playback,
+Back and explicit saved-position Resume passed. Independent read-only review
+found no remaining dependency acceptance gap. PR 21 merged normally.
 
-A fresh pair of native builds and inventories is required because this changes
-a dependency outside codegen-types' declared RN range. The cloud checks do not
-certify native or vendor compatibility. Keep this tested work on its draft PR
-until that evidence exists. No exception approval is needed for the zero-finding
-scan; no release, publication or local acceptance is implied.
+This validates the scoped project compatibility correction. It does not claim
+vendor certification, observed native permission grant/refusal dialogs, reliable
+pause speech or public redistribution permission. Debug stays private.
 
 Primary sources checked: the npm registry records for
 [@amazon-devices/security-manager-lib](https://registry.npmjs.org/@amazon-devices%2fsecurity-manager-lib)
