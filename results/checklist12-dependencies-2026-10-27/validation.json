@@ -28,7 +28,6 @@
   "codegen_outputs": "byte-identical baseline and candidate",
   "unchanged_source": [
     "app/src",
-    "app/test",
     "app/assets",
     "app/manifest.toml"
   ],
@@ -75,6 +74,23 @@
     "negative-sdk-hash": {
       "path": "results/checklist12-dependencies-2026-10-27/checks/negative-sdk-hash.log",
       "sha256": "4af97710a38e3a865f0afcc70dc70b14c4f52ffb755edd7b91cff6e22937c63d"
+    },
+    "image-size": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/image-size.log",
+      "sha256": "6c43cab88961079af194db61b6c147354dc383cd77c5aa57c80320060e17f329"
     }
+  },
+  "image_size_tests": {
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0
+  },
+  "changed_app_tests": [
+    "app/test/calmframes/imageSizeLegacy.test.ts"
+  ],
+  "first_hosted_ci": {
+    "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40459500316",
+    "app_result": "1955 passed, 3 failed: removed Metro 0.54 path in image-size tests",
+    "correction": "The same PNG/JPEG/SVG asset assertions now exercise installed Metro 0.83.8; all 20 image-size tests pass."
   }
 }

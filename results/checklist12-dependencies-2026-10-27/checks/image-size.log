@@ -1,0 +1,28 @@
+PASS test/calmframes/imageSizeLegacy.test.ts
+  patched image-size adapter and the current Metro asset consumer
+    ✓ the installed parser is the exact official fixed version, not a renamed vulnerable copy (15 ms)
+    ✓ malformed ICNS terminates with an error through buffer (41 ms)
+    ✓ malformed ICNS terminates with an error through filename (40 ms)
+    ✓ malformed ICNS terminates with an error through callback (44 ms)
+    ✓ legacy callers retain the callable Buffer and filename API (5 ms)
+    ✓ callback success and parse errors are delivered once (4 ms)
+    ✓ synchronous file reads close descriptors after success and parser errors (19 ms)
+    ✓ synchronous stat errors still close the descriptor (2 ms)
+    ✓ synchronous read errors still close the descriptor (1 ms)
+    ✓ synchronous reads are bounded and partial reads do not lose bytes (2 ms)
+    ✓ callback missing failures are delivered once (1 ms)
+    ✓ callback empty failures are delivered once (1 ms)
+    ✓ callback directory failures are delivered once
+    ✓ the upstream callback success path closes its handle (1 ms)
+    ✓ the upstream callback parse path closes its handle (1 ms)
+    ✓ the upstream callback stat path closes its handle
+    ✓ the upstream callback read path closes its handle (1 ms)
+    ✓ actual Metro retains png asset dimensions (6 ms)
+    ✓ actual Metro retains jpg asset dimensions (2 ms)
+    ✓ the actual current Metro asset builder retains image dimensions (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        1.044 s
+Ran all test suites matching /test\/calmframes\/imageSizeLegacy.test.ts/i.

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 const appRoot = resolve(__dirname, '../..');
-const metroEntry = join(appRoot, 'node_modules/react-native-tscodegen-types/node_modules/metro/src/Assets.js');
+const metroEntry = join(appRoot, 'node_modules/metro/src/Assets.js');
 const legacyRequire = createRequire(metroEntry);
 const runtimeFs = legacyRequire('node:fs') as typeof fs;
 const imageSize = legacyRequire('image-size') as ((input: Buffer | string,
@@ -35,7 +35,7 @@ const rejectedChild = String.raw`
   }
 `;
 
-describe('patched image-size behind the legacy Metro API', () => {
+describe('patched image-size adapter and the current Metro asset consumer', () => {
   let scratch: string;
   beforeEach(() => { scratch = fs.mkdtempSync(join(tmpdir(), 'calm-image-size-test-')); });
   afterEach(() => { fs.rmSync(scratch, { recursive: true, force: true }); jest.restoreAllMocks(); });
@@ -184,7 +184,7 @@ describe('patched image-size behind the legacy Metro API', () => {
     });
   });
 
-  test('the actual legacy Metro asset builder retains image dimensions', async () => {
+  test('the actual current Metro asset builder retains image dimensions', async () => {
     const path = join(scratch, 'plain.svg');
     fs.writeFileSync(path, svg);
     const assets = legacyRequire(metroEntry) as { getAssetData: (path: string, local: string,

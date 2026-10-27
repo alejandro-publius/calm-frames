@@ -72,6 +72,10 @@ policy tests preserve scanner failure, new-advisory and expired-review refusal.
   are enforced in CI. This is code generation, not a native compilation.
 - The complete React Native CLI configuration is identical after replacing
   each worktree's root path. Native dependency/autolinking maps are identical.
+- The first hosted app run passed 1,955 tests and failed three image-size
+  checks that still addressed the removed Metro 0.54 path. Those same asset
+  assertions now exercise the current Metro 0.83 consumer; all 20 image-size
+  tests pass. The adapter's malformed-input and cleanup tests remain intact.
 - The connection component's nine tests and snapshot pass, as does normal
   TypeScript checking. Its Jest native mock is not native permission evidence.
 - Both new guard negative controls fail as intended: restoring the old lock
