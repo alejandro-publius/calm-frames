@@ -7,6 +7,9 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/os-locale')) {
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const entry = join(app, 'node_modules/os-locale/index.js');
 const require = createRequire(entry);
@@ -88,3 +91,5 @@ test('the actual locale module retains its default for disabled spawning and fai
   assert.equal(await failed.value(), 'en_US');
   assert.deepEqual(failed.calls, [['sync', 'locale'], ['async', 'locale']]);
 });
+
+}

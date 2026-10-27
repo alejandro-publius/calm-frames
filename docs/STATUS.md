@@ -1,3 +1,9 @@
+**October 27 dependency candidate:** [Checklist 12 host dependency work](checklist12-dependencies-2026-10-27.md)
+removes the obsolete RN 0.60 toolchain with no retained version changes.
+Fresh scans have zero findings and no exceptions remain. This separate source
+candidate still needs exact-lock native builds/inventories before merging;
+original item 12 remains partial. Product and local acceptance work are untouched.
+
 **October 26 cloud report privacy fix:** new verification reports use exact-media
 identifiers before hashing; export and native packaging refuse host paths.
 Historical reports remain unchanged and native prebuild is blocked until owner

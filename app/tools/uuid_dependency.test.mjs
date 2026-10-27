@@ -5,6 +5,9 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/xcode')) {
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const require = createRequire(join(app, 'node_modules/xcode/lib/pbxProject.js'));
 const uuid = require('uuid');
@@ -59,3 +62,5 @@ test('the actual project parser can add a group, serialize it and parse it again
   assert.equal(reread.hash.project.objects.PBXGroup[group.uuid].name, 'Fictional fixtures');
   assert.match(readFileSync(file, 'utf8'), /BBBBBBBBBBBBBBBBBBBBBBBB/);
 });
+
+}

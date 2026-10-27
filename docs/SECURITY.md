@@ -410,25 +410,30 @@ that every finding is either fixed or written down, in
 `scripts/audit_exceptions.toml`, with the packages it covers, the advisory ids
 that were read, who accepted it, why, and the date it has to be looked at again.
 
-### Current local audit, October 25
+### Current cloud candidate audit, October 27
 
-The current [audit report](../results/audit.json) scans the locked app tree,
-ingest and CDK requirements, plus the development environment freeze used for
-this local continuation. It is not a native package inventory or hosted CI.
-`make audit-check` fails because the two historical groups' review date was
-October 21. Their dates and acceptance text remain unchanged. Only the existing
-five-advisory TOML controlled-build deferral is owner-approved through October
-30, using reviewed, hashed manifests in isolated, bounded builds. Coding
-permission is not acceptance of the remaining findings.
+The current [audit report](../results/audit.json) scans the locked app tree and
+both ingest and CDK requirement files. All scanners completed with no findings.
+The [bounded dependency change](checklist12-dependencies-2026-10-27.md) removes
+the unused React Native 0.60 host graph through one codegen dependency override.
+The app's React Native, Amazon SDK packages and native system bundles retain
+their pinned versions and bytes. This is a locally validated candidate, not an
+Amazon-certified migration or a new native package inventory.
+
+The three old exception groups have been retired because no finding remains
+for them to cover. No acceptance or review date was renewed. The unchanged
+Audit policy still rejects any new unreviewed finding or scanner failure.
+Exact candidate Debug/Release verification remains outstanding while the Mac
+is offline; checklist item 12 is not closed.
 
 | Scope | Current scanner result |
 |---|---|
 | Python packages with findings in the scanned sources | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->9<!--/n--> |
-| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->4<!--/n--> |
+| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->0<!--/n--> |
+| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->0<!--/n--> |
 | npm packages classified critical | <!--n results/audit.json:published.npm_critical -->0<!--/n--> |
-| npm packages classified high | <!--n results/audit.json:published.npm_high -->9<!--/n--> |
-| Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
+| npm packages classified high | <!--n results/audit.json:published.npm_high -->0<!--/n--> |
+| Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->0<!--/n--> |
 
 The [first overnight batch](overnight-2026-10-25/DEPENDENCIES.md) fixes the
 compressed-body parser crash, legacy argument escaping and temporary-path
@@ -438,24 +443,16 @@ scoped legacy consumers. Both include affected-version reproductions, actual
 consumer checks, pinned lockfiles and reproduced SBOMs. No SDK, protection
 budget, exception date or approved media was changed to obtain a passing check.
 
-The [current cloud follow-up](cloud-followup-2026-10-25/DEPENDENCIES.md) retains
-the decoder/UUID fixes and removes eight further parser/glob advisories with
-actual consumer checks. Five remain; both expired groups still block Audit.
+The [October 25 follow-up](cloud-followup-2026-10-25/DEPENDENCIES.md) and
+[residual ledger](cloud-followup-2026-10-25/REMAINING_DEPENDENCIES.md) preserve
+historical findings and the demonstrated WebSocket API barrier. This candidate
+removes those obsolete consumers together; it does not force a new WebSocket
+implementation into them. The decoder adapter and other retained fixes remain.
 
-The [remaining advisory ledger](../results/cloud-followup-2026-10-25/residual-risk.json)
-names each finding, locked node, exposure limit and next action. Shipping
-classification must be checked against the exact new native package; an older
-Debug inventory or host-tool test does not establish current Release contents.
-The old Metro WebSocket consumer still has a demonstrated API barrier to a
-direct fixed-version override. The URI decoder now uses a tested CommonJS
-adapter to the fixed parser; its new native package inventory remains pending.
-
-Historical fixes to xmldom, Lodash, Handlebars, image-size and subsequent build
-leaves remain in the verified handoff. The [retained October 13 audit](../results/audit-2026-10-13-historical.json)
-preserves the old counters used in dated status/review documents. Those old
-passes do not override the present expired reviews. The [October 11 bundle
-inventory](../results/bundle_packages_2026-10-11.json) used a stubbed compiled
-Shaka file and is historical tooling evidence, not a new native build claim.
+The [October 13 audit](../results/audit-2026-10-13-historical.json) and earlier
+bundle inventories retain their original scope. Device inventories do not
+establish host safety. Conversely, the current clean host scan and byte-identical
+SDK assets do not establish native verification of this changed lockfile.
 
 Scanner execution and report validation also fail closed: empty output, error
 JSON, unexpected exit statuses, incomplete records and skipped dependencies
@@ -475,7 +472,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1054<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->931<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.

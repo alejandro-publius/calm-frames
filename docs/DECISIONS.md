@@ -2956,3 +2956,14 @@ reject private paths at export/native packaging, preserving historical bytes for
 integrity inspection. Do not rewrite hash-bound reports or change signer trust.
 Cost: focused cloud regression tests, no service or native build cost.
 [Regeneration boundary and controls](REPORT_PRIVACY.md).
+
+
+## October 27: remove the redundant codegen host graph
+
+Resolve codegen-types 0.66.0's RN dependency to the application's pinned 0.83.0
+in a separate candidate, based on inspected SDK consumers, byte-identical
+native assets, real code-generator output and a clean full dependency scan.
+Preserve Jest notifications explicitly. Retire only exceptions with no remaining
+findings; keep the policy unchanged. Require exact-lock native verification
+before merging or closing item 12. No paid service or device action.
+See [the review and evidence](checklist12-dependencies-2026-10-27.md).

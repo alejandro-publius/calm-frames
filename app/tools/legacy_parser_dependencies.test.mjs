@@ -7,15 +7,17 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { legacyConsumer } from './legacy_consumer.mjs';
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const appRequire = createRequire(join(app, 'package.json'));
-const inspectorPath = appRequire.resolve('metro-inspector-proxy/src/cli.js');
-const inspectorRequire = createRequire(inspectorPath);
-const metroRequire = createRequire(join(app, 'node_modules/react-native-tscodegen-types/node_modules/metro/src/cli.js'));
 const builderPath = appRequire.resolve('@amazon-devices/kepler-module-manifest-builder');
 const builderRequire = createRequire(builderPath);
 const toml = builderRequire('toml');
 
+if (legacyConsumer('node_modules/metro-inspector-proxy')) {
+const inspectorPath = appRequire.resolve('metro-inspector-proxy/src/cli.js');
+const inspectorRequire = createRequire(inspectorPath);
+const metroRequire = createRequire(join(app, 'node_modules/react-native-tscodegen-types/node_modules/metro/src/cli.js'));
 for (const [name, require] of [['inspector', inspectorRequire], ['legacy Metro', metroRequire]]) {
   test(`${name} parser refuses prototype mutation in a separate process`, () => {
     const code = `const parse=require(${JSON.stringify(require.resolve('yargs-parser'))});
@@ -69,6 +71,8 @@ test('old yargs still validates required options and keeps arguments after the d
   assert.equal(parsed.port, 9123);
   assert.deepEqual(parsed._, ['--literal']);
 });
+
+}
 
 test('the actual SDK manifest reader preserves all declared privileges', () => {
   const require = createRequire(join(dirname(builderPath), 'src/utils/compatibility-utils.js'));

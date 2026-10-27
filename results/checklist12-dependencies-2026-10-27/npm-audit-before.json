@@ -1,0 +1,243 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@amazon-devices/security-manager-lib": {
+      "name": "@amazon-devices/security-manager-lib",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "react-native-tscodegen-types"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@amazon-devices/security-manager-lib"
+      ],
+      "fixAvailable": false
+    },
+    "@react-native-community/cli": {
+      "name": "@react-native-community/cli",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro",
+        "metro-config",
+        "ws"
+      ],
+      "effects": [
+        "react-native"
+      ],
+      "range": "<=6.0.1",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli"
+      ],
+      "fixAvailable": false
+    },
+    "metro": {
+      "name": "metro",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro-config",
+        "metro-inspector-proxy",
+        "ws"
+      ],
+      "effects": [
+        "@react-native-community/cli",
+        "metro-config"
+      ],
+      "range": "0.24.5 - 0.66.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/metro"
+      ],
+      "fixAvailable": false
+    },
+    "metro-config": {
+      "name": "metro-config",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "metro"
+      ],
+      "effects": [
+        "metro"
+      ],
+      "range": "<=0.66.2",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/metro-config"
+      ],
+      "fixAvailable": false
+    },
+    "metro-inspector-proxy": {
+      "name": "metro-inspector-proxy",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "ws"
+      ],
+      "effects": [
+        "metro"
+      ],
+      "range": "0.53.0 - 0.66.2",
+      "nodes": [
+        "node_modules/metro-inspector-proxy"
+      ],
+      "fixAvailable": false
+    },
+    "react-devtools-core": {
+      "name": "react-devtools-core",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1099563,
+          "name": "react-devtools-core",
+          "dependency": "react-devtools-core",
+          "title": "React Developer Tools extension Improper Authorization vulnerability",
+          "url": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-116",
+            "CWE-285"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": "<4.28.4"
+        },
+        "ws"
+      ],
+      "effects": [
+        "react-native"
+      ],
+      "range": "<=4.28.0",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core"
+      ],
+      "fixAvailable": false
+    },
+    "react-native": {
+      "name": "react-native",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@react-native-community/cli",
+        {
+          "source": 1089027,
+          "name": "react-native",
+          "dependency": "react-native",
+          "title": "Regular expression denial of service in react-native",
+          "url": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-697"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=0.59.0 <0.62.3"
+        },
+        "react-devtools-core"
+      ],
+      "effects": [
+        "react-native-tscodegen-types"
+      ],
+      "range": "<=0.0.0-20220922-2044-205cc9bc3 || 0.43.0-rc.0 - 0.62.2 || 0.67.0-rc.0 - 0.67.5 || 0.69.0-rc.0 - 0.70.15",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types/node_modules/react-native"
+      ],
+      "fixAvailable": false
+    },
+    "react-native-tscodegen-types": {
+      "name": "react-native-tscodegen-types",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "react-native"
+      ],
+      "effects": [
+        "@amazon-devices/security-manager-lib"
+      ],
+      "range": "<=0.67.0",
+      "nodes": [
+        "node_modules/react-native-tscodegen-types"
+      ],
+      "fixAvailable": false
+    },
+    "ws": {
+      "name": "ws",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1118731,
+          "name": "ws",
+          "dependency": "ws",
+          "title": "ws affected by a DoS when handling a request with many HTTP headers",
+          "url": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+          "severity": "high",
+          "cwe": [
+            "CWE-476"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=2.1.0 <5.2.4"
+        },
+        {
+          "source": 1123262,
+          "name": "ws",
+          "dependency": "ws",
+          "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+          "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770",
+            "CWE-1050"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=1.1.0 <5.2.5"
+        }
+      ],
+      "effects": [
+        "@react-native-community/cli",
+        "metro",
+        "metro-inspector-proxy",
+        "react-devtools-core"
+      ],
+      "range": "1.1.0 - 5.2.4",
+      "nodes": [
+        "node_modules/metro-inspector-proxy/node_modules/ws",
+        "node_modules/react-native-tscodegen-types/node_modules/react-devtools-core/node_modules/ws",
+        "node_modules/react-native-tscodegen-types/node_modules/ws"
+      ],
+      "fixAvailable": false
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 9,
+      "critical": 0,
+      "total": 9
+    },
+    "dependencies": {
+      "prod": 1016,
+      "dev": 475,
+      "optional": 6,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 1495
+    }
+  }
+}

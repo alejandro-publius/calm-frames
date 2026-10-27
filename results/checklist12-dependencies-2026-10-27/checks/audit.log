@@ -1,0 +1,4 @@
+python: 0 package(s) with advisories
+npm: 0 package(s), 0 advisory(s), 0 critical, 0 high
+0 exception group(s) in audit_exceptions.toml
+written to results/audit.json

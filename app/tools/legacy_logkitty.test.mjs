@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
-const consumer = join(app, 'node_modules/react-native-tscodegen-types/node_modules',
+const consumer = join(app, 'node_modules',
   '@react-native-community/cli-platform-android/build/commands/logAndroid/index.js');
 const legacyRequire = createRequire(consumer);
 const adbFile = legacyRequire.resolve('logkitty/build/android/adb.js');
@@ -34,8 +34,8 @@ function loadAdb({ output = Buffer.from('1234\n'), fail } = {}) {
   return { api: exports, calls, child };
 }
 
-test('the legacy CLI resolves the fixed logger without upgrading the CLI', () => {
-  assert.equal(legacyRequire('../../../package.json').version, '2.9.0');
+test('the current CLI resolves the fixed logger without upgrading the CLI', () => {
+  assert.equal(legacyRequire('../../../package.json').version, '20.2.0');
   assert.equal(legacyRequire('logkitty/package.json').version, '0.7.1');
   const lock = JSON.parse(readFileSync(join(app, 'package-lock.json'), 'utf8'));
   for (const [path, item] of Object.entries(lock.packages)) {
@@ -78,7 +78,7 @@ test('the logger preserves specific process and unparsable-PID errors', () => {
   }
 });
 
-test('the actual legacy CLI retains React Native tag filtering and formatted events', async () => {
+test('the actual current CLI retains React Native tag filtering and formatted events', async () => {
   const api = legacyRequire('logkitty');
   const emitter = new EventEmitter();
   const started = [];

@@ -1,0 +1,20 @@
+  Command failed: /workspace/.cache/npm/_npx/f4985f1adc097c41/node_modules/node/bin/node -- /workspace/.cache/npm/_npx/f4985f1adc097c41/node_modules/npm/bin/npm-cli.js ls --json --long --all --package-lock-only
+  npm error code ELSPROBLEMS
+  npm error invalid: react@19.2.0 /workspace/calm-frames-dependencies/app/node_modules/react
+  npm error invalid: @typescript-eslint/parser@8.70.0 /workspace/calm-frames-dependencies/app/node_modules/@typescript-eslint/parser
+  npm error invalid: @types/react@19.3.0 /workspace/calm-frames-dependencies/app/node_modules/@types/react
+  npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 /workspace/calm-frames-dependencies/app/node_modules/@typescript-eslint/eslint-plugin
+  npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0
+  npm error invalid: picomatch@2.3.2 /workspace/calm-frames-dependencies/app/node_modules/picomatch
+  npm error A complete log of this run can be found in: /workspace/.cache/npm/_logs/2026-10-27T06_06_01_413Z-debug-0.log
+  
+  npm error code ELSPROBLEMS
+  npm error invalid: react@19.2.0 /workspace/calm-frames-dependencies/app/node_modules/react
+  npm error invalid: @typescript-eslint/parser@8.70.0 /workspace/calm-frames-dependencies/app/node_modules/@typescript-eslint/parser
+  npm error invalid: @types/react@19.3.0 /workspace/calm-frames-dependencies/app/node_modules/@types/react
+  npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 /workspace/calm-frames-dependencies/app/node_modules/@typescript-eslint/eslint-plugin
+  npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0
+  npm error invalid: picomatch@2.3.2 /workspace/calm-frames-dependencies/app/node_modules/picomatch
+  npm error A complete log of this run can be found in: /workspace/.cache/npm/_logs/2026-10-27T06_06_01_413Z-debug-0.log
+  
+every bill of materials matches what the pinned generators write (cyclonedx-py 7.4.0, cyclonedx-python-lib 11.12.0, cyclonedx-npm 6.0.1, cyclonedx-library 10.3.0)
