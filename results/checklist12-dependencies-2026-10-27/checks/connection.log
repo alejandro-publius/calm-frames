@@ -1,0 +1,17 @@
+PASS test/components/Connection.test.tsx
+  Connection Component Test Cases
+    ✓ renders correctly with styles (268 ms)
+    ✓ renders correctly with initial state (5 ms)
+    ✓ does not display wifi details when wifiDetails is empty object (153 ms)
+    ✓ styles applied correctly (3 ms)
+    ✓ returns the number of keys when wifiDetails has keys (3 ms)
+    ✓ FocusableElement responds to focus and press events (162 ms)
+    ✓ FocusableElement handles focus and blur events correctly (6 ms)
+    ✓ calls handleRefresh when screen is in focus (4 ms)
+    ✓ onError is called when refresh throws an error (3 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       9 passed, 9 total
+Snapshots:   1 passed, 1 total
+Time:        3.582 s
+Ran all test suites matching /test\/components\/Connection.test.tsx/i.

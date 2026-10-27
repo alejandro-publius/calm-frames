@@ -22,8 +22,8 @@ Two scanner matches were verified SHA-256 checksums of committed source-access
 reports. Exact filename/value exceptions retain all default detector rules;
 changed values and credential-field controls remain rejected.
 
-The fresh normal dependency Audit on the combined lockfile still fails: <!--n results/audit.json:published.npm_advisories_total -->4<!--/n-->
-advisories affecting <!--n results/audit.json:published.npm_packages_with_advisories -->9<!--/n--> npm package entries, no critical or Python findings,
+The fresh normal dependency Audit on the combined lockfile still fails: <!--n results/checklist12-dependencies-2026-10-27/audit-baseline.json:published.npm_advisories_total -->4<!--/n-->
+advisories affecting <!--n results/checklist12-dependencies-2026-10-27/audit-baseline.json:published.npm_packages_with_advisories -->9<!--/n--> npm package entries, no critical or Python findings,
 and two exception groups overdue since October 21. No expiry was renewed. The
 rejected codegen experiment remains excluded. A supported vendor correction or
 a separately scoped compatible migration/risk decision remains necessary; this

@@ -10,6 +10,9 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 const file = fileURLToPath(import.meta.url);
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/fbjs-scripts')) {
 const app = dirname(dirname(file));
 const fbEntry = join(app, 'node_modules/fbjs-scripts/gulp/check-dependencies.js');
 const fbRequire = createRequire(fbEntry);
@@ -92,4 +95,6 @@ if (process.argv.includes('--escape-child')) {
     await finished;
     assert.deepEqual(requested, [{ command: 'yarn', args: ['outdated', '--json'], cwd: root }]);
   });
+}
+
 }

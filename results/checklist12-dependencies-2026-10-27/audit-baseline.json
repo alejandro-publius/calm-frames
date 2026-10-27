@@ -1,0 +1,126 @@
+{
+  "generated_utc": "2026-10-25T22:31:46Z",
+  "python": {
+    "ran": true,
+    "sources": [
+      {
+        "name": "ingest container",
+        "path": "pipeline/infra/ingest/requirements.txt",
+        "ran": true,
+        "packages_audited": 12,
+        "findings": []
+      },
+      {
+        "name": "cdk",
+        "path": "pipeline/infra/requirements.txt",
+        "ran": true,
+        "packages_audited": 14,
+        "findings": []
+      },
+      {
+        "name": "development venv",
+        "path": "/workspace/shared/calm-frames-overnight-2026-10-25/python-freeze.txt",
+        "ran": true,
+        "packages_audited": 54,
+        "findings": []
+      }
+    ]
+  },
+  "npm": {
+    "ran": true,
+    "totals": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 9,
+      "critical": 0,
+      "total": 9
+    },
+    "findings": [
+      {
+        "package": "@amazon-devices/security-manager-lib",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@react-native-community/cli",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "metro",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "metro-config",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "metro-inspector-proxy",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "react-devtools-core",
+        "severity": "high",
+        "direct": false,
+        "ids": [
+          "1099563"
+        ],
+        "fix_available": false
+      },
+      {
+        "package": "react-native",
+        "severity": "high",
+        "direct": false,
+        "ids": [
+          "1089027"
+        ],
+        "fix_available": false
+      },
+      {
+        "package": "react-native-tscodegen-types",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "ws",
+        "severity": "high",
+        "direct": false,
+        "ids": [
+          "1118731",
+          "1123262"
+        ],
+        "fix_available": false
+      }
+    ]
+  },
+  "published": {
+    "python_packages_with_advisories": 0,
+    "npm_packages_with_advisories": 9,
+    "npm_advisories_total": 4,
+    "npm_critical": 0,
+    "npm_high": 9,
+    "exception_groups": 3,
+    "exceptions_in_the_shipped_bundle": 1
+  },
+  "statement": "pip-audit and npm audit over the scanned project dependencies. Findings, exception coverage and expired reviews are recorded below. Nonempty problems block audit acceptance; listing a finding does not waive it.",
+  "problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21"
+  ]
+}

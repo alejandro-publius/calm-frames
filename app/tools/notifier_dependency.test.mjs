@@ -9,11 +9,13 @@ import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
+import { legacyConsumer } from './legacy_consumer.mjs';
+
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const require = createRequire(join(app, 'package.json'));
 const cli = createRequire(join(app, 'node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli/package.json'));
-const notifier = cli('node-notifier');
-const notifierRequire = createRequire(cli.resolve('node-notifier'));
+const notifier = require('node-notifier');
+const notifierRequire = createRequire(require.resolve('node-notifier'));
 const utils = notifierRequire('./lib/utils');
 
 function parseArguments(args) {
@@ -39,6 +41,7 @@ function captureLinux(t) {
   return calls;
 }
 
+if (legacyConsumer('node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli')) {
 test('the actual legacy CLI broadcasts a no-client notice without changing its protocol', t => {
   const calls = captureLinux(t);
   // The real server is never listened on: this exercises only the no-client path.
@@ -53,6 +56,8 @@ test('the actual legacy CLI broadcasts a no-client notice without changing its p
   assert.deepEqual(messageSocket.parseMessage('{"version":2,"method":"reload"}', false),
     { version: 2, method: 'reload' });
 });
+
+}
 
 test('actual Jest notification reporter retains success and failure text without running a watch loop', t => {
   const calls = captureLinux(t);

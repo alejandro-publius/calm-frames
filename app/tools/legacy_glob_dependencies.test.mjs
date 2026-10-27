@@ -8,6 +8,9 @@ import { tmpdir } from 'node:os';
 import { once } from 'node:events';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/sane')) {
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const require = createRequire(join(app, 'package.json'));
 const sane = createRequire(require.resolve('sane/src/common'));
@@ -74,3 +77,5 @@ test('the legacy watcher observes a matching file while preserving its ignored-f
   assert.equal(watcher.register(join(root, 'ignored/untracked.txt')), false);
   assert.equal(watcher.register(join(root, '.hidden.txt')), false);
 });
+
+}

@@ -1,0 +1,80 @@
+{
+  "base": "b51c51000f74cbbe6998070cbd3879c8aca3f206",
+  "branch": "codex/checklist12-host-dependencies-2026-10-27",
+  "node": "22.23.2",
+  "npm": "10.9.8",
+  "dependency_tests": {
+    "passed": 61,
+    "failed": 0,
+    "skipped": 0
+  },
+  "connection_tests": {
+    "passed": 9,
+    "snapshots": 1
+  },
+  "audit_policy_tests": 31,
+  "typecheck": "passed",
+  "audit": "passed, zero npm and Python findings, zero exceptions",
+  "sbom": "all three reproduce",
+  "negative_controls": [
+    "old lock rejected",
+    "altered SDK asset hash rejected"
+  ],
+  "cli_configuration": {
+    "normalized_before_after_equal": true,
+    "sha256": "66d3da832dfbf7226b98d02522cd356c5a95aff4a50b9ae1670354d733da92d4",
+    "native_dependencies": 12
+  },
+  "codegen_outputs": "byte-identical baseline and candidate",
+  "unchanged_source": [
+    "app/src",
+    "app/test",
+    "app/assets",
+    "app/manifest.toml"
+  ],
+  "native_verification": "pending: exact candidate Debug/Release builds, inventories and security-manager integration",
+  "original_item_12": "partial; not eligible for closure",
+  "merge": "blocked pending native verification; not an approval denial",
+  "logs": {
+    "clean-install": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/clean-install.log",
+      "sha256": "5a5e9e72a841cf9b0231115248f6c1c5f3d6dffde0d8a60ff61106653fd99398"
+    },
+    "dependency-consumers": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/dependency-consumers.log",
+      "sha256": "d3bfe776168c81c1bd3d8a0659e0b7a1fcc22ebbdcfea1c1514343e15688c9ea"
+    },
+    "typecheck": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/typecheck.log",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    "connection": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/connection.log",
+      "sha256": "bec853c3f6197d946c6b9b1a02688dadc3624834e2c341a16947f40c0cc976dd"
+    },
+    "audit-policy-tests": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/audit-policy-tests.log",
+      "sha256": "7f2347c0be99ddd6f31eb72ab5219254a73c025d585346f8eacdf76dd574c595"
+    },
+    "audit": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/audit.log",
+      "sha256": "5c539f52aa3864578e77dcd8dd7218e9c191a4be597599f379d5a6989fc42871"
+    },
+    "sbom-reproduction": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/sbom-reproduction.log",
+      "sha256": "0e932e7f3bf089a6cccc34c6027157adc542cbff37cb64ed2196f2c8f370b717"
+    },
+    "style": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/style.log",
+      "sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca"
+    },
+    "negative-old-lock": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/negative-old-lock.log",
+      "sha256": "27fd86e24e0abf7dbcc9358abe5311a6bc578b8cabeb681ea25884e75217bdd7"
+    },
+    "negative-sdk-hash": {
+      "path": "results/checklist12-dependencies-2026-10-27/checks/negative-sdk-hash.log",
+      "sha256": "4af97710a38e3a865f0afcc70dc70b14c4f52ffb755edd7b91cff6e22937c63d"
+    }
+  }
+}

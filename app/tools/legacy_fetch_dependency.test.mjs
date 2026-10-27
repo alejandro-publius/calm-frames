@@ -8,6 +8,9 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/isomorphic-fetch')) {
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const isoEntry = join(app, 'node_modules/isomorphic-fetch/fetch-npm-node.js');
 const isoRequire = createRequire(isoEntry);
@@ -152,3 +155,5 @@ test('FBJS still prefers an existing native fetch implementation', async () => {
   assert.equal(global.Response, undefined);
   assert.deepEqual(await fetch('fixture://native'), { url: 'fixture://native', bound: true });
 });
+
+}

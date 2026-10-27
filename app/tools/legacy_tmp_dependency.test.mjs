@@ -6,6 +6,9 @@ import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
+import { legacyConsumer } from './legacy_consumer.mjs';
+
+if (legacyConsumer('node_modules/external-editor')) {
 const app = dirname(dirname(fileURLToPath(import.meta.url)));
 const require = createRequire(join(app, 'node_modules/external-editor/main/index.js'));
 const tmp = require('tmp');
@@ -73,3 +76,5 @@ test('temporary-file mode, cleanup and the actual editor text round trip are ret
   }
   assert.equal(existsSync(editor.temp_file), false);
 });
+
+}

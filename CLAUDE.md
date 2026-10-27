@@ -1,3 +1,11 @@
+**October 27 checklist 12 candidate.** Separate branch
+`codex/checklist12-host-dependencies-2026-10-27` removes the unused RN 0.60 host
+graph. Read [the dependency review](docs/checklist12-dependencies-2026-10-27.md).
+Zero-finding scans permit retirement of obsolete exceptions, without renewal.
+Exact-lock Debug/Release builds and inventories remain pending on the offline
+Mac. Keep this candidate unmerged until verified; item 12 remains partial.
+The current task authorizes source push/PR but excludes local acceptance work.
+
 **Current consolidation, October 25, 2026 (Pacific).** The owner authorized integrating product `001b4867` and documentation `d2f92e4` into an updated main through normal reviewed Git history. Preserve exclusions, rollback refs and all existing gates. Older no-push/no-merge scope statements below are historical. No exception renewal, SDK migration, new signer, media activation or external submission change is authorized by this consolidation. Lee Point woodland was acquired separately and is not integrated or accepted.
 
 **Reading comfort continuation completed:** 3512344 corrects padded viewport measurement. Isolated Debug first/repeated toggles, visibility and focus pass at 720p and 1080p. Pause speech remains unresolved and was untouched. Stop after this scoped pass.

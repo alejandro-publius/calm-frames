@@ -1,0 +1,411 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 1.372609
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 379.15857
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 45.717878
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 6.666882
+  type: 'test'
+  ...
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 5 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 11.605487
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 6 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 19.027678
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 7 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.221842
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 8 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 25.697524
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 9 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 508.102872
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 10 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 1.864311
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 11 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 6.317405
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 12 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 0.993037
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 13 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 31.263234
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 14 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 34.077748
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 15 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 20.499747
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 16 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 28.05594
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 17 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 26.062144
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 18 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 2.683996
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 19 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 68.311792
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 20 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.023964
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 21 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.887598
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 22 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 305.875698
+  type: 'test'
+  ...
+# Subtest: codegen shares the exact app RN while the obsolete host toolchain is absent
+ok 23 - codegen shares the exact app RN while the obsolete host toolchain is absent
+  ---
+  duration_ms: 14.802658
+  type: 'test'
+  ...
+# Subtest: the published SDK consumer, native metadata and system bundles remain byte-identical
+ok 24 - the published SDK consumer, native metadata and system bundles remain byte-identical
+  ---
+  duration_ms: 4.006621
+  type: 'test'
+  ...
+# Subtest: actual SecurityManager and Amazon registry retain permission results, errors and native registration
+ok 25 - actual SecurityManager and Amazon registry retain permission results, errors and native registration
+  ---
+  duration_ms: 44.581669
+  type: 'test'
+  ...
+# Subtest: actual Amazon registry refuses a missing native security module
+ok 26 - actual Amazon registry refuses a missing native security module
+  ---
+  duration_ms: 33.628175
+  type: 'test'
+  ...
+# Subtest: the actual Amazon code generator retains the baseline C++ output
+ok 27 - the actual Amazon code generator retains the baseline C++ output
+  ---
+  duration_ms: 119.51797
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/isomorphic-fetch
+ok 28 - retired consumer stays absent from the lock and installed tree: node_modules/isomorphic-fetch
+  ---
+  duration_ms: 0.824062
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/sane
+ok 29 - retired consumer stays absent from the lock and installed tree: node_modules/sane
+  ---
+  duration_ms: 0.688568
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/os-locale
+ok 30 - retired consumer stays absent from the lock and installed tree: node_modules/os-locale
+  ---
+  duration_ms: 0.926286
+  type: 'test'
+  ...
+# Subtest: the current CLI resolves the fixed logger without upgrading the CLI
+ok 31 - the current CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 15.186216
+  type: 'test'
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+ok 32 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 3.810725
+  type: 'test'
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+ok 33 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 1.39274
+  type: 'test'
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+ok 34 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 3.044731
+  type: 'test'
+  ...
+# Subtest: the actual current CLI retains React Native tag filtering and formatted events
+ok 35 - the actual current CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 18.653834
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/metro-inspector-proxy
+ok 36 - retired consumer stays absent from the lock and installed tree: node_modules/metro-inspector-proxy
+  ---
+  duration_ms: 0.971755
+  type: 'test'
+  ...
+# Subtest: the actual SDK manifest reader preserves all declared privileges
+ok 37 - the actual SDK manifest reader preserves all declared privileges
+  ---
+  duration_ms: 51.127274
+  type: 'test'
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+ok 38 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 47.360314
+  type: 'test'
+  ...
+# Subtest: TOML rejects scalar-path prototype pollution without changing the process prototype
+ok 39 - TOML rejects scalar-path prototype pollution without changing the process prototype
+  ---
+  duration_ms: 31.151632
+  type: 'test'
+  ...
+# Subtest: TOML enforces nesting and integer limits with ordinary parse errors
+ok 40 - TOML enforces nesting and integer limits with ordinary parse errors
+  ---
+  duration_ms: 73.979353
+  type: 'test'
+  ...
+# Subtest: TOML tables hostile fixture completes within a bounded child process
+ok 41 - TOML tables hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 311.402906
+  type: 'test'
+  ...
+# Subtest: TOML path hostile fixture completes within a bounded child process
+ok 42 - TOML path hostile fixture completes within a bounded child process
+  ---
+  duration_ms: 90.295878
+  type: 'test'
+  ...
+# Subtest: all retained shell-quote consumers resolve the fixed parser
+ok 43 - all retained shell-quote consumers resolve the fixed parser
+  ---
+  duration_ms: 6.542694
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 44 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 9.481836
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 45 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 1.619662
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli
+ok 46 - retired consumer stays absent from the lock and installed tree: node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli
+  ---
+  duration_ms: 0.135104
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/fbjs-scripts
+ok 47 - retired consumer stays absent from the lock and installed tree: node_modules/fbjs-scripts
+  ---
+  duration_ms: 0.671924
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/external-editor
+ok 48 - retired consumer stays absent from the lock and installed tree: node_modules/external-editor
+  ---
+  duration_ms: 0.896181
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli
+ok 49 - retired consumer stays absent from the lock and installed tree: node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli
+  ---
+  duration_ms: 0.887138
+  type: 'test'
+  ...
+# Subtest: actual Jest notification reporter retains success and failure text without running a watch loop
+ok 50 - actual Jest notification reporter retains success and failure text without running a watch loop
+  ---
+  duration_ms: 47.371817
+  type: 'test'
+  ...
+# Subtest: Linux string and array options remain literal arguments, including shell metacharacters
+ok 51 - Linux string and array options remain literal arguments, including shell metacharacters
+  ---
+  duration_ms: 9.476473
+  type: 'test'
+  ...
+# Subtest: the macOS backend keeps content and callbacks with its bounded default and unchanged binary
+ok 52 - the macOS backend keeps content and callbacks with its bounded default and unchanged binary
+  ---
+  duration_ms: 1.835898
+  type: 'test'
+  ...
+# Subtest: the fixed notifier UUID consumer keeps unique v4 pipe names without creating an OS pipe
+ok 53 - the fixed notifier UUID consumer keeps unique v4 pipe names without creating an OS pipe
+  ---
+  duration_ms: 1.718761
+  type: 'test'
+  ...
+# Subtest: every declared decoder consumer uses the callable adapter and only the pinned fixed parser
+ok 54 - every declared decoder consumer uses the callable adapter and only the pinned fixed parser
+  ---
+  duration_ms: 4.370649
+  type: 'test'
+  ...
+# Subtest: legacy callable keeps ordinary text, plus signs and invalid input behavior
+ok 55 - legacy callable keeps ordinary text, plus signs and invalid input behavior
+  ---
+  duration_ms: 1.093278
+  type: 'test'
+  ...
+# Subtest: actual query parser retains arrays, empty values, Unicode and literal plus
+ok 56 - actual query parser retains arrays, empty values, Unicode and literal plus
+  ---
+  duration_ms: 2.403504
+  type: 'test'
+  ...
+# Subtest: malformed percent input completes inside a bounded child process
+ok 57 - malformed percent input completes inside a bounded child process
+  ---
+  duration_ms: 49.604623
+  type: 'test'
+  ...
+# Subtest: source-map consumer is either retired with its graph or retains URL and inline-map behavior
+ok 58 - source-map consumer is either retired with its graph or retains URL and inline-map behavior
+  ---
+  duration_ms: 3.214116
+  type: 'test'
+  ...
+# Subtest: the installed navigation path reader and writer retain query parameters
+ok 59 - the installed navigation path reader and writer retain query parameters
+  ---
+  duration_ms: 15.081438
+  type: 'test'
+  ...
+# ● Validation Warning:
+#   Unknown option "fileMapCacheDirectory" with value "/workspace/calm-frames-dependencies/app/node_modules/.cache/calm-frames-metro" was found.
+#   This is probably a typing mistake. Fixing it will remove this message.
+#                         ▒▒▓▓▓▓▒▒
+#                      ▒▓▓▓▒▒░░▒▒▓▓▓▒
+#                   ▒▓▓▓▓░░░▒▒▒▒░░░▓▓▓▓▒
+#                  ▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓
+#                  ▓▓░░░░░▒▓▓▓▓▓▓▒░░░░░▓▓
+#                  ▓▓░░▓▓▒░░░▒▒░░░▒▓▒░░▓▓
+#                  ▓▓░░▓▓▓▓▓▒▒▒▒▓▓▓▓▒░░▓▓
+#                  ▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓▓▒░░▓▓
+#                  ▓▓▒░░▒▒▓▓▓▓▓▓▓▓▒░░░▒▓▓
+#                   ▒▓▓▓▒░░░▒▓▓▒░░░▒▓▓▓▒
+#                      ▒▓▓▓▒░░░░▒▓▓▓▒
+#                         ▒▒▓▓▓▓▒▒
+#                 Welcome to Metro v0.83.8
+#               Fast - Scalable - Integrated
+# [metro-file-map] Cache write error
+# : Error: ENOENT: no such file or directory, open '/workspace/calm-frames-dependencies/app/node_modules/.cache/calm-frames-metro/metro-file-map-8ce8c52c6129bc2b78c8c2271592598a-6950254b88daae41dbc8ec8688266c46'
+#     at async open (node:internal/fs/promises:639:25)
+#     at async Object.writeFile (node:internal/fs/promises:1222:14)
+#     at async /workspace/calm-frames-dependencies/app/node_modules/metro-file-map/src/cache/DiskCacheManager.js:80:11
+#     at async DiskCacheManager.write (/workspace/calm-frames-dependencies/app/node_modules/metro-file-map/src/cache/DiskCacheManager.js:106:7)
+#     at async \#takeSnapshotAndPersist (/workspace/calm-frames-dependencies/app/node_modules/metro-file-map/src/index.js:469:5)
+#     at async /workspace/calm-frames-dependencies/app/node_modules/metro-file-map/src/index.js:295:9
+#     at async DependencyGraph.ready (/workspace/calm-frames-dependencies/app/node_modules/metro/src/node-haste/DependencyGraph.js:94:5) {
+#   errno: -2,
+#   code: 'ENOENT',
+#   syscall: 'open',
+#   path: '/workspace/calm-frames-dependencies/app/node_modules/.cache/calm-frames-metro/metro-file-map-8ce8c52c6129bc2b78c8c2271592598a-6950254b88daae41dbc8ec8688266c46'
+# }
+# transform[stderr]: (node:3347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+# LOG:Writing bundle output to: /workspace/calm-frames-dependencies/app/.logs/uri-metro-vQVaFE/probe.js
+# LOG:Done writing bundle output
+# Subtest: Metro executes the fixed decoder through its existing CommonJS query consumer
+ok 60 - Metro executes the fixed decoder through its existing CommonJS query consumer
+  ---
+  duration_ms: 1955.032772
+  type: 'test'
+  ...
+# Subtest: retired consumer stays absent from the lock and installed tree: node_modules/xcode
+ok 61 - retired consumer stays absent from the lock and installed tree: node_modules/xcode
+  ---
+  duration_ms: 0.545923
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3242.67393

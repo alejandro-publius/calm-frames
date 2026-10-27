@@ -6,20 +6,19 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import test from 'node:test';
 
-const app = dirname(dirname(fileURLToPath(import.meta.url)));
-const entry = join(app, 'node_modules/react-native-tscodegen-types/node_modules',
-  '@react-native-community/cli/build/commands/server/launchEditor.js');
-const legacyRequire = createRequire(entry);
-const shellQuote = legacyRequire('shell-quote');
+import { legacyConsumer } from './legacy_consumer.mjs';
 
-test('legacy CLI resolves the fixed shell-quote without changing its SDK CLI version', () => {
-  const manifest = JSON.parse(readFileSync(join(app, 'package.json'), 'utf8'));
-  const lock = JSON.parse(readFileSync(join(app, 'package-lock.json'), 'utf8'));
-  assert.equal(legacyRequire('../../../package.json').version, '2.10.0');
-  assert.equal(legacyRequire('shell-quote/package.json').version, '1.11.0');
-  assert.equal(manifest.overrides['shell-quote'], '1.11.0');
-  for (const [path, item] of Object.entries(lock.packages)) {
-    if (path.endsWith('/shell-quote')) assert.equal(item.version, '1.11.0', path);
+const app = dirname(dirname(fileURLToPath(import.meta.url)));
+const appRequire = createRequire(join(app, 'package.json'));
+const editorRequire = createRequire(appRequire.resolve('launch-editor'));
+const shellQuote = editorRequire('shell-quote');
+
+test('all retained shell-quote consumers resolve the fixed parser', () => {
+  const lock = JSON.parse(readFileSync(join(app, 'package-lock.json')));
+  for (const [path, entry] of Object.entries(lock.packages)) {
+    if (!entry.dependencies?.['shell-quote']) continue;
+    const consumer = createRequire(join(app, path, 'package.json'));
+    assert.equal(consumer('shell-quote/package.json').version, '1.11.0', path);
   }
 });
 
@@ -40,6 +39,22 @@ test('literal paths and arguments survive quoting without interpretation', () =>
     '`printf unexpected`', '$(printf unexpected)', 'line\nbreak', 'a;b', 'Acadia.tsx'];
   for (const value of values) {
     assert.deepEqual(shellQuote.parse(shellQuote.quote([value]), {}), [value]);
+  }
+});
+
+if (legacyConsumer('node_modules/react-native-tscodegen-types/node_modules/@react-native-community/cli')) {
+const entry = join(app, 'node_modules/react-native-tscodegen-types/node_modules',
+  '@react-native-community/cli/build/commands/server/launchEditor.js');
+const legacyRequire = createRequire(entry);
+
+test('legacy CLI resolves the fixed shell-quote without changing its SDK CLI version', () => {
+  const manifest = JSON.parse(readFileSync(join(app, 'package.json'), 'utf8'));
+  const lock = JSON.parse(readFileSync(join(app, 'package-lock.json'), 'utf8'));
+  assert.equal(legacyRequire('../../../package.json').version, '2.10.0');
+  assert.equal(legacyRequire('shell-quote/package.json').version, '1.11.0');
+  assert.equal(manifest.overrides['shell-quote'], '1.11.0');
+  for (const [path, item] of Object.entries(lock.packages)) {
+    if (path.endsWith('/shell-quote')) assert.equal(item.version, '1.11.0', path);
   }
 });
 
@@ -75,3 +90,5 @@ test('the installed legacy editor launcher preserves quoted argv and uses direct
       [...expectedArgs, join(app, 'a file.tsx')], { stdio: 'inherit' }]]);
   }
 });
+
+}
