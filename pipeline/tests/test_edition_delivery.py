@@ -20,7 +20,7 @@ def app(tmp_path, signed_package):
     target = tmp_path / "checkout" / "app"
     source = REPO / "app"
     # Keep the delivery/rollback controls reachable after privacy enforcement.
-    # The production library intentionally contains historical private reports.
+    # The privacy-negative fixture below is synthetic, not a production assumption.
     # Use its already portable signed Acadia bytes, plus a clearly synthetic
     # metadata-only baseline catalog. No map, report or signature is rewritten.
     assets = target / edition.ASSETS
@@ -66,11 +66,18 @@ def test_existing_exact_fixture_is_idempotent(app, signed_package, tmp_path):
 
 
 def test_retained_historical_private_report_blocks_delivery_without_rewriting_it(app, signed_package, tmp_path):
-    source = REPO / "app" / edition.ASSETS
-    legacy = json.loads((source / "catalog.json").read_text())
+    # Construct an explicitly synthetic legacy report in the temporary app only.
+    # Production reports are now portable; never depend on their containing paths.
+    assets = app / edition.ASSETS
+    legacy = json.loads((assets / "catalog.json").read_text())
     digest = legacy["titles"][0]["verification"]["reportSha256"]
-    shutil.copytree(source / legacy["bundleId"], app / edition.ASSETS / legacy["bundleId"])
-    shutil.copyfile(source / "reports" / f"{digest}.json", app / edition.ASSETS / "reports" / f"{digest}.json")
+    report = json.loads((assets / "reports" / f"{digest}.json").read_text())
+    report["source_path"] = "/Users/fictional/legacy-clip.mp4"
+    temporary = assets / "reports" / "synthetic.json"
+    temporary.write_text(json.dumps(report))
+    synthetic_digest = sha256_file(temporary)
+    temporary.rename(assets / "reports" / f"{synthetic_digest}.json")
+    rewrite(assets, lambda value: value["titles"][0]["verification"].update(reportSha256=synthetic_digest))
     root, ticket = stage(signed_package, tmp_path)
     before = snapshot(app)
     with pytest.raises(PipelineError, match="local filesystem path"):
