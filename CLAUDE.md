@@ -1,3 +1,11 @@
+**October 27 native dependency acceptance completed.** Item 12 is complete.
+Reviewed candidate `23d754ab0716700062047d87319e8035914dd79c` passes exact-lock
+Debug/Release builds and bounded disposable native SDK/Release checks; PR 21
+is merged. See [the receipt](results/checklist12-native-2026-10-27.json).
+The owner authorized this local acceptance and normal source merge. Current
+original totals are 13 complete, 6 partial, 1 blocked. Older offline/no-acceptance
+instructions below are historical; keep remaining product and release limits.
+
 **October 27 checklist 12 candidate.** Separate branch
 `codex/checklist12-host-dependencies-2026-10-27` removes the unused RN 0.60 host
 graph. Read [the dependency review](docs/checklist12-dependencies-2026-10-27.md).
