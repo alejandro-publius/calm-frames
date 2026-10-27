@@ -67,11 +67,6 @@ jest.mock('../../src/utils/useDeviceInfo', () => ({
   })),
 }));
 
-// Mock the refresh function from @amazon-devices/keplerscript-netmgr-lib
-jest.mock('@amazon-devices/keplerscript-netmgr-lib', () => ({
-  refresh: jest.fn(() => Promise.resolve({ success: true })),
-}));
-
 const renderSettingsScreen = () => {
   return <SettingsScreen navigation={mockNavigation} route={mockRoute} />;
 };
@@ -131,25 +126,6 @@ describe('Setting Test Cases', () => {
     expect(onFocusMock).toHaveBeenCalled();
     fireEvent(getByTestId('focusable-element'), 'blur');
     expect(onBlurMock).toHaveBeenCalled();
-  });
-
-  it('does not display wifi details when wifiDetails is empty object', async () => {
-    const { queryByText } = render(renderSettingsScreen());
-    await act(() => {
-      expect(queryByText('Wifi Name:')).toBeNull();
-    });
-  });
-
-  it('returns the number of keys when wifiDetails has keys', async () => {
-    const wifiDetails = {
-      ssid: 'TestWifi',
-      password: 'password123',
-      security: 'WPA2',
-    };
-    render(renderSettingsScreen());
-    await act(() => {
-      expect(Object.keys(wifiDetails).length).toBe(3);
-    });
   });
 
   it('navigates to FEEDBACK_SCREEN when Feedback button is pressed', () => {

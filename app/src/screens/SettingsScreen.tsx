@@ -14,7 +14,6 @@ import {
 } from '../calmframes/harnessFixtures';
 import { useNavigation } from '@amazon-devices/react-navigation__native';
 import BufferingWindow from '../components/BufferingWindow';
-import ConnectionComponent from '../components/ConnectionComponent';
 import LocaleComponent from '../components/LocaleComponent';
 import LoginInformation from '../components/LoginInformation';
 import {
@@ -107,7 +106,6 @@ const SettingsScreen: React.FC<AppDrawerScreenProps<Screens.SETTINGS_SCREEN>> =
           style={styles.linearGradient}>
           <Text style={styles.title}>Settings</Text>
           <LocaleComponent />
-          <ConnectionComponent testID="connection-component" />
           {isAccountLoginEnabled() && (
             <LoginInformation
               loginStatus={loginStatus}

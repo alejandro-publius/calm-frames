@@ -320,18 +320,6 @@ jest.mock('./src/components/GradientButton', () => 'GradientButton');
 
 jest.mock('@amazon-devices/react-linear-gradient', () => 'LinearGradient');
 
-jest.mock('@amazon-devices/security-manager-lib', () => ({
-  SecurityManager: {
-    getPrivilegeState: jest.fn(() => Promise.resolve('ALLOW')),
-    requestPrivilege: jest.fn(() => Promise.resolve('ALLOW')),
-  },
-  PrivilegeState: {
-    ALLOW: 'ALLOW',
-    DENY: 'DENY',
-    UNKNOWN: 'UNKNOWN',
-  },
-}));
-
 // Tests must never reach for a measurement run. readHarnessConfig asks the
 // device and then the network, and in CI that fetch fails and logs after the
 // test that started it has finished, which jest counts as an error. The
