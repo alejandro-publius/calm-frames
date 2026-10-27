@@ -13,7 +13,7 @@ const manifest = index => JSON.parse(fs.readFileSync(path.join(root, approvals[i
 const reportFor = title => fs.readFileSync(path.join(root, 'reports', `${title.verification.reportSha256}.json`));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
-test('historical summaries retain exact measurements but private reports block new proof generation', () => {
+test('portable approved reports reproduce exact playback proof measurements', () => {
   const stored = fs.readFileSync(path.join(app, 'src/calmframes/approvedPlaybackProof.ts'), 'utf8');
   const records = JSON.parse(/= (\[[\s\S]*\]);\n$/.exec(stored)[1]);
   const historical = approvals.flatMap((approval, index) => approval.consumer ?
@@ -24,7 +24,7 @@ test('historical summaries retain exact measurements but private reports block n
   assert.deepEqual(historical, records);
   assert.equal(records.length, 12);
   assert.ok(!stored.includes('/Users/') && !stored.includes('PRIVATE KEY'));
-  assert.throws(() => playbackProofModule(app), /local filesystem path/);
+  assert.equal(playbackProofModule(app), stored);
 });
 
 test('Acadia uses exact output-analysis measurements; McWay does not invent output versions or cover proof', () => {

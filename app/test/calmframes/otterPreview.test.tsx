@@ -10,11 +10,13 @@ import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { bakedAmbientForRendition } from '../../src/calmframes/approvedBakedAmbient';
 import { guardedParamsFor, titleDataFor, defaultCatalog } from '../../src/screens/KidModeScreen';
+import { APPROVED_PREPARED_CATALOGS } from '../../src/calmframes/approvedPreparedCatalogs';
 import { checkedShelf } from './shelfFixtures';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
-const raw = readFileSync(resolve(__dirname, '../../../results/sea-otters-2026-10-18/candidate-catalog.json'), 'utf8');
-// Compare the retained exact candidate against the now-approved production catalog.
+const archivedRaw = readFileSync(resolve(__dirname, '../../../results/sea-otters-2026-10-18/candidate-catalog.json'), 'utf8');
+// Exercise the current exact approval; retain the archived edition as a rejection fixture.
+const raw = APPROVED_PREPARED_CATALOGS.find(catalog => JSON.parse(catalog.raw).titles.some((item: { sourceSha256: string }) => item.sourceSha256 === SEA_OTTER_SOURCE_SHA256))!.raw;
 const candidate = createPackagedLibrary(raw);
 const title = candidate.titles(DEFAULT_SETTINGS)[0];
 const nowMs = Date.parse(JSON.parse(title.maps!.wcag!).created_utc) + 60000;
@@ -39,6 +41,7 @@ it('approves only the exact otter catalog and rejects other content under the sa
   expect(packagedLibrary.acceptsRoute(titleDataFor(otter), guardedParamsFor(otter, DEFAULT_SETTINGS))).toBe(true);
   expect(checkTitle(title, { settings: DEFAULT_SETTINGS, publicKeyBase64: packagedLibrary.publicKeyFor(acadia.title, DEFAULT_SETTINGS)!, nowMs }).status).toBe('failed');
   expect(createApprovedLibrary(raw).problem).toBeNull();
+  expect(createApprovedLibrary(archivedRaw).titles(DEFAULT_SETTINGS)).toEqual([]);
   expect(createApprovedLibrary(raw + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
   const other = JSON.parse(raw); other.titles[0].id = 'prepared-unapproved';
   expect(createApprovedLibrary(JSON.stringify(other)).titles(DEFAULT_SETTINGS)).toEqual([]);

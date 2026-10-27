@@ -33,7 +33,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[wcag] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/wcag.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
+      "detail": "[wcag] flashmap verified the signature and exact source hash",
       "name": "map_signature:wcag",
       "passed": true
     },
@@ -222,7 +222,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[broadcast] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/broadcast.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
+      "detail": "[broadcast] flashmap verified the signature and exact source hash",
       "name": "map_signature:broadcast",
       "passed": true
     },
@@ -411,7 +411,7 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[extra-cautious] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/extra-cautious.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
+      "detail": "[extra-cautious] flashmap verified the signature and exact source hash",
       "name": "map_signature:extra-cautious",
       "passed": true
     },
@@ -592,7 +592,7 @@
       "passed": true
     }
   ],
-  "finished_at": 1792302855.565881,
+  "finished_at": 1793067651.273941,
   "outcome": "no flagged segments",
   "passed": true,
   "presets": [
@@ -601,6 +601,6 @@
     "extra-cautious"
   ],
   "sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
-  "source_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
-  "started_at": 1792302747.250266
+  "source_path": "sha256:02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "started_at": 1793067650.4278736
 }
